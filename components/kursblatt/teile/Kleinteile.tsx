@@ -22,8 +22,7 @@ export function Chip({
   treffer?: number;
 }) {
   return (
-    <button type="button" className="kb-chip" data-aktiv={aktiv ? "an" : "aus"} aria-pressed={aktiv} onClick={onKlick}>
-      <i className="kb-chip__punkt" aria-hidden="true" />
+    <button type="button" className="chip" data-aktiv={aktiv ? "an" : "aus"} aria-pressed={aktiv} onClick={onKlick}>
       {label}
       {treffer !== undefined && <small className="kb-chip__zahl">{treffer}</small>}
     </button>

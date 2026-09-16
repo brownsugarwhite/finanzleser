@@ -20,10 +20,17 @@
   --kopf-h: 64px; --rand-l: 300px; --rand-r: 300px; --spalte: 750px;
   /* Die Eingabepille — Maße wie im Leo-Chat der Live-Seite; --pille-breite gilt nur unten. */
   --pille-h: 92px; --pille-h-landing: 108px; --pille-radius: 35px; --pille-breite: 750px; --pille-breite-landing: 680px;
-  /* Die Breite, in der gesetzt wird: --spalte minus das Padding von #mitte (2 × 11 px).
+  /* Der Rand der Mittelspalte. 🚨 Er hängt an DREI Stellen zusammen: #mitte polstert
+     damit, --satzbreite zieht ihn zweimal ab, und die Eingabepille gleicht ihn mit
+     `width: calc(100% + 2×)` und `margin-left: -1×` wieder aus. Als die Abstandsleiter
+     am 16.09.2026 auch die Chrome erfasste, wurden aus 11 px vierzehn — an einer Stelle.
+     Danach saß die Pille schief und der Satz war sechs Pixel zu breit.
+     Layoutmaße gehören NICHT auf die Abstandsleiter (app/tokens.css, Regel 4). */
+  --mitte-rand: 11px;
+  /* Die Breite, in der gesetzt wird: --spalte minus das Padding von #mitte (2 × Rand).
      Die 728 px des Kursblatt-Handoffs waren bis hierher ein Rechenrest, den nur
      Kommentare kannten — seit dem 13.09. ein Name, auf den man sich berufen kann. */
-  --satzbreite: calc(var(--spalte) - 22px);
+  --satzbreite: calc(var(--spalte) - 2 * var(--mitte-rand));
 
   /* Ein Alt-Name, den Komponenten über inline-style noch lesen. */
   --fill-1: var(--raster);
@@ -45,7 +52,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell button { font: inherit; cursor: pointer; color: inherit; }
 .faden-shell a { color: var(--green-ink); }
 .faden-shell p { margin: 0 0 .8em; }
-.faden-shell :focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.faden-shell :focus-visible { outline: var(--strich-stark) solid var(--green); outline-offset: 2px; }
 .faden-shell .sr { position: absolute; left: -9999px; }
 @media (prefers-reduced-motion: reduce) { .faden-shell *, .faden-shell *::before, .faden-shell *::after { transition: none !important; animation: none !important; } }
 
@@ -96,7 +103,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .begriff--wink { position: relative; }
 .faden-shell .begriff--wink::before {
   content: ""; position: absolute; inset: -2px -5px; border-radius: var(--radius-kante);
-  border: 1.5px solid var(--green); pointer-events: none;
+  border: var(--strich-stark) solid var(--green); pointer-events: none;
   animation: faden-wink 2.6s cubic-bezier(.22,.61,.36,1) infinite;
 }
 .faden-shell .begriff--wink::after {
@@ -138,8 +145,6 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    trägt den Zeitungskopf des Fadens, die beiden Randspaltenköpfe und später die
    Tabellenköpfe. Ein Element mit Verlauf statt zweier Kästchen: so hängt die Teilung
    nicht an box-sizing, und jede Kopfzeile bleibt ein Knoten. */
-.faden-shell { --doppellinie: linear-gradient(var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px); }
-.faden-shell .doppellinie { display: block; height: 5px; background: var(--doppellinie); }
 
 /* ---------- Zeitungskopf über dem progressiven Blur ---------- */
 /* 🚨 Klasse heisst `kopfblur`, NICHT `blur` wie im Prototyp: `blur` ist eine
@@ -153,14 +158,14 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kopfblur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .kopfblur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .kopfblur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .kopfblur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .kopfblur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .kopfblur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .kopfblur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .kopfblur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
 .faden-shell .kopfblur b { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--paper) 0%, transparent 100%); }
 .faden-shell .kopf { position: sticky; top: 0; z-index: 30; background: transparent; }
-.faden-shell .kopf__innen { padding: 0 0 0 var(--luft-xl); }
-.faden-shell .kopf__zeile { display: flex; align-items: center; gap: var(--luft-l); min-height: 64px; }
+.faden-shell .kopf__innen { padding: 0 0 0 28px; }
+.faden-shell .kopf__zeile { display: flex; align-items: center; gap: 22px; min-height: 64px; }
 .faden-shell .logo { display: flex; align-items: center; text-decoration: none; flex: none; }
 .faden-shell .logo img { height: 28px; width: auto; display: block; }
 .faden-shell .register { position: relative; display: flex; align-items: center; justify-content: center; flex: 1; min-width: 0; height: 50px; }
 .faden-shell .register__reihe { position: relative; display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 650px; height: 50px; }
 .faden-shell .register__eintrag { display: inline-flex; align-items: center; gap: 0; }
-.faden-shell .register a, .faden-shell .register button { position: relative; z-index: 3; border: 0; background: none; padding: var(--luft-m) var(--luft-l); margin: 0 calc(-1 * var(--luft-l)); font: 600 var(--grad-16)/1 var(--serif); color: var(--ink); white-space: nowrap; cursor: pointer; transition: color .2s; text-decoration: none; }
+.faden-shell .register a, .faden-shell .register button { position: relative; z-index: 3; border: 0; background: none; padding: 12px 20px; margin: 0 -20px; font: 600 var(--grad-16)/1 var(--serif); color: var(--ink); white-space: nowrap; cursor: pointer; transition: color .2s; text-decoration: none; }
 .faden-shell .register a:hover, .faden-shell .register button:hover { color: var(--green-ink); }
 /* 🚨 Nur der Knopf selbst, per Kindkombinator. Ohne `>` traf die Regel auch die
    `<span data-key="plus">` in der Lupe; mit (0,3,0) schlug sie dort
@@ -171,8 +176,8 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* 🚨 Wie bei [data-key="plus"]: per Kindkombinator nur der Knopf. Ungescoped traf die
    Regel auch die `.punkte-zahl` in der Lupe und färbte die Punktzahl in der dunklen
    Pille grau statt weiss. */
-.faden-shell .register__reihe > button .punkte-zahl { font: 600 var(--grad-12)/1 var(--sans); color: var(--muted); margin-left: var(--luft-xxs); }
-.faden-shell .nav-lupe__reihe .punkte-zahl { font: 600 var(--grad-12)/1 var(--sans); margin-left: var(--luft-xxs); }
+.faden-shell .register__reihe > button .punkte-zahl { font: 600 var(--grad-12)/1 var(--sans); color: var(--muted); margin-left: 2px; }
+.faden-shell .nav-lupe__reihe .punkte-zahl { font: 600 var(--grad-12)/1 var(--sans); margin-left: 2px; }
 .faden-shell .register__reihe > svg { margin: 0; opacity: 1; color: var(--ink); }
 
 /* Nav-Pille als Lupe — Portierung aus dem Prototyp (leo-faden.html:296-306).
@@ -193,13 +198,13 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* Die Spark-Komponente setzt ihre Farbe als fill-Attribut; CSS schlaegt das Attribut,
    deshalb werden die Funken in der Lupe hier auf Weiss gezogen. */
 .faden-shell .nav-lupe__reihe svg path { fill: var(--auf-tinte); }
-.faden-shell .lesezeichen { display: flex; align-items: center; gap: var(--luft-xs); background: var(--green); color: var(--auf-tinte); height: 44px; padding: 0 var(--luft-l) 0 var(--luft-xl); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 22px 50%); flex: none; margin-left: auto; }
-.faden-shell .lesezeichen button { border: 0; background: none; color: var(--auf-tinte); padding: var(--luft-xs) var(--luft-s); font-weight: 700; font-size: var(--grad-14); display: inline-flex; gap: var(--luft-s); align-items: center; cursor: pointer; }
-.faden-shell .lesezeichen .lz-wort { font: 700 var(--grad-14)/1 var(--sans); padding: var(--luft-s) var(--luft-s); }
-.faden-shell .lesezeichen .lz-icon { position: relative; padding: var(--luft-s) var(--luft-s); }
+.faden-shell .lesezeichen { display: flex; align-items: center; gap: 4px; background: var(--green); color: var(--auf-tinte); height: 44px; padding: 0 18px 0 34px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 22px 50%); flex: none; margin-left: auto; }
+.faden-shell .lesezeichen button { border: 0; background: none; color: var(--auf-tinte); padding: 4px 8px; font-weight: 700; font-size: var(--grad-14); display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
+.faden-shell .lesezeichen .lz-wort { font: 700 var(--grad-14)/1 var(--sans); padding: 6px 10px; }
+.faden-shell .lesezeichen .lz-icon { position: relative; padding: 6px 7px; }
 .faden-shell .lesezeichen .lz-icon svg { width: 20px; height: 20px; }
-.faden-shell .lesezeichen .lz-zahl { position: absolute; top: -1px; right: -3px; min-width: 16px; height: 16px; border-radius: var(--radius-kante); background: var(--paper); color: var(--green-ink); font: 700 var(--grad-kicker)/var(--grad-16) var(--sans); text-align: center; padding: 0 var(--luft-xs); font-style: normal; }
-.faden-shell .blatt { display: none; background: var(--paper); border-bottom: 1px solid var(--rule-strong); box-shadow: var(--schatten-schwebend); }
+.faden-shell .lesezeichen .lz-zahl { position: absolute; top: -1px; right: -3px; min-width: 16px; height: 16px; border-radius: var(--radius-kante); background: var(--paper); color: var(--green-ink); font: 700 var(--grad-kicker)/var(--grad-16) var(--sans); text-align: center; padding: 0 4px; font-style: normal; }
+.faden-shell .blatt { display: none; background: var(--paper); border-bottom: var(--strich-haar) solid var(--rule-strong); box-shadow: var(--schatten-schwebend); }
 .faden-shell .blatt.offen { display: block; }
 
 /* ---------- Faden: 750er-Spalte fest in der Mitte, Randspalten teilen sich den Rest ---------- */
@@ -208,7 +213,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    Dokuments, und nichts schiebt sie am Fadenende nach oben. Unten kein Polster mehr am
    Raster: den Platz unter dem letzten Kapitel hält #mitte (Höhe der festen Eingabe). */
 .faden-shell .faden { margin: 0; padding: var(--luft-l) 0 0; display: grid; grid-template-columns: minmax(0, 1fr) var(--spalte) minmax(0, 1fr); grid-template-rows: 1fr auto; gap: 0; align-items: stretch; position: relative; }
-.faden-shell #mitte { grid-column: 2; grid-row: 1; padding: 0 var(--luft-m) var(--eingabe-h, 140px); min-width: 0; }
+.faden-shell #mitte { grid-column: 2; grid-row: 1; padding: 0 var(--mitte-rand) var(--eingabe-h, 140px); min-width: 0; }
 /* 🚨 Spalten AUSDRÜCKLICH setzen. Die Fußnote belegt Zeile 2 über alle Spalten; eine
    automatisch platzierte Randspalte darf keine belegte Zelle überlappen und landete
    deshalb in einer impliziten vierten und fünften Spalte — Faden links, beide Leisten
@@ -242,18 +247,18 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    links und rechts der Kapitelkopfzeile: 1 px, var(--ink-20). */
 .faden-shell .fortschritt__gleis { position: absolute; top: 0; bottom: 0; left: 50%; width: var(--gleis); transform: translateX(-50%); background: repeating-linear-gradient(to bottom, var(--rule-mid) 0 5px, transparent 5px 11px); }
 .faden-shell .fortschritt__fuell { position: absolute; top: 0; left: calc(50% - var(--fuell) / 2); width: var(--fuell); background: var(--ink); transform-origin: 0 0; will-change: transform; }
-.faden-shell .fortschritt__punkt { position: absolute; left: 50%; width: 11px; height: 11px; margin: calc(-1 * var(--luft-xs)) 0 0 calc(-1 * var(--luft-xs)); border-radius: var(--radius-kreis); background: var(--paper); border: 2px solid var(--muted); transition: background .35s, border-color .35s; }
+.faden-shell .fortschritt__punkt { position: absolute; left: 50%; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-stark) solid var(--muted); transition: background .35s, border-color .35s; }
 .faden-shell .fortschritt__punkt.erreicht { background: var(--ink); border-color: var(--ink); }
 /* Abschnitte eines Ratgebers: kurzer Querstrich statt Kreis — zwei Ebenen auf einer
    Linie, Kreis für das Kapitel, Strich für den Abschnitt darin. Vorlage: das TOC-Design
    aus der Claude-Design-Sitzung. Der Strich des Abschnitts, in dem der Leser steht,
    wird länger und dunkel; er kommt ohne Puls aus, der gehört dem Kapitelkreis. */
-.faden-shell .fortschritt__strich { position: absolute; left: 50%; width: 9px; height: 2px; margin-top: calc(-1 * var(--luft-xxs)); transform: translateX(-50%); background: var(--muted); border-radius: var(--radius-kante); transition: width .3s, background .35s; }
+.faden-shell .fortschritt__strich { position: absolute; left: 50%; width: 9px; height: 2px; margin-top: -1px; transform: translateX(-50%); background: var(--muted); border-radius: var(--radius-kante); transition: width .3s, background .35s; }
 .faden-shell .fortschritt__strich.erreicht { background: var(--ink); }
 .faden-shell .fortschritt__strich.jetzt { width: 15px; background: var(--ink); }
 /* Puls nur am jüngsten erreichten Kreis: ein Ring, der aufgeht und verschwindet —
    der Kreis selbst bleibt ruhig, sonst wackelt die Linie. */
-.faden-shell .fortschritt__punkt.jetzt::after { content: ""; position: absolute; inset: -2px; border-radius: var(--radius-kreis); border: 2px solid var(--ink); animation: faden-puls 2.4s cubic-bezier(.22,.61,.36,1) infinite; }
+.faden-shell .fortschritt__punkt.jetzt::after { content: ""; position: absolute; inset: -2px; border-radius: var(--radius-kreis); border: var(--strich-stark) solid var(--ink); animation: faden-puls 2.4s cubic-bezier(.22,.61,.36,1) infinite; }
 @keyframes faden-puls {
   0%   { transform: scale(1);   opacity: .5; }
   70%  { transform: scale(2.1); opacity: 0; }
@@ -262,35 +267,38 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 @media (prefers-reduced-motion: reduce) { .faden-shell .fortschritt__punkt.jetzt::after { display: none; } }
 
 .faden-shell .faden > * { min-width: 0; }
-.faden-shell .rand { align-self: stretch; font-size: var(--grad-14); display: flex; flex-direction: column; gap: var(--luft-l); min-width: 0; }
+.faden-shell .rand { align-self: stretch; font-size: var(--grad-14); display: flex; flex-direction: column; gap: 22px; min-width: 0; }
 .faden-shell .rand--links { justify-self: center; width: min(var(--rand-l), calc(100% - 46px)); }
 .faden-shell .rand--rechts { justify-self: center; width: min(var(--rand-r), calc(100% - 46px)); }
 .faden-shell .rand__lauf { flex: 1; position: relative; }
-.faden-shell .rand__innen { position: sticky; top: calc(var(--kopf-h, 64px) + 16px); max-height: calc(100vh - var(--kopf-h, 64px) - 32px); min-height: calc(100vh - var(--kopf-h, 64px) - 32px); display: flex; flex-direction: column; gap: var(--luft-l); overflow-y: auto; scrollbar-width: none; }
+.faden-shell .rand__innen { position: sticky; top: calc(var(--kopf-h, 64px) + 16px); max-height: calc(100vh - var(--kopf-h, 64px) - 32px); min-height: calc(100vh - var(--kopf-h, 64px) - 32px); display: flex; flex-direction: column; gap: 22px; overflow-y: auto; scrollbar-width: none; }
 .faden-shell .rand__innen::-webkit-scrollbar { width: 0; height: 0; }
-.faden-shell .rand__oben { display: grid; gap: var(--luft-l); align-content: start; }
-.faden-shell .rand__fuss { margin-top: auto; flex: none; display: grid; gap: var(--luft-l); }
-.faden-shell .verlauf { padding-right: var(--luft-xxs); }
-.faden-shell .rand--links .verlauf h2 { position: sticky; top: 0; z-index: 2; background: var(--paper); padding-top: var(--luft-xxs); margin-bottom: var(--luft-s); }
-.faden-shell .rand h2 { font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--luft-s); }
+.faden-shell .rand__oben { display: grid; gap: 22px; align-content: start; }
+.faden-shell .rand__fuss { margin-top: auto; flex: none; display: grid; gap: 18px; }
+.faden-shell .verlauf { padding-right: 2px; }
+.faden-shell .rand--links .verlauf h2 { position: sticky; top: 0; z-index: 2; background: var(--paper); padding-top: 2px; margin-bottom: 8px; }
+.faden-shell .rand h2 { font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
 /* 🚨 Eine Haarlinie, keine Doppellinie. Die Doppellinie ist dem Kopf des Fadens und dem
    Kiosk vorbehalten (Regel 2 des Tokensystems, Wunsch vom 13.09.2026) — sonst verliert
    sie ihre Bedeutung als Auszeichnung. */
-.faden-shell .rand h2::after { content: ""; display: block; height: 1px; margin-top: var(--luft-s); background: var(--rule-strong); }
-.faden-shell .rand--rechts h2 { margin-bottom: var(--luft-s); }
+/* 🚨 Dieselbe Doppellinie wie über der Mittelspalte. Der Faden beginnt in ALLEN DREI
+   Spalten mit demselben Abschluss — eine durchgehende Linie über alle drei wäre etwas
+   anderes und würde die Kopfzeilen der Ränder überschreiben. */
+.faden-shell .rand h2::after { content: ""; display: block; height: 5px; margin-top: var(--luft-s); background: var(--doppellinie); }
+.faden-shell .rand--rechts h2 { margin-bottom: 10px; }
 /* ---------- Verlauf: die schlichte Liste aus „Faden A" (nicht v2) ----------
    Quelle: `Finanzleser Faden A - Zeitung.dc.html`, Zeile 203–216. Nummer als eigene
    schmale Spalte, Titel in Merriweather, unter jedem Eintrag eine Haarlinie — die
    trägt den Rhythmus, deshalb hat die Liste keinen eigenen Zeilenabstand mehr. */
 .faden-shell .rand ul { list-style: none; margin: 0; padding: 0; }
-.faden-shell .verlauf > ul > li > button { display: flex; gap: var(--luft-s); width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--rule-soft); background: none; padding: var(--luft-s) 0; font: 400 var(--grad-14)/1.35 var(--serif); color: var(--muted); transition: color .2s; }
+.faden-shell .verlauf > ul > li > button { display: flex; gap: 10px; width: 100%; text-align: left; border: 0; border-bottom: var(--strich-haar) solid var(--rule-soft); background: none; padding: 8px 0; font: 400 var(--grad-14)/1.35 var(--serif); color: var(--muted); transition: color .2s; }
 .faden-shell .verlauf > ul > li > button:hover { color: var(--ink); }
 .faden-shell .verlauf > ul > li > button.aktiv { font-weight: 700; color: var(--ink); }
 .faden-shell .verlauf__nr { flex: none; min-width: 14px; font: 700 var(--grad-kicker)/1.6 var(--sans); letter-spacing: .06em; color: var(--muted); }
 .faden-shell .rand__leer { color: var(--muted); font-style: italic; font-size: var(--grad-13); }
 /* Blöcke der Randspalte (Wochenbrief, Aktenkoffer): kein Kasten, nur je eine
    Trennlinie darüber und darunter — so nutzen sie die volle Spaltenbreite. */
-.faden-shell .rand .block { background: none; border: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); border-radius: 0; padding: var(--luft-m) 0; }
+.faden-shell .rand .block { background: none; border: 0; border-top: var(--strich-haar) solid var(--ink); border-bottom: var(--strich-haar) solid var(--rule); border-radius: 0; padding: 14px 0; }
 .faden-shell .wb-rail__text { margin: var(--luft-s) 0 var(--luft-s); font: italic 300 var(--grad-14)/1.45 var(--serif); color: var(--ink); }
 /* Aktenkoffer: Kicker links, die Zahl groß rechts daneben, darunter der Satz und der Weg. */
 .faden-shell .koffer-rail { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: var(--luft-xxs) var(--luft-s); }
@@ -298,24 +306,24 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .koffer-rail__text { grid-column: 1 / -1; font: 400 var(--grad-13)/1.5 var(--sans); color: var(--muted); margin-top: var(--luft-xxs); }
 .faden-shell .koffer-rail .strich-link--gross { grid-column: 1 / -1; justify-self: start; margin-top: var(--luft-s); font-size: var(--grad-13); }
 .faden-shell .wb-form { display: flex; gap: var(--luft-s); margin-top: var(--luft-xs); }
-.faden-shell .wb-form input { flex: 1; width: 0; min-width: 0; font: inherit; font-size: var(--grad-13); padding: var(--luft-s) var(--luft-m); border: 1px solid var(--rule); border-radius: var(--radius-pille); background: var(--auflage); color: var(--ink); }
+.faden-shell .wb-form input { flex: 1; width: 0; min-width: 0; font: inherit; font-size: var(--grad-13); padding: var(--luft-s) var(--luft-m); border: var(--strich-haar) solid var(--rule); border-radius: var(--radius-pille); background: var(--auflage); color: var(--ink); }
 /* In der Randspalte ist das Feld kein Kasten, sondern ein Strich mit Textknopf. Die
    Linie liegt an Feld UND Knopf statt am Formular, weil die Einwilligung darunter in
    derselben Zeilenlage steht — sie fehlt in der Vorlage, das Double-Opt-in braucht sie. */
 .faden-shell .wb-form--klein { flex-wrap: wrap; gap: 0; margin-top: 0; }
-.faden-shell .wb-form--klein input[type="email"] { flex: 1; min-width: 0; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; background: transparent; padding: var(--luft-s) 0; font: 400 var(--grad-14) var(--sans); color: var(--ink); }
+.faden-shell .wb-form--klein input[type="email"] { flex: 1; min-width: 0; border: 0; border-bottom: var(--strich-haar) solid var(--ink); border-radius: 0; background: transparent; padding: var(--luft-s) 0; font: 400 var(--grad-14) var(--sans); color: var(--ink); }
 .faden-shell .wb-form--klein input[type="email"]::placeholder { color: var(--muted); }
-.faden-shell .wb-form__senden { border: 0; border-bottom: 1px solid var(--ink); background: none; padding: var(--luft-s) 0 var(--luft-s) var(--luft-s); font: 600 var(--grad-13) var(--sans); color: var(--green-ink); white-space: nowrap; }
+.faden-shell .wb-form__senden { border: 0; border-bottom: var(--strich-haar) solid var(--ink); background: none; padding: var(--luft-s) 0 var(--luft-s) var(--luft-s); font: 600 var(--grad-13) var(--sans); color: var(--green-ink); white-space: nowrap; }
 /* Abschnitte des Kapitels, in dem der Leser steht: eingerückt, jeder mit einem kurzen
    Strich, der beim aktiven von 6 auf 14 px wächst. */
-.faden-shell .verlauf ol { list-style: none; margin: 0; padding: var(--luft-xs) 0 var(--luft-s) var(--luft-l); border-bottom: 1px solid var(--rule-soft); }
-.faden-shell .verlauf ol li button { display: flex; align-items: center; gap: var(--luft-s); width: 100%; text-align: left; border: 0; background: none; padding: var(--luft-xs) 0; font: 400 var(--grad-13) var(--sans); color: var(--muted); transition: color .2s, padding-left .2s; }
-.faden-shell .verlauf ol li button:hover { padding-left: var(--luft-xs); color: var(--ink); }
+.faden-shell .verlauf ol { list-style: none; margin: 0; padding: 4px 0 6px 24px; border-bottom: var(--strich-haar) solid var(--rule-soft); }
+.faden-shell .verlauf ol li button { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; border: 0; background: none; padding: 5px 0; font: 400 var(--grad-13) var(--sans); color: var(--muted); transition: color .2s, padding-left .2s; }
+.faden-shell .verlauf ol li button:hover { padding-left: 4px; color: var(--ink); }
 .faden-shell .verlauf ol li button.aktiv { font-weight: 600; color: var(--ink); }
 .faden-shell .verlauf__strich { flex: none; width: 6px; height: 1px; background: var(--ink); transition: width .3s; }
-.faden-shell .verlauf__typ { display: inline; margin-left: var(--luft-s); font: 400 var(--grad-11)/1 var(--sans); color: var(--muted); letter-spacing: .04em; }
+.faden-shell .verlauf__typ { display: inline; margin-left: 6px; font: 400 var(--grad-11)/1 var(--sans); color: var(--muted); letter-spacing: .04em; }
 .faden-shell .verlauf ol li button.aktiv .verlauf__strich { width: 14px; }
-.faden-shell .glossar-rail { display: grid; gap: var(--luft-s); padding-right: var(--luft-xxs); }
+.faden-shell .glossar-rail { display: grid; gap: 6px; padding-right: 2px; }
 .faden-shell .mobil-leiste { display: none; }
 .faden-shell .schublade { display: none; }
 .faden-shell .rand__zu { display: none; }
@@ -327,9 +335,11 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* Zeitungskopf des Fadens: Kicker links, Datum rechts, darunter die Doppellinie. */
 .faden-shell .zeitungskopf { margin-bottom: var(--luft-xl); }
 .faden-shell .zeitungskopf__zeile { display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-m); }
+/* 🚨 Nur ab 901 px: darunter gibt es keine Randspalten, und ein negativer Rand
+   schöbe den Kopf aus dem Bild. */
 .faden-shell .zeitungskopf .doppellinie { margin-top: var(--luft-s); }
 
-.faden-shell .kapitel { border-top: 1px solid var(--rule); padding: var(--luft-m) 0 var(--luft-l); }
+.faden-shell .kapitel { border-top: var(--strich-haar) solid var(--rule); padding: var(--luft-m) 0 var(--luft-l); }
 /* Das erste Kapitel kommt ohne Trennlinie aus — auch dann, wenn ihm der Zeitungskopf
    vorangeht und `:first-child` deshalb nicht mehr greift. */
 .faden-shell .kapitel:first-child, .faden-shell .zeitungskopf + .kapitel { border-top: 0; padding-top: 0; }
@@ -380,9 +390,9 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .skelett__autor { display: flex; align-items: center; gap: var(--luft-s); }
 .faden-shell .skelett i.skelett__ring { width: 36px; height: 36px; border-radius: var(--radius-kreis); flex: none; }
 .faden-shell .skelett i.skelett__bild { width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: var(--radius-kante); }
-.faden-shell .skelett__inhalt { display: grid; gap: var(--luft-s); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: var(--luft-m) 0 var(--luft-m); }
+.faden-shell .skelett__inhalt { display: grid; gap: var(--luft-s); border-top: var(--strich-haar) solid var(--rule); border-bottom: var(--strich-haar) solid var(--rule); padding: var(--luft-m) 0 var(--luft-m); }
 .faden-shell .skelett i.skelett__karte { height: 420px; border-radius: var(--radius-kante); }
-.faden-shell .skelett__eintrag { display: grid; gap: var(--luft-s); padding: var(--luft-m) 0; border-bottom: 1px solid var(--rule); }
+.faden-shell .skelett__eintrag { display: grid; gap: var(--luft-s); padding: var(--luft-m) 0; border-bottom: var(--strich-haar) solid var(--rule); }
 .faden-shell .skelett h1 { animation: faden-frisch .3s ease both; }
 @keyframes faden-schimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 @media (prefers-reduced-motion: reduce) { .faden-shell .skelett i { animation: none; } }
@@ -419,7 +429,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    lebend hatte (lib/faden/schnappschuss.ts), damit beim Leeren und beim Beleben nichts rückt. */
 .faden-shell .insel--platz { display: block; }
 .faden-shell .kapitel__wieder { color: var(--muted); font-size: var(--grad-14); }
-.faden-shell .kapitel__wieder-zeile { border-top: 1px solid var(--rule); padding-top: var(--luft-s); }
+.faden-shell .kapitel__wieder-zeile { border-top: var(--strich-haar) solid var(--rule); padding-top: var(--luft-s); }
 .faden-shell .wort { display: grid; gap: var(--luft-xs); }
 /* Frage und Antwort sind zwei Sprecher, keine zwei Absätze — sie brauchen Abstand. */
 .faden-shell .wort--frage + .wort--leo { margin-top: var(--luft-l); }
@@ -445,7 +455,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    ANTWORT_FLIESS (leo/Blase.tsx) wird daraus normaler Lesesatz — dieselbe Größe, die
    Leos gestreamte Antworten im Faden tragen (.leo-markdown, 16 px). */
 .faden-shell .leo-rede--fliess > p { font: 400 var(--grad-16)/1.65 var(--sans); color: var(--ink); max-width: 68ch; }
-.faden-shell .leo-rede .quellen { margin-top: var(--luft-m); padding-top: var(--luft-s); border-top: 1px solid var(--rule); }
+.faden-shell .leo-rede .quellen { margin-top: var(--luft-m); padding-top: var(--luft-s); border-top: var(--strich-haar) solid var(--rule); }
 .faden-shell .leo-rede .quellen b { display: block; margin-bottom: var(--luft-xxs); font: 600 var(--grad-11)/1.3 var(--sans); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
 
 /* ---------- Die Frageblase (Maße 1:1 aus app/components.css, Live-Chat) ----------
@@ -453,7 +463,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    den sie bis 10.09.2026 trug. Leos Seite ist blasenlos (siehe .wort--leo oben). */
 /* 🚨 Die Hülle hält Blase und Schwanz als GESCHWISTER, siehe leo/Blase.tsx. */
 .faden-shell .blase-huelle { position: relative; display: inline-block; max-width: 100%; }
-.faden-shell .blase { position: relative; padding: var(--luft-l) var(--luft-l); border-radius: var(--radius-pille); word-wrap: break-word; overflow-wrap: break-word; }
+.faden-shell .blase { position: relative; padding: var(--luft-l) var(--luft-l); border-radius: var(--radius-blase); word-wrap: break-word; overflow-wrap: break-word; }
 .faden-shell .blase > p:last-child { margin-bottom: 0; }
 .faden-shell .blase--frage { background: var(--ink); color: var(--auf-tinte); max-width: 600px; }
 /* „Ihre Frage" steht rechts oben IN der Blase — der Leser sieht auf einen Blick, wessen
@@ -481,7 +491,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell a.einwurf--zeiger { text-decoration: none; margin: var(--luft-s) 0 var(--luft-s); flex-wrap: wrap; } .faden-shell a.einwurf--zeiger span { color: var(--muted); font-style: normal; font-size: var(--grad-12); } .faden-shell a.einwurf--zeiger:hover { color: var(--pink); }
 /* Der Finanztool-Block ist eine eigene Marke im Beitrag — Oberlinie in voller Tinte,
    wie die Kapitelköpfe der Vorlage (Handoff 571, 632, 1046). */
-.faden-shell .abschnitt--werkzeuge { border-top: 1px solid var(--rule-strong); padding-top: var(--luft-m); }
+.faden-shell .abschnitt--werkzeuge { border-top: var(--strich-haar) solid var(--rule-strong); padding-top: var(--luft-m); }
 .faden-shell .abschnitt--werkzeuge .werkzeuge-liste { display: grid; gap: var(--luft-l); margin-top: var(--luft-s); }
 .faden-shell .suchpille-wrap > .field-outline { z-index: 0; }
 
@@ -500,11 +510,11 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kasten { position: relative; background: none; border: 0; border-top: var(--strich-einhaenger) solid var(--ton, var(--green)); border-radius: 0; padding: var(--luft-m) 0 var(--luft-s); display: grid; gap: var(--luft-s); scroll-margin-top: 110px; }
 /* Die Ausnahme, ausdrücklich: echtes Papier mit Kante. */
 .faden-shell .kasten--rahmen { background: var(--paper); border: var(--strich-haar) solid var(--rule); border-top: var(--strich-einhaenger) solid var(--ton, var(--green)); border-radius: var(--radius-kante); padding: var(--luft-m) var(--luft-l) var(--luft-s); }
-.faden-shell .kasten--pink { --ton: var(--tool-rechner); } .faden-shell .kasten--tuerkis { --ton: var(--tool-vergleich); } .faden-shell .kasten--lila { --ton: var(--tool-checkliste); } .faden-shell .kasten--terra { --ton: var(--tool-dokumente); } .faden-shell .kasten--still { border-top: 1px solid var(--rule); }
+.faden-shell .kasten--pink { --ton: var(--tool-rechner); } .faden-shell .kasten--tuerkis { --ton: var(--tool-vergleich); } .faden-shell .kasten--lila { --ton: var(--tool-checkliste); } .faden-shell .kasten--terra { --ton: var(--tool-dokumente); } .faden-shell .kasten--still { border-top: var(--strich-haar) solid var(--rule); }
 .faden-shell .kasten h3 { font-size: var(--grad-20); }
 .faden-shell .kasten p { max-width: 64ch; }
 .faden-shell .kasten .knopf { justify-self: start; }
-.faden-shell .kasten__fuss { display: flex; gap: var(--luft-m); flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: var(--luft-s); }
+.faden-shell .kasten__fuss { display: flex; gap: var(--luft-m); flex-wrap: wrap; border-top: var(--strich-haar) solid var(--rule); padding-top: var(--luft-s); }
 .faden-shell .kasten--inline .kicker { margin-bottom: var(--luft-xxs); }
 .faden-shell .kasten ul.dokumente { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--luft-s); }
 .faden-shell .kasten ul.dokumente li { display: flex; gap: var(--luft-s); align-items: center; font-size: var(--grad-15); }
@@ -521,9 +531,9 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* Kein max-width: Titel und Beschreibung nehmen die volle Satzbreite (Wunsch 11.09.2026). */
 .faden-shell .artikel__untertitel { font: var(--schrift-titel); letter-spacing: -.01em; margin: 0 0 var(--luft-m); }
 .faden-shell .artikel .vorspann { font: var(--schrift-anriss); color: var(--ink); margin: 0 0 var(--luft-l); }
-.faden-shell .autor { display: flex; flex-wrap: wrap; align-items: center; gap: var(--luft-s) var(--luft-m); font: 400 var(--grad-13) var(--sans); color: var(--muted); padding: var(--luft-m) 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.faden-shell .autor { display: flex; flex-wrap: wrap; align-items: center; gap: var(--luft-s) var(--luft-m); font: 400 var(--grad-13) var(--sans); color: var(--muted); padding: var(--luft-m) 0; border-top: var(--strich-haar) solid var(--rule); border-bottom: var(--strich-haar) solid var(--rule); }
 .faden-shell .autor-ring { width: 34px; height: 34px; border-radius: var(--radius-kreis); padding: var(--luft-xxs); background: linear-gradient(135deg, var(--green), var(--tuerkis-hell)); display: inline-flex; flex: none; }
-.faden-shell .autor-ring img { width: 100%; height: 100%; border-radius: var(--radius-kreis); background: var(--paper); border: 2px solid var(--paper); box-sizing: border-box; object-fit: cover; display: block; }
+.faden-shell .autor-ring img { width: 100%; height: 100%; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-stark) solid var(--paper); box-sizing: border-box; object-fit: cover; display: block; }
 .faden-shell .autor b { color: var(--ink); }
 /* Die Lesedauer sitzt rechts am Rand, nicht hinter dem Namen. */
 .faden-shell .autor .lesedauer { display: inline-flex; align-items: center; gap: var(--luft-s); margin-left: auto; }
@@ -531,16 +541,16 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* Visual: Foto formatfüllend über die volle Breite, Haarlinien wie beim Bildband des
    Handoffs (Zeile 1368). Kategorie-Icons (Beiträge ohne Foto) bleiben klein und mittig. */
 .faden-shell .artikel figure { margin: var(--luft-l) 0 0; display: grid; grid-template-columns: 1fr; gap: var(--luft-s); }
-.faden-shell .artikel figure .bild { aspect-ratio: 16 / 9; background: var(--fill-1); display: grid; place-items: center; overflow: hidden; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.faden-shell .artikel figure .bild { aspect-ratio: 16 / 9; background: var(--fill-1); display: grid; place-items: center; overflow: hidden; border-top: var(--strich-haar) solid var(--rule); border-bottom: var(--strich-haar) solid var(--rule); }
 .faden-shell .artikel figure .bild img { width: 64px; height: 64px; opacity: .6; }
 .faden-shell .artikel figure .bild--foto img { width: 100%; height: 100%; object-fit: cover; opacity: 1; }
 .faden-shell .artikel figure figcaption { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }
 /* ---------- Inhaltsverzeichnis mit Punktführung (Handoff 571-578) ---------- */
 /* Flex mit Grundlinien-Ausrichtung, nicht Grid: die Punktführung ist ein leeres <i> mit
    `flex: 1`, das den Rest der Zeile ausfüllt und per translateY auf Mittelhöhe sitzt. */
-.faden-shell .inhalt { display: block; margin: var(--luft-l) 0 0; border-top: 1px solid var(--rule-strong); padding: var(--luft-s) 0 0; }
+.faden-shell .inhalt { display: block; margin: var(--luft-l) 0 0; border-top: var(--strich-haar) solid var(--rule-strong); padding: var(--luft-s) 0 0; }
 .faden-shell .inhalt__liste { list-style: none; margin: var(--luft-s) 0 0; padding: 0; display: flex; flex-direction: column; }
-.faden-shell .inhalt__zeile a { display: flex; align-items: baseline; gap: var(--luft-s); width: 100%; border-top: 1px solid var(--rule-soft); padding: var(--luft-s) 0; text-decoration: none; color: var(--ink); transition: padding-left .3s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .inhalt__zeile a { display: flex; align-items: baseline; gap: var(--luft-s); width: 100%; border-top: var(--strich-haar) solid var(--rule-soft); padding: var(--luft-s) 0; text-decoration: none; color: var(--ink); transition: padding-left .3s cubic-bezier(.2,.8,.2,1); }
 .faden-shell .inhalt__zeile a:hover { padding-left: var(--luft-s); }
 .faden-shell .inhalt__nr { font: 900 var(--grad-15) var(--serif); color: var(--green); min-width: 18px; font-style: normal; }
 .faden-shell .inhalt__zeile--faq .inhalt__nr, .faden-shell .inhalt__zeile--fazit .inhalt__nr { color: var(--muted); }
@@ -549,7 +559,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    diese Zeile steht das ganze Verzeichnis in Grau statt in Tinte. */
 .faden-shell .inhalt__titel { font: 400 var(--grad-15) var(--serif); color: var(--ink); }
 /* Die Punktführung. `flex: 1` frisst den freien Raum, der Versatz hebt sie auf Mittelhöhe. */
-.faden-shell .inhalt__linie { flex: 1; border-bottom: 1px dotted var(--ink-45); transform: translateY(-4px); }
+.faden-shell .inhalt__linie { flex: 1; border-bottom: var(--strich-haar) dotted var(--ink-45); transform: translateY(-4px); }
 /* Rechts, wo im Handoff die Lesedauer steht: ein Zeichen für die Art des Eintrags. */
 .faden-shell .inhalt__art { display: inline-flex; align-items: center; justify-content: flex-end; min-width: 14px; flex: none; color: var(--muted); }
 .faden-shell .inhalt__art svg { width: 13px; height: 13px; display: block; }
@@ -615,14 +625,15 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* ---------- Häufige Fragen (Handoff 721–731) ---------- */
 .faden-shell .abschnitt--faq, .faden-shell .abschnitt--fazit { margin-top: var(--luft-xxl); }
 .faden-shell .faq { margin: 0; display: block; }
-.faden-shell .faq__paar { border-bottom: 1px solid var(--rule-fein); }
+.faden-shell .faq__paar { border-bottom: var(--strich-haar) solid var(--rule-fein); }
 .faden-shell .faq__frage { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: var(--luft-m); width: 100%; border: 0; background: transparent; padding: var(--luft-m) var(--luft-xxs); text-align: left; color: var(--ink); cursor: pointer; transition: padding-left .3s cubic-bezier(.2,.8,.2,1); }
 .faden-shell .faq__frage:hover { padding-left: var(--luft-s); }
-.faden-shell .faq__nr { font: 900 var(--grad-18)/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
+/* Dieselbe Zahl wie in der nummerierten Aufzählung des Fließtexts: groß, Antiqua, 900. */
+.faden-shell .faq__nr { font: 900 var(--grad-22)/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
 .faden-shell .faq__frage[aria-expanded="true"] .faq__nr { color: var(--green); }
-.faden-shell .faq__text { font: 600 var(--grad-16)/1.35 var(--serif); }
+.faden-shell .faq__text { font: var(--schrift-zeile); }
 /* Der Winkel aus zwei Kanten — zeigt zu, dreht beim Öffnen nach oben. */
-.faden-shell .faq__winkel { width: 9px; height: 9px; border-right: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); transform: rotate(45deg) translate(-2px, -2px); transition: transform .4s cubic-bezier(.2,.8,.2,1); margin-right: var(--luft-s); }
+.faden-shell .faq__winkel { width: 9px; height: 9px; border-right: var(--strich-stark) solid var(--ink); border-bottom: var(--strich-stark) solid var(--ink); transform: rotate(45deg) translate(-2px, -2px); transition: transform .4s cubic-bezier(.2,.8,.2,1); margin-right: var(--luft-s); }
 .faden-shell .faq__winkel--auf { transform: rotate(225deg) translate(-2px, -2px); }
 /* 🚨 0fr → 1fr statt height/display: die Antwort bleibt im HTML, auch zugeklappt.
    Daran hängen die FAQPage-Daten und jeder Textauszug. */
@@ -636,15 +647,15 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* Schlicht wie in der Vorlage: Zeichen und Wort nebeneinander, keine Flankenlinien. */
 .faden-shell .fazit-kopf { display: inline-flex; align-items: center; gap: var(--luft-s); font: 700 var(--grad-16) var(--serif); color: var(--ink); }
 .faden-shell .fazit-kopf img { width: 22px; height: 22px; }
-.faden-shell .fazit { margin-top: var(--luft-s); border-left: 3px solid var(--rule-strong); padding-left: var(--luft-m); font: 400 var(--grad-16)/1.65 var(--serif); color: var(--ink); }
+.faden-shell .fazit { margin-top: var(--luft-s); border-left: var(--strich-einhaenger) solid var(--ink); padding-left: var(--luft-m); font: 400 var(--grad-16)/1.65 var(--serif); color: var(--ink); }
 /* Abspann. Bis 11.09.2026 standen Kassensturz, Aktionen und „Dazu passt" ohne jeden
    Abstand aufeinander (margin-top: 0) — drei Blöcke auf Stoß. Jetzt trennt sie dieselbe
    Haarlinie, die auch die Abschnitte schließt. */
-.faden-shell .aktionen { display: flex; gap: var(--luft-m); flex-wrap: wrap; border-top: 1px solid var(--rule-strong); padding-top: var(--luft-s); margin-top: var(--luft-xl); align-items: center; }
-.faden-shell .dazu { display: grid; gap: 0; margin-top: var(--luft-xl); border-top: 1px solid var(--rule); padding-top: var(--luft-m); }
+.faden-shell .aktionen { display: flex; gap: var(--luft-m); flex-wrap: wrap; border-top: var(--strich-haar) solid var(--rule-strong); padding-top: var(--luft-s); margin-top: var(--luft-xl); align-items: center; }
+.faden-shell .dazu { display: grid; gap: 0; margin-top: var(--luft-xl); border-top: var(--strich-haar) solid var(--rule); padding-top: var(--luft-m); }
 .faden-shell .dazu .kicker { margin-bottom: var(--luft-xs); }
 /* Abstand kommt aus dem Rhythmus des Kapitels (.kapitel__satz), nicht vom Block selbst. */
-.faden-shell .dazu__eintrag { text-align: left; border-bottom: 1px solid var(--rule); padding: var(--luft-s) 0; font-family: var(--serif); font-weight: 700; font-size: var(--grad-15); color: var(--ink); text-decoration: none; }
+.faden-shell .dazu__eintrag { text-align: left; border-bottom: var(--strich-haar) solid var(--rule); padding: var(--luft-s) 0; font: var(--schrift-zeile); color: var(--ink); text-decoration: none; }
 .faden-shell .dazu__eintrag:hover { color: var(--green-ink); }
 /* ---------- Abschnittsfuß: Teilen, Trennlinie, darunter Leos Fragen ---------- */
 /* 🚨 Ein einspaltiges Raster, keine Nebenspalte für den Teilen-Link. Als der noch eine
@@ -699,12 +710,15 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* Nummerierte Liste: die Ziffer steht rechtsbündig in einer eigenen Spalte, wie im
    Zeitungssatz — so fluchten ein- und zweistellige Zahlen. */
 .faden-shell .prose ol { list-style: none !important; counter-reset: fl-punkt; margin: var(--luft-m) 0 var(--luft-l) !important; padding-left: 0 !important; }
-.faden-shell .prose ol > li { position: relative; counter-increment: fl-punkt; padding-left: var(--luft-xl); margin: 0 0 var(--luft-xs) !important; }
+.faden-shell .prose ol > li { position: relative; counter-increment: fl-punkt; padding-left: var(--luft-xxl); margin: 0 0 var(--luft-s) !important; min-height: 30px; }
+/* Die Zahl ist eine ZAHL, kein Aufzählungspunkt: groß, in der Antiqua, rechtsbündig in
+   einer eigenen Spalte, ohne Punkt dahinter. So setzt die Zeitung eine Schrittfolge —
+   und ein- und zweistellige Zahlen fluchten (`tabular-nums`). */
 .faden-shell .prose ol > li::before {
-  content: counter(fl-punkt) "."; position: absolute; left: 0; top: 0;
-  width: var(--luft-l); text-align: right;
-  font: 700 var(--grad-15)/1.75 var(--serif); color: var(--ink);
-  font-variant-numeric: tabular-nums;
+  content: counter(fl-punkt); position: absolute; left: 0; top: -2px;
+  width: var(--luft-xl); text-align: right;
+  font: 900 var(--grad-26)/1.2 var(--serif); color: var(--ink);
+  font-variant-numeric: tabular-nums; letter-spacing: -.02em;
 }
 
 /* Zitat: kursiv in der Serifenschrift, zwischen zwei Haarlinien über die Satzbreite.
@@ -750,10 +764,17 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* Tabelle: Doppellinie, graues Kopfband mit weißen Versalien, Zebra — dasselbe Muster
    wie die Listen des Kursblatts (Handoff Runde 2, Punkt 5). Die Grundform steht in
    components.css; hier fehlt nur, was den Zeitungssatz ausmacht. */
-.faden-shell .prose table { margin: var(--luft-l) 0 !important; }
+/* Der Linienstapel über dem Kopf, von oben nach unten:
+     die Zeile mit Text · 2 px Luft · 2 px Linie · 2 px Luft · 1 px Linie · das Band.
+   components.css zeichnet dafür `table::before` und `::after` in Grau; im Zeitungssatz
+   sind beide Tinte, und das Band darunter ist schmaler als vorher. */
+.faden-shell .prose table { margin: var(--luft-l) 0 !important; padding-top: 7px; }
+.faden-shell .prose table::before { top: 2px; height: 2px; background: var(--ink); }
+.faden-shell .prose table::after { top: 6px; height: 1px; background: var(--ink); }
 .faden-shell .prose thead th {
   font: var(--schrift-kicker); letter-spacing: var(--laufweite-band);
-  text-transform: uppercase; padding: var(--luft-s) var(--luft-m);
+  text-transform: uppercase; padding: var(--luft-xs) var(--luft-m);
+  background: var(--ink); color: var(--auf-tinte);
 }
 .faden-shell .prose tbody td { padding: var(--luft-m) var(--luft-m); font-size: var(--grad-15); }
 .faden-shell .prose tbody tr:nth-child(even) { background: var(--ink-05); }
@@ -766,50 +787,50 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .prose a:hover { color: var(--pink); }
 
 /* ---------- Registerblatt ---------- */
-.faden-shell .blatt__innen { max-width: 1320px; margin: 0 auto; padding: var(--luft-l) var(--luft-xl) var(--luft-l); display: grid; grid-template-columns: 220px 220px minmax(0, 1fr); gap: var(--luft-xl); position: relative; }
-.faden-shell .blatt__spalte { display: grid; gap: var(--luft-s); align-content: start; min-width: 0; }
-.faden-shell .blatt__spalte + .blatt__spalte { border-left: 1px solid var(--rule); padding-left: var(--luft-l); }
+.faden-shell .blatt__innen { max-width: 1320px; margin: 0 auto; padding: 18px 28px 22px; display: grid; grid-template-columns: 220px 220px minmax(0, 1fr); gap: 28px; position: relative; }
+.faden-shell .blatt__spalte { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.faden-shell .blatt__spalte + .blatt__spalte { border-left: var(--strich-haar) solid var(--rule); padding-left: 24px; }
 .faden-shell .blatt__spalte--breit { grid-column: 2 / -1; }
-.faden-shell .blatt ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--luft-xxs); }
-.faden-shell .blatt .thema { width: 100%; text-align: left; border: 0; background: none; padding: var(--luft-s) var(--luft-xs); font-size: var(--grad-14); display: flex; align-items: center; gap: var(--luft-s); border-radius: var(--radius-kante); }
+.faden-shell .blatt ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.faden-shell .blatt .thema { width: 100%; text-align: left; border: 0; background: none; padding: 6px 4px; font-size: var(--grad-14); display: flex; align-items: center; gap: 8px; border-radius: var(--radius-kante); }
 .faden-shell .blatt .thema img { width: 15px; height: 15px; opacity: .8; }
 .faden-shell .blatt .thema small { margin-left: auto; color: var(--muted); font-size: var(--grad-12); }
 .faden-shell .blatt .thema:hover, .faden-shell .blatt .thema.aktiv { color: var(--green-ink); font-weight: 700; }
-.faden-shell .blatt .thema.aktiv::after { content: "›"; margin-left: var(--luft-xs); }
+.faden-shell .blatt .thema.aktiv::after { content: "›"; margin-left: 4px; }
 .faden-shell .blatt .eintraege { display: grid; gap: 0; }
 .faden-shell .blatt .eintraege--kompakt { max-height: 44vh; overflow: auto; scrollbar-width: thin; }
-.faden-shell .blatt .eintrag { display: block; text-align: left; border: 0; border-bottom: 1px solid var(--rule); background: none; padding: var(--luft-s) var(--luft-xxs) var(--luft-s); text-decoration: none; color: var(--ink); font-family: var(--serif); font-size: var(--grad-15); font-weight: 700; line-height: 1.3; }
+.faden-shell .blatt .eintrag { display: block; text-align: left; border: 0; border-bottom: var(--strich-haar) solid var(--rule); background: none; padding: 8px 2px 10px; text-decoration: none; color: var(--ink); font-family: var(--serif); font-size: var(--grad-15); font-weight: 700; line-height: 1.3; }
 .faden-shell .blatt .eintrag:hover { color: var(--green-ink); }
-.faden-shell .blatt .werkzeug { width: 100%; text-align: left; border: 0; background: none; padding: var(--luft-xs) var(--luft-xxs); font-size: var(--grad-14); display: flex; gap: var(--luft-s); align-items: center; text-decoration: none; color: var(--ink); }
+.faden-shell .blatt .werkzeug { width: 100%; text-align: left; border: 0; background: none; padding: 5px 2px; font-size: var(--grad-14); display: flex; gap: 8px; align-items: center; text-decoration: none; color: var(--ink); }
 .faden-shell .blatt .werkzeug small { color: var(--muted); font-weight: 400; }
 .faden-shell .blatt .werkzeug:hover { color: var(--green-ink); }
-.faden-shell .blatt input { font: inherit; font-size: var(--grad-13); padding: var(--luft-s) var(--luft-m); border: 1px solid var(--rule); border-radius: var(--radius-pille); background: var(--auflage); color: var(--ink); width: 100%; }
+.faden-shell .blatt input { font: inherit; font-size: var(--grad-13); padding: 7px 12px; border: var(--strich-haar) solid var(--rule); border-radius: var(--radius-pille); background: var(--auflage); color: var(--ink); width: 100%; }
 .faden-shell .blatt .schliessen { position: absolute; right: 24px; top: 14px; border: 0; background: none; color: var(--muted); font-size: var(--grad-12); }
 .faden-shell .blatt .hinweis { font-size: var(--grad-13); color: var(--muted); background: none; border: 0; padding: 0; }
-.faden-shell .blatt__gruppe { display: grid; gap: var(--luft-xs); }
+.faden-shell .blatt__gruppe { display: grid; gap: 4px; }
 .faden-shell .abc { display: flex; flex-wrap: wrap; gap: var(--luft-xs); }
-.faden-shell .abc button { border: 1px solid var(--rule); background: none; padding: var(--luft-xxs) var(--luft-s); font-size: var(--grad-12); font-weight: 700; border-radius: var(--radius-pille); min-width: 28px; }
+.faden-shell .abc button { border: var(--strich-haar) solid var(--rule); background: none; padding: var(--luft-xxs) var(--luft-s); font-size: var(--grad-12); font-weight: 700; border-radius: var(--radius-pille); min-width: 28px; }
 .faden-shell .abc button:disabled { opacity: .35; cursor: default; }
 .faden-shell .abc button:hover:not(:disabled) { border-color: var(--green-ink); color: var(--green-ink); } .faden-shell .abc button.aktiv { border-color: var(--pink); color: var(--pink); }
 .faden-shell .lesezeichen .knopf--menue { display: none; }
 
 /* ---------- Mobiles Menü ---------- */
-.faden-shell .menue { position: fixed; inset: 0; z-index: 60; background: var(--paper); display: flex; flex-direction: column; padding: var(--luft-l) var(--luft-l); overflow: auto; }
-.faden-shell .menue__kopf { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--luft-l); }
+.faden-shell .menue { position: fixed; inset: 0; z-index: 60; background: var(--paper); display: flex; flex-direction: column; padding: 18px 24px; overflow: auto; }
+.faden-shell .menue__kopf { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
 .faden-shell .menue__kopf img { height: 24px; }
-.faden-shell .menue button.zeile-m { width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--rule); background: none; padding: var(--luft-m) 0; font-family: var(--serif); font-weight: 700; font-size: var(--grad-26); display: flex; align-items: center; justify-content: space-between; }
+.faden-shell .menue button.zeile-m { width: 100%; text-align: left; border: 0; border-bottom: var(--strich-haar) solid var(--rule); background: none; padding: 16px 0; font-family: var(--serif); font-weight: 700; font-size: var(--grad-26); display: flex; align-items: center; justify-content: space-between; }
 .faden-shell .menue button.zeile-m small { font: 600 var(--grad-11)/1.4 var(--sans); color: var(--muted); letter-spacing: .1em; text-transform: uppercase; text-align: right; max-width: 44%; }
-.faden-shell .menue .klein { display: grid; gap: var(--luft-xs); margin-top: var(--luft-l); }
-.faden-shell .menue .klein button { text-align: left; border: 0; background: none; padding: var(--luft-s) 0; font-weight: 600; font-size: var(--grad-16); display: flex; gap: var(--luft-s); align-items: center; }
+.faden-shell .menue .klein { display: grid; gap: 4px; margin-top: 18px; }
+.faden-shell .menue .klein button { text-align: left; border: 0; background: none; padding: 10px 0; font-weight: 600; font-size: var(--grad-16); display: flex; gap: 10px; align-items: center; }
 
 /* ---------- Listenkarte (Rubrik, Thema, Übersichten) ---------- */
 .faden-shell .kasten--liste { gap: var(--luft-m); }
 .faden-shell .liste__gruppe { display: grid; gap: var(--luft-xs); }
-.faden-shell .liste__titel { font-size: var(--grad-18); border-bottom: 1px solid var(--rule-strong); padding-bottom: var(--luft-s); margin-top: var(--luft-s); }
+.faden-shell .liste__titel { font-size: var(--grad-18); border-bottom: var(--strich-haar) solid var(--rule-strong); padding-bottom: var(--luft-s); margin-top: var(--luft-s); }
 .faden-shell .liste__titel a { color: inherit; text-decoration: none; } .faden-shell .liste__titel a:hover { color: var(--green-ink); }
 .faden-shell .liste__titel small { color: var(--muted); font: 600 var(--grad-12) var(--sans); }
 .faden-shell .kasten--liste .eintraege { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0 var(--luft-l); }
-.faden-shell .kasten--liste .eintrag { display: grid; gap: var(--luft-xs); border-bottom: 1px solid var(--rule); padding: var(--luft-s) 0 var(--luft-s); text-decoration: none; color: var(--ink); }
+.faden-shell .kasten--liste .eintrag { display: grid; gap: var(--luft-xs); border-bottom: var(--strich-haar) solid var(--rule); padding: var(--luft-s) 0 var(--luft-s); text-decoration: none; color: var(--ink); }
 .faden-shell .kasten--liste .eintrag b { font-family: var(--serif); font-size: var(--grad-16); font-weight: 700; line-height: 1.3; }
 .faden-shell .kasten--liste .eintrag:hover b { color: var(--green-ink); }
 .faden-shell .eintrag__klein { display: flex; align-items: center; gap: var(--luft-s); font: 400 var(--grad-12)/1.3 var(--sans); color: var(--muted); }
@@ -913,7 +934,7 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
    der Seite — das Blatt war beim ersten Laden schlicht nicht zu sehen. Die Blätter des
    Stapels tragen ihren z-index von Spalten.tsx und liegen darum weiterhin darüber. */
 .faden-shell .neueste { margin-block: var(--luft-xl) 0; --einzug: 16px; z-index: 0; }
-.faden-shell .neueste .zeitungskopf { margin-bottom: 0; padding-bottom: var(--luft-s); border-bottom: 1px solid var(--rule); }
+.faden-shell .neueste .zeitungskopf { margin-bottom: 0; padding-bottom: var(--luft-s); border-bottom: var(--strich-haar) solid var(--rule); }
 /* Der Schriftzug füllt die Blattbreite: Grad und Laufweite hängen beide an der
    Innenbreite (cqi bzw. em davon), das Verhältnis bleibt darum auf jeder Breite gleich.
    Der negative Rand rechts fängt die Laufweite HINTER dem letzten Buchstaben ab —
@@ -931,7 +952,6 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
    zwischen zwei Doppellinien, die Schrift wandert durch eine Punktreihe und die Punkte
    weichen ihr aus (components/faden/spalten/Laufband.tsx). */
 .faden-shell .laufband { --lauf-hoehe: 1.5em; }
-.faden-shell .doppellinie--gedreht { transform: scaleY(-1); }
 .faden-shell .laufband__reihe { position: relative; overflow: hidden; height: var(--lauf-hoehe); display: flex; align-items: center; margin: var(--luft-xs) 0; opacity: 0; }
 .faden-shell .laufband__punkte { position: absolute; left: 4px; right: 4px; top: 0; bottom: 0; display: flex; align-items: center; gap: var(--luft-s); z-index: 1; }
 .faden-shell .laufband__punkte span { width: 3px; height: 3px; border-radius: var(--radius-kreis); background: var(--ink); flex: none; }
@@ -1007,7 +1027,7 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 .faden-shell .kiosk__oeffnen { font-size: var(--grad-13); white-space: nowrap; }
 .faden-shell .kiosk-blatt:hover .kiosk__oeffnen i { width: 30px; }
 .faden-shell .kiosk__themen { list-style: none; margin: 0; padding: 0; display: grid; align-content: start; }
-.faden-shell .kiosk__themen button { width: 100%; text-align: left; border: 0; border-top: 1px solid var(--rule-soft); background: none; padding: var(--luft-s) 0; font: 400 var(--grad-15)/1.35 var(--serif); color: var(--ink); white-space: nowrap; transition: color .2s, padding-left .25s; display: flex; align-items: baseline; gap: var(--luft-s); }
+.faden-shell .kiosk__themen button { width: 100%; text-align: left; border: 0; border-top: var(--strich-haar) solid var(--rule-soft); background: none; padding: var(--luft-s) 0; font: 400 var(--grad-15)/1.35 var(--serif); color: var(--ink); white-space: nowrap; transition: color .2s, padding-left .25s; display: flex; align-items: baseline; gap: var(--luft-s); }
 .faden-shell .kiosk__themen button:hover { padding-left: var(--luft-xs); }
 .faden-shell .kiosk__themen .kiosk__thema-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .faden-shell .kiosk__themen small { font: 600 var(--grad-12) var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
@@ -1024,13 +1044,13 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 .faden-shell .kiosk__themen .ist-aktiv button { font-weight: 700; color: var(--green-ink); }
 
 /* Unter den Themen eine Haarlinie, darunter die Werkzeuge zum Thema. */
-.faden-shell .kiosk__werkzeuge { display: flex; flex-direction: column; align-items: flex-start; gap: var(--luft-s); margin-top: var(--luft-m); padding-top: var(--luft-m); border-top: 1px solid var(--rule); }
+.faden-shell .kiosk__werkzeuge { display: flex; flex-direction: column; align-items: flex-start; gap: var(--luft-s); margin-top: var(--luft-m); padding-top: var(--luft-m); border-top: var(--strich-haar) solid var(--rule); }
 .faden-shell .kiosk__werkzeuge .chip { text-decoration: none; }
 
 /* Die drei neuesten Ratgeber des Themas, hinter der Senkrechten. */
-.faden-shell .kiosk__ratgeber { border-left: 1px solid var(--rule); padding-left: var(--luft-l); display: grid; align-content: start; min-width: 0; }
+.faden-shell .kiosk__ratgeber { border-left: var(--strich-haar) solid var(--rule); padding-left: var(--luft-l); display: grid; align-content: start; min-width: 0; }
 .faden-shell .kiosk__artikel { text-align: left; border: 0; background: none; padding: 0 0 var(--luft-m); display: grid; gap: var(--luft-xs); text-decoration: none; color: var(--ink); }
-.faden-shell .kiosk__artikel + .kiosk__artikel { border-top: 1px solid var(--rule-soft); padding-top: var(--luft-m); }
+.faden-shell .kiosk__artikel + .kiosk__artikel { border-top: var(--strich-haar) solid var(--rule-soft); padding-top: var(--luft-m); }
 /* 🚨 Die Titelzeile bricht um, statt zu kürzen (Wunsch 11.09.2026): aus „Vorlage-Test ·
    Photovoltaik Förderu…" wurde sonst bei jedem längeren Titel ein Rätsel. Die Punkte
    bleiben in der ersten Zeile stehen und rutschen nicht unter den Text. */
@@ -1049,46 +1069,46 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 .faden-shell .begriff, .faden-shell .prose a.begriff { border: 0; background: none; padding: 0; font: inherit; color: var(--green-ink); cursor: pointer; text-decoration: underline; text-decoration-color: rgba(69,161,23,.4); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: text-decoration-color .2s, color .2s; }
 .faden-shell .begriff:hover, .faden-shell .prose a.begriff:hover { text-decoration-color: var(--green); }
 .faden-shell .begriff.offen, .faden-shell .prose a.begriff.offen { color: var(--pink); text-decoration-color: var(--pink); }
-.faden-shell .bmenu { position: absolute; z-index: 45; width: min(320px, calc(100vw - 24px)); background: var(--auflage); border: 1px solid var(--rule); border-radius: var(--radius-kante); box-shadow: var(--schatten-dialog); padding: var(--luft-m) var(--luft-l) var(--luft-m); display: grid; gap: var(--luft-xs); }
-.faden-shell .bmenu::before { content: ""; position: absolute; left: var(--pfeil, 22px); top: -7px; width: 12px; height: 12px; background: var(--auflage); border-left: 1px solid var(--rule); border-top: 1px solid var(--rule); transform: rotate(45deg); }
+.faden-shell .bmenu { position: absolute; z-index: 45; width: min(320px, calc(100vw - 24px)); background: var(--auflage); border: var(--strich-haar) solid var(--rule); border-radius: var(--radius-kante); box-shadow: var(--schatten-dialog); padding: 14px 18px 12px; display: grid; gap: 4px; }
+.faden-shell .bmenu::before { content: ""; position: absolute; left: var(--pfeil, 22px); top: -7px; width: 12px; height: 12px; background: var(--auflage); border-left: var(--strich-haar) solid var(--rule); border-top: var(--strich-haar) solid var(--rule); transform: rotate(45deg); }
 .faden-shell .bmenu.oben::before { top: auto; bottom: -7px; transform: rotate(225deg); }
-.faden-shell .bmenu__titel { font-family: var(--serif); font-weight: 700; font-size: var(--grad-20); color: var(--pink); padding-bottom: var(--luft-s); border-bottom: 1px solid var(--rule); margin-bottom: var(--luft-xs); }
-.faden-shell .bmenu .zeile { display: flex; align-items: center; gap: var(--luft-s); width: 100%; text-align: left; border: 0; background: none; padding: var(--luft-s) 0; font: inherit; font-size: var(--grad-15); color: var(--ink); text-decoration: none; cursor: pointer; }
+.faden-shell .bmenu__titel { font-family: var(--serif); font-weight: 700; font-size: var(--grad-20); color: var(--pink); padding-bottom: 8px; border-bottom: var(--strich-haar) solid var(--rule); margin-bottom: 4px; }
+.faden-shell .bmenu .zeile { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; border: 0; background: none; padding: 6px 0; font: inherit; font-size: var(--grad-15); color: var(--ink); text-decoration: none; cursor: pointer; }
 .faden-shell .bmenu .zeile:hover { color: var(--green-ink); }
 .faden-shell .bmenu .zeile i { flex: none; font-style: normal; }
-.faden-shell .bmenu .erkl { font-size: var(--grad-14); line-height: 1.5; color: var(--ink); background: var(--tint, rgba(69,161,23,.08)); padding: var(--luft-s) var(--luft-s); border-radius: var(--radius-kante); margin: var(--luft-xxs) 0 var(--luft-s); }
+.faden-shell .bmenu .erkl { font-size: var(--grad-14); line-height: 1.5; color: var(--ink); background: var(--tint, rgba(69,161,23,.08)); padding: 8px 10px; border-radius: var(--radius-kante); margin: 2px 0 6px; }
 .faden-shell .bmenu .erkl small { color: var(--muted); font-size: var(--grad-12); }
-.faden-shell .bmenu .leo-zeile { border-top: 1px solid var(--rule); margin-top: var(--luft-xs); padding-top: var(--luft-s); font-family: var(--serif); font-size: var(--grad-16); }
+.faden-shell .bmenu .leo-zeile { border-top: var(--strich-haar) solid var(--rule); margin-top: 4px; padding-top: 8px; font-family: var(--serif); font-size: var(--grad-16); }
 .faden-shell .bmenu .leo-zeile img { width: 30px; height: 30px; margin-left: auto; flex: none; }
-.faden-shell .bmenu .gemerkt { font-size: var(--grad-12); color: var(--muted); text-decoration: none; margin-top: var(--luft-xs); line-height: 1.4; }
+.faden-shell .bmenu .gemerkt { font-size: var(--grad-12); color: var(--muted); text-decoration: none; margin-top: 4px; line-height: 1.4; }
 .faden-shell .bmenu .gemerkt:hover { color: var(--green-ink); }
-.faden-shell .glossar-rail { display: grid; gap: var(--luft-s); padding-right: var(--luft-xxs); }
+.faden-shell .glossar-rail { display: grid; gap: 6px; padding-right: 2px; }
 /* Neu gemerkter Begriff kommt von rechts hereingeschoben und legt sich kurz schief —
    `fl-zettel` aus der Design-Übergabe (A v2), 1:1 übernommen. */
-.faden-shell .glossar-rail .eintrag-g { border: 1px solid var(--rule); background: var(--paper); border-radius: var(--radius-kante); overflow: hidden; animation: faden-zettel .7s cubic-bezier(.22,.61,.36,1) both; }
+.faden-shell .glossar-rail .eintrag-g { border: var(--strich-haar) solid var(--rule); background: var(--paper); border-radius: var(--radius-kante); overflow: hidden; animation: faden-zettel .7s cubic-bezier(.22,.61,.36,1) both; }
 @keyframes faden-zettel {
   0%   { opacity: 0; transform: translateX(26px) rotate(3deg); }
   60%  { opacity: 1; transform: translateX(-2px) rotate(-.6deg); }
   100% { opacity: 1; transform: none; }
 }
-.faden-shell .glossar-rail .eintrag-g > button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--luft-s); border: 0; background: none; padding: var(--luft-s) var(--luft-m); font-family: var(--serif); font-weight: 700; font-size: var(--grad-15); color: var(--green-ink); text-align: left; cursor: pointer; }
+.faden-shell .glossar-rail .eintrag-g > button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 0; background: none; padding: 9px 12px; font-family: var(--serif); font-weight: 700; font-size: var(--grad-15); color: var(--green-ink); text-align: left; cursor: pointer; }
 .faden-shell .glossar-rail .eintrag-g > button i { flex: none; width: 22px; height: 22px; border-radius: var(--radius-kreis); background: var(--green); color: var(--auf-tinte); display: grid; place-items: center; font-style: normal; font-size: var(--grad-16); line-height: 1; transition: transform .25s; }
 .faden-shell .glossar-rail .eintrag-g.offen > button i { transform: rotate(45deg); }
-.faden-shell .glossar-rail .erkl { display: none; padding: 0 var(--luft-m) var(--luft-s); font-size: var(--grad-13); line-height: 1.5; color: var(--ink); }
+.faden-shell .glossar-rail .erkl { display: none; padding: 0 12px 10px; font-size: var(--grad-13); line-height: 1.5; color: var(--ink); }
 .faden-shell .glossar-rail .eintrag-g.offen .erkl { display: block; }
-.faden-shell .glossar-rail .erkl .quelle { display: block; margin-top: var(--luft-xs); }
-.faden-shell .glossar-rail .erkl .mehr { display: flex; gap: var(--luft-s); margin-top: var(--luft-s); flex-wrap: wrap; }
-.faden-shell .nachschlag { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--luft-l); }
-.faden-shell .nachschlag__links { display: grid; gap: var(--luft-s); align-content: start; min-width: 0; }
-.faden-shell .nachschlag__liste { max-height: 46vh; overflow: auto; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); scrollbar-width: thin; }
-.faden-shell .nachschlag__liste button { width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--rule-soft); background: none; padding: var(--luft-s) var(--luft-xs); font-family: var(--serif); font-weight: 700; font-size: var(--grad-15); color: var(--ink); display: flex; justify-content: space-between; gap: var(--luft-s); cursor: pointer; }
+.faden-shell .glossar-rail .erkl .quelle { display: block; margin-top: 4px; }
+.faden-shell .glossar-rail .erkl .mehr { display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+.faden-shell .nachschlag { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+.faden-shell .nachschlag__links { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.faden-shell .nachschlag__liste { max-height: 46vh; overflow: auto; border-top: var(--strich-haar) solid var(--rule); border-bottom: var(--strich-haar) solid var(--rule); scrollbar-width: thin; }
+.faden-shell .nachschlag__liste button { width: 100%; text-align: left; border: 0; border-bottom: var(--strich-haar) solid var(--rule-soft); background: none; padding: 7px 4px; font-family: var(--serif); font-weight: 700; font-size: var(--grad-15); color: var(--ink); display: flex; justify-content: space-between; gap: 8px; cursor: pointer; }
 .faden-shell .nachschlag__liste button small { font: 600 var(--grad-11)/1.3 var(--sans); color: var(--muted); text-align: right; }
 .faden-shell .nachschlag__liste button:hover, .faden-shell .nachschlag__liste button.aktiv { color: var(--green-ink); }
-.faden-shell .nachschlag__liste .buchstabe { position: sticky; top: 0; background: var(--paper); font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em; color: var(--muted); padding: var(--luft-s) var(--luft-xs) var(--luft-xxs); border-bottom: 1px solid var(--rule); }
-.faden-shell .nachschlag__detail { align-self: start; display: grid; gap: var(--luft-s); padding: var(--luft-m) var(--luft-m); background: var(--paper); border-radius: var(--radius-kante); min-height: 200px; }
+.faden-shell .nachschlag__liste .buchstabe { position: sticky; top: 0; background: var(--paper); font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em; color: var(--muted); padding: 6px 4px 2px; border-bottom: var(--strich-haar) solid var(--rule); }
+.faden-shell .nachschlag__detail { align-self: start; display: grid; gap: 8px; padding: 14px 16px; background: var(--paper); border-radius: var(--radius-kante); min-height: 200px; }
 .faden-shell .nachschlag__detail h4 { font-family: var(--serif); font-size: var(--grad-20); color: var(--pink); margin: 0; }
 .faden-shell .nachschlag__detail p { font-size: var(--grad-14); line-height: 1.5; margin: 0; }
-.faden-shell .nachschlag__detail .reihe { display: flex; flex-wrap: wrap; gap: var(--luft-s); }
+.faden-shell .nachschlag__detail .reihe { display: flex; flex-wrap: wrap; gap: 10px; }
 .faden-shell .nachschlag__zahl { font-size: var(--grad-12); color: var(--muted); }
 .faden-shell .kasten--begriff { gap: var(--luft-m); }
 .faden-shell .begriff-k__text { font-size: var(--grad-18); }
@@ -1100,7 +1120,7 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 /* ---------- Leo im Faden: Fragen, Antworten, Tipp-Punkte, Folge-Chips, Sprungleiste ---------- */
 .faden-shell .leo-strom { display: grid; gap: var(--luft-l); padding: var(--luft-xs) 0 var(--luft-m); }
 .faden-shell .leo-strom:empty { display: none; padding: 0; }
-.faden-shell .leo-strom--alt { margin-top: var(--luft-m); padding-top: var(--luft-m); border-top: 1px dashed var(--rule); }
+.faden-shell .leo-strom--alt { margin-top: var(--luft-m); padding-top: var(--luft-m); border-top: var(--strich-haar) dashed var(--rule); }
 .faden-shell .wort--frage .kicker { display: block; margin-bottom: var(--luft-xxs); }
 .faden-shell .tippt { display: inline-flex; gap: var(--luft-xs); align-items: center; height: 20px; }
 .faden-shell .tippt i { width: 6px; height: 6px; border-radius: var(--radius-kreis); background: var(--muted); animation: faden-blink 1.2s infinite; }
@@ -1112,18 +1132,18 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 .faden-shell .wort--leo .werkzeuge { display: flex; gap: var(--luft-m); flex-wrap: wrap; margin-top: var(--luft-s); }
 .faden-shell .wort--fehler p { color: var(--pink); }
 .faden-shell .chips--rechts { margin-left: var(--luft-xl); }
-.faden-shell .sprung { padding: var(--luft-s) var(--luft-s) var(--luft-s); display: grid; gap: var(--luft-xxs); max-height: 60vh; overflow: auto; border-bottom: 1px solid var(--rule); }
+.faden-shell .sprung { padding: var(--luft-s) var(--luft-s) var(--luft-s); display: grid; gap: var(--luft-xxs); max-height: 60vh; overflow: auto; border-bottom: var(--strich-haar) solid var(--rule); }
 .faden-shell .sprung__kopf { font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding: var(--luft-xs) var(--luft-s) var(--luft-s); }
 .faden-shell .sprung button { display: flex; gap: var(--luft-m); align-items: baseline; width: 100%; text-align: left; border: 0; background: none; padding: var(--luft-s) var(--luft-s); font: inherit; font-size: var(--grad-15); border-radius: var(--radius-kante); color: var(--ink); cursor: pointer; }
 .faden-shell .sprung button:hover, .faden-shell .sprung button.aktiv { background: var(--tint); }
 .faden-shell .sprung .typ { width: 84px; flex: none; font: 600 var(--grad-kicker)/1.5 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .faden-shell .sprung .unter { margin-left: auto; color: var(--muted); font-size: var(--grad-13); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40%; }
-.faden-shell .sprung .frage { border-top: 1px solid var(--rule); margin-top: var(--luft-xs); padding-top: var(--luft-s); color: var(--pink); font-weight: 600; border-radius: 0; }
+.faden-shell .sprung .frage { border-top: var(--strich-haar) solid var(--rule); margin-top: var(--luft-xs); padding-top: var(--luft-s); color: var(--pink); font-weight: 600; border-radius: 0; }
 
 /* ---------- Anzeigenplätze (Platzhalter, adblocker-neutral benannt) ---------- */
 .faden-shell .einschub { display: grid; gap: var(--luft-xs); justify-items: center; width: 100%; min-width: 0; }
 .faden-shell .einschub__label { font: 700 var(--grad-kicker)/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); justify-self: start; }
-.faden-shell .einschub__flaeche { position: relative; width: 100%; display: block; line-height: 0; border: 1px solid var(--rule); }
+.faden-shell .einschub__flaeche { position: relative; width: 100%; display: block; line-height: 0; border: var(--strich-haar) solid var(--rule); }
 .faden-shell .einschub__flaeche img { width: 100%; height: auto; display: block; }
 .faden-shell .einschub__flaeche img.schmal { display: none; }
 .faden-shell .einschub--top { padding: var(--luft-xs) 0 var(--luft-l); }
@@ -1143,7 +1163,7 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 .faden-shell .einschub[data-format="halfpage"] .einschub__flaeche, .faden-shell .einschub[data-format="rectangle"] .einschub__flaeche { max-width: 300px; }
 .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche { max-width: 728px; }
 .faden-shell .einschub[data-format="mobile"] .einschub__flaeche { max-width: 320px; }
-.faden-shell .rand__fuss .einschub { margin-top: var(--luft-s); }
+.faden-shell .rand__fuss .einschub { margin-top: 8px; }
 .faden-shell .abschnitt .fliess::after { content: ""; display: block; clear: both; }
 
 /* ---------- Vorschläge unter der Eingabe ---------- */
@@ -1188,9 +1208,9 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 .faden-shell .kasten--dokumente .dokumente-embed[data-layout="grid"] { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--luft-l) var(--luft-l); }
 .faden-shell .artikel--karte .kasten { margin-top: var(--luft-xs); }
 .faden-shell .artikel__zusatz { font-weight: 400; font-style: italic; color: var(--muted); font-size: var(--grad-11); }
-.faden-shell .anbieter-k__spalten { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.faden-shell .anbieter-k__spalten { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); border-top: var(--strich-haar) solid var(--rule); border-bottom: var(--strich-haar) solid var(--rule); }
 .faden-shell .anbieter-k__spalten > div { padding: var(--luft-s) var(--luft-m) var(--luft-s) 0; display: grid; gap: var(--luft-xxs); align-content: start; min-width: 0; }
-.faden-shell .anbieter-k__spalten > div + div { border-left: 1px solid var(--rule); padding-left: var(--luft-m); }
+.faden-shell .anbieter-k__spalten > div + div { border-left: var(--strich-haar) solid var(--rule); padding-left: var(--luft-m); }
 .faden-shell .anbieter-k__spalten p { margin: 0; font-size: var(--grad-15); line-height: 1.4; overflow-wrap: anywhere; }
 .faden-shell .kasten--anbieter .anbieter-content h2 { font-size: var(--grad-22); margin: var(--luft-m) 0 var(--luft-xs); } .faden-shell .kasten--anbieter .anbieter-content h3 { font-size: var(--grad-18); margin: var(--luft-m) 0 var(--luft-xs); }
 .faden-shell .kasten--text .prose h2 { font-size: var(--grad-22) !important; margin: 1.2em 0 .5em !important; } .faden-shell .kasten--text .prose h1 { display: none; }
@@ -1199,7 +1219,7 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 /* Fest am unteren Bildschirmrand, genau über der Mittelspalte (Lage und Breite misst
    Eingabe.tsx — `fixed` kennt seine Spalte nicht). Vorher `sticky` in #mitte: stieg am
    Fadenende um die Fußnote nach oben und war bei kurzem Strom gar nicht unten. */
-.faden-shell .eingabe { position: fixed; bottom: 0; left: var(--eingabe-links, 50%); width: var(--eingabe-breite, calc(var(--spalte) - 22px)); display: grid; gap: var(--luft-s); z-index: 5; padding: var(--luft-xl) 0 var(--luft-m); }
+.faden-shell .eingabe { position: fixed; bottom: 0; left: var(--eingabe-links, 50%); width: var(--eingabe-breite, var(--satzbreite)); display: grid; gap: var(--luft-s); z-index: 5; padding: var(--luft-xl) 0 var(--luft-m); }
 .faden-shell .eingabe__blur { position: absolute; left: -10px; right: -10px; top: 0; bottom: 0; z-index: -1; pointer-events: none; }
 .faden-shell .eingabe__blur i { position: absolute; left: 0; right: 0; bottom: 0; display: block; -webkit-mask-image: linear-gradient(to top, #000 40%, transparent 100%); mask-image: linear-gradient(to top, #000 40%, transparent 100%); }
 .faden-shell .eingabe__blur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .eingabe__blur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .eingabe__blur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .eingabe__blur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .eingabe__blur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .eingabe__blur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .eingabe__blur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .eingabe__blur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
@@ -1207,7 +1227,7 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 /* Unten ist die Pille schmaler als die Spalte (wie die Sprechblase auf der Live-Seite)
    und macht nach OBEN auf: sie klebt an der Unterkante, die Reihenfolge im Kasten dreht
    sich um, das Vorschlagsfeld liegt damit über dem Feld. */
-.faden-shell .eingabe .suchpille-wrap { width: calc(100% + 22px); max-width: var(--pille-breite, 750px); margin-left: calc(-1 * var(--luft-m)); }
+.faden-shell .eingabe .suchpille-wrap { width: calc(100% + 2 * var(--mitte-rand)); max-width: var(--pille-breite, 750px); margin-left: calc(-1 * var(--mitte-rand)); }
 .faden-shell .eingabe .suchpille { top: auto; bottom: 0; flex-direction: column-reverse; }
 /* ---------- Die Eingabepille ----------
    Maße 1:1 aus dem Leo-Chat der Live-Seite (components/ui/LeoIcon.tsx): Radius 35,
@@ -1228,7 +1248,7 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 .faden-shell .suchpille-wrap:focus-within > .suchpille { box-shadow: 0 0 0 2px var(--ink); }
 /* Die Feldhöhe steht fest (Wrapper und Pille sollen sich decken); wird der Kasten höher,
    verteilt `space-between` die Zeile nach oben und die Fußzeile nach unten. */
-.faden-shell .suchpille__feld { position: relative; display: grid; gap: var(--luft-xxs); padding: var(--luft-l) 76px var(--luft-m) var(--luft-l); min-height: var(--pille-h); align-content: space-between; }
+.faden-shell .suchpille__feld { position: relative; display: grid; gap: 2px; padding: 22px 76px 12px 24px; min-height: var(--pille-h); align-content: space-between; }
 .faden-shell .hero-landing__pille .suchpille__feld { min-height: var(--pille-h-landing); }
 .faden-shell .suchpille textarea {
   border: 0; background: none; resize: none; outline: none; padding: 0; margin: 0;
@@ -1254,9 +1274,9 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 .faden-shell .eingabe.mit-chips #eingabeChips { opacity: 1; transform: none; pointer-events: auto; }
 
 /* ---------- Toast, Fußnote ---------- */
-.faden-shell .toast, .toast.faden-toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: var(--ink); color: var(--paper); padding: var(--luft-s) var(--luft-l); font-size: var(--grad-14); opacity: 0; transition: .25s; z-index: 60; pointer-events: none; border-radius: var(--radius-pille); max-width: min(560px, calc(100vw - 32px)); }
+.faden-shell .toast, .toast.faden-toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: var(--ink); color: var(--paper); padding: 8px 18px; font-size: var(--grad-14); opacity: 0; transition: .25s; z-index: 60; pointer-events: none; border-radius: var(--radius-pille); max-width: min(560px, calc(100vw - 32px)); }
 .faden-shell .toast.zeigt { opacity: 1; transform: translate(-50%, 0); }
-.faden-shell .fussnote { max-width: 1440px; width: 100%; margin: 0 auto; padding: var(--luft-m) var(--luft-xl) calc(var(--eingabe-h, 140px) + 20px); font-size: var(--grad-13); color: var(--muted); text-align: center; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; justify-content: center; gap: var(--luft-s) var(--luft-l); }
+.faden-shell .fussnote { max-width: 1440px; width: 100%; margin: 0 auto; padding: var(--luft-m) var(--luft-xl) calc(var(--eingabe-h, 140px) + 20px); font-size: var(--grad-13); color: var(--muted); text-align: center; border-top: var(--strich-haar) solid var(--rule); display: flex; flex-wrap: wrap; justify-content: center; gap: var(--luft-s) var(--luft-l); }
 .faden-shell .fussnote a { color: var(--muted); text-decoration: none; } .faden-shell .fussnote a:hover { color: var(--green-ink); text-decoration: underline; }
 
 /* ---------- Umbrüche ---------- */
@@ -1266,14 +1286,14 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
   .faden-shell #mitte { grid-column: 1; padding: 0 0 var(--eingabe-h, 140px); }
   .faden-shell .faden > .fussnote { grid-column: 1; }
   .faden-shell .rand { display: none; }
-  .faden-shell .rand.mobil { display: flex; position: fixed; top: 0; bottom: 0; width: min(360px, 86vw); z-index: 70; background: var(--paper); flex-direction: column; gap: var(--luft-s); padding: var(--luft-m) var(--luft-l) var(--luft-l); overflow: auto; box-shadow: var(--schatten-dialog); }
+  .faden-shell .rand.mobil { display: flex; position: fixed; top: 0; bottom: 0; width: min(360px, 86vw); z-index: 70; background: var(--paper); flex-direction: column; gap: 10px; padding: 12px 20px 20px; overflow: auto; box-shadow: var(--schatten-dialog); }
   .faden-shell .rand--links.mobil { left: 0; } .faden-shell .rand--rechts.mobil { right: 0; }
   .faden-shell .rand.mobil .rand__innen { position: static; top: auto; min-height: 0; display: grid; }
   .faden-shell .rand.mobil .rand__fuss { margin-top: 0; }
   .faden-shell .rand.mobil .rand__zu { display: inline-flex; order: -1; align-self: flex-end; position: sticky; top: 0; z-index: 1; }
   .faden-shell .schublade { display: block; position: fixed; inset: 0; background: var(--schleier); z-index: 69; }
   .faden-shell .mobil-leiste { display: flex; justify-content: space-between; gap: var(--luft-s); padding: 0 0 var(--luft-m); }
-  .faden-shell .mobil-leiste button { border: 1px solid var(--rule); background: var(--paper); border-radius: var(--radius-pille); padding: var(--luft-xs) var(--luft-m); font-size: var(--grad-13); font-weight: 600; color: var(--ink); display: inline-flex; gap: var(--luft-s); align-items: center; }
+  .faden-shell .mobil-leiste button { border: var(--strich-haar) solid var(--rule); background: var(--paper); border-radius: var(--radius-pille); padding: 5px 14px; font-size: var(--grad-13); font-weight: 600; color: var(--ink); display: inline-flex; gap: 8px; align-items: center; }
   .faden-shell .mobil-leiste button i { font-style: normal; color: var(--green); }
   .faden-shell .eingabe .suchpille-wrap { width: 100%; margin-left: 0; }
 }
@@ -1282,18 +1302,18 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
   .faden-shell .dok-card-download, .faden-shell .dok-card-download .rechner-button { max-width: 100%; }
   .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.breit-bild { display: none; } .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche { max-width: 320px; } .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.schmal { display: block; }
   .faden-shell .einschub--umflossen { float: none; width: 100%; margin: var(--luft-m) 0; }
-  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: var(--luft-xs); } .faden-shell .eingabe .chips .chip { flex: none; }
+  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; } .faden-shell .eingabe .chips .chip { flex: none; }
   .faden-shell .hero-landing { min-height: 0; }
   .faden-shell .sprung .typ { width: 64px; } .faden-shell .sprung .unter { display: none; } .faden-shell .chips--rechts { margin-left: 0; }
   .faden-shell .nachschlag { grid-template-columns: 1fr; } .faden-shell .nachschlag__liste { max-height: 40vh; }
   .faden-shell .kopf__innen { padding-left: var(--luft-m); }
-  .faden-shell .kopf__zeile { gap: var(--luft-s); min-height: 56px; } .faden-shell .logo img { height: 21px; }
+  .faden-shell .kopf__zeile { gap: 22px; min-height: 56px; } .faden-shell .logo img { height: 21px; }
   .faden-shell .register { display: none; }
   .faden-shell .lesezeichen .knopf--menue { display: inline-flex; }
-  .faden-shell .blatt__innen { grid-template-columns: 1fr; gap: var(--luft-m); padding: var(--luft-m) var(--luft-m) var(--luft-l); }
-  .faden-shell .blatt__spalte + .faden-shell .blatt__spalte, .faden-shell .blatt__spalte + .blatt__spalte { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: var(--luft-s); }
+  .faden-shell .blatt__innen { grid-template-columns: 1fr; gap: 28px; padding: 18px 28px 22px; }
+  .faden-shell .blatt__spalte + .faden-shell .blatt__spalte, .faden-shell .blatt__spalte + .blatt__spalte { border-left: 0; padding-left: 0; border-top: var(--strich-haar) solid var(--rule); padding-top: 10px; }
   .faden-shell .blatt__spalte--breit { grid-column: auto; }
-  .faden-shell .blatt ul.themen { display: flex; flex-wrap: wrap; gap: var(--luft-xs); } .faden-shell .blatt ul.themen .thema { width: auto; border: 1px solid var(--rule); padding: var(--luft-xs) var(--luft-m); border-radius: var(--radius-pille); }
+  .faden-shell .blatt ul.themen { display: flex; flex-wrap: wrap; gap: 4px; } .faden-shell .blatt ul.themen .thema { width: auto; border: var(--strich-haar) solid var(--rule); padding: 4px 12px; border-radius: var(--radius-pille); }
   /* ---------- Kiosk auf Mobil ----------
      Dieselbe Form wie auf dem Desktop — der Stapel war genau dafür gebaut. Die Blätter
      gehen bis an den Bildschirmrand (die Spalte selbst hat 14 px Polster) und BEHALTEN
@@ -1311,7 +1331,7 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
   .faden-shell .kiosk__themen { gap: 0; }
   .faden-shell .kiosk__themen button { font-size: var(--grad-14); padding: var(--luft-xxs) 0; white-space: normal; }
   .faden-shell .kiosk__werkzeuge { margin-top: var(--luft-m); padding-top: var(--luft-s); }
-  .faden-shell .kiosk__ratgeber { border-left: 0; border-top: 1px solid var(--rule); padding-left: 0; padding-top: var(--luft-m); }
+  .faden-shell .kiosk__ratgeber { border-left: 0; border-top: var(--strich-haar) solid var(--rule); padding-left: 0; padding-top: var(--luft-m); }
   /* „Versicherungen" und die Zeile daneben passen bei 360 px nicht zusammen in eine Zeile. */
   .faden-shell .kiosk__titel { font-size: clamp(var(--grad-18), 6.2cqi, var(--grad-26)); }
   .faden-shell .kiosk__kopf .kicker { font-size: var(--grad-kicker); letter-spacing: .1em; }
@@ -1319,13 +1339,13 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
   .faden-shell .kiosk__fuss { margin-top: var(--luft-s); }
   .faden-shell .hero-landing h1 { font-size: var(--grad-26); }
   .faden-shell .hero-landing__mitte { padding-left: var(--luft-s); padding-right: var(--luft-s); }
-  .faden-shell .lesezeichen { height: 40px; padding: 0 var(--luft-m) 0 var(--luft-xl); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 18px 50%); }
+  .faden-shell .lesezeichen { height: 40px; padding: 0 18px 0 34px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 18px 50%); }
   .faden-shell .lesezeichen .lz-wort { display: none; }
   .faden-shell .faden { padding: var(--luft-m) var(--luft-m) 0; }
   .faden-shell .artikel__untertitel { font-size: var(--grad-26); }
   .faden-shell .kapitel__kopf { flex-wrap: wrap; gap: var(--luft-s) var(--luft-m); } .faden-shell .kapitel__kopf .kicker { white-space: normal; }
   .faden-shell .inhalt__zeile a { grid-template-columns: 28px 24px minmax(0, 1fr); }
-  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: var(--luft-xs); } .faden-shell .eingabe .chips .chip { flex: none; }
+  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; } .faden-shell .eingabe .chips .chip { flex: none; }
   /* Die Pille steht auf Mobil etwas schmaler als die Spalte — sie liegt über dem
      Text und soll ihn nicht bis an den Rand zudecken. Der Blur darunter bleibt
      spaltenbreit, sonst bekäme der Verlauf sichtbare Kanten.
@@ -1333,8 +1353,8 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
      braucht 220 px, und mit den Desktop-Werten (24/76) blieben in der schmaleren Pille
      nur 219 px — er brach in die zweite Zeile um. 22/66 holt 12 der 20 schmaleren
      Pixel zurück, damit bleibt er bis hinunter zu 360 px einzeilig. */
-  .faden-shell .eingabe .suchpille-wrap { width: calc(100% - 20px); margin-left: var(--luft-s); }
-  .faden-shell .eingabe .suchpille__feld { padding-left: var(--luft-l); padding-right: 66px; }
+  .faden-shell .eingabe .suchpille-wrap { width: calc(100% - 20px); margin-left: -11px; }
+  .faden-shell .eingabe .suchpille__feld { padding-left: 22px; padding-right: 66px; }
 }
 
 /* ── Belohnung, Serie, kleine Flüge (Port aus dem Prototyp, 01-css.html:248, 629, 697–703) ── */
@@ -1353,9 +1373,14 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 body.faden-body .flug { font: 600 var(--grad-13)/1.2 var(--sans); background: var(--ink); color: var(--auf-tinte); padding: var(--luft-s) var(--luft-m); border-radius: var(--radius-pille); box-shadow: var(--schatten-schwebend); max-width: 260px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ── Lesestelle (Prototyp 01-css.html:315–317, 881) ── */
-.faden-shell .lesestelle { position: fixed; left: 50%; top: calc(var(--kopf-h, 64px) + 12px); transform: translate(-50%, -16px); z-index: 28; background: var(--ink); color: var(--paper); border: 0; border-radius: var(--radius-pille); padding: var(--luft-s) var(--luft-l) var(--luft-s) var(--luft-m); font: 600 var(--grad-14) var(--sans); display: inline-flex; align-items: center; gap: var(--luft-s); box-shadow: var(--schatten-schwebend); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; cursor: pointer; }
+/* Die Rückkehr zur Lesestelle: sie erscheint, wenn man vom laufenden Kapitel wegrollt
+   (components/faden/Lesestelle.tsx). 🚨 Sie war ein dunkler Klotz mitten im Satz und hat
+   den Text verdeckt, ohne dazuzugehören. Jetzt ist sie eine Marke auf dem Papier:
+   Haarlinie, Tinte auf Papier, ein grüner Pfeil — dieselbe Sprache wie ein Chip. */
+.faden-shell .lesestelle { position: fixed; left: 50%; top: calc(var(--kopf-h, 64px) + 12px); transform: translate(-50%, -16px); z-index: 28; background: var(--paper); color: var(--ink); border: var(--strich-haar) solid var(--ink-25); border-radius: var(--radius-pille); box-shadow: var(--schatten-auflage); display: inline-flex; align-items: center; gap: var(--luft-s); padding: var(--luft-xs) var(--luft-m) var(--luft-xs) var(--luft-s); font: 500 var(--grad-13)/1 var(--sans); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s, border-color .25s; }
+.faden-shell .lesestelle:hover { border-color: var(--ink); }
 .faden-shell .lesestelle.zeigt { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
-.faden-shell .lesestelle i { width: 22px; height: 22px; border-radius: var(--radius-kreis); background: var(--green); display: grid; place-items: center; font-style: normal; font-size: var(--grad-13); }
+.faden-shell .lesestelle i { width: 18px; height: 18px; border-radius: var(--radius-kreis); background: var(--green); color: var(--auf-tinte); display: grid; place-items: center; font-style: normal; font-size: var(--grad-11); flex: none; }
 @media (max-width: 900px) { .faden-shell .lesestelle { top: calc(var(--kopf-h, 64px) + 8px); font-size: var(--grad-13); padding: var(--luft-s) var(--luft-m) var(--luft-s) var(--luft-s); } }
 
 /* ── Flüge: Koffer, Begriff, Frage (Prototyp 01-css.html:242–247) ── */
@@ -1363,38 +1388,38 @@ body.faden-body .flug { font: 600 var(--grad-13)/1.2 var(--sans); background: va
 .faden-shell .flug-koffer { width: 34px; height: 34px; border-radius: var(--radius-kreis); background: var(--ink); color: var(--auf-tinte); display: grid; place-items: center; box-shadow: var(--schatten-schwebend); }
 .faden-shell .flug-koffer svg { width: 18px; height: 18px; }
 .faden-shell .flug-begriff { color: var(--green); font-size: var(--grad-18); }
-.faden-shell .flug-frage { max-width: 420px; background: var(--auflage); border-left: 3px solid var(--rule-strong); padding: var(--luft-s) var(--luft-m); font: italic 400 var(--grad-15) var(--serif); color: var(--ink); box-shadow: var(--schatten-schwebend); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.faden-shell .flug-frage { max-width: 420px; background: var(--auflage); border-left: var(--strich-einhaenger) solid var(--rule-strong); padding: var(--luft-s) var(--luft-m); font: italic 400 var(--grad-15) var(--serif); color: var(--ink); box-shadow: var(--schatten-schwebend); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .faden-shell .lesezeichen .lz-icon.blinkt { animation: koffer-blink .7s ease; }
 @keyframes koffer-blink { 0%, 100% { background: transparent; } 30% { background: rgba(255,255,255,.35); } 60% { background: transparent; } 80% { background: rgba(255,255,255,.25); } }
 .faden-shell .lesezeichen .lz-zahl.popt { animation: popt .5s cubic-bezier(.34,1.56,.64,1); }
 @keyframes popt { 0% { transform: scale(.4); } 60% { transform: scale(1.35); } 100% { transform: scale(1); } }
 
 /* ── Teilen als Zeitungsausriss (Prototyp 01-css.html:234–237) ── */
-.faden-shell .teilen-dialog { position: absolute; z-index: 45; width: 340px; background: var(--auflage); border: 1px solid var(--rule-strong); border-radius: var(--radius-kante); box-shadow: var(--schatten-dialog); padding: var(--luft-m); display: none; gap: var(--luft-s); }
+.faden-shell .teilen-dialog { position: absolute; z-index: 45; width: 340px; background: var(--auflage); border: var(--strich-haar) solid var(--rule-strong); border-radius: var(--radius-kante); box-shadow: var(--schatten-dialog); padding: var(--luft-m); display: none; gap: var(--luft-s); }
 .faden-shell .teilen-dialog.offen { display: grid; animation: ks-rein .25s both; }
 @keyframes ks-rein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-.faden-shell .teilen__ausriss { background: var(--paper); border: 1px solid var(--rule); padding: var(--luft-s) var(--luft-m); display: grid; gap: var(--luft-xxs); transform: rotate(-.6deg); }
+.faden-shell .teilen__ausriss { background: var(--paper); border: var(--strich-haar) solid var(--rule); padding: var(--luft-s) var(--luft-m); display: grid; gap: var(--luft-xxs); transform: rotate(-.6deg); }
 .faden-shell .teilen__ausriss b { font: 700 var(--grad-15)/1.3 var(--serif); }
 .faden-shell .teilen__ausriss small { color: var(--muted); font-size: var(--grad-12); }
 .faden-shell .teilen__wege { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--luft-s); }
-.faden-shell .teilen__wege button { position: relative; border: 1px solid var(--rule); background: none; border-radius: var(--radius-kante); padding: var(--luft-s) var(--luft-xs); display: grid; justify-items: center; gap: var(--luft-xs); font: 600 var(--grad-11) var(--sans); color: var(--ink); cursor: pointer; transition: border-color .2s, background .2s; }
+.faden-shell .teilen__wege button { position: relative; border: var(--strich-haar) solid var(--rule); background: none; border-radius: var(--radius-kante); padding: var(--luft-s) var(--luft-xs); display: grid; justify-items: center; gap: var(--luft-xs); font: 600 var(--grad-11) var(--sans); color: var(--ink); cursor: pointer; transition: border-color .2s, background .2s; }
 .faden-shell .teilen__wege button:hover { border-color: var(--ink); background: var(--paper); }
 .faden-shell .teilen__wege svg { width: 20px; height: 20px; }
-.faden-shell .teilen__wege button.gestempelt::after { content: "Kopiert"; position: absolute; top: -8px; right: -6px; border: 1.5px solid var(--green); color: var(--green-ink); border-radius: var(--radius-kante); padding: var(--luft-xxs) var(--luft-xs); font: 700 var(--grad-kicker) var(--sans); letter-spacing: .1em; text-transform: uppercase; transform: rotate(-8deg); background: var(--auflage); animation: stempel .4s both; }
+.faden-shell .teilen__wege button.gestempelt::after { content: "Kopiert"; position: absolute; top: -8px; right: -6px; border: var(--strich-stark) solid var(--green); color: var(--green-ink); border-radius: var(--radius-kante); padding: var(--luft-xxs) var(--luft-xs); font: 700 var(--grad-kicker) var(--sans); letter-spacing: .1em; text-transform: uppercase; transform: rotate(-8deg); background: var(--auflage); animation: stempel .4s both; }
 @keyframes stempel { from { transform: rotate(-12deg) scale(1.8); opacity: 0; } to { transform: rotate(-8deg) scale(1); opacity: 1; } }
 
 /* ── Kulissen: Was Suchmaschinen sehen (Prototyp 01-css.html:828–835, 867) ── */
 .faden-shell .seite { position: fixed; inset: 0; z-index: 80; background: var(--paper); overflow: auto; display: none; }
 .faden-shell .seite.offen { display: block; }
-.faden-shell .seite__leiste { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: var(--luft-m); padding: var(--luft-s) var(--luft-l); z-index: 2; }
+.faden-shell .seite__leiste { position: sticky; top: 0; background: var(--paper); border-bottom: var(--strich-haar) solid var(--rule); display: flex; align-items: center; gap: 12px; padding: 10px 20px; z-index: 2; }
 .faden-shell .seite__hinweis { font-size: var(--grad-12); color: var(--muted); }
-.faden-shell .url { flex: 1; background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius-pille); padding: var(--luft-s) var(--luft-m); font-size: var(--grad-13); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.faden-shell .url { flex: 1; background: var(--paper); border: var(--strich-haar) solid var(--rule); border-radius: var(--radius-pille); padding: var(--luft-s) var(--luft-m); font-size: var(--grad-13); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .faden-shell .url b { color: var(--ink); font-weight: 600; }
 .faden-shell .seite__innen { max-width: 1100px; margin: 0 auto; padding: var(--luft-xl) var(--luft-l) 80px; display: grid; grid-template-columns: minmax(0, 700px) 300px; gap: var(--luft-xl); }
 .faden-shell .seite__artikel { display: grid; gap: var(--luft-m); min-width: 0; }
 .faden-shell .seo { align-self: start; position: sticky; top: 60px; display: grid; gap: var(--luft-s); }
 .faden-shell .seo ul { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--luft-xs); }
-.faden-shell .seo li { border-bottom: 1px solid var(--rule); padding: var(--luft-s) 0; font-size: var(--grad-14); }
+.faden-shell .seo li { border-bottom: var(--strich-haar) solid var(--rule); padding: var(--luft-s) 0; font-size: var(--grad-14); }
 .faden-shell .seo li small { display: block; color: var(--muted); font-size: var(--grad-12); overflow-wrap: anywhere; }
 @media (max-width: 900px) { .faden-shell .seite__innen { grid-template-columns: 1fr; } .faden-shell .seo { position: static; } }
 /* 🚨 Hier standen drei Regeln, die Kassensturz und Finanzwort NUR im lebenden Kapitel
@@ -1433,7 +1458,7 @@ body[data-schaukasten] .faden-shell .schau-anzeigen .einschub { display: grid; }
 
 /* ---------- Schaukasten: die Inventurtafeln ---------- */
 .faden-shell .inv { list-style: none; margin: var(--luft-m) 0 0; padding: 0; display: grid; }
-.faden-shell .inv li { display: grid; align-items: center; gap: var(--luft-s) var(--luft-m); border-top: 1px solid var(--rule-fein); padding: var(--luft-s) 0; }
+.faden-shell .inv li { display: grid; align-items: center; gap: var(--luft-s) var(--luft-m); border-top: var(--strich-haar) solid var(--rule-fein); padding: var(--luft-s) 0; }
 .faden-shell .inv code { font: 600 var(--grad-12)/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--ink); overflow-wrap: anywhere; }
 .faden-shell .inv b { font: 700 var(--grad-12)/1.3 var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
 .faden-shell .inv__wo { font: 400 var(--grad-12)/1.4 var(--sans); color: var(--muted); overflow-wrap: anywhere; }
@@ -1442,7 +1467,7 @@ body[data-schaukasten] .faden-shell .schau-anzeigen .einschub { display: grid; }
 .faden-shell .inv__grade li[data-token] code { color: var(--green-ink); }
 .faden-shell .inv__probe { color: var(--ink); white-space: nowrap; overflow: hidden; }
 .faden-shell .inv__farben li { grid-template-columns: 42px 34px 170px minmax(0, 1fr); }
-.faden-shell .inv__farben i { width: 34px; height: 22px; border: 1px solid var(--rule); display: block; }
+.faden-shell .inv__farben i { width: 34px; height: 22px; border: var(--strich-haar) solid var(--rule); display: block; }
 .faden-shell .inv__formen li { grid-template-columns: minmax(0, 260px) 200px minmax(0, 1fr); align-items: center; }
 @media (max-width: 860px) {
   .faden-shell .inv li { grid-template-columns: minmax(0, 1fr) !important; }
@@ -1496,21 +1521,21 @@ body[data-schaukasten] .faden-shell .kapitel.zu .kapitel__inhalt { display: grid
 /* ---------- Schaukasten: der versteckte Knopf ----------
    Ein Punkt in der Ecke, der erst beim Überfahren sichtbar wird. Er gehört nicht zur
    Seite, sondern zur Abnahme (components/faden/SchaukastenKnopf.tsx). */
-.faden-shell .schaukasten-knopf { position: fixed; right: 12px; bottom: 12px; z-index: 90; width: 12px; height: 12px; padding: 0; border: 1px solid var(--ink); border-radius: var(--radius-kreis); background: transparent; opacity: .12; transition: opacity .2s, transform .2s; }
+.faden-shell .schaukasten-knopf { position: fixed; right: 12px; bottom: 12px; z-index: 90; width: 12px; height: 12px; padding: 0; border: var(--strich-haar) solid var(--ink); border-radius: var(--radius-kreis); background: transparent; opacity: .12; transition: opacity .2s, transform .2s; }
 .faden-shell .schaukasten-knopf:hover, .faden-shell .schaukasten-knopf:focus-visible { opacity: 1; transform: scale(1.25); background: var(--ink); }
 
 @media print { .faden-shell .kopf, .faden-shell .rand, .faden-shell .eingabe, .faden-shell .einschub, .faden-shell .kapitel--alt, .faden-shell #leo-strom, .faden-shell .lesestelle, .faden-shell .teilen-dialog, .faden-shell .kopfblur, .faden-shell .schaukasten-knopf { display: none !important; } }
 
 /* ── Plus-Bereich: Belege, Regeln, Schalter, Koffer, Wächter, Album, Level, Profil (Prototyp 01-css.html:59–61, 178, 197–200, 204–213, 222–225, 350–372, 692–693) ── */
 .faden-shell .blatt .gruss { grid-column: 1 / -1; font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.faden-shell .blatt__wege { grid-column: 1 / -1; display: flex; gap: var(--luft-s); flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: var(--luft-m); align-items: center; }
+.faden-shell .blatt__wege { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; border-top: var(--strich-haar) solid var(--rule); padding-top: 12px; align-items: center; }
 .faden-shell .blatt__wege .punkte { font-weight: 700; color: var(--pink); }
-.faden-shell .blatt ul.liste-plus { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--luft-xs); font-size: var(--grad-14); }
-.faden-shell .beleg { position: relative; text-align: left; width: 100%; border: 1px solid var(--rule); background: var(--paper); padding: var(--luft-s) var(--luft-m) var(--luft-s) var(--luft-l); display: grid; gap: var(--luft-xxs); border-radius: var(--radius-kante); }
-.faden-shell .beleg::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; border-left: 1px dashed var(--muted); opacity: .6; }
+.faden-shell .blatt ul.liste-plus { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: var(--grad-14); }
+.faden-shell .beleg { position: relative; text-align: left; width: 100%; border: var(--strich-haar) solid var(--rule); background: var(--paper); padding: var(--luft-s) var(--luft-m) var(--luft-s) var(--luft-l); display: grid; gap: var(--luft-xxs); border-radius: var(--radius-kante); }
+.faden-shell .beleg::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; border-left: var(--strich-haar) dashed var(--muted); opacity: .6; }
 .faden-shell .beleg b { font-family: var(--serif); font-size: var(--grad-14); }
 .faden-shell .beleg small { color: var(--muted); font-size: var(--grad-12); }
-.faden-shell .regel { border: 1px solid var(--rule); background: var(--paper); padding: var(--luft-s) var(--luft-m); display: grid; grid-template-columns: 1fr auto; gap: var(--luft-xxs) var(--luft-s); border-radius: var(--radius-kante); align-items: start; }
+.faden-shell .regel { border: var(--strich-haar) solid var(--rule); background: var(--paper); padding: var(--luft-s) var(--luft-m); display: grid; grid-template-columns: 1fr auto; gap: var(--luft-xxs) var(--luft-s); border-radius: var(--radius-kante); align-items: start; }
 .faden-shell .regel b { font-family: var(--serif); font-size: var(--grad-14); }
 .faden-shell .regel span { font-size: var(--grad-12); color: var(--ink); grid-column: 1; }
 .faden-shell .regel small { font-size: var(--grad-11); color: var(--muted); grid-column: 1; }
@@ -1519,7 +1544,7 @@ body[data-schaukasten] .faden-shell .kapitel.zu .kapitel__inhalt { display: grid
 .faden-shell .toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: var(--radius-kreis); background: var(--auflage); transition: left .2s; }
 .faden-shell .toggle.an { background: var(--green); } .faden-shell .toggle.an::after { left: 21px; }
 .faden-shell .sicherung { display: grid; gap: var(--luft-s); }
-.faden-shell .sicherung input, .faden-shell .koffer__sichern input { font: inherit; padding: var(--luft-s) var(--luft-m); border: 1px solid var(--rule-strong); border-radius: var(--radius-pille); background: var(--auflage); color: var(--ink); width: 100%; max-width: 340px; }
+.faden-shell .sicherung input, .faden-shell .koffer__sichern input { font: inherit; padding: var(--luft-s) var(--luft-m); border: var(--strich-haar) solid var(--rule-strong); border-radius: var(--radius-pille); background: var(--auflage); color: var(--ink); width: 100%; max-width: 340px; }
 .faden-shell .sicherung .reihe, .faden-shell .koffer__sichern .reihe { display: flex; gap: var(--luft-s); flex-wrap: wrap; align-items: center; }
 .faden-shell .schalter { display: inline-flex; align-items: center; gap: var(--luft-s); cursor: pointer; }
 .faden-shell .schalter input { position: absolute; opacity: 0; width: 0; height: 0; }
@@ -1533,19 +1558,19 @@ body[data-schaukasten] .faden-shell .kapitel.zu .kapitel__inhalt { display: grid
 .faden-shell .koffer__leer .ikon { width: 40px; height: 40px; }
 .faden-shell .koffer__leer p { margin: 0; max-width: 46ch; font-size: var(--grad-15); }
 .faden-shell .koffer__liste { display: grid; }
-.faden-shell .koffer__eintrag { display: grid; grid-template-columns: 38px 1fr auto; gap: var(--luft-m); align-items: center; padding: var(--luft-s) var(--luft-xxs); border-bottom: 1px solid var(--rule); animation: ks-rein .4s both; transition: opacity .3s, transform .3s; }
-.faden-shell .koffer__eintrag:first-child { border-top: 1px solid var(--rule); }
+.faden-shell .koffer__eintrag { display: grid; grid-template-columns: 38px 1fr auto; gap: var(--luft-m); align-items: center; padding: var(--luft-s) var(--luft-xxs); border-bottom: var(--strich-haar) solid var(--rule); animation: ks-rein .4s both; transition: opacity .3s, transform .3s; }
+.faden-shell .koffer__eintrag:first-child { border-top: var(--strich-haar) solid var(--rule); }
 .faden-shell .koffer__eintrag.weg { opacity: 0; transform: translateX(20px); }
 .faden-shell .koffer__ikon { width: 38px; height: 38px; border-radius: var(--radius-kante); background: var(--tint); display: grid; place-items: center; color: var(--green-ink); }
 .faden-shell .koffer__text b { display: block; font: 700 var(--grad-15) var(--serif); }
 .faden-shell .koffer__text small { display: block; color: var(--muted); font-size: var(--grad-13); }
 .faden-shell .koffer__akt { display: flex; gap: var(--luft-m); }
-.faden-shell .koffer__sichern { border-top: 1px solid var(--rule); padding-top: var(--luft-m); display: grid; gap: var(--luft-s); }
+.faden-shell .koffer__sichern { border-top: var(--strich-haar) solid var(--rule); padding-top: var(--luft-m); display: grid; gap: var(--luft-s); }
 .faden-shell .koffer__sichern p { margin: 0; font-size: var(--grad-15); }
 .faden-shell .waechter { display: grid; gap: var(--luft-m); }
 .faden-shell .waechter__liste { display: grid; }
-.faden-shell .waechter__regel { display: grid; grid-template-columns: 34px 1fr auto auto; gap: var(--luft-m); align-items: center; padding: var(--luft-s) var(--luft-xs); border-bottom: 1px solid var(--rule); cursor: pointer; animation: ks-rein .4s both; }
-.faden-shell .waechter__glocke { width: 34px; height: 34px; border-radius: var(--radius-kreis); background: var(--paper); border: 1px solid var(--rule-strong); display: grid; place-items: center; color: var(--muted); transition: background .25s, color .25s, border-color .25s; transform-origin: 50% 0; }
+.faden-shell .waechter__regel { display: grid; grid-template-columns: 34px 1fr auto auto; gap: var(--luft-m); align-items: center; padding: var(--luft-s) var(--luft-xs); border-bottom: var(--strich-haar) solid var(--rule); cursor: pointer; animation: ks-rein .4s both; }
+.faden-shell .waechter__glocke { width: 34px; height: 34px; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-haar) solid var(--rule-strong); display: grid; place-items: center; color: var(--muted); transition: background .25s, color .25s, border-color .25s; transform-origin: 50% 0; }
 .faden-shell .waechter__regel.an .waechter__glocke { background: var(--green); border-color: var(--green); color: var(--auf-tinte); }
 .faden-shell .waechter__glocke.laeutet { animation: laeuten .8s ease-in-out; }
 @keyframes laeuten { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(16deg); } 40% { transform: rotate(-14deg); } 60% { transform: rotate(9deg); } 80% { transform: rotate(-5deg); } }
@@ -1553,7 +1578,7 @@ body[data-schaukasten] .faden-shell .kapitel.zu .kapitel__inhalt { display: grid
 .faden-shell .waechter__text small { display: block; color: var(--muted); font-size: var(--grad-13); }
 .faden-shell .waechter__wann { font: 600 var(--grad-kicker)/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 .faden-shell .waechter__kanal { display: grid; gap: var(--luft-s); }
-.faden-shell .segment { display: inline-flex; border: 1px solid var(--rule-strong); border-radius: var(--radius-pille); padding: var(--luft-xs); gap: var(--luft-xxs); justify-self: start; }
+.faden-shell .segment { display: inline-flex; border: var(--strich-haar) solid var(--rule-strong); border-radius: var(--radius-pille); padding: var(--luft-xs); gap: var(--luft-xxs); justify-self: start; }
 .faden-shell .segment button { border: 0; background: none; border-radius: var(--radius-pille); padding: var(--luft-s) var(--luft-m); font: 600 var(--grad-14) var(--sans); color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; gap: var(--luft-s); transition: background .2s, color .2s; }
 .faden-shell .segment button.aktiv { background: var(--ink); color: var(--paper); }
 .faden-shell .segment .ikon { width: 16px; height: 16px; vertical-align: 0; }
@@ -1563,16 +1588,16 @@ body[data-schaukasten] .faden-shell .kapitel.zu .kapitel__inhalt { display: grid
 .faden-shell .bereich__spalten > div { display: grid; gap: var(--luft-s); align-content: start; }
 .faden-shell .bereich .hinweis { font-size: var(--grad-13); color: var(--muted); }
 .faden-shell .belohnungen { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--luft-xs); font-size: var(--grad-14); }
-.faden-shell .level--karte { border: 1px solid var(--rule); border-radius: var(--radius-kante); padding: var(--luft-m) var(--luft-l); background: var(--paper); }
+.faden-shell .level--karte { border: var(--strich-haar) solid var(--rule); border-radius: var(--radius-kante); padding: var(--luft-m) var(--luft-l); background: var(--paper); }
 .faden-shell .level__innen { display: flex; gap: var(--luft-l); align-items: center; }
 .faden-shell .level__ring { position: relative; width: 80px; height: 80px; flex: none; }
 .faden-shell .level__ring svg { width: 80px; height: 80px; }
 .faden-shell .level__ring b { position: absolute; inset: 0; display: grid; place-items: center; font: 900 var(--grad-26) var(--serif); color: var(--pink); }
-.faden-shell .level__stempel { display: inline-block; border: 2px solid var(--pink); color: var(--pink); border-radius: var(--radius-kante); padding: var(--luft-xs) var(--luft-s); font: 700 var(--grad-13) var(--sans); letter-spacing: .16em; text-transform: uppercase; transform: rotate(-4deg); animation: stempel .5s cubic-bezier(.34,1.56,.64,1) both; }
+.faden-shell .level__stempel { display: inline-block; border: var(--strich-stark) solid var(--pink); color: var(--pink); border-radius: var(--radius-kante); padding: var(--luft-xs) var(--luft-s); font: 700 var(--grad-13) var(--sans); letter-spacing: .16em; text-transform: uppercase; transform: rotate(-4deg); animation: stempel .5s cubic-bezier(.34,1.56,.64,1) both; }
 .faden-shell .level p { margin: var(--luft-s) 0 0; font-size: var(--grad-15); }
 .faden-shell .profil { display: grid; gap: var(--luft-xs); font-size: var(--grad-13); }
 .faden-shell .profil-ring { width: 48px; height: 48px; border-radius: var(--radius-kreis); padding: var(--luft-xs); background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); display: grid; place-items: center; }
-.faden-shell .profil-ring .ikon { width: 100%; height: 100%; border-radius: var(--radius-kreis); background: var(--paper); border: 3px solid var(--paper); padding: var(--luft-s); color: var(--ink); }
+.faden-shell .profil-ring .ikon { width: 100%; height: 100%; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-einhaenger) solid var(--paper); padding: var(--luft-s); color: var(--ink); }
 .faden-shell .album { display: grid; gap: var(--luft-m); }
 .faden-shell .album__raster { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--luft-m); }
 .faden-shell .wappen { position: relative; display: grid; justify-items: center; gap: var(--luft-xs); animation: ks-rein .5s both; }
@@ -1596,16 +1621,17 @@ body[data-schaukasten] .faden-shell .kapitel.zu .kapitel__inhalt { display: grid
 /* ── Lebensereignis: Zeitleiste, Phasen, Schritte (Prototyp 01-css.html:214–217) ── */
 .faden-shell .ereignis { display: grid; gap: var(--luft-m); }
 .faden-shell .ereignis__vorspann { margin: 0; font: italic 400 var(--grad-16)/1.5 var(--serif); }
-.faden-shell .zeitleiste { display: grid; gap: var(--luft-l); border-left: 2px solid var(--rule-strong); margin-left: var(--luft-s); padding-left: var(--luft-l); }
+.faden-shell .zeitleiste { display: grid; gap: var(--luft-l); border-left: var(--strich-stark) solid var(--rule-strong); margin-left: var(--luft-s); padding-left: var(--luft-l); }
 .faden-shell .phase { display: grid; gap: var(--luft-s); position: relative; }
-.faden-shell .phase::before { content: ""; position: absolute; left: -29px; top: 4px; width: 12px; height: 12px; border-radius: var(--radius-kreis); background: var(--green); border: 2px solid var(--paper); box-shadow: 0 0 0 1px var(--green); }
+.faden-shell .phase::before { content: ""; position: absolute; left: -29px; top: 4px; width: 12px; height: 12px; border-radius: var(--radius-kreis); background: var(--green); border: var(--strich-stark) solid var(--paper); box-shadow: 0 0 0 1px var(--green); }
 .faden-shell .phase__titel { font: 600 var(--grad-kicker)/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--green-ink); }
 .faden-shell .schritt { display: flex; gap: var(--luft-s); align-items: center; flex-wrap: wrap; font-size: var(--grad-15); animation: ks-rein .4s both; cursor: pointer; }
+/* Kästchen, kein Regler — hier ist `accent-color` richtig. */
 .faden-shell .schritt input { accent-color: var(--green); }
 .faden-shell .schritt .erledigt { text-decoration: line-through; color: var(--muted); }
 .faden-shell .schritt .chip { margin-left: auto; }
 .faden-shell .ereignis__stand { margin: 0; font-size: var(--grad-14); }
-.faden-shell .ereignis__waechter { border-top: 1px solid var(--rule); padding-top: var(--luft-m); display: grid; gap: var(--luft-s); }
+.faden-shell .ereignis__waechter { border-top: var(--strich-haar) solid var(--rule); padding-top: var(--luft-m); display: grid; gap: var(--luft-s); }
 .faden-shell .ereignis__waechter .kicker .ikon { width: 14px; height: 14px; vertical-align: -3px; }
 .faden-shell .schalter-zeile { display: flex; gap: var(--luft-m); align-items: center; font-size: var(--grad-14); cursor: pointer; }
 

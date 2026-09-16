@@ -20,6 +20,8 @@ import type { Werkzeug } from "./Lineal";
 
 export interface SetzzeileProps {
   label: string;
+  /** Rechts neben der Bezeichnung: „500 – 200.000 €", „ziehen · Marke antippen". */
+  bereich?: string;
   wert: number | null;
   onWert: (v: number) => void;
   einheit?: string;
@@ -47,7 +49,7 @@ const FARBE: Record<Werkzeug, string> = {
 };
 
 export default function Setzzeile({
-  label, wert, onWert, einheit = "", min, max, schritt, dez = 0,
+  label, bereich, wert, onWert, einheit = "", min, max, schritt, dez = 0,
   werkzeug = "tuerkis", platzhalter = "", vorschlaege = [], vorschlaegeImmer = false,
   stepper = false, hinweis = "",
 }: SetzzeileProps) {
@@ -80,7 +82,10 @@ export default function Setzzeile({
       data-fehler={fehler ? "an" : "aus"}
       style={{ "--kb-feld-farbe": FARBE[werkzeug] } as React.CSSProperties}
     >
-      <span className="kb-setzzeile__label">{label}</span>
+      <div className="kb__feldkopf">
+        <b className="kb-setzzeile__label">{label}</b>
+        {bereich && <span>{bereich}</span>}
+      </div>
 
       <div className="kb-setzzeile__zeile">
         <button

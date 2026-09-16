@@ -4,20 +4,20 @@
     "vorkommen": 0
   },
   "farben": {
-    "verschieden": 15,
-    "vorkommen": 20
+    "verschieden": 27,
+    "vorkommen": 36
   },
   "schriftgrade": {
-    "verschieden": 2,
-    "vorkommen": 2
+    "verschieden": 3,
+    "vorkommen": 3
   },
   "schriftfamilien": {
     "verschieden": 0,
     "vorkommen": 0
   },
   "abstaende": {
-    "verschieden": 8,
-    "vorkommen": 9
+    "verschieden": 30,
+    "vorkommen": 155
   },
   "linien": {
     "verschieden": 0,
@@ -28,7 +28,7 @@
     "vorkommen": 1
   },
   "schatten": {
-    "verschieden": 8,
-    "vorkommen": 8
+    "verschieden": 9,
+    "vorkommen": 9
   }
 }

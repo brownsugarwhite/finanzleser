@@ -89,6 +89,8 @@ export default function AlleAngebote({
         )}
       </div>
 
+      {/* Der Kopfstapel trägt die Doppellinie, das Band darin die Versalien in Tinte. */}
+      <div className="kb-liste__kopfstapel">
       <div className="kb-liste__kopf">
         {/* K:183 „Anbieter · Produkt" — die Spalte trägt beides, den Namen der Bank und
             den des Tarifs. `def.einzahl` wäre hier falsch: das ist das Produkt, nicht der,
@@ -98,6 +100,7 @@ export default function AlleAngebote({
         {total && <span className="kb-liste__kopf-rechts kb-liste__kopf-total">{total.kurz ?? total.label}</span>}
         {dritte && <span className="kb-liste__kopf-dritte">{dritte.kurz ?? dritte.label}</span>}
         <span />
+      </div>
       </div>
 
       {z.zeilen.slice(0, z.gezeigt).map((p, i) => (

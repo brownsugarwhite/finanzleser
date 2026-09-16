@@ -35,15 +35,15 @@
    die Breite, die man haben will; `pretty` verhindert nur den Schusterjungen. */
 .faden-shell .ks__frage { font: var(--schrift-gross); letter-spacing: normal; text-wrap: pretty; }
 .faden-shell .ks__hinweis { font: italic 300 var(--grad-15)/1.45 var(--serif); color: var(--muted); margin: calc(-1 * var(--luft-s)) 0 0; }
-.faden-shell .ks__weiter { border: 0; background: none; color: var(--ink); font: 600 var(--grad-14)/1 var(--sans); cursor: pointer; display: inline-flex; align-items: center; gap: var(--luft-s); padding: var(--luft-s) var(--luft-xxs); border-bottom: 1px solid var(--ink); text-decoration: none; border-radius: 0; }
+.faden-shell .ks__weiter { border: 0; background: none; color: var(--ink); font: 600 var(--grad-14)/1 var(--sans); cursor: pointer; display: inline-flex; align-items: center; gap: var(--luft-s); padding: var(--luft-s) var(--luft-xxs); border-bottom: var(--strich-haar) solid var(--ink); text-decoration: none; border-radius: 0; }
 .faden-shell .ks__weiter i { font-style: normal; color: var(--green); transition: transform .2s; }
 .faden-shell .ks__weiter:hover i { transform: translateX(3px); }
 .faden-shell .ks__still { border: 0; background: none; color: var(--muted); font: 400 var(--grad-13)/1 var(--sans); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .faden-shell .ks__regler { width: 100%; display: grid; gap: 0; }
 .faden-shell .ks__bahn { position: relative; padding: var(--luft-xl) 0 var(--luft-s); }
 .faden-shell .ks input[type=range] { position: relative; z-index: 2; width: 100%; height: 6px; -webkit-appearance: none; appearance: none; background: linear-gradient(to right, var(--ink) var(--anteil, 0%), var(--rule) var(--anteil, 0%)); border-radius: var(--radius-kante); }
-.faden-shell .ks input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: var(--radius-kreis); background: var(--paper); border: 3px solid var(--ink); cursor: pointer; }
-.faden-shell .ks input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: var(--radius-kreis); background: var(--paper); border: 3px solid var(--ink); cursor: pointer; }
+.faden-shell .ks input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-einhaenger) solid var(--ink); cursor: pointer; }
+.faden-shell .ks input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-einhaenger) solid var(--ink); cursor: pointer; }
 .faden-shell .ks__fahne { position: absolute; top: 0; transform: translateX(-50%); z-index: 3; background: var(--ink); color: var(--auf-tinte); padding: var(--luft-xs) var(--luft-m); font: 600 var(--grad-16)/1 var(--sans); white-space: nowrap; font-variant-numeric: tabular-nums; transition: left .28s cubic-bezier(.22,1,.36,1); }
 .faden-shell .ks__fahne::after { content: ""; position: absolute; left: 50%; bottom: -5px; transform: translateX(-50%); border: 5px solid transparent; border-bottom: 0; border-top-color: var(--ink); }
 .faden-shell .ks__spanne { position: absolute; top: 34px; height: 6px; z-index: 1; background: repeating-linear-gradient(135deg, rgba(51,74,39,.28) 0 4px, transparent 4px 8px); }
@@ -60,12 +60,12 @@
 
 /* Antworten als Karten mit Ikon */
 .faden-shell .ks__karten { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: var(--luft-m); width: 100%; min-width: 0; }
-.faden-shell .ks__karte { position: relative; border: 1px solid var(--rule); background: transparent; border-radius: 0; padding: var(--luft-l) var(--luft-l) var(--luft-m); display: grid; justify-items: start; gap: var(--luft-s); text-align: left; color: var(--ink); cursor: pointer; transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, background .3s; animation: ks-rein .4s both; }
+.faden-shell .ks__karte { position: relative; border: var(--strich-haar) solid var(--rule); background: transparent; border-radius: 0; padding: var(--luft-l) var(--luft-l) var(--luft-m); display: grid; justify-items: start; gap: var(--luft-s); text-align: left; color: var(--ink); cursor: pointer; transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, background .3s; animation: ks-rein .4s both; }
 .faden-shell .ks__karte b { font: 700 var(--grad-16)/1.3 var(--serif); }
 .faden-shell .ks__karte .ikon { width: 28px; height: 28px; vertical-align: 0; color: var(--ink); transition: color .2s, transform .2s; }
 .faden-shell .ks__karte:hover { transform: translateY(-3px); border-color: var(--ink); }
 .faden-shell .ks__karte:hover .ikon { transform: scale(1.08); }
-.faden-shell .ks__karte.gewaehlt { border: 2px solid var(--ink); padding: var(--luft-m) var(--luft-m) var(--luft-m); }
+.faden-shell .ks__karte.gewaehlt { border: var(--strich-stark) solid var(--ink); padding: var(--luft-m) var(--luft-m) var(--luft-m); }
 .faden-shell .ks__karte.gewaehlt .ikon { color: var(--ink); }
 
 /* Ergebnis: Zierlinie, Profil als Vorspann, Ampel als Zeile, Tacho rechts, Lücken als Karten */
@@ -84,7 +84,7 @@
 .faden-shell .ks__profilblock .ks__ampel { justify-content: flex-start; }
 .faden-shell .ks__tacho { justify-self: end; }
 .faden-shell .ks__erg-karten { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--luft-m); width: 100%; text-align: left; }
-.faden-shell .ks__erg { position: relative; border: 1px solid var(--rule); border-radius: 0; background: none; padding: var(--luft-l) var(--luft-m) var(--luft-m); display: grid; gap: var(--luft-s); align-content: start; }
+.faden-shell .ks__erg { position: relative; border: var(--strich-haar) solid var(--rule); border-radius: 0; background: none; padding: var(--luft-l) var(--luft-m) var(--luft-m); display: grid; gap: var(--luft-s); align-content: start; }
 .faden-shell .ks__erg h4 { margin: 0; font: 700 var(--grad-16)/1.3 var(--serif); }
 .faden-shell .ks__erg p { margin: 0; font-size: var(--grad-14); line-height: 1.5; }
 .faden-shell .ks__erg .links { display: flex; flex-wrap: wrap; gap: var(--luft-xs) var(--luft-m); margin-top: var(--luft-xxs); }
@@ -93,9 +93,9 @@
 .faden-shell .ks__erg--gut .ks__erg-ikon { color: var(--green-ink); }
 .faden-shell .ks__erg .ks__nr { position: absolute; top: 12px; right: 14px; font-size: var(--grad-22); }
 .faden-shell .ks__aktionen { display: flex; gap: var(--luft-l); flex-wrap: wrap; justify-content: center; }
-.faden-shell .ks__nachher { width: 100%; text-align: left; background: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; padding: var(--luft-l) 0 0; margin-top: var(--luft-s); }
+.faden-shell .ks__nachher { width: 100%; text-align: left; background: none; border: 0; border-top: var(--strich-haar) solid var(--rule); border-radius: 0; padding: var(--luft-l) 0 0; margin-top: var(--luft-s); }
 .faden-shell .ks__zustellung { grid-column: 2; display: flex; align-items: baseline; gap: var(--luft-l); flex-wrap: wrap; margin-top: var(--luft-m); width: 100%; }
-.faden-shell .ks__feld { display: flex; align-items: baseline; gap: 0; flex: 1 1 260px; min-width: 0; max-width: 380px; border-bottom: 1px solid var(--ink); }
+.faden-shell .ks__feld { display: flex; align-items: baseline; gap: 0; flex: 1 1 260px; min-width: 0; max-width: 380px; border-bottom: var(--strich-haar) solid var(--ink); }
 .faden-shell .ks__feld input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; padding: var(--luft-s) 0; font: 400 var(--grad-14) var(--sans); color: var(--ink); }
 .faden-shell .ks__feld input::placeholder { color: var(--muted); }
 .faden-shell .ks__senden { border: 0; background: none; padding: var(--luft-s) 0 var(--luft-s) var(--luft-s); font: 600 var(--grad-13) var(--sans); color: var(--green-ink); white-space: nowrap; cursor: pointer; }

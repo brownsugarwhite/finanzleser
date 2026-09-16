@@ -128,6 +128,9 @@ export function schatten(): Fund[] {
  * die sind Zustände.
  */
 export function knopfformen(): Form[] {
+  // 🚨 Selektorlisten aufteilen. Die Grundformen stehen doppelt („.pille, .faden-shell
+  //    .pille"), weil `.faden-shell button { color: inherit }` sonst gewinnt — und fielen
+  //    dadurch aus dieser Tafel heraus: der Schaukasten zeigte nur noch die Varianten.
   const treffer = /^(?:\.faden-shell )?\.([a-z0-9_-]+(?:--[a-z0-9-]+)?)$/;
   // 🚨 Genau die Grundform oder eine ihrer Varianten — kein Teilwort. Ein lockeres
   //    /pille/ trifft sonst `nav-pille__koerper` und `suchpille-wrap`: Bauteile, die
@@ -135,9 +138,11 @@ export function knopfformen(): Form[] {
   const gesucht = /^(pille|knopf|chip|chips|strich-link|taste|schalter|segment)(--[a-z0-9-]+)?$/;
   const map = new Map<string, Form>();
   for (const { sel, datei } of regeln()) {
-    const m = sel.match(treffer);
-    if (!m || !gesucht.test(m[1])) continue;
-    if (!map.has(m[1])) map.set(m[1], { klasse: m[1], datei, element: "button" });
+    for (const teil of sel.split(",")) {
+      const m = teil.trim().match(treffer);
+      if (!m || !gesucht.test(m[1])) continue;
+      if (!map.has(m[1])) map.set(m[1], { klasse: m[1], datei, element: "button" });
+    }
   }
   return [...map.values()].sort((a, b) => a.klasse.localeCompare(b.klasse, "de"));
 }

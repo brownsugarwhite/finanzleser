@@ -187,7 +187,7 @@ const KATEGORIEN: KategorieDef[] = [
         // bewusst NICHT: sie wird von `tools/financeads-registry-export.mjs` mit dem nackten
         // Node-Loader gelesen, der den `@/`-Alias nicht kennt — der Export bräche.
         key: "real", label: "Nach Inflation ({zins} p. a.) bleibt real",
-        unter: "echter Kaufkraftgewinn", art: "geld", ton: "gruen", gross: true,
+        unter: "echter Kaufkraftgewinn", art: "geld", ton: "gruen",
         formel: { art: "real", key: "ertrag", jahreAus: "months" },
         negativ: { unter: "Kaufkraft sinkt trotz Zinsen" },
       },
@@ -459,7 +459,7 @@ const KATEGORIEN: KategorieDef[] = [
     kennzahlen: [
       { key: "best", label: "Beste Rate im Monat", art: "geld", ton: "werkzeug", formel: { art: "best", key: "rate" } },
       { key: "schnitt", label: "Durchschnittliche Rate", art: "geld", ton: "grau", formel: { art: "schnitt", key: "rate" } },
-      { key: "erspar", label: "Ersparnis mit dem Bestwert", unter: "gegenüber dem Durchschnitt", art: "geld", ton: "gruen", gross: true, formel: { art: "differenz", key: "rate", mal: "duration_months" } },
+      { key: "erspar", label: "Ersparnis mit dem Bestwert", unter: "gegenüber dem Durchschnitt", art: "geld", ton: "gruen", formel: { art: "differenz", key: "rate", mal: "duration_months" } },
     ],
     kursblatt: { band: "streuung", podest: 3, stempel: "Bestwert", mehrkosten: { key: "rate", mal: "duration_months", label: "Mehrkosten zum Bestwert" } },
     sortierung: [{ key: "effzins", label: "Zins" }, { key: "rate", label: "Rate" }],

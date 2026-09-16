@@ -14,7 +14,7 @@ import type { DefLite, SpalteDef, VergleichProdukt } from "@/lib/financeads/type
 import { formatKennwert } from "@/lib/financeads/format";
 import { mitVorzeichen } from "@/lib/financeads/kursblatt";
 import PilleCTA from "@/components/kursblatt/teile/PilleCTA";
-import Stempel from "@/components/kursblatt/teile/Stempel";
+import Siegel from "@/components/kursblatt/teile/Siegel";
 import { Logorahmen, MerkenKnopf, Punktzeile } from "@/components/kursblatt/teile/Kleinteile";
 
 export interface ZeileProps {
@@ -67,7 +67,7 @@ export default function Zeile({
         <div className="kb__zeile-namen">
           <b>
             {p.anbieter}
-            {ist && <Stempel text={def.kursblatt?.stempel ?? "Bestwert"} klein animation={stempel} />}
+            {ist && <Siegel text={def.kursblatt?.stempel ?? "Bestwert"} klein animation={stempel} />}
           </b>
           <span>{p.tarif}</span>
         </div>

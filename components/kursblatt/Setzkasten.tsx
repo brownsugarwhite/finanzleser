@@ -19,7 +19,7 @@ import Register from "@/components/kursblatt/eingabe/Register";
 import Drehring from "@/components/kursblatt/eingabe/Drehring";
 import Zaehlwerk from "@/components/kursblatt/eingabe/Zaehlwerk";
 import PilleCTA from "@/components/kursblatt/teile/PilleCTA";
-import Stempel from "@/components/kursblatt/teile/Stempel";
+import Siegel from "@/components/kursblatt/teile/Siegel";
 import StempelPresets from "@/components/kursblatt/teile/StempelPresets";
 import Segment from "@/components/kursblatt/teile/Segment";
 import { Chip, Logorahmen, MerkenKnopf, Punktzeile, Schalter, StrichLink } from "@/components/kursblatt/teile/Kleinteile";
@@ -162,7 +162,7 @@ export default function Setzkasten() {
 
         <div className="kb-podest" style={{ display: "flex", alignItems: "center", gap: "14px 22px", flexWrap: "wrap", marginTop: 24 }}>
           <Logorahmen name="Verivox" groesse="gewinner" />
-          <Stempel text="Bestwert" />
+          <Siegel text="Bestwert" />
           <PilleCTA text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" fuellung href="#" />
           <PilleCTA text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" fuellung klein href="#" />
           <MerkenKnopf gemerkt={gemerkt} onKlick={() => setGemerkt((g) => !g)} />

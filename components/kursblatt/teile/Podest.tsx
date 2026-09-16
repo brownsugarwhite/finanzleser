@@ -17,7 +17,7 @@ import type { KursblattDef, SpalteDef, VergleichProdukt } from "@/lib/financeads
 import { formatKennwert } from "@/lib/financeads/format";
 import { mitVorzeichen } from "@/lib/financeads/kursblatt";
 import PilleCTA from "./PilleCTA";
-import Stempel from "./Stempel";
+import Siegel from "./Siegel";
 import { Logorahmen, MerkenKnopf, Punktzeile, StrichLink } from "./Kleinteile";
 
 export interface PodestProps {
@@ -106,8 +106,8 @@ export default function Podest({
         <i className="kb-podest__rahmen kb-podest__rahmen--links" style={anim(spalte, ".9s", ".2s ")} aria-hidden="true" />
         <i className="kb-podest__rahmen kb-podest__rahmen--rechts" style={anim(spalte, ".9s", ".2s ")} aria-hidden="true" />
         {/* Jeder Gewinner bekommt einen Stempel; welcher, sagt die Registry. */}
-        <span className="kb-podest__stempel">
-          <Stempel text={kursblatt?.stempel ?? "Bestwert"} animation={stempel} />
+        <span className="kb-podest__siegel">
+          <Siegel text={kursblatt?.stempel ?? "Bestwert"} animation={stempel} />
         </span>
 
         <div className="kb-podest__raster">

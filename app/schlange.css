@@ -14,13 +14,13 @@
   aspect-ratio: var(--schlange-spalten) / var(--schlange-reihen);
   background-size: calc(100% / var(--schlange-spalten)) calc(100% / var(--schlange-reihen));
   background-position: calc(50% / var(--schlange-spalten)) calc(50% / var(--schlange-reihen));
-  border: 1px solid var(--rule-strong);
+  border: var(--strich-haar) solid var(--rule-strong);
   border-radius: 0;
   overflow: hidden;
   touch-action: manipulation;   /* Wischen steuert die Schlange, es soll nichts zoomen */
   cursor: pointer;
 }
-.faden-shell .schlange__feld:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.faden-shell .schlange__feld:focus-visible { outline: var(--strich-stark) solid var(--green); outline-offset: 3px; }
 
 .faden-shell .schlange__feld svg { display: block; width: 100%; height: 100%; }
 .faden-shell .schlange__leib { fill: var(--ink); }

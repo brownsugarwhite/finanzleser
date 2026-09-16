@@ -39,7 +39,7 @@
 
 /* CTA „Finanzleser entdecken ↓“ unten im Hero, blendet nach 2,2 s ein (01-css.html:476–479) */
 .faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; border: 0; background: none; color: var(--ink); font-weight: 600; font-size: var(--grad-14); display: grid; justify-items: center; gap: var(--luft-xs); letter-spacing: .02em; cursor: pointer; font-family: inherit; }
-.faden-shell .hero-cta i { width: 28px; height: 28px; border-radius: var(--radius-kreis); border: 1.5px solid var(--green); color: var(--green); display: grid; place-items: center; font-style: normal; font-size: var(--grad-13); animation: faden-wippen 2.2s ease-in-out infinite; }
+.faden-shell .hero-cta i { width: 28px; height: 28px; border-radius: var(--radius-kreis); border: var(--strich-stark) solid var(--green); color: var(--green); display: grid; place-items: center; font-style: normal; font-size: var(--grad-13); animation: faden-wippen 2.2s ease-in-out infinite; }
 @keyframes faden-wippen { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
 @media (max-width: 900px) {

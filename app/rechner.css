@@ -61,7 +61,7 @@
   width: 23px;
   height: 23px;
   min-width: 23px;
-  border: 1px solid var(--color-text-primary);
+  border: var(--strich-haar) solid var(--color-text-primary);
   border-radius: var(--radius-kante);
   background: transparent;
   transition: background 0.2s, border-color 0.2s;

@@ -1,5 +1,7 @@
 # Next.js
 .next/
+# Zweiter Ausgabeordner für Prüfläufe neben einem laufenden Dev-Server (NEXT_DIST_DIR).
+.next-*/
 out/
 
 # TypeScript incremental build cache

@@ -15,7 +15,7 @@
    ===================================================================================== */
 
 /* ── Die Kopfzeile, Baustein aller Spiele (Handoff 1046, 1072, 1090, 1100 — wortgleich) ── */
-.faden-shell .spiel-kopf { display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-s); width: 100%; border-bottom: 1px solid var(--ink); padding-bottom: var(--luft-s); margin-bottom: var(--luft-m); text-align: left; }
+.faden-shell .spiel-kopf { display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-s); width: 100%; border-bottom: var(--strich-haar) solid var(--ink); padding-bottom: var(--luft-s); margin-bottom: var(--luft-m); text-align: left; }
 .faden-shell .spiel-kopf__hinweis { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); white-space: nowrap; }
 
 /* ── Gemeinsame Bausteine der Spielkörper ─────────────────────────────────────────── */
@@ -28,7 +28,7 @@
 .faden-shell .spiel__aufloesung--falsch b { color: var(--pink); }
 
 /* Antwortzeile — das Optionsraster des Quiz (Handoff 1093–1095). Mythos benutzt dasselbe. */
-.faden-shell .spiel-antwort { position: relative; display: grid; grid-template-columns: 22px 1fr; align-items: baseline; gap: var(--luft-s); width: 100%; border: 0; border-top: 1px solid var(--rule-fein); background: transparent; padding: var(--luft-s) var(--luft-xxs); text-align: left; color: var(--ink); cursor: pointer; transition: padding-left .3s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .spiel-antwort { position: relative; display: grid; grid-template-columns: 22px 1fr; align-items: baseline; gap: var(--luft-s); width: 100%; border: 0; border-top: var(--strich-haar) solid var(--rule-fein); background: transparent; padding: var(--luft-s) var(--luft-xxs); text-align: left; color: var(--ink); cursor: pointer; transition: padding-left .3s cubic-bezier(.2,.8,.2,1); }
 .faden-shell .spiel-antwort:hover:not(:disabled) { padding-left: var(--luft-s); }
 .faden-shell .spiel-antwort:disabled { cursor: default; }
 .faden-shell .spiel-antwort__zeichen { font: 900 var(--grad-15)/1.5 var(--serif); color: var(--muted); }
@@ -51,7 +51,7 @@
 .faden-shell .spiel-schaetz__skala { display: flex; justify-content: space-between; font: 700 var(--grad-12) var(--sans); color: var(--ink); font-variant-numeric: tabular-nums; }
 
 /* ── Schon gewusst (keine Vorlage im Handoff — im selben Idiom entworfen) ──────────── */
-.faden-shell .spiel-gewusst__flaeche { position: relative; margin-top: var(--luft-m); border: 1px solid var(--rule); background: var(--paper); overflow: hidden; }
+.faden-shell .spiel-gewusst__flaeche { position: relative; margin-top: var(--luft-m); border: var(--strich-haar) solid var(--rule); background: var(--paper); overflow: hidden; }
 .faden-shell .spiel-gewusst__text { margin: 0; padding: var(--luft-m) var(--luft-l); font: 400 var(--grad-15)/1.7 var(--sans); color: var(--ink); }
 .faden-shell .spiel-gewusst__tuch { position: absolute; inset: 0; display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
 .faden-shell .spiel-gewusst__tuch:active { cursor: grabbing; }

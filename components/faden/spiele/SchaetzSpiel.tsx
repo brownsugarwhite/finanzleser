@@ -48,7 +48,10 @@ export default function SchaetzSpiel({ felder }: { felder: Record<string, string
           disabled={ab}
           aria-label={felder.frage || "Ihr Tipp"}
           onChange={(e) => setTipp(Number(e.target.value))}
-          style={{ background: `linear-gradient(to right, var(--ink) ${anteil(tipp)}%, rgba(51,74,39,.23) ${anteil(tipp)}%)` }}
+          /* 🚨 Nur der Füllstand, nicht der Grund. Ein Verlauf direkt auf dem Feld färbt
+             dessen ganze Höhe (22 px) und macht aus der Haarlinie einen Balken; die Spur
+             holt sich den Wert in app/knoepfe.css aus `--fuell`. */
+          style={{ "--fuell": `${anteil(tipp)}%` } as React.CSSProperties}
         />
         <span className="spiel-schaetz__blase" style={{ left: `${anteil(tipp)}%` }}>
           <i aria-hidden="true" />

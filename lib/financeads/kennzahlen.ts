@@ -19,7 +19,6 @@ export interface KennzahlWert {
   unter?: string;
   art: SpalteDef["art"];
   ton: "werkzeug" | "grau" | "gruen" | "magenta";
-  gross?: boolean;
   /** Der Betrag; die Darstellung formatiert ihn und lässt ihn zählen. */
   wert: number;
   /** Vorzeichen, wo es etwas bedeutet (Ertrag, Kaufkraft). */
@@ -40,7 +39,7 @@ export function vorgabeKennzahlen(haupt: SpalteDef): KennzahlDef[] {
   return [
     { key: "best", label: `${besser} ${haupt.label}`, art: haupt.art, ton: "werkzeug", formel: { art: "best", key: haupt.key } },
     { key: "schnitt", label: "Durchschnitt", art: haupt.art, ton: "grau", formel: { art: "schnitt", key: haupt.key } },
-    { key: "unterschied", label: "Unterschied zum Durchschnitt", art: haupt.art, ton: "gruen", gross: true, formel: { art: "differenz", key: haupt.key } },
+    { key: "unterschied", label: "Unterschied zum Durchschnitt", art: haupt.art, ton: "gruen", formel: { art: "differenz", key: haupt.key } },
   ];
 }
 
@@ -98,7 +97,7 @@ export function kennzahlenBauen(
     // Liste („Bestwert bringt 142 € mehr“, F:92).
     const label = k.label.replace("{zins}", `${INFLATION_PA.toLocaleString("de-DE", { minimumFractionDigits: 1 })} %`);
     const unterText = unter?.replace("{differenz}", formatKennwert({ ...haupt, ab: false }, Math.abs(bester - schnitt)));
-    out.push({ key: k.key, label, unter: unterText, art: k.art, ton, gross: k.gross, wert, zeichen });
+    out.push({ key: k.key, label, unter: unterText, art: k.art, ton, wert, zeichen });
   }
   return out;
 }

@@ -8,6 +8,14 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
+  /**
+   * Ausgabeordner. Standard bleibt `.next`; über NEXT_DIST_DIR lässt sich ein zweiter
+   * bauen, ohne den Ordner eines laufenden `next dev` zu überschreiben.
+   * 🚨 Genau daran ist am 16.09.2026 eine Prüfung gescheitert: ein `next build` neben
+   * dem Dev-Server des Users zerlegt dessen `.next`, und danach liefert er 500.
+   */
+  distDir: process.env.NEXT_DIST_DIR || ".next",
+
   serverExternalPackages: ["pdfjs-dist"],
   experimental: {
     // IONOS-Shared-Hosting ist unter Build-Last fragil. Da Artikel/Hauptkategorien jetzt

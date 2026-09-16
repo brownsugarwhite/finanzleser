@@ -70,9 +70,10 @@
 .pille__scheibe[data-schrumpft="an"] { transform: scale(.8); }
 
 /* Die kleine Pille: in einer Listenzeile, wo die große den Satz sprengen würde. */
-.pille--klein { height: 42px; padding-left: var(--luft-m); outline: 0; font-size: var(--grad-14); }
-.pille--klein .pille__scheibe, .pille--klein .pille__fuell { width: 32px; }
-.pille--klein .pille__scheibe { height: 32px; }
+.pille--klein { height: 36px; padding: var(--luft-xxs) var(--luft-xxs) var(--luft-xxs) var(--luft-m); outline: 0; font-size: var(--grad-13); }
+.pille--klein .pille__scheibe, .pille--klein .pille__fuell { width: 28px; }
+.pille--klein .pille__scheibe { height: 28px; }
+.pille--klein .pille__fuell { top: 2px; right: 2px; bottom: 2px; }
 
 /* Auf schmalem Schirm bleibt von der kleinen Pille nur die Scheibe. */
 .pille--nur-knopf { padding-left: var(--luft-xs); }
@@ -90,12 +91,14 @@
   white-space: nowrap; text-decoration: none; cursor: pointer;
   transition: background .25s, border-color .25s, color .25s;
 }
-.knopf:hover { background: var(--ink-05); }
+/* 🚨 Beim Zeigen färbt sich die KONTUR, nicht die Fläche. Ein grauer Grund unter einem
+   Umriss sieht im Zeitungssatz nach Formular aus; die Linie allein ist edler. */
+.knopf:hover { border-color: var(--ink); color: var(--green-ink); }
 .knopf.knopf--primaer { background: var(--ink); border-color: var(--ink); color: var(--auf-tinte); }
-.knopf.knopf--primaer:hover { background: var(--green-ink); border-color: var(--green-ink); }
+.knopf.knopf--primaer:hover { background: var(--green-ink); border-color: var(--green-ink); color: var(--auf-tinte); }
 .knopf.knopf--still { border-color: var(--rule); color: var(--muted); }
-.knopf.knopf--still:hover { border-color: var(--rule-mid); color: var(--ink); }
-.knopf--klein { padding: var(--luft-xs) var(--luft-m); font-size: var(--grad-13); }
+.knopf.knopf--still:hover { border-color: var(--ink); color: var(--ink); background: transparent; }
+.knopf--klein { padding: var(--luft-xxs) var(--luft-m); font-size: var(--grad-12); gap: var(--luft-xs); }
 .knopf:disabled { opacity: .45; cursor: not-allowed; }
 
 /* ═══ 3 · Der Chip ═══════════════════════════════════════════════════════════════════
@@ -149,3 +152,40 @@
 .strich-link:hover i { width: 30px; }
 /* Ohne Strich bleibt der Verweis ein Verweis: dann trägt ihn die Unterstreichung. */
 .strich-link:not(:has(i)):hover { text-decoration: underline; }
+
+
+/* ═══ 5 · Der Regler ═════════════════════════════════════════════════════════════════
+   Kein eigener Knopf, aber dieselbe Frage: Wie sieht eine Bedienung im Zeitungssatz aus?
+   🚨 Vorher gab es ihn zweimal — im Schätzspiel als reiner Browser-Standard (eine blaue
+   Systemleiste mitten im Satz) und in der Statistik als Standard mit `accent-color`.
+   Jetzt eine Haarlinie mit einem Griff in Tinte, dieselbe Sprache wie die Grundlinie
+   einer Eingabe im Kursblatt. Gilt für jeden Schieberegler im Faden. */
+.faden-shell input[type="range"] {
+  appearance: none; -webkit-appearance: none;
+  width: 100%; height: 22px; background: transparent; cursor: pointer; outline: 0;
+}
+/* `--fuell` färbt die Spur bis zum Griff — wo ein Regler einen Füllstand zeigen soll
+   (Schätzfrage), setzt ihn die Komponente; sonst bleibt die Spur durchgehend hell. */
+.faden-shell input[type="range"]::-webkit-slider-runnable-track {
+  height: 1px; border: 0;
+  background: linear-gradient(to right, var(--ink) 0 var(--fuell, 0%), var(--ink-35) var(--fuell, 0%) 100%);
+}
+.faden-shell input[type="range"]::-moz-range-track {
+  height: 1px; border: 0;
+  background: linear-gradient(to right, var(--ink) 0 var(--fuell, 0%), var(--ink-35) var(--fuell, 0%) 100%);
+}
+.faden-shell input[type="range"]::-moz-range-progress { height: 1px; background: var(--ink); }
+.faden-shell input[type="range"]::-webkit-slider-thumb {
+  appearance: none; -webkit-appearance: none;
+  width: 14px; height: 14px; margin-top: -6.5px; border: 0;
+  border-radius: var(--radius-kreis); background: var(--ink);
+  box-shadow: 0 0 0 3px var(--paper);
+  transition: transform .2s var(--ueber), background .2s;
+}
+.faden-shell input[type="range"]::-moz-range-thumb {
+  width: 14px; height: 14px; border: 0;
+  border-radius: var(--radius-kreis); background: var(--ink); box-shadow: 0 0 0 3px var(--paper);
+}
+.faden-shell input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
+.faden-shell input[type="range"]:focus-visible::-webkit-slider-thumb { background: var(--green); }
+.faden-shell input[type="range"]:focus-visible::-moz-range-thumb { background: var(--green); }

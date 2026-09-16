@@ -227,7 +227,7 @@
 
 /* K:136 u. v. a. — Punktführung. Der Versatz nach oben lässt die Punkte auf der
    Grundlinie der Schrift sitzen statt darunter. */
-.kb .kb__fuehrung { flex: 1; min-width: 12px; border-bottom: 1px dotted var(--ink-45); transform: translateY(-4px); }
+.kb .kb__fuehrung { flex: 1; min-width: 12px; border-bottom: var(--strich-haar) dotted var(--ink-45); transform: translateY(-4px); }
 .kb .kb__punktzeile { display: flex; align-items: baseline; gap: var(--luft-s); padding: var(--luft-xs) 0; min-width: 0; }
 
 /* K:58-60 — Kopf einer Kursblatt-Seite. */
@@ -250,39 +250,54 @@
   .kb .kb__reiter { gap: var(--luft-m); }
 }
 
-/* ── Lineal (FL Lineal.dc.html:17-36) ─────────────────────────────────────────────── */
+/* ── Lineal (FL Lineal.dc.html:17-36, Fassung Runde 2) ────────────────────────────────
+   🚨 Der Wert steht ÜBER der Skala, die Nadel zeigt von der Skala nach OBEN auf ihn.
+   Vorher stand er darunter, und darüber lief eine zweite Reihe angetippter Pins mit
+   denselben Stellen — dieselbe Information zweimal auf 40 px Höhe. Jetzt:
+
+     0 – 34   der Wert, zentriert, gestrichelt unterstrichen
+     42 – 48  die Spitze, nach oben zeigend
+     48 – 70  die Nadel (2 × 22, Handoff)
+     70       die Grundlinie
+     70 – 88  die Striche
+     92 –     die Marken: die Skalenzahlen selbst, jede ein Knopf
+   Gesamt 126 px statt 118 — bei einer Reihe weniger.
+   ─────────────────────────────────────────────────────────────────────────────────── */
 .kb .kb-lineal {
-  position: relative; width: 100%; height: 118px;
+  position: relative; width: 100%; height: 126px;
   user-select: none;
   /* Eigener Container, damit der Bedienhinweis an der Breite DES LINEALS hängt und nicht
      an der des Satzspiegels (FL Lineal:87 prüft `w >= 520`). */
   container-type: inline-size; container-name: lineal;
 }
+/* 🚨 Der Griff deckt das GANZE Lineal — Nadel, Spitze und Fenster sitzen darin und
+   rechnen ihre Abstände von seiner Oberkante. Ein `top: 42px` hier verschiebt alles
+   darunter um 42 px, und die Marken landen im nächsten Feld. */
 .kb .kb-lineal__griff { position: absolute; inset: 0; touch-action: none; cursor: grab; outline: 0; }
 .kb .kb-lineal--zieht .kb-lineal__griff { cursor: grabbing; }
-.kb .kb-lineal__griff:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.kb .kb-lineal__griff:focus-visible { outline: var(--strich-stark) solid var(--green); outline-offset: 2px; }
 
 /* L:18 — die Spur läuft links und rechts aus, statt an einer Kante abzuschneiden. */
 .kb .kb-lineal__fenster {
-  position: absolute; left: 0; right: 0; top: 0; height: 76px; overflow: hidden;
+  position: absolute; left: 0; right: 0; top: 28px; height: 84px; overflow: hidden;
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 /* L:19 + :83 — im Prototyp `left:0` plus gemessener Versatz; hier `left:50%` und der Wert
    als Verschiebung. Gleiche Geometrie, aber schon im gelieferten HTML richtig. */
 .kb .kb-lineal__spur {
-  position: absolute; left: 50%; top: 0; height: 76px;
+  position: absolute; left: 50%; top: 0; height: 84px;
   transform: translateX(calc(-1 * var(--kb-x)));
   transition: transform .55s var(--kurve);
 }
 .kb .kb-lineal--zieht .kb-lineal__spur { transition: none; }
 
-.kb .kb-lineal__grundlinie { position: absolute; left: 0; right: 0; top: 36px; height: 1px; background: var(--ink); }
+.kb .kb-lineal__grundlinie { position: absolute; left: 0; right: 0; top: 42px; height: 1px; background: var(--ink); }
 
 /* L:24-26 — drei Strichhöhen. Als Kachel statt als Knoten: eine Kachel je Periode,
    sonst entstünde an der Kachelgrenze eine Naht. Reihenfolge = Stapelung von oben:
    groß (18 px, Tinte) über mittel (12 px) über klein (7 px). */
 .kb .kb-lineal__striche {
-  position: absolute; left: 0; right: 0; top: 36px; height: 18px;
+  position: absolute; left: 0; right: 0; top: 42px; height: 18px;
   background-image:
     linear-gradient(90deg, var(--ink) 0 1px, transparent 1px),
     linear-gradient(90deg, var(--ink-45) 0 1px, transparent 1px),
@@ -292,52 +307,45 @@
   background-repeat: repeat-x;
 }
 
-/* L:27-29 — Beschriftung unter den großen Strichen; die unter der Nadel blendet aus. */
-.kb .kb-lineal__schild {
-  position: absolute; top: 58px; transform: translateX(-50%);
+/* Die Marken: die Skalenzahlen SIND die Marken. Ein Klick springt hin; wo ein Name
+   gegeben ist („5 Jahre“), steht der Name statt der Zahl und wiegt schwerer. */
+.kb .kb-lineal__marke {
+  position: absolute; top: 64px; transform: translateX(-50%);
+  border: 0; background: transparent; padding: var(--luft-xs) var(--luft-s); cursor: pointer;
   font: 500 var(--grad-11) var(--sans); color: var(--muted);
   white-space: nowrap; font-variant-numeric: tabular-nums;
-  transition: opacity .3s;
+  transition: color .25s, transform .25s, opacity .3s;
 }
+.kb .kb-lineal__marke[data-benannt="an"] { font-weight: 700; font-size: var(--grad-12); color: var(--ink); }
+.kb .kb-lineal__marke:hover { color: var(--kb-lineal-farbe); transform: translateX(-50%) translateY(-1px); }
 
-/* L:20-22 — Marken oben auf der Spur. */
-.kb .kb-lineal__marke {
-  position: absolute; top: 0; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: var(--luft-xxs);
-  border: 0; background: transparent; padding: var(--luft-xs) var(--luft-s); cursor: pointer;
-  font: 500 var(--grad-12) var(--sans); color: var(--muted); white-space: nowrap;
-  transition: color .25s, transform .25s;
-}
-.kb .kb-lineal__marke:hover { transform: translateX(-50%) translateY(-2px); }
-.kb .kb-lineal__marke--aktiv { font-weight: 700; color: var(--kb-lineal-farbe); }
-.kb .kb-lineal__marke i { width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid currentColor; }
-
-/* L:32-33 — Nadel mit Papier-Aura, damit sie über den Strichen frei steht. */
+/* L:32-33 — Nadel mit Papier-Aura, damit sie über den Strichen frei steht.
+   Sie steht ÜBER der Skala und zeigt nach oben auf den Wert. */
 .kb .kb-lineal__nadel {
-  position: absolute; left: 50%; top: 26px; width: 2px; height: 30px;
+  position: absolute; left: 50%; top: 48px; width: 2px; height: 22px;
   background: var(--kb-lineal-farbe); transform: translateX(-50%);
   box-shadow: 0 0 0 3px var(--paper);
 }
 .kb .kb-lineal__spitze {
-  position: absolute; left: 50%; top: 22px; width: 0; height: 0; transform: translateX(-50%);
+  position: absolute; left: 50%; top: 42px; width: 0; height: 0; transform: translateX(-50%);
   border-left: 5px solid transparent; border-right: 5px solid transparent;
-  border-top: 6px solid var(--kb-lineal-farbe);
+  border-bottom: 6px solid var(--kb-lineal-farbe);
 }
 
-/* L:34 — der Wert steht als Eingabefeld unter der Nadel, gestrichelt unterstrichen. */
+/* L:34 — der Wert steht als Eingabefeld ÜBER der Nadel, gestrichelt unterstrichen. */
 .kb .kb-lineal__wert {
-  position: absolute; left: 50%; top: 78px; transform: translateX(-50%); z-index: 2;
-  text-align: center; border: 0; border-bottom: 1px dashed var(--ink-35);
-  background: transparent; font: 700 var(--grad-18) var(--serif); color: var(--kb-lineal-farbe);
-  padding: var(--luft-xxs) 0 var(--luft-xs); outline: 0; font-variant-numeric: tabular-nums; cursor: text;
+  position: absolute; left: 50%; top: 0; transform: translateX(-50%); z-index: 2;
+  text-align: center; border: 0; border-bottom: var(--strich-haar) dashed var(--ink-35);
+  background: transparent; font: var(--schrift-wert); color: var(--kb-lineal-farbe);
+  padding: 0 0 var(--luft-xs); outline: 0; font-variant-numeric: tabular-nums; cursor: text;
 }
-.kb .kb-lineal__wert:focus { border-bottom: 1px solid var(--ink); background: rgba(255, 255, 255, .7); }
+.kb .kb-lineal__wert:focus { border-bottom: var(--strich-haar) solid var(--ink); background: transparent; }
 
-/* L:35 — Bedienhinweis mit pendelndem Strich; verschwindet nach der ersten Berührung. */
+/* L:35 — Bedienhinweis oben rechts; verschwindet nach der ersten Berührung. */
 .kb .kb-lineal__hinweis {
-  position: absolute; right: 0; top: 104px;
+  position: absolute; right: 0; top: var(--luft-s);
   display: flex; align-items: center; gap: var(--luft-s);
-  font: italic 300 var(--grad-12) var(--serif); color: var(--muted);
+  font: var(--schrift-hinweis); color: var(--muted);
   transition: opacity .5s; pointer-events: none;
 }
 .kb .kb-lineal__hinweis i { display: inline-block; width: 14px; height: 1px; background: currentColor; animation: fl-hand 1.8s ease-in-out infinite; }
@@ -347,10 +355,54 @@
   .kb .kb-lineal__hinweis { opacity: 0; }
 }
 
-/* ── Feldkopf: Bezeichnung links, Bereich rechts (K:69, :73, :251, :256, :275) ────── */
+/* ═══ Die gemeinsame Anatomie der fünf Bausteine ══════════════════════════════════════
+   Handoff Runde 2, Punkt 2 — „die wichtigste Änderung für die 56 Rechner":
+
+     [Kicker-Label grau]                    [rechts: Bereich/Hinweis kursiv grau]
+     [Wertzeile 40 px · Wert 700/26 Antiqua Tinte · Einheit kursiv 15 grau]
+     [Linie 1 px 35 % Tinte · im Fokus Doppellinie in Werkzeugfarbe]
+     [Hinweiszeile 16 px kursiv]
+
+   🚨 Kein Wert größer als 26 px, kein Label als Antiqua-15 mehr. Vorher trugen Lineal,
+   Drehring und Zählwerk ihre Bezeichnung als `600 15px` Antiqua, Setzzeile und Register
+   dagegen schon als Kicker — zwei Anatomien nebeneinander in DEMSELBEN Rechner. Und der
+   Drehring setzte seinen Mittelwert auf 34 px, die Setzzeile auf bis zu 28.
+
+   Der Gewinn ist nicht nur Ordnung, sondern Platz: rund 14 px je Feld, bei acht Feldern
+   gut 110 px pro Rechner. Es wirkt dabei ALLES auf die 194 Felder der 56 Rechner —
+   sie kommen aus lib/rechner/schemata und werden nicht einzeln gebaut.
+   ═══════════════════════════════════════════════════════════════════════════════════ */
+
+/* Der Kopf: Bezeichnung links, Bereich rechts. */
 .kb .kb__feldkopf { display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-m); }
-.kb .kb__feldkopf b { font: 600 var(--grad-15) var(--serif); }
-.kb .kb__feldkopf span { font: 400 var(--grad-12) var(--sans); color: var(--muted); }
+.kb .kb__feldkopf b,
+.kb .kb-setzzeile__label,
+.kb .kb-register__label {
+  display: block; font: var(--schrift-kicker); letter-spacing: var(--laufweite-kicker);
+  text-transform: uppercase; color: var(--muted); transition: color .3s;
+}
+.kb .kb__feldkopf span,
+.kb .kb-feld__bereich { font: var(--schrift-hinweis); color: var(--muted); }
+
+/* Die Wertzeile: 40 px, überall. */
+.kb .kb-setzzeile__zeile { height: 40px; }
+
+/* Der Wert: 26 px, überall. Die Zahl bleibt Tinte — die Werkzeugfarbe trägt Nadel,
+   Bogen, Linie und den Kicker im aktiven Zustand, nicht den Wert. */
+.kb .kb-setzzeile__wert,
+.kb .kb-register__gewaehlt,
+.kb .kb-zaehlwerk__wert,
+.kb .kb-drehring__mitte b { font: var(--schrift-wert); color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* Die Einheit steht kursiv direkt hinter der Zahl. */
+.kb .kb-setzzeile__einheit,
+.kb .kb-feld__einheit { font: italic 300 var(--grad-15) var(--serif); color: var(--muted); flex-shrink: 0; }
+
+/* Die Hinweiszeile: 16 px, kursiv, grau — und in Magenta, wenn etwas nicht stimmt. */
+.kb .kb-setzzeile__fuss { min-height: 16px; }
+.kb .kb-setzzeile__hinweis,
+.kb .kb-zaehlwerk__hinweis,
+.kb .kb-feld__hinweis { font: var(--schrift-hinweis); color: var(--muted); }
 
 /* ── Feldlinien: Grundlinie + Doppellinie, die sich im Fokus von der Mitte zeichnet ──
    Gemeinsam für Setzzeile (S:25-30) und Register (R:22-26). Die zweite Linie folgt
@@ -370,17 +422,13 @@
 /* S:29 — der grüne Knoten bestätigt den gesetzten Wert, sobald die Zeile den Fokus abgibt. */
 .kb .kb-feldlinien__knoten {
   position: absolute; right: -4px; top: -4px; width: 9px; height: 9px; border-radius: var(--radius-kreis);
-  background: var(--green); border: 2px solid var(--paper); box-sizing: content-box;
+  background: var(--green); border: var(--strich-stark) solid var(--paper); box-sizing: content-box;
   opacity: 0; transition: opacity .4s;
 }
 .kb .kb-feldlinien__knoten[data-an="an"] { opacity: 1; }
 
 /* ── Setzzeile (FL Setzzeile.dc.html:17-37) ───────────────────────────────────────── */
 .kb .kb-setzzeile { position: relative; min-width: 0; }
-.kb .kb-setzzeile__label {
-  display: block; font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em;
-  text-transform: uppercase; color: var(--muted); transition: color .3s;
-}
 .kb .kb-setzzeile[data-fokus="an"] .kb-setzzeile__label { color: var(--kb-feld-farbe); }
 .kb .kb-setzzeile[data-fehler="an"] .kb-setzzeile__label { color: var(--pink); }
 
@@ -398,32 +446,28 @@
 .kb .kb-setzzeile__schritt[data-immer="an"] { opacity: 1; }
 .kb .kb-setzzeile__schritt i {
   width: 8px; height: 8px;
-  border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  border-left: var(--strich-stark) solid currentColor; border-bottom: var(--strich-stark) solid currentColor;
   transform: rotate(45deg); margin-left: var(--luft-xs);
 }
 .kb .kb-setzzeile__schritt--plus i { transform: rotate(-135deg); margin-left: 0; margin-right: var(--luft-xs); }
 
 .kb .kb-setzzeile__wert {
   flex: 1; min-width: 0; border: 0; background: transparent;
-  font: 700 clamp(var(--grad-26), 3.2vw, var(--grad-28)) var(--serif); color: var(--ink);
-  outline: 0; padding: 0; font-variant-numeric: tabular-nums; letter-spacing: -.01em;
-  transition: color .3s;
+  outline: 0; padding: 0; letter-spacing: -.01em; transition: color .3s;
 }
 .kb .kb-setzzeile[data-fehler="an"] .kb-setzzeile__wert { color: var(--pink); }
-.kb .kb-setzzeile__einheit { font: italic 300 var(--grad-16) var(--serif); color: var(--muted); flex-shrink: 0; }
 
 .kb .kb-setzzeile__fuss {
   display: flex; justify-content: space-between; align-items: baseline;
   gap: var(--luft-s) var(--luft-m); flex-wrap: wrap; margin-top: var(--luft-s); min-height: 18px;
 }
-.kb .kb-setzzeile__hinweis { font: italic 300 var(--grad-12) var(--serif); color: var(--muted); min-width: 0; }
 .kb .kb-setzzeile[data-fehler="an"] .kb-setzzeile__hinweis { color: var(--pink); animation: fl-druck .4s both; }
 /* S:33-34 — Vorschläge erscheinen im Fokus (oder immer) und halten ihn beim Antippen. */
 .kb .kb-setzzeile__vorschlaege { display: flex; gap: var(--luft-m); flex-wrap: wrap; opacity: 0; pointer-events: none; transition: opacity .3s; }
 .kb .kb-setzzeile__vorschlaege[data-an="an"] { opacity: 1; pointer-events: auto; }
 .kb .kb-setzzeile__vorschlaege button {
   border: 0; background: transparent; padding: 0 0 var(--luft-xxs); font: 500 var(--grad-12) var(--sans);
-  color: var(--muted); border-bottom: 1px dotted var(--ink-45); cursor: pointer; transition: color .2s;
+  color: var(--muted); border-bottom: var(--strich-haar) dotted var(--ink-45); cursor: pointer; transition: color .2s;
 }
 .kb .kb-setzzeile__vorschlaege button:hover { color: var(--ink); }
 
@@ -431,20 +475,15 @@
 /* R:16 — offen muss das Verzeichnis über allem liegen, was danach im Satz kommt. */
 .kb .kb-register { position: relative; min-width: 0; z-index: 1; }
 .kb .kb-register[data-offen="an"] { z-index: 40; }
-.kb .kb-register__label {
-  display: block; font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em;
-  text-transform: uppercase; color: var(--muted); transition: color .3s;
-}
 .kb .kb-register[data-offen="an"] .kb-register__label { color: var(--kb-feld-farbe); }
 .kb .kb-register__trigger {
   display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-m);
-  width: 100%; min-width: 0; height: 54px; border: 0; background: transparent; padding: 0;
+  width: 100%; min-width: 0; height: 40px; border: 0; background: transparent; padding: 0;
   text-align: left; cursor: pointer; color: var(--ink); outline: 0;
 }
-.kb .kb-register__trigger:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.kb .kb-register__trigger:focus-visible { outline: var(--strich-stark) solid var(--green); outline-offset: 2px; }
 .kb .kb-register__gewaehlt {
-  font: 700 clamp(var(--grad-22), 3vw, var(--grad-28)) var(--serif); letter-spacing: -.01em;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+  letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
 }
 .kb .kb-register__rechts { display: flex; align-items: center; gap: var(--luft-m); flex-shrink: 1; min-width: 0; }
 .kb .kb-register__meta { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -462,7 +501,7 @@
 .kb .kb-register__verzeichnis {
   transform-origin: top center; transform: rotateX(-72deg); opacity: 0;
   transition: transform .5s var(--klappe), opacity .25s;
-  background: var(--paper); border: 1px solid var(--ink-20);
+  background: var(--paper); border: var(--strich-haar) solid var(--ink-20);
   box-shadow: var(--schatten-dialog);
   padding: var(--luft-xs) 0; max-height: var(--kb-register-hoehe, 340px); overflow: auto; scrollbar-width: thin;
 }
@@ -471,7 +510,7 @@
 .kb .kb-register__eintrag {
   display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: baseline; gap: var(--luft-s);
   width: 100%; min-height: 44px; padding: var(--luft-s) var(--luft-m) var(--luft-s) var(--luft-m);
-  border: 0; border-top: 1px solid var(--ink-08); background: transparent;
+  border: 0; border-top: var(--strich-haar) solid var(--ink-08); background: transparent;
   text-align: left; cursor: pointer; color: var(--ink);
   transition: background .2s, padding-left .3s var(--kurve);
 }
@@ -510,7 +549,7 @@
 .kb .kb-drehring { position: relative; width: 190px; height: 190px; margin-inline: auto; }
 .kb .kb-drehring__scheibe { display: block; touch-action: none; cursor: grab; user-select: none; overflow: visible; }
 .kb .kb-drehring__scheibe[data-zieht="an"] { cursor: grabbing; }
-.kb .kb-drehring__scheibe:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+.kb .kb-drehring__scheibe:focus-visible { outline: var(--strich-stark) solid var(--green); outline-offset: 4px; }
 .kb .kb-drehring__strich { transition: stroke .3s; }
 /* Geometrie-Eigenschaften als CSS animieren — als Attribut allein täte sich nichts. */
 .kb .kb-drehring__griff { transition: cx .45s var(--kurve), cy .45s var(--kurve), r .2s; }
@@ -520,7 +559,7 @@
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
   display: flex; flex-direction: column; align-items: center; pointer-events: none; padding-top: var(--luft-s);
 }
-.kb .kb-drehring__mitte b { font: 900 var(--grad-34)/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
+
 .kb .kb-drehring__einheit { font: italic 300 var(--grad-12) var(--serif); color: var(--muted); margin-top: var(--luft-xs); }
 .kb .kb-drehring__unter { font: 500 var(--grad-11) var(--sans); color: var(--kb-feld-farbe); margin-top: var(--luft-xs); white-space: nowrap; }
 
@@ -528,7 +567,7 @@
 .kb .kb-zaehlwerk__zeile { display: flex; align-items: center; justify-content: space-between; gap: var(--luft-s); margin-top: var(--luft-l); }
 .kb .kb-zaehlwerk__knopf {
   position: relative; width: 46px; height: 46px; flex-shrink: 0;
-  border: 1.5px solid var(--ink); border-radius: var(--radius-kreis); background: transparent; color: var(--ink);
+  border: var(--strich-stark) solid var(--ink); border-radius: var(--radius-kreis); background: transparent; color: var(--ink);
   display: flex; align-items: center; justify-content: center; cursor: pointer; touch-action: none;
   transition: transform .2s, background .2s, color .2s;
 }
@@ -538,18 +577,12 @@
 .kb .kb-zaehlwerk__plus { position: absolute; width: 2px; height: 14px; background: currentColor; }
 .kb .kb-zaehlwerk__wert {
   display: flex; align-items: baseline; justify-content: center;
-  font: 900 clamp(var(--grad-34), 5vw, var(--grad-44))/1 var(--serif); color: var(--ink);
-  font-variant-numeric: tabular-nums; letter-spacing: -.01em;
+  letter-spacing: -.01em;
 }
 .kb .kb-zaehlwerk__schnellwahl { display: flex; justify-content: center; gap: var(--luft-s); margin-top: var(--luft-l); flex-wrap: wrap; }
-.kb .kb-zaehlwerk__chip {
-  min-height: 34px; padding: 0 var(--luft-m); border: 1px solid var(--ink-25); border-radius: var(--radius-pille);
-  background: transparent; color: var(--ink); font: 500 var(--grad-13) var(--sans);
-  cursor: pointer; transition: background .3s, color .3s, border-color .3s;
-}
-.kb .kb-zaehlwerk__chip:hover { border-color: var(--ink); }
-.kb .kb-zaehlwerk__chip[data-aktiv="an"] { background: var(--ink); color: var(--auf-tinte); border-color: var(--ink); }
-.kb .kb-zaehlwerk__hinweis { display: block; text-align: center; margin-top: var(--luft-s); font: italic 300 var(--grad-12) var(--serif); color: var(--muted); }
+/* Die Schnellwahl des Zählwerks ist der Chip, nur eine Spur kleiner. */
+.kb .kb-zaehlwerk__chip { min-height: 32px; font-size: var(--grad-13); }
+.kb .kb-zaehlwerk__hinweis { display: block; text-align: center; margin-top: var(--luft-s); }
 
 /* ── Pille ───────────────────────────────────────────────────────────────────────── */
 /* Die Pille steht seit dem 16.09.2026 in app/knoepfe.css und gilt für die ganze Seite —
@@ -567,22 +600,60 @@
   .kb .pille--klein .pille__text { display: none; }
 }
 
-/* ── Stempel (K:123 groß · :191 klein) ────────────────────────────────────────────── */
-.kb .kb-stempel {
-  display: inline-block; padding: var(--luft-xs) var(--luft-m);
-  border: 2px solid var(--tuerkis-hell); color: var(--tuerkis-hell); background: var(--paper);
-  font: 700 var(--grad-11) var(--sans); letter-spacing: .14em; text-transform: uppercase;
-  transform: rotate(-11deg);
+/* ── Siegel „Bestwert“ (K:123 groß · :191 klein, Runde 2) ──────────────────────────
+   Eine Glanzfolie, kein Aufdruck. Der Schimmer hängt am FENSTER, nicht am Siegel:
+   beim Scrollen wandert das Siegel über das stehende Bild und bricht das Licht dabei
+   jedes Mal anders. Aufbau in zwei Ebenen, weil `background-attachment: fixed` nur
+   ohne transformierten Vorfahr aufs Fenster zeigt — die Drehung sitzt außen, die Folie
+   innen. Der Text liegt darüber, damit er von der Folie nicht eingefärbt wird. */
+.kb .kb-siegel {
+  position: relative; display: inline-block; isolation: isolate;
+  padding: var(--luft-xs) var(--luft-m); transform: rotate(-11deg);
+  filter: drop-shadow(0 1px 0 var(--ink-25));
 }
-.kb .kb-stempel--klein { padding: var(--luft-xxs) var(--luft-s); border-width: 1.5px; font-size: var(--grad-kicker); letter-spacing: .12em; transform: rotate(-6deg); flex-shrink: 0; }
-@container kb (max-width: 559px) { .kb .kb-stempel--klein { display: none; } }
+.kb .kb-siegel__folie {
+  position: absolute; inset: 0; z-index: 0; display: block;
+  /* Die Folie: weiches Perlmutt aus vier übereinanderliegenden Verläufen. Fest am
+     Fenster verankert und absichtlich viel größer als das Siegel (320 %), damit auch ein
+     kurzer Scrollweg den Farbort spürbar verschiebt. */
+  background-image:
+    linear-gradient(112deg,
+      #FFC7E4 0%, #C9E7FF 18%, #BFF4DE 34%, #FFF3B8 50%,
+      #D9C8FF 66%, #A8ECFF 82%, #FFC7E4 100%),
+    radial-gradient(130% 100% at 16% 18%, rgba(255,255,255,.92) 0%, rgba(255,255,255,0) 55%),
+    radial-gradient(100% 80% at 84% 82%, rgba(140,245,230,.85) 0%, rgba(140,245,230,0) 58%),
+    linear-gradient(22deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 32%, rgba(255,255,255,.65) 58%, rgba(255,255,255,0) 100%);
+  /* Viel größer als das Siegel, damit ein kurzer Scrollweg den Farbort spürbar
+     verschiebt. Die Position setzt die Komponente beim Scrollen (Siegel.tsx). */
+  background-size: 480% 480%, 420% 420%, 380% 380%, 520% 520%;
+  background-position: 50% 50%;
+  transition: background-position .08s linear;
+  /* Ein hauchdünner Innenrahmen, wie die Prägekante einer echten Folie. */
+  box-shadow: inset 0 0 0 1px rgba(51, 74, 39, .28);
+}
+.kb .kb-siegel__text {
+  position: relative; z-index: 1; display: block;
+  font: 700 var(--grad-11)/1 var(--sans); letter-spacing: .13em;
+  text-transform: uppercase; color: var(--ink); white-space: nowrap;
+}
+.kb .kb-siegel--klein { padding: var(--luft-xxs) var(--luft-s); transform: rotate(-6deg); flex-shrink: 0; }
+.kb .kb-siegel--klein .kb-siegel__text { font-size: 9.5px; letter-spacing: .12em; }
+@container kb (max-width: 559px) { .kb .kb-siegel--klein { display: none; } }
+/* Ohne Bewegungswunsch steht die Folie still — der Glanz bleibt, nur das Kippen fehlt. */
+@media (prefers-reduced-motion: reduce) {
+  .kb .kb-siegel__folie { transition: none; }
+}
 
 /* ── Stempel-Presets (K:242-247) ──────────────────────────────────────────────────── */
 .kb .kb-presets { display: flex; align-items: center; gap: var(--luft-m) var(--luft-m); flex-wrap: wrap; }
-.kb .kb-presets__label { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }
+.kb .kb-presets__label,
+.kb .kb-liste__filter-label {
+  font: var(--schrift-kicker); letter-spacing: var(--laufweite-kicker);
+  text-transform: uppercase; color: var(--muted);
+}
 .kb .kb-presets__stempel {
   position: relative; padding: var(--luft-s) var(--luft-m) var(--luft-s); min-height: 44px;
-  border: 1.5px solid var(--muted); border-radius: var(--radius-kante); background: transparent; color: var(--muted);
+  border: var(--strich-stark) solid var(--muted); border-radius: var(--radius-kante); background: transparent; color: var(--muted);
   text-align: left; cursor: pointer; transform: rotate(var(--kb-neigung, 0deg));
   transition: transform .35s var(--ueber), color .25s, border-color .25s;
 }
@@ -594,7 +665,7 @@
 /* ── Segment-Umschalter (K:78-82) ─────────────────────────────────────────────────── */
 .kb .kb-segment {
   position: relative; display: inline-grid; grid-template-columns: repeat(var(--kb-seg-spalten, 3), auto);
-  border: 1px solid var(--ink-30); height: 44px; overflow: hidden; box-sizing: border-box;
+  border: var(--strich-haar) solid var(--ink-30); height: 44px; overflow: hidden; box-sizing: border-box;
 }
 .kb .kb-segment__block {
   position: absolute; top: 0; bottom: 0; left: var(--kb-seg-links, 0); width: var(--kb-seg-breite, 0);
@@ -614,16 +685,10 @@
 }
 
 /* ── Filter-Chip (K:173) ──────────────────────────────────────────────────────────── */
-.kb .kb-chip {
-  display: inline-flex; align-items: center; gap: var(--luft-s); min-height: 40px; padding: 0 var(--luft-m);
-  border: 1px solid var(--ink-25); border-radius: var(--radius-pille); background: transparent; color: var(--ink);
-  font: 500 var(--grad-14) var(--sans); cursor: pointer;
-  transition: background .3s var(--kurve), color .3s, border-color .3s, transform .3s;
-}
-.kb .kb-chip:hover { transform: translateY(-1px); border-color: var(--ink); }
-.kb .kb-chip__punkt { width: 7px; height: 7px; border-radius: var(--radius-kreis); background: var(--ink-30); transition: background .3s; flex: none; }
-.kb .kb-chip[data-aktiv="an"] { background: var(--ink); color: var(--auf-tinte); border-color: var(--ink); }
-.kb .kb-chip[data-aktiv="an"] .kb-chip__punkt { background: var(--green); }
+/* Die Form steht in app/knoepfe.css. Der Handoff sah hier links einen 7-px-Punkt vor,
+   der im aktiven Zustand grün wurde — er ist am 16.09.2026 gefallen: dass ein Chip
+   gewählt ist, sagt schon die Tintefläche, und eine Reihe Chips soll wie eine Reihe
+   aussehen. Übrig bleibt die Zahl rechts. */
 .kb .kb-chip__zahl { opacity: .7; font-size: var(--grad-12); }
 
 /* ── Strich-Link (K:159) ──────────────────────────────────────────────────────────── */
@@ -645,7 +710,7 @@
 
 /* ── Logorahmen (K:127/:154/:190) ─────────────────────────────────────────────────── */
 .kb .kb-logo {
-  position: relative; flex-shrink: 0; border: 1px solid var(--ink-20); background: var(--paper);
+  position: relative; flex-shrink: 0; border: var(--strich-haar) solid var(--ink-20); background: var(--paper);
   box-sizing: border-box; display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
 .kb .kb-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
@@ -696,7 +761,7 @@
 .kb .kb-rechner__leo {
   display: flex; align-items: center; justify-content: space-between; gap: var(--luft-l) var(--luft-xl); flex-wrap: wrap;
   margin-top: var(--luft-xl); padding: var(--luft-l) 0;
-  border-top: 1px dotted var(--ink-45); border-bottom: 1px dotted var(--ink-45);
+  border-top: var(--strich-haar) dotted var(--ink-45); border-bottom: var(--strich-haar) dotted var(--ink-45);
 }
 .kb .kb-rechner__vorschau { display: flex; align-items: baseline; gap: var(--luft-s) var(--luft-m); flex-wrap: wrap; }
 .kb .kb-rechner__leo-vor { font: italic 400 var(--grad-15) var(--serif); color: var(--muted); }
@@ -714,7 +779,7 @@
 .kb .kb-ergebnis__innen[data-veraltet="an"] { opacity: .45; }
 .kb .kb-ergebnis__inhalt { padding-top: var(--luft-xl); display: grid; gap: var(--luft-xl); }
 .kb .kb-ergebnis__kopf { display: flex; align-items: center; gap: var(--luft-l); }
-.kb .kb-ergebnis__kopf i { flex: 1; border-top: 1px dotted var(--ink-45); }
+.kb .kb-ergebnis__kopf i { flex: 1; border-top: var(--strich-haar) dotted var(--ink-45); }
 .kb .kb-ergebnis__kopf i:first-child { transform-origin: right; }
 .kb .kb-ergebnis__kopf i:last-child { transform-origin: left; }
 .kb .kb-ergebnis__kopf span { font: 300 var(--grad-14) var(--sans); letter-spacing: 2px; }
@@ -723,8 +788,8 @@
 .kb .kb-kacheln { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: var(--luft-l); }
 .kb .kb-kachel { padding: var(--luft-l) var(--luft-l); background: var(--ink-05); }
 .kb .kb-kachel--haupt {
-  background: var(--paper); border: 1px solid var(--ink-30);
-  outline: 2px solid var(--ink-25); outline-offset: 3px;
+  background: var(--paper); border: var(--strich-haar) solid var(--ink-30);
+  outline: var(--strich-stark) solid var(--ink-25); outline-offset: 3px;
 }
 .kb .kb-kachel__wert {
   display: block; margin-top: var(--luft-s);
@@ -769,7 +834,7 @@
 }
 .kb .kb-tabelle__zeile {
   grid-template-columns: .7fr 1fr 1fr 1.2fr; padding: var(--luft-s) 0;
-  border-top: 1px solid var(--ink-12);
+  border-top: var(--strich-haar) solid var(--ink-12);
   font: 400 clamp(var(--grad-13), 1.9vw, var(--grad-14)) var(--sans); font-variant-numeric: tabular-nums;
 }
 .kb .kb-tabelle__zeile[data-betont="an"] { border-top: var(--strich-stark) solid var(--pink); }
@@ -826,7 +891,7 @@
 .kb .kb-band__ende { position: absolute; top: 122px; font: 500 var(--grad-11) var(--sans); color: var(--muted); }
 .kb .kb-band__ende--links { left: 0; }
 .kb .kb-band__ende--rechts { right: 0; }
-.kb .kb-band__schnitt { position: absolute; top: 88px; height: 24px; border-left: 1px dashed var(--muted); transition: left .7s var(--kurve); }
+.kb .kb-band__schnitt { position: absolute; top: 88px; height: 24px; border-left: var(--strich-haar) dashed var(--muted); transition: left .7s var(--kurve); }
 .kb .kb-band__schnitt-wert {
   position: absolute; top: 70px; transform: translateX(-50%);
   font: 500 var(--grad-12) var(--sans); color: var(--muted); white-space: nowrap;
@@ -849,7 +914,7 @@
 .kb .kb-band__best[data-anker="rechts"] { padding: 0 var(--luft-s) 0 0; transform: translateX(-100%); }
 .kb .kb-band__punkt {
   position: absolute; width: 10px; height: 10px; transform: translate(-50%, -50%);
-  border-radius: var(--radius-kreis); background: var(--paper); border: 1.5px solid var(--ink);
+  border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-stark) solid var(--ink);
   box-sizing: border-box; padding: 0; cursor: pointer;
   transition: left .7s var(--kurve), top .5s, width .25s, height .25s, background .25s;
 }
@@ -886,7 +951,7 @@
 }
 .kb .kb-zinskurve__punkt {
   position: absolute; width: 10px; height: 10px; transform: translate(-50%, -50%);
-  border-radius: var(--radius-kreis); background: var(--paper); border: 1.5px solid var(--tuerkis);
+  border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-stark) solid var(--tuerkis);
   box-sizing: border-box; padding: 0; cursor: pointer;
   transition: left .5s, top .5s var(--kurve), width .25s, height .25s, background .25s;
 }
@@ -920,23 +985,38 @@
 /* F:88 — der Hinweis, wenn die Kurve nicht für den eingestellten Betrag gilt. */
 .kb .kb-zinskurve__fuss { display: block; margin-top: var(--luft-s); font: italic 300 var(--grad-13)/1.5 var(--serif); color: var(--muted); }
 
-/* Kennzahlen (K:107-112). Die große steht im schmalen Satz über die volle Breite. */
+/* ── Kennzahlen: die dreispaltige Zeitungstabelle ─────────────────────────────────────
+   Handoff Runde 2, Punkt 4. Vorher stand eine Zahl groß (bis 44 px) und zwei klein
+   daneben — auf 1,6 fr Spaltenbreite gequetscht, mit der Unterzeile im Umbruch. Genau
+   diese Stelle hat der User am 16.09.2026 gezeigt.
+
+   Jetzt: drei gleich große Zellen, Doppellinie oben, Trennlinien dazwischen, Abschluss
+   unten. Die Zahlen sind ALLE 900/28 — unterschieden wird über die FARBE:
+   Türkis der Bestwert, Grau der Durchschnitt, Grün die Ersparnis, Magenta ein Minus.
+   ─────────────────────────────────────────────────────────────────────────────────── */
 .kb .kb-kennzahlen {
-  display: grid; grid-template-columns: 1fr 1fr 1.6fr; gap: var(--luft-m) var(--luft-xl);
-  margin-top: var(--luft-l); padding-top: var(--luft-m);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: var(--luft-l);
+  border-top: var(--strich-stark) solid var(--ink); box-shadow: var(--doppellinie-schatten);
+  border-bottom: var(--strich-haar) solid var(--ink);
 }
-.kb .kb-kennzahl__label { display: block; font: 400 var(--grad-13) var(--sans); color: var(--muted); }
-.kb .kb-kennzahl__zeile { display: flex; align-items: baseline; gap: var(--luft-s); flex-wrap: wrap; margin-top: var(--luft-xs); }
-.kb .kb-kennzahl__wert { font: 700 clamp(var(--grad-20), 3.2vw, var(--grad-26))/1.1 var(--serif); font-variant-numeric: tabular-nums; }
-.kb .kb-kennzahl__unter { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }
-.kb .kb-kennzahl[data-ton="werkzeug"] .kb-kennzahl__wert { font-weight: 900; font-size: clamp(var(--grad-26), 4vw, var(--grad-28)); color: var(--tuerkis); }
+.kb .kb-kennzahl { padding: var(--luft-m) var(--luft-m); min-width: 0; }
+.kb .kb-kennzahl + .kb-kennzahl { border-left: var(--strich-haar) solid var(--ink-20); }
+.kb .kb-kennzahl__label {
+  display: block; font: var(--schrift-kicker); letter-spacing: var(--laufweite-kicker);
+  text-transform: uppercase; color: var(--muted);
+}
+.kb .kb-kennzahl__zeile { display: block; margin-top: var(--luft-xs); }
+.kb .kb-kennzahl__wert { display: block; font: var(--schrift-kennzahl); font-variant-numeric: tabular-nums; color: var(--ink); }
+.kb .kb-kennzahl__unter { display: block; margin-top: var(--luft-xxs); font: italic 300 var(--grad-12)/1.4 var(--serif); color: var(--muted); }
+.kb .kb-kennzahl[data-ton="werkzeug"] .kb-kennzahl__wert { color: var(--werkzeug); }
 .kb .kb-kennzahl[data-ton="grau"] .kb-kennzahl__wert { color: var(--muted); }
-.kb .kb-kennzahl[data-ton="gruen"] .kb-kennzahl__wert { color: var(--green); }
+.kb .kb-kennzahl[data-ton="gruen"] .kb-kennzahl__wert { color: var(--green-ink); }
 .kb .kb-kennzahl[data-ton="magenta"] .kb-kennzahl__wert { color: var(--pink); }
-.kb .kb-kennzahl[data-gross="an"] .kb-kennzahl__wert { font-weight: 900; font-size: clamp(var(--grad-28), 5vw, var(--grad-44)); }
+/* Im schmalen Satz zwei nebeneinander, die dritte über die volle Breite darunter. */
 @container kb (max-width: 559px) {
-  .kb .kb-kennzahlen { grid-template-columns: 1fr 1fr; }
-  .kb .kb-kennzahl[data-gross="an"] { grid-column: 1 / -1; }
+  .kb .kb-kennzahlen { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kb .kb-kennzahl:nth-child(3) { grid-column: 1 / -1; border-left: 0; border-top: var(--strich-haar) solid var(--ink-20); }
 }
 
 /* ── Podest (K:115-165) ───────────────────────────────────────────────────────────── */
@@ -957,7 +1037,7 @@
 .kb .kb-podest__rahmen--links { left: 0; top: 0; bottom: 0; width: 1px; }
 .kb .kb-podest__rahmen--rechts { right: 0; top: 0; bottom: 0; width: 1px; }
 /* K:123 — der Stempel sitzt über der Oberlinie, nicht darunter. */
-.kb .kb-podest__stempel { position: absolute; right: 20px; top: -13px; }
+.kb .kb-podest__siegel { position: absolute; right: 20px; top: -13px; }
 
 .kb .kb-podest__raster { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--luft-l) var(--luft-xl); align-items: start; }
 .kb .kb-podest__kopf { display: flex; align-items: center; gap: var(--luft-m); }
@@ -978,7 +1058,7 @@
 
 /* K:150-164 — Platz 2 und 3: keine Rahmen, nur eine Unterlinie und die große Rangziffer. */
 .kb .kb-plaetze { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--luft-xl); margin-top: var(--luft-s); }
-.kb .kb-platz { position: relative; padding: var(--luft-l) 0 var(--luft-s); border-bottom: 1px solid var(--ink-20, var(--ink-20)); display: flex; flex-direction: column; }
+.kb .kb-platz { position: relative; padding: var(--luft-l) 0 var(--luft-s); border-bottom: var(--strich-haar) solid var(--ink-20, var(--ink-20)); display: flex; flex-direction: column; }
 .kb .kb-platz__rang { position: absolute; right: 0; top: 14px; font: 900 var(--grad-44)/1 var(--serif); color: var(--ink-16); }
 .kb .kb-platz__zahl { display: flex; align-items: baseline; gap: var(--luft-s); margin-top: var(--luft-m); }
 .kb .kb-platz__zahl span { font: 900 var(--grad-28)/1 var(--serif); font-variant-numeric: tabular-nums; }
@@ -1003,7 +1083,7 @@
 .kb .kb-liste { margin-top: 60px; --kb-liste-spalten: 96px minmax(0, 1fr) minmax(112px, auto) minmax(100px, auto) auto; --kb-liste-gap: 20px; }
 .kb .kb-liste__titel { display: block; font: 700 clamp(var(--grad-22), 3.4vw, var(--grad-26)) var(--serif); }
 .kb .kb-liste__filter { display: flex; align-items: center; gap: var(--luft-s) var(--luft-s); flex-wrap: wrap; margin-top: var(--luft-m); }
-.kb .kb-liste__filter-label { font: 400 var(--grad-13) var(--sans); color: var(--muted); margin-right: var(--luft-xs); }
+.kb .kb-liste__filter-label { margin-right: var(--luft-xs); }
 .kb .kb-liste__zeile { display: flex; justify-content: space-between; align-items: center; gap: var(--luft-s) var(--luft-m); flex-wrap: wrap; margin-top: var(--luft-m); }
 .kb .kb-liste__zahl { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }
 .kb .kb-liste__sortieren { display: flex; align-items: center; gap: var(--luft-m); }
@@ -1019,12 +1099,26 @@
 }
 .kb .kb-liste__tab[data-aktiv="an"] i { transform: scaleX(1); }
 
-/* K:182-184 — Tabellenkopf unter der Doppellinie, Zahlen rechtsbündig. */
+/* K:182-184 — der Tabellenkopf als BAND in Tinte, darüber die Doppellinie.
+   Der Stapel von oben nach unten, wie in der Übergabe:
+     die Zeile mit Text · 2 px Luft · 2 px Linie · 2 px Luft · 1 px Linie · das Band.
+   🚨 Bis zum 16.09.2026 stand hier graue Versalienschrift auf Papier. Ein grauer Kopf
+   über einer Tabelle in Tinte liest sich wie eine zweite, schwächere Stimme — der Kopf
+   ist aber die stärkste Zeile der Tabelle. */
+.kb .kb-liste__kopfstapel {
+  margin-top: var(--luft-s); padding-top: 7px; position: relative;
+}
+.kb .kb-liste__kopfstapel::before,
+.kb .kb-liste__kopfstapel::after {
+  content: ""; position: absolute; left: 0; right: 0; background: var(--ink);
+}
+.kb .kb-liste__kopfstapel::before { top: 2px; height: 2px; }
+.kb .kb-liste__kopfstapel::after { top: 6px; height: 1px; }
 .kb .kb-liste__kopf {
   display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap);
-  align-items: end; padding: var(--luft-s) 0 var(--luft-s); margin-top: var(--luft-m);
-  border-top: var(--strich-stark) solid var(--ink); box-shadow: var(--doppellinie-schatten);
-  font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+  align-items: center; padding: var(--luft-xs) var(--luft-s);
+  background: var(--ink); color: var(--auf-tinte);
+  font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: var(--laufweite-band); text-transform: uppercase;
 }
 .kb .kb-liste__kopf-namen { grid-column: span 2; }
 .kb .kb-liste__kopf-rechts { text-align: right; white-space: nowrap; }
@@ -1067,15 +1161,21 @@
 .kb .kb-liste--anbieter .kb__zeile:hover .kb__zeile-linie { transform: scaleX(1); }
 
 /* K:186-199 — die Zeile. Bestwert auf türkisem Grund, Überfahren auf 3,5 % Tinte. */
-.kb .kb__zeile { position: relative; border-bottom: 1px solid var(--ink-12); transition: background .35s; }
+.kb .kb__zeile { position: relative; border-bottom: var(--strich-haar) solid var(--ink-12); transition: background .35s; }
 .kb .kb__zeile[data-hell="an"] { background: var(--ink-05); }
+/* Zebra (Handoff Runde 2, Punkt 5): jede zweite Zeile trägt einen Hauch Tinte. */
+.kb .kb__zeile:nth-child(even) { background: var(--ink-05); }
+.kb .kb__zeile[data-ist="an"]:nth-child(even) { background: var(--tuerkis-grund); }
 .kb .kb__zeile[data-ist="an"] { background: var(--tuerkis-grund); }
 .kb .kb__zeile-linie { position: absolute; left: 0; right: 0; height: 1px; background: var(--ink); transform: scaleX(0); transition: transform .4s var(--kurve); }
 .kb .kb__zeile-linie--oben { top: -1px; transform-origin: left; }
 .kb .kb__zeile-linie--unten { bottom: -1px; transform-origin: right; }
 .kb .kb__zeile[data-hell="an"] .kb__zeile-linie { transform: scaleX(1); }
 
-.kb .kb__zeile-raster { display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap); align-items: center; padding: var(--luft-m) 0 var(--luft-xs); }
+/* 🚨 Derselbe SEITLICHE Innenabstand wie im Kopfband (Handoff Runde 2, Punkt 5: Band
+   10 px, Zeilen 10 px). Steht er nur am Band, verrutschen alle Spalten der Liste um
+   genau diesen Betrag gegen ihre Überschrift. */
+.kb .kb__zeile-raster { display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap); align-items: center; padding: var(--luft-m) var(--luft-s) var(--luft-xs); }
 .kb .kb__zeile-namen { min-width: 0; }
 .kb .kb__zeile-namen b { display: flex; align-items: center; gap: var(--luft-s); font: 700 var(--grad-16)/1.2 var(--serif); text-wrap: balance; }
 /* 🚨 Direktes Kind: `.kb__zeile-namen span` traf auch den Mini-Stempel, der im Namen
@@ -1147,13 +1247,13 @@
      und ein gedrehter Kasten hat eine größere achsenparallele Hülle. Wer hier Breiten
      prüft, liest den berechneten Wert, nicht das Rechteck. */
   width: min(360px, calc(100vw - 32px));
-  background: var(--paper); border: 1px solid var(--ink-20);
+  background: var(--paper); border: var(--strich-haar) solid var(--ink-20);
   box-shadow: var(--schatten-blatt);
   padding: var(--luft-m) var(--luft-l) var(--luft-m); box-sizing: border-box;
   font-family: var(--font-body, "Open Sans", sans-serif); color: var(--ink);
   animation: fl-zettel .7s cubic-bezier(.2, .8, .2, 1) both;
 }
-.kb-zettel__knoten { position: absolute; left: -5px; top: 22px; width: 10px; height: 10px; border-radius: var(--radius-kreis); background: var(--green); border: 2px solid var(--auf-tinte); box-sizing: border-box; }
+.kb-zettel__knoten { position: absolute; left: -5px; top: 22px; width: 10px; height: 10px; border-radius: var(--radius-kreis); background: var(--green); border: var(--strich-stark) solid var(--auf-tinte); box-sizing: border-box; }
 .kb-zettel__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-m); }
 .kb-zettel__kopf .kb__kicker { font: 700 var(--grad-kicker)/1.3 var(--font-body, sans-serif); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .kb-zettel__leeren { border: 0; background: transparent; padding: var(--luft-s) 0; font: 400 var(--grad-12) var(--font-body, sans-serif); color: var(--muted); cursor: pointer; text-decoration: underline dotted; }
@@ -1190,7 +1290,7 @@
 .kb .kb-messlatte { margin-top: var(--luft-l); }
 .kb .kb-messlatte__zeile {
   display: grid; grid-template-columns: minmax(96px, auto) 1fr minmax(72px, auto);
-  align-items: center; gap: var(--luft-m); padding: var(--luft-s) 0; border-top: 1px solid var(--ink-12);
+  align-items: center; gap: var(--luft-m); padding: var(--luft-s) 0; border-top: var(--strich-haar) solid var(--ink-12);
 }
 .kb .kb-messlatte__name { font: 400 var(--grad-14) var(--sans); color: var(--muted); }
 .kb .kb-messlatte__balken { height: 8px; background: var(--ink-30); transition: width .9s var(--kurve); }
@@ -1210,7 +1310,7 @@
   letter-spacing: -.01em;
 }
 .kb .kb-rassenwahl__feld::placeholder { font: italic 300 clamp(var(--grad-16), 2.2vw, var(--grad-20)) var(--serif); color: var(--muted); }
-.kb .kb-rassenwahl__feld:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+.kb .kb-rassenwahl__feld:focus-visible { outline: var(--strich-stark) solid var(--green); outline-offset: 4px; }
 .kb .kb-rassenwahl__gruppe {
   display: inline-flex; align-items: center; gap: var(--luft-s); flex-shrink: 0;
   font: italic 300 var(--grad-13) var(--serif); color: var(--muted); white-space: nowrap;

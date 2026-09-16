@@ -11,7 +11,7 @@
  * Neue Tokens bekommen ihren NAMEN und ihre AUFGABE in lib/faden/tokenliste.ts.
  */
 import { useEffect, useRef, useState } from "react";
-import { ALLE_TOKEN, TOKENGRUPPEN, type Tokengruppe } from "@/lib/faden/tokenliste";
+import { ALLE_TOKEN, TOKENGRUPPEN, SCHRIFT_ZUSATZ, type Tokengruppe } from "@/lib/faden/tokenliste";
 
 function Gruppe({ g, werte }: { g: Tokengruppe; werte: Record<string, string> }) {
   return (
@@ -33,7 +33,9 @@ function Gruppe({ g, werte }: { g: Tokengruppe; werte: Record<string, string> })
               />
             )}
             {g.art === "bewegung" && <i className="token__lauf" style={{ animationTimingFunction: `var(${k})` }} />}
-            {g.art === "schrift" && <span className="token__satz" style={{ font: `var(${k})` }}>Finanzleser · 0123</span>}
+            {g.art === "schrift" && (
+              <span className="token__satz" style={{ font: `var(${k})`, ...SCHRIFT_ZUSATZ[k] }}>Finanzleser · 0123</span>
+            )}
             <code>{k}</code>
             <b>{werte[k] || "…"}</b>
             <span>{was}</span>

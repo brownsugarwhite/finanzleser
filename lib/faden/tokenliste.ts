@@ -1,3 +1,5 @@
+import type React from "react";
+
 /**
  * Die Namen des Verzeichnisses — mit ihrer Aufgabe, nicht mit ihrem Wert.
  *
@@ -11,6 +13,26 @@
  */
 
 export type Art = "farbe" | "linie" | "mass" | "schrift" | "form" | "bewegung";
+
+/**
+ * Wie eine Schriftrolle WIRKLICH aussieht, wenn sie im Satz steht. Das `font:` allein
+ * reicht nicht: Versalien und Laufweite des Kickers stehen in `.kicker`, nicht im
+ * Kurzschreiben — eine Probe nur mit `font:` zeigte deshalb Gemischtschrift, wo auf der
+ * Seite Versalien stehen.
+ */
+export const SCHRIFT_ZUSATZ: Record<string, React.CSSProperties> = {
+  "--schrift-kicker": { textTransform: "uppercase", letterSpacing: "var(--laufweite-kicker)", color: "var(--muted)" },
+  "--schrift-mini": { color: "var(--muted)" },
+  "--schrift-klein": { color: "var(--muted)" },
+  "--schrift-hinweis": { color: "var(--muted)" },
+  "--schrift-tabelle": { textTransform: "uppercase", letterSpacing: "var(--laufweite-band)", background: "var(--ink)", color: "var(--auf-tinte)", padding: "2px 8px" },
+  "--schrift-zitat": { color: "var(--ink)" },
+  "--schrift-vorspann": { color: "var(--ink)" },
+  "--schrift-anriss": { color: "var(--ink)" },
+  "--schrift-rubrik": { color: "var(--pink)" },
+  "--schrift-wert": { color: "var(--ink)", fontVariantNumeric: "tabular-nums" },
+  "--schrift-kennzahl": { color: "var(--tuerkis)", fontVariantNumeric: "tabular-nums" },
+};
 
 export interface Tokengruppe {
   titel: string;
@@ -63,7 +85,7 @@ export const TOKENGRUPPEN: Tokengruppe[] = [
       ["--tuerkis", "Vergleich: Bestwert, Nadel, Kurve, CTA"],
       ["--tuerkis-hell", "Siegel „Bestwert“, Grund der Bestwertzeile"],
       ["--lila", "Checklisten"],
-      ["--terra", "Dokumente"],
+      ["--blau", "Dokumente"],
       ["--rot", "Fehler und Warnung"],
     ],
   },

@@ -140,8 +140,6 @@ export interface KennzahlDef {
   unter?: string;
   art: SpaltenArt;
   ton: "werkzeug" | "grau" | "gruen";
-  /** Die dritte Kennzahl steht groß und nimmt bei schmalem Satz die volle Breite. */
-  gross?: boolean;
   formel: KennzahlFormel;
   /** Was gilt, wenn die Zahl negativ wird (Festgeld: Kaufkraft sinkt trotz Zinsen). */
   negativ?: { unter: string };

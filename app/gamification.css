@@ -11,7 +11,7 @@
   margin: var(--luft-xl) 0;
   padding: var(--luft-l) var(--luft-l);
   background: var(--paper);
-  border: 1px solid var(--color-border-default);
+  border: var(--strich-haar) solid var(--color-border-default);
   border-top: var(--strich-einhaenger) solid var(--green);
   border-radius: var(--radius-kante);
   font-family: var(--font-body);
@@ -71,7 +71,7 @@
   font-weight: 600;
   cursor: pointer;
   background: var(--paper);
-  border: 1.5px solid var(--color-border-default);
+  border: var(--strich-stark) solid var(--color-border-default);
   border-radius: var(--radius-kante);
   transition: border-color 0.15s, background 0.15s;
 }
@@ -96,7 +96,7 @@
   text-align: left;
   cursor: pointer;
   background: var(--paper);
-  border: 1.5px solid var(--color-border-default);
+  border: var(--strich-stark) solid var(--color-border-default);
   border-radius: var(--radius-kante);
   transition: border-color 0.15s, background 0.15s;
 }
@@ -142,7 +142,7 @@
   margin-top: var(--luft-m);
   padding: var(--luft-m) var(--luft-m);
   border-radius: var(--radius-kante);
-  border-left: 3px solid;
+  border-left: var(--strich-einhaenger) solid;
   animation: fl-gam-fade 0.25s ease;
 }
 .fl-gam-result.is-correct {
@@ -212,7 +212,7 @@
   position: relative;
   margin: var(--luft-xl) 0;
   padding: var(--luft-xl) var(--luft-xl) var(--luft-xl);
-  border: 1px solid var(--color-text-primary);
+  border: var(--strich-haar) solid var(--color-text-primary);
   background: var(--color-bg-page);
   font-family: var(--font-body);
   color: var(--color-text-primary);
@@ -390,7 +390,7 @@
   position: relative;
   margin: var(--luft-xl) 0;
   padding: var(--luft-xl) var(--luft-xl) var(--luft-xl);
-  border: 1px solid var(--color-text-primary);
+  border: var(--strich-haar) solid var(--color-text-primary);
   background: var(--color-bg-page);
   font-family: var(--font-body);
   color: var(--color-text-primary);
@@ -478,7 +478,7 @@
   position: relative;
   margin: var(--luft-xl) 0;
   padding: var(--luft-xl) var(--luft-xl) var(--luft-xl);
-  border: 1px solid var(--color-text-primary);
+  border: var(--strich-haar) solid var(--color-text-primary);
   background: var(--color-bg-page);
   font-family: var(--font-body);
   color: var(--color-text-primary);
@@ -748,7 +748,7 @@
 .fl-schaetz-track {
   position: relative;
   height: 12px;
-  border: 1.5px solid var(--color-text-primary);
+  border: var(--strich-stark) solid var(--color-text-primary);
   border-radius: var(--radius-kante);
   background: var(--tuerkis-hauch);
   cursor: pointer;
@@ -770,7 +770,7 @@
   margin-left: 0;
   transform: translate(-50%, -50%);
   background: var(--color-bg-page);
-  border: 3px solid var(--color-text-primary);
+  border: var(--strich-einhaenger) solid var(--color-text-primary);
   border-radius: var(--radius-kreis);
   box-shadow: var(--schatten-auflage);
   cursor: grab;

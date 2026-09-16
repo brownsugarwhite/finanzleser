@@ -71,7 +71,7 @@
   --tuerkis: #0B7F66;             /* Vergleich: Bestwert, Nadel, Kurve, CTA */
   --tuerkis-hell: #06D496;        /* Siegel „Bestwert“, Grund der Bestwertzeile */
   --lila: #9953c9;                /* Checklisten */
-  --terra: #E07A5F;               /* Dokumente */
+  --blau: #27548F;                /* Dokumente — Druckerblau, kalt gegen das warme Papier */
   --rot: #C0392B;                 /* Fehler und Warnung — vorher nur in gamification.css */
 
   /* Vier Hauchtöne als Grund für Zustände — mehr Zustände gibt es nicht. */
@@ -86,7 +86,7 @@
   --tool-rechner: var(--pink);
   --tool-vergleich: var(--tuerkis-hell);
   --tool-checkliste: var(--lila);
-  --tool-dokumente: var(--terra);
+  --tool-dokumente: var(--blau);
 
   /* ── Linien ──────────────────────────────────────────────────────────────────────
      Fünf Stufen derselben Tinte, benannt nach ihrer AUFGABE. Wer die Deckung meint,
@@ -101,7 +101,12 @@
   --strich-haar: 1px;             /* trennt */
   --strich-stark: 2px;            /* schließt ab, trägt die Doppellinie */
   --strich-einhaenger: 3px;       /* eröffnet einen Block, trägt die Werkzeugfarbe */
-  /* Die Doppellinie als Schatten — 2 px Linie + 2 px Luft + 1 px Linie in einem Wert. */
+  /* Die Doppellinie: 2 px Linie, 2 px Luft, 1 px Linie. Als VERLAUF auf einem 5-px-hohen
+     Element — so hängt sie an einem einzigen Knoten und lässt sich drehen.
+     Der Schatten-Zwilling ist für Blöcke, die die Linie als Kante tragen (Tabellenkopf,
+     Kennzahlen): dort gibt es kein eigenes Element dafür. */
+  --doppellinie: linear-gradient(var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px);
+  --doppellinie-grau: linear-gradient(var(--muted) 0 2px, transparent 2px 4px, var(--muted) 4px 5px);
   --doppellinie-schatten: 0 3px 0 -2px var(--ink);
 
   /* ── Abstandsleiter ──────────────────────────────────────────────────────────────
@@ -173,6 +178,10 @@
   --radius-kante: 2px;            /* die einzige erlaubte Abrundung einer Fläche */
   --radius-pille: 999px;          /* Pille, Knopf, Chip, Eingabefeld */
   --radius-kreis: 50%;            /* Punkt, Scheibe, Siegelzahn */
+  /* 🚨 Die Sprechblase braucht ein eigenes Maß. Mit --radius-pille (999 px) übersteigt
+     der Radius die halbe Blasenhöhe, und an der unteren Ecke entsteht ein Zipfel, der
+     wie ein missratener Sprechblasen-Schwanz aussieht. */
+  --radius-blase: 27px;
 
   /* Die Pfeilspitze des Megamenüs, als Maske — so kommt ihre Farbe aus `background`.
      🚨 Maße 1:1 aus MegaArrowTrail: Spitze 8 px hoch (× 7,62/14,37 = 4,24 px breit),

@@ -23,6 +23,8 @@ export interface RegisterOption<T> {
 
 export interface RegisterProps<T extends string | number> {
   label: string;
+  /** Rechts neben der Bezeichnung: Zahl der Einträge, Gültigkeit, Hinweis. */
+  bereich?: string;
   wert: T;
   onWert: (v: T) => void;
   optionen: RegisterOption<T>[];
@@ -39,7 +41,7 @@ const FARBE: Record<Werkzeug, string> = {
 };
 
 export default function Register<T extends string | number>({
-  label, wert, onWert, optionen, werkzeug = "tuerkis", maxHoehe = "340px",
+  label, bereich, wert, onWert, optionen, werkzeug = "tuerkis", maxHoehe = "340px",
 }: RegisterProps<T>) {
   const [offen, setOffen] = useState(false);
   const [hell, setHell] = useState(-1);
@@ -89,7 +91,10 @@ export default function Register<T extends string | number>({
       onKeyDown={taste}
       style={{ "--kb-feld-farbe": FARBE[werkzeug], "--kb-register-hoehe": maxHoehe } as React.CSSProperties}
     >
-      <span className="kb-register__label">{label}</span>
+      <div className="kb__feldkopf">
+        <b className="kb-register__label">{label}</b>
+        {bereich && <span>{bereich}</span>}
+      </div>
 
       <button
         type="button"

@@ -117,15 +117,36 @@ export default function Lineal({
   const spurBreite = anzahl * px;
   const x = ((wert - min) / schritt) * px;
 
-  // Beschriftete Striche: nur an Vielfachen von major × schritt (FL Lineal:74-76).
+  /**
+   * Die Skalenzahlen SIND die Marken (Handoff Runde 2, Punkt 2). Vorher gab es zwei
+   * Reihen: oben angetippte Pins („3 Jahre“, „5 Jahre“) und unten die Zahlen der großen
+   * Striche — dieselbe Information zweimal, auf 40 px Höhe verteilt.
+   *
+   * Jetzt eine Reihe unter der Skala: jede beschriftete Stelle ist ein Knopf, ein Klick
+   * springt hin. Wo ein Name gegeben ist, gewinnt der Name über die Zahl.
+   *
+   * 🚨 Die großen Striche liegen auf RUNDEN Werten (`Math.ceil(min / grossAlle)`), nicht
+   * auf Indexvielfachen — bei min 500 also auf 10.000, nicht auf 10.500.
+   */
   const grossAlle = major * schritt;
   const erstesGross = Math.ceil(min / grossAlle) * grossAlle;
-  const schilder: { x: number; text: string; sichtbar: boolean }[] = [];
-  for (let v = erstesGross; v <= max; v += grossAlle) {
-    const sx = ((v - min) / schritt) * px;
-    // Das Schild unter der Nadel blendet aus, damit es den Wert nicht doppelt (FL Lineal:76).
-    schilder.push({ x: sx, text: fmtDe(v, dez), sichtbar: Math.abs(sx - x) >= 22 });
-  }
+  const benannt = new Map(marken.filter((m) => m.wert >= min && m.wert <= max).map((m) => [m.wert, m.label]));
+  const punkte = new Map<number, string>();
+  // Gibt es benannte Stellen („5 Jahre“), tragen SIE die Reihe allein. Zahlen daneben
+  // wären dieselbe Auskunft in schwächerer Form — und bei Schritt 6 auf 120 Monaten
+  // stünden zehn Zahlen zwischen drei Namen.
+  if (benannt.size === 0) for (let v = erstesGross; v <= max; v += grossAlle) punkte.set(v, fmtDe(v, dez));
+  for (const [v, label] of benannt) punkte.set(v, label);
+  const skala = [...punkte.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([v, text]) => {
+      const sx = ((v - min) / schritt) * px;
+      return {
+        wert: v, x: sx, text, benannt: benannt.has(v),
+        // Die Zahl direkt unter der Nadel blendet aus, damit sie den Wert nicht doppelt.
+        sichtbar: Math.abs(sx - x) >= 24,
+      };
+    });
   const mittelAlle = mittel ? mittel * schritt : 0;
   const erstesMittel = mittelAlle ? Math.ceil(min / mittelAlle) * mittelAlle : 0;
 
@@ -181,22 +202,6 @@ export default function Lineal({
             className="kb-lineal__spur"
             style={{ width: spurBreite, "--kb-x": `${x}px` } as React.CSSProperties}
           >
-            {marken.map((m) => {
-              const aktiv = Math.abs(m.wert - wert) < schritt / 2;
-              return (
-                <button
-                  key={m.wert}
-                  type="button"
-                  className={"kb-lineal__marke" + (aktiv ? " kb-lineal__marke--aktiv" : "")}
-                  style={{ left: ((m.wert - min) / schritt) * px }}
-                  onPointerDown={stopp}
-                  onClick={() => { setzen(m.wert); setHinweisAn(false); }}
-                >
-                  <span>{m.label}</span>
-                  <i aria-hidden="true" />
-                </button>
-              );
-            })}
             <i className="kb-lineal__grundlinie" aria-hidden="true" />
             <i
               className="kb-lineal__striche"
@@ -209,15 +214,20 @@ export default function Lineal({
                 "--kb-mittel-x": mittelAlle ? `${((erstesMittel - min) / schritt) * px}px` : "0px",
               } as React.CSSProperties}
             />
-            {schilder.map((s) => (
-              <span
-                key={s.x}
-                className="kb-lineal__schild"
-                style={{ left: s.x, opacity: s.sichtbar ? 1 : 0 }}
-                aria-hidden="true"
+            {skala.map((m) => (
+              <button
+                key={m.wert}
+                type="button"
+                className="kb-lineal__marke"
+                data-benannt={m.benannt ? "an" : "aus"}
+                style={{ left: m.x, opacity: m.sichtbar ? 1 : 0 }}
+                tabIndex={-1}
+                aria-hidden={!m.sichtbar}
+                onPointerDown={stopp}
+                onClick={() => { setzen(m.wert); setHinweisAn(false); }}
               >
-                {s.text}
-              </span>
+                {m.text}
+              </button>
             ))}
           </div>
         </div>

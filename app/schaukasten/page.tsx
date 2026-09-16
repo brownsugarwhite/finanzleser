@@ -33,7 +33,8 @@ import ListenKarte from "@/components/faden/karten/ListenKarte";
 import KassensturzTeaser from "@/components/faden/kassensturz/KassensturzTeaser";
 import MeinBereich from "@/components/faden/karten/MeinBereich";
 import LeoFragt from "@/components/faden/leo/LeoFragt";
-import GamificationEmbed from "@/components/gamification/GamificationEmbed";
+import FadenSpiel from "@/components/faden/spiele/FadenSpiel";
+import Schlange from "@/components/faden/spiele/Schlange";
 import Finanzwort from "@/components/faden/spiele/Finanzwort";
 import SchaukastenModus from "@/components/faden/SchaukastenModus";
 import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
@@ -49,6 +50,7 @@ import PlusTeaser from "@/components/faden/landing/PlusTeaser";
 import WeiterredenChips from "@/components/faden/landing/WeiterredenChips";
 import VergleichKoerper from "@/components/vergleich/VergleichKoerper";
 import Setzkasten from "@/components/kursblatt/Setzkasten";
+import RechnerEmbed from "@/components/rechner/RechnerEmbed";
 import Statistik from "@/components/statistik/Statistik";
 import { HANDOFF_BEISPIELE } from "@/lib/statistik/handoffBeispiele";
 import { FORM_NAME, pruefeStatistik } from "@/lib/statistik/schema";
@@ -217,7 +219,7 @@ export default async function Schaukasten() {
         <p style={{ marginTop: "var(--luft-l)" }}>Der Zeitungskopf, wie er den Faden anführt:</p>
         <Zeitungskopf />
         <p style={{ marginTop: "var(--luft-l)" }}>
-          Wie ein Block auf dem Papier steht, zeigt Abschnitt „Die Blöcke der Startseite" —
+          Wie ein Block auf dem Papier steht, zeigt Abschnitt „Die Blöcke der Startseite“ —
           dort stehen die echten Bausteine, nicht nachgebaute.
         </p>
         <p style={{ marginTop: "var(--luft-l)" }}>Und die Ausnahme, wenn es wirklich ein Kärtchen sein soll:</p>
@@ -444,12 +446,23 @@ export default async function Schaukasten() {
           Antiqua, Linie, Hinweiszeile. Die Farbe folgt dem Werkzeug — Türkis im Vergleich,
           Magenta im Rechner. Die Zahl selbst bleibt immer Tinte.
         </p>
-        {/* 🚨 KEINE Insel: der Vertrag einer Insel ist Typ + Slug, und beim Aufklappen
+        {/* 🚨 Der Setzkasten braucht den `.kb`-Rahmen. Er trägt ihn nicht selbst — die
+            Entwurfsroute setzt ihn um ihn herum. Ohne ihn greift keine einzige
+            `.kb .kb-*`-Regel, und die fünf Bausteine stehen als nackter Text da.
+            🚨 Und KEINE Insel: der Vertrag einer Insel ist Typ + Slug, beim Aufklappen
             ersetzt InselnBeleben ihre Kinder durch die Komponente zu diesem Typ. Für den
-            Setzkasten gibt es keinen — `typ="rechner" arg="setzkasten"` hätte einen
-            Rechner dieses Namens gesucht und nichts gefunden. Hier steht er direkt; im
-            eingefrorenen Kapitel ist er dann ein Bild, und das genügt einer Schauseite. */}
-        <Setzkasten />
+            Setzkasten gibt es keinen. */}
+        <div className="kb kb--rechner">
+          <Setzkasten />
+        </div>
+
+        <h3 style={{ marginTop: "var(--luft-xxl)" }}>Ein ganzer Rechner</h3>
+        <p>
+          Derselbe <code>KursblattRechner</code>, den alle 56 Rechner benutzen — hier mit dem
+          Schema <code>brutto-netto</code>. Er rechnet: Werte ändern, „Ausrechnen“ drücken.
+          Die Felder kommen aus <code>lib/rechner/schemata/</code>, nicht aus dieser Seite.
+        </p>
+        <Insel typ="rechner" arg="brutto-netto"><RechnerEmbed slug="brutto-netto" /></Insel>
     </>) },
 
     { titel: "Vergleichsrechner", inhalt: (<>
@@ -458,31 +471,53 @@ export default async function Schaukasten() {
         <VergleichKoerper slug="private-haftpflichtversicherung-vergleich" skin="faden" />
     </>) },
     { titel: "Spiele", inhalt: (<>
-        <p>Jede Spielform mit echtem Inhalt, damit sich auch die Auflösung anschauen lässt.</p>
-        <div className="spiel-inline"><GamificationEmbed gamType="quiz" fields={{
+        <p className="vorspann">
+          Die schlichte Fassung des Fadens: <strong>kein Kasten, kein Rahmen, kein Schatten</strong> —
+          eine Kopfzeile mit Tintenlinie und der Inhalt darunter. Das alte Chassis mit Teal-Rahmen
+          und 38 px Innenabstand (<code>GamificationEmbed</code>) lebt nur noch auf der alten
+          Beitragsseite weiter; im Faden setzt <code>FadenSpiel</code>. „Schon gewusst“ und
+          „Karteikarte“ gibt es nicht mehr.
+        </p>
+        <Insel typ="spiel" werte={{ typ: "quiz", felder: {
           frage: "Welcher Block ist im Beispiel der zweitgrößte am Strompreis?",
           a: "Steuern und Abgaben", b: "Netzentgelte", c: "Messstellenbetrieb", d: "Konzessionsabgabe",
           richtig: "B",
           erklaerung: "Die Netzentgelte machen im Beispiel 31 Prozent aus — nach Beschaffung und Vertrieb mit 44 Prozent der zweitgrößte Posten.",
-        }} /></div>
-        <div className="spiel-inline"><GamificationEmbed gamType="mythos" fields={{
+        } }}>
+          <FadenSpiel typ="quiz" felder={{
+            frage: "Welcher Block ist im Beispiel der zweitgrößte am Strompreis?",
+            a: "Steuern und Abgaben", b: "Netzentgelte", c: "Messstellenbetrieb", d: "Konzessionsabgabe",
+            richtig: "B",
+            erklaerung: "Die Netzentgelte machen im Beispiel 31 Prozent aus — nach Beschaffung und Vertrieb mit 44 Prozent der zweitgrößte Posten.",
+          }} />
+        </Insel>
+
+        <Insel typ="spiel" werte={{ typ: "mythos", felder: {
           aussage: "Wer den Stromanbieter wechselt, sitzt beim Wechsel kurz im Dunkeln.",
           stimmt: "nein",
           aufloesung: "Die Versorgung läuft ununterbrochen weiter. Der Netzbetreiber bleibt derselbe, es wechselt nur, wer Ihnen die Kilowattstunde in Rechnung stellt.",
-        }} /></div>
-        <div className="spiel-inline"><GamificationEmbed gamType="schaetzen" fields={{
+        } }}>
+          <FadenSpiel typ="mythos" felder={{
+            aussage: "Wer den Stromanbieter wechselt, sitzt beim Wechsel kurz im Dunkeln.",
+            stimmt: "nein",
+            aufloesung: "Die Versorgung läuft ununterbrochen weiter. Der Netzbetreiber bleibt derselbe, es wechselt nur, wer Ihnen die Kilowattstunde in Rechnung stellt.",
+          }} />
+        </Insel>
+
+        <Insel typ="spiel" werte={{ typ: "schaetzen", felder: {
           frage: "Wie viele Kilowattstunden verbraucht ein Zwei-Personen-Haushalt im Jahr?",
           antwort: "2500", einheit: " kWh", min: "1000", max: "6000",
           aufloesung: "Rund 2.500 kWh sind der übliche Wert — mit elektrischer Warmwasserbereitung eher 3.500 kWh.",
-        }} /></div>
-        <div className="spiel-inline"><GamificationEmbed gamType="gewusst" fields={{
-          text: "Der Grundpreis fällt auch dann an, wenn Sie ein Jahr lang keine einzige Kilowattstunde verbrauchen. Bei einem Zweitwohnsitz ist er oft der größere Teil der Rechnung.",
-        }} /></div>
-        <div className="spiel-inline"><GamificationEmbed gamType="test" fields={{
-          frage: "Was steht auf Ihrer Jahresrechnung ganz oben?",
-          antwort: "Der Tarifname. Enthält er „Grundversorgung“, zahlen Sie fast immer zu viel.",
-        }} /></div>
-        <div style={{ marginTop: 18 }}>
+        } }}>
+          <FadenSpiel typ="schaetzen" felder={{
+            frage: "Wie viele Kilowattstunden verbraucht ein Zwei-Personen-Haushalt im Jahr?",
+            antwort: "2500", einheit: " kWh", min: "1000", max: "6000",
+            aufloesung: "Rund 2.500 kWh sind der übliche Wert — mit elektrischer Warmwasserbereitung eher 3.500 kWh.",
+          }} />
+        </Insel>
+
+        <h3 style={{ marginTop: "var(--luft-xl)" }}>Das Finanzwort</h3>
+        <Insel typ="finanzwort" arg="schaukasten-finanzwort">
           <Finanzwort
             slug="schaukasten-finanzwort"
             wort="TARIF"
@@ -496,6 +531,21 @@ export default async function Schaukasten() {
             punkte={10}
             wappen="wortmeister"
           />
+        </Insel>
+
+        <h3 style={{ marginTop: "var(--luft-xl)" }}>Die Schlange</h3>
+        <p>
+          Die Belohnung am Artikelende. 🚨 Ihre Form ist aus einer Bildvorlage gemessen und
+          steht als Regelwerk in <code>lib/faden/schlange.ts</code> — das Feldmaß darf sich
+          ändern, die Schlangenform nicht.
+        </p>
+        <div className="spiel-satz spiel-satz--schlange">
+          <div className="spiel-satz__koerper">
+            <Insel typ="schlange"><Schlange /></Insel>
+          </div>
+          <div className="spiel-satz__rand">
+            <p className="spiel-satz__notiz">Steht am Ende eines Kapitels, wenn der Faden etwas zu feiern hat.</p>
+          </div>
         </div>
     </>) },
 
@@ -549,9 +599,20 @@ export default async function Schaukasten() {
         <p>
           Schriftgrade, Abstände, Radien, Schatten und Farben, gezählt über die fünfzehn
           Stylesheets des Fadens und des Kursblatts. Kein gepflegtes Verzeichnis — die Zahlen
-          kommen beim Bauen aus denselben Dateien, die die Seite lädt. Ein Wert, der nur ein-
-          oder zweimal vorkommt, ist ein Kandidat zum Zusammenlegen. Dieselbe Rechnung als
-          Befehl: <code>npm run wache:bericht</code>.
+          kommen beim Bauen aus denselben Dateien, die die Seite lädt. Dieselbe Rechnung als
+          Befehl: <code>npm run wache:bericht</code>; <code>npm run wache</code> schlägt an,
+          sobald ein Wert dazukommt.
+        </p>
+        <p>
+          <strong>Was hier stehen bleiben DARF.</strong> Nicht jede Zahl gehört auf eine Leiter.
+          Die Abstandsleiter regelt den <em>Satz</em> — was zwischen und in Textblöcken steht.
+          Die <em>Chrome</em> des Fadens (Kopf, Navigation, Megamenü-Blatt, Randspalten,
+          Eingabepille, klebende Leisten) ist Layout und trägt eigene Maße: dort stehen 155 der
+          verbliebenen Abstände, und zwar mit Absicht. Am 16.09.2026 waren sie kurzzeitig auf
+          der Leiter — danach saß die Eingabepille schief, und die Navigation lief ineinander.
+          Ebenso bleiben: das Schwarz in Maskenverläufen (eine Maske braucht Deckung, keine
+          Farbe), die sechs Autoren-Verläufe (Personenbilder), die Zustandsringe
+          (<code>0 0 0 Npx</code> ist keine Höhe) und die vier Verläufe der Siegelfolie.
         </p>
 
         <h3>Schriftgrade · {grade.length} verschiedene</h3>

@@ -101,7 +101,7 @@ export default function Zaehlwerk({
             const aktiv = Math.abs(v - wert) < schritt / 2;
             return (
               <button
-                key={v} type="button" className="kb-zaehlwerk__chip" data-aktiv={aktiv ? "an" : "aus"}
+                key={v} type="button" className="chip kb-zaehlwerk__chip" data-aktiv={aktiv ? "an" : "aus"}
                 onClick={() => setzen(v)}
               >
                 {v.toLocaleString("de-DE", { minimumFractionDigits: dez, maximumFractionDigits: dez })} {einheit}

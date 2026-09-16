@@ -17,14 +17,14 @@
 .vgl__chip--aktiv { background: var(--color-text-primary); color: var(--color-bg-page); border-color: var(--color-text-primary); }
 .vgl__chip--frei { color: var(--color-text-medium); }
 .vgl__frei { display: inline-flex; align-items: center; gap: var(--luft-s); }
-.vgl__eingabe { width: 120px; min-height: 36px; padding: var(--luft-s) var(--luft-s); border: 1px solid var(--color-border-default); border-radius: var(--radius-pille); font: 500 var(--grad-14) var(--font-body); background: transparent; color: inherit; }
-.vgl__eingabe:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+.vgl__eingabe { width: 120px; min-height: 36px; padding: var(--luft-s) var(--luft-s); border: var(--strich-haar) solid var(--color-border-default); border-radius: var(--radius-pille); font: 500 var(--grad-14) var(--font-body); background: transparent; color: inherit; }
+.vgl__eingabe:focus-visible { outline: var(--strich-stark) solid var(--color-brand); outline-offset: 2px; }
 .vgl__einheit { font-size: var(--grad-13); color: var(--color-text-medium); }
-.vgl__select { min-height: 36px; padding: var(--luft-s) var(--luft-xl) var(--luft-s) var(--luft-m); border: 1px solid var(--color-border-default); border-radius: var(--radius-pille); font: 500 var(--grad-14) var(--font-body); background: transparent; color: inherit; }
+.vgl__select { min-height: 36px; padding: var(--luft-s) var(--luft-xl) var(--luft-s) var(--luft-m); border: var(--strich-haar) solid var(--color-border-default); border-radius: var(--radius-pille); font: 500 var(--grad-14) var(--font-body); background: transparent; color: inherit; }
 .vgl__laedt { font-size: var(--grad-13); color: var(--color-text-medium); font-style: italic; }
 .vgl__fehler { margin: 0 0 var(--luft-m); font-size: var(--grad-13); color: var(--color-brand-secondary); }
 
-.vgl__filterzeile { display: flex; flex-wrap: wrap; align-items: center; gap: var(--luft-m) var(--luft-l); padding-bottom: var(--luft-m); border-bottom: 1px solid var(--color-text-primary); }
+.vgl__filterzeile { display: flex; flex-wrap: wrap; align-items: center; gap: var(--luft-m) var(--luft-l); padding-bottom: var(--luft-m); border-bottom: var(--strich-haar) solid var(--color-text-primary); }
 .vgl__schalter { display: flex; align-items: center; gap: var(--luft-s); border: 0; background: transparent; padding: 0; cursor: pointer; font: 500 var(--grad-14) var(--font-body); color: var(--color-text-primary); min-height: 44px; }
 .vgl__schalter-knopf { position: relative; width: 42px; height: 24px; border-radius: var(--radius-kante); background: var(--ink-20); transition: background .3s; flex: none; }
 .vgl__schalter-knopf i { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: var(--radius-kreis); background: var(--auflage); box-shadow: var(--schatten-auflage); transition: left .35s cubic-bezier(.34,1.56,.64,1); }
@@ -41,7 +41,7 @@
 .vgl__kopfzelle--mitte { text-align: center; }
 .vgl__kopfzelle--rechts { text-align: right; }
 .vgl__zeilen { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.vgl__zeile { display: grid; grid-template-columns: var(--vgl-spalten); gap: 0 var(--luft-m); align-items: center; padding: var(--luft-m) var(--luft-s); margin: 0 calc(-1 * var(--luft-s)); border-top: 1px solid var(--ink-12); transition: background .3s, padding-left .3s cubic-bezier(.2,.8,.2,1); animation: vgl-herz .6s cubic-bezier(.2,.8,.2,1) both; }
+.vgl__zeile { display: grid; grid-template-columns: var(--vgl-spalten); gap: 0 var(--luft-m); align-items: center; padding: var(--luft-m) var(--luft-s); margin: 0 calc(-1 * var(--luft-s)); border-top: var(--strich-haar) solid var(--ink-12); transition: background .3s, padding-left .3s cubic-bezier(.2,.8,.2,1); animation: vgl-herz .6s cubic-bezier(.2,.8,.2,1) both; }
 .vgl__zeile:hover { padding-left: var(--luft-m); }
 .vgl__zeile--best { background: var(--tuerkis-grund); }
 .vgl__tarif { display: flex; flex-direction: column; gap: var(--luft-xs); min-width: 0; }
@@ -73,7 +73,7 @@
 
 /* Anbieterliste (Klasse B) */
 .vgl__anbieter-liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.vgl__anbieter-zeile { display: grid; grid-template-columns: 110px minmax(0,1fr) auto auto; gap: 0 var(--luft-m); align-items: center; padding: var(--luft-m) var(--luft-s); margin: 0 calc(-1 * var(--luft-s)); border-top: 1px solid var(--ink-12); animation: vgl-herz .6s cubic-bezier(.2,.8,.2,1) both; }
+.vgl__anbieter-zeile { display: grid; grid-template-columns: 110px minmax(0,1fr) auto auto; gap: 0 var(--luft-m); align-items: center; padding: var(--luft-m) var(--luft-s); margin: 0 calc(-1 * var(--luft-s)); border-top: var(--strich-haar) solid var(--ink-12); animation: vgl-herz .6s cubic-bezier(.2,.8,.2,1) both; }
 .vgl__logo { display: flex; align-items: center; min-height: 28px; }
 .vgl__logo img { max-width: 100px; height: auto; }
 .vgl__logo b { font: 700 var(--grad-14) var(--font-heading); }
@@ -84,10 +84,10 @@
 .vgl__mehr:hover { text-decoration: underline; }
 .vgl__leer { margin: var(--luft-m) 0; font-size: var(--grad-14); color: var(--color-text-medium); }
 .vgl__hinweis { margin: var(--luft-m) 0 0; font: 400 var(--grad-13)/1.5 var(--font-body); color: var(--color-text-medium); }
-.vgl__fuss { display: flex; flex-wrap: wrap; align-items: center; gap: var(--luft-s) var(--luft-l); margin-top: var(--luft-l); padding-top: var(--luft-m); border-top: 1px solid var(--ink-16); }
+.vgl__fuss { display: flex; flex-wrap: wrap; align-items: center; gap: var(--luft-s) var(--luft-l); margin-top: var(--luft-l); padding-top: var(--luft-m); border-top: var(--strich-haar) solid var(--ink-16); }
 .vgl__meta { font: italic 300 var(--grad-13) var(--font-heading); color: var(--color-text-medium); }
 .vgl__quelle { margin-left: auto; font: 400 var(--grad-12) var(--font-body); color: var(--color-text-medium); }
-.vgl__wartend { padding: var(--luft-l); border: 1px dashed var(--color-border-default); border-radius: var(--radius-kante); font-size: var(--grad-14); color: var(--color-text-medium); }
+.vgl__wartend { padding: var(--luft-l); border: var(--strich-haar) dashed var(--color-border-default); border-radius: var(--radius-kante); font-size: var(--grad-14); color: var(--color-text-medium); }
 .vgl__wartend p { margin: 0; }
 .vgl__saeulen { margin: 0 0 var(--luft-l); }
 
@@ -112,7 +112,7 @@
 @media (prefers-reduced-motion: reduce) { .vgl__zeile, .vgl__anbieter-zeile, .vgl__stempel { animation: none; } .vgl__balken i, .vgl__schalter-knopf i { transition: none; } }
 
 /* ── Skin der alten Seite: Chips wie die Pillen der Rechner, Ergebniszahl in Zweitmarke ── */
-.vgl--alt .vgl__chip { display: inline-flex; align-items: center; min-height: 36px; padding: var(--luft-s) var(--luft-m); border: 1px solid var(--color-border-default); border-radius: var(--radius-pille); background: transparent; font: 500 var(--grad-14) var(--font-body); color: var(--color-text-primary); transition: border-color .2s, background .2s; }
+.vgl--alt .vgl__chip { display: inline-flex; align-items: center; min-height: 36px; padding: var(--luft-s) var(--luft-m); border: var(--strich-haar) solid var(--color-border-default); border-radius: var(--radius-pille); background: transparent; font: 500 var(--grad-14) var(--font-body); color: var(--color-text-primary); transition: border-color .2s, background .2s; }
 .vgl--alt .vgl__chip:hover { border-color: var(--color-text-primary); }
 .vgl--alt .vgl__chip--aktiv { background: var(--color-text-primary); color: var(--auf-tinte); border-color: var(--color-text-primary); }
 .vgl--alt .vgl__zahl { color: var(--color-brand-secondary); }
@@ -122,7 +122,7 @@
 /* Redaktionstext und Leo-Fragen auf der Vergleichsseite */
 .vgl-redaktion { margin: 0 0 var(--luft-l); }
 .vgl-fragen { margin-top: var(--luft-xl); }
-.vgl-fragen--alt .vgl-frage { border-top: 1px solid var(--ink-16); padding: var(--luft-m) 0; }
+.vgl-fragen--alt .vgl-frage { border-top: var(--strich-haar) solid var(--ink-16); padding: var(--luft-m) 0; }
 .vgl-fragen--alt .vgl-frage summary { cursor: pointer; font: 600 var(--grad-16) var(--font-heading); color: var(--color-text-primary); }
 .vgl-fragen--alt .vgl-frage .prose { margin-top: var(--luft-s); }
 

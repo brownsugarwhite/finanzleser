@@ -74,9 +74,11 @@
 /* Nur der Tabellenkopf. Grauer Grund, weiße Versalien, etwas engere Laufweite —
    auf einer Fläche braucht die Versalienschrift weniger Luft als auf Papier.
    Handoff Runde 2, Punkt 5. */
+/* 🚨 Tinte, nicht Grau. Ein grauer Kopf über einer Tabelle in Tinte-Schrift liest sich
+   wie eine zweite, schwächere Stimme; der Kopf ist aber die stärkste Zeile der Tabelle. */
 .kopf--band {
-  background: var(--muted); color: var(--auf-tinte);
-  padding: var(--luft-s) var(--luft-s);
+  background: var(--ink); color: var(--auf-tinte);
+  padding: var(--luft-xs) var(--luft-s);
   font: var(--schrift-kicker); letter-spacing: var(--laufweite-band);
   text-transform: uppercase;
 }
@@ -87,10 +89,12 @@
 .kopf--frei { display: grid; gap: var(--luft-xs); }
 
 /* ── Die Doppellinie ───────────────────────────────────────────────────────────────── */
-/* 2 px, 2 px Luft, 1 px — als ein Schatten, damit sie an einem einzigen Element hängt.
+/* 2 px Linie, 2 px Luft, 1 px Linie — als EIN Verlauf auf einem 5-px-Element.
+   🚨 Nicht als `border-top` plus Schatten: der Faden hatte die Klasse `.doppellinie`
+   schon (faden.css, als Verlauf), und eine zweite Definition unter demselben Namen
+   legte sich am 16.09.2026 darüber statt sie zu ersetzen — Rahmen UND Verlauf UND
+   Schatten, also eine deutlich schwerere Linie als vorher.
    Vier Verwendungen, mehr nicht: Kopf des Fadens, Kiosk, Tabellenkopf, Kennzahlen. */
-.doppellinie {
-  border-top: var(--strich-stark) solid var(--ink);
-  box-shadow: var(--doppellinie-schatten);
-}
-.doppellinie--grau { border-top-color: var(--muted); box-shadow: var(--doppellinie-muted); }
+.doppellinie { display: block; height: 5px; background: var(--doppellinie); border: 0; }
+.doppellinie--grau { background: var(--doppellinie-grau); }
+.doppellinie--gedreht { transform: scaleY(-1); }

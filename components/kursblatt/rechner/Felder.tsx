@@ -14,6 +14,13 @@ import Register from "@/components/kursblatt/eingabe/Register";
 import { Schalter } from "@/components/kursblatt/teile/Kleinteile";
 import type { Feld, Werte } from "@/lib/rechner/schema";
 
+/**
+ * Der Kopf eines Feldes: Bezeichnung als Kicker links, Bereich oder Hinweis rechts.
+ *
+ * 🚨 Seit dem 16.09.2026 (Handoff Runde 2, Punkt 2) tragen ihn ALLE fünf Bausteine in
+ * derselben Anatomie. Setzzeile und Register bringen ihn selbst mit, weil ihr Zustand
+ * die Farbe des Kickers ändert; Lineal, Drehring und Zählwerk bekommen ihn von hier.
+ */
 function Kopf({ f }: { f: Feld }) {
   return (
     <div className="kb__feldkopf">
@@ -67,7 +74,7 @@ function EinFeld({ f, werte, setzen }: { f: Feld; werte: Werte; setzen: (k: stri
     case "setzzeile":
       return (
         <Setzzeile
-          label={f.label} wert={zahl} onWert={(v) => setzen(f.key, v)}
+          label={f.label} bereich={f.bereich} wert={zahl} onWert={(v) => setzen(f.key, v)}
           einheit={f.einheit} min={f.min ?? 0} max={f.max ?? 1e9} schritt={f.schritt ?? 1} dez={f.dez}
           platzhalter={f.platzhalter} vorschlaege={f.vorschlaege} vorschlaegeImmer={f.vorschlaegeImmer}
           stepper={f.stepper} hinweis={f.hinweis} werkzeug="magenta"
@@ -76,7 +83,7 @@ function EinFeld({ f, werte, setzen }: { f: Feld; werte: Werte; setzen: (k: stri
     case "register":
       return (
         <Register
-          label={f.label} wert={String(werte[f.key] ?? "")} onWert={(v) => setzen(f.key, v)}
+          label={f.label} bereich={f.bereich} wert={String(werte[f.key] ?? "")} onWert={(v) => setzen(f.key, v)}
           optionen={f.optionen.map((o) => ({
             wert: String(o.wert),
             label: o.label,

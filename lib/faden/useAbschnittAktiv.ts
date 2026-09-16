@@ -76,6 +76,7 @@ let io: IntersectionObserver | null = null;
 let mo: MutationObserver | null = null;
 let nutzer = 0;
 let geplant = 0;
+let nachfassen: number[] = [];
 const hoerer = new Set<() => void>();
 
 function melden() { hoerer.forEach((h) => h()); }
@@ -135,8 +136,16 @@ function pruefen() {
 function aktivesKapitelElement(): HTMLElement | null {
   const strom = document.getElementById("strom");
   if (!strom) return null;
-  if (pin === "skelett") return null;
-  if (pin) { const g = document.getElementById(pin); if (g) return g; }
+  // 🚨 Der Pin gilt nur, solange das, worauf er zeigt, auch dasteht. „skelett" heißt
+  //    „es wird gerade geladen, noch kein Kapitel aktiv" — steht aber gar kein Skelett
+  //    mehr im Strom, ist der Pin übrig geblieben, und die linke Randspalte zeigte
+  //    dauerhaft „Noch kein Kapitel", obwohl ein Kapitel mit allen Abschnitten dastand.
+  //    Gemessen am 16.09.2026 auf /schaukasten: 22 Abschnitte im DOM, 0 im Verzeichnis.
+  if (pin === "skelett") {
+    if (strom.querySelector(".kapitel--skelett")) return null;
+    pin = null;
+  }
+  if (pin) { const g = document.getElementById(pin); if (g) return g; pin = null; }
   const kante = kopfHoehe() + 100;
   let treffer: HTMLElement | null = null;
   strom.querySelectorAll<HTMLElement>(".kapitel").forEach((k) => {
@@ -165,14 +174,42 @@ export function useAbschnittAktiv(): AbschnittStand {
   useEffect(() => {
     nutzer += 1;
     if (nutzer === 1) {
-      const strom = document.getElementById("strom");
-      if (strom) { mo = new MutationObserver(anstossen); mo.observe(strom, { childList: true, subtree: true }); }
+      /**
+       * 🚨 Den KÖRPER beobachten, nicht `#strom`. Der Strom entsteht erst mit der
+       * RSC-Antwort; auf einer groß strömenden Seite steht er beim Einhängen noch gar
+       * nicht im Baum. Die alte Fassung legte den Beobachter nur an, WENN `#strom` schon
+       * da war — sonst nie, und danach stieß nichts mehr an.
+       *
+       * Gemessen am 16.09.2026 auf /schaukasten: 22 Abschnitte im DOM, das Verzeichnis
+       * links dauerhaft leer („Noch kein Kapitel"), obwohl das Kapitel offen dastand.
+       * Auf dem kleineren /schaukasten/ratgeber trat es nicht auf — dort war der Strom
+       * rechtzeitig da. Das kostet ein paar Anstöße mehr; `anstossen` bündelt sie
+       * ohnehin auf einen Frame.
+       */
+      mo = new MutationObserver(anstossen);
+      mo.observe(document.body, { childList: true, subtree: true });
       window.addEventListener("scroll", anstossen, { passive: true });
       pruefen();
+      /**
+       * 🚨 Nachfassen. Beim ersten Lauf steht das Kapitel oft erst halb im Baum: der
+       * Knoten `#kapitel-live` ist da, seine Abschnitte noch nicht. `pruefen` schreibt
+       * dann ein leeres Verzeichnis in die Signatur — und weil danach nichts mehr die
+       * Signatur ändert, blieb es leer.
+       *
+       * Gemessen am 16.09.2026 auf /schaukasten: 22 Abschnitte im DOM, 0 im Verzeichnis,
+       * `aktivesKapitel` korrekt auf „kapitel-live", `vorhanden` trotzdem false. Scrollen
+       * half nicht, der MutationObserver auch nicht — beide stoßen nur an, und angestoßen
+       * wurde schon.
+       *
+       * Drei Nachfassversuche in der ersten Sekunde kosten nichts und schließen die
+       * Lücke zwischen Hydration und fertig geströmtem Kapitel.
+       */
+      nachfassen = [0, 120, 600].map((ms) => window.setTimeout(() => { signatur = ""; pruefen(); }, ms));
     }
     return () => {
       nutzer -= 1;
       if (nutzer) return;
+      nachfassen.forEach(clearTimeout); nachfassen = [];
       window.removeEventListener("scroll", anstossen);
       mo?.disconnect(); mo = null;
       io?.disconnect(); io = null;
