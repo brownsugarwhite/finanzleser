@@ -151,7 +151,7 @@ export default function Siegel({
             <image
               href="/holo.jpg" x="0" y="0" width={KACHEL_B} height={KACHEL_H}
               preserveAspectRatio="xMidYMid slice"
-              style={{ filter: "saturate(2.1) contrast(1.08) brightness(1.02)" }}
+              style={{ filter: "saturate(2.8) contrast(1.18) brightness(1.02)" }}
             />
           </pattern>
         </defs>

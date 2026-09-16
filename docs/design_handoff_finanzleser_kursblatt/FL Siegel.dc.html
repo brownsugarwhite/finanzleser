@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@keyframes fl-schimmer{0%{transform:translateX(-160%) skewX(-22deg)}100%{transform:translateX(300%) skewX(-22deg)}}
+@keyframes fl-schimmer2{0%{transform:translateX(-160%) skewX(-22deg)}100%{transform:translateX(300%) skewX(-22deg)}}
+</style>
+</helmet>
+<div ref="{{setEl}}" style="position:relative;width:{{w}}px;height:{{h}}px;transform:rotate({{rot}});filter:drop-shadow(0 1px 0 rgba(51,74,39,.28))">
+  <svg viewBox="{{viewBox}}" width="{{w}}" height="{{h}}" style="position:absolute;left:0;top:0;display:block;overflow:visible">
+    <defs>
+      <linearGradient id="{{gid}}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#06D496"></stop><stop offset=".48" stop-color="#CDF8EA"></stop><stop offset="1" stop-color="#2FC39C"></stop></linearGradient>
+      <linearGradient id="{{sid}}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"></stop><stop offset=".5" stop-color="#fff" stop-opacity=".95"></stop><stop offset="1" stop-color="#fff" stop-opacity="0"></stop></linearGradient>
+      <mask id="{{mid}}"><rect width="{{w}}" height="{{h}}" fill="#fff"></rect><sc-for list="{{loecher}}" as="l" hint-placeholder-count="0"><circle cx="{{l.x}}" cy="{{l.y}}" r="{{r}}" fill="#000"></circle></sc-for></mask>
+    </defs>
+    <g mask="url(#{{mid}})">
+      <rect width="{{w}}" height="{{h}}" fill="url(#{{gid}})"></rect>
+      <rect x="0" y="-4" width="{{shW}}" height="{{shH}}" fill="url(#{{sid}})" style="transform-box:fill-box;transform:translateX(-160%) skewX(-22deg);animation:{{anim}}"></rect>
+    </g>
+    <rect x="{{innen}}" y="{{innen}}" width="{{innenW}}" height="{{innenH}}" fill="none" stroke="rgba(51,74,39,.45)" stroke-width=".8"></rect>
+  </svg>
+  <span style="position:absolute;left:0;right:0;top:0;bottom:0;display:flex;align-items:center;justify-content:center;font:{{font}};letter-spacing:.13em;text-transform:uppercase;color:#334A27;white-space:nowrap">{{text}}</span>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:160,&quot;height&quot;:80},&quot;text&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Bestwert&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;w&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:98,&quot;tsType&quot;:&quot;number&quot;},&quot;h&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:35,&quot;tsType&quot;:&quot;number&quot;},&quot;zahn&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:7,&quot;tsType&quot;:&quot;number&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:11,&quot;tsType&quot;:&quot;number&quot;},&quot;rot&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;-8deg&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { n: 0 };
+  uid = 'sg' + Math.random().toString(36).slice(2, 8);
+  setEl = el => { this.el = el; };
+  componentDidMount() {
+    this.last = -9999;
+    this.tick = () => { const now = performance.now(); if (now - this.last < 1800 || !this.el) return; const r = this.el.getBoundingClientRect(); if (r.bottom < 0 || r.top > window.innerHeight) return; this.last = now; this.setState(s => ({ n: s.n + 1 })); };
+    window.addEventListener('scroll', this.tick, { passive: true }); this.t0 = setTimeout(this.tick, 700);
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this.tick); clearTimeout(this.t0); }
+  renderVals() {
+    const w = this.props.w ?? 98, h = this.props.h ?? 35, s = this.props.zahn ?? 7, r = +(s * .3).toFixed(2);
+    const loecher = [];
+    for (let x = 0; x <= w + .01; x += s) { loecher.push({ x: +x.toFixed(1), y: 0 }); loecher.push({ x: +x.toFixed(1), y: h }); }
+    for (let y = s; y < h - .01; y += s) { loecher.push({ x: 0, y: +y.toFixed(1) }); loecher.push({ x: w, y: +y.toFixed(1) }); }
+    const innen = +(s * .55).toFixed(1);
+    return {
+      setEl: this.setEl, w, h, r, loecher, viewBox: `0 0 ${w} ${h}`, gid: this.uid + 'g', mid: this.uid + 'm', sid: this.uid + 's',
+      shW: Math.round(w * .42), shH: h + 8, innen, innenW: +(w - 2 * innen).toFixed(1), innenH: +(h - 2 * innen).toFixed(1),
+      text: this.props.text ?? 'Bestwert', rot: this.props.rot ?? '-8deg', font: `700 ${this.props.size ?? 10}px 'Open Sans',sans-serif`,
+      anim: this.state.n ? `fl-schimmer${this.state.n % 2 ? '' : '2'} 1.5s cubic-bezier(.45,0,.2,1) both` : 'none',
+    };
+  }
+}
+</script>
+</body>
+</html>

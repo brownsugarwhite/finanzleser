@@ -8,7 +8,7 @@
  *
  * Voraussetzungen:
  *   1. Der Handoff-Server läuft:
- *        cd "design_handoff_finanzleser_kursblatt 3" && python3 -m http.server 8901
+ *        cd docs/design_handoff_finanzleser_kursblatt && python3 -m http.server 8901
  *   2. Der Dev-Server läuft auf 3000.
  *
  * Aufruf:  node tools/vorlage-vergleich.mjs [name ...]

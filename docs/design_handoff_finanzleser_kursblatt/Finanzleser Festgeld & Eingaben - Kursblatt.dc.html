@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#faf9f6;color:#334A27;font-family:'Open Sans',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#2E7A0B}a:hover{color:#334A27}
+input,button{font:inherit;color:inherit}
+@keyframes fl-herz{0%{opacity:0;transform:translateY(14px) scale(.985)}55%{opacity:1;transform:translateY(-2px) scale(1.008)}78%{transform:translateY(1px) scale(.999)}100%{opacity:1;transform:none}}
+@keyframes fl-herz2{0%{opacity:0;transform:translateY(14px) scale(.985)}55%{opacity:1;transform:translateY(-2px) scale(1.008)}78%{transform:translateY(1px) scale(.999)}100%{opacity:1;transform:none}}
+@keyframes fl-linie{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes fl-mitte{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes fl-mitte2{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes fl-spalte{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes fl-spalte2{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes fl-puls{0%,100%{transform:translate(-50%,-50%) scale(1);box-shadow:0 0 0 0 rgba(11,127,102,.45)}14%{transform:translate(-50%,-50%) scale(1.2)}28%{transform:translate(-50%,-50%) scale(1)}42%{transform:translate(-50%,-50%) scale(1.12)}64%{transform:translate(-50%,-50%) scale(1);box-shadow:0 0 0 12px rgba(11,127,102,0)}}
+@keyframes fl-punkt{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(69,161,23,.5)}14%{transform:scale(1.2)}28%{transform:scale(1)}42%{transform:scale(1.12)}64%{transform:scale(1);box-shadow:0 0 0 8px rgba(69,161,23,0)}}
+@keyframes fl-stempel{0%{transform:scale(1.7) rotate(-22deg);opacity:0}60%{transform:scale(.94) rotate(-8deg);opacity:1}100%{transform:scale(1) rotate(-11deg);opacity:1}}
+@keyframes fl-stempel2{0%{transform:scale(1.7) rotate(-22deg);opacity:0}60%{transform:scale(.94) rotate(-8deg);opacity:1}100%{transform:scale(1) rotate(-11deg);opacity:1}}
+@keyframes fl-zeichnen{to{stroke-dashoffset:0}}
+@keyframes fl-zeichnen2{to{stroke-dashoffset:0}}
+@keyframes fl-druck{0%{opacity:0;transform:translateY(7px);letter-spacing:.06em;filter:blur(.6px)}60%{opacity:1;letter-spacing:.01em;filter:blur(0)}100%{opacity:1;transform:none;letter-spacing:normal}}
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div ref="{{setRoot}}" data-screen-label="Kursblatt Festgeld" style="max-width:728px;margin:0 auto;padding:26px clamp(14px,3vw,24px) 140px;font-family:'Open Sans',sans-serif;color:#334A27;box-sizing:border-box">
+
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px 16px;flex-wrap:wrap;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A">
+    <span>Finanztools · Vergleiche · Sparen</span>
+    <span>15. September 2026 · Kursblatt</span>
+  </div>
+  <div style="height:2px;background:#334A27;margin-top:8px;transform-origin:center;animation:fl-mitte .9s cubic-bezier(.2,.8,.2,1) both"></div>
+  <div style="height:1px;background:#334A27;margin-top:2px;transform-origin:center;animation:fl-mitte .9s cubic-bezier(.2,.8,.2,1) .12s both"></div>
+  <div style="display:flex;gap:26px;margin-top:8px;flex-wrap:wrap">
+    <a href="Finanzleser%20Vergleich%20%26%20Rechner%20-%20Kursblatt.dc.html" style="padding:10px 0;font:600 14px 'Merriweather',Georgia,serif;color:#686C6A;text-decoration:none">Seite 1–2 · Autokredit &amp; Rechner</a>
+    <button onClick="{{zuVgl}}" style="position:relative;border:0;background:transparent;padding:10px 0;font:600 14px 'Merriweather',Georgia,serif;color:{{seite1Farbe}};cursor:pointer;transition:color .25s"><span>Seite 3 · Festgeld</span><i style="position:absolute;left:0;bottom:4px;height:2px;width:100%;background:#45A117;transform:{{seite1Linie}};transform-origin:left;transition:transform .4s cubic-bezier(.2,.8,.2,1)"></i></button>
+    <button onClick="{{zuBau}}" style="position:relative;border:0;background:transparent;padding:10px 0;font:600 14px 'Merriweather',Georgia,serif;color:{{seite2Farbe}};cursor:pointer;transition:color .25s"><span>Seite 4 · Eingabe-Bausteine</span><i style="position:absolute;left:0;bottom:4px;height:2px;width:100%;background:#45A117;transform:{{seite2Linie}};transform-origin:left;transition:transform .4s cubic-bezier(.2,.8,.2,1)"></i></button>
+  </div>
+
+  <!-- ═══════════ SEITE 3 · FESTGELD ═══════════ -->
+  <section ref="{{setVglRef}}" data-screen-label="Festgeld" style="padding-top:36px">
+    <span style="font:italic 400 clamp(16px,2.4vw,19px) 'Merriweather',Georgia,serif;color:#D3005E;animation:fl-druck .6s both">Anzeige · Vergleich mit Partnerlinks</span>
+    <h1 style="margin:6px 0 14px;font:900 clamp(38px,8vw,60px)/1.02 'Merriweather',Georgia,serif;letter-spacing:-.02em;animation:fl-druck .7s .1s both">Festgeld</h1>
+    <p style="margin:0;font:italic 300 clamp(16px,2.4vw,19px)/1.5 'Merriweather',Georgia,serif;text-wrap:pretty;animation:fl-herz .8s .2s both"><b style="font-weight:700;color:#0B7F66;font-style:normal">{{anzahl}} Angebote</b> im Vergleich, bis zu <b style="font-weight:700;color:#0B7F66;font-style:normal">{{bestZinsText}}</b> Zinsen für {{dauerText}}, Stand 15.09.2026. Legen Sie Ihr Geld für eine feste Zeit an und sichern Sie sich den Zins von heute – planbar, mit gesetzlicher Einlagensicherung.</p>
+
+    <!-- Ihre Angaben -->
+    <div style="margin-top:36px;padding-top:16px;border-top:2px solid #0B7F66;animation:fl-herz .8s .3s both">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:8px;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#2E7A0B"><i style="width:8px;height:8px;border-radius:50%;background:#0B7F66"></i>Ihre Angaben</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font:italic 300 12.5px 'Merriweather',Georgia,serif;color:#686C6A"><i style="width:7px;height:7px;border-radius:50%;background:#45A117;animation:fl-punkt 1.8s infinite"></i>Ergebnis folgt sofort</span>
+      </div>
+      <div style="display:grid;grid-template-columns:{{eingabeCols}};gap:22px 40px;margin-top:22px;align-items:start">
+        <dc-import name="FL Setzzeile" label="Anlagebetrag" bereich="500 – 500.000 €" wert="{{betrag}}" on-change="{{setBetrag}}" einheit="€" min="{{K.bMin}}" max="{{K.bMax}}" step="{{K.bStep}}" vorschlag="z. B. 20.000" vorschlaege="{{K.bVor}}" hinweis="tippen, ‹ › oder Pfeiltasten" farbe="#0B7F66" hint-size="100%,84px"></dc-import>
+        <dc-import name="FL Register" label="Anlagedauer" wert="{{dauer}}" on-change="{{setDauer}}" optionen="{{dauerOptionen}}" farbe="#0B7F66" hint-size="100%,96px"></dc-import>
+        <dc-import name="FL Register" label="Einlagensicherung" wert="{{sicherung}}" on-change="{{setSicherung}}" optionen="{{sicherungOptionen}}" farbe="#0B7F66" hint-size="100%,96px"></dc-import>
+      </div>
+    </div>
+
+    <!-- Marktüberblick · Zinskurve -->
+    <div style="margin-top:40px;animation:fl-herz .8s .4s both">
+      <span style="font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A">Marktüberblick</span>
+      <h3 style="margin:6px 0 4px;font:700 clamp(19px,2.8vw,23px)/1.25 'Merriweather',Georgia,serif;text-wrap:balance">Lohnt sich länger binden? Der beste Zins je Laufzeit.</h3>
+      <p style="margin:0;font:italic 300 13.5px/1.5 'Merriweather',Georgia,serif;color:#686C6A;text-wrap:pretty">Die türkise Linie zeigt den jeweils besten Zins, die graue den Durchschnitt aller Angebote. Ihre Laufzeit ist markiert – einen anderen Punkt antippen, um zu wechseln.</p>
+      <div style="position:relative;margin-top:16px">
+        <svg viewBox="0 0 640 210" width="100%" style="display:block;overflow:visible">
+          <line x1="30" y1="190" x2="610" y2="190" stroke="#334A27" stroke-width="1"></line>
+          <sc-for list="{{kurveGitter}}" as="g" hint-placeholder-count="0"><line x1="30" y1="{{g.y}}" x2="610" y2="{{g.y}}" stroke="rgba(51,74,39,.12)" stroke-width="1"></line></sc-for>
+          <path d="{{kurveAvg}}" fill="none" stroke="#686C6A" stroke-width="1.2" stroke-dasharray="4 4" style="transition:d .6s"></path>
+          <path d="{{kurveBest}}" fill="none" stroke="#0B7F66" stroke-width="2" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="animation:{{kurveAnim}}"></path>
+          <sc-for list="{{kurvePunkte}}" as="p" hint-placeholder-count="0"><line x1="{{p.x}}" y1="{{p.y}}" x2="{{p.x}}" y2="190" stroke="rgba(11,127,102,.35)" stroke-width="1" stroke-dasharray="2 3" style="opacity:{{p.stielOp}};transition:opacity .3s"></line></sc-for>
+        </svg>
+        <sc-for list="{{kurveGitter}}" as="g" hint-placeholder-count="0"><span style="position:absolute;left:0;top:{{g.top}};transform:translateY(-100%);font:500 10px 'Open Sans',sans-serif;color:#686C6A;pointer-events:none">{{g.t}}</span></sc-for>
+        <sc-for list="{{kurvePunkte}}" as="p" hint-placeholder-count="0">
+          <button onClick="{{p.klick}}" onMouseEnter="{{p.rein}}" onMouseLeave="{{p.raus}}" aria-label="{{p.aria}}" style="position:absolute;left:{{p.left}};top:{{p.top}};width:{{p.size}}px;height:{{p.size}}px;transform:translate(-50%,-50%);border-radius:50%;background:{{p.bg}};border:{{p.border}};box-sizing:border-box;padding:0;cursor:pointer;transition:left .5s,top .5s cubic-bezier(.2,.8,.2,1),width .25s,height .25s,background .25s;animation:{{p.anim}}"></button>
+          <span style="position:absolute;left:{{p.left}};top:{{p.labelTop}};transform:translate(-50%,-100%);font:{{p.labelFont}};color:{{p.labelFarbe}};white-space:nowrap;pointer-events:none;transition:top .5s cubic-bezier(.2,.8,.2,1),color .3s;font-variant-numeric:tabular-nums">{{p.label}}</span>
+          <span style="position:absolute;left:{{p.left}};bottom:-2px;transform:translateX(-50%);font:{{p.achseFont}};color:{{p.achseFarbe}};white-space:nowrap;pointer-events:none">{{p.achse}}</span>
+        </sc-for>
+      </div>
+      <!-- Ertrag -->
+      <div style="margin-top:26px;border-top:2px solid #334A27;box-shadow:0 3px 0 -2px #334A27;padding-top:3px">
+        <div style="display:grid;grid-template-columns:{{kennCols}};border-bottom:1px solid #334A27">
+          <div style="padding:14px 18px 14px 0"><span style="display:block;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A">Zinsertrag Bestwert</span><b style="display:block;margin-top:8px;font:900 28px/1 'Merriweather',Georgia,serif;font-variant-numeric:tabular-nums;color:#0B7F66;white-space:nowrap">+ {{zBest}}</b><span style="display:block;margin-top:7px;font:italic 300 12px/1.4 'Merriweather',Georgia,serif;color:#686C6A">nach {{dauerText}}, vor Steuern</span></div>
+          <div style="padding:14px 18px;border-left:{{kennRand}};border-top:{{kennOben}}"><span style="display:block;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A">Ø aller Angebote</span><b style="display:block;margin-top:8px;font:900 28px/1 'Merriweather',Georgia,serif;font-variant-numeric:tabular-nums;color:#686C6A;white-space:nowrap">+ {{zAvg}}</b><span style="display:block;margin-top:7px;font:italic 300 12px/1.4 'Merriweather',Georgia,serif;color:#686C6A">Bestwert bringt {{zDiff}} mehr</span></div>
+          <div style="padding:14px 0 14px 18px;border-left:{{kennRand}};border-top:{{kennOben}};grid-column:{{realSpalte}}"><span style="display:block;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A">Real nach Inflation</span><b style="display:block;margin-top:8px;font:900 28px/1 'Merriweather',Georgia,serif;font-variant-numeric:tabular-nums;color:{{realFarbe}};white-space:nowrap">{{zReal}}</b><span style="display:block;margin-top:7px;font:italic 300 12px/1.4 'Merriweather',Georgia,serif;color:#686C6A">bei 2,1 % p.a. – {{realText}}</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bestes Angebot -->
+    <div style="margin-top:44px;animation:fl-herz .8s .5s both">
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px"><i style="height:1px;background:rgba(51,74,39,.3);transform-origin:right;animation:fl-linie 1s both"></i><span style="font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A;text-align:center">Das beste Angebot für Ihre Angaben</span><i style="height:1px;background:rgba(51,74,39,.3);transform-origin:left;animation:fl-linie 1s both"></i></div>
+      <div onMouseEnter="{{w.rein}}" onMouseLeave="{{w.raus}}" style="position:relative;margin-top:28px;padding:clamp(20px,4vw,30px);display:{{w.display}}">
+        <i style="position:absolute;left:0;right:0;top:0;height:2px;background:#0B7F66;transform-origin:center;animation:{{rahmenAnimX}}"></i>
+        <i style="position:absolute;left:0;right:0;bottom:0;height:1px;background:#0B7F66;transform-origin:center;animation:{{rahmenAnimX}}"></i>
+        <i style="position:absolute;left:0;top:0;bottom:0;width:1px;background:#0B7F66;transform-origin:center;animation:{{rahmenAnimY}}"></i>
+        <i style="position:absolute;right:0;top:0;bottom:0;width:1px;background:#0B7F66;transform-origin:center;animation:{{rahmenAnimY}}"></i>
+        <div style="position:absolute;right:16px;top:-18px;z-index:2;animation:{{stempelAnim}}"><dc-import name="FL Siegel" text="Höchster Ertrag" w="{{S.gw}}" h="{{S.gh}}" size="{{S.gs}}" rot="0deg" hint-size="126px,35px"></dc-import></div>
+        <div style="display:grid;grid-template-columns:{{gewinnerCols}};gap:18px 32px;align-items:start">
+          <div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="position:relative;width:120px;height:42px;flex-shrink:0;border:1px solid rgba(51,74,39,.18);background:#fff;box-sizing:border-box;padding:4px"><image-slot id="{{w.logoIdGross}}" shape="rect" fit="contain" placeholder="Logo"></image-slot></div>
+              <div style="min-width:0"><b style="display:block;font:700 21px 'Merriweather',Georgia,serif">{{w.name}}</b><span style="font:italic 300 13.5px 'Merriweather',Georgia,serif;color:#686C6A">{{w.produkt}}</span></div>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:12px;margin-top:18px;flex-wrap:wrap"><span style="font:900 clamp(44px,8vw,60px)/1 'Merriweather',Georgia,serif;letter-spacing:-.02em;color:#0B7F66;font-variant-numeric:tabular-nums">{{w.zins}}</span><span style="font:italic 300 14px 'Merriweather',Georgia,serif;color:#686C6A">Zinsen p.a.</span></div>
+            <div style="display:flex;gap:6px 16px;flex-wrap:wrap;margin-top:14px">
+              <sc-for list="{{w.merkmale}}" as="m" hint-placeholder-count="0"><span style="display:inline-flex;align-items:center;gap:6px;font:500 13px 'Open Sans',sans-serif;color:#2E7A0B"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#45A117" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5l2.6 2.6L10 3.5"></path></svg>{{m}}</span></sc-for>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;align-items:baseline;gap:10px;padding:5px 0"><span style="font:400 14px 'Open Sans',sans-serif">Zinsertrag</span><i style="flex:1;border-bottom:1px dotted rgba(51,74,39,.4);transform:translateY(-4px)"></i><b style="font:700 19px 'Merriweather',Georgia,serif;font-variant-numeric:tabular-nums;color:#0B7F66">+ {{w.ertrag}}</b></div>
+            <div style="display:flex;align-items:baseline;gap:10px;padding:5px 0"><span style="font:400 14px 'Open Sans',sans-serif">Endbetrag</span><i style="flex:1;border-bottom:1px dotted rgba(51,74,39,.4);transform:translateY(-4px)"></i><b style="font:500 15px 'Open Sans',sans-serif;font-variant-numeric:tabular-nums">{{w.ende}}</b></div>
+            <div style="display:flex;align-items:baseline;gap:10px;padding:5px 0"><span style="font:400 14px 'Open Sans',sans-serif">Zinszahlung</span><i style="flex:1;border-bottom:1px dotted rgba(51,74,39,.4);transform:translateY(-4px)"></i><b style="font:500 15px 'Open Sans',sans-serif">{{w.zahlung}}</b></div>
+            <div style="display:flex;align-items:center;gap:14px 22px;flex-wrap:wrap;margin-top:18px">
+              <a href="#" onClick="{{noop}}" style="position:relative;display:inline-flex;align-items:center;height:48px;padding:3px 3px 3px 19px;border:2px solid #334A27;outline:1px solid #334A27;outline-offset:2px;border-radius:21px;text-decoration:none;color:{{w.ctaFarbe}};font:500 16px 'Open Sans',sans-serif;overflow:hidden;transition:color .3s;box-sizing:border-box">
+                <i style="position:absolute;top:{{w.ctaIn}};bottom:{{w.ctaIn}};right:{{w.ctaIn}};width:{{w.ctaFill}};border-radius:21px;background:#0B7F66;transition:all .45s cubic-bezier(.2,.8,.2,1)"></i>
+                <span style="position:relative;padding-right:16px">Zum Anbieter</span>
+                <span style="position:relative;width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M6 4h6v6"></path></svg></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alle Angebote -->
+    <div style="margin-top:48px;animation:fl-herz .8s .6s both">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px 16px;flex-wrap:wrap">
+        <b style="font:700 clamp(22px,3.4vw,26px) 'Merriweather',Georgia,serif;white-space:nowrap;flex-shrink:0">Alle {{anzahl}} Angebote</b>
+        <span style="font:italic 300 13px 'Merriweather',Georgia,serif;color:#686C6A">{{listeHinweis}}</span>
+      </div>
+      <div style="margin-top:14px;border-top:2px solid #334A27;box-shadow:0 3px 0 -2px #334A27;padding-top:4px"></div>
+      <div style="display:grid;grid-template-columns:{{cols}};gap:0 {{colGap}};align-items:center;padding:10px 10px;background:#686C6A;color:#fff;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase">
+        <span style="grid-column:span 2">Bank · Produkt</span><span style="text-align:right">Ertrag</span><span style="display:{{nebenDisplay}};text-align:right;white-space:nowrap">Zins p.a.</span><span style="display:{{nebenDisplay}}">Land</span><span></span>
+      </div>
+      <sc-for list="{{zeilen}}" as="z" hint-placeholder-count="4">
+        <div onMouseEnter="{{z.rein}}" onMouseLeave="{{z.raus}}" style="position:relative;border-bottom:1px solid rgba(51,74,39,.12);background:{{z.bg}};transition:background .35s;animation:{{z.anim}}">
+          <i style="position:absolute;left:0;right:0;top:-1px;height:1px;background:#334A27;transform:{{z.rahmen}};transform-origin:left;transition:transform .4s cubic-bezier(.2,.8,.2,1)"></i>
+          <i style="position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#334A27;transform:{{z.rahmen}};transform-origin:right;transition:transform .4s cubic-bezier(.2,.8,.2,1)"></i>
+          <div style="display:grid;grid-template-columns:{{cols}};gap:0 {{colGap}};align-items:center;padding:16px 10px">
+            <div style="position:relative;width:{{logoW}};height:34px;border:1px solid rgba(51,74,39,.18);background:#fff;box-sizing:border-box;padding:3px"><image-slot id="{{z.logoId}}" shape="rect" fit="contain" placeholder="Logo"></image-slot><div style="position:absolute;left:-6px;top:-19px;z-index:2;display:{{z.stempelDisplay}}"><dc-import name="FL Siegel" text="Höchster Ertrag" w="{{S.lw}}" h="{{S.lh}}" size="{{S.ls}}" rot="-8deg" hint-size="112px,21px"></dc-import></div></div>
+            <div style="min-width:0"><b style="display:block;font:700 15px/1.25 'Merriweather',Georgia,serif;text-wrap:balance">{{z.name}}</b><span style="display:block;margin-top:2px;font:400 12.5px 'Open Sans',sans-serif;color:#686C6A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{z.produkt}}</span></div>
+            <div style="text-align:right"><b style="display:block;font:900 20px 'Merriweather',Georgia,serif;font-variant-numeric:tabular-nums;color:{{z.zinsFarbe}};white-space:nowrap">+ {{z.ertrag}}</b><i style="display:block;height:3px;width:{{z.bar}};max-width:80px;margin-left:auto;background:{{z.barFarbe}};margin-top:6px;transition:width .7s cubic-bezier(.2,.8,.2,1),background .3s"></i><span style="display:{{unterDisplay}};margin-top:6px;font:600 13px 'Open Sans',sans-serif;font-variant-numeric:tabular-nums">{{z.zins}} · {{z.land}}</span></div>
+            <b style="display:{{nebenDisplay}};text-align:right;font:700 16px 'Merriweather',Georgia,serif;font-variant-numeric:tabular-nums">{{z.zins}}</b>
+            <span title="{{z.landText}}" style="display:{{nebenDisplay}};align-items:center;gap:7px;font:600 13px 'Open Sans',sans-serif;letter-spacing:.04em"><i style="width:7px;height:7px;border-radius:50%;background:{{z.landFarbe}}"></i>{{z.land}}</span>
+            <a href="#" onClick="{{noop}}" aria-label="Zum Anbieter" style="position:relative;display:inline-flex;align-items:center;justify-self:end;height:42px;padding:3px 3px 3px {{ctaPad}};border:2px solid #334A27;border-radius:19px;text-decoration:none;color:{{z.ctaFarbe}};font:500 14px 'Open Sans',sans-serif;overflow:hidden;transition:color .3s;box-sizing:border-box">
+              <i style="position:absolute;top:{{z.ctaIn}};bottom:{{z.ctaIn}};right:{{z.ctaIn}};width:{{z.ctaFill}};border-radius:19px;background:#0B7F66;transition:all .4s cubic-bezier(.2,.8,.2,1)"></i>
+              <span style="position:relative;padding-right:12px;display:{{ctaTextDisplay}}">Zum Anbieter</span>
+              <span style="position:relative;width:32px;height:32px;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M6 4h6v6"></path></svg></span>
+            </a>
+          </div>
+        </div>
+      </sc-for>
+      <p style="margin:22px 0 0;font:400 12.5px/1.6 'Open Sans',sans-serif;color:#686C6A;text-wrap:pretty"><b style="color:#334A27">Rechtliche Hinweise:</b> Der kostenlose Vergleich bietet keinen kompletten Marktüberblick und finanziert sich über Provisionen. Zinsen gelten für Neukunden bei Anlage über Weltsparen/Partner; Erträge vor Steuern. Einlagensicherung gesetzlich bis 100.000 € pro Kunde und Bank im jeweiligen Land. Stand 15.09.2026.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ SEITE 4 · EINGABE-BAUSTEINE ═══════════ -->
+  <section ref="{{setBauRef}}" data-screen-label="Eingabe-Bausteine" style="position:relative;margin-top:96px;padding-top:20px;border-top:2px solid #334A27">
+    <i style="position:absolute;left:0;right:0;top:3px;height:1px;background:#334A27"></i>
+    <div style="display:flex;justify-content:space-between;gap:6px 16px;flex-wrap:wrap;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A"><span>Seite 4 · Setzkasten</span><span>Eingabe-Bausteine für Rechner</span></div>
+    <span style="display:inline-flex;align-items:center;gap:8px;margin-top:32px;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#2E7A0B"><i style="width:8px;height:8px;border-radius:50%;background:#D3005E"></i>Rechner · Beispiel Brutto-Netto</span>
+    <h2 style="margin:8px 0 12px;font:900 clamp(30px,6vw,46px)/1.05 'Merriweather',Georgia,serif;letter-spacing:-.02em">Setzzeile &amp; Register</h2>
+    <p style="margin:0;font:italic 300 clamp(16px,2.3vw,18px)/1.5 'Merriweather',Georgia,serif;text-wrap:pretty">Die <b style="font-style:normal;font-weight:700">Setzzeile</b> ersetzt das Eingabefeld: eine Zeile auf dem Papier, die sich beim Setzen doppelt unterstreicht, Zahlen formatiert, mit ‹ › und Pfeiltasten zählt und Fehler in Magenta druckt. Das <b style="font-style:normal;font-weight:700">Register</b> ersetzt das Dropdown: ein Verzeichnis klappt aus dem Blatt, nummeriert, mit Punktführung und Zusatzinfo je Eintrag.</p>
+
+    <div style="display:grid;grid-template-columns:{{eingabeCols}};gap:26px 40px;margin-top:34px;align-items:start">
+      <dc-import name="FL Setzzeile" label="Bruttogehalt im Monat" bereich="500 – 50.000 €" wert="{{brutto}}" on-change="{{setBrutto}}" einheit="€" min="{{K.gMin}}" max="{{K.gMax}}" step="{{K.gStep}}" vorschlag="z. B. 3.800" vorschlaege="{{K.gVor}}" hinweis="Versuchen Sie 999.999 – die Zeile meldet sich" farbe="#D3005E" hint-size="100%,96px"></dc-import>
+      <dc-import name="FL Register" label="Steuerklasse" wert="{{stkl}}" on-change="{{setStkl}}" optionen="{{stklOptionen}}" farbe="#D3005E" hint-size="100%,96px"></dc-import>
+      <dc-import name="FL Register" label="Bundesland" wert="{{land}}" on-change="{{setLand}}" optionen="{{landOptionen}}" farbe="#D3005E" max-hoehe="300px" hint-size="100%,96px"></dc-import>
+      <dc-import name="FL Setzzeile" label="Kinderfreibeträge" bereich="0 – 10" wert="{{kinder}}" on-change="{{setKinder}}" einheit="" min="{{K.kMin}}" max="{{K.kMax}}" step="{{K.kStep}}" dez="{{K.kDez}}" stepper="{{true}}" vorschlaege="{{K.kVor}}" vorschlaege-immer="{{true}}" hinweis="halbe Freibeträge sind möglich" farbe="#D3005E" hint-size="100%,96px"></dc-import>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px 32px;flex-wrap:wrap;margin-top:30px;padding:18px 0;border-top:1px dotted rgba(51,74,39,.45);border-bottom:1px dotted rgba(51,74,39,.45)">
+      <div style="display:flex;align-items:baseline;gap:6px 14px;flex-wrap:wrap"><span style="font:italic 400 15px 'Merriweather',Georgia,serif;color:#686C6A">Leo liest mit:</span><span style="font:italic 400 15.5px/1.5 'Merriweather',Georgia,serif;color:#334A27">{{leoSatz}}</span></div>
+    </div>
+
+    <div style="margin-top:30px;display:grid;grid-template-columns:{{regelnCols}};gap:18px 36px">
+      <div><span style="font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A">Wann welcher Baustein</span>
+        <div style="margin-top:10px;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:baseline;gap:10px;padding:7px 0;border-top:1px solid rgba(51,74,39,.1)"><span style="font:600 13.5px 'Merriweather',Georgia,serif">Lineal</span><i style="flex:1;border-bottom:1px dotted rgba(51,74,39,.4);transform:translateY(-4px)"></i><span style="font:400 13px 'Open Sans',sans-serif;color:#686C6A;text-align:right">Beträge und Laufzeiten mit Gefühl – Summe, Monate, Jahre</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;padding:7px 0;border-top:1px solid rgba(51,74,39,.1)"><span style="font:600 13.5px 'Merriweather',Georgia,serif">Drehring</span><i style="flex:1;border-bottom:1px dotted rgba(51,74,39,.4);transform:translateY(-4px)"></i><span style="font:400 13px 'Open Sans',sans-serif;color:#686C6A;text-align:right">kleine Skalen mit festen Schritten – Laufzeit, Alter, Stunden</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;padding:7px 0;border-top:1px solid rgba(51,74,39,.1)"><span style="font:600 13.5px 'Merriweather',Georgia,serif">Zählwerk</span><i style="flex:1;border-bottom:1px dotted rgba(51,74,39,.4);transform:translateY(-4px)"></i><span style="font:400 13px 'Open Sans',sans-serif;color:#686C6A;text-align:right">Prozentwerte mit Nachkomma – Zins, Tilgung, Rendite</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;padding:7px 0;border-top:1px solid rgba(51,74,39,.1)"><span style="font:600 13.5px 'Merriweather',Georgia,serif">Setzzeile</span><i style="flex:1;border-bottom:1px dotted rgba(51,74,39,.4);transform:translateY(-4px)"></i><span style="font:400 13px 'Open Sans',sans-serif;color:#686C6A;text-align:right">alles, was man genau kennt – Gehalt, Miete, Kilometer, Datum</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;padding:7px 0;border-top:1px solid rgba(51,74,39,.1);border-bottom:1px solid rgba(51,74,39,.1)"><span style="font:600 13.5px 'Merriweather',Georgia,serif">Register</span><i style="flex:1;border-bottom:1px dotted rgba(51,74,39,.4);transform:translateY(-4px)"></i><span style="font:400 13px 'Open Sans',sans-serif;color:#686C6A;text-align:right">Auswahl aus 3–20 Einträgen – Steuerklasse, Bundesland, Zeitraum</span></div>
+        </div>
+      </div>
+      <div><span style="font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A">Was jeder Baustein kann</span>
+        <div style="margin-top:10px;font:400 13.5px/1.7 'Open Sans',sans-serif;color:#334A27;text-wrap:pretty">Tastatur und Touch gleichwertig, Tap-Ziele mindestens 44 px, Wert immer auch eintippbar. Fokus zeichnet die Doppellinie von der Mitte, ein grüner Knoten bestätigt den gesetzten Wert, Fehler drucken sich in Magenta ein und lösen sich beim Korrigieren. Farbe folgt dem Werkzeug: Türkis im Vergleich, Magenta im Rechner.</div>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;tempo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;normal&quot;,&quot;options&quot;:[&quot;ruhig&quot;,&quot;normal&quot;,&quot;lebhaft&quot;],&quot;tsType&quot;:&quot;'ruhig'|'normal'|'lebhaft'&quot;,&quot;section&quot;:&quot;Bewegung&quot;}}">
+const TERMS = [3, 6, 12, 24, 36, 48, 60];
+const BANKEN = [
+  { id: 'ca', name: 'Crédit Agricole Savings', produkt: 'Festgeld langfristig', land: 'FR', zahlung: 'jährlich', z: [2.6, 2.9, 3.2, 3.35, 3.45, 3.4, 3.35] },
+  { id: 'jt', name: 'J&T Direktbank', produkt: 'Festgeld', land: 'CZ', zahlung: 'jährlich', z: [2.5, 2.85, 3.15, 3.3, 3.4, 3.35, 3.3] },
+  { id: 'fi', name: 'Fibank', produkt: 'Festgeld Plus', land: 'BG', zahlung: 'am Ende', z: [2.7, 3.0, 3.3, 3.45, 3.55, 3.5, 3.45] },
+  { id: 'kl', name: 'Klarna', produkt: 'Festgeld', land: 'SE', zahlung: 'jährlich', z: [2.4, 2.7, 3.05, 3.2, 3.3, 3.25, 3.15] },
+  { id: 'ob', name: 'Openbank', produkt: 'Festgeld', land: 'ES', zahlung: 'jährlich', z: [2.35, 2.65, 3.0, 3.15, 3.28, 3.22, 3.12] },
+  { id: 'pbb', name: 'pbb direkt', produkt: 'Festgeld', land: 'DE', zahlung: 'jährlich', z: [2.3, 2.6, 3.0, 3.15, 3.25, 3.2, 3.1] },
+  { id: 'swk', name: 'SWK Bank', produkt: 'Festgeldkonto', land: 'DE', zahlung: 'jährlich', z: [2.2, 2.55, 2.95, 3.1, 3.21, 3.15, 3.05] },
+  { id: 'hb', name: 'Hanseatic Bank', produkt: 'SparBrief', land: 'DE', zahlung: 'am Ende', z: [2.1, 2.5, 2.9, 3.05, 3.16, 3.1, 3.0] },
+  { id: 'rb', name: 'Renault Bank direkt', produkt: 'Festgeld', land: 'FR', zahlung: 'jährlich', z: [2.0, 2.4, 2.8, 2.95, 3.05, 3.0, 2.9] },
+  { id: 'cb', name: 'Consorsbank', produkt: 'Festgeld', land: 'DE', zahlung: 'jährlich', z: [1.8, 2.2, 2.6, 2.75, 2.85, 2.8, 2.7] },
+];
+const LAENDER = { DE: 'Deutschland', FR: 'Frankreich', CZ: 'Tschechien', BG: 'Bulgarien', SE: 'Schweden', ES: 'Spanien' };
+const TOP = ['DE', 'SE'];
+const SICHERUNG = [{ v: 'eu', label: 'Alle EU-Länder' }, { v: 'top', label: 'Nur Top-Bonität' }, { v: 'de', label: 'Nur Deutschland' }];
+const BUNDESLAENDER = ['Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern', 'Niedersachsen', 'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen'];
+const STKL = [{ v: 1, label: 'Klasse I', meta: 'ledig, geschieden' }, { v: 2, label: 'Klasse II', meta: 'alleinerziehend' }, { v: 3, label: 'Klasse III', meta: 'verheiratet, höheres Einkommen' }, { v: 4, label: 'Klasse IV', meta: 'verheiratet, ähnlich verdienend' }, { v: 5, label: 'Klasse V', meta: 'verheiratet, geringeres Einkommen' }, { v: 6, label: 'Klasse VI', meta: 'Zweitjob' }];
+const INFL = 2.1;
+const eur = v => Math.round(v).toLocaleString('de-DE') + ' €';
+const pct = v => v.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' %';
+const dauerText = m => m < 12 ? m + ' Monate' : m === 12 ? '1 Jahr' : (m / 12) + ' Jahre';
+const ertrag = (b, o, ti) => { const r = o.z[ti] / 100; const y = TERMS[ti] / 12; return o.zahlung === 'jährlich' && y >= 1 ? b * (Math.pow(1 + r, y) - 1) : b * r * y; };
+const S = { gw: 126, gh: 35, gs: 11, lw: 112, lh: 21, ls: 8.5 };
+const K = { bMin: 500, bMax: 500000, bStep: 500, bVor: [5000, 10000, 20000, 50000], gMin: 500, gMax: 50000, gStep: 100, gVor: [2500, 3800, 5200], kMin: 0, kMax: 10, kStep: .5, kDez: 1, kVor: [0, 1, 2] };
+
+class Component extends DCLogic {
+  state = { betrag: 20000, dauer: 36, sicherung: 'eu', hover: null, hoverTop: null, hoverPunkt: null, cw: 728, seite: 1, z: { best: 0, avg: 0, real: 0 }, brutto: 3800, stkl: 1, land: 'Nordrhein-Westfalen', kinder: 0 };
+  lauf = 0; sig = null; raf = null;
+  componentDidMount() { this.onScroll = () => { if (!this.bauRef) return; const s = this.bauRef.getBoundingClientRect().top < window.innerHeight * .45 ? 2 : 1; if (s !== this.state.seite) this.setState({ seite: s }); }; window.addEventListener('scroll', this.onScroll, { passive: true }); }
+  componentWillUnmount() { window.removeEventListener('scroll', this.onScroll); if (this.ro) this.ro.disconnect(); if (this.raf) cancelAnimationFrame(this.raf); }
+  tf() { return { ruhig: 1.35, lebhaft: .65 }[this.props.tempo] ?? 1; }
+  setRoot = el => { if (!el || this.rootEl === el) return; this.rootEl = el; this.ro = new ResizeObserver(() => { const cw = el.clientWidth; if (cw !== this.state.cw) this.setState({ cw }); }); this.ro.observe(el); };
+  setVglRef = el => { this.vglRef = el; }; setBauRef = el => { this.bauRef = el; };
+  scrollZu(el) { if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 24, behavior: 'smooth' }); }
+  zuVgl = () => this.scrollZu(this.vglRef); zuBau = () => this.scrollZu(this.bauRef);
+  noop = e => e.preventDefault();
+  zaehle(t) {
+    const start = { ...this.state.z }; const t0 = performance.now(); const dur = 950 * this.tf(); if (this.raf) cancelAnimationFrame(this.raf);
+    const step = now => { const p = Math.min(1, (now - t0) / dur); const e = 1 - Math.pow(1 - p, 3); const z = {}; for (const k in t) z[k] = start[k] + (t[k] - start[k]) * e; this.setState({ z }); if (p < 1) this.raf = requestAnimationFrame(step); };
+    this.raf = requestAnimationFrame(step);
+  }
+  setBetrag = v => this.setState({ betrag: v }); setDauer = v => this.setState({ dauer: v }); setSicherung = v => this.setState({ sicherung: v });
+  setBrutto = v => this.setState({ brutto: v }); setStkl = v => this.setState({ stkl: v }); setLand = v => this.setState({ land: v }); setKinder = v => this.setState({ kinder: v });
+  gef(sich) { return BANKEN.filter(o => sich === 'eu' || (sich === 'de' ? o.land === 'DE' : TOP.includes(o.land))); }
+
+  renderVals() {
+    const s = this.state; const tf = this.tf(); const eng = s.cw < 560; const { betrag, dauer } = s; const ti = TERMS.indexOf(dauer);
+    const gef = this.gef(s.sicherung); const n = gef.length;
+    const sortiert = [...gef].sort((a, b) => ertrag(betrag, b, ti) - ertrag(betrag, a, ti) || b.z[ti] - a.z[ti]); const best = sortiert[0];
+    const maxZ = n ? Math.max(...gef.map(o => o.z[ti])) : 1; const maxE = best ? ertrag(betrag, best, ti) : 1; const minE = n ? ertrag(betrag, sortiert[n - 1], ti) : 0;
+    const eBest = best ? ertrag(betrag, best, ti) : 0; const eAvg = n ? gef.reduce((a, o) => a + ertrag(betrag, o, ti), 0) / n : 0;
+    const inflVerlust = betrag * (Math.pow(1 + INFL / 100, dauer / 12) - 1); const real = eBest - inflVerlust;
+    const sig = [betrag, dauer, s.sicherung].join('|');
+    if (sig !== this.sig) { if (this.sig !== null) this.lauf++; this.sig = sig; setTimeout(() => this.zaehle({ best: eBest, avg: eAvg, real }), 0); }
+    const alt = this.lauf % 2; const A = alt ? 'fl-herz2' : 'fl-herz', M = alt ? 'fl-mitte2' : 'fl-mitte', Y = alt ? 'fl-spalte2' : 'fl-spalte', ST = alt ? 'fl-stempel2' : 'fl-stempel', Z = alt ? 'fl-zeichnen2' : 'fl-zeichnen';
+    // Zinskurve
+    const bestJe = TERMS.map((_, i) => gef.length ? Math.max(...gef.map(o => o.z[i])) : 0); const avgJe = TERMS.map((_, i) => gef.length ? gef.reduce((a, o) => a + o.z[i], 0) / gef.length : 0);
+    const lo = Math.floor(Math.min(...avgJe, 1.5) * 2) / 2, hi = Math.ceil(Math.max(...bestJe) * 2) / 2 + .25;
+    const X = i => 70 + i / (TERMS.length - 1) * 540, Yv = v => 190 - (v - lo) / (hi - lo) * 150;
+    const pfad = arr => arr.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Yv(v).toFixed(1)).join('');
+    const kurveGitter = []; for (let g = Math.ceil(lo * 2) / 2; g <= hi; g += .5) kurveGitter.push({ y: Yv(g).toFixed(1), top: (Yv(g) / 210 * 100).toFixed(2) + '%', t: g.toLocaleString('de-DE', { minimumFractionDigits: 1 }) + ' %' });
+    const kurvePunkte = TERMS.map((m, i) => { const akt = i === ti; const h = s.hoverPunkt === i; return { left: (X(i) / 640 * 100).toFixed(2) + '%', top: (Yv(bestJe[i]) / 210 * 100).toFixed(2) + '%', labelTop: ((Yv(bestJe[i]) - 12) / 210 * 100).toFixed(2) + '%', x: X(i).toFixed(1), y: Yv(bestJe[i]).toFixed(1), size: akt ? 16 : h ? 14 : 10, bg: akt ? '#0B7F66' : h ? '#334A27' : '#faf9f6', border: akt ? '0' : '1.5px solid #0B7F66', anim: akt ? `fl-puls 2.2s ${tf}s infinite` : 'none', stielOp: akt ? 1 : 0, label: pct(bestJe[i]), labelFont: `${akt ? 700 : 500} ${akt ? 13 : 11}px 'Open Sans',sans-serif`, labelFarbe: akt ? '#0B7F66' : h ? '#334A27' : '#686C6A', achse: eng ? (m < 12 ? m + ' M.' : (m / 12) + ' J.') : dauerText(m), achseFont: `${akt ? 700 : 500} 11px 'Open Sans',sans-serif`, achseFarbe: akt ? '#0B7F66' : '#686C6A', aria: dauerText(m) + ' wählen', klick: () => this.setState({ dauer: m }), rein: () => this.setState({ hoverPunkt: i }), raus: () => this.setState({ hoverPunkt: null }) }; });
+    // Gewinner + Zeilen
+    const mk = (o, i) => ({ id: o.id, logoId: 'fg-logo-' + o.id, logoIdGross: 'fg-logo-top-' + o.id, name: o.name, produkt: o.produkt, mono: o.name[0].toUpperCase(), zins: pct(o.z[ti]), ertrag: eur(ertrag(betrag, o, ti)), ende: eur(betrag + ertrag(betrag, o, ti)), zahlung: o.zahlung === 'jährlich' ? 'jährlich aufs Konto' : 'am Ende der Laufzeit', land: o.land, landText: `${LAENDER[o.land]} (${o.land})`, landFarbe: TOP.includes(o.land) ? '#45A117' : '#0B7F66', rang: i + 1 });
+    const wh = best && s.hoverTop === best.id;
+    const w = best ? { ...mk(best, 0), display: 'block', merkmale: [`Einlagensicherung ${LAENDER[best.land]}`, best.zahlung === 'jährlich' ? 'Zinsen jährlich, Zinseszins' : 'Auszahlung am Ende', 'Kostenlose Kontoführung'], ctaFill: wh ? '100%' : '38px', ctaIn: wh ? '0px' : '3px', ctaFarbe: wh ? '#fff' : '#334A27', rein: () => this.setState({ hoverTop: best.id }), raus: () => this.setState({ hoverTop: null }) }
+      : { display: 'none', merkmale: [], name: '', produkt: '', mono: '', zins: '', ertrag: '', ende: '', zahlung: '', ctaFill: '38px', ctaIn: '3px', ctaFarbe: '#334A27', rein: () => {}, raus: () => {} };
+    const zeilen = sortiert.map((o, i) => { const ist = i === 0; const h = s.hover === o.id; return { ...mk(o, i), rangFarbe: ist ? '#0B7F66' : '#686C6A', zinsFarbe: ist ? '#0B7F66' : '#334A27', bg: ist ? 'rgba(6,212,150,.08)' : h ? 'rgba(51,74,39,.07)' : i % 2 ? 'rgba(51,74,39,.035)' : 'transparent', rahmen: h ? 'scaleX(1)' : 'scaleX(0)', bar: Math.max(8, (ertrag(betrag, o, ti) - minE * .8) / (maxE - minE * .8) * 100) + '%', barFarbe: ist ? '#0B7F66' : 'rgba(51,74,39,.5)', ctaFill: h ? '100%' : '32px', ctaIn: h ? '0px' : '3px', ctaFarbe: h ? '#fff' : '#334A27', stempelDisplay: ist ? 'block' : 'none', anim: `${A} .7s cubic-bezier(.2,.8,.2,1) ${i * .05 * tf}s both`, rein: () => this.setState({ hover: o.id }), raus: () => this.setState({ hover: null }) }; });
+    const dauerOptionen = TERMS.map((m, i) => ({ v: m, label: dauerText(m), meta: 'bis ' + pct(bestJe[i]) }));
+    const sicherungOptionen = SICHERUNG.map(x => ({ v: x.v, label: x.label, meta: this.gef(x.v).length + ' Angebote' }));
+    const stklOptionen = STKL; const landOptionen = BUNDESLAENDER.map(l => ({ v: l, label: l, meta: ['Bayern', 'Baden-Württemberg'].includes(l) ? 'KiSt 8 %' : 'KiSt 9 %' }));
+    const stklL = STKL.find(x => x.v === s.stkl);
+    return {
+      K, S, setRoot: this.setRoot, setVglRef: this.setVglRef, setBauRef: this.setBauRef, zuVgl: this.zuVgl, zuBau: this.zuBau, noop: this.noop,
+      seite1Farbe: s.seite === 1 ? '#334A27' : '#686C6A', seite2Farbe: s.seite === 2 ? '#334A27' : '#686C6A', seite1Linie: s.seite === 1 ? 'scaleX(1)' : 'scaleX(0)', seite2Linie: s.seite === 2 ? 'scaleX(1)' : 'scaleX(0)',
+      betrag, dauer, sicherung: s.sicherung, setBetrag: this.setBetrag, setDauer: this.setDauer, setSicherung: this.setSicherung, dauerOptionen, sicherungOptionen,
+      anzahl: n, bestZinsText: best ? pct(maxZ) : '–', dauerText: dauerText(dauer), eingabeCols: eng ? 'minmax(0,1fr)' : 'minmax(0,1fr) minmax(0,1fr)',
+      kurveGitter, kurveBest: pfad(bestJe), kurveAvg: pfad(avgJe), kurvePunkte, kurveAnim: `${Z} 1.4s ease-out ${.2 * tf}s both`,
+      kennCols: eng ? 'minmax(0,1fr) minmax(0,1fr)' : 'repeat(3,minmax(0,1fr))', kennRand: '1px solid rgba(51,74,39,.2)', kennOben: eng ? '1px solid rgba(51,74,39,.2)' : '0', realSpalte: eng ? '1 / -1' : 'auto', zBest: eur(s.z.best), zAvg: eur(s.z.avg), zDiff: eur(eBest - eAvg), zReal: (real < 0 ? '− ' : '+ ') + eur(Math.abs(s.z.real)), realFarbe: real < 0 ? '#D3005E' : '#45A117', realText: real < 0 ? 'Kaufkraft sinkt trotz Zinsen' : 'echter Kaufkraftgewinn',
+      w, gewinnerCols: eng ? '1fr' : '1.1fr 1fr', rahmenAnimX: `${M} .9s cubic-bezier(.2,.8,.2,1) both`, rahmenAnimY: `${Y} .9s cubic-bezier(.2,.8,.2,1) .2s both`, stempelAnim: `${ST} .7s cubic-bezier(.2,.8,.2,1) ${.5 * tf}s both`,
+      listeHinweis: n ? `Sortiert nach Ertrag für ${eur(betrag)} über ${dauerText(dauer)}` : 'Kein Angebot erfüllt die Auswahl', cols: eng ? '64px minmax(0,1fr) auto auto' : '96px minmax(0,1fr) 96px 66px 44px auto', colGap: eng ? '12px' : '18px', logoW: eng ? '64px' : '96px', nebenDisplay: eng ? 'none' : 'flex', unterDisplay: eng ? 'block' : 'none', ctaPad: eng ? '3px' : '15px', ctaTextDisplay: eng ? 'none' : 'inline', zeilen,
+      brutto: s.brutto, stkl: s.stkl, land: s.land, kinder: s.kinder, setBrutto: this.setBrutto, setStkl: this.setStkl, setLand: this.setLand, setKinder: this.setKinder, stklOptionen, landOptionen,
+      leoSatz: `${eur(s.brutto)} brutto, ${stklL ? stklL.label : ''} in ${s.land}, ${s.kinder ? s.kinder.toLocaleString('de-DE') + ' Kinderfreibetrag' : 'ohne Kinderfreibetrag'} – sobald Sie „Ausrechnen" drücken, öffnet sich das Ergebnis.`, regelnCols: eng ? 'minmax(0,1fr)' : 'minmax(0,1.3fr) minmax(0,1fr)',
+    };
+  }
+}
+</script>
+</body>
+</html>
