@@ -153,7 +153,9 @@ export const radien = () => sammeln(({ block }) =>
 export const schatten = () => sammeln(({ block }) =>
   werte(block, "box-shadow")
     .map((w) => w.replace(/\s+/g, " ").toLowerCase())
-    .filter((w) => w !== "none" && !/var\(--schatten/.test(w)));
+    // Ein Wert, der NUR aus einem Token besteht, ist genau richtig — egal wie es heißt
+    // (--schatten-*, --doppellinie-*). Gezählt wird, was daneben noch hart dasteht.
+    .filter((w) => w !== "none" && !/^var\(--[a-z0-9-]+\)$/.test(w)));
 
 /**
  * 🚨 Selbstbezug: `--x: var(--x)`. Die Eigenschaft ist damit *garantiert ungültig* und

@@ -4,8 +4,8 @@
     "vorkommen": 0
   },
   "farben": {
-    "verschieden": 16,
-    "vorkommen": 21
+    "verschieden": 15,
+    "vorkommen": 20
   },
   "schriftgrade": {
     "verschieden": 2,
@@ -28,7 +28,7 @@
     "vorkommen": 1
   },
   "schatten": {
-    "verschieden": 10,
-    "vorkommen": 11
+    "verschieden": 8,
+    "vorkommen": 8
   }
 }
