@@ -182,6 +182,7 @@
      der Radius die halbe Blasenhöhe, und an der unteren Ecke entsteht ein Zipfel, der
      wie ein missratener Sprechblasen-Schwanz aussieht. */
   --radius-blase: 27px;
+  --radius-blase-eng: 20px;       /* dieselbe Blase auf schmalem Schirm, mit weniger Polster */
 
   /* Die Pfeilspitze des Megamenüs, als Maske — so kommt ihre Farbe aus `background`.
      🚨 Maße 1:1 aus MegaArrowTrail: Spitze 8 px hoch (× 7,62/14,37 = 4,24 px breit),

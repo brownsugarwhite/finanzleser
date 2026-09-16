@@ -82,7 +82,9 @@
   font: var(--schrift-kicker); letter-spacing: var(--laufweite-band);
   text-transform: uppercase;
 }
-.kopf--band .kicker { color: var(--auf-tinte); }
+.kopf--band .kicker,
+.kopf--band span,
+.kopf--band b { color: var(--auf-tinte); }
 
 /* ── 4 · Frei: Versalien OHNE Linie ────────────────────────────────────────────────── */
 /* Der Regelfall im Satz: Kicker, darunter die Schlagzeile, sonst nichts. */

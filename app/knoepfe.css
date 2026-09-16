@@ -35,21 +35,40 @@
    der Werkzeugfarbe mit weißem Zeichen.
    `--pille-farbe` ist der einzige Regler: Grün im Faden, Türkis im Vergleich, Magenta
    im Rechner. */
+/* 🚨 Die Maße sind die der Vorlage, nicht die der Leiter. Eine Pille ist ein GERÄT, kein
+   Satzelement: Rahmen 2 px, darum eine 1-px-Outline mit 2 px Abstand, Radius 21 px auf
+   48 px Höhe — also ausdrücklich KEINE volle Kapsel (die wären 24 px). Genau diese
+   flacheren Enden machen sie zierlich. Und der Abstand von der Scheibe zum Rahmen ist
+   rundum derselbe: 3 px, oben wie rechts wie unten.
+
+   Alles folgt der HÖHE, damit die kleine Pille proportional dieselbe bleibt:
+     Radius  = .4375 × Höhe   (21 / 48)
+     Scheibe = .7917 × Höhe   (38 / 48)
+     Scheibenradius = .4474 × Scheibe (17 / 38) — die Form eines App-Zeichens, kein Kreis
+     Polster = .0625 × Höhe   (3 / 48)
+
+   🚨 Der 16.09.2026 hatte das durch `--radius-pille` (999 px), `--radius-kreis` und
+   Werte aus der Abstandsleiter ersetzt: aus der Pille wurde eine Kapsel, aus dem
+   App-Zeichen ein Kreis, und die Scheibe saß 1 px zu eng. */
 .pille, .faden-shell .pille {
   --pille-farbe: var(--werkzeug, var(--green));
+  --pille-hoehe: 48px;
+  --pille-polster: calc(var(--pille-hoehe) * .0625);
+  --pille-scheibe: calc(var(--pille-hoehe) * .7917);
   position: relative; display: inline-flex; align-items: center; align-self: flex-start;
-  height: 48px; box-sizing: border-box;
-  padding: var(--luft-xs) var(--luft-xs) var(--luft-xs) var(--luft-l);
+  height: var(--pille-hoehe); box-sizing: border-box;
+  padding: var(--pille-polster) var(--pille-polster) var(--pille-polster) calc(var(--pille-hoehe) * .4167);
   border: var(--strich-stark) solid var(--ink);
   outline: var(--strich-haar) solid var(--ink); outline-offset: 2px;
-  border-radius: var(--radius-pille); background: transparent;
-  color: var(--ink); font: 500 var(--grad-16) var(--sans); text-decoration: none;
+  border-radius: calc(var(--pille-hoehe) * .4375); background: transparent;
+  color: var(--ink); font: 500 calc(var(--pille-hoehe) * .3542)/1 var(--sans); text-decoration: none;
   overflow: hidden; cursor: pointer; transition: color .3s;
 }
 .pille__text { position: relative; padding-right: var(--luft-m); white-space: nowrap; }
 .pille__scheibe {
-  position: relative; flex-shrink: 0; width: 38px; height: 38px;
-  border-radius: var(--radius-kreis); background: var(--pille-farbe);
+  position: relative; flex-shrink: 0;
+  width: var(--pille-scheibe); height: var(--pille-scheibe);
+  border-radius: calc(var(--pille-scheibe) * .4474); background: var(--pille-farbe);
   display: flex; align-items: center; justify-content: center;
   transition: transform .35s var(--ueber);
 }
@@ -57,26 +76,30 @@
 /* Die Füllung, die auf Hover von der Scheibe auf die ganze Innenfläche wächst
    (Runde 2, Punkt 7: kein sichtbarer Papierrand mehr zwischen Rahmen und Füllung). */
 .pille__fuell {
-  position: absolute; top: 3px; right: 3px; bottom: 3px; width: 38px;
-  border-radius: var(--radius-pille); background: var(--pille-farbe);
-  transition: width .45s var(--kurve);
+  position: absolute; inset: var(--pille-polster); left: auto;
+  width: var(--pille-scheibe);
+  border-radius: calc(var(--pille-scheibe) * .4474); background: var(--pille-farbe);
+  transition: width .45s var(--kurve), border-radius .45s var(--kurve);
 }
 .pille--fuellt .pille__scheibe { background: transparent; }
-.pille--fuellt:hover .pille__fuell, .pille--fuellt:focus-visible .pille__fuell { width: 100%; }
+.pille--fuellt:hover .pille__fuell, .pille--fuellt:focus-visible .pille__fuell {
+  width: calc(100% - 2 * var(--pille-polster));
+  border-radius: calc(var(--pille-hoehe) * .3542);
+}
 .pille--fuellt:hover, .pille--fuellt:focus-visible { color: var(--auf-tinte); }
 /* Ohne Füllung färbt sich beim Überfahren nur die Schrift. */
 .pille:not(.pille--fuellt):hover { color: var(--pille-farbe); }
 .pille:disabled, .pille[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
 .pille__scheibe[data-schrumpft="an"] { transform: scale(.8); }
 
-/* Die kleine Pille: in einer Listenzeile, wo die große den Satz sprengen würde. */
-.pille--klein { height: 36px; padding: var(--luft-xxs) var(--luft-xxs) var(--luft-xxs) var(--luft-m); outline: 0; font-size: var(--grad-13); }
-.pille--klein .pille__scheibe, .pille--klein .pille__fuell { width: 28px; }
-.pille--klein .pille__scheibe { height: 28px; }
-.pille--klein .pille__fuell { top: 2px; right: 2px; bottom: 2px; }
+/* Die kleine Pille: in einer Listenzeile, wo die große den Satz sprengen würde.
+   EINE Zahl ändert sich — alles andere rechnet sich daraus. */
+/* 🚨 Beide Selektoren, sonst schlägt `.faden-shell .pille` (0,2,0) aus dem Grundsatz
+   die Einzelklasse hier — und die kleine Pille bliebe 48 px hoch. */
+.pille--klein, .faden-shell .pille--klein { --pille-hoehe: 38px; outline: 0; }
 
 /* Auf schmalem Schirm bleibt von der kleinen Pille nur die Scheibe. */
-.pille--nur-knopf { padding-left: var(--luft-xs); }
+.pille--nur-knopf { padding-left: var(--pille-polster); }
 .pille--nur-knopf .pille__text { display: none; }
 
 /* ═══ 2 · Der Knopf ══════════════════════════════════════════════════════════════════

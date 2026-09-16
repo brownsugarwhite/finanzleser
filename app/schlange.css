@@ -2,7 +2,7 @@
    Das Spielfeld ist die Bildvorlage: Papierfläche, Punktraster, dünner Rahmen in Tinte.
    Die Schlange selbst zeichnet lib/faden/schlange.ts — hier steht nur Farbe und Bühne. */
 
-.faden-shell .schlange { display: grid; gap: var(--luft-s); width: 100%; }
+.faden-shell .schlange { display: grid; gap: 10px; width: 100%; }
 
 /* Punktraster: ein Punkt je Spielzelle, Größe und Lage also immer im Takt des Feldes. */
 .faden-shell .schlange__feld {
@@ -46,7 +46,7 @@
 
 /* Stand und Knopf stehen unter dem Feld, nicht darauf: das Feld zeigt immer die
    Schlange, ohne Deckel darüber. */
-.faden-shell .schlange__fuss { display: flex; align-items: center; justify-content: space-between; gap: var(--luft-m); min-height: 34px; }
+.faden-shell .schlange__fuss { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 34px; }
 .faden-shell .schlange__fuss .knopf { padding: var(--luft-xs) var(--luft-m); font-size: var(--grad-13); }
 .faden-shell .schlange__stand { margin: 0; flex: 1; font: 400 var(--grad-13)/1.4 var(--sans); color: var(--muted); }
 .faden-shell .schlange__stand b { color: var(--ink); font-weight: 700; }

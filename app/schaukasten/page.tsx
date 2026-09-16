@@ -475,8 +475,8 @@ export default async function Schaukasten() {
           Die schlichte Fassung des Fadens: <strong>kein Kasten, kein Rahmen, kein Schatten</strong> —
           eine Kopfzeile mit Tintenlinie und der Inhalt darunter. Das alte Chassis mit Teal-Rahmen
           und 38 px Innenabstand (<code>GamificationEmbed</code>) lebt nur noch auf der alten
-          Beitragsseite weiter; im Faden setzt <code>FadenSpiel</code>. „Schon gewusst“ und
-          „Karteikarte“ gibt es nicht mehr.
+          Beitragsseite weiter; im Faden setzt <code>FadenSpiel</code>. Die Karteikarte
+          gibt es nicht mehr; das Rubbellos schon.
         </p>
         <Insel typ="spiel" werte={{ typ: "quiz", felder: {
           frage: "Welcher Block ist im Beispiel der zweitgrößte am Strompreis?",
@@ -513,6 +513,19 @@ export default async function Schaukasten() {
             frage: "Wie viele Kilowattstunden verbraucht ein Zwei-Personen-Haushalt im Jahr?",
             antwort: "2500", einheit: " kWh", min: "1000", max: "6000",
             aufloesung: "Rund 2.500 kWh sind der übliche Wert — mit elektrischer Warmwasserbereitung eher 3.500 kWh.",
+          }} />
+        </Insel>
+
+        <h3 style={{ marginTop: "var(--luft-xl)" }}>Das Rubbellos</h3>
+        <p>
+          Die Fläche wird freigerubbelt — ziehen oder wischen. Sie heißt im Code{" "}
+          <code>gewusst</code>; gestrichen ist die alte Karteikarte, nicht das Rubbellos.
+        </p>
+        <Insel typ="spiel" werte={{ typ: "gewusst", felder: {
+          text: "Der Grundpreis fällt auch dann an, wenn Sie ein Jahr lang keine einzige Kilowattstunde verbrauchen. Bei einem Zweitwohnsitz ist er oft der größere Teil der Rechnung.",
+        } }}>
+          <FadenSpiel typ="gewusst" felder={{
+            text: "Der Grundpreis fällt auch dann an, wenn Sie ein Jahr lang keine einzige Kilowattstunde verbrauchen. Bei einem Zweitwohnsitz ist er oft der größere Teil der Rechnung.",
           }} />
         </Insel>
 

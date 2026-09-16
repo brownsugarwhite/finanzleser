@@ -65,10 +65,7 @@ export default function Zeile({
         <Logorahmen quelle={p.logo} name={p.anbieter} groesse="zeile" />
 
         <div className="kb__zeile-namen">
-          <b>
-            {p.anbieter}
-            {ist && <Siegel text={def.kursblatt?.stempel ?? "Bestwert"} klein animation={stempel} />}
-          </b>
+          <b>{p.anbieter}</b>
           <span>{p.tarif}</span>
         </div>
 
@@ -94,11 +91,17 @@ export default function Zeile({
           </span>
         )}
 
+        {/* 🚨 Das Siegel sitzt RECHTS über der Pille, nicht neben dem Namen: so steht es
+            in der Vorlage, und so kostet es keine Spaltenbreite — ein Siegel hinter einem
+            langen Anbieternamen drückt die Zahlenspalten zusammen. */}
+        <span className="kb__zeile-pille">
+          {ist && <Siegel text={def.kursblatt?.stempel ?? "Bestwert"} klein animation={stempel} />}
         <PilleCTA
           text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" fuellung klein
           href={p.link} rel="sponsored nofollow noopener" target="_blank"
           ariaLabel={`Zum Anbieter ${p.anbieter}`}
         />
+        </span>
       </div>
 
       <div className="kb__zeile-aktionen">

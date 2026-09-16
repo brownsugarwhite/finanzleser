@@ -276,7 +276,7 @@
 .faden-shell .st-balken { display: flex; flex-direction: column; margin-top: var(--luft-m); }
 /* Die Beschriftung steht rechtsbündig an der Bahn. Links ausgerichtet klaffte bei kurzen
    Wörtern eine Lücke von halber Spaltenbreite zwischen Text und Balken. */
-.faden-shell .st-balken__zeile { display: grid; grid-template-columns: minmax(90px, 20%) minmax(0, 1fr) auto; gap: var(--luft-m); align-items: center; padding: var(--luft-s) 0; border-top: var(--strich-haar) solid var(--ink-12); transition: opacity .2s; }
+.faden-shell .st-balken__zeile { display: grid; grid-template-columns: minmax(110px, 24%) minmax(0, 1fr) auto; gap: var(--luft-m); align-items: center; padding: var(--luft-s) 0; border-top: var(--strich-haar) solid var(--ink-12); transition: opacity .2s; }
 .faden-shell .st-balken__zeile.gedimmt { opacity: .4; }
 .faden-shell .st-balken__name { font: 400 var(--grad-15)/1.35 var(--serif); color: var(--ink); overflow-wrap: anywhere; text-align: right; }
 .faden-shell .st-balken__bahn { position: relative; height: 26px; }

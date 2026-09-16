@@ -591,12 +591,12 @@
    auch, wenn die Maus über der ZEILE steht statt über der Pille (K:482/:485 löst das im
    Prototyp mit zwei Zustandsfeldern; ein Nachfahren-Selektor kann es ohne Hydration). */
 .kb .kb__zeile:hover .pille__fuell,
-.kb .kb-podest:hover .pille__fuell { width: 100%; }
+.kb .kb-podest:hover .pille__fuell { width: calc(100% - 2 * var(--pille-polster)); border-radius: calc(var(--pille-hoehe) * .3542); }
 .kb .kb__zeile:hover .pille--fuellt,
 .kb .kb-podest:hover .pille--fuellt { color: var(--auf-tinte); }
 /* K:519 — im schmalen Satz bleibt von der Listen-Pille nur die Scheibe. */
 @container kb (max-width: 559px) {
-  .kb .pille--klein { padding-left: var(--luft-xs); }
+  .kb .pille--klein { padding-left: var(--pille-polster); }
   .kb .pille--klein .pille__text { display: none; }
 }
 
@@ -623,9 +623,11 @@
     radial-gradient(130% 100% at 16% 18%, rgba(255,255,255,.92) 0%, rgba(255,255,255,0) 55%),
     radial-gradient(100% 80% at 84% 82%, rgba(140,245,230,.85) 0%, rgba(140,245,230,0) 58%),
     linear-gradient(22deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 32%, rgba(255,255,255,.65) 58%, rgba(255,255,255,0) 100%);
-  /* Viel größer als das Siegel, damit ein kurzer Scrollweg den Farbort spürbar
-     verschiebt. Die Position setzt die Komponente beim Scrollen (Siegel.tsx). */
-  background-size: 480% 480%, 420% 420%, 380% 380%, 520% 520%;
+  /* 🚨 Nur wenig größer als das Siegel. Bei 480 % lag nur ein Zwanzigstel des Spektrums
+     im Bild, und die Folie sah aus wie eine einfarbige Tönung. Bei 190 % stehen mehrere
+     Farben gleichzeitig darin — Rosa, Blau, Grün, Gelb — und der Scrollweg verschiebt
+     sie trotzdem sichtbar. Die Position setzt die Komponente (Siegel.tsx). */
+  background-size: 190% 190%, 170% 170%, 150% 150%, 210% 210%;
   background-position: 50% 50%;
   transition: background-position .08s linear;
   /* Ein hauchdünner Innenrahmen, wie die Prägekante einer echten Folie. */
@@ -1038,6 +1040,9 @@
 .kb .kb-podest__rahmen--rechts { right: 0; top: 0; bottom: 0; width: 1px; }
 /* K:123 — der Stempel sitzt über der Oberlinie, nicht darunter. */
 .kb .kb-podest__siegel { position: absolute; right: 20px; top: -13px; }
+/* Das Siegel der Listenzeile hängt über der rechten oberen Ecke der Pille. */
+.kb .kb__zeile-pille { position: relative; display: inline-flex; justify-self: end; }
+.kb .kb__zeile-pille .kb-siegel { position: absolute; right: -6px; top: -19px; z-index: 2; }
 
 .kb .kb-podest__raster { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--luft-l) var(--luft-xl); align-items: start; }
 .kb .kb-podest__kopf { display: flex; align-items: center; gap: var(--luft-m); }
@@ -1106,20 +1111,30 @@
    über einer Tabelle in Tinte liest sich wie eine zweite, schwächere Stimme — der Kopf
    ist aber die stärkste Zeile der Tabelle. */
 .kb .kb-liste__kopfstapel {
-  margin-top: var(--luft-s); padding-top: 7px; position: relative;
+  margin-top: var(--luft-s);
+  /* Der Linienstapel über dem Kopf, von oben nach unten:
+       1 px Linie · 2 px Luft · 2 px Linie · 2 px Luft · 1 px Linie · das Band.
+     Als EIN Verlauf, weil ein Element nur zwei Pseudoelemente hat und es drei Linien
+     sind. 🚨 Die oberste 1-px-Linie fehlte bis zum 16.09.2026. */
+  padding-top: 8px;
+  background-image: linear-gradient(
+    var(--ink) 0 1px, transparent 1px 3px,
+    var(--ink) 3px 5px, transparent 5px 7px,
+    var(--ink) 7px 8px);
+  background-repeat: no-repeat;
+  background-size: 100% 8px;
 }
-.kb .kb-liste__kopfstapel::before,
-.kb .kb-liste__kopfstapel::after {
-  content: ""; position: absolute; left: 0; right: 0; background: var(--ink);
-}
-.kb .kb-liste__kopfstapel::before { top: 2px; height: 2px; }
-.kb .kb-liste__kopfstapel::after { top: 6px; height: 1px; }
 .kb .kb-liste__kopf {
   display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap);
   align-items: center; padding: var(--luft-xs) var(--luft-s);
   background: var(--ink); color: var(--auf-tinte);
   font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: var(--laufweite-band); text-transform: uppercase;
 }
+/* 🚨 Farbe auf den SPANS, nicht nur auf dem Band. `components.css` färbt global jedes
+   `p, li, span` in --color-text-medium; eine Einzelelement-Regel schlägt jede Vererbung,
+   egal wie spezifisch der Elternteil ist. Ohne das stand die Kopfzeile grau auf Tinte. */
+.kb .kb-liste__kopf > span,
+.kb .kb-liste__kopf span { color: var(--auf-tinte); }
 .kb .kb-liste__kopf-namen { grid-column: span 2; }
 .kb .kb-liste__kopf-rechts { text-align: right; white-space: nowrap; }
 .kb .kb-liste__kopf-dritte { white-space: nowrap; }

@@ -158,7 +158,12 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kopfblur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .kopfblur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .kopfblur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .kopfblur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .kopfblur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .kopfblur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .kopfblur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .kopfblur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
 .faden-shell .kopfblur b { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--paper) 0%, transparent 100%); }
 .faden-shell .kopf { position: sticky; top: 0; z-index: 30; background: transparent; }
-.faden-shell .kopf__innen { padding: 0 0 0 28px; }
+/* 🚨 `flex: 1`. `header.kopf` ist über eine Regel aus dem Alt-CSS ein Flex-Container;
+   ohne diese Zeile ist `.kopf__innen` ein Flex-Kind mit `flex: 0 1 auto` und schrumpft
+   auf seinen INHALT. Gemessen 16.09.2026 auf 1920 px: die ganze Leiste endete bei
+   945 px, und das Lesezeichen klebte mitten im Bild statt an der rechten Kante —
+   auf jeder Fensterbreite gleich, weil die Breite gar nicht vom Fenster kam. */
+.faden-shell .kopf__innen { padding: 0 0 0 28px; flex: 1; min-width: 0; }
 .faden-shell .kopf__zeile { display: flex; align-items: center; gap: 22px; min-height: 64px; }
 .faden-shell .logo { display: flex; align-items: center; text-decoration: none; flex: none; }
 .faden-shell .logo img { height: 28px; width: auto; display: block; }
@@ -203,7 +208,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .lesezeichen .lz-wort { font: 700 var(--grad-14)/1 var(--sans); padding: 6px 10px; }
 .faden-shell .lesezeichen .lz-icon { position: relative; padding: 6px 7px; }
 .faden-shell .lesezeichen .lz-icon svg { width: 20px; height: 20px; }
-.faden-shell .lesezeichen .lz-zahl { position: absolute; top: -1px; right: -3px; min-width: 16px; height: 16px; border-radius: var(--radius-kante); background: var(--paper); color: var(--green-ink); font: 700 var(--grad-kicker)/var(--grad-16) var(--sans); text-align: center; padding: 0 4px; font-style: normal; }
+.faden-shell .lesezeichen .lz-zahl { position: absolute; top: -1px; right: -3px; min-width: 16px; height: 16px; border-radius: var(--radius-pille); background: var(--paper); color: var(--green-ink); font: 700 var(--grad-kicker)/var(--grad-16) var(--sans); text-align: center; padding: 0 4px; font-style: normal; }
 .faden-shell .blatt { display: none; background: var(--paper); border-bottom: var(--strich-haar) solid var(--rule-strong); box-shadow: var(--schatten-schwebend); }
 .faden-shell .blatt.offen { display: block; }
 
@@ -480,7 +485,10 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .blase__spike { position: absolute; bottom: -2px; width: 21.05px; height: 26.8px; pointer-events: none; }
 .faden-shell .blase--frage .blase__spike { right: -7.4px; transform: scaleX(-1); color: var(--ink); }
 @media (max-width: 900px) {
-  .faden-shell .blase { padding: var(--luft-m) var(--luft-l); border-radius: var(--radius-pille); }
+  /* 🚨 NICHT --radius-pille. Der Radius-Durchgang vom 16.09.2026 hat hier aus 20 px
+     999 px gemacht — die Blase wurde zur Kapsel, und der Sprechblasen-Zipfel unten rechts
+     saß plötzlich als Kerbe daneben statt anzuschließen. */
+  .faden-shell .blase { padding: var(--luft-m) var(--luft-l); border-radius: var(--radius-blase-eng); }
 }
 .faden-shell .quellen { font-size: var(--grad-13); color: var(--muted); display: grid; gap: var(--luft-xxs); margin-top: var(--luft-xs); }
 .faden-shell .quellen b { color: var(--ink); font-weight: 600; }
@@ -768,9 +776,23 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
      die Zeile mit Text · 2 px Luft · 2 px Linie · 2 px Luft · 1 px Linie · das Band.
    components.css zeichnet dafür `table::before` und `::after` in Grau; im Zeitungssatz
    sind beide Tinte, und das Band darunter ist schmaler als vorher. */
-.faden-shell .prose table { margin: var(--luft-l) 0 !important; padding-top: 7px; }
-.faden-shell .prose table::before { top: 2px; height: 2px; background: var(--ink); }
-.faden-shell .prose table::after { top: 6px; height: 1px; background: var(--ink); }
+.faden-shell .prose table {
+  margin: var(--luft-l) 0 !important;
+  /* Der Linienstapel über dem Kopf, von oben nach unten:
+       1 px Linie · 2 px Luft · 2 px Linie · 2 px Luft · 1 px Linie · das Band.
+     Als EIN Verlauf, weil ein Element nur zwei Pseudoelemente hat und es drei Linien
+     sind. 🚨 Die oberste 1-px-Linie fehlte bis zum 16.09.2026. */
+  padding-top: 8px;
+  background-image: linear-gradient(
+    var(--ink) 0 1px, transparent 1px 3px,
+    var(--ink) 3px 5px, transparent 5px 7px,
+    var(--ink) 7px 8px);
+  background-repeat: no-repeat;
+  background-size: 100% 8px;
+}
+/* components.css zeichnet dafür `table::before` und `::after` in Grau — hier trägt der
+   Verlauf alle drei Linien, die beiden Pseudoelemente werden abgeschaltet. */
+.faden-shell .prose table::before, .faden-shell .prose table::after { display: none; }
 .faden-shell .prose thead th {
   font: var(--schrift-kicker); letter-spacing: var(--laufweite-band);
   text-transform: uppercase; padding: var(--luft-xs) var(--luft-m);
