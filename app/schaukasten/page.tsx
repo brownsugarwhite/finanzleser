@@ -39,7 +39,7 @@ import SchaukastenModus from "@/components/faden/SchaukastenModus";
 import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
 import Zeitungskopf from "@/components/faden/Zeitungskopf";
 import SchaukastenTokens from "@/components/faden/SchaukastenTokens";
-import { schriftgrade, harteFarben, knopfformen } from "@/lib/faden/inventur";
+import { schriftgrade, harteFarben, knopfformen, abstaende, radien, schatten } from "@/lib/faden/inventur";
 import Button from "@/components/ui/Button";
 import Einschub from "@/components/faden/Einschub";
 import Fortschrittsreihe from "@/components/faden/kassensturz/Fortschrittsreihe";
@@ -48,6 +48,10 @@ import WochenbriefTeaser from "@/components/faden/landing/WochenbriefTeaser";
 import PlusTeaser from "@/components/faden/landing/PlusTeaser";
 import WeiterredenChips from "@/components/faden/landing/WeiterredenChips";
 import VergleichKoerper from "@/components/vergleich/VergleichKoerper";
+import Setzkasten from "@/components/kursblatt/Setzkasten";
+import Statistik from "@/components/statistik/Statistik";
+import { HANDOFF_BEISPIELE } from "@/lib/statistik/handoffBeispiele";
+import { FORM_NAME, pruefeStatistik } from "@/lib/statistik/schema";
 
 export const metadata: Metadata = {
   title: "Schaukasten · Bausteine",
@@ -108,31 +112,36 @@ export default async function Schaukasten() {
   const grade = schriftgrade();
   const farben = harteFarben();
   const formen = knopfformen();
-  const VON = 16;
+  const luft = abstaende();
+  const ecken = radien();
+  const huelle = schatten();
 
-  return (
-    <KartenKapitel
-      schluessel="schaukasten"
-      titel="Schaukasten"
-      kicker="Abnahme · Alle Bausteine"
-      beschreibung="Jedes Element des Fadens einmal, in Ruhe nebeneinander. Diese Seite gehört nicht zum Magazin — sie existiert nur, solange der Schaukasten eingeschaltet ist."
-      krumen={[{ name: "Abnahme", href: "/schaukasten" }]}
-      url="/schaukasten"
-    >
-      <SchaukastenModus />
-      <Abschnitt titel="Tokens" nr={1} von={VON}>
+  /**
+   * 🚨 Die Abschnitte stehen als Liste, nicht als Folge von JSX-Blöcken mit
+   * handgetippten Nummern. Bis zum 16.09.2026 musste, wer einen Abschnitt einfügte,
+   * alle folgenden `nr` und die Konstante `VON` von Hand nachziehen — die einzige
+   * Sollbruchstelle dieser Seite.
+   */
+  const ABSCHNITTE: { titel: string; inhalt: React.ReactNode }[] = [
+    { titel: "Tokens", inhalt: (<>
         <p>
-          Alle Werte, die mehr als einmal vorkommen. Sie stehen im Kopf von <code>app/faden.css</code>;
-          hier stehen sie so, wie der Browser sie gerade auflöst — nicht abgeschrieben, sondern gemessen.
-          Wer im Faden eine Zahl direkt in eine Regel schreibt, muss sie begründen können.
+          Alle Werte, die mehr als einmal vorkommen. Sie stehen in <code>app/tokens.css</code> und
+          gelten für den Faden UND das Kursblatt; hier stehen sie so, wie der Browser sie gerade
+          auflöst — nicht abgeschrieben, sondern <strong>gemessen</strong>. Wer im Faden eine Zahl
+          direkt in eine Regel schreibt, muss sie begründen können; <code>npm run wache</code>
+          schlägt an, sobald eine dazukommt. Die Namen und ihre Aufgaben stehen in
+          <code>lib/faden/tokenliste.ts</code> — nur die Namen, nie die Werte.
         </p>
         <SchaukastenTokens />
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Schrift und Zeitungssatz" nr={2} von={VON}>
-        <span className="kicker">Kicker · grau</span>
-        <span className="kicker kicker--gruen">Kicker · grün</span>
-        <span className="kicker kicker--pink">Kicker · magenta</span>
+    { titel: "Schrift und Zeitungssatz", inhalt: (<>
+        <div className="chips" style={{ marginBottom: "var(--luft-m)" }}>
+          <span className="kicker">Kicker · grau</span>
+          <span className="kicker kicker--gruen">Kicker · grün</span>
+          <span className="kicker kicker--pink">Kicker · magenta</span>
+          <span className="kicker kicker--tool"><i className="dot dot--vergleich" />Kicker · Werkzeug</span>
+        </div>
         <h3>Zwischentitel (h3)</h3>
         <p className="vorspann">Vorspann: kursiv, gesetzt in Merriweather, für den Einstieg in einen Beitrag.</p>
         <div className="prose zeitung zeitung--initiale">
@@ -171,9 +180,35 @@ export default async function Schaukasten() {
           </table>
           <p className="quelle">Quelle: Schaukasten – Beispieldaten, Stand 2026</p>
         </div>
-      </Abschnitt>
 
-      <Abschnitt titel="Linien und Flächen" nr={3} von={VON}>
+        <h3 style={{ marginTop: "var(--luft-l)" }}>Verschachtelte Liste, Begriffe und Kleinkram</h3>
+        <div className="prose">
+          <ul>
+            <li>
+              Erste Ebene, mit einer zweiten darunter:
+              <ul>
+                <li>Zweite Ebene trägt einen Strich statt eines Quadrats.</li>
+                <li>So bleibt der Rang sichtbar, ohne dass eine zweite Form dazukommt.</li>
+              </ul>
+            </li>
+            <li>Ein Punkt mit <mark>Hervorhebung</mark>, einer <abbr title="Abgekürzt geschrieben">Abk.</abbr> und <code>Code im Fließtext</code>.</li>
+          </ul>
+          <dl>
+            <dt>Effektiver Jahreszins</dt>
+            <dd>Was ein Kredit im Jahr wirklich kostet — Sollzins plus alle Gebühren, auf die Laufzeit gerechnet.</dd>
+            <dt>Tilgung</dt>
+            <dd>Der Teil der Rate, der die Schuld verringert. Der Rest sind Zinsen.</dd>
+          </dl>
+          <hr />
+          <figure>
+            <div style={{ background: "var(--placeholder)", height: 120 }} />
+            <figcaption>Eine Bildunterschrift: klein, grau, mit einer Haarlinie darüber. Quelle steht am Ende.</figcaption>
+          </figure>
+          <p><small>Kleintext für Fußnoten und Rechtliches.</small></p>
+        </div>
+    </>) },
+
+    { titel: "Linien und Flächen", inhalt: (<>
         <p>
           <strong>Die Doppellinie ist eine Auszeichnung.</strong> Sie steht an genau zwei Stellen:
           am Anfang des Fadens und im Kiosk. Überall sonst grenzt eine Haarlinie ab.
@@ -191,9 +226,62 @@ export default async function Schaukasten() {
           <p style={{ margin: "6px 0 0" }}>Weißes Papier mit Kante. Braucht eine Begründung.</p>
         </div>
         <p className="hinweis" style={{ marginTop: "var(--luft-m)" }}>Hinweiszeile: gelber Grund, für Warnungen und Nachträge.</p>
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Knöpfe, Chips und Links" nr={4} von={VON}>
+    { titel: "Das Kopfsystem: Versalien und Linien", inhalt: (<>
+        <p className="vorspann">
+          Der Kicker ist das lauteste kleine Element der Seite. Wann er über, wann unter und
+          wann in einer Linie steht, ist seit dem 16.09.2026 eine Regel und keine Laune.
+        </p>
+        <div className="prose">
+          <ul>
+            <li>Versalien <strong>UNTER</strong> der Linie → die Linie <em>eröffnet</em> einen Block.</li>
+            <li>Versalien <strong>ÜBER</strong> der Linie → die Linie <em>schließt ab</em>.</li>
+            <li>Versalien <strong>IN</strong> einer Fläche → nur der Tabellenkopf.</li>
+            <li>Versalien <strong>OHNE</strong> Linie → Kicker direkt über der Schlagzeile.</li>
+          </ul>
+        </div>
+
+        <div style={{ display: "grid", gap: "var(--luft-xl)", marginTop: "var(--luft-l)" }}>
+          <div>
+            <div className="kopf kopf--einhaenger kopf--einhaenger--rechner">
+              <span className="kicker kicker--tool"><i className="dot dot--rechner" />Rechner · Einhänger</span>
+              <span className="kopf__hinweis">3 Min.</span>
+            </div>
+            <h3 style={{ marginTop: "var(--luft-xs)" }}>Die Linie eröffnet</h3>
+            <p>Für alles, was im Fließtext beginnt: Kästen, Werkzeuge, Spiele, Statistiken. Die Farbe der Linie sagt, um welches Werkzeug es geht.</p>
+          </div>
+
+          <div>
+            <div className="kopf kopf--abschluss">
+              <span className="kicker">Aus dem Bestand · Abschluss</span>
+              <span className="kopf__hinweis">56 Einträge</span>
+            </div>
+            <p>Für Verzeichnisse, Listenköpfe, Kennzahlen: erst die Überschrift, dann der Strich, dann der Inhalt. Die Linie sagt „ab hier kommen die Einträge“.</p>
+          </div>
+
+          <div>
+            <div className="kopf--band"><span className="kicker">Bundesland · Förderung · Zielgruppe</span></div>
+            <p style={{ marginTop: "var(--luft-s)" }}>Versalien in einer Fläche gibt es nur im Tabellenkopf — grauer Grund, weiße Schrift, etwas engere Laufweite, weil eine Versalienzeile auf Fläche weniger Luft braucht als auf Papier.</p>
+          </div>
+
+          <div className="kopf--frei">
+            <span className="kicker">Frei · ohne Linie</span>
+            <h3 style={{ margin: 0 }}>Der Regelfall im Satz</h3>
+            <p style={{ marginTop: "var(--luft-xs)" }}>Kicker, darunter die Schlagzeile, sonst nichts.</p>
+          </div>
+
+          <div>
+            <div className="doppellinie" style={{ height: 6 }} />
+            <p style={{ marginTop: "var(--luft-m)" }}>
+              Die <strong>Doppellinie</strong> ist abschließend aufgezählt und gehört dem Kopf des Fadens,
+              dem Kiosk, dem Tabellenkopf und dem Kennzahlenblock des Kursblatts. Sonst nirgends.
+            </p>
+          </div>
+        </div>
+    </>) },
+
+    { titel: "Knöpfe, Chips und Links", inhalt: (<>
         <p>
           <strong>Vier Formen, mehr gibt es nicht.</strong> Die <code>.pille</code> holt den
           Blick (eine je Block), der <code>.knopf</code> trägt die Handlung nebenbei, der{" "}
@@ -238,9 +326,9 @@ export default async function Schaukasten() {
             </li>
           ))}
         </ul>
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Leo und die Frage des Lesers" nr={5} von={VON}>
+    { titel: "Leo und die Frage des Lesers", inhalt: (<>
         <div className="wort wort--leo">
           <span className="kicker kicker--gruen">Leo · Ihr Finanzagent</span>
           <LeoRede text="So spricht Leo: ohne Sprechblase, Kopf links in der Gasse, Text kursiv in Merriweather. Grüne Begriffe erklären sich auf Tipp.">
@@ -260,9 +348,9 @@ export default async function Schaukasten() {
           <LeoRede fehler><p>So sieht die Störung aus.</p></LeoRede>
         </div>
         <div style={{ marginTop: 18 }}><SucheLeo q="Wie viel Strom verbraucht ein Haushalt?" /></div>
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Ein Gespräch mit Leo" nr={6} von={VON}>
+    { titel: "Ein Gespräch mit Leo", inhalt: (<>
         <p>Zwei Runden Frage und Antwort, so wie sie im Faden untereinander stehen.</p>
         <div className="wort wort--frage"><FrageBlase text="Was kostet mich Strom im Monat, wenn ich allein wohne?"><p>Was kostet mich Strom im Monat, wenn ich allein wohne?</p></FrageBlase></div>
         <div className="wort wort--leo">
@@ -288,9 +376,9 @@ export default async function Schaukasten() {
             { abschnitt: "heading-1", frage: "Was kostet mich der Trockner?", antwort: "Rund 45 Euro im Jahr bei zweimal Trocknen pro Woche — ein Wärmepumpentrockner kommt auf etwa die Hälfte.", quellen: ["Schaukasten – Beispieldaten · S. 7"] },
           ]} />
         </div>
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Leos Zwischenfrage" nr={7} von={VON}>
+    { titel: "Leos Zwischenfrage", inhalt: (<>
         <p>Leo fragt von sich aus — einmal mit Chips, einmal mit Regler. Im Betrieb kommen die Fragen aus dem CMS und erscheinen in der rechten Randspalte.</p>
         <LeoFragt vorgabe={{
           key: "schaukasten-chips",
@@ -308,26 +396,68 @@ export default async function Schaukasten() {
             regler: { min: 500, max: 6000, wert: 2500, schritt: 100, einheit: " kWh" },
           }} />
         </div>
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Statistiken" nr={8} von={VON}>
-        <p>Alle drei Arten, wie sie auch im Ratgeber stehen — Säulen mit Umschalter, Torte mit Legende, Balken.</p>
+    { titel: "Statistiken: alle dreizehn Formen", inhalt: (<>
+        <p className="vorspann">
+          Die dreizehn Formen aus Design A v2, jede mit ihrem Namen und ihrem Schlüssel — und
+          zwar <strong>so, wie sie im Ratgeber wirklich stehen</strong>: in einer Insel, in einer
+          Statistikkarte, im Satzspiegel des Fadens. Die eigene Route{" "}
+          <a href="/schaukasten/statistiken">/schaukasten/statistiken</a> zeigt sie daneben ohne
+          Hülle, für den A/B-Vergleich gegen die gerenderte Vorlage.
+        </p>
+        <p className="quelle">Alle Zahlen sind der Blindtext des Design-Handoffs, keine recherchierten Werte.</p>
+        {HANDOFF_BEISPIELE.map((st, i) => {
+          const befunde = pruefeStatistik(st);
+          return (
+            <div key={`${st.art}-${i}`} style={{ marginTop: "var(--luft-xl)" }}>
+              <div className="kopf kopf--abschluss">
+                <span className="kicker">{i + 1} · {FORM_NAME[st.art]}</span>
+                <code className="kopf__hinweis">{st.art}</code>
+              </div>
+              <Insel typ="statistik-block" werte={st}><Statistik st={st} /></Insel>
+              {befunde.length > 0 && (
+                <p className="hinweis">🚨 {befunde.join(" · ")}</p>
+              )}
+            </div>
+          );
+        })}
+    </>) },
+
+    { titel: "Statistiken im Fließtext", inhalt: (<>
+        <p>Drei Formen mit den Blinddaten des Schaukastens, so wie sie zwischen zwei Absätzen eines Ratgebers stehen.</p>
         {STATISTIKEN.map((st, i) => (
           <Insel key={i} typ="statistik" werte={st}><StatistikKarte st={st} /></Insel>
         ))}
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Werkzeuge" nr={9} von={VON}>
+    { titel: "Werkzeuge", inhalt: (<>
         <p>Rechner, Checkliste und Dokumente als Karten — mit echten Daten aus dem Bestand. Vergleiche fehlen hier bewusst.</p>
         {embeds.map((teil, i) => <WerkzeugKarte key={i} teil={teil} toolData={toolData} imInhalt />)}
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Vergleichsrechner" nr={10} von={VON}>
+    { titel: "Die fünf Eingabe-Bausteine", inhalt: (<>
+        <p className="vorspann">
+          Lineal, Drehring, Zählwerk, Setzzeile und Register ersetzen Feld und Auswahlliste in
+          allen 56 Rechnern und in jedem Vergleich. Sie teilen seit Runde 2 des Kursblatt-Handoffs
+          EINE Anatomie: Kicker-Label links, Bereich rechts, Wertzeile 40 px, Wert 26 px in
+          Antiqua, Linie, Hinweiszeile. Die Farbe folgt dem Werkzeug — Türkis im Vergleich,
+          Magenta im Rechner. Die Zahl selbst bleibt immer Tinte.
+        </p>
+        {/* 🚨 KEINE Insel: der Vertrag einer Insel ist Typ + Slug, und beim Aufklappen
+            ersetzt InselnBeleben ihre Kinder durch die Komponente zu diesem Typ. Für den
+            Setzkasten gibt es keinen — `typ="rechner" arg="setzkasten"` hätte einen
+            Rechner dieses Namens gesucht und nichts gefunden. Hier steht er direkt; im
+            eingefrorenen Kapitel ist er dann ein Bild, und das genügt einer Schauseite. */}
+        <Setzkasten />
+    </>) },
+
+    { titel: "Vergleichsrechner", inhalt: (<>
         <p className="vorspann">Der eigene Vergleich aus der financeads-API, im Kursblatt-Satz: Zeitungskopf, „Ihre Angaben“ mit Lineal, Setzzeile und Register, Streuband oder Zinskurve, drei Kennzahlen, Podest und Angebotsliste mit Balken und Details. Klasse-B-Kategorien (Versicherungen, für die der Partner keine Beiträge liefert) zeigen stattdessen die Anbieterliste — ohne Band, ohne Kennzahlen, ohne Gewinner.</p>
         <VergleichKoerper slug="tagesgeldvergleich" skin="faden" />
         <VergleichKoerper slug="private-haftpflichtversicherung-vergleich" skin="faden" />
-      </Abschnitt>
-      <Abschnitt titel="Spiele" nr={11} von={VON}>
+    </>) },
+    { titel: "Spiele", inhalt: (<>
         <p>Jede Spielform mit echtem Inhalt, damit sich auch die Auflösung anschauen lässt.</p>
         <div className="spiel-inline"><GamificationEmbed gamType="quiz" fields={{
           frage: "Welcher Block ist im Beispiel der zweitgrößte am Strompreis?",
@@ -367,18 +497,18 @@ export default async function Schaukasten() {
             wappen="wortmeister"
           />
         </div>
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Listen, Karten und Mein Bereich" nr={12} von={VON}>
+    { titel: "Listen, Karten und Mein Bereich", inhalt: (<>
         <ListenKarte kicker="Aus dem Bestand" gruppen={listen} />
         <div style={{ marginTop: 18 }}><KassensturzTeaser /></div>
         <div style={{ marginTop: 18 }}>
           <span className="kicker kicker--gruen">Mein Bereich</span>
           <MeinBereich regeln={WAECHTER} />
         </div>
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Anzeigenplätze" nr={13} von={VON}>
+    { titel: "Anzeigenplätze", inhalt: (<>
         <p>
           Sechs Formate, adblocker-neutral benannt. Im Schaukasten sind Anzeigen sonst aus —
           sie laden nach und schieben den Satz; hier sind sie der Gegenstand und deshalb
@@ -398,9 +528,9 @@ export default async function Schaukasten() {
           <span className="kicker">Mobile · 320 × 100</span>
           <Einschub format="mobile" />
         </div>
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Die Blöcke der Startseite" nr={14} von={VON}>
+    { titel: "Die Blöcke der Startseite", inhalt: (<>
         <p>
           Dieselben Bausteine, die das Kapitel „Heute" tragen. Alle stehen auf dem Papier,
           alle tragen denselben Blockkopf und denselben Abstand.
@@ -413,14 +543,15 @@ export default async function Schaukasten() {
           <PlusTeaser />
           <WeiterredenChips />
         </div>
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Inventur: was es wirklich gibt" nr={15} von={VON}>
+    { titel: "Inventur: was es wirklich gibt", inhalt: (<>
         <p>
-          Alle Schriftgrade und alle hart geschriebenen Farben des Fadens, gezählt über
-          neun Stylesheets. Kein gepflegtes Verzeichnis — die Zahlen kommen beim Bauen aus
-          denselben Dateien, die die Seite lädt. Ein Wert, der nur ein- oder zweimal
-          vorkommt, ist ein Kandidat zum Zusammenlegen.
+          Schriftgrade, Abstände, Radien, Schatten und Farben, gezählt über die fünfzehn
+          Stylesheets des Fadens und des Kursblatts. Kein gepflegtes Verzeichnis — die Zahlen
+          kommen beim Bauen aus denselben Dateien, die die Seite lädt. Ein Wert, der nur ein-
+          oder zweimal vorkommt, ist ein Kandidat zum Zusammenlegen. Dieselbe Rechnung als
+          Befehl: <code>npm run wache:bericht</code>.
         </p>
 
         <h3>Schriftgrade · {grade.length} verschiedene</h3>
@@ -433,6 +564,38 @@ export default async function Schaukasten() {
                 Finanzleser · 0123
               </span>
               <span className="inv__wo">{g.stellen.slice(0, 4).map((x) => x.sel.replace(".faden-shell ", "")).join(" · ")}{g.stellen.length > 4 ? ` · +${g.stellen.length - 4}` : ""}</span>
+            </li>
+          ))}
+        </ul>
+
+        <h3 style={{ marginTop: "var(--luft-xl)" }}>Abstände außerhalb der Leiter · {luft.length} verschiedene</h3>
+        <p className="quelle">
+          Was in <code>calc</code>, <code>clamp</code>, <code>min</code> oder <code>max</code> steht,
+          ist ein Layoutmaß und zählt nicht mit — die Leiter regelt den Satz.
+        </p>
+        <ul className="inv inv__grade">
+          {luft.map((f) => (
+            <li key={f.wert}>
+              <b>{f.stellen.length}×</b>
+              <code>{f.wert}</code>
+              <span className="inv__probe"><i style={{ display: "inline-block", height: 12, width: f.wert, background: "var(--green)" }} /></span>
+              <span className="inv__wo">{f.stellen.slice(0, 4).map((x) => x.sel.replace(".faden-shell ", "")).join(" · ")}{f.stellen.length > 4 ? ` · +${f.stellen.length - 4}` : ""}</span>
+            </li>
+          ))}
+        </ul>
+
+        <h3 style={{ marginTop: "var(--luft-xl)" }}>Radien und Schatten ohne Token · {ecken.length + huelle.length} verschiedene</h3>
+        <p className="quelle">
+          Zustandsringe (<code>0 0 0 Npx</code>) zählen mit: sie sind keine Höhe, sondern ein Zustand,
+          und stehen deshalb bewusst neben den drei Schattenstufen.
+        </p>
+        <ul className="inv inv__grade">
+          {[...ecken, ...huelle].map((f) => (
+            <li key={f.wert}>
+              <b>{f.stellen.length}×</b>
+              <code>{f.wert}</code>
+              <span className="inv__probe" />
+              <span className="inv__wo">{f.stellen.slice(0, 4).map((x) => x.sel.replace(".faden-shell ", "")).join(" · ")}{f.stellen.length > 4 ? ` · +${f.stellen.length - 4}` : ""}</span>
             </li>
           ))}
         </ul>
@@ -452,9 +615,9 @@ export default async function Schaukasten() {
             </li>
           ))}
         </ul>
-      </Abschnitt>
+    </>) },
 
-      <Abschnitt titel="Der Vorlage-Beitrag" nr={16} von={VON}>
+    { titel: "Der Vorlage-Beitrag", inhalt: (<>
         <p>
           Der zweite Teil des Schaukastens ist eine <strong>echte Kopie</strong> aus dem CMS:
           „Vorlage-Test · Photovoltaik Förderung“ mit sieben Abschnitten, Tabelle, Statistiken,
@@ -468,7 +631,24 @@ export default async function Schaukasten() {
         <p className="reihe">
           <a className="knopf knopf--primaer" href="/schaukasten/ratgeber">Vorlage-Beitrag als Kapitel anhängen ↓</a>
         </p>
-      </Abschnitt>
+    </>) },
+  ];
+
+  return (
+    <KartenKapitel
+      schluessel="schaukasten"
+      titel="Schaukasten"
+      kicker="Abnahme · Alle Bausteine"
+      beschreibung="Jedes Element des Fadens einmal, in Ruhe nebeneinander. Diese Seite gehört nicht zum Magazin — sie existiert nur, solange der Schaukasten eingeschaltet ist."
+      krumen={[{ name: "Abnahme", href: "/schaukasten" }]}
+      url="/schaukasten"
+    >
+      <SchaukastenModus />
+      {ABSCHNITTE.map((a, i) => (
+        <Abschnitt key={a.titel} titel={a.titel} nr={i + 1} von={ABSCHNITTE.length}>
+          {a.inhalt}
+        </Abschnitt>
+      ))}
 
     </KartenKapitel>
   );

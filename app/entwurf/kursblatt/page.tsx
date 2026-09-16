@@ -15,7 +15,7 @@ import { notFound } from "next/navigation";
 import { ENTWURF_AKTIV } from "@/lib/faden/flag";
 import Zeitungskopf from "@/components/kursblatt/teile/Zeitungskopf";
 import Seitenreiter from "@/components/kursblatt/teile/Seitenreiter";
-import Bausteine from "./Bausteine";
+import Setzkasten from "@/components/kursblatt/Setzkasten";
 
 export const metadata: Metadata = {
   title: "Setzkasten · Kursblatt",
@@ -63,7 +63,7 @@ export default function KursblattSetzkasten() {
           <i aria-hidden="true" />
           Die fünf Bausteine
         </span>
-        <Bausteine />
+        <Setzkasten />
       </section>
 
       <section style={{ marginTop: 52 }}>
@@ -77,7 +77,7 @@ export default function KursblattSetzkasten() {
             ["Register", "Auswahl aus 3–20 Einträgen – Steuerklasse, Bundesland, Zeitraum"],
           ].map(([name, zweck]) => (
             <div key={name} className="kb__punktzeile">
-              <span style={{ font: "600 13.5px var(--serif)" }}>{name}</span>
+              <span style={{ font: "var(--schrift-zeile)" }}>{name}</span>
               <i className="kb__fuehrung" aria-hidden="true" />
               <span style={{ font: "400 13px var(--sans)", color: "var(--muted)", textAlign: "right" }}>
                 {zweck}

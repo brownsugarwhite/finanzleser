@@ -1450,21 +1450,40 @@ body[data-schaukasten] .faden-shell .schau-anzeigen .einschub { display: grid; }
 }
 
 /* ---------- Schaukasten: die Tokentafel ---------- */
-.faden-shell .token { display: grid; gap: var(--luft-m); }
-.faden-shell .token__titel { font-size: var(--grad-18); border-bottom: 1px solid var(--rule-strong); padding-bottom: var(--luft-xs); margin-top: var(--luft-l); }
+/* ---------- Die Tokentafel (Schaukasten, Abschnitt 1) ----------
+   Eine Zeile je Token: Probe · Name · gemessener Wert · Aufgabe. Die Spaltenbreiten
+   unterscheiden sich nach Art, weil eine Farbprobe anders breit ist als eine Schriftprobe. */
+.faden-shell .token { display: grid; gap: var(--luft-xl); }
+.faden-shell .token__gruppe { display: grid; gap: var(--luft-s); }
+.faden-shell .token__titel { font: var(--schrift-zwischen); border-bottom: var(--strich-haar) solid var(--rule-strong); padding-bottom: var(--luft-xs); margin: 0; }
+.faden-shell .token__regel { font: var(--schrift-hinweis); color: var(--muted); margin: 0; max-width: 70ch; }
 .faden-shell .token ul { list-style: none; margin: 0; padding: 0; display: grid; }
-.faden-shell .token li { display: grid; align-items: center; gap: var(--luft-s) var(--luft-m); border-top: 1px solid var(--rule-fein); padding: var(--luft-s) 0; }
-.faden-shell .token code { font: 600 var(--grad-12)/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--ink); }
-.faden-shell .token b { font: 600 var(--grad-12)/1.3 var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
+.faden-shell .token li { display: grid; align-items: center; gap: var(--luft-s) var(--luft-m); border-top: var(--strich-haar) solid var(--rule-fein); padding: var(--luft-s) 0; }
+.faden-shell .token code { font: 600 var(--grad-12)/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--ink); overflow-wrap: anywhere; }
+.faden-shell .token b { font: 600 var(--grad-12)/1.3 var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .faden-shell .token span { font: var(--schrift-klein); color: var(--muted); }
-.faden-shell .token__felder li { grid-template-columns: 40px 190px 118px minmax(0, 1fr); }
-.faden-shell .token__probe { width: 40px; height: 28px; border: 1px solid var(--rule); }
-.faden-shell .token__linien li { grid-template-columns: 190px minmax(60px, 1fr) 220px 118px; }
-.faden-shell .token__linien i { height: 2px; }
-.faden-shell .token__luft li { grid-template-columns: 130px 58px 60px minmax(0, 1fr); }
-.faden-shell .token__luft i { height: 14px; background: var(--green); display: block; }
-.faden-shell .token__schrift li { grid-template-columns: minmax(0, 1fr) 190px 200px; }
+
+.faden-shell .token__liste--farbe li { grid-template-columns: 40px 170px 190px minmax(0, 1fr); }
+.faden-shell .token__probe { width: 40px; height: 28px; border: var(--strich-haar) solid var(--rule); }
+
+.faden-shell .token__liste--linie li { grid-template-columns: minmax(60px, 120px) 150px 130px minmax(0, 1fr); }
+.faden-shell .token__strich { height: 2px; width: 100%; display: block; }
+
+.faden-shell .token__liste--mass li { grid-template-columns: 60px 170px 70px minmax(0, 1fr); }
+.faden-shell .token__balken { height: 14px; background: var(--green); display: block; min-width: 1px; }
+
+.faden-shell .token__liste--form li { grid-template-columns: 46px 190px 210px minmax(0, 1fr); }
+.faden-shell .token__form { width: 40px; height: 28px; display: block; background: var(--placeholder); }
+
+.faden-shell .token__liste--bewegung li { grid-template-columns: 60px 170px 230px minmax(0, 1fr); }
+.faden-shell .token__lauf { width: 10px; height: 10px; border-radius: var(--radius-kreis); background: var(--pink); display: block; animation: token-lauf 2.4s infinite alternate; }
+@keyframes token-lauf { from { transform: translateX(0); } to { transform: translateX(46px); } }
+
+.faden-shell .token__liste--schrift li { grid-template-columns: minmax(0, 1fr) 180px 220px; }
 .faden-shell .token__satz { color: var(--ink); }
+@media (max-width: 900px) {
+  .faden-shell .token li { grid-template-columns: minmax(0, 1fr) !important; }
+}
 @media (max-width: 760px) {
   .faden-shell .token__felder li, .faden-shell .token__linien li, .faden-shell .token__luft li, .faden-shell .token__schrift li { grid-template-columns: minmax(0, 1fr); }
 }

@@ -28,10 +28,12 @@ export default function robots(): MetadataRoute.Robots {
         // als "durch robots.txt blockiert" auflaufen — und weil die Seite kein noindex
         // trägt, könnte Google sie dann nicht einmal mehr sauber deindexieren.
         //
-        // "/entwurf/" ist der Setzkasten der Kursblatt-Bausteine (app/entwurf/kursblatt).
-        // Er trägt bereits noindex und hängt an ENTWURF_AKTIV; der Disallow-Eintrag spart
-        // Crawl-Budget, statt etwas zu schützen.
-        disallow: ["/api/", "/suche?", "/entwurf/"],
+        // "/entwurf/" ist der Setzkasten der Kursblatt-Bausteine (app/entwurf/kursblatt),
+        // "/schaukasten/" die Abnahmeseite. Beide tragen bereits noindex und hängen an
+        // einem Flag; der Disallow-Eintrag spart Crawl-Budget, statt etwas zu schützen.
+        // 🚨 /schaukasten/ fehlte hier bis zum 16.09.2026, obwohl die Schwesterroute
+        // drinstand — eine Asymmetrie ohne Grund.
+        disallow: ["/api/", "/suche?", "/entwurf/", "/schaukasten/"],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

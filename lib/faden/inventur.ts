@@ -13,8 +13,9 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const DATEIEN = [
-  "knoepfe.css", "faden.css", "faden-landing.css", "faden-hover.css", "kassensturz.css",
-  "finanzwort.css", "spiele.css", "schlange.css", "leo-fragt.css", "statistik-formen.css",
+  "knoepfe.css", "koepfe.css", "faden.css", "faden-landing.css", "faden-hover.css",
+  "kassensturz.css", "finanzwort.css", "spiele.css", "schlange.css", "leo-fragt.css",
+  "statistik-formen.css", "kursblatt.css", "vergleich.css", "rechner.css", "gamification.css",
 ];
 
 export interface Fund { wert: string; stellen: { sel: string; datei: string }[] }
@@ -78,11 +79,46 @@ export function schriftgrade(): Fund[] {
 export function harteFarben(): Fund[] {
   return sammeln(({ block, sel }) => {
     // Die Tokendefinition selbst ist keine Fundstelle, sonst zählt sich jedes Token mit.
-    if (sel === ".faden-shell") return [];
+    if (sel === ".faden-shell" || sel === ".kb" || sel === ":root") return [];
     return [...block.matchAll(/#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\)/g)]
       .map((m) => m[0].toLowerCase().replace(/\s+/g, ""))
       .filter((w) => w !== "rgba(0,0,0,0)");
   });
+}
+
+/** Abstände, die nicht aus der Leiter kommen. */
+export function abstaende(): Fund[] {
+  const props = ["padding", "padding-top", "padding-right", "padding-bottom", "padding-left",
+                 "padding-block", "padding-inline", "margin", "margin-top", "margin-right",
+                 "margin-bottom", "margin-left", "margin-block", "margin-inline",
+                 "gap", "row-gap", "column-gap"];
+  return sammeln(({ block }) => {
+    const aus: string[] = [];
+    for (const p of props) {
+      for (const m of block.matchAll(new RegExp(`(?:^|;)\\s*${p}\\s*:\\s*([^;]+)`, "g"))) {
+        const w = m[1];
+        if (/var\(--luft|auto|inherit|unset/.test(w)) continue;
+        for (const t of w.matchAll(/-?\d+(?:\.\d+)?px/g)) aus.push(t[0]);
+      }
+    }
+    return aus;
+  });
+}
+
+/** Radien ohne Token. */
+export function radien(): Fund[] {
+  return sammeln(({ block }) =>
+    [...block.matchAll(/(?:^|;)\s*border-radius\s*:\s*([^;]+)/g)]
+      .map((m) => m[1].trim().replace(/\s+/g, " "))
+      .filter((w) => w !== "0" && !/var\(--radius/.test(w)));
+}
+
+/** Schatten, die nicht aus einem Token kommen. */
+export function schatten(): Fund[] {
+  return sammeln(({ block }) =>
+    [...block.matchAll(/(?:^|;)\s*box-shadow\s*:\s*([^;]+)/g)]
+      .map((m) => m[1].trim().replace(/\s+/g, " ").toLowerCase())
+      .filter((w) => w !== "none" && !/^var\(--[a-z0-9-]+\)$/.test(w)));
 }
 
 /**

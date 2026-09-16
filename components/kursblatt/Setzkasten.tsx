@@ -1,8 +1,13 @@
 "use client";
 
 /**
- * Die Bausteine des Setzkastens mit eigenem Zustand — der Teil der Entwurfsroute, der
- * bedient werden will. Die Seite selbst bleibt eine Serverkomponente.
+ * Der Setzkasten: die fünf Eingabe-Bausteine mit eigenem Zustand, zum Anfassen.
+ *
+ * 🚨 Lag bis zum 16.09.2026 als `app/entwurf/kursblatt/Bausteine.tsx` IN einer Route.
+ * Ein Bauteil, das zwei Seiten brauchen (/entwurf/kursblatt und der Schaukasten), gehört
+ * nach components/ — ein Import quer durch app/ zieht in Next die Grenze zwischen Server
+ * und Client an der falschen Stelle: der Schaukasten versuchte danach, den asynchronen
+ * Server-Vergleich im Browser zu rendern.
  *
  * Die Maße der drei Lineale stammen 1:1 aus „Finanzleser Vergleich & Rechner -
  * Kursblatt.dc.html“:379-383 (Konstante `L`).
@@ -43,7 +48,7 @@ const LAENDER = [
   "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen",
 ].map((l) => ({ wert: l, label: l, meta: ["Bayern", "Baden-Württemberg"].includes(l) ? "KiSt 8 %" : "KiSt 9 %" }));
 
-export default function Bausteine() {
+export default function Setzkasten() {
   const [summe, setSumme] = useState(20000);
   const [monate, setMonate] = useState(60);
   const [rsumme, setRsumme] = useState(20000);
@@ -135,7 +140,7 @@ export default function Bausteine() {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "12px 18px", flexWrap: "wrap", marginTop: 22 }}>
-          <b style={{ font: "600 15px var(--serif)" }}>Verwendung</b>
+          <b className="kb-presets__label">Verwendung</b>
           <Segment
             ariaLabel="Verwendung"
             wert={verwendung}
@@ -149,7 +154,7 @@ export default function Bausteine() {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "8px 10px", flexWrap: "wrap", marginTop: 20 }}>
-          <span style={{ font: "400 13px var(--sans)", color: "var(--muted)", marginRight: 4 }}>Nur mit:</span>
+          <span className="kb-presets__label" style={{ marginRight: 4 }}>Nur mit:</span>
           <Chip label="Gilt für Ihre Angaben" aktiv={filter.gilt} treffer={14} onKlick={() => setFilter((f) => ({ ...f, gilt: !f.gilt }))} />
           <Chip label="ohne Bearbeitungsgebühr" aktiv={filter.gebuehr} treffer={20} onKlick={() => setFilter((f) => ({ ...f, gebuehr: !f.gebuehr }))} />
           <Chip label="nur Direktbanken" aktiv={filter.direkt} treffer={11} onKlick={() => setFilter((f) => ({ ...f, direkt: !f.direkt }))} />
