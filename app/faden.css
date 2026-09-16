@@ -8,85 +8,29 @@
    ===================================================================================== */
 
 /* ═══════════════════════════════════════════════════════════════════════════════════
-   DAS TOKENSYSTEM DES FADENS
+   Das Verzeichnis steht seit dem 16.09.2026 in app/tokens.css — Farbe, Linie, Abstand,
+   Schriftgrad, Radius, Schatten, Bewegung, für den Faden UND das Kursblatt. Dort stehen
+   auch die fünf Regeln, die den Zeitungsstil tragen.
 
-   Alle Werte, die mehr als einmal vorkommen, stehen HIER — Farbe, Linie, Abstand,
-   Schriftgrad. Wer im Faden eine Zahl direkt in eine Regel schreibt, muss sie begründen
-   können; sonst gehört sie in dieses Verzeichnis. Der Schaukasten zeigt jedes Token.
-
-   Vier Regeln, die den Zeitungsstil tragen:
-
-   1. **Papierfarbe, nicht Weiß.** Die Seite ist `--paper`. Nichts bekommt einen eigenen
-      Grund, solange es nicht ausdrücklich ein Kasten sein soll (`.kasten--papier`).
-   2. **Linien statt Rahmen.** Ein Block grenzt sich durch eine Linie über sich ab, nicht
-      durch eine Umrandung. Die **Doppellinie** ist dem Kopf des Fadens und dem Kiosk
-      vorbehalten — überall sonst gilt eine Haarlinie.
-   3. **Schrift trennt Rang, nicht Größe allein.** Serif trägt Titel und Zitat, Sans den
-      Fließtext und alles Technische. Kursiv ist der Hinweis, Versalien der Kicker.
-   4. **Abstände kommen aus der Leiter.** Kein `margin: 37px`. Die Leiter ist
-      4 · 8 · 14 · 22 · 34 · 52 px und deckt alles ab, was im Faden vorkommt.
+   Hier bleibt nur, was der Faden für sich allein braucht: seine MASSE. Die gehören nicht
+   auf die Abstandsleiter — die Leiter regelt den Satz, nicht das Layout.
    ═══════════════════════════════════════════════════════════════════════════════════ */
 .faden-shell {
-  /* ── Flächen ───────────────────────────────────────────────────────────────────── */
-  --paper: var(--color-bg-page);        /* die Seite. Standardgrund für ALLES */
-  --white: #fdfdfb;                     /* nur für ausdrückliche Kästen und Kiosk-Blätter */
-  --placeholder: var(--color-placeholder-bg);
-
-  /* ── Tinte ─────────────────────────────────────────────────────────────────────── */
-  --ink: var(--color-text-primary);     /* Titel, Fließtext */
-  --muted: var(--color-text-medium);    /* Kicker, Hinweis, Bildunterschrift */
-  --green: var(--color-brand);          /* Marke: Pfeile, Punkte, Knopfscheibe */
-  --green-ink: #2E7A0B;                 /* Marke als SCHRIFT (kontraststark genug) */
-  --pink: var(--color-brand-secondary); /* Zweitmarke: Spiel, Finanzwort */
-  --pink-tint: #FBEAF1; --tint: #eef3e8;
-  --tool-rechner: var(--color-tool-rechner); --tool-vergleich: var(--color-tool-vergleiche);
-  --tool-checkliste: var(--color-tool-checklisten); --tool-dokumente: var(--color-tool-dokumente);
-  --fill-1: var(--visual-fill-1); --note: #FBF6E3; --note-ink: #5F4A00; --note-line: #E3C25E;
-
-  /* ── Linien ────────────────────────────────────────────────────────────────────── */
-  /* Vier Stufen derselben Tinte. --rule ist die häufigste (Blocktrenner), --rule-fein
-     trägt Zeilen in Listen, --rule-soft die feinsten Trenner im Verzeichnis,
-     --rule-mid Kapitelkopf, Fortschrittsgleis und Chipkontur, --rule-strong volle Tinte. */
-  --rule: rgba(51,74,39,.16); --rule-fein: rgba(51,74,39,.1); --rule-soft: rgba(51,74,39,.08);
-  --rule-mid: rgba(51,74,39,.2); --rule-strong: #334A27;
-
-  /* ── Abstandsleiter ───────────────────────────────────────────────────────────── */
-  /* Sechs Stufen, mehr braucht der Faden nicht:
-     xs Zeilenabstand in einer Liste · s zwischen Kicker und Titel · m innerhalb eines
-     Blocks · l zwischen zwei Teilen eines Blocks · xl zwischen zwei Blöcken ·
-     xxl zwischen zwei Kapitelteilen. */
-  --luft-xs: 4px; --luft-s: 8px; --luft-m: 14px; --luft-l: 22px; --luft-xl: 34px; --luft-xxl: 52px;
-
-  /* ── Schriftleiter ────────────────────────────────────────────────────────────── */
-  --serif: var(--font-heading); --sans: var(--font-body);
-  --schrift-kicker: 700 10.5px/1.3 var(--sans);          /* Versalien, .14em Laufweite */
-  --schrift-klein: 400 12.5px/1.45 var(--sans);          /* Fußnote, Quelle */
-  --schrift-hinweis: italic 300 12.5px/1.45 var(--serif);/* der kursive Halbsatz rechts */
-  --schrift-text: 400 15px/1.65 var(--sans);             /* Fließtext */
-  --schrift-zeile: 700 15.5px/1.3 var(--serif);          /* Titelzeile in einer Liste */
-  --schrift-vorspann: italic 300 15px/1.5 var(--serif);  /* Vorspann unter der Schlagzeile */
-  --schrift-schlag: 900 clamp(20px, 2.2vw, 27px)/1.15 var(--serif);  /* Blockschlagzeile */
-  --schrift-gross: 900 clamp(24px, 2.4vw, 34px)/1.2 var(--serif);    /* Kassensturzfrage */
-  /* … und die sechs, die den RATGEBER tragen. Sie standen bis zum 13.09.2026 als nackte
-     Zahlen in ihren Regeln — mit dem Ergebnis, dass die Schrift des Fadens auf
-     48 verschiedene Grade kam (node tools/faden-inventur, jetzt im Schaukasten). */
-  --schrift-rubrik: italic 500 clamp(16px, 1.4vw, 19px)/1.3 var(--serif);   /* Rubrikzeile über dem Titel */
-  --schrift-titel: 900 clamp(28px, 3.4vw, 44px)/1.1 var(--serif);           /* Die Schlagzeile des Ratgebers */
-  --schrift-anriss: italic 300 clamp(16px, 1.35vw, 19px)/1.5 var(--serif);  /* Vorspann des Ratgebers */
-  --schrift-abschnitt: 700 clamp(20px, 1.9vw, 26px)/1.25 var(--serif);      /* Abschnittstitel */
-  --schrift-fliess: 400 16px/1.75 var(--sans);                              /* Fließtext im Ratgeber */
-  --schrift-zwischen: 700 18px/1.3 var(--serif);                            /* Zwischentitel im Fließtext */
-  --laufweite-kicker: .14em;
-
-  /* ── Maße ─────────────────────────────────────────────────────────────────────── */
+  /* Die Maße des Fadens. */
   --kopf-h: 64px; --rand-l: 300px; --rand-r: 300px; --spalte: 750px;
   /* Die Eingabepille — Maße wie im Leo-Chat der Live-Seite; --pille-breite gilt nur unten. */
   --pille-h: 92px; --pille-h-landing: 108px; --pille-radius: 35px; --pille-breite: 750px; --pille-breite-landing: 680px;
   /* Die Breite, in der gesetzt wird: --spalte minus das Padding von #mitte (2 × 11 px).
      Die 728 px des Kursblatt-Handoffs waren bis hierher ein Rechenrest, den nur
-     Kommentare kannten — ab jetzt ein Name, auf den man sich berufen kann. */
+     Kommentare kannten — seit dem 13.09. ein Name, auf den man sich berufen kann. */
   --satzbreite: calc(var(--spalte) - 22px);
-  background: var(--paper); color: var(--ink); font: 16px/1.65 var(--sans); min-height: 100vh;
+
+  /* Alt-Namen, die im Faden noch an vielen Stellen stehen. Sie tragen keinen eigenen
+     Wert; die Umstellung der Fundstellen kommt Schritt für Schritt. */
+  --white: var(--auflage);
+  --fill-1: var(--raster);
+
+  background: var(--paper); color: var(--ink); font: var(--schrift-fliess); min-height: 100vh;
 }
 /* 🚨 Keine Scroll-Verankerung des Browsers: Chrome wählt selbst einen Ankerknoten und
    verschiebt scrollY, wenn sich darüber etwas ändert — im Faden mal ja, mal nein (gemessen
