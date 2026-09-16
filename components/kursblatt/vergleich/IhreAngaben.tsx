@@ -13,6 +13,7 @@
 import Lineal from "@/components/kursblatt/eingabe/Lineal";
 import Setzzeile from "@/components/kursblatt/eingabe/Setzzeile";
 import Register from "@/components/kursblatt/eingabe/Register";
+import Rassenwahl from "@/components/kursblatt/eingabe/Rassenwahl";
 import Segment from "@/components/kursblatt/teile/Segment";
 import { bausteinFuer, linealMasse } from "@/lib/financeads/kursblatt";
 import type { AuswahlDef, DefLite, ParamDef, VergleichQuelle } from "@/lib/financeads/typen";
@@ -88,6 +89,21 @@ export default function IhreAngaben({ def, quelle, params, onParam, meta, regist
       {(rest.length > 0 || nebenRegister.length > 0) && (
         <div className="kb__zweispalt kb-angaben__paar">
           {rest.map((p) => {
+            // Werte aus einer Liste des Partners (Rassen) — eigener Baustein, weil 579
+            // Einträge weder in ein Register noch in `DefLite` passen.
+            if (p.liste) {
+              const tier = String(params[p.liste.ausParam ?? ""] ?? def.params.find((q) => q.key === p.liste!.ausParam)?.standard ?? "");
+              return (
+                <Rassenwahl
+                  key={p.key}
+                  label={p.label}
+                  liste={p.liste.name.replace("{tier}", tier.toLowerCase() === "cat" ? "katzen" : "hunde")}
+                  gruppe={String(params[p.key] ?? p.standard)}
+                  onGruppe={(g) => onParam(p.key, g)}
+                  werkzeug="tuerkis"
+                />
+              );
+            }
             const baustein = bausteinFuer(p);
             if (baustein === "segment") {
               return (

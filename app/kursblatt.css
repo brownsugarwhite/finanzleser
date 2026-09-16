@@ -1261,3 +1261,17 @@
   .kb .kb-messlatte__balken { transition: none; }
   .kb .kb-zeiger__bogen { transition: none !important; }
 }
+
+/* ── Rassenwahl (financeads-Liste statt drei Gruppennummern) ──────────────────────── */
+.kb .kb-rassenwahl__zeile { display: flex; align-items: baseline; gap: 12px; height: 54px; }
+.kb .kb-rassenwahl__feld {
+  flex: 1; min-width: 0; border: 0; background: transparent; padding: 0; outline: 0;
+  font: 700 clamp(20px, 2.8vw, 26px) var(--kb-serif); color: var(--kb-ink);
+  letter-spacing: -.01em;
+}
+.kb .kb-rassenwahl__feld::placeholder { font: italic 300 clamp(16px, 2.2vw, 19px) var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-rassenwahl__feld:focus-visible { outline: 2px solid var(--kb-gruen); outline-offset: 4px; }
+.kb .kb-rassenwahl__gruppe {
+  display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
+  font: italic 300 13px var(--kb-serif); color: var(--kb-grau); white-space: nowrap;
+}

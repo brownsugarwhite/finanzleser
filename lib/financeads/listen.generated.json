@@ -1,0 +1,3796 @@
+{
+ "_hinweis": "Erzeugt von tools/financeads-listen.mjs — nicht von Hand ändern.",
+ "_stand": "2026-09-16",
+ "hunderassen": [
+  {
+   "wert": "2",
+   "label": "Affenpinscher",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "4",
+   "label": "Afghane",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "6",
+   "label": "Ainu",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "8",
+   "label": "Akbash",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "10",
+   "label": "Akita Inu",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "12",
+   "label": "Alabai",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "14",
+   "label": "Alamo",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "16",
+   "label": "Alano",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "18",
+   "label": "Alaskan Inian Dog",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "20",
+   "label": "Alaskan Malamute",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "22",
+   "label": "Alsatian",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "24",
+   "label": "American Akita",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "26",
+   "label": "Anatolier",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "28",
+   "label": "Anglo-Fran. de Petite Venerie",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "30",
+   "label": "Ariegois",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "32",
+   "label": "Australian Cattle Dog",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "34",
+   "label": "Azawakh",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "36",
+   "label": "Baladi",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "38",
+   "label": "Barbet",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "40",
+   "label": "Bardino",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "42",
+   "label": "Bärenhund, Germanischer",
+   "anzeige": "Germanischer Bärenhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "44",
+   "label": "Bärenhund, Karelischer",
+   "anzeige": "Karelischer Bärenhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "46",
+   "label": "Barsoi",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "48",
+   "label": "Bas Rouge",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "50",
+   "label": "Basenji",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "52",
+   "label": "Basset",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "54",
+   "label": "Basset Artesien Normand",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "56",
+   "label": "Basset Bleu de Gascogne",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "58",
+   "label": "Basset d'Artois",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "60",
+   "label": "Basset Fauve de Bretagne",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "62",
+   "label": "Basset Griffon petit",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "64",
+   "label": "Basset Griffon Vendeen",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "66",
+   "label": "Bawarski Sokol",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "68",
+   "label": "Beagle",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "70",
+   "label": "Beagle Harrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "72",
+   "label": "Beauceron",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "74",
+   "label": "Bedlington",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "76",
+   "label": "Bergamasker",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "78",
+   "label": "Berger Allemand",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "80",
+   "label": "Berger Blanc Suisse",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "82",
+   "label": "Berger de Beauce",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "84",
+   "label": "Berger de Brie / Briard",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "86",
+   "label": "Berger des Pyrenees",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "88",
+   "label": "Berger Picard",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "90",
+   "label": "Berghund, Bali",
+   "anzeige": "Bali Berghund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "92",
+   "label": "Berghund, Böhmischer",
+   "anzeige": "Böhmischer Berghund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "94",
+   "label": "Berghund, Estrela",
+   "anzeige": "Estrela Berghund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "96",
+   "label": "Berghund, Pyrenáen",
+   "anzeige": "Pyrenáen Berghund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "98",
+   "label": "Bernhardiner",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "100",
+   "label": "Bichon Bolonais",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "102",
+   "label": "Bichon Frise",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "104",
+   "label": "Billy",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "106",
+   "label": "Black Coated Retriever",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "108",
+   "label": "Bluthund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "110",
+   "label": "Bobtail",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "112",
+   "label": "Boerboel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "114",
+   "label": "Bologneser",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "116",
+   "label": "Bolonka Franzuska",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "118",
+   "label": "Bolonka Zwetna",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "120",
+   "label": "Bordelino",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "122",
+   "label": "Bouvier",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "124",
+   "label": "Bouvier des Ardennes",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "126",
+   "label": "Bouvier des Flandes",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "128",
+   "label": "Bower",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "130",
+   "label": "Boxer",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "132",
+   "label": "Boxer, Deutsch",
+   "anzeige": "Deutsch Boxer",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "134",
+   "label": "Brabanter, Kleiner",
+   "anzeige": "Kleiner Brabanter",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "136",
+   "label": "Bracco Italiano",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "138",
+   "label": "Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "140",
+   "label": "Bracke, Bosnische",
+   "anzeige": "Bosnische Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "142",
+   "label": "Bracke, Brandl",
+   "anzeige": "Brandl Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "144",
+   "label": "Bracke, Deutsche",
+   "anzeige": "Deutsche Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "146",
+   "label": "Bracke, Finnen-",
+   "anzeige": "Finnen- Bracke",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "148",
+   "label": "Bracke, Griechische",
+   "anzeige": "Griechische Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "150",
+   "label": "Bracke, Haid-",
+   "anzeige": "Haid- Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "152",
+   "label": "Bracke, Holz-",
+   "anzeige": "Holz- Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "154",
+   "label": "Bracke, Istrianer",
+   "anzeige": "Istrianer Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "156",
+   "label": "Bracke, Jugosl. Dreifarbige",
+   "anzeige": "Jugosl. Dreifarbige Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "158",
+   "label": "Bracke, Kelten-",
+   "anzeige": "Kelten- Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "160",
+   "label": "Bracke, Peintinger",
+   "anzeige": "Peintinger Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "162",
+   "label": "Bracke, Polnische",
+   "anzeige": "Polnische Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "164",
+   "label": "Bracke, Savatal-",
+   "anzeige": "Savatal- Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "166",
+   "label": "Bracke, Siebenbürger",
+   "anzeige": "Siebenbürger Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "168",
+   "label": "Bracke, Slowakische",
+   "anzeige": "Slowakische Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "170",
+   "label": "Bracke, Tiroler",
+   "anzeige": "Tiroler Bracke",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "172",
+   "label": "Braque du Bourbonnais",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "174",
+   "label": "Braque Francais Typ Gascogne",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "176",
+   "label": "Braque Francais Typ Pyrenées",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "178",
+   "label": "Briard / Berger de Brie",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "180",
+   "label": "Briquet Griffon Vendeen",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "182",
+   "label": "Broholmer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "184",
+   "label": "Buhund",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "186",
+   "label": "Bull Terrier",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "188",
+   "label": "Bull Terrier Miniature",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "190",
+   "label": "Bull Terrier Stafford Shire",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "192",
+   "label": "Bulldog Continental",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "194",
+   "label": "Bulldogge, Amerikanische",
+   "anzeige": "Amerikanische Bulldogge",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "196",
+   "label": "Bulldogge, Argentinische",
+   "anzeige": "Argentinische Bulldogge",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "198",
+   "label": "Bulldogge, Englische",
+   "anzeige": "Englische Bulldogge",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "200",
+   "label": "Bulldogge, Französische",
+   "anzeige": "Französische Bulldogge",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "202",
+   "label": "Bullmastiff",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "204",
+   "label": "Bullterrier Mini",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "206",
+   "label": "Bully, American",
+   "anzeige": "American Bully",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "208",
+   "label": "Ca de Bestiar",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "210",
+   "label": "Ca de Bue",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "212",
+   "label": "Ca de Garriguer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "214",
+   "label": "Cane Corso",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "216",
+   "label": "Cane da Pastore Maremmano-Ab.",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "218",
+   "label": "Cao da Serra da Estrela",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "220",
+   "label": "Cao da Serra de Aires",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "222",
+   "label": "Cao de Castro Laboreiro",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "224",
+   "label": "Cao de Fila S. Miguel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "226",
+   "label": "Cardigan",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "228",
+   "label": "Carpatin",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "230",
+   "label": "Cattle Dog, Australian",
+   "anzeige": "Australian Cattle Dog",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "232",
+   "label": "Cavalier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "234",
+   "label": "Cavalier King Charles Spa.",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "236",
+   "label": "Chesapeake Bay Retriever",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "238",
+   "label": "Chihuahua",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "240",
+   "label": "Chodsky Pes",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "242",
+   "label": "Chortaj",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "244",
+   "label": "Chow Chow",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "246",
+   "label": "Chow Chow, Kurzhaar",
+   "anzeige": "Kurzhaar Chow Chow",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "248",
+   "label": "Cirneco dell'Etna",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "250",
+   "label": "Cocker Spaniel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "252",
+   "label": "Cocker Spaniel, American",
+   "anzeige": "American Cocker Spaniel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "256",
+   "label": "Cocker-Spaniel English",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "254",
+   "label": "Cocker, anglaise",
+   "anzeige": "anglaise Cocker",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "258",
+   "label": "Collie",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "260",
+   "label": "Collie Americanisch",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "262",
+   "label": "Collie Kurzhaar",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "264",
+   "label": "Collie Langhaar",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "266",
+   "label": "Collie, Bearded",
+   "anzeige": "Bearded Collie",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "268",
+   "label": "Collie, Border",
+   "anzeige": "Border Collie",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "270",
+   "label": "Collie, Highland",
+   "anzeige": "Highland Collie",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "272",
+   "label": "Coonhound, Black and Tan",
+   "anzeige": "Black and Tan Coonhound",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "274",
+   "label": "Coton de Tulear",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "276",
+   "label": "Curly Coated Retriever",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "278",
+   "label": "Cuvac",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "280",
+   "label": "Dachsbracke, Erzgebirge-",
+   "anzeige": "Erzgebirge- Dachsbracke",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "282",
+   "label": "Dachsbracke, Sauerl.",
+   "anzeige": "Sauerl. Dachsbracke",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "284",
+   "label": "Dachsbracke, Schwedische",
+   "anzeige": "Schwedische Dachsbracke",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "286",
+   "label": "Dachsbracke, Schweizer",
+   "anzeige": "Schweizer Dachsbracke",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "288",
+   "label": "Dachsbracke, Westfälische",
+   "anzeige": "Westfälische Dachsbracke",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "290",
+   "label": "Dachshund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "292",
+   "label": "Dackel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "294",
+   "label": "Dackel, Kurzhaar",
+   "anzeige": "Kurzhaar Dackel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "296",
+   "label": "Dackel, Langhaar",
+   "anzeige": "Langhaar Dackel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "298",
+   "label": "Dackel, Rauhhaar",
+   "anzeige": "Rauhhaar Dackel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "300",
+   "label": "Dackel, Zwerg",
+   "anzeige": "Zwerg Dackel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "302",
+   "label": "Dalmatiner",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "304",
+   "label": "Dansk/Svensk Gardhund",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "306",
+   "label": "Deerhound",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "308",
+   "label": "Deutsch Drahthaar",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "310",
+   "label": "Deutsch Kurzhaar",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "312",
+   "label": "Deutsch Langhaar",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "314",
+   "label": "Deutsch Stichelhaar",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "316",
+   "label": "Dingo",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "318",
+   "label": "Do Khyi",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "320",
+   "label": "Dobermann",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "322",
+   "label": "Dogge",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "336",
+   "label": "Dogge-Englische",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "324",
+   "label": "Dogge, Antik",
+   "anzeige": "Antik Dogge",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "326",
+   "label": "Dogge, Argentinische",
+   "anzeige": "Argentinische Dogge",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "328",
+   "label": "Dogge, Bordeaux",
+   "anzeige": "Bordeaux Dogge",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "330",
+   "label": "Dogge, Dänische",
+   "anzeige": "Dänische Dogge",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "332",
+   "label": "Dogge, Deutsche",
+   "anzeige": "Deutsche Dogge",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "334",
+   "label": "Dogge, Tibet-",
+   "anzeige": "Tibet- Dogge",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "338",
+   "label": "Dogo Argentino",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "340",
+   "label": "Dogo Canario",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "342",
+   "label": "Dogo Mallorquin",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "344",
+   "label": "Drahthaar, Deutsch",
+   "anzeige": "Deutsch Drahthaar",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "346",
+   "label": "Drahthaar, Ungarisch",
+   "anzeige": "Ungarisch Drahthaar",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "348",
+   "label": "Drenste Patrijshons",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "350",
+   "label": "Drever",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "352",
+   "label": "Dürrbächler",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "354",
+   "label": "Elchhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "356",
+   "label": "Elchhund, Norwegischer",
+   "anzeige": "Norwegischer Elchhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "358",
+   "label": "Elchhund, Schwedischer",
+   "anzeige": "Schwedischer Elchhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "360",
+   "label": "Elo",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "362",
+   "label": "Englicher Bullterrier",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "364",
+   "label": "Epagneul Breton",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "366",
+   "label": "Epagneul du Pont Auderner",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "368",
+   "label": "Epagneul Francais",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "370",
+   "label": "Epagneul Picard",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "372",
+   "label": "Eskimohund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "374",
+   "label": "Eurasier",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "376",
+   "label": "Fila Brasileiro",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "378",
+   "label": "Flat Coated Retriever",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "380",
+   "label": "Foxhound, American",
+   "anzeige": "American Foxhound",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "382",
+   "label": "Foxhound, English",
+   "anzeige": "English Foxhound",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "384",
+   "label": "Foxterrier, Drahthaar",
+   "anzeige": "Drahthaar Foxterrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "386",
+   "label": "Foxterrier, Glatthaar",
+   "anzeige": "Glatthaar Foxterrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "388",
+   "label": "Francais",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "390",
+   "label": "Galgo Espaniol",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "392",
+   "label": "Gebetshund, tibetanischer",
+   "anzeige": "tibetanischer Gebetshund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "394",
+   "label": "Gebirgsschweißhund, Bayrischer",
+   "anzeige": "Bayrischer Gebirgsschweißhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "396",
+   "label": "Gebirgsschweißhund, Schwarzwälder",
+   "anzeige": "Schwarzwälder Gebirgsschweißhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "398",
+   "label": "German Trail Hound",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "400",
+   "label": "Glen of Imaal Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "402",
+   "label": "Golden Retriever",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "404",
+   "label": "Gos D'Atura Catala",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "406",
+   "label": "Grand Anglo Francais",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "408",
+   "label": "Grand Basset Griffon Vendeen",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "410",
+   "label": "Grand Bleu des Gascogne",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "412",
+   "label": "Grand Griffon Vendeen",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "414",
+   "label": "Greyhound",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "416",
+   "label": "Griffon",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "418",
+   "label": "Griffon Bleu des Gascogne",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "420",
+   "label": "Griffon Fauve de Bretagne",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "422",
+   "label": "Griffon Korthals",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "424",
+   "label": "Griffon Nivernais",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "426",
+   "label": "Griffon Vendeen",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "428",
+   "label": "Griffon, Belgischer",
+   "anzeige": "Belgischer Griffon",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "430",
+   "label": "Griffon, Brüssler",
+   "anzeige": "Brüssler Griffon",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "432",
+   "label": "Groenendael",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "434",
+   "label": "Hamiltonstövare",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "436",
+   "label": "Harrier",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "438",
+   "label": "Harzer Fuchs",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "440",
+   "label": "Havaneser",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "442",
+   "label": "Heeler, Lancashire",
+   "anzeige": "Lancashire Heeler",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "444",
+   "label": "Hertha-Pointer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "446",
+   "label": "Hirtenhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "448",
+   "label": "Hirtenhund, Coban",
+   "anzeige": "Coban Hirtenhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "450",
+   "label": "Hirtenhund, Kaukasischer",
+   "anzeige": "Kaukasischer Hirtenhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "452",
+   "label": "Hirtenhund, Mioritic",
+   "anzeige": "Mioritic Hirtenhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "454",
+   "label": "Hirtenhund, Ungarischer",
+   "anzeige": "Ungarischer Hirtenhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "456",
+   "label": "Hofhund, Dänisch-Schwedischer",
+   "anzeige": "Dänisch-Schwedischer Hofhund",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "458",
+   "label": "Hollandse Smoushond",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "460",
+   "label": "Hovawart",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "462",
+   "label": "Hühnerhund, Portugiesischer",
+   "anzeige": "Portugiesischer Hühnerhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "464",
+   "label": "Husky",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "466",
+   "label": "Husky, Alaskan",
+   "anzeige": "Alaskan Husky",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "468",
+   "label": "Husky, Malamut",
+   "anzeige": "Malamut Husky",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "470",
+   "label": "Husky, Siberian",
+   "anzeige": "Siberian Husky",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "472",
+   "label": "Hütehund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "476",
+   "label": "Hütehund-Tibetanischer-",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "474",
+   "label": "Hütehund, türkisch",
+   "anzeige": "türkisch Hütehund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "478",
+   "label": "Hybride",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "480",
+   "label": "Island Hund",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "482",
+   "label": "Jack Russel Parson",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "484",
+   "label": "Jagdhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "486",
+   "label": "Jagdterrier, Deutscher",
+   "anzeige": "Deutscher Jagdterrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "488",
+   "label": "Japan Chin",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "490",
+   "label": "Kanaan Hund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "492",
+   "label": "Kangal",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "494",
+   "label": "Karabesh",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "496",
+   "label": "Karelier",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "498",
+   "label": "Karstschäferhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "500",
+   "label": "Kaukasicher Owtcharka",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "502",
+   "label": "Kelpie",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "504",
+   "label": "Kelpie, Australian",
+   "anzeige": "Australian Kelpie",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "506",
+   "label": "King Charles Cavalier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "508",
+   "label": "Kohchi Ken",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "510",
+   "label": "Komondor",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "512",
+   "label": "Kooikerhondje",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "514",
+   "label": "Korean Jindo Dog",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "516",
+   "label": "Kromfohrländer",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "518",
+   "label": "Kuvasz",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "520",
+   "label": "Kyi Leo",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "522",
+   "label": "Laaken",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "524",
+   "label": "Laborhund, Horakscher",
+   "anzeige": "Horakscher Laborhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "526",
+   "label": "Labradoodle",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "528",
+   "label": "Labrador",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "530",
+   "label": "Labrador Retriever",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "532",
+   "label": "Lagotto Romagnolo",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "534",
+   "label": "Laika, Ostsibirische",
+   "anzeige": "Ostsibirische Laika",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "536",
+   "label": "Laika, Russisch-Europäische",
+   "anzeige": "Russisch-Europäische Laika",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "538",
+   "label": "Laika, Westsibirische",
+   "anzeige": "Westsibirische Laika",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "540",
+   "label": "Landseer",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "542",
+   "label": "Lapphund, Finnischer",
+   "anzeige": "Finnischer Lapphund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "544",
+   "label": "Lapphund, Schwedischer",
+   "anzeige": "Schwedischer Lapphund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "546",
+   "label": "Laufhund, Berner",
+   "anzeige": "Berner Laufhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "548",
+   "label": "Laufhund, Jura  Typ Bruno",
+   "anzeige": "Jura  Typ Bruno Laufhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "550",
+   "label": "Laufhund, Luzerner",
+   "anzeige": "Luzerner Laufhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "552",
+   "label": "Laufhund, Schweizerische",
+   "anzeige": "Schweizerische Laufhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "554",
+   "label": "Laufhund, Skandinavischer",
+   "anzeige": "Skandinavischer Laufhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "556",
+   "label": "Leonberger",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "558",
+   "label": "Lhasa Apso",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "560",
+   "label": "Löwchen",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "562",
+   "label": "Lundehund, Norwegischer",
+   "anzeige": "Norwegischer Lundehund",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "564",
+   "label": "Lurcher",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "566",
+   "label": "Magyar Agar",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "568",
+   "label": "Magyar Vizsla",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "570",
+   "label": "Malinois",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "572",
+   "label": "Malteser",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "574",
+   "label": "Malteser/Pekinese",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "576",
+   "label": "Maremma-Abruzzenhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "578",
+   "label": "Markiesje",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "580",
+   "label": "Mastiff",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "584",
+   "label": "Mastiff-Tibet",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "582",
+   "label": "Mastiff, Old English",
+   "anzeige": "Old English Mastiff",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "586",
+   "label": "Mastin de Aragon",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "588",
+   "label": "Mastin Espanol",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "590",
+   "label": "Mastin Leones",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "592",
+   "label": "Mastino Napoletano",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "594",
+   "label": "Mechelaer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "596",
+   "label": "Mioritic",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "598",
+   "label": "Mioritic Hirtenhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "600",
+   "label": "Mischling groß",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "602",
+   "label": "Mischling klein",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "604",
+   "label": "Mittelasiat",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "606",
+   "label": "Mocano",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "608",
+   "label": "Mongrel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "610",
+   "label": "Mops",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "612",
+   "label": "Mudi",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "614",
+   "label": "Münsterländer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "616",
+   "label": "Münsterländer, Großer",
+   "anzeige": "Großer Münsterländer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "618",
+   "label": "Münsterländer, Kleiner",
+   "anzeige": "Kleiner Münsterländer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "620",
+   "label": "Nackthund, Chinesischer",
+   "anzeige": "Chinesischer Nackthund",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "622",
+   "label": "Nackthund, Mexikanischer",
+   "anzeige": "Mexikanischer Nackthund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "624",
+   "label": "Nackthund, Peruanischer",
+   "anzeige": "Peruanischer Nackthund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "626",
+   "label": "Neufundländer",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "628",
+   "label": "Niederlaufhund, Berner",
+   "anzeige": "Berner Niederlaufhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "630",
+   "label": "Niederlaufhund, Schweizer",
+   "anzeige": "Schweizer Niederlaufhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "632",
+   "label": "Niederungshütehund, Poln.",
+   "anzeige": "Poln. Niederungshütehund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "634",
+   "label": "Nova Scotia Duck Tolling Ret.",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "636",
+   "label": "Old Eng.Bullterrier",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "638",
+   "label": "Old English Bulldog",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "640",
+   "label": "Otterhound",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "642",
+   "label": "Owczarek Podhalanski",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "644",
+   "label": "Owtcharka",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "646",
+   "label": "Owtcharka, Südrussischer",
+   "anzeige": "Südrussischer Owtcharka",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "648",
+   "label": "Owtcharka/Caucasischer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "650",
+   "label": "Pachon de Navarro",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "652",
+   "label": "Palasthund, Peking",
+   "anzeige": "Peking Palasthund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "654",
+   "label": "Papillon",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "656",
+   "label": "Pariahund",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "658",
+   "label": "Pastor Mallorquin",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "660",
+   "label": "Pekinese, japanisch",
+   "anzeige": "japanisch Pekinese",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "662",
+   "label": "Pekingese / Pekinese",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "664",
+   "label": "Perro de Agua Espanol",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "666",
+   "label": "Perro de Alano Espanol",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "668",
+   "label": "Perro De Presa",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "670",
+   "label": "Perro de Presa Canario",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "672",
+   "label": "Perro de Presa Mallorquin",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "674",
+   "label": "Petit Basset Griffon Vendeen",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "676",
+   "label": "Petit Bleu de Cascogne",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "678",
+   "label": "Phalene",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "680",
+   "label": "Pharaonenhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "682",
+   "label": "Picardie",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "684",
+   "label": "Pinscher, Deutscher",
+   "anzeige": "Deutscher Pinscher",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "686",
+   "label": "Pinscher, Östereichischer",
+   "anzeige": "Östereichischer Pinscher",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "688",
+   "label": "Pitbull",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "690",
+   "label": "Pitbull-Mix",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "692",
+   "label": "Pittbull, American",
+   "anzeige": "American Pittbull",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "694",
+   "label": "Plott Hound",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "696",
+   "label": "Podenco",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "698",
+   "label": "Podenco Canario",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "700",
+   "label": "Podengo Medio",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "702",
+   "label": "Podengo Pequeno",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "704",
+   "label": "Podhalaner",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "706",
+   "label": "Pointer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "708",
+   "label": "Pointer, Portugiesischer",
+   "anzeige": "Portugiesischer Pointer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "710",
+   "label": "Pointer, Spanischer",
+   "anzeige": "Spanischer Pointer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "712",
+   "label": "Poitevin",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "714",
+   "label": "Polski Owczarek Nizinny",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "716",
+   "label": "Pomeranian",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "718",
+   "label": "Pon",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "720",
+   "label": "Poongsan,Koreanischer Jagdhund",
+   "anzeige": "Koreanischer Jagdhund Poongsan",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "722",
+   "label": "Prager Rattler",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "724",
+   "label": "Presa Canario",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "726",
+   "label": "Pudel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "728",
+   "label": "Pudel, Groß-",
+   "anzeige": "Groß- Pudel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "730",
+   "label": "Pudel, Harlekin-",
+   "anzeige": "Harlekin- Pudel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "732",
+   "label": "Pudel, Klein-",
+   "anzeige": "Klein- Pudel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "734",
+   "label": "Pudel, Königs-",
+   "anzeige": "Königs- Pudel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "736",
+   "label": "Pudel, Mittel-",
+   "anzeige": "Mittel- Pudel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "738",
+   "label": "Pudel, Toy",
+   "anzeige": "Toy Pudel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "740",
+   "label": "Pudel, Zwerg-",
+   "anzeige": "Zwerg- Pudel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "742",
+   "label": "Pudelpointer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "744",
+   "label": "Puli",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "746",
+   "label": "Pumi",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "748",
+   "label": "Pyrenäenberghund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "750",
+   "label": "Rafeiro do Alentejo",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "752",
+   "label": "Ratero (Mallorquin)",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "754",
+   "label": "Rauhbart, Böhmischer",
+   "anzeige": "Böhmischer Rauhbart",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "756",
+   "label": "Rauhbart, Slowakisch",
+   "anzeige": "Slowakisch Rauhbart",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "758",
+   "label": "Rehpinscher",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "760",
+   "label": "Rentierhütehund, Finnischer",
+   "anzeige": "Finnischer Rentierhütehund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "762",
+   "label": "Retriever",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "764",
+   "label": "Rhodesian Ridgeback",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "766",
+   "label": "Rottweiler",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "768",
+   "label": "Saarlos Wolfhound",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "770",
+   "label": "Sabueso alaves",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "772",
+   "label": "Saluki",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "774",
+   "label": "Samojede",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "776",
+   "label": "Samojedskaj",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "778",
+   "label": "Sarplaninac",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "780",
+   "label": "Schäferh. Am.Can.",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "782",
+   "label": "Schäferhd.,Berger Blanc Suisse",
+   "anzeige": "Berger Blanc Suisse Schäferhd.",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "784",
+   "label": "Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "786",
+   "label": "Schäferhund, Altdeutscher",
+   "anzeige": "Altdeutscher Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "788",
+   "label": "Schäferhund, Altenglischer",
+   "anzeige": "Altenglischer Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "790",
+   "label": "Schäferhund, Am.-Can. Weißer",
+   "anzeige": "Am.-Can. Weißer Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "792",
+   "label": "Schäferhund, Atlas",
+   "anzeige": "Atlas Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "794",
+   "label": "Schäferhund, Belgischer",
+   "anzeige": "Belgischer Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "796",
+   "label": "Schäferhund, Deutscher",
+   "anzeige": "Deutscher Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "798",
+   "label": "Schäferhund, Holländischer",
+   "anzeige": "Holländischer Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "800",
+   "label": "Schäferhund, Illyrischer",
+   "anzeige": "Illyrischer Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "802",
+   "label": "Schäferhund, Kanadischer",
+   "anzeige": "Kanadischer Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "804",
+   "label": "Schäferhund, Karst",
+   "anzeige": "Karst Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "806",
+   "label": "Schäferhund, Katalonischer",
+   "anzeige": "Katalonischer Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "808",
+   "label": "Schäferhund, Kroatischer",
+   "anzeige": "Kroatischer Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "810",
+   "label": "Schäferhund, Langhaar",
+   "anzeige": "Langhaar Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "812",
+   "label": "Schäferhund, Pyrenäen",
+   "anzeige": "Pyrenäen Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "814",
+   "label": "Schäferhund, Schottischer",
+   "anzeige": "Schottischer Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "816",
+   "label": "Schäferhund, Schweizer",
+   "anzeige": "Schweizer Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "818",
+   "label": "Schäferhund, Shetland",
+   "anzeige": "Shetland Schäferhund",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "820",
+   "label": "Schäferhund, Tervueren",
+   "anzeige": "Tervueren Schäferhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "822",
+   "label": "Schafpudel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "824",
+   "label": "Schapendoes",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "826",
+   "label": "Schipperke",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "828",
+   "label": "Schnauzer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "830",
+   "label": "Schnauzer, Mittel-",
+   "anzeige": "Mittel- Schnauzer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "832",
+   "label": "Schnauzer, Riesen-",
+   "anzeige": "Riesen- Schnauzer",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "834",
+   "label": "Schnauzer, Zwerg-",
+   "anzeige": "Zwerg- Schnauzer",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "836",
+   "label": "Schopfhund, Chin.",
+   "anzeige": "Chin. Schopfhund",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "838",
+   "label": "Schweißhund, Hannoverscher",
+   "anzeige": "Hannoverscher Schweißhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "840",
+   "label": "Scottisch Deerhound",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "842",
+   "label": "Segugio Italiano",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "844",
+   "label": "Senfhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "846",
+   "label": "Sennenhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "848",
+   "label": "Sennenhund, Appenzeller",
+   "anzeige": "Appenzeller Sennenhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "850",
+   "label": "Sennenhund, Berner",
+   "anzeige": "Berner Sennenhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "852",
+   "label": "Sennenhund, Entlebucher",
+   "anzeige": "Entlebucher Sennenhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "854",
+   "label": "Sennenhund, Großer Schweizer",
+   "anzeige": "Großer Schweizer Sennenhund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "856",
+   "label": "Setter, Breton",
+   "anzeige": "Breton Setter",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "858",
+   "label": "Setter, Englisch",
+   "anzeige": "Englisch Setter",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "860",
+   "label": "Setter, Gordon",
+   "anzeige": "Gordon Setter",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "862",
+   "label": "Setter, Irish",
+   "anzeige": "Irish Setter",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "864",
+   "label": "Setter, Rotweißer Irisch",
+   "anzeige": "Rotweißer Irisch Setter",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "866",
+   "label": "Setter, Schottischer",
+   "anzeige": "Schottischer Setter",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "868",
+   "label": "Shapendoes, Neederlandse",
+   "anzeige": "Neederlandse Shapendoes",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "870",
+   "label": "Shar Pei",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "878",
+   "label": "Sheepdog-Old German",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "872",
+   "label": "Sheepdog, Old English",
+   "anzeige": "Old English Sheepdog",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "874",
+   "label": "Sheepdog, Shetland",
+   "anzeige": "Shetland Sheepdog",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "876",
+   "label": "Sheepdog, Working",
+   "anzeige": "Working Sheepdog",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "880",
+   "label": "Sheltie",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "882",
+   "label": "Shepherd, Australian",
+   "anzeige": "Australian Shepherd",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "884",
+   "label": "Shepherd, Canadian",
+   "anzeige": "Canadian Shepherd",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "886",
+   "label": "Shepherd, German",
+   "anzeige": "German Shepherd",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "888",
+   "label": "Shiba Inu",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "890",
+   "label": "Shih Tzu",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "892",
+   "label": "Sloughi",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "894",
+   "label": "Smalandstövare",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "896",
+   "label": "Span.Laufhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "898",
+   "label": "Spaniel, Bretonischer",
+   "anzeige": "Bretonischer Spaniel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "900",
+   "label": "Spaniel, Cavalier King Charles",
+   "anzeige": "Cavalier King Charles Spaniel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "902",
+   "label": "Spaniel, Clumber",
+   "anzeige": "Clumber Spaniel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "904",
+   "label": "Spaniel, English Springer",
+   "anzeige": "English Springer Spaniel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "906",
+   "label": "Spaniel, English Water",
+   "anzeige": "English Water Spaniel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "908",
+   "label": "Spaniel, Field",
+   "anzeige": "Field Spaniel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "910",
+   "label": "Spaniel, Irish Water",
+   "anzeige": "Irish Water Spaniel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "912",
+   "label": "Spaniel, King Charles",
+   "anzeige": "King Charles Spaniel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "914",
+   "label": "Spaniel, Kontinentaler Zwerg-",
+   "anzeige": "Kontinentaler Zwerg- Spaniel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "916",
+   "label": "Spaniel, Russischer",
+   "anzeige": "Russischer Spaniel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "918",
+   "label": "Spaniel, Tibet",
+   "anzeige": "Tibet Spaniel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "920",
+   "label": "Spaniel, Welsh Springer",
+   "anzeige": "Welsh Springer Spaniel",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "922",
+   "label": "Spinone Italiano",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "924",
+   "label": "Spitz",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "926",
+   "label": "Spitz, Deutscher",
+   "anzeige": "Deutscher Spitz",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "928",
+   "label": "Spitz, Goß-",
+   "anzeige": "Goß- Spitz",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "930",
+   "label": "Spitz, Italienscher",
+   "anzeige": "Italienscher Spitz",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "932",
+   "label": "Spitz, Japanischer",
+   "anzeige": "Japanischer Spitz",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "934",
+   "label": "Spitz, Klein-",
+   "anzeige": "Klein- Spitz",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "936",
+   "label": "Spitz, Mittel-",
+   "anzeige": "Mittel- Spitz",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "938",
+   "label": "Spitz, Wolfs-",
+   "anzeige": "Wolfs- Spitz",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "940",
+   "label": "Spitz, Zwerg-",
+   "anzeige": "Zwerg- Spitz",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "942",
+   "label": "Spürhund, Griechischer",
+   "anzeige": "Griechischer Spürhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "944",
+   "label": "Spürhund, Kretischer",
+   "anzeige": "Kretischer Spürhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "946",
+   "label": "Stabijhound",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "948",
+   "label": "Stafford-Mischling",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "950",
+   "label": "Stafford-Mix",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "952",
+   "label": "Stafford-Pittbull-Terrier",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "954",
+   "label": "Staffordshire-Terrier",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "956",
+   "label": "Stichelhaar, Deutsch",
+   "anzeige": "Deutsch Stichelhaar",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "958",
+   "label": "Tajgan",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "960",
+   "label": "Tazy",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "962",
+   "label": "Teckel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "964",
+   "label": "Teckel-Kurzhaar",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "966",
+   "label": "Teckel-Langhaar",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "968",
+   "label": "Teckel-Rauhaar",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "970",
+   "label": "Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "972",
+   "label": "Terrier, Aberdeen",
+   "anzeige": "Aberdeen Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "974",
+   "label": "Terrier, Airdale",
+   "anzeige": "Airdale Terrier",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "976",
+   "label": "Terrier, American Staff. Bull.",
+   "anzeige": "American Staff. Bull. Terrier",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "978",
+   "label": "Terrier, American Staffordshire",
+   "anzeige": "American Staffordshire Terrier",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "980",
+   "label": "Terrier, Australian",
+   "anzeige": "Australian Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "982",
+   "label": "Terrier, Australian Silky",
+   "anzeige": "Australian Silky Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "984",
+   "label": "Terrier, Bedlington",
+   "anzeige": "Bedlington Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "986",
+   "label": "Terrier, Biewer",
+   "anzeige": "Biewer Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "988",
+   "label": "Terrier, Border",
+   "anzeige": "Border Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "990",
+   "label": "Terrier, Boston",
+   "anzeige": "Boston Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "992",
+   "label": "Terrier, Brasilianischer",
+   "anzeige": "Brasilianischer Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "994",
+   "label": "Terrier, Cairn",
+   "anzeige": "Cairn Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "996",
+   "label": "Terrier, Cesky",
+   "anzeige": "Cesky Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "998",
+   "label": "Terrier, Clydesdale",
+   "anzeige": "Clydesdale Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1000",
+   "label": "Terrier, Dandie Dinmont",
+   "anzeige": "Dandie Dinmont Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1002",
+   "label": "Terrier, Deutscher Jagd",
+   "anzeige": "Deutscher Jagd Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1004",
+   "label": "Terrier, Drahthaar-Fox",
+   "anzeige": "Drahthaar-Fox Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1006",
+   "label": "Terrier, Engl. Staff. Bull",
+   "anzeige": "Engl. Staff. Bull Terrier",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "1008",
+   "label": "Terrier, English Pitbull",
+   "anzeige": "English Pitbull Terrier",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "1010",
+   "label": "Terrier, English Toy",
+   "anzeige": "English Toy Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1012",
+   "label": "Terrier, Fell",
+   "anzeige": "Fell Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1014",
+   "label": "Terrier, Fox",
+   "anzeige": "Fox Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1016",
+   "label": "Terrier, Fox Drahthaar",
+   "anzeige": "Fox Drahthaar Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1018",
+   "label": "Terrier, Fox Glatthaar",
+   "anzeige": "Fox Glatthaar Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1020",
+   "label": "Terrier, Irish",
+   "anzeige": "Irish Terrier",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1022",
+   "label": "Terrier, Irish Blue",
+   "anzeige": "Irish Blue Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1024",
+   "label": "Terrier, Irish-Staffordshire",
+   "anzeige": "Irish-Staffordshire Terrier",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1026",
+   "label": "Terrier, Jack Russel",
+   "anzeige": "Jack Russel Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1028",
+   "label": "Terrier, Jagd",
+   "anzeige": "Jagd Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1030",
+   "label": "Terrier, Japanischer",
+   "anzeige": "Japanischer Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1032",
+   "label": "Terrier, Kerry Blue",
+   "anzeige": "Kerry Blue Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1034",
+   "label": "Terrier, Labrador-Staffordshir",
+   "anzeige": "Labrador-Staffordshir Terrier",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1036",
+   "label": "Terrier, Lakeland",
+   "anzeige": "Lakeland Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1038",
+   "label": "Terrier, Manchester",
+   "anzeige": "Manchester Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1040",
+   "label": "Terrier, Miniatur Bull",
+   "anzeige": "Miniatur Bull Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1042",
+   "label": "Terrier, Norfolk",
+   "anzeige": "Norfolk Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1044",
+   "label": "Terrier, Norwich",
+   "anzeige": "Norwich Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1046",
+   "label": "Terrier, Parson-Russel",
+   "anzeige": "Parson-Russel Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1048",
+   "label": "Terrier, Patterdale",
+   "anzeige": "Patterdale Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1050",
+   "label": "Terrier, Pit Bull",
+   "anzeige": "Pit Bull Terrier",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "1052",
+   "label": "Terrier, Russischer",
+   "anzeige": "Russischer Terrier",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1054",
+   "label": "Terrier, Scottish",
+   "anzeige": "Scottish Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1056",
+   "label": "Terrier, Sealyham",
+   "anzeige": "Sealyham Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1058",
+   "label": "Terrier, Skey Silky",
+   "anzeige": "Skey Silky Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1060",
+   "label": "Terrier, Skye",
+   "anzeige": "Skye Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1062",
+   "label": "Terrier, Soft-Coated Wheaten-",
+   "anzeige": "Soft-Coated Wheaten- Terrier",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1064",
+   "label": "Terrier, Staffordshire Bull",
+   "anzeige": "Staffordshire Bull Terrier",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "1066",
+   "label": "Terrier, Staffordshire-Bullterrier mini",
+   "anzeige": "Staffordshire-Bullterrier mini Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1068",
+   "label": "Terrier, Tibet",
+   "anzeige": "Tibet Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1070",
+   "label": "Terrier, Toy",
+   "anzeige": "Toy Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1072",
+   "label": "Terrier, Welsh",
+   "anzeige": "Welsh Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1074",
+   "label": "Terrier, West Highland White",
+   "anzeige": "West Highland White Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1076",
+   "label": "Terrier, Westfalen-",
+   "anzeige": "Westfalen- Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1078",
+   "label": "Terrier, Working",
+   "anzeige": "Working Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1080",
+   "label": "Terrier, Yorkshire",
+   "anzeige": "Yorkshire Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1082",
+   "label": "Terrier,Siotch",
+   "anzeige": "Siotch Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1084",
+   "label": "Tervueren",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "1086",
+   "label": "Thai Ridgeback",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1088",
+   "label": "Tibet Apso",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1090",
+   "label": "Tibet Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1092",
+   "label": "Tosa Inu",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "1094",
+   "label": "Toy Terrier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1096",
+   "label": "Vieräugl",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1098",
+   "label": "Vizsla",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1100",
+   "label": "Vorstehhund, Bretonischer",
+   "anzeige": "Bretonischer Vorstehhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1102",
+   "label": "Vorstehhund, Ungarischer",
+   "anzeige": "Ungarischer Vorstehhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1104",
+   "label": "Wachhund, Moskauer",
+   "anzeige": "Moskauer Wachhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1106",
+   "label": "Wachtelhund, Deutscher",
+   "anzeige": "Deutscher Wachtelhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1108",
+   "label": "Wäller",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1110",
+   "label": "Wasserhund, Portugisischer",
+   "anzeige": "Portugisischer Wasserhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1112",
+   "label": "Wasserhund, Spanischer",
+   "anzeige": "Spanischer Wasserhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1114",
+   "label": "Weimaraner",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1116",
+   "label": "Welsh Corgi Cardigan",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1118",
+   "label": "Welsh Corgi Pembroke",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1120",
+   "label": "Welsh Hound",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1122",
+   "label": "Wetterhoun",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1124",
+   "label": "Whippet",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1126",
+   "label": "Windhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1128",
+   "label": "Windhund, Afghanischer",
+   "anzeige": "Afghanischer Windhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1130",
+   "label": "Windhund, Arabischer",
+   "anzeige": "Arabischer Windhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1132",
+   "label": "Windhund, Englischer",
+   "anzeige": "Englischer Windhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1134",
+   "label": "Windhund, Persischer",
+   "anzeige": "Persischer Windhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1136",
+   "label": "Windhund, Polnischer",
+   "anzeige": "Polnischer Windhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1138",
+   "label": "Windhund, Sloughi",
+   "anzeige": "Sloughi Windhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1140",
+   "label": "Windhund, Spanischer",
+   "anzeige": "Spanischer Windhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1142",
+   "label": "Windhund, Tuareg",
+   "anzeige": "Tuareg Windhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1144",
+   "label": "Windhund, Ungarischer",
+   "anzeige": "Ungarischer Windhund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1146",
+   "label": "Windspiel",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1148",
+   "label": "Wolfs-Chow",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1150",
+   "label": "Wolfshund, Irischer",
+   "anzeige": "Irischer Wolfshund",
+   "gruppe": "RG3"
+  },
+  {
+   "wert": "1152",
+   "label": "Wolfshund, Russischer",
+   "anzeige": "Russischer Wolfshund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1154",
+   "label": "Wolfshund, Tschechoslow.",
+   "anzeige": "Tschechoslow. Wolfshund",
+   "gruppe": "RG2"
+  },
+  {
+   "wert": "1156",
+   "label": "Zwergpinscher",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1158",
+   "label": "Zwergterrier, Moskauer",
+   "anzeige": "Moskauer Zwergterrier",
+   "gruppe": "RG1"
+  }
+ ],
+ "katzenrassen": [
+  {
+   "wert": "1160",
+   "label": "Abessinier",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1162",
+   "label": "Ägyptische Mau",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1164",
+   "label": "Amerikanisch Bobtail",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1166",
+   "label": "American Curl",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1168",
+   "label": "Amerikanisch Kurzhaar",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1170",
+   "label": "Amerikanisch Langhaar",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1172",
+   "label": "Balinesisch",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1174",
+   "label": "Bengal",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1176",
+   "label": "Birma",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1178",
+   "label": "Bombay",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1180",
+   "label": "Britisch Kurzhaar",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1182",
+   "label": "Britisch Langhaar",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1184",
+   "label": "Burmese",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1186",
+   "label": "Burmilla",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1188",
+   "label": "Chartreux",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1190",
+   "label": "Chausie",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1192",
+   "label": "Cornish Rex",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1194",
+   "label": "Cymric",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1196",
+   "label": "Devon Rex",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1198",
+   "label": "Europäisch Kurzhaar",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1200",
+   "label": "Exotische Kurzhaarkatze",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1202",
+   "label": "Havanna Brown",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1204",
+   "label": "Japanisch Bobtail",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1206",
+   "label": "Javanese",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1208",
+   "label": "Korat",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1210",
+   "label": "LaPerm",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1212",
+   "label": "Maine Coon",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1214",
+   "label": "Manx",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1216",
+   "label": "Munchkin",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1218",
+   "label": "Nebelung",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1220",
+   "label": "Norwegische Waldkatze",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1222",
+   "label": "Ocicat",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1224",
+   "label": "Orientalisch Kurzhaar",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1226",
+   "label": "Perser",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1228",
+   "label": "Pixie-Bob",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1230",
+   "label": "Ragamuffin",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1232",
+   "label": "Ragdoll",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1234",
+   "label": "Russisch Blau",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1236",
+   "label": "Scottish Fold",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1238",
+   "label": "Selkirk Rex",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1240",
+   "label": "Siamkatze",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1242",
+   "label": "Sibirische Katze",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1244",
+   "label": "Singapura",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1246",
+   "label": "Snowshoe",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1248",
+   "label": "Somali",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1250",
+   "label": "Sphynx",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1252",
+   "label": "Tonkinese",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1254",
+   "label": "Türkisch Angora",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1256",
+   "label": "Türkisch Van",
+   "gruppe": "RG1"
+  },
+  {
+   "wert": "1258",
+   "label": "Ukrainisch Levkoy",
+   "gruppe": "RG1"
+  }
+ ],
+ "tierarten": [
+  {
+   "wert": "cat",
+   "label": "Katze"
+  },
+  {
+   "wert": "dog",
+   "label": "Hund"
+  }
+ ],
+ "kreditverwendung": [
+  {
+   "wert": "FREE",
+   "label": "Freier Verwendungszweck"
+  },
+  {
+   "wert": "CAR",
+   "label": "Auto"
+  },
+  {
+   "wert": "MODERNIZATION",
+   "label": "Modernisierung"
+  }
+ ],
+ "kartenanbieter": [
+  {
+   "wert": "amex",
+   "label": "American Express"
+  },
+  {
+   "wert": "diners_club",
+   "label": "Diners Club"
+  },
+  {
+   "wert": "jcb",
+   "label": "Japan Credit Bureau"
+  },
+  {
+   "wert": "mastercard",
+   "label": "Mastercard"
+  },
+  {
+   "wert": "visa",
+   "label": "Visa"
+  }
+ ],
+ "bankkartenanbieter": [
+  {
+   "wert": "maestro",
+   "label": "Maestro"
+  },
+  {
+   "wert": "vpay",
+   "label": "VPAY"
+  }
+ ],
+ "kontozielgruppen": [
+  {
+   "wert": "employee",
+   "label": "Angestellte"
+  },
+  {
+   "wert": "minor",
+   "label": "Minderjährige"
+  },
+  {
+   "wert": "pupil",
+   "label": "Schüler"
+  },
+  {
+   "wert": "student",
+   "label": "Studenten"
+  },
+  {
+   "wert": "apprentice",
+   "label": "Auszubildende"
+  },
+  {
+   "wert": "retired",
+   "label": "Rentner"
+  },
+  {
+   "wert": "freelancer",
+   "label": "Freiberufler"
+  },
+  {
+   "wert": "independent",
+   "label": "Selbstständige"
+  },
+  {
+   "wert": "unemployed",
+   "label": "Arbeitslose"
+  },
+  {
+   "wert": "couples",
+   "label": "Paare"
+  },
+  {
+   "wert": "default",
+   "label": "Standard"
+  }
+ ],
+ "kontowege": [
+  {
+   "wert": "online",
+   "label": "Online - Banking"
+  },
+  {
+   "wert": "app",
+   "label": "App - Banking"
+  },
+  {
+   "wert": "telephone",
+   "label": "Telefon - Banking"
+  },
+  {
+   "wert": "offline",
+   "label": "Filial - Banking"
+  }
+ ],
+ "kontosicherheit": [
+  {
+   "wert": "itan",
+   "label": "iTAN"
+  },
+  {
+   "wert": "pushtan",
+   "label": "pushTAN"
+  },
+  {
+   "wert": "phototan",
+   "label": "photoTAN"
+  },
+  {
+   "wert": "mtan",
+   "label": "mTAN"
+  },
+  {
+   "wert": "chiptan",
+   "label": "ChipTAN"
+  }
+ ],
+ "geschaeftszielgruppen": [
+  {
+   "wert": "sole_proprietorship",
+   "label": "Einzelunternehmer"
+  },
+  {
+   "wert": "freelancer",
+   "label": "Freiberufler"
+  },
+  {
+   "wert": "sole_trader",
+   "label": "Einzelkaufleute (eK)"
+  },
+  {
+   "wert": "limited_liability_company",
+   "label": "GmbH / KGaA / AG"
+  },
+  {
+   "wert": "ordinary_partnership",
+   "label": "OHG"
+  },
+  {
+   "wert": "nontrading_partnership",
+   "label": "GbR"
+  },
+  {
+   "wert": "entrepreneurial_company",
+   "label": "UG"
+  },
+  {
+   "wert": "limited_partnership",
+   "label": "Kommanditgesellschaft (KG)"
+  },
+  {
+   "wert": "limited",
+   "label": "Limited (Ltd)"
+  },
+  {
+   "wert": "other",
+   "label": "Sonstige"
+  }
+ ],
+ "boersenplaetze": [
+  {
+   "wert": "allbig",
+   "label": "Alle großen Börsen"
+  },
+  {
+   "wert": "xetra",
+   "label": "XETRA"
+  },
+  {
+   "wert": "frankfurt",
+   "label": "Frankfurt"
+  },
+  {
+   "wert": "nyse",
+   "label": "NYSE"
+  },
+  {
+   "wert": "hamburg",
+   "label": "Hamburg"
+  },
+  {
+   "wert": "getex",
+   "label": "Gettex"
+  },
+  {
+   "wert": "otc",
+   "label": "OTC"
+  }
+ ],
+ "boersenplaetzeVerfuegbar": [
+  {
+   "wert": "amsterdam",
+   "label": "Amsterdam"
+  },
+  {
+   "wert": "deutsch_xetra",
+   "label": "Deutschland & Xetra"
+  },
+  {
+   "wert": "euronext_brussel",
+   "label": "Euronext Brüssel"
+  },
+  {
+   "wert": "frankfurt",
+   "label": "Frankfurt"
+  },
+  {
+   "wert": "getex",
+   "label": "Gettex"
+  },
+  {
+   "wert": "japan",
+   "label": "Japan"
+  },
+  {
+   "wert": "london",
+   "label": "London"
+  },
+  {
+   "wert": "madrid",
+   "label": "Madrid"
+  },
+  {
+   "wert": "mailand",
+   "label": "Mailand"
+  },
+  {
+   "wert": "paris",
+   "label": "Paris"
+  },
+  {
+   "wert": "usakanada",
+   "label": "USA & Kanada"
+  },
+  {
+   "wert": "weltweit",
+   "label": "Weltweit"
+  }
+ ],
+ "depotzielgruppen": [
+  {
+   "wert": "children",
+   "label": "Kinder"
+  },
+  {
+   "wert": "default",
+   "label": "Standard"
+  }
+ ],
+ "kryptowaehrungen": [
+  {
+   "wert": "BTC",
+   "label": "Bitcoin"
+  },
+  {
+   "wert": "ETH",
+   "label": "Ethereum"
+  },
+  {
+   "wert": "XRP",
+   "label": "Ripple"
+  },
+  {
+   "wert": "USDT",
+   "label": "Tether"
+  },
+  {
+   "wert": "BNB",
+   "label": "Binance Coin"
+  },
+  {
+   "wert": "SOL",
+   "label": "Solana"
+  }
+ ],
+ "crowdorte": [
+  {
+   "wert": "0",
+   "label": "Alle"
+  },
+  {
+   "wert": "1",
+   "label": "EU ohne Deutschland"
+  },
+  {
+   "wert": "2",
+   "label": "Deutschland"
+  }
+ ],
+ "regionen": [
+  {
+   "wert": "europe",
+   "label": "Europa"
+  },
+  {
+   "wert": "international",
+   "label": "Weltweit"
+  }
+ ],
+ "kautionsverwendung": [
+  {
+   "wert": "PRIVATE",
+   "label": "Private Miete"
+  },
+  {
+   "wert": "FIRMA",
+   "label": "Gewerbliche Miete (bestehendes Unternehmen)"
+  },
+  {
+   "wert": "STARTUP",
+   "label": "Gewerbliche Miete (Existenzgründer)"
+  }
+ ],
+ "steuerzielgruppen": [
+  {
+   "wert": "independent",
+   "label": "Selbstständige"
+  },
+  {
+   "wert": "freelancer",
+   "label": "Freiberufler"
+  },
+  {
+   "wert": "employee",
+   "label": "Angestellte"
+  },
+  {
+   "wert": "unemployed",
+   "label": "Arbeitslose"
+  },
+  {
+   "wert": "retired",
+   "label": "Rentner"
+  },
+  {
+   "wert": "student",
+   "label": "Studenten"
+  },
+  {
+   "wert": "gbr",
+   "label": "GbR"
+  },
+  {
+   "wert": "gmbh",
+   "label": "GmbH"
+  }
+ ],
+ "reiseversicherte": [
+  {
+   "wert": "1",
+   "label": "Single ohne Kind"
+  },
+  {
+   "wert": "2",
+   "label": "Single/Paar mit Kind"
+  },
+  {
+   "wert": "3",
+   "label": "Paar ohne Kind"
+  }
+ ]
+}

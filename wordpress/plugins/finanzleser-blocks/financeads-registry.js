@@ -1525,7 +1525,7 @@ window.FL_FINANCEADS = {
         },
         {
           "key": "risky_group",
-          "label": "Rassegruppe",
+          "label": "Rasse",
           "typ": "wahl",
           "standard": "RG1",
           "einheit": "",

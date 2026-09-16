@@ -50,6 +50,15 @@ export interface ParamDef {
    * anzubieten, von denen zwei ins Leere führen, ist eine Falle.
    */
   wenn?: { key: string; ist: string };
+  /**
+   * Die Werte kommen aus einer Liste des Partners (`lib/financeads/listen.generated.json`),
+   * nicht aus `optionen`. Bei der Tierversicherung wählt der Leser eine Rasse, gesetzt
+   * wird die Risikogruppe — die API kennt nur die Gruppe.
+   *
+   * Der Listenname hängt hier von einem anderen Parameter ab (Hund oder Katze), deshalb
+   * eine Vorlage mit `{key}`.
+   */
+  liste?: { name: string; ausParam?: string };
 }
 
 /** „saldo": positiv = Kosten, negativ = Ertrag (Girokonto mit Guthabenzins). */
