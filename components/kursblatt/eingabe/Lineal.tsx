@@ -59,10 +59,10 @@ export interface LinealProps {
 }
 
 const FARBE: Record<Werkzeug, string> = {
-  tuerkis: "var(--kb-tuerkis)",
-  magenta: "var(--kb-magenta)",
-  gruen: "var(--kb-gruen)",
-  ink: "var(--kb-ink)",
+  tuerkis: "var(--tuerkis)",
+  magenta: "var(--pink)",
+  gruen: "var(--green)",
+  ink: "var(--ink)",
 };
 
 export default function Lineal({

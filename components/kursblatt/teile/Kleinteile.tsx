@@ -86,7 +86,7 @@ export function MerkenKnopf({
       aria-pressed={gemerkt}
       onClick={onKlick}
     >
-      <svg width={klein ? 13 : 14} height={klein ? 13 : 14} viewBox="0 0 14 14" fill={gemerkt ? "var(--kb-gruen)" : "none"} stroke="currentColor" strokeWidth={1.5}>
+      <svg width={klein ? 13 : 14} height={klein ? 13 : 14} viewBox="0 0 14 14" fill={gemerkt ? "var(--green)" : "none"} stroke="currentColor" strokeWidth={1.5}>
         <path d="M3 1.5h8v11L7 9.6 3 12.5z" />
       </svg>
       {gemerkt ? "Gemerkt" : "Merken"}

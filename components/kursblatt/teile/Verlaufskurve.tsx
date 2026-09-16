@@ -69,19 +69,19 @@ export default function Verlaufskurve({
       </div>
       <div className="kb-kurve__buehne">
         <svg viewBox={`0 0 ${B} ${H}`} width="100%" className="kb-kurve__bild" onPointerMove={fahren} onPointerLeave={() => setStelle(null)}>
-          <line x1={LINKS} y1={UNTEN} x2={RECHTS} y2={UNTEN} stroke="var(--kb-ink)" strokeWidth={1} />
+          <line x1={LINKS} y1={UNTEN} x2={RECHTS} y2={UNTEN} stroke="var(--ink)" strokeWidth={1} />
           <line x1={LINKS} y1={OBEN} x2={RECHTS} y2={OBEN} stroke="rgba(51,74,39,.15)" strokeWidth={1} />
           <line x1={LINKS} y1={(OBEN + UNTEN) / 2} x2={RECHTS} y2={(OBEN + UNTEN) / 2} stroke="rgba(51,74,39,.15)" strokeWidth={1} />
           <path d={flaeche} fill="rgba(51,74,39,.06)" />
           <path
-            d={pfad} fill="none" stroke="var(--kb-ink)" strokeWidth={1.5}
+            d={pfad} fill="none" stroke="var(--ink)" strokeWidth={1.5}
             pathLength={1} strokeDasharray={1} strokeDashoffset={1}
             className="kb-kurve__linie"
             style={zeichnen === "none" ? { strokeDashoffset: 0 } : { animation: `${zeichnen} 1.6s ease-out .4s both` }}
           />
           {marken.map((i) => (
             <g key={i}>
-              <line x1={x(i).toFixed(1)} y1={UNTEN} x2={x(i).toFixed(1)} y2={UNTEN + 5} stroke="var(--kb-ink)" strokeWidth={1} />
+              <line x1={x(i).toFixed(1)} y1={UNTEN} x2={x(i).toFixed(1)} y2={UNTEN + 5} stroke="var(--ink)" strokeWidth={1} />
               <text x={x(i).toFixed(1)} y={H - 2} className="kb-kurve__achse" textAnchor="middle">{xText(i)}</text>
             </g>
           ))}
@@ -89,8 +89,8 @@ export default function Verlaufskurve({
           <text x={LINKS + 2} y={(OBEN + UNTEN) / 2 - 4} className="kb-kurve__achse">{yText(hoch / 2)}</text>
           {stelle !== null && (
             <g className="kb-kurve__scrub">
-              <line x1={sx.toFixed(1)} y1={20} x2={sx.toFixed(1)} y2={UNTEN} stroke="var(--kb-magenta)" strokeWidth={1} strokeDasharray="3 3" />
-              <circle cx={sx.toFixed(1)} cy={sy.toFixed(1)} r={5} fill="var(--kb-weiss)" stroke="var(--kb-magenta)" strokeWidth={2} />
+              <line x1={sx.toFixed(1)} y1={20} x2={sx.toFixed(1)} y2={UNTEN} stroke="var(--pink)" strokeWidth={1} strokeDasharray="3 3" />
+              <circle cx={sx.toFixed(1)} cy={sy.toFixed(1)} r={5} fill="var(--auf-tinte)" stroke="var(--pink)" strokeWidth={2} />
             </g>
           )}
         </svg>

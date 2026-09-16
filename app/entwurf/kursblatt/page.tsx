@@ -58,7 +58,7 @@ export default function KursblattSetzkasten() {
         </p>
       </section>
 
-      <section style={{ marginTop: 46, paddingTop: 16, borderTop: "2px solid var(--kb-werkzeug)" }}>
+      <section style={{ marginTop: 46, paddingTop: 16, borderTop: "2px solid var(--werkzeug)" }}>
         <span className="kb__kicker kb__kicker--werkzeug">
           <i aria-hidden="true" />
           Die fünf Bausteine
@@ -77,9 +77,9 @@ export default function KursblattSetzkasten() {
             ["Register", "Auswahl aus 3–20 Einträgen – Steuerklasse, Bundesland, Zeitraum"],
           ].map(([name, zweck]) => (
             <div key={name} className="kb__punktzeile">
-              <span style={{ font: "600 13.5px var(--kb-serif)" }}>{name}</span>
+              <span style={{ font: "600 13.5px var(--serif)" }}>{name}</span>
               <i className="kb__fuehrung" aria-hidden="true" />
-              <span style={{ font: "400 13px var(--kb-sans)", color: "var(--kb-grau)", textAlign: "right" }}>
+              <span style={{ font: "400 13px var(--sans)", color: "var(--muted)", textAlign: "right" }}>
                 {zweck}
               </span>
             </div>

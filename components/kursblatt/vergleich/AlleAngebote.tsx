@@ -110,7 +110,7 @@ export default function AlleAngebote({
           offen={offen === p.id}
           gemerkt={gemerkt.includes(p.id)}
           stempel={stempel}
-          animation={herz === "none" ? undefined : `${herz} .7s var(--kb-kurve) ${(i * 0.05 * tempo).toFixed(2)}s both`}
+          animation={herz === "none" ? undefined : `${herz} .7s var(--kurve) ${(i * 0.05 * tempo).toFixed(2)}s both`}
           onHover={onHover}
           onToggle={() => onOeffnen(offen === p.id ? null : p.id)}
           onMerken={() => onMerken(p.id)}

@@ -88,7 +88,7 @@ export default function Streuband({ haupt, neben, zeilen, best, hover, onHover, 
         <>
           <i
             className="kb-band__faden"
-            style={{ left: `${pos(bestZahl)}%`, animation: spalte === "none" ? undefined : `${spalte} .7s var(--kb-kurve) .3s both` }}
+            style={{ left: `${pos(bestZahl)}%`, animation: spalte === "none" ? undefined : `${spalte} .7s var(--kurve) .3s both` }}
             aria-hidden="true"
           />
           {/* 🚨 Zwei Ebenen, weil sich sonst zwei `transform` in die Quere kommen: außen

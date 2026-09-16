@@ -44,7 +44,7 @@ export default function StempelPresets<P extends Record<string, number | string 
             data-aktiv={ist ? "an" : "aus"}
             style={{
               "--kb-neigung": ist ? "0deg" : p.neigung,
-              animation: schlag ? `fl-stempelflach${schlag % 2 ? "" : "2"} .6s var(--kb-kurve) both` : undefined,
+              animation: schlag ? `fl-stempelflach${schlag % 2 ? "" : "2"} .6s var(--kurve) both` : undefined,
             } as React.CSSProperties}
             onClick={() => { setGeklickt((g) => ({ id: p.id, lauf: (g?.id === p.id ? g.lauf : 0) + 1 })); onWaehlen(p); }}
           >

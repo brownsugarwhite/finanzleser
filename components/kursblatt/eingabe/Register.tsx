@@ -32,10 +32,10 @@ export interface RegisterProps<T extends string | number> {
 }
 
 const FARBE: Record<Werkzeug, string> = {
-  tuerkis: "var(--kb-tuerkis)",
-  magenta: "var(--kb-magenta)",
-  gruen: "var(--kb-gruen)",
-  ink: "var(--kb-ink)",
+  tuerkis: "var(--tuerkis)",
+  magenta: "var(--pink)",
+  gruen: "var(--green)",
+  ink: "var(--ink)",
 };
 
 export default function Register<T extends string | number>({
@@ -128,7 +128,7 @@ export default function Register<T extends string | number>({
               data-aktiv={o.wert === wert ? "an" : "aus"}
               onClick={() => waehle(o)}
               onMouseEnter={() => setHell(i)}
-              style={{ animation: offen ? `${druck} .45s var(--kb-kurve) ${(0.05 + i * 0.04).toFixed(2)}s both` : undefined }}
+              style={{ animation: offen ? `${druck} .45s var(--kurve) ${(0.05 + i * 0.04).toFixed(2)}s both` : undefined }}
             >
               <i className="kb-register__nr">{String(i + 1).padStart(2, "0")}</i>
               <span className="kb-register__eintrag-label">

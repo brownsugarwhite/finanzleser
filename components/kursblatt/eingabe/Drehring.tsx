@@ -38,10 +38,10 @@ export interface DrehringProps {
 }
 
 const FARBE: Record<Werkzeug, string> = {
-  tuerkis: "var(--kb-tuerkis)",
-  magenta: "var(--kb-magenta)",
-  gruen: "var(--kb-gruen)",
-  ink: "var(--kb-ink)",
+  tuerkis: "var(--tuerkis)",
+  magenta: "var(--pink)",
+  gruen: "var(--green)",
+  ink: "var(--ink)",
 };
 
 const MITTE = 90;
@@ -114,12 +114,12 @@ export default function Drehring({
           if (e.key === "ArrowLeft" || e.key === "ArrowDown") { e.preventDefault(); setzen(wert - schritt); }
         }}
       >
-        <path d={bogen(MITTE, MITTE, R_BOGEN, VON, BIS)} fill="none" stroke="var(--kb-t18)" strokeWidth={1.5} />
+        <path d={bogen(MITTE, MITTE, R_BOGEN, VON, BIS)} fill="none" stroke="var(--ink-20)" strokeWidth={1.5} />
         {striche.map((s, i) => (
           <line
             key={i}
             x1={s.x1.toFixed(1)} y1={s.y1.toFixed(1)} x2={s.x2.toFixed(1)} y2={s.y2.toFixed(1)}
-            stroke={s.erreicht ? "var(--kb-ink)" : "var(--kb-t30)"}
+            stroke={s.erreicht ? "var(--ink)" : "var(--ink-30)"}
             strokeWidth={s.stark ? 1.5 : 1}
             className="kb-drehring__strich"
           />
@@ -132,7 +132,7 @@ export default function Drehring({
         {anteil > 0.001 && (
           <path d={bogen(MITTE, MITTE, R_BOGEN, VON, winkel)} fill="none" stroke="var(--kb-feld-farbe)" strokeWidth={3} strokeLinecap="round" className="kb-drehring__bogen" />
         )}
-        <circle cx={gx.toFixed(2)} cy={gy.toFixed(2)} r={zieht ? 12 : 9} fill="var(--kb-weiss)" stroke="var(--kb-ink)" strokeWidth={3} className="kb-drehring__griff" />
+        <circle cx={gx.toFixed(2)} cy={gy.toFixed(2)} r={zieht ? 12 : 9} fill="var(--auf-tinte)" stroke="var(--ink)" strokeWidth={3} className="kb-drehring__griff" />
       </svg>
       <div className="kb-drehring__mitte" aria-hidden="true">
         <b>{wert}</b>

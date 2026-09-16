@@ -33,7 +33,7 @@ export interface RassenwahlProps {
   werkzeug?: "tuerkis" | "magenta";
 }
 
-const FARBE = { tuerkis: "var(--kb-tuerkis)", magenta: "var(--kb-magenta)" };
+const FARBE = { tuerkis: "var(--tuerkis)", magenta: "var(--pink)" };
 
 export default function Rassenwahl({ label, liste, gruppe, onGruppe, werkzeug = "tuerkis" }: RassenwahlProps) {
   const [rassen, setRassen] = useState<Rasse[] | null>(null);

@@ -15,7 +15,7 @@ export default function Stempel({
   return (
     <span
       className={"kb-stempel" + (klein ? " kb-stempel--klein" : "")}
-      style={animation && animation !== "none" ? { animation: `${animation} .7s var(--kb-kurve) .5s both` } : undefined}
+      style={animation && animation !== "none" ? { animation: `${animation} .7s var(--kurve) .5s both` } : undefined}
     >
       {text}
     </span>

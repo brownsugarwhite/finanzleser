@@ -70,9 +70,9 @@ export default function Zinskurve({ punkte, spalte, wert, onWert, zeichnen }: Zi
   return (
     <div className="kb-zinskurve" ref={ref}>
       <svg viewBox="0 0 640 210" width="100%" aria-hidden="true">
-        <line x1="30" y1="190" x2="610" y2="190" stroke="var(--kb-ink)" strokeWidth={1} />
+        <line x1="30" y1="190" x2="610" y2="190" stroke="var(--ink)" strokeWidth={1} />
         {linien.map((g) => (
-          <line key={g} x1="30" y1={Y(g).toFixed(1)} x2="610" y2={Y(g).toFixed(1)} stroke="var(--kb-t12)" strokeWidth={1} />
+          <line key={g} x1="30" y1={Y(g).toFixed(1)} x2="610" y2={Y(g).toFixed(1)} stroke="var(--ink-12)" strokeWidth={1} />
         ))}
         <path className="kb-zinskurve__schnitt" d={pfad((p) => p.schnitt)} />
         <path

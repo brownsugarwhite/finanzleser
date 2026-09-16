@@ -25,7 +25,7 @@ function Kachel({ label, wert, text, haupt, verzug, lauf }: { label: string; wer
   return (
     <div
       className={"kb-kachel" + (haupt ? " kb-kachel--haupt" : "")}
-      style={lauf.herz === "none" ? undefined : { animation: `${lauf.herz} .8s var(--kb-kurve) ${verzug}s both` }}
+      style={lauf.herz === "none" ? undefined : { animation: `${lauf.herz} .8s var(--kurve) ${verzug}s both` }}
     >
       <span className="kb__kicker">{label}</span>
       <b className="kb-kachel__wert">{text(laufend)}</b>
@@ -50,9 +50,9 @@ export default function Ergebnis({
               Oberkante liegt 40 px höher und ist unsichtbar (Innenabstand). Gemessen
               landete die sichtbare Zeile dadurch auf 130 px statt der 90 px des Handoffs. */}
           <div className="kb-ergebnis__kopf" ref={kopfRef}>
-            <i style={lauf.mitte === "none" || !offen ? undefined : { animation: `${lauf.mitte} .9s var(--kb-kurve) both` }} aria-hidden="true" />
+            <i style={lauf.mitte === "none" || !offen ? undefined : { animation: `${lauf.mitte} .9s var(--kurve) both` }} aria-hidden="true" />
             <span>ERGEBNIS</span>
-            <i style={lauf.mitte === "none" || !offen ? undefined : { animation: `${lauf.mitte} .9s var(--kb-kurve) both` }} aria-hidden="true" />
+            <i style={lauf.mitte === "none" || !offen ? undefined : { animation: `${lauf.mitte} .9s var(--kurve) both` }} aria-hidden="true" />
           </div>
 
           {bloecke.map((b, i) => {

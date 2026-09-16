@@ -54,7 +54,7 @@ export default function Anbieterliste({ def, zeilen, gezeigt, alle, onAlle, geme
         <div
           key={p.id}
           className="kb__zeile"
-          style={herz === "none" ? undefined : { animation: `${herz} .7s var(--kb-kurve) ${(Math.min(i, 12) * 0.05).toFixed(2)}s both` }}
+          style={herz === "none" ? undefined : { animation: `${herz} .7s var(--kurve) ${(Math.min(i, 12) * 0.05).toFixed(2)}s both` }}
         >
           <i className="kb__zeile-linie kb__zeile-linie--oben" aria-hidden="true" />
           <i className="kb__zeile-linie kb__zeile-linie--unten" aria-hidden="true" />

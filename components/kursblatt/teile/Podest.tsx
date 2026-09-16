@@ -62,7 +62,7 @@ function mehrkosten(
 
 function Haken() {
   return (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="var(--kb-gruen)" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="var(--green)" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M2 6.5l2.6 2.6L10 3.5" />
     </svg>
   );
@@ -90,7 +90,7 @@ export default function Podest({
     .slice(0, 3);
   const plaetze = kursblatt?.podest === 1 ? [] : zeilen.filter((p) => p.id !== best.id).slice(0, 2);
   const titel = plaetze.length ? "Die drei Besten für Ihre Angaben" : "Das beste Angebot für Ihre Angaben";
-  const anim = (name: string, dauer: string, verzug = "") => (name === "none" ? undefined : { animation: `${name} ${dauer} var(--kb-kurve) ${verzug}both` });
+  const anim = (name: string, dauer: string, verzug = "") => (name === "none" ? undefined : { animation: `${name} ${dauer} var(--kurve) ${verzug}both` });
 
   return (
     <section className="kb-podest-block">
@@ -154,7 +154,7 @@ export default function Podest({
               <div
                 key={p.id}
                 className="kb-platz"
-                style={herz === "none" ? undefined : { animation: `${herz} .8s var(--kb-kurve) ${(0.15 + i * 0.1).toFixed(2)}s both` }}
+                style={herz === "none" ? undefined : { animation: `${herz} .8s var(--kurve) ${(0.15 + i * 0.1).toFixed(2)}s both` }}
               >
                 <span className="kb-platz__rang" aria-hidden="true">{i + 2}</span>
                 <div className="kb-podest__kopf">

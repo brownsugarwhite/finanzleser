@@ -68,7 +68,7 @@ export default function PilleCTA({
     </>
   );
 
-  const stil = { "--kb-pille-farbe": werkzeug === "magenta" ? "var(--kb-magenta)" : "var(--kb-tuerkis)" } as React.CSSProperties;
+  const stil = { "--kb-pille-farbe": werkzeug === "magenta" ? "var(--pink)" : "var(--tuerkis)" } as React.CSSProperties;
 
   if (href) {
     return (

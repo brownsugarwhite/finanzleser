@@ -135,7 +135,7 @@ export default function Bausteine() {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "12px 18px", flexWrap: "wrap", marginTop: 22 }}>
-          <b style={{ font: "600 15px var(--kb-serif)" }}>Verwendung</b>
+          <b style={{ font: "600 15px var(--serif)" }}>Verwendung</b>
           <Segment
             ariaLabel="Verwendung"
             wert={verwendung}
@@ -149,7 +149,7 @@ export default function Bausteine() {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "8px 10px", flexWrap: "wrap", marginTop: 20 }}>
-          <span style={{ font: "400 13px var(--kb-sans)", color: "var(--kb-grau)", marginRight: 4 }}>Nur mit:</span>
+          <span style={{ font: "400 13px var(--sans)", color: "var(--muted)", marginRight: 4 }}>Nur mit:</span>
           <Chip label="Gilt für Ihre Angaben" aktiv={filter.gilt} treffer={14} onKlick={() => setFilter((f) => ({ ...f, gilt: !f.gilt }))} />
           <Chip label="ohne Bearbeitungsgebühr" aktiv={filter.gebuehr} treffer={20} onKlick={() => setFilter((f) => ({ ...f, gebuehr: !f.gebuehr }))} />
           <Chip label="nur Direktbanken" aktiv={filter.direkt} treffer={11} onKlick={() => setFilter((f) => ({ ...f, direkt: !f.direkt }))} />
@@ -238,7 +238,7 @@ export default function Bausteine() {
           />
         </div>
         <p className="kb__vorspann" style={{ marginTop: 26, fontSize: 15.5 }}>
-          <i style={{ fontStyle: "italic", color: "var(--kb-grau)" }}>Leo liest mit: </i>
+          <i style={{ fontStyle: "italic", color: "var(--muted)" }}>Leo liest mit: </i>
           {(brutto ?? 0).toLocaleString("de-DE")} € brutto,{" "}
           {STEUERKLASSEN.find((s) => s.wert === stkl)?.label} in {land},{" "}
           {kinder ? `${kinder.toLocaleString("de-DE")} Kinderfreibetrag` : "ohne Kinderfreibetrag"}.
@@ -246,7 +246,7 @@ export default function Bausteine() {
       </div>
 
       <div style={{ marginTop: 40 }}>
-        <span className="kb__kicker kb__kicker--werkzeug" style={{ "--kb-werkzeug": "var(--kb-tuerkis)" } as React.CSSProperties}>
+        <span className="kb__kicker kb__kicker--werkzeug" style={{ "--werkzeug": "var(--tuerkis)" } as React.CSSProperties}>
           <i aria-hidden="true" />
           Dieselben Bausteine im Vergleich
         </span>

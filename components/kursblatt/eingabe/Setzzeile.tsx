@@ -40,10 +40,10 @@ export interface SetzzeileProps {
 }
 
 const FARBE: Record<Werkzeug, string> = {
-  tuerkis: "var(--kb-tuerkis)",
-  magenta: "var(--kb-magenta)",
-  gruen: "var(--kb-gruen)",
-  ink: "var(--kb-ink)",
+  tuerkis: "var(--tuerkis)",
+  magenta: "var(--pink)",
+  gruen: "var(--green)",
+  ink: "var(--ink)",
 };
 
 export default function Setzzeile({
@@ -129,7 +129,7 @@ export default function Setzzeile({
         <i
           className="kb-feldlinien__knoten"
           data-an={!fokus && gesetzt > 0 ? "an" : "aus"}
-          style={{ animation: gesetzt ? `fl-knoten${gesetzt % 2 ? "" : "2"} .5s var(--kb-ueber) both` : undefined }}
+          style={{ animation: gesetzt ? `fl-knoten${gesetzt % 2 ? "" : "2"} .5s var(--ueber) both` : undefined }}
         />
       </div>
 
