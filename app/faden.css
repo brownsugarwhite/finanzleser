@@ -158,12 +158,11 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kopfblur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .kopfblur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .kopfblur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .kopfblur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .kopfblur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .kopfblur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .kopfblur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .kopfblur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
 .faden-shell .kopfblur b { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--paper) 0%, transparent 100%); }
 .faden-shell .kopf { position: sticky; top: 0; z-index: 30; background: transparent; }
-/* 🚨 `flex: 1`. `header.kopf` ist über eine Regel aus dem Alt-CSS ein Flex-Container;
-   ohne diese Zeile ist `.kopf__innen` ein Flex-Kind mit `flex: 0 1 auto` und schrumpft
-   auf seinen INHALT. Gemessen 16.09.2026 auf 1920 px: die ganze Leiste endete bei
-   945 px, und das Lesezeichen klebte mitten im Bild statt an der rechten Kante —
-   auf jeder Fensterbreite gleich, weil die Breite gar nicht vom Fenster kam. */
-.faden-shell .kopf__innen { padding: 0 0 0 28px; flex: 1; min-width: 0; }
+/* 🚨 Hier stand ein `flex: 1; min-width: 0` gegen eine schrumpfende Navigationsleiste.
+   Es war das Pflaster auf einer Namenskollision: das neue Kopfmuster in koepfe.css hieß
+   `.kopf` und machte `<header class="kopf">` zum Flex-Container. Seit es `.satzkopf`
+   heißt, ist der Seitenkopf wieder ein Block — und braucht keine Flex-Angaben. */
+.faden-shell .kopf__innen { padding: 0 0 0 28px; }
 .faden-shell .kopf__zeile { display: flex; align-items: center; gap: 22px; min-height: 64px; }
 .faden-shell .logo { display: flex; align-items: center; text-decoration: none; flex: none; }
 .faden-shell .logo img { height: 28px; width: auto; display: block; }
@@ -209,7 +208,19 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .lesezeichen .lz-icon { position: relative; padding: 6px 7px; }
 .faden-shell .lesezeichen .lz-icon svg { width: 20px; height: 20px; }
 .faden-shell .lesezeichen .lz-zahl { position: absolute; top: -1px; right: -3px; min-width: 16px; height: 16px; border-radius: var(--radius-pille); background: var(--paper); color: var(--green-ink); font: 700 var(--grad-kicker)/var(--grad-16) var(--sans); text-align: center; padding: 0 4px; font-style: normal; }
-.faden-shell .blatt { display: none; background: var(--paper); border-bottom: var(--strich-haar) solid var(--rule-strong); box-shadow: var(--schatten-schwebend); }
+/* 🚨 Das Registerblatt liegt ÜBER dem Satz — es schiebt ihn nicht.
+   Im Prototyp (docs/prototype/src/01-css.html:330) ist `.blatt` ein Block im Fluss des
+   Kopfes. Dort fiel das nie auf, weil das Blatt immer von ganz oben aufging. Im echten
+   Faden öffnet man es mitten im Lesen, und dann wächst der sticky Kopf von 64 auf 501 px
+   — der ganze Satz rutschte unter dem Leser weg (gemessen 16.09.2026 im Schaukasten bei
+   scrollY 4000: Sprung von 1783 px). Absolut positioniert bleibt der Kopf 64 px hoch,
+   das Blatt fällt darunter, und der Satz bleibt stehen, wo er steht. */
+.faden-shell .blatt {
+  display: none; position: absolute; top: 100%; left: 0; right: 0;
+  max-height: calc(100dvh - var(--kopf-h, 64px)); overflow-y: auto; overscroll-behavior: contain;
+  background: var(--paper); border-bottom: var(--strich-haar) solid var(--rule-strong);
+  box-shadow: var(--schatten-schwebend);
+}
 .faden-shell .blatt.offen { display: block; }
 
 /* ---------- Faden: 750er-Spalte fest in der Mitte, Randspalten teilen sich den Rest ---------- */

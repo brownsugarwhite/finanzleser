@@ -15,6 +15,9 @@ const eslintConfig = [
     ignores: [
       "node_modules/**",
       ".next/**",
+      // NEXT_DIST_DIR baut in ein eigenes Verzeichnis (next.config.ts). Ohne diese Zeile
+      // liest eslint den erzeugten Code mit: aus 44 Fehlern wurden 1394.
+      ".next-*/**",
       "out/**",
       "build/**",
       "next-env.d.ts",

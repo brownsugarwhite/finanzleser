@@ -246,28 +246,28 @@ export default async function Schaukasten() {
 
         <div style={{ display: "grid", gap: "var(--luft-xl)", marginTop: "var(--luft-l)" }}>
           <div>
-            <div className="kopf kopf--einhaenger kopf--einhaenger--rechner">
+            <div className="satzkopf satzkopf--einhaenger satzkopf--einhaenger--rechner">
               <span className="kicker kicker--tool"><i className="dot dot--rechner" />Rechner · Einhänger</span>
-              <span className="kopf__hinweis">3 Min.</span>
+              <span className="satzkopf__hinweis">3 Min.</span>
             </div>
             <h3 style={{ marginTop: "var(--luft-xs)" }}>Die Linie eröffnet</h3>
             <p>Für alles, was im Fließtext beginnt: Kästen, Werkzeuge, Spiele, Statistiken. Die Farbe der Linie sagt, um welches Werkzeug es geht.</p>
           </div>
 
           <div>
-            <div className="kopf kopf--abschluss">
+            <div className="satzkopf satzkopf--abschluss">
               <span className="kicker">Aus dem Bestand · Abschluss</span>
-              <span className="kopf__hinweis">56 Einträge</span>
+              <span className="satzkopf__hinweis">56 Einträge</span>
             </div>
             <p>Für Verzeichnisse, Listenköpfe, Kennzahlen: erst die Überschrift, dann der Strich, dann der Inhalt. Die Linie sagt „ab hier kommen die Einträge“.</p>
           </div>
 
           <div>
-            <div className="kopf--band"><span className="kicker">Bundesland · Förderung · Zielgruppe</span></div>
+            <div className="satzkopf--band"><span className="kicker">Bundesland · Förderung · Zielgruppe</span></div>
             <p style={{ marginTop: "var(--luft-s)" }}>Versalien in einer Fläche gibt es nur im Tabellenkopf — grauer Grund, weiße Schrift, etwas engere Laufweite, weil eine Versalienzeile auf Fläche weniger Luft braucht als auf Papier.</p>
           </div>
 
-          <div className="kopf--frei">
+          <div className="satzkopf--frei">
             <span className="kicker">Frei · ohne Linie</span>
             <h3 style={{ margin: 0 }}>Der Regelfall im Satz</h3>
             <p style={{ marginTop: "var(--luft-xs)" }}>Kicker, darunter die Schlagzeile, sonst nichts.</p>
@@ -413,9 +413,9 @@ export default async function Schaukasten() {
           const befunde = pruefeStatistik(st);
           return (
             <div key={`${st.art}-${i}`} style={{ marginTop: "var(--luft-xl)" }}>
-              <div className="kopf kopf--abschluss">
+              <div className="satzkopf satzkopf--abschluss">
                 <span className="kicker">{i + 1} · {FORM_NAME[st.art]}</span>
-                <code className="kopf__hinweis">{st.art}</code>
+                <code className="satzkopf__hinweis">{st.art}</code>
               </div>
               <Insel typ="statistik-block" werte={st}><Statistik st={st} /></Insel>
               {befunde.length > 0 && (

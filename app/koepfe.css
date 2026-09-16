@@ -8,10 +8,10 @@
 
    ── Die Regel ───────────────────────────────────────────────────────────────────────
 
-     Versalien UNTER der Linie   → die Linie ERÖFFNET einen Block.      .kopf--einhaenger
-     Versalien ÜBER der Linie    → die Linie SCHLIESST ab.              .kopf--abschluss
-     Versalien IN einer Fläche   → nur der Tabellenkopf.                .kopf--band
-     Versalien OHNE Linie        → Kicker direkt über der Schlagzeile.  .kopf--frei
+     Versalien UNTER der Linie   → die Linie ERÖFFNET einen Block.      .satzkopf--einhaenger
+     Versalien ÜBER der Linie    → die Linie SCHLIESST ab.              .satzkopf--abschluss
+     Versalien IN einer Fläche   → nur der Tabellenkopf.                .satzkopf--band
+     Versalien OHNE Linie        → Kicker direkt über der Schlagzeile.  .satzkopf--frei
 
    Und dazu die Strichstärken aus dem Verzeichnis, die den Rang tragen:
 
@@ -23,6 +23,14 @@
    Kiosk, dem Tabellenkopf und dem Kennzahlenblock des Kursblatts. Sonst nirgends.
 
    Die Datei ist nicht auf `.faden-shell` begrenzt — das Kursblatt läuft auch allein.
+   🚨 Und genau deshalb heißt das Muster `.satzkopf` und NICHT `.kopf`: `.kopf` gehört
+   seit dem Zeitungsumbau dem Seitenkopf (`components/faden/Kopf.tsx`, `<header
+   class="kopf" id="kopf">`). Eine ungebundene Regel `.kopf { display: flex }` traf ihn
+   mit — der Seitenkopf wurde zum Flex-Container, das Megamenü `.blatt` wurde darin zum
+   zweiten Flex-Kind und klappte RECHTS NEBEN der Navigation auf, statt unter ihr; die
+   Navigation schrumpfte auf 429 px und die ganze Seite rutschte um 420 px nach unten.
+   Eine ungebundene Klasse in dieser Datei muss einen Namen tragen, den der Faden noch
+   nicht kennt. Gegenprobe: `grep -rn '"<name>' components app`.
    ===================================================================================== */
 
 /* ── Der Kicker ─────────────────────────────────────────────────────────────────────── */
@@ -41,34 +49,34 @@
 /* Fast jeder Block im Faden trägt rechts noch eine Angabe — eine Lesedauer, einen
    Bereich, ein Datum. Sie steht kursiv und grau, nie in Versalien: zwei Versalienzeilen
    nebeneinander lesen sich als Konkurrenz. */
-.kopf {
+.satzkopf {
   display: flex; align-items: baseline; justify-content: space-between;
   gap: var(--luft-s) var(--luft-m); flex-wrap: wrap;
 }
-.kopf__hinweis { font: var(--schrift-hinweis); color: var(--muted); }
+.satzkopf__hinweis { font: var(--schrift-hinweis); color: var(--muted); }
 
 /* ── 1 · Einhänger: die Linie ERÖFFNET ─────────────────────────────────────────────── */
 /* Für alles, was im Fließtext beginnt: Kästen, Werkzeuge, Spiele, Statistiken.
    `--ton` trägt die Werkzeugfarbe; ohne Angabe eröffnet Grün. */
-.kopf--einhaenger {
+.satzkopf--einhaenger {
   border-top: var(--strich-einhaenger) solid var(--ton, var(--green));
   padding-top: var(--luft-s);
 }
-.kopf--einhaenger--rechner { --ton: var(--tool-rechner); }
-.kopf--einhaenger--vergleich { --ton: var(--tool-vergleich); }
-.kopf--einhaenger--checkliste { --ton: var(--tool-checkliste); }
-.kopf--einhaenger--dokumente { --ton: var(--tool-dokumente); }
-.kopf--einhaenger--tinte { --ton: var(--ink); }
+.satzkopf--einhaenger--rechner { --ton: var(--tool-rechner); }
+.satzkopf--einhaenger--vergleich { --ton: var(--tool-vergleich); }
+.satzkopf--einhaenger--checkliste { --ton: var(--tool-checkliste); }
+.satzkopf--einhaenger--dokumente { --ton: var(--tool-dokumente); }
+.satzkopf--einhaenger--tinte { --ton: var(--ink); }
 
 /* ── 2 · Abschluss: die Linie SCHLIESST AB ─────────────────────────────────────────── */
 /* Für Verzeichnisse, Listenköpfe, Kennzahlen: erst die Überschrift, dann der Strich,
    dann der Inhalt. Die Linie sagt „ab hier kommen die Einträge". */
-.kopf--abschluss {
+.satzkopf--abschluss {
   border-bottom: var(--strich-haar) solid var(--rule);
   padding-bottom: var(--luft-xs);
   margin-bottom: var(--luft-s);
 }
-.kopf--abschluss--stark { border-bottom-width: var(--strich-stark); border-bottom-color: var(--ink); }
+.satzkopf--abschluss--stark { border-bottom-width: var(--strich-stark); border-bottom-color: var(--ink); }
 
 /* ── 3 · Band: Versalien IN einer Fläche ───────────────────────────────────────────── */
 /* Nur der Tabellenkopf. Grauer Grund, weiße Versalien, etwas engere Laufweite —
@@ -76,19 +84,19 @@
    Handoff Runde 2, Punkt 5. */
 /* 🚨 Tinte, nicht Grau. Ein grauer Kopf über einer Tabelle in Tinte-Schrift liest sich
    wie eine zweite, schwächere Stimme; der Kopf ist aber die stärkste Zeile der Tabelle. */
-.kopf--band {
+.satzkopf--band {
   background: var(--ink); color: var(--auf-tinte);
   padding: var(--luft-xs) var(--luft-s);
   font: var(--schrift-kicker); letter-spacing: var(--laufweite-band);
   text-transform: uppercase;
 }
-.kopf--band .kicker,
-.kopf--band span,
-.kopf--band b { color: var(--auf-tinte); }
+.satzkopf--band .kicker,
+.satzkopf--band span,
+.satzkopf--band b { color: var(--auf-tinte); }
 
 /* ── 4 · Frei: Versalien OHNE Linie ────────────────────────────────────────────────── */
 /* Der Regelfall im Satz: Kicker, darunter die Schlagzeile, sonst nichts. */
-.kopf--frei { display: grid; gap: var(--luft-xs); }
+.satzkopf--frei { display: grid; gap: var(--luft-xs); }
 
 /* ── Die Doppellinie ───────────────────────────────────────────────────────────────── */
 /* 2 px Linie, 2 px Luft, 1 px Linie — als EIN Verlauf auf einem 5-px-Element.
