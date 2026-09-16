@@ -102,7 +102,20 @@ export function normalisiereVariante(def: KategorieDef, params: Record<string, s
   let produkte = roh.map((x) => normalisiereProdukt(def, x, p)).filter((x): x is VergleichProdukt => !!x);
   if (def.bestwert) produkte = sortiere(produkte, def.bestwert.key, def.bestwert.richtung);
   produkte = produkte.slice(0, limit);
-  const bestwert = bestwertId(produkte, def.bestwert);
+  /**
+   * 🚨 Der Bestwert darf nicht auf ein Angebot zeigen, das die Liste gar nicht zeigt.
+   *
+   * `kursblatt.ohne` sortiert Angebote aus, die für diese Kombination nicht gelten — beim
+   * Festgeld die Banken mit 0 % Zinsen, bei der Auslandskrankenversicherung den Tarif
+   * ohne ausgewiesenen Beitrag. Beim Festgeld fiel das nie auf, weil dort der HÖCHSTE
+   * Ertrag gewinnt und eine Null nie gewinnt. Bei der Auslandskranken gewinnt der
+   * NIEDRIGSTE Beitrag — und da stand im Vorspann „Bestwert 0 €" für einen Tarif, der
+   * unter der Liste als ausgeschlossen genannt wird (gemessen 16.09.2026).
+   */
+  const zaehlen = def.kursblatt?.ohne
+    ? produkte.filter((x) => x.kennzahlen[def.kursblatt!.ohne!.key] !== def.kursblatt!.ohne!.ist)
+    : produkte;
+  const bestwert = bestwertId(zaehlen.length ? zaehlen : produkte, def.bestwert);
   const best = produkte.find((x) => x.id === bestwert);
   return { schluessel: paramSchluessel(p), params: p, produkte, bestwert, bestwertGrund: best && def.begruendung ? def.begruendung(best) : undefined };
 }

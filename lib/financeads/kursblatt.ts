@@ -97,28 +97,49 @@ export function achsenEnden(haupt: SpalteDef | undefined): [string, string] {
   return ["niedrig", "hoch"];
 }
 
-/** „20.000 € über 60 Monate“ — wofür die Liste gerade gilt (K:90). */
+/**
+ * „20.000 € über 60 Monate“ — wofür die Liste gerade gilt (K:90).
+ *
+ * 🚨 Drei Regeln, die alle drei aus kaputten Sätzen entstanden sind (16.09.2026, als die
+ * Registry breiter wurde):
+ *
+ *   1 **Laufzeit erkennt man am Label, nicht an der Einheit.** „Orders / Jahr" und
+ *     „Buchungen / Monat" enthalten ein Zeitwort, sind aber Stückzahlen — daraus wurde
+ *     „20.000 € über 12" und „10 über 0". Und das Alter eines Hundes hat die Einheit
+ *     „Jahre", ist aber keine Dauer: „Hund über 2 Jahre" liest sich wie „älter als zwei“.
+ *   2 **Eine Auswahl, die nichts einschränkt, sagt nichts.** „alle Länder", „egal",
+ *     „keine", „ohne" gehören nicht in einen Satz darüber, wofür die Liste gilt.
+ *     Sonst endete die Auslandskrankenversicherung auf „eine Person ohne."
+ *   3 **Eine Zahl ohne Einheit braucht ihr Wort.** „12" allein ist nichts, „12 Orders /
+ *     Jahr" ist eine Angabe. Und eine solche Zahl auf 0 sagt ebenfalls nichts.
+ *
+ * Getrennt wird mit „ · ", nur die Dauer hängt sich mit „über" an den Satz davor.
+ */
 export function eingabenSatz(def: DefLite, fest: Record<string, string>, params: Record<string, string | number>): string {
   const teile: string[] = [];
+  const NICHTSSAGEND = /^(alle|egal|keine|ohne|beliebig)\b/i;
   for (const p of def.params) {
     if (p.fest || fest[p.key] !== undefined) continue;
     const roh = params[p.key] ?? p.standard;
     if (roh === "" || roh === undefined) continue;
-    const dauer = /monat|jahr|dauer|laufzeit/i.test(p.einheit ?? p.label);
+    const dauer = /dauer|laufzeit|zinsbindung/i.test(p.label);
     if (p.typ === "wahl") {
       const o = p.optionen?.find((x) => String(x.wert) === String(roh));
-      // Auch eine Laufzeit aus einer Auswahlliste hängt sich an: „20.000 € über 12 Monate".
-      if (o) teile.push(dauer && teile.length ? `über ${o.label}` : o.label);
+      if (!o || NICHTSSAGEND.test(o.label)) continue;
+      // „bis 30 Tage" trägt sein Verhältniswort schon — „über bis 30 Tage" wäre doppelt.
+      teile.push(dauer && teile.length && !/^(bis|ab|über|unter)\b/i.test(o.label) ? `über ${o.label}` : o.label);
       continue;
     }
     const z = Number(roh);
     if (!Number.isFinite(z)) continue;
-    const text = `${z.toLocaleString("de-DE")}${p.einheit ? " " + p.einheit : ""}`;
-    // Laufzeiten hängen sich an: „20.000 € über 60 Monate“ liest sich wie ein Satz,
-    // „20.000 € · 60 Monate“ wie eine Aufzählung.
+    if (!p.einheit && z === 0) continue;
+    // 🚨 Eine Postleitzahl ist keine Menge: „60.311" wäre falsch gruppiert.
+    const kennung = !p.einheit && /leitzahl|plz|nummer/i.test(p.label);
+    const zahlText = kennung ? String(z) : z.toLocaleString("de-DE");
+    const text = kennung ? `${p.label} ${zahlText}` : `${zahlText} ${p.einheit || p.label}`;
     teile.push(dauer && teile.length ? `über ${text}` : text);
   }
-  return teile.join(" ").replace(/ (über)/g, " $1");
+  return teile.join(" · ").replace(/ · (über )/g, " $1");
 }
 
 /**
