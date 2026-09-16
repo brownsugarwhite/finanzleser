@@ -11,19 +11,24 @@ import { FADEN_INDEX_TAG } from "@/lib/cacheTags";
 import { buildRechnerUrl, buildChecklisteUrl, buildVergleichUrl, buildDokumentUrl } from "@/lib/urls";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 
-export interface WerkzeugVerweis { titel: string; href: string }
+export interface WerkzeugVerweis {
+  titel: string;
+  href: string;
+  /** Veröffentlichungsdatum (ISO), für die Auslese auf der Startseite. Dokumente haben keins. */
+  datum?: string;
+}
 
 /** Über Requests hinweg gecacht (siehe lib/faden/titel.ts): vier paginierte Listen je Render sind zu teuer. */
 const werkzeugListe = unstable_cache(
   async (): Promise<[string, WerkzeugVerweis][]> => {
     const out: [string, WerkzeugVerweis][] = [];
-    for (const r of await getAllRechner()) out.push([`rechner:${r.slug}`, { titel: decodeHtmlEntities(r.title), href: buildRechnerUrl(r.slug) }]);
-    for (const c of await getAllChecklisten()) out.push([`checkliste:${c.slug}`, { titel: decodeHtmlEntities(c.title), href: buildChecklisteUrl(c.slug) }]);
-    for (const v of await getAllVergleiche()) out.push([`vergleich:${v.slug}`, { titel: decodeHtmlEntities(v.title), href: buildVergleichUrl(v.slug) }]);
+    for (const r of await getAllRechner()) out.push([`rechner:${r.slug}`, { titel: decodeHtmlEntities(r.title), href: buildRechnerUrl(r.slug), datum: r.date }]);
+    for (const c of await getAllChecklisten()) out.push([`checkliste:${c.slug}`, { titel: decodeHtmlEntities(c.title), href: buildChecklisteUrl(c.slug), datum: c.date }]);
+    for (const v of await getAllVergleiche()) out.push([`vergleich:${v.slug}`, { titel: decodeHtmlEntities(v.title), href: buildVergleichUrl(v.slug), datum: v.date }]);
     for (const d of await getAllDokumente()) out.push([`dokumente:${d.slug}`, { titel: decodeHtmlEntities(d.title), href: buildDokumentUrl(d.slug) }]);
     return out;
   },
-  ["faden-werkzeugindex"],
+  ["faden-werkzeugindex-v2"],
   { revalidate: CONTENT_REVALIDATE, tags: [FADEN_INDEX_TAG] },
 );
 

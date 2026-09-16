@@ -27,8 +27,10 @@
 .faden-shell .werkzeugreihe { position: relative; display: flex; align-items: stretch; justify-content: center; width: 100%; margin-top: 8px; }
 .faden-shell .werkzeugreihe .trenner { --linie: 28px; }
 .faden-shell .werkzeugreihe .trenner--voll { --linie: 78px; }
-.faden-shell .werkzeug-k { flex: 1 1 0; max-width: 236px; text-align: left; border: 0; background: none; padding: 12px 22px; display: grid; gap: 3px; align-content: center; cursor: pointer; opacity: 0; transition: opacity .6s ease, transform .9s cubic-bezier(.2,.8,.2,1); position: relative; z-index: 1; color: var(--ink); text-decoration: none; }
-.faden-shell .werkzeug-k.da { opacity: 1; transform: none !important; }
+/* 🚨 Hier stand ein Einblendzustand für die Trennlinien. Er war nötig, solange die
+   Kacheln nacheinander andockten — die Striche standen sonst im leeren Raum. Seit dem
+   13.09.2026 hat der Hero gar keine Auftrittsanimation mehr: alles steht sofort. */
+.faden-shell .werkzeug-k { flex: 1 1 0; max-width: 236px; text-align: left; border: 0; background: none; padding: 12px 22px; display: grid; gap: 3px; align-content: center; cursor: pointer; position: relative; z-index: 1; color: var(--ink); text-decoration: none; }
 .faden-shell .werkzeug-k b { font-family: var(--serif); font-size: 26px; font-weight: 900; line-height: 1.1; }
 .faden-shell .werkzeug-k b small { font-size: 13px; font-weight: 700; color: var(--muted); margin-left: 6px; font-family: var(--sans); }
 .faden-shell .werkzeug-k span { font-size: 12.5px; color: var(--muted); }
@@ -36,8 +38,7 @@
 .faden-shell .werkzeug-k:hover > .pfeil-link i { width: 30px; }
 
 /* CTA „Finanzleser entdecken ↓“ unten im Hero, blendet nach 2,2 s ein (01-css.html:476–479) */
-.faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; border: 0; background: none; color: var(--ink); font-weight: 600; font-size: 13.5px; display: grid; justify-items: center; gap: 5px; letter-spacing: .02em; opacity: 0; cursor: pointer; font-family: inherit; }
-.faden-shell .hero-cta.da { opacity: 1; }
+.faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; border: 0; background: none; color: var(--ink); font-weight: 600; font-size: 13.5px; display: grid; justify-items: center; gap: 5px; letter-spacing: .02em; cursor: pointer; font-family: inherit; }
 .faden-shell .hero-cta i { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--green); color: var(--green); display: grid; place-items: center; font-style: normal; font-size: 13px; animation: faden-wippen 2.2s ease-in-out infinite; }
 @keyframes faden-wippen { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 

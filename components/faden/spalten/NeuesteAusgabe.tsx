@@ -18,7 +18,6 @@ import { buildPostUrl } from "@/lib/urls";
 import { medienUrl } from "@/lib/faden/medien";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 import { stripHtml } from "@/lib/seo";
-import Zeitungskopf from "../Zeitungskopf";
 import Laufband from "./Laufband";
 
 export default function NeuesteAusgabe({ post }: { post: Post | null }) {
@@ -29,8 +28,10 @@ export default function NeuesteAusgabe({ post }: { post: Post | null }) {
   const bild = post.featuredImage?.node?.sourceUrl;
   return (
     <section className="neueste kiosk-blatt" aria-label="Neueste Ausgabe">
-      {/* Ohne eigene Doppellinie: die des Laufbands trennt Titel und Zeile. */}
-      <Zeitungskopf linie={false} />
+      {/* 🚨 Hier stand „Ausgabe n · Datum" ein zweites Mal. Die Zeile war dem Kopfblatt am
+          11.09.2026 zugefallen, weil der Faden damals ohne Zeitungskopf begann. Seit der
+          wieder an seinem Platz steht (13.09.), stünden beide auf EINEM Bildschirm — die
+          Ausgabe wird einmal ausgerufen, nicht zweimal. Der Schriftzug bleibt. */}
       {/* Der Schriftzug ist zugleich der Schalter, der den Stapel wieder zusammenfahren
           lässt — Spalten.tsx hängt sich an `data-kiosk-zu`. Ein echter Knopf, damit er
           auch mit der Tastatur erreichbar ist. */}
@@ -39,7 +40,9 @@ export default function NeuesteAusgabe({ post }: { post: Post | null }) {
       <a className="neueste__blatt" href={buildPostUrl(post)}>
         {bild && (
           <span className="neueste__bild">
-            <img src={medienUrl(bild)} alt={post.featuredImage?.node?.altText || ""} loading="lazy" />
+            {/* Das erste große Bild der Seite und in ~1 s im Blick — es wartet nicht auf den
+                Scroll. Die Maße kommen aus `aspect-ratio: 16/9` (faden.css), deshalb kein Sprung. */}
+            <img src={medienUrl(bild)} alt={post.featuredImage?.node?.altText || ""} loading="eager" decoding="async" />
           </span>
         )}
         <span className="neueste__satz">

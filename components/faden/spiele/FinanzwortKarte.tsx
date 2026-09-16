@@ -9,6 +9,7 @@ import { getGlossarBySlug } from "@/lib/wordpress";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 import { stripHtml } from "@/lib/seo";
 import type { Spiel } from "@/lib/types";
+import Insel from "@/components/faden/kette/Insel";
 import SpielKopf from "./SpielKopf";
 import Finanzwort from "./Finanzwort";
 
@@ -25,22 +26,24 @@ export default async function FinanzwortKarte({ spiel: vorgegeben }: { spiel?: S
   const nr = await spielNummer(spiel);
   const begriff = spiel.felder.begriff || "";
   const eintrag = begriff ? await getGlossarBySlug(begriff) : null;
+  const werte = {
+    slug: spiel.slug,
+    wort,
+    begriff,
+    begriffName: eintrag ? decodeHtmlEntities(eintrag.title) : undefined,
+    hinweis1: spiel.felder.hinweis1 || "",
+    hinweis2: spiel.felder.hinweis2 || "",
+    erklaerung: spiel.felder.erklaerung || (eintrag ? stripHtml(eintrag.content) : ""),
+    nr,
+    datum: spiel.datum,
+    punkte: spiel.punkte,
+    wappen: spiel.wappen,
+  };
   return (
     <article className="kasten kasten--pink" id={`kasten-${spiel.slug}`}>
       <SpielKopf kicker={`Finanzwort · Nr. ${nr}`} hinweis={`${wort.length} Buchstaben, sechs Versuche`} />
-      <Finanzwort
-        slug={spiel.slug}
-        wort={wort}
-        begriff={begriff}
-        begriffName={eintrag ? decodeHtmlEntities(eintrag.title) : undefined}
-        hinweis1={spiel.felder.hinweis1 || ""}
-        hinweis2={spiel.felder.hinweis2 || ""}
-        erklaerung={spiel.felder.erklaerung || (eintrag ? stripHtml(eintrag.content) : "")}
-        nr={nr}
-        datum={spiel.datum}
-        punkte={spiel.punkte}
-        wappen={spiel.wappen}
-      />
+      {/* 🚨 In einer Insel, sonst ist das Spiel im eingefrorenen Kapitel ein Foto. */}
+      <Insel typ="finanzwort" werte={werte}><Finanzwort {...werte} /></Insel>
     </article>
   );
 }

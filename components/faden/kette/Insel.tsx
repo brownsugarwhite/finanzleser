@@ -26,7 +26,10 @@ export type InselTyp =
   | "rechner" | "checkliste" | "vergleich" | "dokumente"
   | "statistik" | "statistik-block" | "weiterlesen" | "spiel"
   | "aktionen" | "abschnitt-teilen" | "kasten-fuss" | "wochenbrief"
-  | "spalten" | "vorlesen" | "schlange" | "faq";
+  | "spalten" | "vorlesen" | "schlange" | "faq"
+  /* Die Blöcke der Startseite. 🚨 Jeder bedienbare Teil des Fadens braucht eine Insel —
+     sonst lebt er genau bis zum ersten Kapitelwechsel und ist danach ein Foto. */
+  | "finanzwort" | "kassensturz" | "leo-empfiehlt" | "weiterreden";
 
 export default function Insel({
   typ, arg, werte, children,

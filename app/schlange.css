@@ -52,8 +52,6 @@
 .faden-shell .schlange__stand b { color: var(--ink); font-weight: 700; }
 .faden-shell .schlange__wink { color: var(--green-ink); font-style: italic; }
 
-/* Im Kapitel „Heute" ist das Spiel Teil der Zeitungsseite, kein Kärtchen darauf —
-   wie Kassensturz und Finanzwort (faden.css, „ohne Kasten"). */
-.faden-shell #kapitel-live[data-key="heute"] .kasten--schlange {
-  border: 0; background: none; box-shadow: none; padding-left: 0; padding-right: 0;
-}
+/* 🚨 Hier stand eine Entkastung für `.kasten--schlange`. Seit dem 12.09.2026 steht die
+   Schlange auf der Startseite im selben Satzraster wie im Ratgeber (`.spiel-satz`) und
+   war nie ein Kasten — die Regel hatte nichts mehr zu entkasten. */

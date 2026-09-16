@@ -8,6 +8,7 @@
  */
 import { useSyncExternalStore } from "react";
 import { KASSENSTURZ_URL, KS_SPEICHER, datumLang } from "./logik";
+import Fortschrittsreihe from "./Fortschrittsreihe";
 
 function abonnieren(cb: () => void): () => void {
   window.addEventListener("storage", cb);
@@ -36,7 +37,9 @@ export default function KassensturzTeaser() {
           <span className="kicker kicker--pink">Finanz-Kassensturz</span>
           <span className="ks__stand">{erg ? "Ergebnis" : "3 Minuten"}</span>
         </div>
-        <div className="ks__fortschritt"><i style={{ width: erg ? "100%" : 0 }} /></div>
+        {/* Acht Segmente, wie der Satz darunter sagt. Der Teaser kennt die Daten nicht —
+            der echte Lauf zählt die offenen Fragen und kann kürzer ausfallen. */}
+        <Fortschrittsreihe nr={erg ? 9 : 0} gesamt={8} />
         <div className="ks__buehne">
           {erg ? (
             <>

@@ -6,6 +6,10 @@
  * bestehenden Gettern; JSON-LD bleibt wie auf der alten Startseite (app/page.tsx).
  */
 import { getNavItems, getLatestPosts } from "@/lib/wordpress";
+import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
+import { GAENGIGE_VERGLEICHE, empfehlungen, werkzeugeDerWoche, type AusleseEintrag } from "@/lib/faden/landing";
+import { buildPostUrl } from "@/lib/urls";
+import { decodeHtmlEntities } from "@/lib/html-utils";
 import { baueSpalten } from "@/lib/faden/spalten";
 import { buildGlossarUrl } from "@/lib/urls";
 import { DOKUMENTE } from "@/lib/faden/bestand";
@@ -14,10 +18,15 @@ import Spalten from "./spalten/Spalten";
 import NeuesteAusgabe from "./spalten/NeuesteAusgabe";
 import FinanzwortKarte from "./spiele/FinanzwortKarte";
 import SchlangeKarte from "./spiele/SchlangeKarte";
-import Kassensturz from "./kassensturz/Kassensturz";
+import KassensturzStart from "./kassensturz/KassensturzStart";
 import { zieleAufloesen } from "@/lib/faden/kassensturzZiele";
 import { getFadenOptionen } from "@/lib/faden/optionen";
 import Begruessung from "./Begruessung";
+import AusDemNewsletter from "./landing/AusDemNewsletter";
+import WochenbriefTeaser from "./landing/WochenbriefTeaser";
+import PlusTeaser from "./landing/PlusTeaser";
+import LeoEmpfiehlt from "./landing/LeoEmpfiehlt";
+import WeiterredenChips from "./landing/WeiterredenChips";
 import { spielUrl } from "./spiele/spielUrl";
 import { spielAm } from "@/lib/faden/spiele";
 import Insel from "@/components/faden/kette/Insel";
@@ -27,10 +36,11 @@ import BegriffWink from "@/components/faden/glossar/BegriffWink";
 import { getGlossarIndex, loeseBegriffe } from "@/lib/faden/glossar";
 
 /** Vorschläge unter der Eingabe: Fragen an Leo (Chips wie im Prototyp), dazu ein Sprung in die Werkzeuge. */
+/** Vorschläge unter der Eingabe.
+ *  🚨 Nur noch SPRÜNGE. Die Gesprächsfragen stehen seit dem 12.09.2026 im eigenen Block
+ *  „Weiterreden mit Leo" am Fadenende — beides zusammen ergäbe zweimal dieselben Fragen
+ *  direkt übereinander. */
 const VORSCHLAEGE: { text: string; slug?: string; frage?: boolean; href?: string }[] = [
-  { text: "Wie viel Unterhalt für zwei Kinder?", frage: true },
-  { text: "Wie hoch ist das Kindergeld 2026?", frage: true },
-  { text: "Wie viel Steuer zahle ich auf meine Rente?", frage: true },
   { text: "Kassensturz: Wie gut bin ich aufgestellt?", href: "/kassensturz" },
   { text: "Alle Finanztools", href: "/finanztools" },
 ];
@@ -38,13 +48,23 @@ const VORSCHLAEGE: { text: string; slug?: string; frage?: boolean; href?: string
 export default async function FadenLanding() {
   // Kein .catch auf WP-Fetches: Fehler müssen werfen, sonst cacht Next eine halbe Startseite (CLAUDE.md, Falle 2).
   const nav = await getNavItems();
+  // 🚨 `baueSpalten` fährt INTERN schon drei Verbindungen parallel (lib/faden/spalten.ts).
+  // Es bekommt seine drei Slots allein — mehr als drei gleichzeitig verträgt das
+  // WordPress nicht (CLAUDE.md, Falle 1).
   const rubriken = await baueSpalten(nav);
-  // Jüngster Beitrag für „Neueste Ausgabe" über den vier Rubriken.
-  const neueste = (await getLatestPosts(1))[0] || null;
+  // Danach drei unabhängige Abrufe in einem Zug. Ein Zug für die Beiträge: [0] ist das
+  // Kopfblatt „Neueste Ausgabe", [1..3] die drei Ratgeber der Auslese — so steht kein
+  // Titel zweimal auf der Seite. Kein .catch: Fehler müssen werfen, sonst cacht Next eine
+  // halbe Startseite (CLAUDE.md, Falle 2); Promise.all wirft beim ersten davon.
+  const [juengste, optionen, finanzwort] = await Promise.all([
+    getLatestPosts(4),
+    getFadenOptionen(),
+    spielAm("finanzwort"),
+  ]);
+  const neueste = juengste[0] || null;
   // Kassensturz im Kapitel „Heute": dieselben Daten und Ziele wie auf /kassensturz.
-  const { kassensturz } = await getFadenOptionen();
+  const { kassensturz } = optionen;
   const ksZiele = kassensturz ? await zieleAufloesen(kassensturz) : {};
-  const finanzwort = await spielAm("finanzwort");
   // Standard-Chips wie im Prototyp (STANDARD_CHIPS): zuletzt „Finanzwort des Tages“ auf die Spielseite des Tages.
   const chips = [
     ...VORSCHLAEGE.map((v) => (v.frage ? { text: v.text, frage: v.text } : { text: v.text, href: v.href })),
@@ -53,18 +73,27 @@ export default async function FadenLanding() {
   // Leos Begrüßung verlinkt „Versicherungsbedingungen". Ohne Nutzlast holt das Klickmenü
   // den Begriff beim Antippen über /api/faden/glossar/<slug> — eine CMS-Abfrage mitten in
   // der Geste. Auf einer vorgerenderten Seite kostet das Mitschicken nichts.
-  const glossar = await getGlossarIndex();
+  // Der Werkzeugindex ist über getWerkzeugZahlen() im Layout und über zieleAufloesen
+  // ohnehin warm — die Auslese und Leos Empfehlungen kosten deshalb keine einzige
+  // zusätzliche WP-Abfrage.
+  const [glossar, werkzeuge] = await Promise.all([getGlossarIndex(), getWerkzeugIndex()]);
   const avb = glossar.get("avb");
   const begriffe = avb ? await loeseBegriffe([avb]) : [];
+  const auslese: AusleseEintrag[] = [
+    ...juengste.slice(1, 4).map((p) => ({ label: "Ratgeber", titel: decodeHtmlEntities(p.title), href: buildPostUrl(p) })),
+    ...werkzeugeDerWoche(werkzeuge),
+  ];
+  const gaengig = empfehlungen(werkzeuge, GAENGIGE_VERGLEICHE);
 
   return (
     <>
+      {/* Leo steht in jedem Leo-Block und ist das erste Bild des Kapitels. */}
+      <link rel="preload" as="image" href="/assets/leo.svg" fetchPriority="high" />
       <section className="kapitel kapitel--live" id="kapitel-live" data-key="heute" data-titel="Heute" data-pfad="">
         <KapitelKopf pfad={[]} />
         <div className="kapitel__inhalt">
-          {/* Inszenierung wie im Prototyp: Leo schreibt erst, wenn der Leser den Faden
-              erreicht; danach die Spalten leise, zuletzt das Finanzwort. Ohne JS steht
-              alles sofort da (SSR unverändert). */}
+          {/* Leo schreibt, sobald der Leser den Faden erreicht — die einzige Inszenierung,
+              die geblieben ist. Alles andere steht ab dem ersten Paint da (Begruessung.tsx). */}
           <Begruessung>
           <div className="wort wort--leo" id="leo-gruss">
             <span className="kicker kicker--gruen">Leo</span>
@@ -73,13 +102,19 @@ export default async function FadenLanding() {
             </LeoRede>
             <BegriffWink ziel="#leo-gruss" />
           </div>
-          {/* Reihenfolge wie im Prototyp: erst die Rubrikenspalten, dann das Finanzwort
-              (begruessung(): anhaengen(spaltenwahl, leise) vor meldung('Finanzwort…')). */}
+          {/* Reihenfolge der Zeitungsseite (12.09.2026): Kopfblatt, Kiosk, Kassensturz,
+              Wort des Tages — danach kommen Wochenbrief, Spiel, Plus und Leo. */}
           <NeuesteAusgabe post={neueste} />
           <Insel typ="spalten" werte={rubriken}><Spalten rubriken={rubriken} /></Insel>
-          {kassensturz && <Kassensturz daten={kassensturz} ziele={ksZiele} />}
-          <SchlangeKarte />
+          {kassensturz && <Insel typ="kassensturz" werte={{ daten: kassensturz, ziele: ksZiele }}><KassensturzStart daten={kassensturz} ziele={ksZiele} /></Insel>}
           <FinanzwortKarte />
+          <AusDemNewsletter eintraege={auslese} />
+          <WochenbriefTeaser />
+          <SchlangeKarte />
+          <PlusTeaser />
+          <Insel typ="leo-empfiehlt" werte={{ gaengig, daten: kassensturz, ziele: ksZiele }}><LeoEmpfiehlt gaengig={gaengig} daten={kassensturz} ziele={ksZiele} /></Insel>
+          <Insel typ="weiterreden"><WeiterredenChips /></Insel>
+
           </Begruessung>
         </div>
         <GlossarDaten daten={begriffe} />

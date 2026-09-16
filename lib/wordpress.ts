@@ -1227,6 +1227,7 @@ async function _fetchAllRechner(): Promise<Rechner[]> {
           id
           title
           slug
+          date
           excerpt
           rechnerTyp
           beschreibung
@@ -1295,6 +1296,7 @@ async function _fetchAllChecklisten(): Promise<Checkliste[]> {
           id
           title
           slug
+          date
           excerpt
           beschreibung
         }
@@ -1536,6 +1538,7 @@ async function _fetchAllVergleiche(): Promise<Vergleich[]> {
           id
           title
           slug
+          date
           excerpt
         }
       }

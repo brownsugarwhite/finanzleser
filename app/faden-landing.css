@@ -1,0 +1,75 @@
+/* =====================================================================================
+   faden-landing.css — die Blöcke, die die Startseite zur fertigen Zeitungsseite machen:
+   die Auslese aus dem Wochenbrief, der Wochenbrief-Teaser, Finanzleser Plus, Leos
+   Empfehlungen und die Chips zum Weiterreden.
+
+   Vorlage: Design A v2 hat KEIN Landing-Artboard (README der Übergabe, Zeile 181). Die
+   Form ist deshalb aus vorhandenen v2-Bausteinen abgeleitet — Kopfzeile aus Kapitel 1
+   „Heute" (Zeile 331–340: Kicker links, kursiver Hinweis rechts), Zeilensatz mit
+   Punktführung aus den Kioskkarten (Zeile 375–379), Anzeigenzeile (Zeile 873–877),
+   Plus-Texte (Zeile 223/270).
+
+   🚨 Kein Kasten, kein weißer Grund, kein Schatten. Diese Blöcke stehen direkt auf dem
+   Papier, wie Kassensturz, Spiel und Finanzwort im Kapitel „Heute".
+   ===================================================================================== */
+
+/* ---------- Gemeinsames Gerüst ---------- */
+.faden-shell .landing-block { display: grid; gap: var(--luft-s); clear: both; min-width: 0; scroll-margin-top: 110px; }
+/* Kopfzeile eines Blocks: Kicker links, kursiver Hinweis rechts, darunter eine Haarlinie
+   in voller Tinte — genau wie die Abschnittsköpfe in v2 (Übergabe Zeile 1158). Die Linie
+   gehört zur Kopfzeile, nicht als eigenes Element daneben. */
+.faden-shell .landing-block__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid var(--rule-strong); padding-bottom: 6px; }
+.faden-shell .landing-block__hinweis { font: var(--schrift-hinweis); color: var(--muted); }
+.faden-shell .landing-block__schlag { margin: 6px 0 0; font: var(--schrift-schlag); color: var(--ink); text-wrap: pretty; }
+.faden-shell .landing-block__vorspann { margin: 0; font: var(--schrift-vorspann); color: var(--muted); }
+
+/* ---------- Aus unserem Newsletter: sechs Zeilen mit Punktführung ---------- */
+.faden-shell .auslese__liste { list-style: none; margin: 6px 0 0; padding: 0; display: grid; }
+.faden-shell .auslese__eintrag { display: flex; align-items: baseline; gap: 10px; border-top: 1px solid var(--rule-fein); padding: 10px 0; text-decoration: none; color: var(--ink); transition: padding-left .3s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .auslese__eintrag:hover { padding-left: 8px; }
+.faden-shell .auslese__eintrag .kicker { flex: none; width: 78px; }
+.faden-shell .auslese__titel { font: 700 15.5px/1.3 var(--serif); color: var(--ink); min-width: 0; }
+.faden-shell .auslese__eintrag:hover .auslese__titel { color: var(--green-ink); }
+.faden-shell .auslese__eintrag .dot { align-self: center; }
+.faden-shell .auslese > .pfeil-link { justify-self: start; margin-top: 12px; }
+@media (max-width: 620px) {
+  .faden-shell .auslese__eintrag { flex-wrap: wrap; gap: 4px 10px; }
+  .faden-shell .auslese__eintrag .kicker { width: auto; }
+  .faden-shell .auslese__eintrag .inhalt__linie { display: none; }
+}
+
+/* ---------- Wochenbrief-Teaser ---------- */
+.faden-shell .wb-teaser__satz { display: grid; gap: 18px 32px; align-items: start; }
+.faden-shell .wb-teaser__bild { width: 100%; max-width: 220px; height: auto; justify-self: center; }
+@media (min-width: 760px) { .faden-shell .wb-teaser__satz { grid-template-columns: minmax(0, 1fr) 220px; } }
+
+/* ---------- Finanzleser Plus: plakativ, mit Grafik ---------- */
+.faden-shell .plus-teaser__satz { display: grid; gap: var(--luft-l) var(--luft-xl); align-items: center; margin-top: var(--luft-m); }
+@media (min-width: 720px) { .faden-shell .plus-teaser__satz { grid-template-columns: minmax(0, 1fr) 240px; } }
+.faden-shell .plus-teaser__text { display: grid; justify-items: start; gap: var(--luft-m); }
+/* Die Schlagzeile des Plus-Blocks ist die größte der Seite — hier wird geworben. */
+.faden-shell .plus-teaser__schlag { margin: 0; font: 900 clamp(26px, 3.2vw, 40px)/1.1 var(--serif); color: var(--ink); letter-spacing: -.015em; }
+.faden-shell .plus-teaser__bild { width: 100%; max-width: 240px; height: auto; justify-self: center; }
+.faden-shell .plus-teaser__preis { margin: calc(-1 * var(--luft-s)) 0 0; }
+/* Die drei Leistungen als Dreispalter mit Haarlinie darüber — Zeitungssatz, kein Kärtchen. */
+.faden-shell .plus-teaser__punkte { list-style: none; margin: var(--luft-l) 0 0; padding: 0; display: grid; gap: var(--luft-l) var(--luft-xl); }
+@media (min-width: 720px) { .faden-shell .plus-teaser__punkte { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.faden-shell .plus-teaser__punkte li { display: grid; gap: var(--luft-xs); align-content: start; border-top: 1px solid var(--rule-strong); padding-top: var(--luft-s); }
+.faden-shell .plus-teaser__punkte b { font: var(--schrift-zeile); }
+.faden-shell .plus-teaser__punkte span { font: var(--schrift-klein); color: var(--muted); }
+.faden-shell .plus-teaser__punkte .textlink { justify-self: start; margin-top: var(--luft-xs); }
+
+/* ---------- Leo empfiehlt: Vergleiche als Vorschau ---------- */
+/* Die Karten stehen in Leos Spalte, also rechts der 60-px-Gasse von `.wort--leo`. */
+.faden-shell .leo-empfiehlt__reihe { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: var(--luft-l) var(--luft-l); margin-top: var(--luft-l); }
+.faden-shell .vgl-karte { display: grid; align-content: start; gap: var(--luft-xs); border-top: 1px solid var(--rule-strong); padding-top: var(--luft-s); text-decoration: none; color: var(--ink); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .vgl-karte:hover { transform: translateY(-3px); }
+/* Das Bild sitzt ÜBER der Linie — wie das Visual über dem Ratgeberkopf. */
+.faden-shell .vgl-karte__bild { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; margin-bottom: var(--luft-s); background: var(--placeholder); }
+.faden-shell .vgl-karte__titel { font: 700 17px/1.25 var(--serif); }
+.faden-shell .vgl-karte:hover .vgl-karte__titel { color: var(--green-ink); }
+.faden-shell .vgl-karte__text { font: var(--schrift-klein); color: var(--muted); }
+.faden-shell .vgl-karte .pfeil-link { margin-top: var(--luft-xs); font-size: 13px; }
+
+/* ---------- Weiterreden mit Leo ---------- */
+.faden-shell .weiterreden .chips { margin-top: 4px; }

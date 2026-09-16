@@ -14,7 +14,9 @@ import Blatt from "./kopf/Blatt";
 export default function Kopf({ nav, preload, onMenue }: { nav: NavItem[]; preload: MegamenuPreload; onMenue: () => void }) {
   const { koffer, navigieren, blattOeffnen } = useFaden();
   const zumWochenbrief = () => {
-    const ziel = document.querySelector<HTMLElement>("#wochenbrief, .wb-rail");
+    // Reihenfolge zählt: der Teaser der Startseite zuerst, dann der Kasten am Ende einer
+    // Ratgeber-Kette, zuletzt die Randspalte.
+    const ziel = document.querySelector<HTMLElement>("#wochenbrief-heute, #wochenbrief, .wb-rail");
     if (ziel) ziel.scrollIntoView({ block: "center", behavior: "smooth" });
     ziel?.querySelector<HTMLInputElement>("input[type=email]")?.focus();
   };
