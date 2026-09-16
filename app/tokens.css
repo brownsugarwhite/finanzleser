@@ -81,7 +81,6 @@
   --rot-hauch: #FBEAE8;           /* rot: falsch, Fehler */
   --tuerkis-grund: rgba(6, 212, 150, .07);  /* Grund der Bestwertzeile in einer Liste */
   --schleier: rgba(0, 0, 0, .35);  /* hinter einer Schublade — der einzige Ort für Schwarz */
-  --note: #FBF6E3; --note-ink: #5F4A00; --note-line: #E3C25E;   /* die gelbe Notiz */
 
   /* Werkzeugfarben — der Punkt vor dem Kicker, die Linie über dem Einhänger. */
   --tool-rechner: var(--pink);

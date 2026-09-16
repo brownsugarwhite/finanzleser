@@ -186,8 +186,8 @@ export default async function Schaukasten() {
           dort stehen die echten Bausteine, nicht nachgebaute.
         </p>
         <p style={{ marginTop: "var(--luft-l)" }}>Und die Ausnahme, wenn es wirklich ein Kärtchen sein soll:</p>
-        <div className="kasten kasten--papier kasten--still">
-          <span className="kicker">kasten--papier</span>
+        <div className="kasten kasten--rahmen kasten--still">
+          <span className="kicker">kasten--rahmen</span>
           <p style={{ margin: "6px 0 0" }}>Weißes Papier mit Kante. Braucht eine Begründung.</p>
         </div>
         <p className="hinweis" style={{ marginTop: "var(--luft-m)" }}>Hinweiszeile: gelber Grund, für Warnungen und Nachträge.</p>

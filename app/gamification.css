@@ -10,7 +10,7 @@
 .fl-gam {
   margin: var(--luft-xl) 0;
   padding: var(--luft-l) var(--luft-l);
-  background: var(--auflage);
+  background: var(--paper);
   border: 1px solid var(--color-border-default);
   border-top: 3px solid var(--color-brand);
   border-radius: var(--radius-kante);
@@ -70,7 +70,7 @@
   font: inherit;
   font-weight: 600;
   cursor: pointer;
-  background: var(--auflage);
+  background: var(--paper);
   border: 1.5px solid var(--color-border-default);
   border-radius: var(--radius-kante);
   transition: border-color 0.15s, background 0.15s;
@@ -95,7 +95,7 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
-  background: var(--auflage);
+  background: var(--paper);
   border: 1.5px solid var(--color-border-default);
   border-radius: var(--radius-kante);
   transition: border-color 0.15s, background 0.15s;

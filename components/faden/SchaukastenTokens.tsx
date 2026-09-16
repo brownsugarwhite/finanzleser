@@ -12,7 +12,7 @@ import { useEffect, useRef, useState } from "react";
 
 const FARBEN: [string, string][] = [
   ["--paper", "Die Seite. Standardgrund für alles"],
-  ["--white", "Nur für ausdrückliche Kästen und Kiosk-Blätter"],
+  ["--auflage", "Nur was über dem Papier schwebt: Menü, Dialog, Feld"],
   ["--ink", "Titel, Fließtext"],
   ["--muted", "Kicker, Hinweis, Bildunterschrift"],
   ["--green", "Marke: Pfeile, Punkte, Knopfscheibe"],
@@ -20,7 +20,6 @@ const FARBEN: [string, string][] = [
   ["--pink", "Zweitmarke: Spiel, Finanzwort"],
   ["--tint", "Grüner Hauch, für Hervorhebungen"],
   ["--pink-tint", "Magenta-Hauch"],
-  ["--note", "Hinweiszeile"],
   ["--tool-rechner", "Punkt: Rechner"],
   ["--tool-vergleich", "Punkt: Vergleich"],
   ["--tool-checkliste", "Punkt: Checkliste"],

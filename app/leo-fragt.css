@@ -1,7 +1,7 @@
 /* „Leo fragt“ in der rechten Randspalte (Port aus dem Prototyp, 01-css.html Z. 567–581): Kasten im Fuß über der Anzeige,
    Regler oder Chips, danach der Danke-Kasten. Nur im .faden-shell-Scope; unter prefers-reduced-motion nimmt die Regel in
    faden.css die Einblendung weg. */
-.faden-shell .leo-frage { position: relative; border: 1px solid var(--rule-strong); border-radius: var(--radius-kante); background: var(--white); padding: var(--luft-s) var(--luft-m) var(--luft-s); display: grid; gap: var(--luft-s); font-family: var(--serif); animation: leo-rein .55s cubic-bezier(.34,1.56,.64,1) both; box-shadow: var(--schatten-schwebend); }
+.faden-shell .leo-frage { position: relative; border: 1px solid var(--rule-strong); border-radius: var(--radius-kante); background: var(--paper); padding: var(--luft-s) var(--luft-m) var(--luft-s); display: grid; gap: var(--luft-s); font-family: var(--serif); animation: leo-rein .55s cubic-bezier(.34,1.56,.64,1) both; box-shadow: var(--schatten-schwebend); }
 @keyframes leo-rein { from { opacity: 0; transform: translateY(22px) scale(.96); } to { opacity: 1; transform: none; } }
 .faden-shell .leo-frage .spaeter { position: absolute; top: 8px; right: 10px; border: 0; background: none; color: var(--muted); font: 600 var(--grad-11)/1 var(--sans); cursor: pointer; }
 .faden-shell .leo-frage .spaeter:hover { color: var(--ink); }

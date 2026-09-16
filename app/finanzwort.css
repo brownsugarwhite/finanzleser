@@ -33,7 +33,7 @@
 .faden-shell .chip--spiel { border-color: var(--pink); color: var(--pink); }
 .faden-shell .chip--spiel:hover { background: var(--pink-tint); color: var(--pink); border-color: var(--pink); }
 /* Meldung im Kapitel „Heute“ (Prototyp Zeilen 648–649); .aktionen hier ohne die Artikel-Trennlinie aus faden.css */
-.faden-shell .meldung { border: 1px solid var(--rule); background: var(--white); padding: var(--luft-s) var(--luft-m); display: grid; grid-template-columns: 1fr auto; gap: var(--luft-xxs) var(--luft-m); align-items: center; border-radius: var(--radius-kante); }
+.faden-shell .meldung { border: 1px solid var(--rule); background: var(--auflage); padding: var(--luft-s) var(--luft-m); display: grid; grid-template-columns: 1fr auto; gap: var(--luft-xxs) var(--luft-m); align-items: center; border-radius: var(--radius-kante); }
 .faden-shell .meldung .kicker { grid-column: 1 / -1; }
 .faden-shell .meldung p { margin: 0; font-size: var(--grad-14); }
 .faden-shell .meldung .aktionen { display: flex; gap: var(--luft-s); border-top: 0; padding-top: 0; }
