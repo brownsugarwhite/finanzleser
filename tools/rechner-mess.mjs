@@ -20,9 +20,10 @@
  */
 import { chromium } from "playwright";
 import { readdirSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 
 /** Alle migrierten Rechner — die Dateien sind die Wahrheit, nicht eine zweite Liste. */
-const ALLE = readdirSync(new URL("../lib/rechner/schemata", import.meta.url))
+const ALLE = readdirSync(fileURLToPath(new globalThis.URL("../lib/rechner/schemata", import.meta.url)))
   .filter((f) => f.endsWith(".tsx")).map((f) => f.slice(0, -4)).sort();
 
 const arg = (name, standard) => { const i = process.argv.indexOf(`--${name}`); return i > 0 ? process.argv[i + 1] : standard; };

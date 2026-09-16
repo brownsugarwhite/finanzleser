@@ -211,11 +211,11 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd, toolData }
       return (
         <ArticleElementWrapper key={unit.itemKey} variant="centered" collapsed={collapsed}>
           <div className="article-tool-embed article-finanztool">
-            <RechnerEmbed
-              slug={unit.slug}
-              noVisual
-              formHeader={<ToolLabel type="rechner" slug={unit.slug} headingId={unit.headingId} showExcerpt preload={toolData?.titles[`rechner:${unit.slug}`]} />}
-            />
+            {/* Die Beschriftung steht jetzt VOR dem Rechner statt in ihm: der
+                Kursblatt-Satz bringt seinen eigenen Kopf mit und nimmt keinen fremden
+                mehr entgegen. Die Sprungmarke (`headingId`) bleibt damit erhalten. */}
+            <ToolLabel type="rechner" slug={unit.slug} headingId={unit.headingId} showExcerpt preload={toolData?.titles[`rechner:${unit.slug}`]} />
+            <RechnerEmbed slug={unit.slug} noVisual />
             {/* Fester Abstand + Trennlinie nach dem Rechner (ein-/ausgeklappt gleich) */}
             <hr className="article-tool-divider" />
           </div>
