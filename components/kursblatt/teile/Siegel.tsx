@@ -145,13 +145,13 @@ export default function Siegel({
             patternUnits="userSpaceOnUse"
             width={KACHEL_B} height={KACHEL_H}
           >
-            {/* 🚨 Nachgesättigt. Die Vorlage ist als Foto sehr blass; auf 112 px Breite bleibt
-                davon ein grauer Hauch. Erst mit `saturate` liest man Flieder, Mint und Rosa —
-                dieselben Töne, nur mit dem Kontrast, den eine echte Folie im Licht hat. */}
+            {/* 🚨 KEIN Filter. Ich hatte die Folie erst nachgesättigt und dann noch einmal
+                kräftiger gedreht — beides ungefragt. Das Bild des Users ist die Vorlage;
+                mit `saturate` sah es wie ein Aufkleber aus, ohne wie Folie. Wer hier
+                wieder an Sättigung oder Kontrast dreht, ändert sein Bild. */}
             <image
               href="/holo.jpg" x="0" y="0" width={KACHEL_B} height={KACHEL_H}
               preserveAspectRatio="xMidYMid slice"
-              style={{ filter: "saturate(2.8) contrast(1.18) brightness(1.02)" }}
             />
           </pattern>
         </defs>

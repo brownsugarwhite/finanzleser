@@ -70,7 +70,7 @@ export default function Ergebnis({
                   <Zeiger label={b.label} wert={b.wert} max={b.max} einheit={b.einheit} zeichnen={lauf.zeichnen} aktiv={offen} />
                   <Messlatte
                     titel={m.titel} wert={m.wert} schnitt={m.schnitt} einheit={m.einheit}
-                    wertLabel={m.wertLabel} schnittLabel={m.schnittLabel}
+                    wertLabel={m.wertLabel} schnittLabel={m.schnittLabel} weitere={m.weitere}
                   />
                 </div>
               );
@@ -138,7 +138,7 @@ export default function Ergebnis({
               case "zeiger":
                 return <Zeiger key={i} label={b.label} wert={b.wert} max={b.max} einheit={b.einheit} zeichnen={lauf.zeichnen} aktiv={offen} />;
               case "messlatte":
-                return <Messlatte key={i} titel={b.titel} wert={b.wert} schnitt={b.schnitt} einheit={b.einheit} wertLabel={b.wertLabel} schnittLabel={b.schnittLabel} />;
+                return <Messlatte key={i} titel={b.titel} wert={b.wert} schnitt={b.schnitt} einheit={b.einheit} wertLabel={b.wertLabel} schnittLabel={b.schnittLabel} weitere={b.weitere} />;
               case "hinweis":
                 return <div key={i} className="kb-ergebnis__hinweis">{b.text}</div>;
             }

@@ -76,7 +76,9 @@ export type ErgebnisBlock =
   /** Quote als Ring — ersetzt RechnerGauge (13 Rechner). */
   | { art: "zeiger"; label: string; wert: number; max?: number; einheit?: string }
   /** Eigener Wert neben dem Durchschnitt — ersetzt RechnerBenchmark (5 Rechner). */
-  | { art: "messlatte"; titel?: string; wert: number; schnitt: number; einheit?: string; wertLabel?: string; schnittLabel?: string }
+  | { art: "messlatte"; titel?: string; wert: number; schnitt: number; einheit?: string; wertLabel?: string; schnittLabel?: string;
+      /** Eine dritte Säule zwischen eigenem Wert und Durchschnitt — der Bestwert des Marktes. */
+      weitere?: { label: string; wert: number; ton?: "magenta" | "tuerkis" | "ink" }[] }
   | { art: "hinweis"; text: ReactNode };
 
 export interface Preset<W extends Werte> {
@@ -91,12 +93,31 @@ export interface Preset<W extends Werte> {
  * Was der Vergleich für die Eingaben des Rechners gerade hergibt — die Zahlen der Brücke
  * („aktuell 20 Angebote ab 0,68 %, das wären ab 339 € im Monat“).
  */
+/** Eine Kennzahl des Marktes als ZAHL — für Säulen und Vergleiche im Ergebnis. */
+export interface MarktZahl {
+  /** Der Wert des besten Angebots. */
+  best: number | null;
+  /** Der Durchschnitt über ALLE Angebote der Variante, nicht über die Top 3. */
+  schnitt: number;
+  anzahl: number;
+}
+
 export interface MarktKurz {
   titel: string;
   mehrzahl: string;
   anzahl: number;
   href: string;
   bestwert: { anbieter: string; wert: string; label: string; total: string | null; totalLabel: string | null } | null;
+  /**
+   * 🚨 Die Zahlen hinter den Texten. `bestwert.*` ist fertig formatiert („339 €") und
+   * taugt für einen Satz, nicht zum Rechnen. Wer eine Säule zeichnen will, nimmt `zahlen`.
+   */
+  zahlen?: {
+    haupt: MarktZahl | null;
+    total: MarktZahl | null;
+    totalLabel: string | null;
+    totalArt: string | null;
+  };
 }
 
 export interface RechnerSchema<W extends Werte = Werte, E = unknown> {
@@ -114,8 +135,17 @@ export interface RechnerSchema<W extends Werte = Werte, E = unknown> {
   /** „Leo rechnet mit: ≈ 387 € im Monat · unverbindlich“ — rollt live mit. */
   vorschau?: (w: W) => { vor: string; zahl: string; nach: string };
   rechne: (w: W, rates: typeof RATES) => E;
-  /** `rates` steht dabei, weil einige Rechner Marktwerte in ihren Zeilen nennen (Mindestlohn, Mehrwertsteuersatz). */
-  ergebnis: (e: E, w: W, rates: typeof RATES) => ErgebnisBlock[];
+  /**
+   * `rates` steht dabei, weil einige Rechner Marktwerte in ihren Zeilen nennen
+   * (Mindestlohn, Mehrwertsteuersatz).
+   *
+   * 🚨 `markt` ist das, was der VERGLEICH zu genau diesen Eingaben sagt — bestes Angebot,
+   * Durchschnitt, Anzahl. Er fehlt, solange der Partner lädt, und bleibt weg, wenn er
+   * nicht antwortet: ein Block, der ihn benutzt, muss ohne ihn verschwinden dürfen.
+   * Er ist die einzige Quelle für Marktzahlen — geschätzte Vergleichswerte haben in einem
+   * Finanzrechner nichts zu suchen.
+   */
+  ergebnis: (e: E, w: W, rates: typeof RATES, markt?: MarktKurz) => ErgebnisBlock[];
   /** Pflichthinweis unter dem Ergebnis. */
   hinweis?: string;
   /** Brücke in den Vergleich: übernimmt die Werte in den Hash der Vergleichsseite. */

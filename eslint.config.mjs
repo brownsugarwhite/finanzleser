@@ -26,6 +26,10 @@ const eslintConfig = [
       // erwartet dort Grossschreibung und meldet sonst 47 Fehler, die keine sind.
       // Geprueft wird diese Datei stattdessen mit `node --check` (siehe wordpress/README.md).
       "wordpress/**",
+      // Fremdcode, minifiziert ausgeliefert (html2canvas für den PDF-Export der
+      // Checklisten). Er wird nicht von uns gepflegt, und `no-this-alias` auf einer
+      // Minifikat-Zeile ist keine Aussage über unseren Code.
+      "public/scripts/**",
     ],
   },
 ];

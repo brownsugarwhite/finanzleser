@@ -22,6 +22,7 @@ import Odometer from "@/components/kursblatt/eingabe/Odometer";
 import Felder from "./Felder";
 import Ergebnis from "./Ergebnis";
 import Bruecke from "./Bruecke";
+import { useMarkt } from "@/lib/kursblatt/useMarkt";
 import type { RechnerSchema, Werte } from "@/lib/rechner/schema";
 
 /** K:236 — „15. September 2026 · Kursblatt“. Rein darstellend, kein Datenstand. */
@@ -46,6 +47,15 @@ export default function KursblattRechner<W extends Werte, E>({
 
   const lauf = useLauf(JSON.stringify(werte));
 
+  /* Was der Vergleich zu diesen Eingaben sagt — einmal geholt, von Ergebnis UND Brücke
+     benutzt. Fehlt er, fällt beides auf seine Fassung ohne Marktzahlen zurück. */
+  const brueckenFrage = useMemo(() => {
+    if (!schema.bruecke) return "";
+    const u = schema.bruecke.uebernimm(werte);
+    return new URLSearchParams(Object.entries(u).map(([k, v]) => [k, String(v)])).toString();
+  }, [schema, werte]);
+  const markt = useMarkt(schema.bruecke?.slug, brueckenFrage);
+
   const setzen = useCallback((k: string, v: number | string | boolean) => {
     setWerte((w) => ({ ...w, [k]: v }));
     setErgebnis((e) => { if (e) setVeraltet(true); return e; });
@@ -67,7 +77,7 @@ export default function KursblattRechner<W extends Werte, E>({
   const vorschau = useMemo(() => {
     if (schema.vorschau) return schema.vorschau(werte);
     try {
-      const bloecke = schema.ergebnis(schema.rechne(werte, rates), werte, rates);
+      const bloecke = schema.ergebnis(schema.rechne(werte, rates), werte, rates, markt);
       for (const b of bloecke) {
         if (b.art !== "kacheln") continue;
         const k = b.kacheln.find((x) => x.haupt) ?? b.kacheln[0];
@@ -123,7 +133,7 @@ export default function KursblattRechner<W extends Werte, E>({
     }, verzug);
   };
 
-  const bloecke = useMemo(() => (ergebnis ? schema.ergebnis(ergebnis, werte, rates) : []), [ergebnis, werte, schema, rates]);
+  const bloecke = useMemo(() => (ergebnis ? schema.ergebnis(ergebnis, werte, rates, markt) : []), [ergebnis, werte, schema, rates, markt]);
 
   return (
     <div className="kb kb--rechner">
@@ -178,7 +188,7 @@ export default function KursblattRechner<W extends Werte, E>({
         <Ergebnis bloecke={bloecke} offen={Boolean(ergebnis)} veraltet={veraltet} lauf={lauf} kopfRef={ergRef} />
 
         {ergebnis && schema.bruecke && (
-          <Bruecke bruecke={schema.bruecke} rechnerTitel={schema.titel} werte={werte} ergebnis={ergebnis} />
+          <Bruecke bruecke={schema.bruecke} rechnerTitel={schema.titel} werte={werte} ergebnis={ergebnis} markt={markt} />
         )}
       </section>
     </div>

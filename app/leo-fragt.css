@@ -24,3 +24,42 @@
 /* Textlink „Zum Vergleich“ im Danke-Kasten (nur in Next: das Ziel der Regler-Frage ist hier eine eigene Seite) */
 .faden-shell .leo-frage .strich-link { justify-self: start; font-family: var(--sans); }
 .faden-shell .leo-frage--danke { border-color: var(--rule); background: var(--paper); }
+
+/* ── Leos Vergleichskarte im Antwortstrom (components/faden/leo/LeoVergleichKarte.tsx) ──
+   🚨 Diese Karte hatte bis zum 17.09.2026 GAR KEIN CSS. Acht Klassen, keine einzige
+   Regel — gebaut und nie gestaltet. Im schmalen Leo-Strom fiel damit jedes Element auf
+   seine Standardbreite zurück: der Titel brach nach jedem Wort um, der Kicker lief in die
+   Werkzeugzeile darunter, die Angebotsliste stand als nackte Aufzählung untereinander.
+   Am Ende des Fadens sah das aus wie ein Fehler, und es war einer.
+
+   Sie ist ein WERKZEUGBLOCK wie jeder andere: Einhängerlinie in der Vergleichsfarbe,
+   Kicker, Titel, Grund, Liste, Weg hinein. Kein Kasten, kein Schatten. */
+.faden-shell .leo-karte {
+  display: grid; gap: var(--luft-s); margin-top: var(--luft-m);
+  border-top: var(--strich-einhaenger) solid var(--tool-vergleich);
+  padding-top: var(--luft-s);
+  /* 🚨 Ohne das bricht der Titel im Strom nach jedem Wort um: das Raster einer Sprechblase
+     gibt seinen Kindern die Breite des längsten Wortes, wenn sie keine eigene haben. */
+  min-width: 0;
+}
+.faden-shell .leo-karte__titel {
+  font: 700 var(--grad-18)/1.25 var(--serif); color: var(--ink); text-decoration: none;
+  text-wrap: balance;
+}
+.faden-shell .leo-karte__titel:hover { color: var(--tuerkis); }
+.faden-shell .leo-karte__grund { font: italic 300 var(--grad-13)/1.5 var(--serif); color: var(--muted); }
+
+.faden-shell .leo-karte__liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.faden-shell .leo-karte__zeile {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--luft-m);
+  padding: var(--luft-s) 0; border-top: var(--strich-haar) solid var(--ink-12); min-width: 0;
+}
+.faden-shell .leo-karte__zeile:first-child { border-top: 0; }
+.faden-shell .leo-karte__zeile--best .leo-karte__wert { color: var(--tuerkis); }
+.faden-shell .leo-karte__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--grad-14); }
+.faden-shell .leo-karte__name b { font: 700 var(--grad-15) var(--serif); }
+.faden-shell .leo-karte__name > span { color: var(--muted); font-style: italic; }
+.faden-shell .leo-karte__wert { flex: none; font: 700 var(--grad-15) var(--serif); font-variant-numeric: tabular-nums; }
+
+.faden-shell .leo-karte__laedt,
+.faden-shell .leo-karte__stand { font: italic 300 var(--grad-12)/1.4 var(--serif); color: var(--muted); }

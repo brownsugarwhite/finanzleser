@@ -18,7 +18,7 @@
  * gerechnet, und ein Abruf im Server-Render würde die ganze Route auf das Minimum seines
  * `revalidate` ziehen (Regel 11 in CLAUDE.md).
  */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { MouseEvent } from "react";
 import { useFadenOptional } from "@/components/faden/FadenProvider";
 import PilleCTA from "@/components/kursblatt/teile/PilleCTA";
@@ -31,28 +31,22 @@ export interface BrueckeProps<W extends Werte, E> {
   rechnerTitel: string;
   werte: W;
   ergebnis: E;
+  /** Was der Vergleich zu genau diesen Eingaben sagt; fehlt, solange er lädt. */
+  markt?: MarktKurz;
 }
 
-export default function Bruecke<W extends Werte, E>({ bruecke, rechnerTitel, werte, ergebnis }: BrueckeProps<W, E>) {
-  const [markt, setMarkt] = useState<MarktKurz | undefined>(undefined);
+/**
+ * 🚨 Die Brücke holt die Marktzahlen NICHT mehr selbst. Sie standen hier, und damit kam
+ * das Ergebnis darüber nicht an sie heran — die Säulen „Ihre Rate im Marktvergleich"
+ * blieben leer, obwohl die Zahlen zwei Bauteile weiter schon geladen waren. Jetzt holt
+ * `KursblattRechner` sie einmal (lib/kursblatt/useMarkt.ts) und reicht sie an beide.
+ */
+export default function Bruecke<W extends Werte, E>({ bruecke, rechnerTitel, werte, ergebnis, markt }: BrueckeProps<W, E>) {
   const faden = useFadenOptional();
   const [abgelegt, setAbgelegt] = useState(false);
 
   const uebernahme = bruecke.uebernimm(werte);
-  const frage = new URLSearchParams(Object.entries(uebernahme).map(([k, v]) => [k, String(v)])).toString();
   const hash = `#vgl:${Object.entries(uebernahme).map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join("&")}`;
-
-  useEffect(() => {
-    let aktiv = true;
-    const abbruch = new AbortController();
-    fetch(`/api/vergleich-daten/${encodeURIComponent(bruecke.slug)}?kurz=1&${frage}`, { signal: abbruch.signal })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((j: MarktKurz | null) => { if (aktiv && j?.bestwert) setMarkt(j); })
-      // Antwortet der Partner nicht, bleibt der Satz ohne Marktzahlen stehen. Eine
-      // Fehlermeldung wäre hier fehl am Platz: der Leser hat sein Ergebnis längst.
-      .catch(() => { /* still */ });
-    return () => { aktiv = false; abbruch.abort(); };
-  }, [bruecke.slug, frage]);
 
   const ablegen = (e: MouseEvent<HTMLButtonElement>) => {
     if (!faden || abgelegt) return;

@@ -75,6 +75,32 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     ? def.spalten.find((s) => s !== haupt && (s.kurz === def.totalLabel || s.label === def.totalLabel))
     : undefined;
   const best = variante.produkte.find((p) => p.id === variante.bestwert) ?? variante.produkte[0];
+
+  /**
+   * 🚨 Die ZAHLEN, nicht nur ihre Beschriftung.
+   *
+   * `bestwert.total` ist ein fertiger Text („339 €"). Für die Säulen im Rechnerergebnis
+   * („Ihre Rate im Marktvergleich", Handoff Runde 2, Punkt 6) braucht der Rechner
+   * Zahlen — und vor allem den DURCHSCHNITT, den es hier bisher gar nicht gab. Genau
+   * deshalb standen die Säulen bis zum 17.09.2026 leer: zwei ihrer drei Werte konnte der
+   * Rechner nicht wissen, und geschätzt hätte er sie nicht ausgeben dürfen.
+   *
+   * Der Schnitt läuft über ALLE Angebote der Variante, nicht über die drei oben — sonst
+   * wäre „Ø aller Angebote" eine Aussage über die Spitzengruppe.
+   */
+  const zahlenFuer = (s: typeof haupt | undefined) => {
+    if (!s) return null;
+    const werte = variante.produkte
+      .map((p) => p.kennzahlen[s.key])
+      .filter((w): w is number => typeof w === "number");
+    if (!werte.length) return null;
+    return {
+      best: typeof best?.kennzahlen[s.key] === "number" ? (best.kennzahlen[s.key] as number) : null,
+      schnitt: werte.reduce((a, b) => a + b, 0) / werte.length,
+      anzahl: werte.length,
+    };
+  };
+
   return NextResponse.json({
     // `kategorie` und `version` nennen, damit ein Prüfwerkzeug nicht aus dem Slug raten muss.
     slug, kategorie: def.kategorie, version: v.def.version, titel: def.titel, klasse: def.klasse, mehrzahl: def.mehrzahl,
@@ -92,5 +118,11 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
         }
       : null,
     grund: variante.bestwertGrund || null,
+    zahlen: {
+      haupt: zahlenFuer(haupt),
+      total: zahlenFuer(total),
+      totalLabel: total ? (total.kurz ?? total.label) : null,
+      totalArt: total?.art ?? null,
+    },
   }, { headers: kopf });
 }

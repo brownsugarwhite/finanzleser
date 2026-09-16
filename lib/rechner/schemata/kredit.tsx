@@ -17,6 +17,9 @@ function rate(w: KreditParams): number {
   return (w.kreditsumme * r) / (1 - Math.pow(1 + r, -w.laufzeitMonate));
 }
 
+/** Der Vergleich, auf den dieser Rechner zeigt — steht in den Säulen und in der Brücke. */
+const VERGLEICH_TITEL = "Autokredit-Vergleich";
+
 export const kreditSchema: RechnerSchema<W, KreditResult> = {
   slug: "kredit",
   titel: "Kreditrechner",
@@ -68,18 +71,28 @@ export const kreditSchema: RechnerSchema<W, KreditResult> = {
    * („Der Block ist entfallen, der Ring ersetzt ihn"). Das Ergebnis sah dadurch anders
    * aus als jede Vorlage, aus der es gebaut sein sollte.
    */
-  ergebnis: (e, w) => [
+  ergebnis: (e, w, _rates, markt) => [
     { art: "zeiger", label: "Zinsanteil", wert: (e.gesamtzinsen / e.gesamtbetrag) * 100, max: 100, einheit: " %" },
-    /* 🚨 Hier stehen in der Vorlage die SÄULEN „Ihre Rate im Marktvergleich" — drei
-       Balken: Ihre Rate, das beste Angebot, der Durchschnitt aller Angebote. Sie fehlen
-       bewusst, denn zwei der drei Zahlen kann dieser Rechner nicht wissen: sie kommen aus
-       dem Vergleich. `ergebnis()` bekommt nur die eigenen Eingaben, und `MarktKurz`
-       (components/kursblatt/rechner/Bruecke.tsx) trägt zwar den Bestwert, aber KEINEN
-       Durchschnitt — und der steht in der Vorlage in der dritten Säule.
-       Eine Rate „× 1,04" als Marktschnitt auszugeben wäre eine erfundene Zahl in einem
-       Finanzrechner. Die Säulen kommen, wenn der Durchschnitt durch
-       `/api/vergleich-daten/<slug>?kurz=1` mitgeliefert und bis ins Schema durchgereicht
-       wird — das ist eine Datenänderung, keine Gestaltungsfrage. */
+    /* Die Säulen der Vorlage: Ihre Rate · das beste Angebot · der Durchschnitt.
+       🚨 Zwei der drei Zahlen kommen aus dem VERGLEICH, nicht aus dieser Rechnung — sie
+       stehen erst da, wenn `markt` geladen ist, und bleiben weg, wenn der Partner nicht
+       antwortet. Der Block verschwindet dann ganz; eine geschätzte Marktrate wäre in
+       einem Finanzrechner eine Falschaussage. */
+    ...(markt?.zahlen?.total?.best != null
+      ? [{
+          art: "messlatte" as const,
+          titel: "Ihre Rate im Marktvergleich",
+          wert: e.monatsrate, wertLabel: "Ihre Rate",
+          weitere: [{
+            label: `Bestes Angebot im ${VERGLEICH_TITEL}`,
+            wert: markt.zahlen.total.best,
+            ton: "tuerkis" as const,
+          }],
+          schnitt: markt.zahlen.total.schnitt,
+          schnittLabel: `Ø der ${markt.zahlen.total.anzahl} Angebote`,
+          einheit: " €",
+        }]
+      : []),
     {
       art: "kacheln",
       kacheln: [
@@ -133,7 +146,7 @@ export const kreditSchema: RechnerSchema<W, KreditResult> = {
 
   bruecke: {
     slug: "autokredit-vergleich",
-    titel: "Autokredit-Vergleich",
+    titel: VERGLEICH_TITEL,
     // 🚨 Zwei Sätze, nicht einer mit Lücken: solange die Marktzahlen laden (oder der
     // Partner schweigt), steht hier ein vollständiger Satz und kein Gerüst mit „…".
     satz: (w, e, markt) =>

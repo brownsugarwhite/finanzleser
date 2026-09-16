@@ -1162,6 +1162,15 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 .faden-shell .leo-markdown { font-size: var(--grad-16); min-height: 1.6em; }
 .faden-shell .leo-markdown > :first-child { margin-top: 0; } .faden-shell .leo-markdown > :last-child { margin-bottom: 0; }
 .faden-shell .leo-markdown .cursor { display: inline-block; width: 2px; height: 1em; background: var(--green); vertical-align: -2px; margin-left: var(--luft-xxs); animation: faden-blink .9s infinite; }
+/* 🚨 `.wort--leo` ist ein Raster aus 60-px-Gasse (Leos Kopf) und Textspalte. Alles, was
+   NACH der Sprechblase kommt, muss ausdrücklich in Spalte 2 — sonst fällt es in die
+   nächste freie Zelle, und das ist die 60-px-Gasse. Genau daran hing Leos Vergleichskarte
+   am Ende des Fadens: 60 px breit, jedes Wort eine eigene Zeile.
+   🚨 Der Selektor muss ein NACHFAHRE sein, kein Kind: die Karte steckt in einer `Insel`,
+   und die ist `display: contents` — fürs Raster ist sie unsichtbar, für den Selektor
+   nicht. */
+.faden-shell .wort--leo .werkzeuge,
+.faden-shell .wort--leo .leo-karte { grid-column: 2; }
 .faden-shell .wort--leo .werkzeuge { display: flex; gap: var(--luft-m); flex-wrap: wrap; margin-top: var(--luft-s); }
 .faden-shell .wort--fehler p { color: var(--pink); }
 .faden-shell .chips--rechts { margin-left: var(--luft-xl); }
@@ -1410,11 +1419,22 @@ body.faden-body .flug { font: 600 var(--grad-13)/1.2 var(--sans); background: va
    (components/faden/Lesestelle.tsx). 🚨 Sie war ein dunkler Klotz mitten im Satz und hat
    den Text verdeckt, ohne dazuzugehören. Jetzt ist sie eine Marke auf dem Papier:
    Haarlinie, Tinte auf Papier, ein grüner Pfeil — dieselbe Sprache wie ein Chip. */
-.faden-shell .lesestelle { position: fixed; left: 50%; top: calc(var(--kopf-h, 64px) + 12px); transform: translate(-50%, -16px); z-index: 28; background: var(--paper); color: var(--ink); border: var(--strich-haar) solid var(--ink-25); border-radius: var(--radius-pille); box-shadow: var(--schatten-auflage); display: inline-flex; align-items: center; gap: var(--luft-s); padding: var(--luft-xs) var(--luft-m) var(--luft-xs) var(--luft-s); font: 500 var(--grad-13)/1 var(--sans); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s, border-color .25s; }
-.faden-shell .lesestelle:hover { border-color: var(--ink); }
+/* 🚨 DUNKEL, größer, und ÜBER dem Blur.
+   Der Durchgang hatte daraus eine helle Papierpille mit Haarlinie und 13-px-Schrift
+   gemacht — sie verschwand damit im progressiven Blur des Kopfes, durch den sie
+   hindurchscheinen sollte. Sie ist ein Angebot mitten im Lesen und darf auffallen:
+   Tinte, Papierschrift, 600/14, kein Rahmen, weicher Schlagschatten.
+   🚨 `z-index: 30` — der Blur liegt auf 29. Auf 28 lag die Pille DARUNTER und bekam
+   dessen Unschärfe ab.
+   🚨 Die Polster (9/18/9/14, mobil 8/14/8/10) stehen als Zahlen und gehören NICHT auf die
+   Abstandsleiter: die Pille ist eine Form, ihr linkes Polster ist auf die 22-px-Scheibe
+   gerechnet, das rechte auf die Schrift. Auf 4/14 gerastert sitzt die Scheibe schief. */
+.faden-shell .lesestelle { position: fixed; left: 50%; top: calc(var(--kopf-h, 64px) + 12px); transform: translate(-50%, -16px); z-index: 30; background: var(--ink); color: var(--paper); border: 0; border-radius: var(--radius-pille); box-shadow: var(--schatten-schwebend); display: inline-flex; align-items: center; gap: var(--luft-s); padding: 9px 18px 9px 14px; font: 600 var(--grad-14)/1 var(--sans); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+/* Farbe auf dem Knopf UND auf seinen Kindern: components.css färbt jedes span. */
+.faden-shell .lesestelle span { color: var(--paper); }
 .faden-shell .lesestelle.zeigt { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
-.faden-shell .lesestelle i { width: 18px; height: 18px; border-radius: var(--radius-kreis); background: var(--green); color: var(--auf-tinte); display: grid; place-items: center; font-style: normal; font-size: var(--grad-11); flex: none; }
-@media (max-width: 900px) { .faden-shell .lesestelle { top: calc(var(--kopf-h, 64px) + 8px); font-size: var(--grad-13); padding: var(--luft-s) var(--luft-m) var(--luft-s) var(--luft-s); } }
+.faden-shell .lesestelle i { width: 22px; height: 22px; border-radius: var(--radius-kreis); background: var(--green); color: var(--auf-tinte); display: grid; place-items: center; font-style: normal; font-size: var(--grad-13); flex: none; }
+@media (max-width: 900px) { .faden-shell .lesestelle { top: calc(var(--kopf-h, 64px) + 8px); font-size: var(--grad-13); padding: 8px 14px 8px 10px; } }
 
 /* ── Flüge: Koffer, Begriff, Frage (Prototyp 01-css.html:242–247) ── */
 .faden-shell .flug-koffer, .faden-shell .flug-begriff, .faden-shell .flug-frage { position: fixed; z-index: 60; pointer-events: none; transform: translate(-50%, -50%); }
