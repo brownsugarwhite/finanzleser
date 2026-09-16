@@ -47,6 +47,7 @@ import AusDemNewsletter from "@/components/faden/landing/AusDemNewsletter";
 import WochenbriefTeaser from "@/components/faden/landing/WochenbriefTeaser";
 import PlusTeaser from "@/components/faden/landing/PlusTeaser";
 import WeiterredenChips from "@/components/faden/landing/WeiterredenChips";
+import VergleichKoerper from "@/components/vergleich/VergleichKoerper";
 
 export const metadata: Metadata = {
   title: "Schaukasten · Bausteine",
@@ -107,7 +108,7 @@ export default async function Schaukasten() {
   const grade = schriftgrade();
   const farben = harteFarben();
   const formen = knopfformen();
-  const VON = 15;
+  const VON = 16;
 
   return (
     <KartenKapitel
@@ -302,7 +303,12 @@ export default async function Schaukasten() {
         {embeds.map((teil, i) => <WerkzeugKarte key={i} teil={teil} toolData={toolData} imInhalt />)}
       </Abschnitt>
 
-      <Abschnitt titel="Spiele" nr={10} von={VON}>
+      <Abschnitt titel="Vergleichsrechner" nr={10} von={VON}>
+        <p className="vorspann">Der eigene Vergleich aus der financeads-API, im Kursblatt-Satz: Zeitungskopf, „Ihre Angaben“ mit Lineal, Setzzeile und Register, Streuband oder Zinskurve, drei Kennzahlen, Podest und Angebotsliste mit Balken und Details. Klasse-B-Kategorien (Versicherungen, für die der Partner keine Beiträge liefert) zeigen stattdessen die Anbieterliste — ohne Band, ohne Kennzahlen, ohne Gewinner.</p>
+        <VergleichKoerper slug="tagesgeldvergleich" skin="faden" />
+        <VergleichKoerper slug="private-haftpflichtversicherung-vergleich" skin="faden" />
+      </Abschnitt>
+      <Abschnitt titel="Spiele" nr={11} von={VON}>
         <p>Jede Spielform mit echtem Inhalt, damit sich auch die Auflösung anschauen lässt.</p>
         <div className="spiel-inline"><GamificationEmbed gamType="quiz" fields={{
           frage: "Welcher Block ist im Beispiel der zweitgrößte am Strompreis?",
@@ -344,7 +350,7 @@ export default async function Schaukasten() {
         </div>
       </Abschnitt>
 
-      <Abschnitt titel="Listen, Karten und Mein Bereich" nr={11} von={VON}>
+      <Abschnitt titel="Listen, Karten und Mein Bereich" nr={12} von={VON}>
         <ListenKarte kicker="Aus dem Bestand" gruppen={listen} />
         <div style={{ marginTop: 18 }}><KassensturzTeaser /></div>
         <div style={{ marginTop: 18 }}>
@@ -353,7 +359,7 @@ export default async function Schaukasten() {
         </div>
       </Abschnitt>
 
-      <Abschnitt titel="Anzeigenplätze" nr={12} von={VON}>
+      <Abschnitt titel="Anzeigenplätze" nr={13} von={VON}>
         <p>
           Sechs Formate, adblocker-neutral benannt. Im Schaukasten sind Anzeigen sonst aus —
           sie laden nach und schieben den Satz; hier sind sie der Gegenstand und deshalb
@@ -375,7 +381,7 @@ export default async function Schaukasten() {
         </div>
       </Abschnitt>
 
-      <Abschnitt titel="Die Blöcke der Startseite" nr={13} von={VON}>
+      <Abschnitt titel="Die Blöcke der Startseite" nr={14} von={VON}>
         <p>
           Dieselben Bausteine, die das Kapitel „Heute" tragen. Alle stehen auf dem Papier,
           alle tragen denselben Blockkopf und denselben Abstand.
@@ -390,7 +396,7 @@ export default async function Schaukasten() {
         </div>
       </Abschnitt>
 
-      <Abschnitt titel="Inventur: was es wirklich gibt" nr={14} von={VON}>
+      <Abschnitt titel="Inventur: was es wirklich gibt" nr={15} von={VON}>
         <p>
           Alle Schriftgrade und alle hart geschriebenen Farben des Fadens, gezählt über
           neun Stylesheets. Kein gepflegtes Verzeichnis — die Zahlen kommen beim Bauen aus
@@ -429,7 +435,7 @@ export default async function Schaukasten() {
         </ul>
       </Abschnitt>
 
-      <Abschnitt titel="Der Vorlage-Beitrag" nr={15} von={VON}>
+      <Abschnitt titel="Der Vorlage-Beitrag" nr={16} von={VON}>
         <p>
           Der zweite Teil des Schaukastens ist eine <strong>echte Kopie</strong> aus dem CMS:
           „Vorlage-Test · Photovoltaik Förderung“ mit sieben Abschnitten, Tabelle, Statistiken,

@@ -21,3 +21,15 @@ export const FADEN_AKTIV = process.env.NEXT_PUBLIC_FADEN === "1";
  */
 export const SCHAUKASTEN_AKTIV =
   FADEN_AKTIV && (process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_SCHAUKASTEN === "1");
+
+/**
+ * Entwurfsroute des Kursblatts (app/entwurf/kursblatt) — der Setzkasten, in dem alle
+ * Eingabe-Bausteine und Knopfmuster nebeneinander stehen.
+ *
+ * 🚨 Anders als der Schaukasten NICHT an FADEN_AKTIV gehängt: der Tokenkopf `.kb` ist
+ * selbsttragend (app/kursblatt.css), die Bausteine müssen sich auch ohne Faden-Hülle
+ * abnehmen lassen. In der Entwicklung immer da, in einem Produktions-Build nur mit
+ * `NEXT_PUBLIC_ENTWURF=1`. Die Route trägt zusätzlich noindex und steht in robots.txt.
+ */
+export const ENTWURF_AKTIV =
+  process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_ENTWURF === "1";

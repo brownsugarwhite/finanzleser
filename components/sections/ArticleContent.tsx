@@ -19,7 +19,9 @@ const ChecklisteEmbed = dynamic(() => import("@/components/checkliste/Checkliste
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Checkliste wird geladen...</div>,
 });
 
-const VergleichEmbed = dynamic(() => import("@/components/vergleich/VergleichEmbed"), {
+// Seit 15.09.2026: VergleichLazy entscheidet nach /api/vergleich-data, ob der eigene
+// financeads-Rechner oder das Fremd-Embed (VergleichEmbed) erscheint.
+const VergleichLazy = dynamic(() => import("@/components/vergleich/VergleichLazy"), {
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Vergleich wird geladen...</div>,
 });
 
@@ -209,11 +211,11 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd, toolData }
       return (
         <ArticleElementWrapper key={unit.itemKey} variant="centered" collapsed={collapsed}>
           <div className="article-tool-embed article-finanztool">
-            <RechnerEmbed
-              slug={unit.slug}
-              noVisual
-              formHeader={<ToolLabel type="rechner" slug={unit.slug} headingId={unit.headingId} showExcerpt preload={toolData?.titles[`rechner:${unit.slug}`]} />}
-            />
+            {/* Die Beschriftung steht jetzt VOR dem Rechner statt in ihm: der
+                Kursblatt-Satz bringt seinen eigenen Kopf mit und nimmt keinen fremden
+                mehr entgegen. Die Sprungmarke (`headingId`) bleibt damit erhalten. */}
+            <ToolLabel type="rechner" slug={unit.slug} headingId={unit.headingId} showExcerpt preload={toolData?.titles[`rechner:${unit.slug}`]} />
+            <RechnerEmbed slug={unit.slug} noVisual />
             {/* Fester Abstand + Trennlinie nach dem Rechner (ein-/ausgeklappt gleich) */}
             <hr className="article-tool-divider" />
           </div>
@@ -245,7 +247,7 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd, toolData }
           {/* Widget breit, OHNE äußere Box (nur Streifen-Ladebox + Vergleich) */}
           <ArticleElementWrapper variant="tool" collapsed={collapsed}>
             <div className="article-finanztool article-finanztool--wide">
-              <VergleichEmbed slug={unit.slug} />
+              <VergleichLazy slug={unit.slug} />
             </div>
           </ArticleElementWrapper>
           <ArticleElementWrapper variant="centered" collapsed={collapsed}>

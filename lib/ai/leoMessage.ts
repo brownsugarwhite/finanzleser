@@ -1,4 +1,7 @@
 import type { UIMessage } from "ai";
+import type { CardRef } from "./karten";
+
+export type { CardRef };
 
 /**
  * Eine Quelle, die das LEO-Backend (Kunden-RAG-Service) pro Antwort liefert.
@@ -16,7 +19,7 @@ export interface LeoSource {
  * Genutzt von der Proxy-Route (`app/api/chat/route.ts`) beim Schreiben des Streams
  * und vom Frontend (`useChat<LeoUIMessage>`, `LeoChatMessages`) beim Rendern.
  */
-export type LeoUIMessage = UIMessage<unknown, { sources: LeoSource[] }>;
+export type LeoUIMessage = UIMessage<unknown, { sources: LeoSource[]; card: CardRef }>;
 
 /** Reiner Text einer Nachricht (alle Text-Parts zusammengefügt). */
 export function getMessageText(message: LeoUIMessage): string {
@@ -30,4 +33,10 @@ export function getMessageText(message: LeoUIMessage): string {
 export function getSources(message: LeoUIMessage): LeoSource[] {
   const part = message.parts.find((p) => p.type === "data-sources");
   return (part as { type: "data-sources"; data: LeoSource[] } | undefined)?.data ?? [];
+}
+
+/** Die Karte aus dem `data-card`-Part (Proxy-Anreicherung, lib/ai/karten.ts) — höchstens eine. */
+export function getCard(message: LeoUIMessage): CardRef | null {
+  const part = message.parts.find((p) => p.type === "data-card");
+  return (part as { type: "data-card"; data: CardRef } | undefined)?.data ?? null;
 }

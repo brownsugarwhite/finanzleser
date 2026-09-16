@@ -14,6 +14,7 @@ import {
   getNavItems,
 } from "@/lib/wordpress";
 import { SITE_URL } from "@/lib/seo";
+import { getVergleichUebersicht } from "@/lib/financeads/laden";
 import {
   buildPostUrl,
   buildRechnerUrl,
@@ -100,11 +101,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const vergleichEntries: MetadataRoute.Sitemap = vergleiche.map((v) => ({
-    url: `${SITE_URL}${buildVergleichUrl(v.slug)}`,
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
+  // Vergleiche: Datum aus dem financeads-Snapshot (Konditionsstand) oder der letzten
+  // CPT-Änderung; Endpunkte, die financeads gerade nicht bedient (Index „defekt"),
+  // fallen heraus — ihre Seite ist noindex. Der Index ist ein gecachter REST-Abruf;
+  // fehlt er, bleibt das Datum weg, nie eine falsche Zahl.
+  const vergleichIndex = await safe(getVergleichUebersicht, {} as Awaited<ReturnType<typeof getVergleichUebersicht>>);
+  const vergleichEntries: MetadataRoute.Sitemap = vergleiche.flatMap((v) => {
+    const u = vergleichIndex[v.slug];
+    if (u?.defekt) return [];
+    const daten = [u?.stand, v.modified, v.date].filter((d): d is string => !!d).sort().pop();
+    return [{
+      url: `${SITE_URL}${buildVergleichUrl(v.slug)}`,
+      ...(daten ? { lastModified: new Date(daten) } : {}),
+      changeFrequency: (u ? "weekly" : "monthly") as "weekly" | "monthly",
+      priority: u ? 0.7 : 0.6,
+    }];
+  });
 
   const checklistenEntries: MetadataRoute.Sitemap = checklisten.map((c) => ({
     url: `${SITE_URL}${buildChecklisteUrl(c.slug)}`,

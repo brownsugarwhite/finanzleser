@@ -23,11 +23,18 @@ import type { Empfehlung } from "@/components/faden/landing/LeoEmpfiehlt";
 
 interface AktionenWerte { titel: string; url: string; kurzfassung?: FadenKurzfassung; artikelId: string; pdf?: BeitragPdf | null }
 import type { InselTyp } from "./Insel";
+import type { DefLite, VergleichDaten, VergleichQuelle } from "@/lib/financeads/typen";
+import type { CardRef } from "@/lib/ai/karten";
+
+interface VergleichInselWerte { def: DefLite; quelle: VergleichQuelle; daten: VergleichDaten; skin: "faden" | "alt"; kursblatt?: boolean; beschreibung?: string }
 import type { Statistik as StatistikDaten } from "@/lib/statistik/schema";
 
 const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"));
 const ChecklisteEmbed = dynamic(() => import("@/components/checkliste/ChecklisteEmbed"));
 const VergleichEmbed = dynamic(() => import("@/components/vergleich/VergleichEmbed"));
+const VergleichRechner = dynamic(() => import("@/components/vergleich/VergleichRechner"));
+const KursblattVergleich = dynamic(() => import("@/components/kursblatt/vergleich/KursblattVergleich"));
+const LeoVergleichKarte = dynamic(() => import("@/components/faden/leo/LeoVergleichKarte"));
 const DokumenteEmbed = dynamic(() => import("@/components/dokumente/DokumenteEmbed"));
 const StatistikKarte = dynamic(() => import("@/components/statistik/StatistikKarte"));
 const Statistik = dynamic(() => import("@/components/statistik/Statistik"));
@@ -51,8 +58,19 @@ interface Gefunden { el: HTMLElement; typ: InselTyp; arg: string; werte: unknown
 function Koerper({ typ, arg, werte }: { typ: InselTyp; arg: string; werte: unknown }) {
   if (typ === "rechner") return <RechnerEmbed slug={arg} noVisual />;
   if (typ === "checkliste") return <ChecklisteEmbed slug={arg} noVisual />;
-  if (typ === "vergleich") return <VergleichEmbed slug={arg} />;
+  if (typ === "vergleich") {
+    // Mit Werten = eigener financeads-Rechner (Definition, Quelle, Snapshot reisen in der
+    // Insel mit, kein Refetch); ohne Werte = Fremd-Embed, das seine Config selbst holt.
+    const w = werte as VergleichInselWerte | undefined;
+    if (!w?.daten) return <VergleichEmbed slug={arg} />;
+    // 🚨 Der Kursblatt-Satz muss hier genauso aufwachen wie die alte Liste. Fehlt der
+    // Zweig, bleibt im eingefrorenen Kapitel ein Foto zurück: nichts lässt sich mehr
+    // ziehen, und es gibt keinen Fehler, der darauf hinweist.
+    if (w.kursblatt) return <KursblattVergleich slug={arg} def={w.def} quelle={w.quelle} daten={w.daten} beschreibung={w.beschreibung} />;
+    return <VergleichRechner slug={arg} def={w.def} quelle={w.quelle} daten={w.daten} skin={w.skin} />;
+  }
   if (typ === "dokumente") return <DokumenteEmbed slugs={arg.split(",").filter(Boolean)} />;
+  if (typ === "leo-karte") return werte ? <LeoVergleichKarte karte={werte as CardRef} /> : null;
   if (typ === "statistik") return werte ? <StatistikKarte st={werte as FadenStatistik} /> : null;
   if (typ === "statistik-block") return werte ? <Statistik st={werte as StatistikDaten} /> : null;
   if (typ === "weiterlesen") return werte ? <Weiterlesen fragen={werte as FadenFrage[]} /> : null;

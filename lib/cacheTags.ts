@@ -17,3 +17,11 @@ export const RECHNER_CONFIG_TAG = "rechner-config";
  * bustet sie, sobald irgendein Inhalt gespeichert wird.
  */
 export const FADEN_INDEX_TAG = "faden-index";
+
+/**
+ * Der financeads-Snapshot (WP-Option `finanzleser_vergleich_daten`, gelesen über
+ * lib/financeads/laden.ts). Der Refresh (tools/financeads-refresh.mjs) bustet ihn nach
+ * jedem erfolgreichen Lauf über app/api/revalidate — die Vergleichsseiten holen die
+ * Daten dann beim nächsten Render frisch aus WordPress, nie von financeads.
+ */
+export const VERGLEICH_DATEN_TAG = "vergleich-daten";

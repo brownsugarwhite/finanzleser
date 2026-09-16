@@ -82,7 +82,10 @@
   --kopf-h: 64px; --rand-l: 300px; --rand-r: 300px; --spalte: 750px;
   /* Die Eingabepille — Maße wie im Leo-Chat der Live-Seite; --pille-breite gilt nur unten. */
   --pille-h: 92px; --pille-h-landing: 108px; --pille-radius: 35px; --pille-breite: 750px; --pille-breite-landing: 680px;
-
+  /* Die Breite, in der gesetzt wird: --spalte minus das Padding von #mitte (2 × 11 px).
+     Die 728 px des Kursblatt-Handoffs waren bis hierher ein Rechenrest, den nur
+     Kommentare kannten — ab jetzt ein Name, auf den man sich berufen kann. */
+  --satzbreite: calc(var(--spalte) - 22px);
   background: var(--paper); color: var(--ink); font: 16px/1.65 var(--sans); min-height: 100vh;
 }
 /* 🚨 Keine Scroll-Verankerung des Browsers: Chrome wählt selbst einen Ankerknoten und

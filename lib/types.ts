@@ -111,8 +111,13 @@ export interface Vergleich {
   title: string;
   slug: string;
   excerpt?: string;
-  /** Veröffentlichungsdatum (ISO). */
+  /** Veröffentlichung / letzte Änderung (ISO), für Sitemap und Datenstand. */
   date?: string;
+  modified?: string;
+  /** Gerenderter Inhalt — nur bei `getVergleichBySlug` (trägt den Block `vergleich-quelle`). */
+  content?: string;
+  /** Faden-Felder (leo_fragen, dazu_passt, glossar_begriffe) — nur mit Flag und nur bei `getVergleichBySlug`. */
+  faden?: FadenFelder;
   vergleichFelder?: VergleichACF;
 }
 

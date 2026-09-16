@@ -7,7 +7,6 @@
  * zusätzliche WordPress-Abfrage.
  */
 import type { WerkzeugVerweis } from "@/lib/faden/werkzeugIndex";
-import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
 
 /** Ein Eintrag der Auslese, so knapp wie möglich — er reist im Schnappschuss mit. */
 export interface AusleseEintrag {
@@ -77,15 +76,18 @@ export function vergleicheAufloesen(index: Map<string, WerkzeugVerweis>, slugs: 
 }
 
 /**
- * Leos Empfehlungen mit Beschreibung. Der Text kommt aus `lib/vergleichDescriptions.ts`
- * — dort steht er, weil das Vergleich-CPT kein Excerpt kennt. Auf den ersten Satz
- * gekürzt: in der Vorschau steht ein Versprechen, kein Absatz.
+ * Leos Empfehlungen mit Beschreibung. Auf den ersten Satz gekürzt: in der Vorschau steht
+ * ein Versprechen, kein Absatz.
+ *
+ * 🚨 Der Text kam bis zum 15.09.2026 aus `lib/vergleichDescriptions.ts` — einer Liste im
+ * Code, weil das Vergleich-CPT kein Excerpt kannte. Seit `finanzleser-cpt-excerpt.php`
+ * kann es das; die Texte stehen im CMS und reisen über den Werkzeugindex hierher.
  */
 export function empfehlungen(index: Map<string, WerkzeugVerweis>, slugs: string[]): { titel: string; href: string; text: string }[] {
   return slugs.flatMap((slug) => {
     const v = index.get(`vergleich:${slug}`);
     if (!v) return [];
-    const ganz = VERGLEICH_DESCRIPTIONS[slug] || "";
+    const ganz = v.text || "";
     const punkt = ganz.indexOf(". ");
     return [{ titel: v.titel, href: v.href, text: punkt > 0 ? ganz.slice(0, punkt + 1) : ganz }];
   });

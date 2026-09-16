@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { cacheHeaders } from "@/lib/httpCache";
+import { holeVergleich } from "@/lib/financeads/holeVergleich";
+import { defLite } from "@/lib/financeads/registry";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Vergleich-Embed-Config
@@ -11,7 +13,9 @@ import { cacheHeaders } from "@/lib/httpCache";
 // Backend anlegen – er erscheint im Dropdown UND rendert, ohne Code-Commit.
 //
 // Fallback: die frühere hardcodierte Map, solange ein CPT noch keinen Config-Block
-// trägt (kein Bruch während der Migration). Wird entfernt, sobald alle CPTs Config haben.
+// trägt (kein Bruch während der Migration). Die 11 Einträge auf tools.financeads.net
+// sind am 15.09.2026 herausgefallen — der Host ist tot, die Vergleiche laufen jetzt
+// über die financeads-API (lib/financeads). Der Rest wird mit der Migration entfernt.
 // ─────────────────────────────────────────────────────────────────────────────
 
 type EmbedConfig = {
@@ -22,24 +26,13 @@ type EmbedConfig = {
 };
 
 const VERGLEICH_DATA: Record<string, EmbedConfig> = {
-  "private-haftpflichtversicherung-vergleich": { iframeUrl: "https://tools.financeads.net/privathaftpflichtrechner.php?tp=dif&wf=24770&ntpl=responsive&h=1" },
-  "festgeldvergleich": { iframeUrl: "https://tools.financeads.net/festgeldrechner.php?tp=dif&wf=24770&ntpl=responsive&h=1" },
-  "tagesgeldvergleich": { iframeUrl: "https://tools.financeads.net/tagesgeldrechner.php?tp=dif&wf=24770&ntpl=responsive&h=1" },
-  "autokredit-vergleich": { iframeUrl: "https://tools.financeads.net/autokreditrechner.php?tp=dif&wf=24770&ntpl=responsive&h=1" },
-  "ratenkredit-vergleich": { iframeUrl: "https://tools.financeads.net/ratenkreditrechner.php?tp=dif&wf=24770&ntpl=responsive&h=1" },
-  "bausparen-vergleich": { iframeUrl: "https://tools.financeads.net/bausparrechner.php?tp=dif&wf=24770&ntpl=responsive&h=1" },
-  "baufinanzierung-vergleich": { iframeUrl: "https://tools.financeads.net/baufinanzierungrechner.php?tp=dif&wf=24770&ntpl=responsive&h=1" },
   "private-krankenversicherung-vergleich": { iframeUrl: "https://form.partner-versicherung.de/form.php?aid=1226&cid=1&partner_id=46986&insurance_id=1&scrollto=page&module=formv4" },
   "gaspreisvergleich": { iframeUrl: "https://koop.energie.check24.de/129535/default/gas/?tracking_id2=264&considerdeposit=no&considerdiscounts=yes&paymentperiod=month&priceguarantee=yes&guidelinematch=yes&packages=no&eco=no&mode=normal&deviceoutput=desktop" },
   "strompreisvergleich": { iframeUrl: "https://koop.energie.check24.de/129535/default/strom/?tracking_id2=264&considerdeposit=no&considerdiscounts=yes&paymentperiod=month&priceguarantee=yes&guidelinematch=yes&packages=no&eco=no&mode=normal&deviceoutput=desktop" },
-  "risikolebensversicherung-vergleich": { iframeUrl: "https://tools.financeads.net/risikolebensrechner.php?tp=dif&wf=24770&ntpl=responsive&h=1" },
-  "reisekrankenversicherung-vergleich": { iframeUrl: "https://tools.financeads.net/auslandskrankenrechner.php?tp=dif&wf=24770&ntpl=responsive&h=1" },
   "fahrradversicherung-vergleich": { iframeUrl: "https://rechner.covomo.de/bike?theme=covomo&r=eyJhZmZpbGlhdGVfaWQiOiI1MDAwMDA3MjkxIiwiYSI6IjUwMDAwMDcyOTEifQ%3D%3D&vehicle_type=11870&type_of_use=11875" },
   "haus-und-grundbesitzerhaftpflicht-vergleich": { iframeUrl: "https://www.mr-money.de/cookievgl.php?sp=hug&id=00204203" },
   "unfallversicherung-vergleich": { iframeUrl: "https://www.mr-money.de/cookievgl.php?sp=unf&id=00204203" },
   "gebaeudeversicherung-vergleich": { iframeUrl: "https://www.mr-money.de/cookievgl.php?sp=wg&id=00204203" },
-  "rechtsschutzversicherung-vergleich": { iframeUrl: "https://tools.financeads.net/rechtsschutzrechner.php?tp=dif&wf=24770&ntpl=responsive&h=1" },
-  "hausratversicherung-vergleich": { iframeUrl: "https://tools.financeads.net/hausratrechner.php?tp=dif&wf=24770&ntpl=responsive&h=1" },
   "kfz-versicherung-vergleich": { iframeUrl: "https://kfz.check24.de/auto/rechner/web/rechner?appSettings=44b37067-61a3-408f-946c-72505fc56de4" },
   "rentenversicherung-vergleich": { iframeUrl: "https://form.partner-versicherung.de/383ebb4ad0b6436d692cfca05cef2c89/form.php?aid=1226&cid=2&partner_id=46986&insurance_id=2&scrollto=page&module=formv4" },
   "lebensversicherung-vergleich": { scriptConfig: { type: "finanzen-de", slotId: "1721399007", siteKey: "httpswwwfinanzleserde", designId: "11912", productId: "38", scriptSrc: "https://vue-singlepage.am.fgrp.net/de/fdeam.nocache.module.js" } },
@@ -100,6 +93,17 @@ export async function GET(
 ) {
   const { slug } = await params;
 
+  // Eigener Rechner (financeads-API): Definition, Quelle und Snapshot für VergleichLazy
+  // auf der alten Seite. `art` unterscheidet die Antwortformen; das Embed-Format unten
+  // bleibt für VergleichEmbed unverändert.
+  const eigener = await holeVergleich(slug);
+  if (eigener?.art === "financeads") {
+    return NextResponse.json({
+      art: "financeads", slug, title: eigener.cpt.title, def: defLite(eigener.def), quelle: eigener.quelle,
+      daten: eigener.daten ? { ...eigener.daten, varianten: eigener.daten.varianten.slice(0, 1) } : null, defekt: !!eigener.def.defekt,
+    }, { headers: cacheHeaders(300, 3600) });
+  }
+
   const fromCpt = await getConfigFromCpt(slug);
   const cptConfig = fromCpt?.config;
   const hasCptConfig =
@@ -111,6 +115,7 @@ export async function GET(
   }
 
   return NextResponse.json({
+    art: "embed",
     title: fromCpt?.title || titleFromSlug(slug),
     iframeUrl: data.iframeUrl || "",
     scriptConfig: data.scriptConfig || null,

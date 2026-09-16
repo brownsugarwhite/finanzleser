@@ -1,0 +1,1277 @@
+/* =====================================================================================
+   kursblatt.css — „Kursblatt“: Vergleiche und Rechner im Zeitungssatz.
+
+   Vorlage: design_handoff_finanzleser_kursblatt/ —
+     „Finanzleser Vergleich & Rechner - Kursblatt.dc.html“  (Seite 1 Vergleich, Seite 2 Rechner)
+     „Finanzleser Festgeld & Eingaben - Kursblatt.dc.html“  (Seite 3 Festgeld, Seite 4 Bausteine)
+     „FL Lineal.dc.html“ · „FL Setzzeile.dc.html“ · „FL Register.dc.html“
+   Jede Regel trägt die Zeilennummer ihrer Vorlage — Muster app/statistik-formen.css.
+   Kürzel: K = Kursblatt.dc.html · F = Festgeld.dc.html · L/S/R = Lineal/Setzzeile/Register.
+
+   🚨 Eigener Namensraum `kb`. Das Kursblatt ist kein Skin über `.vgl__*`/`.rechner-*`,
+   sondern ein anderer Komponentenbaum. vergleich.css, faden-vergleich.css und rechner.css
+   bleiben unberührt, bis der Tausch als eigener Commit kommt.
+
+   🚨 Keine Klasse enthält ad/banner/sponsor/promo/financeads — Adblocker-Listen matchen
+   darauf (siehe vergleich.css:5). „Anzeige“ steht nur als Text im Kicker, nie als Klasse.
+
+   Der Tokenkopf ist selbsttragend: `.kb` läuft auch außerhalb `.faden-shell`.
+   ===================================================================================== */
+
+/* ── Tokenkopf ────────────────────────────────────────────────────────────────────── */
+/* Farben 1:1 aus README „Design Tokens · Farben (nur diese)“. */
+.kb {
+  --kb-breite: 728px;
+  --kb-rand: clamp(14px, 3vw, 24px);            /* K:41 padding */
+
+  --kb-papier: #faf9f6;
+  --kb-weiss: #fff;
+  --kb-ink: #334A27;
+  --kb-grau: #686C6A;
+  --kb-gruen: #45A117;
+  --kb-gruen-dunkel: #2E7A0B;
+  --kb-tuerkis: #0B7F66;                        /* Vergleich */
+  --kb-tuerkis-hell: #06D496;                   /* Stempel */
+  --kb-magenta: #D3005E;                        /* Rechner */
+  --kb-rahmen-grau: #999;                       /* Outline der Ergebnis-Kachel 1 */
+
+  /* Tinte-Abstufungen. Die Prozentzahl steht im Namen, damit die Handoff-Tabelle
+     ohne Übersetzung lesbar bleibt. */
+  --kb-t45: rgba(51,74,39,.45);                 /* kleine Teilstriche des Lineals */
+  --kb-t40: rgba(51,74,39,.4);                  /* Punktführung */
+  --kb-t35: rgba(51,74,39,.35);
+  --kb-t30: rgba(51,74,39,.3);
+  --kb-t25: rgba(51,74,39,.25);
+  --kb-t22: rgba(51,74,39,.22);
+  --kb-t18: rgba(51,74,39,.18);                 /* Logo-Rahmen */
+  --kb-t16: rgba(51,74,39,.16);
+  --kb-t12: rgba(51,74,39,.12);                 /* Zeilentrenner */
+  --kb-t10: rgba(51,74,39,.1);
+  --kb-t08: rgba(51,74,39,.08);
+  --kb-t05: rgba(51,74,39,.05);                 /* Hover Register-Eintrag */
+  --kb-t035: rgba(51,74,39,.035);               /* Hover Listenzeile */
+  --kb-bestwert: rgba(6,212,150,.07);           /* Grund der Bestwert-Zeile */
+
+  --kb-serif: var(--font-heading, 'Merriweather', Georgia, serif);
+  --kb-sans: var(--font-body, 'Open Sans', sans-serif);
+
+  /* Bewegung — README „Herzschlag-Prinzip“. */
+  --kb-kurve: cubic-bezier(.2, .8, .2, 1);      /* Standard */
+  --kb-ueber: cubic-bezier(.34, 1.56, .64, 1);  /* Überschwung */
+  --kb-ueber-sanft: cubic-bezier(.34, 1.4, .64, 1);
+  --kb-klappe: cubic-bezier(.22, 1.1, .36, 1);  /* Register aufklappen */
+  --kb-tempo: 1;                                /* ruhig 1.35 · lebhaft .65 */
+
+  /* Werkzeugfarbe: Türkis im Vergleich, Magenta im Rechner. */
+  --kb-werkzeug: var(--kb-tuerkis);
+
+  /* 🚨 `width: 100%` ist Pflicht, nicht Kosmetik. Gemessen 15.09.2026: im Faden ist `.kb`
+     ein Grid-Kind von #strom; `margin-inline: auto` hebt dort das Strecken auf, die Breite
+     käme also aus dem Inhalt — und `container-type: inline-size` schließt den Inhalt von
+     der Breitenberechnung aus. Ergebnis war eine 3087 px hohe Seite mit clientWidth 0.
+     Eine Container-Query braucht eine Breite, die NICHT vom Inhalt kommt. */
+  width: 100%;
+  max-width: var(--kb-breite);
+  margin-inline: auto;
+  padding-inline: var(--kb-rand);
+  /* 🚨 Der Handoff misst „Containerbreite (ResizeObserver auf dem Wurzel-Element,
+     nicht Viewport)“ (README „Breakpoints“). Nativ ist das eine Container-Query —
+     ohne Beobachter und ohne den Hydrations-Sprung, den ein useState(false) auf dem
+     Server unweigerlich erzeugt. */
+  container-type: inline-size;
+  container-name: kb;
+  font-family: var(--kb-sans);
+  color: var(--kb-ink);
+  font-variant-numeric: tabular-nums;           /* README: „überall“ */
+  box-sizing: border-box;
+}
+.kb *, .kb *::before, .kb *::after { box-sizing: border-box; }
+.kb--rechner { --kb-werkzeug: var(--kb-magenta); }
+
+/* Im Faden liefert #mitte die Satzbreite und das Padding bereits (faden.css:206). */
+.faden-shell .kb { max-width: var(--satzbreite, 728px); padding-inline: 0; }
+
+/* ── Bewegung ─────────────────────────────────────────────────────────────────────── */
+/*
+ * Der Neustart-Trick der Übergabe (README „Bewegung“, K:472): jede Keyframe-Animation
+ * existiert doppelt, und ein Zähler wechselt bei jeder Änderung den Namen. Anders lässt
+ * sich eine laufende Animation nicht neu starten, ohne den Knoten aus dem DOM zu nehmen.
+ * Den Zähler führt lib/kursblatt/useLauf.ts.
+ *
+ * 🚨 @keyframes sind global, nicht scopebar. `fl-herz` steht bereits in
+ * statistik-formen.css:35 mit exakt diesen Werten und wird hier NICHT neu definiert —
+ * nur der Zwilling fehlte. Gegenprobe: grep -c "@keyframes fl-herz{" app/*.css → 1.
+ */
+@keyframes fl-herz2 { /* Zwilling zu statistik-formen.css:35 — K:19 */
+  0%   { opacity: 0; transform: translateY(14px) scale(.985); }
+  55%  { opacity: 1; transform: translateY(-2px) scale(1.008); }
+  78%  { transform: translateY(1px) scale(.999); }
+  100% { opacity: 1; transform: none; }
+}
+/* K:20-24 — Linien zeichnen sich; Origin setzt die Regel am Element (center/left/right). */
+@keyframes fl-linie   { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes fl-mitte   { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes fl-mitte2  { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes fl-spalte  { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes fl-spalte2 { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+/* K:25 — Doppelschlag des Bestwert-Punkts. translate bleibt Teil der Keyframes, weil
+   der Punkt per transform zentriert wird und eine zweite transform ihn sonst versetzt. */
+@keyframes fl-puls {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(11,127,102,.45); }
+  14%      { transform: translate(-50%, -50%) scale(1.2); }
+  28%      { transform: translate(-50%, -50%) scale(1); }
+  42%      { transform: translate(-50%, -50%) scale(1.12); }
+  64%      { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 12px rgba(11,127,102,0); }
+}
+/* K:26 — derselbe Doppelschlag für den grünen Live-Punkt, ohne Zentrier-Transform. */
+@keyframes fl-punkt {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69,161,23,.5); }
+  14%      { transform: scale(1.2); }
+  28%      { transform: scale(1); }
+  42%      { transform: scale(1.12); }
+  64%      { transform: scale(1); box-shadow: 0 0 0 8px rgba(69,161,23,0); }
+}
+/* K:27-30 — Stempel: aufgesetzt (bleibt schief) und flach (dreht sich gerade). */
+@keyframes fl-stempel {
+  0%   { transform: scale(1.7) rotate(-22deg); opacity: 0; }
+  60%  { transform: scale(.94) rotate(-8deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-11deg); opacity: 1; }
+}
+@keyframes fl-stempel2 {
+  0%   { transform: scale(1.7) rotate(-22deg); opacity: 0; }
+  60%  { transform: scale(.94) rotate(-8deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-11deg); opacity: 1; }
+}
+@keyframes fl-stempelflach {
+  0%   { transform: scale(1.5) rotate(-8deg); }
+  60%  { transform: scale(.96) rotate(1deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+@keyframes fl-stempelflach2 {
+  0%   { transform: scale(1.5) rotate(-8deg); }
+  60%  { transform: scale(.96) rotate(1deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+/* K:31-32 — SVG zeichnet sich; das Element setzt pathLength="1" stroke-dasharray="1". */
+@keyframes fl-zeichnen  { to { stroke-dashoffset: 0; } }
+@keyframes fl-zeichnen2 { to { stroke-dashoffset: 0; } }
+
+/* K:33 — Text druckt sich ein.
+   🚨 Die Übergabe kennt drei leicht verschiedene Fassungen (K:33 7 px/.06em,
+   S:14 5 px/.06em, R:12 6 px/.05em) — drei Dateien, die im Prototyp nie zusammen
+   geladen werden. In einem Stylesheet kann nur eine gewinnen; maßgeblich ist die
+   Hauptdatei. Der Unterschied sind 1–2 px und ein Hundertstel em. */
+@keyframes fl-druck {
+  0%   { opacity: 0; transform: translateY(7px); letter-spacing: .06em; filter: blur(.6px); }
+  60%  { opacity: 1; letter-spacing: .01em; filter: blur(0); }
+  100% { opacity: 1; transform: none; letter-spacing: normal; }
+}
+@keyframes fl-druck2 {
+  0%   { opacity: 0; transform: translateY(7px); letter-spacing: .06em; filter: blur(.6px); }
+  60%  { opacity: 1; letter-spacing: .01em; filter: blur(0); }
+  100% { opacity: 1; transform: none; letter-spacing: normal; }
+}
+/* K:34 — der Merkzettel fliegt von rechts ein und bleibt leicht schief liegen. */
+@keyframes fl-zettel {
+  0%   { opacity: 0; transform: translateX(26px) rotate(3deg); }
+  60%  { opacity: 1; transform: translateX(-2px) rotate(-1.4deg); }
+  100% { opacity: 1; transform: rotate(-1deg); }
+}
+/* S:12-13 — grüner Knoten bestätigt den gesetzten Wert. */
+@keyframes fl-knoten  { 0% { transform: scale(0); } 60% { transform: scale(1.6); } 100% { transform: scale(1); } }
+@keyframes fl-knoten2 { 0% { transform: scale(0); } 60% { transform: scale(1.6); } 100% { transform: scale(1); } }
+/* L:12-13 — der Wert unter der Nadel tickt bei jeder Änderung. */
+@keyframes fl-tickA { 0% { transform: translateX(-50%) scale(1); } 40% { transform: translateX(-50%) scale(1.1); } 100% { transform: translateX(-50%) scale(1); } }
+@keyframes fl-tickB { 0% { transform: translateX(-50%) scale(1); } 40% { transform: translateX(-50%) scale(1.1); } 100% { transform: translateX(-50%) scale(1); } }
+/* L:14 — der pendelnde Strich am Bedienhinweis. */
+@keyframes fl-hand { 0%, 100% { transform: translateX(-6px); opacity: .55; } 50% { transform: translateX(6px); opacity: 1; } }
+
+/*
+ * 🚨 faden.css:38 bremst `.faden-shell *` — aber nur CSS, und nur im Faden. Das Kursblatt
+ * läuft auch außerhalb (Entwurfsroute, später ggf. die alte Seite) und braucht deshalb
+ * eine eigene Bremse. Die rAF-Zählwerke ignorieren CSS ohnehin; die prüfen
+ * reduzierteBewegung() aus lib/faden/belohnung.ts und springen auf den Zielwert.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .kb, .kb *, .kb *::before, .kb *::after {
+    animation: none !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ── Typografische Bausteine ──────────────────────────────────────────────────────── */
+/*
+ * 🚨 Alle Regeln hier tragen den `.kb`-Vorsatz — nicht aus Ordnungsliebe, sondern wegen
+ * der Spezifität. faden.css:32 setzt `.faden-shell h1,h2,h3,h4 { font-weight: 700;
+ * line-height: 1.22 }` und faden.css:34/35 `.faden-shell a`/`p`. Das sind je (0,1,1) und
+ * schlagen ein einzelnes `.kb__titel` (0,1,0) — die H1 stand deshalb in 700/1.22 statt in
+ * 900/1.02 (gemessen 15.09.2026). `.kb .kb__titel` ist (0,2,0) und gewinnt, ohne sich auf
+ * die Reihenfolge der @imports verlassen zu müssen.
+ */
+/* README „Typografie“: Kicker überall identisch. */
+.kb .kb__kicker {
+  font: 700 10.5px/1.3 var(--kb-sans);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--kb-grau);
+}
+.kb .kb__kicker--werkzeug { display: inline-flex; align-items: center; gap: 8px; color: var(--kb-gruen-dunkel); }
+.kb .kb__kicker--werkzeug i { width: 8px; height: 8px; border-radius: 50%; background: var(--kb-werkzeug); flex: none; }
+
+/* K:44-49 — Zeitungskopf: Kickerzeile, dann die Doppellinie, die sich von der Mitte
+   zeichnet; die feine Linie folgt .12 s später. Zwei Divs statt box-shadow, weil beide
+   Linien getrennt animieren. */
+.kb .kb__kopfzeile {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 8px 16px; flex-wrap: wrap;
+  font: 700 10.5px/1.3 var(--kb-sans);
+  letter-spacing: .14em; text-transform: uppercase; color: var(--kb-grau);
+}
+.kb .kb__kopflinie {
+  height: 2px; background: var(--kb-ink); margin-top: 8px;
+  transform-origin: center; animation: fl-mitte .9s var(--kb-kurve) both;
+}
+.kb .kb__kopflinie--fein {
+  height: 1px; margin-top: 2px;
+  animation: fl-mitte .9s var(--kb-kurve) .12s both;
+}
+
+/* K:50-53 — Seitenreiter. Aktiv = Tinte + grüne 2-px-Unterlinie, die von links wächst. */
+.kb .kb__reiter { display: flex; gap: 26px; margin-top: 8px; flex-wrap: wrap; }
+.kb .kb__reiter-blatt {
+  position: relative; border: 0; background: transparent; padding: 10px 0;
+  font: 600 14px var(--kb-serif); color: var(--kb-grau);
+  cursor: pointer; text-decoration: none; text-align: left;
+  transition: color .25s;
+}
+.kb .kb__reiter-blatt[aria-current="true"] { color: var(--kb-ink); }
+.kb .kb__reiter-blatt i {
+  position: absolute; left: 0; bottom: 4px; height: 2px; width: 100%;
+  background: var(--kb-gruen); transform: scaleX(0); transform-origin: left;
+  transition: transform .4s var(--kb-kurve);
+}
+.kb .kb__reiter-blatt[aria-current="true"] i { transform: scaleX(1); }
+
+/* K:108, :182 — Doppellinie als Kopf über Kennzahlen und Tabellen.
+   Hier als box-shadow-Variante (README „Linien“), weil sie nicht animiert. */
+.kb .kb__doppellinie { border-top: 2px solid var(--kb-ink); box-shadow: 0 3px 0 -2px var(--kb-ink); }
+.kb .kb__doppellinie--grau { border-top-color: var(--kb-grau); box-shadow: 0 3px 0 -2px var(--kb-grau); }
+
+/* K:136 u. v. a. — Punktführung. Der Versatz nach oben lässt die Punkte auf der
+   Grundlinie der Schrift sitzen statt darunter. */
+.kb .kb__fuehrung { flex: 1; min-width: 12px; border-bottom: 1px dotted var(--kb-t40); transform: translateY(-4px); }
+.kb .kb__punktzeile { display: flex; align-items: baseline; gap: 10px; padding: 5px 0; min-width: 0; }
+
+/* K:58-60 — Kopf einer Kursblatt-Seite. */
+.kb .kb__anzeige { font: italic 400 clamp(16px, 2.4vw, 19px) var(--kb-serif); color: var(--kb-magenta); animation: fl-druck .6s both; }
+.kb .kb__titel { margin: 6px 0 14px; font: 900 clamp(38px, 8vw, 60px)/1.02 var(--kb-serif); letter-spacing: -.02em; color: var(--kb-ink); animation: fl-druck .7s .1s both; }
+.kb .kb__vorspann { margin: 0; font: italic 300 clamp(16px, 2.4vw, 19px)/1.5 var(--kb-serif); color: var(--kb-ink); text-wrap: pretty; animation: fl-herz .8s .2s both; }
+.kb .kb__vorspann b { font-weight: 700; font-style: normal; color: var(--kb-werkzeug); }
+
+/* K:90-91 — Marktüberblick-Überschrift und Erklärsatz. */
+.kb .kb__h3 { margin: 6px 0 4px; font: 700 clamp(19px, 2.8vw, 23px)/1.25 var(--kb-serif); text-wrap: balance; }
+.kb .kb__erklaer { margin: 0; font: italic 300 13.5px/1.5 var(--kb-serif); color: var(--kb-grau); text-wrap: pretty; }
+.kb .kb__hinweis { font: italic 300 12px var(--kb-serif); color: var(--kb-grau); }
+
+/* K:211 — Rechtliche Hinweise. */
+.kb .kb__recht { margin: 22px 0 0; font: 400 12.5px/1.6 var(--kb-sans); color: var(--kb-grau); text-wrap: pretty; }
+.kb .kb__recht b { color: var(--kb-ink); }
+
+/* ── Schmaler Satz (README „Breakpoints“: eng = Containerbreite < 560 px) ─────────── */
+@container kb (max-width: 559px) {
+  .kb .kb__reiter { gap: 16px; }
+}
+
+/* ── Lineal (FL Lineal.dc.html:17-36) ─────────────────────────────────────────────── */
+.kb .kb-lineal {
+  position: relative; width: 100%; height: 118px;
+  user-select: none;
+  /* Eigener Container, damit der Bedienhinweis an der Breite DES LINEALS hängt und nicht
+     an der des Satzspiegels (FL Lineal:87 prüft `w >= 520`). */
+  container-type: inline-size; container-name: lineal;
+}
+.kb .kb-lineal__griff { position: absolute; inset: 0; touch-action: none; cursor: grab; outline: 0; }
+.kb .kb-lineal--zieht .kb-lineal__griff { cursor: grabbing; }
+.kb .kb-lineal__griff:focus-visible { outline: 2px solid var(--kb-gruen); outline-offset: 2px; }
+
+/* L:18 — die Spur läuft links und rechts aus, statt an einer Kante abzuschneiden. */
+.kb .kb-lineal__fenster {
+  position: absolute; left: 0; right: 0; top: 0; height: 76px; overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+/* L:19 + :83 — im Prototyp `left:0` plus gemessener Versatz; hier `left:50%` und der Wert
+   als Verschiebung. Gleiche Geometrie, aber schon im gelieferten HTML richtig. */
+.kb .kb-lineal__spur {
+  position: absolute; left: 50%; top: 0; height: 76px;
+  transform: translateX(calc(-1 * var(--kb-x)));
+  transition: transform .55s var(--kb-kurve);
+}
+.kb .kb-lineal--zieht .kb-lineal__spur { transition: none; }
+
+.kb .kb-lineal__grundlinie { position: absolute; left: 0; right: 0; top: 36px; height: 1px; background: var(--kb-ink); }
+
+/* L:24-26 — drei Strichhöhen. Als Kachel statt als Knoten: eine Kachel je Periode,
+   sonst entstünde an der Kachelgrenze eine Naht. Reihenfolge = Stapelung von oben:
+   groß (18 px, Tinte) über mittel (12 px) über klein (7 px). */
+.kb .kb-lineal__striche {
+  position: absolute; left: 0; right: 0; top: 36px; height: 18px;
+  background-image:
+    linear-gradient(90deg, var(--kb-ink) 0 1px, transparent 1px),
+    linear-gradient(90deg, var(--kb-t45) 0 1px, transparent 1px),
+    linear-gradient(90deg, var(--kb-t45) 0 1px, transparent 1px);
+  background-size: var(--kb-gross-px) 18px, var(--kb-mittel-px) 12px, var(--kb-px) 7px;
+  background-position: var(--kb-gross-x) 0, var(--kb-mittel-x) 0, 0 0;
+  background-repeat: repeat-x;
+}
+
+/* L:27-29 — Beschriftung unter den großen Strichen; die unter der Nadel blendet aus. */
+.kb .kb-lineal__schild {
+  position: absolute; top: 58px; transform: translateX(-50%);
+  font: 500 11px var(--kb-sans); color: var(--kb-grau);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+  transition: opacity .3s;
+}
+
+/* L:20-22 — Marken oben auf der Spur. */
+.kb .kb-lineal__marke {
+  position: absolute; top: 0; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  border: 0; background: transparent; padding: 4px 6px; cursor: pointer;
+  font: 500 11.5px var(--kb-sans); color: var(--kb-grau); white-space: nowrap;
+  transition: color .25s, transform .25s;
+}
+.kb .kb-lineal__marke:hover { transform: translateX(-50%) translateY(-2px); }
+.kb .kb-lineal__marke--aktiv { font-weight: 700; color: var(--kb-lineal-farbe); }
+.kb .kb-lineal__marke i { width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid currentColor; }
+
+/* L:32-33 — Nadel mit Papier-Aura, damit sie über den Strichen frei steht. */
+.kb .kb-lineal__nadel {
+  position: absolute; left: 50%; top: 26px; width: 2px; height: 30px;
+  background: var(--kb-lineal-farbe); transform: translateX(-50%);
+  box-shadow: 0 0 0 3px rgba(250, 249, 246, .9);
+}
+.kb .kb-lineal__spitze {
+  position: absolute; left: 50%; top: 22px; width: 0; height: 0; transform: translateX(-50%);
+  border-left: 5px solid transparent; border-right: 5px solid transparent;
+  border-top: 6px solid var(--kb-lineal-farbe);
+}
+
+/* L:34 — der Wert steht als Eingabefeld unter der Nadel, gestrichelt unterstrichen. */
+.kb .kb-lineal__wert {
+  position: absolute; left: 50%; top: 78px; transform: translateX(-50%); z-index: 2;
+  text-align: center; border: 0; border-bottom: 1px dashed var(--kb-t35);
+  background: transparent; font: 700 17px var(--kb-serif); color: var(--kb-lineal-farbe);
+  padding: 2px 0 3px; outline: 0; font-variant-numeric: tabular-nums; cursor: text;
+}
+.kb .kb-lineal__wert:focus { border-bottom: 1px solid var(--kb-ink); background: rgba(255, 255, 255, .7); }
+
+/* L:35 — Bedienhinweis mit pendelndem Strich; verschwindet nach der ersten Berührung. */
+.kb .kb-lineal__hinweis {
+  position: absolute; right: 0; top: 104px;
+  display: flex; align-items: center; gap: 6px;
+  font: italic 300 11.5px var(--kb-serif); color: var(--kb-grau);
+  transition: opacity .5s; pointer-events: none;
+}
+.kb .kb-lineal__hinweis i { display: inline-block; width: 14px; height: 1px; background: currentColor; animation: fl-hand 1.8s ease-in-out infinite; }
+.kb .kb-lineal[data-hinweis="aus"] .kb-lineal__hinweis { opacity: 0; }
+/* L:87 — unter 520 px Breite ist kein Platz für den Hinweis. */
+@container lineal (max-width: 519px) {
+  .kb .kb-lineal__hinweis { opacity: 0; }
+}
+
+/* ── Feldkopf: Bezeichnung links, Bereich rechts (K:69, :73, :251, :256, :275) ────── */
+.kb .kb__feldkopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.kb .kb__feldkopf b { font: 600 15px var(--kb-serif); }
+.kb .kb__feldkopf span { font: 400 12px var(--kb-sans); color: var(--kb-grau); }
+
+/* ── Feldlinien: Grundlinie + Doppellinie, die sich im Fokus von der Mitte zeichnet ──
+   Gemeinsam für Setzzeile (S:25-30) und Register (R:22-26). Die zweite Linie folgt
+   .08 s später — dasselbe Versetzen wie im Zeitungskopf, nur eine Stufe kleiner. */
+.kb .kb-feldlinien { position: relative; height: 6px; }
+.kb .kb-feldlinien__grund { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--kb-t35); }
+.kb .kb-feldlinien__doppel {
+  position: absolute; left: 0; right: 0; background: var(--kb-feld-farbe);
+  transform: scaleX(0); transform-origin: center;
+  transition: transform .45s var(--kb-kurve), background .3s;
+}
+.kb .kb-feldlinien__doppel--stark { top: -1px; height: 2px; }
+.kb .kb-feldlinien__doppel--fein { top: 3px; height: 1px; transition-delay: .08s; }
+.kb [data-fokus="an"] > .kb-feldlinien .kb-feldlinien__doppel,
+.kb [data-offen="an"] > .kb-feldlinien .kb-feldlinien__doppel { transform: scaleX(1); }
+.kb [data-fehler="an"] > .kb-feldlinien .kb-feldlinien__doppel { background: var(--kb-magenta); }
+/* S:29 — der grüne Knoten bestätigt den gesetzten Wert, sobald die Zeile den Fokus abgibt. */
+.kb .kb-feldlinien__knoten {
+  position: absolute; right: -4px; top: -4px; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--kb-gruen); border: 2px solid var(--kb-papier); box-sizing: content-box;
+  opacity: 0; transition: opacity .4s;
+}
+.kb .kb-feldlinien__knoten[data-an="an"] { opacity: 1; }
+
+/* ── Setzzeile (FL Setzzeile.dc.html:17-37) ───────────────────────────────────────── */
+.kb .kb-setzzeile { position: relative; min-width: 0; }
+.kb .kb-setzzeile__label {
+  display: block; font: 700 10.5px/1.3 var(--kb-sans); letter-spacing: .14em;
+  text-transform: uppercase; color: var(--kb-grau); transition: color .3s;
+}
+.kb .kb-setzzeile[data-fokus="an"] .kb-setzzeile__label { color: var(--kb-feld-farbe); }
+.kb .kb-setzzeile[data-fehler="an"] .kb-setzzeile__label { color: var(--kb-magenta); }
+
+.kb .kb-setzzeile__zeile { position: relative; display: flex; align-items: center; gap: 6px; height: 54px; }
+/* S:20/23 — die Chevrons sitzen mit negativem Rand halb außerhalb, damit die Zahl auf
+   der Satzkante steht und nicht eingerückt wirkt. */
+.kb .kb-setzzeile__schritt {
+  width: 34px; height: 44px; margin-left: -10px; border: 0; background: transparent; padding: 0;
+  display: flex; align-items: center; justify-content: center; color: var(--kb-grau);
+  opacity: .45; transition: opacity .3s, color .2s; cursor: pointer;
+}
+.kb .kb-setzzeile__schritt--plus { margin-left: 0; margin-right: -10px; }
+.kb .kb-setzzeile__schritt:hover { color: var(--kb-ink); }
+.kb .kb-setzzeile[data-fokus="an"] .kb-setzzeile__schritt,
+.kb .kb-setzzeile__schritt[data-immer="an"] { opacity: 1; }
+.kb .kb-setzzeile__schritt i {
+  width: 8px; height: 8px;
+  border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg); margin-left: 4px;
+}
+.kb .kb-setzzeile__schritt--plus i { transform: rotate(-135deg); margin-left: 0; margin-right: 4px; }
+
+.kb .kb-setzzeile__wert {
+  flex: 1; min-width: 0; border: 0; background: transparent;
+  font: 700 clamp(24px, 3.2vw, 30px) var(--kb-serif); color: var(--kb-ink);
+  outline: 0; padding: 0; font-variant-numeric: tabular-nums; letter-spacing: -.01em;
+  transition: color .3s;
+}
+.kb .kb-setzzeile[data-fehler="an"] .kb-setzzeile__wert { color: var(--kb-magenta); }
+.kb .kb-setzzeile__einheit { font: italic 300 16px var(--kb-serif); color: var(--kb-grau); flex-shrink: 0; }
+
+.kb .kb-setzzeile__fuss {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 6px 12px; flex-wrap: wrap; margin-top: 8px; min-height: 18px;
+}
+.kb .kb-setzzeile__hinweis { font: italic 300 12px var(--kb-serif); color: var(--kb-grau); min-width: 0; }
+.kb .kb-setzzeile[data-fehler="an"] .kb-setzzeile__hinweis { color: var(--kb-magenta); animation: fl-druck .4s both; }
+/* S:33-34 — Vorschläge erscheinen im Fokus (oder immer) und halten ihn beim Antippen. */
+.kb .kb-setzzeile__vorschlaege { display: flex; gap: 12px; flex-wrap: wrap; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.kb .kb-setzzeile__vorschlaege[data-an="an"] { opacity: 1; pointer-events: auto; }
+.kb .kb-setzzeile__vorschlaege button {
+  border: 0; background: transparent; padding: 0 0 1px; font: 500 12px var(--kb-sans);
+  color: var(--kb-grau); border-bottom: 1px dotted rgba(51, 74, 39, .5); cursor: pointer; transition: color .2s;
+}
+.kb .kb-setzzeile__vorschlaege button:hover { color: var(--kb-ink); }
+
+/* ── Register (FL Register.dc.html:16-34) ─────────────────────────────────────────── */
+/* R:16 — offen muss das Verzeichnis über allem liegen, was danach im Satz kommt. */
+.kb .kb-register { position: relative; min-width: 0; z-index: 1; }
+.kb .kb-register[data-offen="an"] { z-index: 40; }
+.kb .kb-register__label {
+  display: block; font: 700 10.5px/1.3 var(--kb-sans); letter-spacing: .14em;
+  text-transform: uppercase; color: var(--kb-grau); transition: color .3s;
+}
+.kb .kb-register[data-offen="an"] .kb-register__label { color: var(--kb-feld-farbe); }
+.kb .kb-register__trigger {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  width: 100%; min-width: 0; height: 54px; border: 0; background: transparent; padding: 0;
+  text-align: left; cursor: pointer; color: var(--kb-ink); outline: 0;
+}
+.kb .kb-register__trigger:focus-visible { outline: 2px solid var(--kb-gruen); outline-offset: 2px; }
+.kb .kb-register__gewaehlt {
+  font: 700 clamp(22px, 3vw, 28px) var(--kb-serif); letter-spacing: -.01em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+}
+.kb .kb-register__rechts { display: flex; align-items: center; gap: 12px; flex-shrink: 1; min-width: 0; }
+.kb .kb-register__meta { font: italic 300 13px var(--kb-serif); color: var(--kb-grau); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* R:20 — der Spark dreht sich beim Aufklappen mit Überschwung und nimmt die Werkzeugfarbe an. */
+.kb .kb-register__spark { display: block; flex: none; color: var(--kb-ink); transition: transform .55s var(--kb-ueber), color .3s; }
+.kb .kb-register[data-offen="an"] .kb-register__spark { transform: rotate(135deg) scale(1.15); color: var(--kb-feld-farbe); }
+
+/* R:27-28 — das Verzeichnis klappt aus dem Blatt: Bühne trägt die Perspektive. */
+.kb .kb-register__buehne {
+  position: absolute; left: 0; top: calc(100% + 4px);
+  min-width: 100%; width: max-content; max-width: min(92vw, 400px);
+  perspective: 900px; perspective-origin: 50% 0; pointer-events: none;
+}
+.kb .kb-register[data-offen="an"] .kb-register__buehne { pointer-events: auto; }
+.kb .kb-register__verzeichnis {
+  transform-origin: top center; transform: rotateX(-72deg); opacity: 0;
+  transition: transform .5s var(--kb-klappe), opacity .25s;
+  background: var(--kb-papier); border: 1px solid var(--kb-t22);
+  box-shadow: 0 30px 40px -24px rgba(51, 74, 39, .45);
+  padding: 4px 0; max-height: var(--kb-register-hoehe, 340px); overflow: auto; scrollbar-width: thin;
+}
+.kb .kb-register[data-offen="an"] .kb-register__verzeichnis { transform: rotateX(0); opacity: 1; }
+
+.kb .kb-register__eintrag {
+  display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: baseline; gap: 10px;
+  width: 100%; min-height: 44px; padding: 9px 16px 9px 14px;
+  border: 0; border-top: 1px solid var(--kb-t08); background: transparent;
+  text-align: left; cursor: pointer; color: var(--kb-ink);
+  transition: background .2s, padding-left .3s var(--kb-kurve);
+}
+.kb .kb-register__eintrag[data-hell="an"] { background: var(--kb-t05); padding-left: 20px; }
+.kb .kb-register__nr { font: 900 12px var(--kb-serif); font-style: normal; color: var(--kb-gruen); }
+.kb .kb-register__eintrag[data-aktiv="an"] .kb-register__nr { color: var(--kb-feld-farbe); }
+.kb .kb-register__eintrag-label { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.kb .kb-register__eintrag-label > span { font: 500 15px var(--kb-serif); white-space: nowrap; }
+.kb .kb-register__eintrag[data-aktiv="an"] .kb-register__eintrag-label > span { font-weight: 700; }
+.kb .kb-register__eintrag-label .kb__fuehrung { min-width: 14px; }
+.kb .kb-register__eintrag-meta { font: 500 12.5px var(--kb-sans); color: var(--kb-grau); white-space: nowrap; }
+.kb .kb-register__eintrag[data-aktiv="an"] .kb-register__eintrag-meta { color: var(--kb-feld-farbe); }
+
+/* ── Zweispaltige Eingabegruppe (F:62, :172) ──────────────────────────────────────── */
+.kb .kb__zweispalt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px 40px; align-items: start; }
+@container kb (max-width: 559px) {
+  .kb .kb__zweispalt { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ── Ziffernwalzen (K:279, :295) ──────────────────────────────────────────────────── */
+/* Schrift und Farbe kommen vom Elternteil — dieselbe Walze trägt den Zinssatz (44 px)
+   und Leos laufende Rate (36 px). Rechtsbündig, damit bei 999 → 1.000 nur die neue
+   Stelle hinzukommt, statt dass die ganze Zahl wirbelt. */
+.kb .kb-odo { position: relative; display: inline-flex; align-items: baseline; justify-content: flex-end; gap: 1px; font-variant-numeric: tabular-nums; }
+/* Die echte Zahl als unsichtbarer Text — für Vorlesesoftware, Textauszüge und alles,
+   was den Satz liest statt ihn zu sehen. Kein display:none (siehe Kopf der Komponente). */
+.kb .kb-odo__klartext {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.kb .kb-odo__walze { display: inline-block; height: 1em; overflow: hidden; line-height: 1; }
+.kb .kb-odo__spalte { display: block; text-align: center; line-height: 1; transition: transform .5s var(--kb-kurve); }
+.kb .kb-odo__zeichen { display: block; height: 1em; line-height: 1; }
+
+/* ── Drehring (K:258-271) ─────────────────────────────────────────────────────────── */
+.kb .kb-drehring { position: relative; width: 190px; height: 190px; margin-inline: auto; }
+.kb .kb-drehring__scheibe { display: block; touch-action: none; cursor: grab; user-select: none; overflow: visible; }
+.kb .kb-drehring__scheibe[data-zieht="an"] { cursor: grabbing; }
+.kb .kb-drehring__scheibe:focus-visible { outline: 2px solid var(--kb-gruen); outline-offset: 4px; }
+.kb .kb-drehring__strich { transition: stroke .3s; }
+/* Geometrie-Eigenschaften als CSS animieren — als Attribut allein täte sich nichts. */
+.kb .kb-drehring__griff { transition: cx .45s var(--kb-kurve), cy .45s var(--kb-kurve), r .2s; }
+.kb .kb-drehring__scheibe[data-zieht="an"] .kb-drehring__griff { transition: r .2s; }
+.kb .kb-drehring__schild { font: 500 10px var(--kb-sans); fill: var(--kb-grau); }
+.kb .kb-drehring__mitte {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; pointer-events: none; padding-top: 6px;
+}
+.kb .kb-drehring__mitte b { font: 900 36px/1 var(--kb-serif); color: var(--kb-ink); font-variant-numeric: tabular-nums; }
+.kb .kb-drehring__einheit { font: italic 300 12px var(--kb-serif); color: var(--kb-grau); margin-top: 4px; }
+.kb .kb-drehring__unter { font: 500 11px var(--kb-sans); color: var(--kb-feld-farbe); margin-top: 4px; white-space: nowrap; }
+
+/* ── Zählwerk (K:274-287) ─────────────────────────────────────────────────────────── */
+.kb .kb-zaehlwerk__zeile { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 26px; }
+.kb .kb-zaehlwerk__knopf {
+  position: relative; width: 46px; height: 46px; flex-shrink: 0;
+  border: 1.5px solid var(--kb-ink); border-radius: 50%; background: transparent; color: var(--kb-ink);
+  display: flex; align-items: center; justify-content: center; cursor: pointer; touch-action: none;
+  transition: transform .2s, background .2s, color .2s;
+}
+.kb .kb-zaehlwerk__knopf:hover { background: var(--kb-ink); color: var(--kb-weiss); }
+.kb .kb-zaehlwerk__knopf:active { transform: scale(.9); }
+.kb .kb-zaehlwerk__minus { width: 14px; height: 2px; background: currentColor; }
+.kb .kb-zaehlwerk__plus { position: absolute; width: 2px; height: 14px; background: currentColor; }
+.kb .kb-zaehlwerk__wert {
+  display: flex; align-items: baseline; justify-content: center;
+  font: 900 clamp(34px, 5vw, 44px)/1 var(--kb-serif); color: var(--kb-ink);
+  font-variant-numeric: tabular-nums; letter-spacing: -.01em;
+}
+.kb .kb-zaehlwerk__schnellwahl { display: flex; justify-content: center; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+.kb .kb-zaehlwerk__chip {
+  min-height: 34px; padding: 0 12px; border: 1px solid var(--kb-t25); border-radius: 999px;
+  background: transparent; color: var(--kb-ink); font: 500 12.5px var(--kb-sans);
+  cursor: pointer; transition: background .3s, color .3s, border-color .3s;
+}
+.kb .kb-zaehlwerk__chip:hover { border-color: var(--kb-ink); }
+.kb .kb-zaehlwerk__chip[data-aktiv="an"] { background: var(--kb-ink); color: var(--kb-weiss); border-color: var(--kb-ink); }
+.kb .kb-zaehlwerk__hinweis { display: block; text-align: center; margin-top: 10px; font: italic 300 11.5px var(--kb-serif); color: var(--kb-grau); }
+
+/* ── Pille (K:140-144 groß · :194-198 Liste · :299/:349 fester Knopf) ─────────────── */
+.kb .kb-pille {
+  position: relative; display: inline-flex; align-items: center; height: 48px;
+  padding: 3px 3px 3px 19px; border: 2px solid var(--kb-ink);
+  outline: 1px solid var(--kb-ink); outline-offset: 2px; border-radius: 21px;
+  background: transparent; text-decoration: none; color: var(--kb-ink);
+  font: 500 16px var(--kb-sans); overflow: hidden; cursor: pointer;
+  transition: color .3s; box-sizing: border-box;
+}
+.kb .kb-pille--klein { height: 42px; padding-left: 15px; border-radius: 19px; outline: 0; font-size: 14px; }
+.kb .kb-pille__fuell {
+  position: absolute; top: 3px; bottom: 3px; right: 3px; width: 38px; border-radius: 19px;
+  background: var(--kb-pille-farbe); transition: width .5s var(--kb-kurve);
+}
+.kb .kb-pille--klein .kb-pille__fuell { width: 32px; border-radius: 16px; transition-duration: .45s; }
+.kb .kb-pille__text { position: relative; padding-right: 16px; }
+.kb .kb-pille--klein .kb-pille__text { padding-right: 12px; }
+.kb .kb-pille__knopf {
+  position: relative; width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--kb-pille-farbe); transition: transform .35s var(--kb-ueber);
+}
+.kb .kb-pille--klein .kb-pille__knopf { width: 32px; height: 32px; }
+/* Bei der füllenden Pille trägt die Füllung die Farbe — der Knopf ist nur ihr rundes Ende. */
+.kb .kb-pille--fuellt .kb-pille__knopf { background: transparent; }
+.kb .kb-pille__knopf[data-schrumpft="an"] { transform: scale(.8); }
+/* Die Füllung läuft auch, wenn die Maus über der ZEILE steht, nicht über der Pille. */
+.kb .kb-pille--fuellt:hover .kb-pille__fuell,
+.kb .kb__zeile:hover .kb-pille__fuell,
+.kb .kb-podest:hover .kb-pille__fuell { width: 100%; }
+.kb .kb-pille--fuellt:hover,
+.kb .kb__zeile:hover .kb-pille--fuellt,
+.kb .kb-podest:hover .kb-pille--fuellt { color: var(--kb-weiss); }
+/* Pillen ohne Füllung färben beim Überfahren nur den Text (K:299 Magenta, :349 Türkis). */
+.kb .kb-pille:not(.kb-pille--fuellt):hover { color: var(--kb-pille-farbe); }
+.kb .kb-pille--nur-knopf { padding-left: 3px; }
+.kb .kb-pille--nur-knopf .kb-pille__text { display: none; }
+/* K:519 — im schmalen Satz bleibt von der Listen-Pille nur der Knopf. */
+@container kb (max-width: 559px) {
+  .kb .kb-pille--klein { padding-left: 3px; }
+  .kb .kb-pille--klein .kb-pille__text { display: none; }
+}
+
+/* ── Stempel (K:123 groß · :191 klein) ────────────────────────────────────────────── */
+.kb .kb-stempel {
+  display: inline-block; padding: 5px 12px;
+  border: 2px solid var(--kb-tuerkis-hell); color: var(--kb-tuerkis-hell); background: var(--kb-papier);
+  font: 700 11px var(--kb-sans); letter-spacing: .14em; text-transform: uppercase;
+  transform: rotate(-11deg);
+}
+.kb .kb-stempel--klein { padding: 2px 7px; border-width: 1.5px; font-size: 9px; letter-spacing: .12em; transform: rotate(-6deg); flex-shrink: 0; }
+@container kb (max-width: 559px) { .kb .kb-stempel--klein { display: none; } }
+
+/* ── Stempel-Presets (K:242-247) ──────────────────────────────────────────────────── */
+.kb .kb-presets { display: flex; align-items: center; gap: 14px 16px; flex-wrap: wrap; }
+.kb .kb-presets__label { font: italic 300 13px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-presets__stempel {
+  position: relative; padding: 8px 14px 7px; min-height: 44px;
+  border: 1.5px solid var(--kb-grau); border-radius: 4px; background: transparent; color: var(--kb-grau);
+  text-align: left; cursor: pointer; transform: rotate(var(--kb-neigung, 0deg));
+  transition: transform .35s var(--kb-ueber), color .25s, border-color .25s;
+}
+.kb .kb-presets__stempel:hover { transform: rotate(0deg) scale(1.04); }
+.kb .kb-presets__stempel[data-aktiv="an"] { color: var(--kb-magenta); border-color: var(--kb-magenta); }
+.kb .kb-presets__stempel b { display: block; font: 700 11px var(--kb-sans); letter-spacing: .12em; text-transform: uppercase; }
+.kb .kb-presets__stempel span { display: block; font: italic 300 11px var(--kb-serif); margin-top: 2px; opacity: .85; }
+
+/* ── Segment-Umschalter (K:78-82) ─────────────────────────────────────────────────── */
+.kb .kb-segment {
+  position: relative; display: inline-grid; grid-template-columns: repeat(var(--kb-seg-spalten, 3), auto);
+  border: 1px solid var(--kb-t30); height: 44px; overflow: hidden; box-sizing: border-box;
+}
+.kb .kb-segment__block {
+  position: absolute; top: 0; bottom: 0; left: var(--kb-seg-links, 0); width: var(--kb-seg-breite, 0);
+  background: var(--kb-ink);
+  transition: left .45s var(--kb-ueber-sanft), width .45s var(--kb-ueber-sanft);
+}
+.kb .kb-segment__knopf {
+  position: relative; border: 0; background: transparent; padding: 0 18px;
+  font: 500 14px var(--kb-sans); color: var(--kb-ink); cursor: pointer; transition: color .3s;
+  white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis;
+}
+/* Weiß erst, wenn der Block gemessen ist — sonst stünde weiße Schrift auf hellem Papier. */
+.kb .kb-segment[data-gemessen="an"] .kb-segment__knopf[data-aktiv="an"] { color: var(--kb-weiss); }
+@container kb (max-width: 559px) {
+  .kb .kb-segment { display: grid; width: 100%; grid-template-columns: repeat(var(--kb-seg-spalten, 3), 1fr); }
+  .kb .kb-segment__knopf { padding: 0 6px; font-size: 12px; }
+}
+
+/* ── Filter-Chip (K:173) ──────────────────────────────────────────────────────────── */
+.kb .kb-chip {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px;
+  border: 1px solid var(--kb-t25); border-radius: 999px; background: transparent; color: var(--kb-ink);
+  font: 500 13.5px var(--kb-sans); cursor: pointer;
+  transition: background .3s var(--kb-kurve), color .3s, border-color .3s, transform .3s;
+}
+.kb .kb-chip:hover { transform: translateY(-1px); border-color: var(--kb-ink); }
+.kb .kb-chip__punkt { width: 7px; height: 7px; border-radius: 50%; background: var(--kb-t30); transition: background .3s; flex: none; }
+.kb .kb-chip[data-aktiv="an"] { background: var(--kb-ink); color: var(--kb-weiss); border-color: var(--kb-ink); }
+.kb .kb-chip[data-aktiv="an"] .kb-chip__punkt { background: var(--kb-gruen); }
+.kb .kb-chip__zahl { opacity: .7; font-size: 12px; }
+
+/* ── Strich-Link (K:159) ──────────────────────────────────────────────────────────── */
+.kb .kb-strich {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px;
+  border: 0; background: transparent; padding: 0;
+  font: 500 14px var(--kb-sans); color: var(--kb-tuerkis); text-decoration: none; cursor: pointer;
+}
+.kb .kb-strich__strich { width: 18px; height: 1px; background: currentColor; transition: width .45s var(--kb-kurve); }
+.kb .kb-strich:hover .kb-strich__strich,
+.kb .kb-podest:hover .kb-strich__strich,
+/* K:484 — auf Platz 2 und 3 wächst der Strich, sobald die KARTE überfahren wird, nicht
+   erst der Link selbst. Der ganze Platz ist die Schaltfläche. */
+.kb .kb-platz:hover .kb-strich__strich { width: 34px; }
+/* „Im Aktenkoffer ✓“: erledigt, also grün und ohne Zeiger — der Strich bleibt stehen,
+   damit die Zeile nicht springt. */
+.kb .kb-strich[data-erledigt="an"] { color: var(--kb-gruen-dunkel); cursor: default; }
+.kb .kb-strich[data-erledigt="an"] .kb-strich__strich { width: 34px; }
+
+/* ── Logorahmen (K:127/:154/:190) ─────────────────────────────────────────────────── */
+.kb .kb-logo {
+  position: relative; flex-shrink: 0; border: 1px solid var(--kb-t18); background: var(--kb-weiss);
+  box-sizing: border-box; display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.kb .kb-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.kb .kb-logo b { font: 700 16px var(--kb-serif); color: var(--kb-ink); }
+.kb .kb-logo--gewinner { width: 120px; height: 42px; padding: 4px; }
+.kb .kb-logo--platz, .kb .kb-logo--zeile { width: 96px; height: 34px; padding: 3px; }
+@container kb (max-width: 559px) { .kb .kb-logo--zeile { width: 64px; } }
+
+/* ── Merken (K:145) ───────────────────────────────────────────────────────────────── */
+.kb .kb-merken {
+  display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent;
+  padding: 6px 0; min-height: 40px; font: 500 14px var(--kb-sans); color: var(--kb-grau);
+  cursor: pointer; transition: color .2s;
+}
+.kb .kb-merken--klein { gap: 6px; font-size: 13px; }
+.kb .kb-merken[data-gemerkt="an"] { color: var(--kb-gruen-dunkel); }
+.kb .kb-merken svg { transition: fill .3s; }
+
+/* ── Punktzeile: Werte rechts (K:136-138) ─────────────────────────────────────────── */
+.kb .kb__punktzeile-k { font: 400 14px var(--kb-sans); flex-shrink: 0; }
+.kb .kb__punktzeile-v { font: 500 15px var(--kb-sans); font-variant-numeric: tabular-nums; text-align: right; }
+.kb .kb__punktzeile-v[data-gross="an"] { font: 700 19px var(--kb-serif); }
+.kb .kb__punktzeile-v[data-ton="gut"] { color: var(--kb-gruen-dunkel); }
+.kb .kb__punktzeile-v[data-ton="warnung"] { color: var(--kb-magenta); }
+.kb .kb__punktzeile-v[data-ton="werkzeug"] { color: var(--kb-werkzeug); }
+
+/* ── Schalter (nicht in der Kursblatt-Übergabe; Maße aus faden.css:1319-1330) ─────── */
+.kb .kb-schalter {
+  display: inline-flex; align-items: center; gap: 10px; border: 0; background: transparent; padding: 0;
+  min-height: 44px; font: 500 14px var(--kb-sans); color: var(--kb-ink); cursor: pointer;
+}
+.kb .kb-schalter__knopf { position: relative; width: 42px; height: 24px; border-radius: 12px; background: var(--kb-t18); transition: background .3s; flex: none; }
+.kb .kb-schalter__knopf i { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--kb-weiss); box-shadow: 0 1px 3px rgba(0, 0, 0, .2); transition: left .35s var(--kb-ueber); }
+.kb .kb-schalter[aria-checked="true"] .kb-schalter__knopf { background: var(--kb-gruen); }
+.kb .kb-schalter[aria-checked="true"] .kb-schalter__knopf i { left: 20px; }
+
+/* ═════ Seite 2 · Rechner (K:234-354) ═══════════════════════════════════════════════ */
+
+.kb .kb-rechner { padding-top: 32px; }
+/* K:238 — die H2 des Rechners ist eine Spur kleiner als die H1 des Vergleichs. */
+.kb .kb__titel--rechner { margin: 8px 0 12px; font-size: clamp(32px, 6.5vw, 50px); line-height: 1.05; }
+.kb .kb__vorspann--rechner { font-size: clamp(16px, 2.3vw, 18px); }
+.kb .kb-rechner__presets { margin-top: 28px; }
+.kb .kb-rechner__felder { margin-top: 30px; display: grid; gap: 22px; }
+.kb .kb-rechner__paar { gap: 28px 40px; align-items: start; }
+
+/* K:291-300 — „Leo rechnet mit“ zwischen zwei Punktlinien, rechts der Knopf. */
+.kb .kb-rechner__leo {
+  display: flex; align-items: center; justify-content: space-between; gap: 18px 32px; flex-wrap: wrap;
+  margin-top: 30px; padding: 18px 0;
+  border-top: 1px dotted rgba(51, 74, 39, .45); border-bottom: 1px dotted rgba(51, 74, 39, .45);
+}
+.kb .kb-rechner__vorschau { display: flex; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; }
+.kb .kb-rechner__leo-vor { font: italic 400 15px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-rechner__leo-zahl {
+  display: inline-flex; align-items: baseline;
+  font: 900 clamp(28px, 4.4vw, 36px)/1 var(--kb-serif); color: var(--kb-ink);
+}
+.kb .kb-rechner__leo-nach { font: italic 300 13px var(--kb-serif); color: var(--kb-grau); }
+
+/* ── Ergebnis: öffnet über die Zeilenhöhe, nicht über eine Höhe in Pixeln (K:303) ── */
+.kb .kb-ergebnis { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .75s var(--kb-kurve); }
+.kb .kb-ergebnis[data-offen="an"] { grid-template-rows: 1fr; }
+.kb .kb-ergebnis__innen { overflow: hidden; opacity: 1; transition: opacity .4s; }
+/* K:525 — nach einer Eingabe steht das Ergebnis noch da, aber blass: es ist veraltet. */
+.kb .kb-ergebnis__innen[data-veraltet="an"] { opacity: .45; }
+.kb .kb-ergebnis__inhalt { padding-top: 40px; display: grid; gap: 32px; }
+.kb .kb-ergebnis__kopf { display: flex; align-items: center; gap: 18px; }
+.kb .kb-ergebnis__kopf i { flex: 1; border-top: 1px dotted rgba(51, 74, 39, .5); }
+.kb .kb-ergebnis__kopf i:first-child { transform-origin: right; }
+.kb .kb-ergebnis__kopf i:last-child { transform-origin: left; }
+.kb .kb-ergebnis__kopf span { font: 300 14px var(--kb-sans); letter-spacing: 2px; }
+
+/* K:306-310 — drei Kacheln; die erste ist die Antwort und steht auf Weiß mit Outline. */
+.kb .kb-kacheln { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 18px; }
+.kb .kb-kachel { padding: 20px 18px; background: rgba(0, 0, 0, .03); }
+.kb .kb-kachel--haupt {
+  background: var(--kb-weiss); border: 1px solid var(--kb-t30);
+  outline: 2px solid var(--kb-rahmen-grau); outline-offset: 3px;
+}
+.kb .kb-kachel__wert {
+  display: block; margin-top: 8px;
+  font: 700 clamp(22px, 3.4vw, 28px)/1 var(--kb-serif); font-variant-numeric: tabular-nums;
+}
+.kb .kb-kachel--haupt .kb-kachel__wert { font-size: clamp(28px, 4.6vw, 36px); color: var(--kb-magenta); }
+@container kb (max-width: 559px) { .kb .kb-kacheln { grid-template-columns: 1fr; } }
+
+/* K:312-316 — Anteilsband. */
+.kb .kb-anteil__band { display: flex; height: 18px; margin-top: 10px; gap: 2px; }
+.kb .kb-anteil__band i { transition: width .9s var(--kb-kurve); }
+.kb .kb-anteil__band i[data-ton="ink"] { background: var(--kb-ink); }
+.kb .kb-anteil__band i[data-ton="magenta"] { background: var(--kb-magenta); }
+.kb .kb-anteil__legende { display: flex; justify-content: space-between; margin-top: 8px; font: 400 12.5px var(--kb-sans); }
+.kb .kb-anteil__legende span { display: inline-flex; align-items: center; gap: 6px; }
+.kb .kb-anteil__legende i { width: 8px; height: 8px; }
+.kb .kb-anteil__legende i[data-ton="ink"] { background: var(--kb-ink); }
+.kb .kb-anteil__legende i[data-ton="magenta"] { background: var(--kb-magenta); }
+
+/* K:318-335 — Verlaufskurve mit Scrubber. */
+.kb .kb-kurve__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 12px; flex-wrap: wrap; }
+.kb .kb-kurve__buehne { position: relative; margin-top: 10px; }
+.kb .kb-kurve__bild { display: block; overflow: visible; touch-action: pan-y; }
+.kb .kb-kurve__achse { font: 500 10px var(--kb-sans); fill: var(--kb-grau); }
+.kb .kb-kurve__fahne {
+  position: absolute; top: 0; padding: 6px 10px; background: var(--kb-ink); color: var(--kb-weiss);
+  font: 500 12px var(--kb-sans); white-space: nowrap; pointer-events: none;
+}
+/* Der Hinweis nennt die Maus; auf Geräten ohne Zeigegerät die Berührung. */
+.kb .kb-kurve__bedienhinweis--touch { display: none; }
+@media (hover: none) {
+  .kb .kb-kurve__bedienhinweis { display: none; }
+  .kb .kb-kurve__bedienhinweis--touch { display: inline; }
+}
+
+/* K:337-341 — Jahresübersicht mit grauem Doppelkopf. */
+.kb .kb-tabelle { --kb-tab-spalte: 1fr; }
+.kb .kb-tabelle__kopf, .kb .kb-tabelle__zeile { display: grid; gap: 10px; }
+.kb .kb-tabelle__kopf {
+  grid-template-columns: .7fr 1fr 1fr 1.2fr; padding: 8px 0; margin-top: 10px;
+  font: 700 10.5px/1.3 var(--kb-sans); letter-spacing: .12em; text-transform: uppercase; color: var(--kb-grau);
+}
+.kb .kb-tabelle__zeile {
+  grid-template-columns: .7fr 1fr 1fr 1.2fr; padding: 10px 0;
+  border-top: 1px solid var(--kb-t12);
+  font: 400 clamp(12.5px, 1.9vw, 14px) var(--kb-sans); font-variant-numeric: tabular-nums;
+}
+.kb .kb-tabelle__zeile[data-betont="an"] { border-top: 2px solid var(--kb-magenta); }
+.kb .kb-tabelle__kopf span[data-rechts="an"], .kb .kb-tabelle__zeile span[data-rechts="an"] { text-align: right; }
+.kb .kb-tabelle__zeile span[data-ton="magenta"] { color: var(--kb-magenta); }
+.kb .kb-tabelle__zeile span:first-child { font: 700 14px var(--kb-serif); }
+.kb .kb-tabelle__zeile span:last-child { font-weight: 600; }
+
+.kb .kb-punktblock { display: grid; }
+
+/* K:343 — Pflichthinweis unter dem Ergebnis. */
+.kb .kb-ergebnis__hinweis {
+  padding-top: 14px; border-top: 2px solid var(--kb-magenta);
+  font: 400 13px/1.6 var(--kb-sans); color: var(--kb-grau); text-wrap: pretty;
+}
+.kb .kb-ergebnis__hinweis b { color: var(--kb-magenta); }
+
+/* K:345-352 — die Brücke zurück in den Vergleich, türkis eingehängt. */
+.kb .kb-bruecke { margin-top: 28px; padding-top: 20px; border-top: 2px solid var(--kb-tuerkis); }
+.kb .kb__kicker--vergleich { --kb-werkzeug: var(--kb-tuerkis); }
+.kb .kb-bruecke__satz { margin: 6px 0 0; font: italic 400 16px/1.5 var(--kb-serif); text-wrap: pretty; }
+.kb .kb-bruecke__satz b { font-style: normal; color: var(--kb-tuerkis); }
+.kb .kb-bruecke__aktionen { display: flex; align-items: center; gap: 14px 24px; flex-wrap: wrap; margin-top: 18px; }
+
+/* ═════ Seite 1 · Vergleich (K:56-213) ══════════════════════════════════════════════ */
+
+.kb--vergleich { --kb-werkzeug: var(--kb-tuerkis); }
+.kb .kb__fehler { margin: 14px 0 0; font: 400 13px var(--kb-sans); color: var(--kb-magenta); }
+
+/* K:62-67 — „Ihre Angaben“ hängt am türkisen Einhänger; rechts der Hinweis mit dem
+   pulsenden grünen Punkt: hier wird nichts bestätigt, hier rechnet es sofort. */
+.kb .kb-angaben { margin-top: 36px; padding-top: 16px; border-top: 2px solid var(--kb-werkzeug); }
+.kb .kb-angaben__kopf { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; }
+.kb .kb-angaben__sofort {
+  display: inline-flex; align-items: center; gap: 7px;
+  font: italic 300 12.5px var(--kb-serif); color: var(--kb-grau);
+}
+.kb .kb-angaben__sofort i { width: 7px; height: 7px; border-radius: 50%; background: var(--kb-gruen); animation: fl-punkt 1.8s infinite; flex: none; }
+.kb .kb-angaben__breit { margin-top: 22px; }
+.kb .kb-angaben__breit + .kb-angaben__breit { margin-top: 18px; }
+.kb .kb-angaben__paar { margin-top: 22px; gap: 22px 40px; }
+/* K:76-77 — die Bezeichnung steht neben dem Umschalter, nicht darüber. */
+.kb .kb-angaben__segment { display: flex; align-items: center; gap: 12px 18px; flex-wrap: wrap; }
+.kb .kb-angaben__segment > b { font: 600 15px var(--kb-serif); }
+
+/* ── Marktüberblick (K:87-113) ────────────────────────────────────────────────────── */
+.kb .kb-markt { margin-top: 46px; }
+@container kb (max-width: 559px) { .kb .kb-markt__tipp { display: none; } }
+
+/* Streuband (K:92-106). Die Höhe ist fest: Beschriftung oben, Achse bei 112, Tooltip bei 138. */
+.kb .kb-band { position: relative; height: 172px; margin-top: 10px; }
+.kb .kb-band__kicker { position: absolute; left: 0; top: 0; }
+.kb .kb-band__achse { position: absolute; left: 0; right: 0; top: 112px; height: 1px; background: var(--kb-ink); }
+.kb .kb-band__ende { position: absolute; top: 122px; font: 500 11px var(--kb-sans); color: var(--kb-grau); }
+.kb .kb-band__ende--links { left: 0; }
+.kb .kb-band__ende--rechts { right: 0; }
+.kb .kb-band__schnitt { position: absolute; top: 88px; height: 24px; border-left: 1px dashed var(--kb-grau); transition: left .7s var(--kb-kurve); }
+.kb .kb-band__schnitt-wert {
+  position: absolute; top: 70px; transform: translateX(-50%);
+  font: 500 11.5px var(--kb-sans); color: var(--kb-grau); white-space: nowrap;
+  transition: left .7s var(--kb-kurve);
+}
+/* Beschriftungen hängen sich an den Rändern um, statt aus dem Satz zu laufen. */
+.kb .kb-band__schnitt-wert[data-anker="links"] { transform: none; }
+.kb .kb-band__schnitt-wert[data-anker="rechts"] { transform: translateX(-100%); }
+/* Der Faden vom Bestwert zu seiner Beschriftung — er wächst von der Achse nach oben. */
+.kb .kb-band__faden {
+  position: absolute; top: 44px; height: 68px; width: 1px; background: var(--kb-tuerkis);
+  transform-origin: bottom; transition: left .7s var(--kb-kurve);
+}
+.kb .kb-band__best {
+  position: absolute; top: 28px; padding-left: 8px;
+  font: 700 13px var(--kb-sans); color: var(--kb-tuerkis); white-space: nowrap;
+  transition: left .7s var(--kb-kurve);
+}
+.kb .kb-band__best > span { display: inline-block; }
+.kb .kb-band__best[data-anker="rechts"] { padding: 0 8px 0 0; transform: translateX(-100%); }
+.kb .kb-band__punkt {
+  position: absolute; width: 10px; height: 10px; transform: translate(-50%, -50%);
+  border-radius: 50%; background: var(--kb-papier); border: 1.5px solid var(--kb-ink);
+  box-sizing: border-box; padding: 0; cursor: pointer;
+  transition: left .7s var(--kb-kurve), top .5s, width .25s, height .25s, background .25s;
+}
+.kb .kb-band__punkt[data-hell="an"] { width: 16px; height: 16px; background: var(--kb-ink); }
+.kb .kb-band__punkt[data-ist="an"] {
+  width: 14px; height: 14px; background: var(--kb-tuerkis); border: 0;
+  animation: fl-puls 2.2s infinite;
+}
+.kb .kb-band__tip {
+  position: absolute; top: 138px; padding: 5px 10px;
+  background: var(--kb-ink); color: var(--kb-weiss); font: 500 12px var(--kb-sans);
+  white-space: nowrap; transition: opacity .2s, left .3s; pointer-events: none;
+}
+
+/* Zinskurve (F:74-88) — der beste Wert je Laufzeit statt eines Punkts je Angebot.
+   🚨 Eigener Name, nicht `.kb-kurve`: so heißt seit Schritt 7 die Restschuldkurve des
+   Rechners (components/kursblatt/teile/Verlaufskurve.tsx). Gemessen am 16.09.2026 hat
+   dieser Block deren `__achse` überschrieben (11 px statt 10 px) und ihrem Wurzelknoten
+   `position/margin/padding` verpasst, die sie nie hatte.
+   Das SVG trägt Gitter und Linien, die Punkte liegen als Knöpfe darüber: sie brauchen
+   Tastfläche, Fokusring und Beschriftung. Alle Positionen in Prozent des viewBox-Rasters
+   640×210, damit die Kurve jede Satzbreite mitgeht. */
+.kb .kb-zinskurve { position: relative; margin-top: 16px; }
+.kb .kb-zinskurve > svg { display: block; overflow: visible; }
+.kb .kb-zinskurve__best {
+  fill: none; stroke: var(--kb-tuerkis); stroke-width: 2;
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+}
+.kb .kb-zinskurve__schnitt { fill: none; stroke: var(--kb-grau); stroke-width: 1.2; stroke-dasharray: 4 4; transition: d .6s; }
+.kb .kb-zinskurve__stiel { stroke: rgba(11, 127, 102, .35); stroke-width: 1; stroke-dasharray: 2 3; }
+.kb .kb-zinskurve__gitter-wert {
+  position: absolute; left: 0; transform: translateY(-100%);
+  font: 500 10px var(--kb-sans); color: var(--kb-grau); pointer-events: none;
+}
+.kb .kb-zinskurve__punkt {
+  position: absolute; width: 10px; height: 10px; transform: translate(-50%, -50%);
+  border-radius: 50%; background: var(--kb-papier); border: 1.5px solid var(--kb-tuerkis);
+  box-sizing: border-box; padding: 0; cursor: pointer;
+  transition: left .5s, top .5s var(--kb-kurve), width .25s, height .25s, background .25s;
+}
+/* Der Punkt ist 10–16 px groß; angetippt wird ein unsichtbares 44er-Feld darum
+   (README „Was jeder Baustein kann“: Tap-Ziele mindestens 44 px). */
+.kb .kb-zinskurve__punkt::before { content: ""; position: absolute; inset: -17px; border-radius: 50%; }
+.kb .kb-zinskurve__punkt[data-hell="an"] { width: 14px; height: 14px; background: var(--kb-ink); }
+.kb .kb-zinskurve__punkt[data-ist="an"] {
+  width: 16px; height: 16px; background: var(--kb-tuerkis); border: 0;
+  animation: fl-puls 2.2s infinite;
+}
+.kb .kb-zinskurve__wert {
+  position: absolute; transform: translate(-50%, -100%);
+  font: 500 11px var(--kb-sans); color: var(--kb-grau); white-space: nowrap;
+  pointer-events: none; font-variant-numeric: tabular-nums;
+  transition: top .5s var(--kb-kurve), color .3s;
+}
+.kb .kb-zinskurve__wert[data-hell="an"] { color: var(--kb-ink); }
+.kb .kb-zinskurve__wert[data-ist="an"] { font-weight: 700; font-size: 13px; color: var(--kb-tuerkis); }
+.kb .kb-zinskurve__achse {
+  position: absolute; bottom: -2px; transform: translateX(-50%);
+  font: 500 11px var(--kb-sans); color: var(--kb-grau); white-space: nowrap; pointer-events: none;
+}
+.kb .kb-zinskurve__achse[data-ist="an"] { font-weight: 700; color: var(--kb-tuerkis); }
+/* Die Beschriftung unter der Achse braucht Platz, den das SVG nicht hat. */
+.kb .kb-zinskurve { padding-bottom: 18px; }
+@media (prefers-reduced-motion: reduce) {
+  .kb .kb-zinskurve__best { stroke-dasharray: none; stroke-dashoffset: 0; }
+  .kb .kb-zinskurve__punkt[data-ist="an"] { animation: none; }
+}
+/* F:88 — der Hinweis, wenn die Kurve nicht für den eingestellten Betrag gilt. */
+.kb .kb-zinskurve__fuss { display: block; margin-top: 10px; font: italic 300 12.5px/1.5 var(--kb-serif); color: var(--kb-grau); }
+
+/* Kennzahlen (K:107-112). Die große steht im schmalen Satz über die volle Breite. */
+.kb .kb-kennzahlen {
+  display: grid; grid-template-columns: 1fr 1fr 1.6fr; gap: 14px 28px;
+  margin-top: 22px; padding-top: 12px;
+}
+.kb .kb-kennzahl__label { display: block; font: 400 13px var(--kb-sans); color: var(--kb-grau); }
+.kb .kb-kennzahl__zeile { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.kb .kb-kennzahl__wert { font: 700 clamp(20px, 3.2vw, 24px)/1.1 var(--kb-serif); font-variant-numeric: tabular-nums; }
+.kb .kb-kennzahl__unter { font: italic 300 12.5px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-kennzahl[data-ton="werkzeug"] .kb-kennzahl__wert { font-weight: 900; font-size: clamp(24px, 4vw, 30px); color: var(--kb-tuerkis); }
+.kb .kb-kennzahl[data-ton="grau"] .kb-kennzahl__wert { color: var(--kb-grau); }
+.kb .kb-kennzahl[data-ton="gruen"] .kb-kennzahl__wert { color: var(--kb-gruen); }
+.kb .kb-kennzahl[data-ton="magenta"] .kb-kennzahl__wert { color: var(--kb-magenta); }
+.kb .kb-kennzahl[data-gross="an"] .kb-kennzahl__wert { font-weight: 900; font-size: clamp(28px, 5vw, 40px); }
+@container kb (max-width: 559px) {
+  .kb .kb-kennzahlen { grid-template-columns: 1fr 1fr; }
+  .kb .kb-kennzahl[data-gross="an"] { grid-column: 1 / -1; }
+}
+
+/* ── Podest (K:115-165) ───────────────────────────────────────────────────────────── */
+.kb .kb-podest-block { margin-top: 54px; }
+/* K:117 — der Titel steht zwischen zwei Linien, die von außen nach innen wachsen. */
+.kb .kb-podest__titel { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; }
+.kb .kb-podest__titel i { height: 1px; background: var(--kb-t30); }
+.kb .kb-podest__titel i:first-child { transform-origin: right; }
+.kb .kb-podest__titel i:last-child { transform-origin: left; }
+.kb .kb-podest__titel .kb__kicker { text-align: center; }
+
+/* K:118-122 — vier Linien statt eines Rahmens: sie zeichnen sich einzeln, die
+   senkrechten .2 s später. Ein `border` könnte das nicht. */
+.kb .kb-podest { position: relative; margin-top: 28px; padding: clamp(20px, 4vw, 30px); }
+.kb .kb-podest__rahmen { position: absolute; background: var(--kb-tuerkis); transform-origin: center; }
+.kb .kb-podest__rahmen--oben { left: 0; right: 0; top: 0; height: 2px; }
+.kb .kb-podest__rahmen--unten { left: 0; right: 0; bottom: 0; height: 1px; }
+.kb .kb-podest__rahmen--links { left: 0; top: 0; bottom: 0; width: 1px; }
+.kb .kb-podest__rahmen--rechts { right: 0; top: 0; bottom: 0; width: 1px; }
+/* K:123 — der Stempel sitzt über der Oberlinie, nicht darunter. */
+.kb .kb-podest__stempel { position: absolute; right: 20px; top: -13px; }
+
+.kb .kb-podest__raster { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px 32px; align-items: start; }
+.kb .kb-podest__kopf { display: flex; align-items: center; gap: 14px; }
+.kb .kb-podest__namen { min-width: 0; }
+.kb .kb-podest__namen b { display: block; font: 700 21px var(--kb-serif); }
+.kb .kb-podest__namen span { font: italic 300 13.5px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-podest__namen--klein b { font-size: 17px; }
+.kb .kb-podest__namen--klein span { font-size: 12.5px; }
+.kb .kb-podest__zahl { display: flex; align-items: baseline; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+.kb .kb-podest__zins {
+  font: 900 clamp(44px, 8vw, 60px)/1 var(--kb-serif); letter-spacing: -.02em;
+  color: var(--kb-tuerkis); font-variant-numeric: tabular-nums;
+}
+.kb .kb-podest__zins-label { font: italic 300 14px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-podest__merkmale { display: flex; gap: 6px 16px; flex-wrap: wrap; margin-top: 14px; }
+.kb .kb-podest__merkmale span { display: inline-flex; align-items: center; gap: 6px; font: 500 13px var(--kb-sans); color: var(--kb-gruen-dunkel); }
+.kb .kb-podest__aktionen { display: flex; align-items: center; gap: 14px 22px; flex-wrap: wrap; margin-top: 18px; }
+
+/* K:150-164 — Platz 2 und 3: keine Rahmen, nur eine Unterlinie und die große Rangziffer. */
+.kb .kb-plaetze { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; margin-top: 8px; }
+.kb .kb-platz { position: relative; padding: 22px 0 10px; border-bottom: 1px solid var(--kb-t20, rgba(51,74,39,.2)); display: flex; flex-direction: column; }
+.kb .kb-platz__rang { position: absolute; right: 0; top: 14px; font: 900 40px/1 var(--kb-serif); color: var(--kb-t16); }
+.kb .kb-platz__zahl { display: flex; align-items: baseline; gap: 10px; margin-top: 16px; }
+.kb .kb-platz__zahl span { font: 900 30px/1 var(--kb-serif); font-variant-numeric: tabular-nums; }
+.kb .kb-platz__zahl small { font: italic 300 12.5px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-platz__fuss { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 10px; }
+.kb .kb-platz .kb__punktzeile-k { font-size: 13.5px; }
+.kb .kb-platz .kb__punktzeile-v[data-gross="an"] { font-size: 16px; }
+
+@container kb (max-width: 559px) {
+  .kb .kb-podest__raster { grid-template-columns: 1fr; }
+  .kb .kb-plaetze { grid-template-columns: 1fr; }
+}
+
+/* ── Alle Angebote (K:167-212) ────────────────────────────────────────────────────── */
+/* K:519 — die Übergabe gibt der Hauptzahl 88 px; das reicht für „0,68 %", nicht für
+   „ab 0,68 %". Das „ab" ist bei Krediten keine Zierde, sondern die Aussage (bonitäts-
+   abhängig), also bekommt die Spalte die Breite, die sie braucht. */
+/* K:519 — die Übergabe gibt der Hauptzahl 88 px; das reicht für „0,68 %", nicht für
+   „ab 0,68 %" (gemessen 104 px) und erst recht nicht für „ab 12.345 €" (116 px). Das
+   „ab" ist bei Krediten keine Zierde, sondern die Aussage. Deshalb ein Mindestmaß mit
+   Luft nach oben: die Namensspalte gibt den Platz her, die Ausrichtung bleibt. */
+.kb .kb-liste { margin-top: 60px; --kb-liste-spalten: 96px minmax(0, 1fr) minmax(112px, auto) minmax(100px, auto) auto; --kb-liste-gap: 20px; }
+.kb .kb-liste__titel { display: block; font: 700 clamp(22px, 3.4vw, 26px) var(--kb-serif); }
+.kb .kb-liste__filter { display: flex; align-items: center; gap: 8px 10px; flex-wrap: wrap; margin-top: 14px; }
+.kb .kb-liste__filter-label { font: 400 13px var(--kb-sans); color: var(--kb-grau); margin-right: 4px; }
+.kb .kb-liste__zeile { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; margin-top: 14px; }
+.kb .kb-liste__zahl { font: italic 300 13px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-liste__sortieren { display: flex; align-items: center; gap: 16px; }
+.kb .kb-liste__sortieren > span { font: 400 13px var(--kb-sans); color: var(--kb-grau); }
+.kb .kb-liste__tab {
+  position: relative; border: 0; background: transparent; padding: 10px 0;
+  font: 400 14px var(--kb-sans); color: var(--kb-ink); cursor: pointer;
+}
+.kb .kb-liste__tab[data-aktiv="an"] { font-weight: 700; }
+.kb .kb-liste__tab i {
+  position: absolute; left: 0; right: 0; bottom: 4px; height: 2px; background: var(--kb-ink);
+  transform: scaleX(0); transform-origin: left; transition: transform .35s var(--kb-kurve);
+}
+.kb .kb-liste__tab[data-aktiv="an"] i { transform: scaleX(1); }
+
+/* K:182-184 — Tabellenkopf unter der Doppellinie, Zahlen rechtsbündig. */
+.kb .kb-liste__kopf {
+  display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap);
+  align-items: end; padding: 10px 0 8px; margin-top: 12px;
+  border-top: 2px solid var(--kb-ink); box-shadow: 0 3px 0 -2px var(--kb-ink);
+  font: 700 10.5px/1.3 var(--kb-sans); letter-spacing: .14em; text-transform: uppercase; color: var(--kb-grau);
+}
+.kb .kb-liste__kopf-namen { grid-column: span 2; }
+.kb .kb-liste__kopf-rechts { text-align: right; white-space: nowrap; }
+.kb .kb-liste__kopf-dritte { white-space: nowrap; }
+
+/* F:140 — eine dritte Spalte, wo die Registry eine vorsieht (Festgeld: Land). Sie steht
+   zwischen Gesamtzahl und Pille und trägt links einen Punkt, dessen Farbe eine Ja/Nein-
+   Kennzahl setzt. */
+.kb .kb-liste[data-dritte="an"] {
+  --kb-liste-spalten: 96px minmax(0, 1fr) minmax(112px, auto) minmax(84px, auto) minmax(44px, auto) auto;
+}
+.kb .kb__zeile-dritte {
+  display: flex; align-items: center; gap: 7px;
+  font: 600 13px var(--kb-sans); letter-spacing: .04em; white-space: nowrap;
+}
+.kb .kb__zeile-dritte i { width: 7px; height: 7px; border-radius: 50%; background: var(--kb-tuerkis); flex-shrink: 0; }
+.kb .kb__zeile-dritte i[data-gut="an"] { background: var(--kb-gruen); }
+
+.kb .kb-liste__ausgeschlossen { margin: 14px 0 0; font: italic 300 13px/1.5 var(--kb-serif); color: var(--kb-grau); }
+
+/* Klasse B: keine Zahlenspalten, dafür Platz für den Namen und die Prüfsiegel.
+   Siehe den Kopf von components/kursblatt/vergleich/Anbieterliste.tsx. */
+/* 🚨 Feste Maße für Siegel- und Pillenspalte, keine `auto`.
+   Kopfzeile und jede Angebotszeile sind EIGENE Grids mit derselben Vorlage — `auto`
+   löst sich in jedem davon anders auf. Gemessen: Kopf 96/495/76/0, erste Zeile
+   96/367/49/155, und Zeilen ohne Siegel wären wieder anders. Nur feste Spalten stehen
+   untereinander. */
+.kb .kb-liste--anbieter { --kb-liste-spalten: 96px minmax(0, 1fr) 108px 156px; }
+.kb .kb-liste__ohne-zahlen { margin: 12px 0 0; max-width: 60ch; }
+.kb .kb-liste--anbieter .kb-liste__kopf-dritte { text-align: right; }
+.kb .kb-zeile__siegel { display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: 0; }
+/* Höhe als Obergrenze, nicht als Maß: zwei Siegel in 108 px müssen schrumpfen dürfen,
+   ohne ihr Seitenverhältnis zu verlieren. */
+.kb .kb-zeile__siegel img { display: block; max-height: 34px; max-width: 100%; width: auto; height: auto; min-width: 0; }
+/* Ohne Details-Knopf trägt die Aktionszeile nur „Merken“ — sie darf dichter stehen. */
+.kb .kb-liste--anbieter .kb__zeile-aktionen { padding-bottom: 12px; }
+/* Klasse A koppelt das Hervorheben an den Punkt im Band (`data-hell`); hier gibt es kein
+   Band, also reicht der Zeiger — und das ohne eine Zeile JavaScript. */
+.kb .kb-liste--anbieter .kb__zeile:hover { background: var(--kb-t035); }
+.kb .kb-liste--anbieter .kb__zeile:hover .kb__zeile-linie { transform: scaleX(1); }
+
+/* K:186-199 — die Zeile. Bestwert auf türkisem Grund, Überfahren auf 3,5 % Tinte. */
+.kb .kb__zeile { position: relative; border-bottom: 1px solid var(--kb-t12); transition: background .35s; }
+.kb .kb__zeile[data-hell="an"] { background: var(--kb-t035); }
+.kb .kb__zeile[data-ist="an"] { background: var(--kb-bestwert); }
+.kb .kb__zeile-linie { position: absolute; left: 0; right: 0; height: 1px; background: var(--kb-ink); transform: scaleX(0); transition: transform .4s var(--kb-kurve); }
+.kb .kb__zeile-linie--oben { top: -1px; transform-origin: left; }
+.kb .kb__zeile-linie--unten { bottom: -1px; transform-origin: right; }
+.kb .kb__zeile[data-hell="an"] .kb__zeile-linie { transform: scaleX(1); }
+
+.kb .kb__zeile-raster { display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap); align-items: center; padding: 16px 0 4px; }
+.kb .kb__zeile-namen { min-width: 0; }
+.kb .kb__zeile-namen b { display: flex; align-items: center; gap: 8px; font: 700 15.5px/1.2 var(--kb-serif); text-wrap: balance; }
+/* 🚨 Direktes Kind: `.kb__zeile-namen span` traf auch den Mini-Stempel, der im Namen
+   steht — und überschrieb dessen `display: none` im schmalen Satz, weil beide Regeln
+   dieselbe Spezifität haben und diese hier später kommt. */
+.kb .kb__zeile-namen > span { display: block; margin-top: 2px; font: 400 12.5px var(--kb-sans); color: var(--kb-grau); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.kb .kb__zeile-haupt { text-align: right; }
+.kb .kb__zeile-haupt b { display: block; font: 900 21px var(--kb-serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.kb .kb__zeile[data-ist="an"] .kb__zeile-haupt b { color: var(--kb-tuerkis); }
+.kb .kb__zeile-balken { display: block; height: 3px; max-width: 80px; margin: 6px 0 0 auto; background: rgba(51, 74, 39, .5); transition: width .7s var(--kb-kurve), background .3s; }
+.kb .kb__zeile[data-ist="an"] .kb__zeile-balken { background: var(--kb-tuerkis); }
+.kb .kb__zeile-total { text-align: right; font: 700 17px var(--kb-serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* Im schmalen Satz rückt die Gesamtzahl unter die Hauptzahl (K:519). */
+.kb .kb__zeile-total-eng { display: none; margin-top: 6px; font: 600 13px var(--kb-sans); font-variant-numeric: tabular-nums; }
+
+.kb .kb__zeile-aktionen { display: flex; align-items: center; gap: 20px; padding: 0 0 10px 116px; }
+.kb .kb__details-knopf {
+  display: inline-flex; align-items: center; gap: 7px; border: 0; background: transparent;
+  padding: 8px 0; min-height: 40px; font: 500 13.5px var(--kb-sans); color: var(--kb-ink); cursor: pointer;
+}
+/* Chevron dreht sich beim Aufklappen mit Überschwung um 180° (K:201). */
+.kb .kb__details-knopf i {
+  width: 7px; height: 7px; margin-top: -3px;
+  border-right: 1.4px solid currentColor; border-bottom: 1.4px solid currentColor;
+  transform: rotate(45deg); transition: transform .4s var(--kb-ueber);
+}
+.kb .kb__details-knopf i[data-offen="an"] { transform: rotate(225deg) translateY(-2px); }
+
+/* K:204 — das Fach klappt über die Zeilenhöhe auf; der Inhalt steht im HTML. */
+.kb .kb__details { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s var(--kb-kurve); }
+.kb .kb__details[data-offen="an"] { grid-template-rows: 1fr; }
+.kb .kb__details > div { overflow: hidden; }
+.kb .kb__details-raster { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 36px; padding: 0 0 20px 116px; }
+.kb .kb__details-raster .kb__punktzeile-k { font-size: 13.5px; color: var(--kb-grau); }
+.kb .kb__details-raster .kb__punktzeile-v { font: 600 13.5px var(--kb-sans); }
+.kb .kb__pflicht { grid-column: 1 / -1; margin-top: 8px; }
+.kb .kb__pflicht summary { font: 400 12.5px var(--kb-sans); color: var(--kb-grau); cursor: pointer; }
+.kb .kb__pflicht p { margin: 6px 0 0; font: 400 12px/1.5 var(--kb-sans); color: var(--kb-grau); white-space: pre-wrap; }
+
+.kb .kb-liste__mehr { margin: 14px 0 0; border: 0; background: none; padding: 0; font: 600 14px var(--kb-sans); color: var(--kb-gruen-dunkel); cursor: pointer; }
+.kb .kb-liste__mehr:hover { text-decoration: underline; }
+
+@container kb (max-width: 559px) {
+  .kb .kb-liste, .kb .kb-liste[data-dritte="an"] { --kb-liste-spalten: 64px minmax(0, 1fr) auto auto; --kb-liste-gap: 12px; }
+  /* Im schmalen Satz haben Siegel und Pille nebeneinander keinen Platz; die Siegel
+     stehen dann unter dem Namen statt vor der Pille. */
+  .kb .kb-liste--anbieter { --kb-liste-spalten: 64px minmax(0, 1fr) auto; --kb-liste-gap: 12px; }
+  .kb .kb-liste--anbieter .kb-liste__kopf-dritte { display: none; }
+  .kb .kb-zeile__siegel { grid-column: 2; grid-row: 2; justify-content: flex-start; margin-top: 8px; }
+  .kb .kb-liste--anbieter .kb__zeile-raster { align-items: start; }
+  .kb .kb-liste__kopf-total, .kb .kb__zeile-total { display: none; }
+  .kb .kb-liste__kopf-dritte, .kb .kb__zeile-dritte { display: none; }
+  .kb .kb__zeile-total-eng { display: block; }
+  .kb .kb__zeile-aktionen, .kb .kb__details-raster { padding-left: 0; }
+  .kb .kb__details-raster { grid-template-columns: 1fr; }
+}
+
+/* ── Merkzettel (K:215-231) ───────────────────────────────────────────────────────── */
+/* 🚨 Liegt per Portal am <body>, außerhalb von `.kb` — deshalb hier ohne `.kb`-Vorsatz,
+   und die Tokens stehen am Element selbst. */
+.kb-zettel {
+  position: fixed; right: 16px; z-index: 50;
+  /* Über Leos fester Eingabe, nicht darauf (faden.css:206). Außerhalb des Fadens
+     greift der Rückfallwert. */
+  bottom: calc(var(--eingabe-h, 0px) + 16px);
+  /* 🚨 Beim Messen erscheint der Zettel 3 px breiter als berechnet und 2 px nach links
+     versetzt. Das ist keine Abweichung: `fl-zettel` endet auf `rotate(-1deg)` (K:34),
+     und ein gedrehter Kasten hat eine größere achsenparallele Hülle. Wer hier Breiten
+     prüft, liest den berechneten Wert, nicht das Rechteck. */
+  width: min(360px, calc(100vw - 32px));
+  background: #fff; border: 1px solid rgba(51, 74, 39, .22);
+  box-shadow: 2px 4px 0 rgba(51, 74, 39, .08), 0 24px 40px -22px rgba(51, 74, 39, .45);
+  padding: 16px 18px 14px; box-sizing: border-box;
+  font-family: var(--font-body, "Open Sans", sans-serif); color: #334A27;
+  animation: fl-zettel .7s cubic-bezier(.2, .8, .2, 1) both;
+}
+.kb-zettel__knoten { position: absolute; left: -5px; top: 22px; width: 10px; height: 10px; border-radius: 50%; background: #45A117; border: 2px solid #fff; box-sizing: border-box; }
+.kb-zettel__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.kb-zettel__kopf .kb__kicker { font: 700 10.5px/1.3 var(--font-body, sans-serif); letter-spacing: .14em; text-transform: uppercase; color: #686C6A; }
+.kb-zettel__leeren { border: 0; background: transparent; padding: 6px 0; font: 400 12px var(--font-body, sans-serif); color: #686C6A; cursor: pointer; text-decoration: underline dotted; }
+.kb-zettel__raster { display: grid; gap: 14px; margin-top: 10px; }
+.kb-zettel__karte { position: relative; padding-top: 10px; border-top: 2px solid #334A27; min-width: 0; }
+.kb-zettel__karte[data-ist="an"] { border-top-color: #0B7F66; }
+.kb-zettel__weg { position: absolute; right: -6px; top: 2px; border: 0; background: transparent; padding: 6px 8px; font: 400 16px/1 var(--font-body, sans-serif); color: #686C6A; cursor: pointer; }
+.kb-zettel__karte b { display: block; font: 700 13px var(--font-heading, serif); padding-right: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kb-zettel__wert { display: block; margin-top: 4px; font: 900 22px/1.2 var(--font-heading, serif); font-variant-numeric: tabular-nums; color: #334A27; }
+.kb-zettel__karte[data-ist="an"] .kb-zettel__wert { color: #0B7F66; }
+/* Bei drei Karten teilen sich 360 px auf je gut 100 px auf — „ab 0,68 %" bricht dort in
+   900 22px um. Die Zahl wird kleiner, statt über zwei Zeilen zu laufen; bei einer oder
+   zwei Karten bleibt sie so groß, wie die Übergabe sie setzt (K:224). */
+.kb-zettel[data-anzahl="3"] .kb-zettel__wert { font-size: 17px; }
+.kb-zettel__zeile { display: block; margin-top: 2px; font: 400 12px var(--font-body, sans-serif); font-variant-numeric: tabular-nums; }
+.kb-zettel__klein { display: block; font: 400 11.5px var(--font-body, sans-serif); color: #686C6A; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kb-zettel__fuss { display: block; margin-top: 12px; font: italic 300 11.5px var(--font-heading, serif); color: #686C6A; }
+@media (prefers-reduced-motion: reduce) { .kb-zettel { animation: none; } }
+
+/* ── Zeiger (ersetzt RechnerGauge) ────────────────────────────────────────────────── */
+.kb .kb-zeiger { position: relative; width: 190px; max-width: 100%; margin: 26px auto 0; }
+.kb .kb-zeiger__bild { display: block; width: 100%; height: auto; }
+.kb .kb-zeiger__innen { fill: none; stroke: var(--kb-t25); stroke-width: 1; }
+.kb .kb-zeiger__spur { fill: none; stroke: var(--kb-t12); stroke-width: 5; }
+.kb .kb-zeiger__bogen { fill: none; stroke: var(--kb-werkzeug); stroke-width: 5; stroke-linecap: butt; }
+.kb .kb-zeiger__mitte {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px; text-align: center; pointer-events: none;
+}
+.kb .kb-zeiger__mitte b { font: 900 30px/1 var(--kb-serif); font-variant-numeric: tabular-nums; color: var(--kb-werkzeug); }
+.kb .kb-zeiger__mitte span { font: 400 12px var(--kb-sans); color: var(--kb-grau); }
+
+/* ── Messlatte (ersetzt RechnerBenchmark) ─────────────────────────────────────────── */
+.kb .kb-messlatte { margin-top: 26px; }
+.kb .kb-messlatte__zeile {
+  display: grid; grid-template-columns: minmax(96px, auto) 1fr minmax(72px, auto);
+  align-items: center; gap: 12px; padding: 9px 0; border-top: 1px solid var(--kb-t10);
+}
+.kb .kb-messlatte__name { font: 400 13.5px var(--kb-sans); color: var(--kb-grau); }
+.kb .kb-messlatte__balken { height: 8px; background: var(--kb-t30); transition: width .9s var(--kb-kurve); }
+.kb .kb-messlatte__zeile[data-ist="an"] .kb-messlatte__balken { background: var(--kb-werkzeug); }
+.kb .kb-messlatte__zeile[data-ist="an"] .kb-messlatte__name { color: var(--kb-ink); font-weight: 600; }
+.kb .kb-messlatte__wert { text-align: right; font: 700 15px var(--kb-serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) {
+  .kb .kb-messlatte__balken { transition: none; }
+  .kb .kb-zeiger__bogen { transition: none !important; }
+}
+
+/* ── Rassenwahl (financeads-Liste statt drei Gruppennummern) ──────────────────────── */
+.kb .kb-rassenwahl__zeile { display: flex; align-items: baseline; gap: 12px; height: 54px; }
+.kb .kb-rassenwahl__feld {
+  flex: 1; min-width: 0; border: 0; background: transparent; padding: 0; outline: 0;
+  font: 700 clamp(20px, 2.8vw, 26px) var(--kb-serif); color: var(--kb-ink);
+  letter-spacing: -.01em;
+}
+.kb .kb-rassenwahl__feld::placeholder { font: italic 300 clamp(16px, 2.2vw, 19px) var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-rassenwahl__feld:focus-visible { outline: 2px solid var(--kb-gruen); outline-offset: 4px; }
+.kb .kb-rassenwahl__gruppe {
+  display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
+  font: italic 300 13px var(--kb-serif); color: var(--kb-grau); white-space: nowrap;
+}
