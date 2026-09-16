@@ -7,6 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "wache": "node tools/token-wache.mjs --pruefen",
+    "wache:bericht": "node tools/token-wache.mjs",
+    "mess:satz": "node tools/faden-mess-satz.mjs",
     "warm": "node netlify/plugins/warm-cache/warm-cache.mjs",
     "verify:redirects": "node --experimental-strip-types tools/verify-redirects.mjs"
   },

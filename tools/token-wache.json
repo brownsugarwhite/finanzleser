@@ -1,0 +1,30 @@
+{
+  "farben": {
+    "verschieden": 72,
+    "vorkommen": 173
+  },
+  "schriftgrade": {
+    "verschieden": 76,
+    "vorkommen": 499
+  },
+  "schriftfamilien": {
+    "verschieden": 0,
+    "vorkommen": 0
+  },
+  "abstaende": {
+    "verschieden": 61,
+    "vorkommen": 1198
+  },
+  "linien": {
+    "verschieden": 16,
+    "vorkommen": 32
+  },
+  "radien": {
+    "verschieden": 24,
+    "vorkommen": 120
+  },
+  "schatten": {
+    "verschieden": 28,
+    "vorkommen": 30
+  }
+}
