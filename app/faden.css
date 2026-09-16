@@ -668,7 +668,96 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .prose { line-height: 1.75; }
 .faden-shell .prose p { margin-bottom: 1em !important; }
 .faden-shell .prose h3 { font: var(--schrift-zwischen); margin: var(--luft-m) 0 var(--luft-s) !important; } .faden-shell .prose h4 { font-size: var(--grad-16); margin: var(--luft-m) 0 var(--luft-xs) !important; }
-.faden-shell .prose ul, .faden-shell .prose ol { margin: 0 0 var(--luft-m) var(--luft-l); padding: 0; } .faden-shell .prose li { margin: 0 0 var(--luft-xs); }
+/* ---------- Die Elemente des Fließtexts ----------------------------------------------
+   Sie tragen die meiste Fläche der Seite und hatten bis zum 16.09.2026 fast keine Regel:
+   `.prose ul` bekam einen 22-px-Einzug, `blockquote` ein `break-inside: avoid`, sonst
+   nichts. Den Rest malte der Browser.
+
+   Der Zeitungssatz setzt sie anders als das Web:
+     · Marken HÄNGEN am Spaltenrand, der Text steht auf der Fluchtlinie des Absatzes.
+       Ein eingerückter Listentext bricht die Spalte optisch auf.
+     · Der Abstand zwischen zwei Punkten ist KLEINER als zwischen zwei Absätzen —
+       eine Liste ist ein Gedanke, nicht fünf.
+     · Ein Zitat trägt seine Auszeichnung in der SCHRIFT, nicht in einem Rahmen.
+   ------------------------------------------------------------------------------------- */
+
+/* Aufzählung: die Marke ist ein Quadrat in Tinte und hängt am Spaltenrand.
+   🚨 Der Spark (components.css:1036) bleibt die Marke der Live-Seite und des Menüs — im
+   Zeitungssatz ist er zu verspielt und sitzt bei 0,78 em zu hoch in der Zeile. */
+.faden-shell .prose ul { list-style: none !important; margin: var(--luft-m) 0 var(--luft-l) !important; padding-left: 0 !important; }
+.faden-shell .prose ul > li { position: relative; padding-left: var(--luft-l); margin: 0 0 var(--luft-xs) !important; }
+.faden-shell .prose ul > li::before {
+  content: ""; position: absolute; left: 0; top: .72em;
+  width: 5px; height: 5px; background: var(--ink);
+  -webkit-mask: none; mask: none; border-radius: 0;
+}
+/* Zweite Ebene: ein Strich statt eines Quadrats — so bleibt der Rang sichtbar,
+   ohne dass eine zweite Form dazukommt. */
+.faden-shell .prose ul ul { margin: var(--luft-xs) 0 0 !important; }
+.faden-shell .prose ul ul > li::before { top: .92em; width: 7px; height: 1px; background: var(--ink-45); }
+
+/* Nummerierte Liste: die Ziffer steht rechtsbündig in einer eigenen Spalte, wie im
+   Zeitungssatz — so fluchten ein- und zweistellige Zahlen. */
+.faden-shell .prose ol { list-style: none !important; counter-reset: fl-punkt; margin: var(--luft-m) 0 var(--luft-l) !important; padding-left: 0 !important; }
+.faden-shell .prose ol > li { position: relative; counter-increment: fl-punkt; padding-left: var(--luft-xl); margin: 0 0 var(--luft-xs) !important; }
+.faden-shell .prose ol > li::before {
+  content: counter(fl-punkt) "."; position: absolute; left: 0; top: 0;
+  width: var(--luft-l); text-align: right;
+  font: 700 var(--grad-15)/1.75 var(--serif); color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Zitat: kursiv in der Serifenschrift, zwischen zwei Haarlinien über die Satzbreite.
+   Kein linker Balken — die Zeitung setzt ein Zitat durch Schrift, nicht durch Rahmen.
+   (`.fazit` behält seinen Balken; das ist kein Zitat, sondern ein Schluss.) */
+.faden-shell blockquote {
+  margin: var(--luft-l) 0; padding: var(--luft-m) 0;
+  border-top: var(--strich-haar) solid var(--rule);
+  border-bottom: var(--strich-haar) solid var(--rule);
+  font: var(--schrift-zitat); color: var(--ink);
+}
+.faden-shell blockquote p { margin: 0 !important; }
+.faden-shell blockquote p + p { margin-top: var(--luft-s) !important; }
+/* Die Quelle gehört unter das Zitat und ist ein Kicker, kein Satz. */
+.faden-shell blockquote + .quelle {
+  margin-top: calc(-1 * var(--luft-s)); margin-bottom: var(--luft-l);
+  font: var(--schrift-kicker); letter-spacing: var(--laufweite-kicker);
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* Bild mit Unterschrift. */
+.faden-shell .prose figure { margin: var(--luft-l) 0 !important; }
+.faden-shell .prose figcaption {
+  margin-top: var(--luft-s); padding-top: var(--luft-xs);
+  border-top: var(--strich-haar) solid var(--rule);
+  font: var(--schrift-klein); color: var(--muted);
+}
+
+/* Begriff und Erklärung. */
+.faden-shell .prose dl { margin: var(--luft-m) 0 var(--luft-l); display: grid; gap: var(--luft-xs); }
+.faden-shell .prose dt { font: 700 var(--grad-15)/1.4 var(--serif); color: var(--ink); }
+.faden-shell .prose dd { margin: 0 0 var(--luft-s); padding-left: var(--luft-l); border-left: var(--strich-haar) solid var(--rule); }
+
+/* Ein Trenner im Fließtext ist eine Haarlinie, kein Relief. */
+.faden-shell .prose hr { border: 0; border-top: var(--strich-haar) solid var(--rule); margin: var(--luft-xl) 0; }
+
+/* Kleinkram, der bisher gar keine Regel hatte. */
+.faden-shell .prose mark { background: var(--tint); color: var(--ink); padding: 0 var(--luft-xxs); }
+.faden-shell .prose abbr[title] { text-decoration: underline dotted var(--ink-45); text-underline-offset: 3px; cursor: help; }
+.faden-shell .prose small { font: var(--schrift-klein); color: var(--muted); }
+.faden-shell .prose code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; background: var(--ink-05); padding: 0 var(--luft-xxs); }
+
+/* Tabelle: Doppellinie, graues Kopfband mit weißen Versalien, Zebra — dasselbe Muster
+   wie die Listen des Kursblatts (Handoff Runde 2, Punkt 5). Die Grundform steht in
+   components.css; hier fehlt nur, was den Zeitungssatz ausmacht. */
+.faden-shell .prose table { margin: var(--luft-l) 0 !important; }
+.faden-shell .prose thead th {
+  font: var(--schrift-kicker); letter-spacing: var(--laufweite-band);
+  text-transform: uppercase; padding: var(--luft-s) var(--luft-m);
+}
+.faden-shell .prose tbody td { padding: var(--luft-m) var(--luft-m); font-size: var(--grad-15); }
+.faden-shell .prose tbody tr:nth-child(even) { background: var(--ink-05); }
+.faden-shell .prose tbody tr:hover { background: var(--ink-08); }
 .faden-shell .prose img { max-width: 100%; height: auto; } .faden-shell .prose figure { margin: 0 0 var(--luft-m); }
 /* Verweise im Fließtext: Primärgrün, ohne Unterstrich — Beitragslinks und Glossarbegriffe
    sehen gleich aus (Wunsch vom 09.09.). Rückmeldung gibt allein der Farbwechsel beim
