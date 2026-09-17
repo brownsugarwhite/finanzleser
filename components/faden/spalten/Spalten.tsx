@@ -230,9 +230,11 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
               <b className="kiosk__titel">{r.titel}</b>
               {/* Im Ruhestand steht das erste Blatt nur angeschnitten offen — dann heißt es
                   weiter „aufschlagen", denn genau das tut der Klick. */}
-              {/* Wie in v2 (Übergabe Zeile 380): grün, gemischt gesetzt, mit der wachsenden Linie
-                  und der Pfeilspitze — kein Versalien-Kicker. */}
-              <span className="strich-link strich-link--gross kiosk__oeffnen"><span className="kiosk__wort">Ausgabe </span>{offen && beruehrt ? "zuklappen" : "aufschlagen"}<i /></span>
+              {/* 🚨 Wieder der Versalien-Kicker OHNE Pfeil (Wunsch 17.09.2026). Am 13.09. war
+                  daraus ein grüner Strich-Link mit Pfeilspitze geworden — damit stand auf jedem
+                  Blatt dieselbe grüne Aufforderung wie auf dem Kopfblatt, viermal untereinander.
+                  Der Stapel braucht keine vier Knöpfe, er braucht vier Beschriftungen. */}
+              <span className="kicker kiosk__oeffnen"><span className="kiosk__wort">Kategorie </span>{offen && beruehrt ? "zuklappen" : "aufschlagen"}</span>
             </button>
             <i className="doppellinie" />
             <div

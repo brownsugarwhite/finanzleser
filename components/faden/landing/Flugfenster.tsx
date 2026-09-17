@@ -121,9 +121,14 @@ export default function Flugfenster() {
   }, [fenster, flieger, nah]);
 
   return (
-    <section className="flugfenster" data-ruht={nah ? undefined : ""} aria-hidden="true">
+    <section className="flugfenster" data-ruht={nah ? undefined : ""} aria-labelledby="flug-kicker">
+      {/* Die Aufforderung steht ÜBER der ersten Linie (Wunsch 17.09.2026) — sie ist der
+          Blockkopf des Flugs, und der Flug führt zum Eintragen darunter. Damit trägt der
+          Abschnitt einen Namen und ist nicht mehr `aria-hidden`; nur die Bilder selbst
+          bleiben für den Vorleser stumm. */}
+      <span className="kicker kicker--gruen flugfenster__kicker" id="flug-kicker">Newsletter abonnieren</span>
       <i className="flugfenster__linie" />
-      <div className="flugfenster__ausschnitt" ref={setFenster}>
+      <div className="flugfenster__ausschnitt" ref={setFenster} aria-hidden="true">
         {geladen && (
           <>
             <div className="flugfenster__buehne">

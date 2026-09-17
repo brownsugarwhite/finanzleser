@@ -47,6 +47,8 @@
 }
 
 .faden-shell .flugfenster__linie { display: block; height: var(--strich-haar, 1px); background: var(--rule-strong); }
+/* Der Blockkopf über der ersten Linie — derselbe Satz wie jeder Kicker der Startseite. */
+.faden-shell .flugfenster__kicker { display: block; margin-bottom: var(--luft-s); }
 
 /* Das Fenster: der einzige Ort, an dem die Bühne zu sehen ist.
    Der Verlauf darunter ist der Himmel in zwei Tönen — er hält die Fläche, bis die

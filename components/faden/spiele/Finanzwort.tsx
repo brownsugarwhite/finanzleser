@@ -116,10 +116,26 @@ export default function Finanzwort({ slug, wort, begriff, begriffName, hinweis1,
     try { localStorage.setItem(SPEICHER, JSON.stringify(stand)); } catch { /* kein Speicher (privater Modus) */ }
   }, [slug]);
 
-  // Fokus wie im Prototyp, damit die physische Tastatur sofort greift.
+  /**
+   * Fokus wie im Prototyp, damit die physische Tastatur sofort greift — aber NUR, wenn das
+   * Spiel beim Einhängen wirklich im Bild steht (Spielseite).
+   *
+   * 🚨 Ohne diese Bedingung griff das Finanzwort den Fokus auch auf der Startseite, wo es
+   * weit unter der Faltung steht. Ergebnis: `:focus-visible` legte den grünen 2-px-Ring um
+   * das ganze Spielfeld, sichtbar ab dem ersten Scrollen — der „grüne Rahmen um die
+   * Elemente" aus der Fehlermeldung vom 17.09.2026. Und der Fokus lag auf einem Element,
+   * das der Leser nie angesehen hatte. Wer das Spiel anklickt, bekommt den Fokus ohnehin
+   * (`tabIndex={0}`), dann aber ohne Ring — so ist `:focus-visible` gemeint.
+   */
   useEffect(() => {
     if (!geladen || fertig) return;
-    const t = setTimeout(() => huelle.current?.focus({ preventScroll: true }), 100);
+    const t = setTimeout(() => {
+      const el = huelle.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      if (r.bottom <= 0 || r.top >= window.innerHeight) return;
+      el.focus({ preventScroll: true });
+    }, 100);
     return () => clearTimeout(t);
   }, [geladen, fertig]);
 

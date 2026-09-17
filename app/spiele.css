@@ -76,6 +76,9 @@
 /* Die Einhängerlinie über einem Spielblock trägt die Spielfarbe — wie die Werkzeugfarbe
    über einem Rechner. Vorher Tinte hier, Pink beim Finanzwort, Grün bei der Schlange:
    drei Farben für dieselbe Sache. */
-.faden-shell .spiel-satz--schlange { border-top: var(--strich-einhaenger) solid var(--tool-spiel); padding-top: var(--luft-m); }
+/* 🚨 Die Linie gehört dem SPIEL, nicht dem Satz. Sie lag am `.spiel-satz` und lief
+   damit über beide Spalten — also auch über die Anzeige rechts, die mit dem Spiel nichts
+   zu tun hat (Fehlermeldung 17.09.2026). Am Körper ist sie genau so breit wie das Feld. */
+.faden-shell .spiel-satz--schlange > .spiel-satz__koerper { border-top: var(--strich-einhaenger) solid var(--tool-spiel); padding-top: var(--luft-m); }
 .faden-shell .spiel-satz__rand { display: grid; gap: var(--luft-s); }
 .faden-shell .spiel-satz__notiz { margin: 0; font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }

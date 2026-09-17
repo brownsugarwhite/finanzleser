@@ -1031,7 +1031,19 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
    Stapelkontext, und sein Papier (`::before`, z-index -1) rutscht hinter den Hintergrund
    der Seite — das Blatt war beim ersten Laden schlicht nicht zu sehen. Die Blätter des
    Stapels tragen ihren z-index von Spalten.tsx und liegen darum weiterhin darüber. */
-.faden-shell .neueste { margin-block: var(--luft-xl) 0; --einzug: 16px; z-index: 0; }
+/* 🚨 `padding-bottom` statt der „luft-l" aus `.kiosk-blatt`: Unter dem Kopfblatt klaffte
+   sonst ein Spalt. Der Stapel liegt mit 10 px auf dem Blatt, dessen Fuß aber 22 px hoch
+   ist — es blieben 14 px Papier stehen, genau dort, wo der Verlauf am dunkelsten ist, und
+   darauf fiel zusätzlich der Schatten des nächsten Blattes. Das las sich als Lücke
+   zwischen „Ratgeber" und „Finanzen" (Fehlermeldung 17.09.2026). Mit 14 px Fuß deckt der
+   Überlapp ihn bis auf vier Pixel zu, und „Finanzen" liegt auf dem Kopfblatt wie jedes andere Blatt auf
+   seinem Vorgänger.
+   Der Abstand nach oben ist klein: darüber steht jetzt die Überschrift „Kiosk", nicht mehr
+   das Papier der Seite. */
+.faden-shell .neueste { margin-block: var(--luft-m) 0; padding-bottom: var(--luft-m); --einzug: 16px; z-index: 0; }
+/* Die Überschrift über dem Stapel — sie steht auf dem Papier der Seite, nicht auf dem
+   Blatt, und trägt darum den Blockkopf-Satz der übrigen Startseite. */
+.faden-shell .kiosk-auftakt { margin-bottom: 0; }
 .faden-shell .neueste .zeitungskopf { margin-bottom: 0; padding-bottom: var(--luft-s); border-bottom: var(--strich-haar) solid var(--rule); }
 /* Der Schriftzug füllt die Blattbreite: Grad und Laufweite hängen beide an der
    Innenbreite (cqi bzw. em davon), das Verhältnis bleibt darum auf jeder Breite gleich.

@@ -33,7 +33,10 @@ export default function AusDemNewsletter({ eintraege }: { eintraege: AusleseEint
           </li>
         ))}
       </ul>
-      <a className="strich-link strich-link--gross" href="#wochenbrief-heute">Den Wochenbrief abonnieren<i /></a>
+      {/* 🚨 Hier stand „Den Wochenbrief abonnieren". Die Aufforderung ist an den Kopf des
+          Flugfensters gewandert (Wunsch 17.09.2026): Der Flug FÜHRT zum Eintragen, dann
+          braucht der Block darüber ihn nicht schon anzukündigen. Zweimal dieselbe
+          Aufforderung im Abstand einer Linie las sich wie ein Versehen. */}
     </section>
   );
 }

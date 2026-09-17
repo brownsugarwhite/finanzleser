@@ -104,7 +104,7 @@ export default async function FadenLanding() {
           </div>
           {/* Reihenfolge der Zeitungsseite (12.09.2026): Kopfblatt, Kiosk, Kassensturz,
               Wort des Tages — danach kommen Wochenbrief, Spiel, Plus und Leo. */}
-          <NeuesteAusgabe post={neueste} />
+          <NeuesteAusgabe post={neueste} rubriken={rubriken.reduce((a, r) => a + r.zahl, 0)} />
           <Insel typ="spalten" werte={rubriken}><Spalten rubriken={rubriken} /></Insel>
           {kassensturz && <Insel typ="kassensturz" werte={{ daten: kassensturz, ziele: ksZiele }}><KassensturzStart daten={kassensturz} ziele={ksZiele} /></Insel>}
           <FinanzwortKarte />
