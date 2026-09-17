@@ -58,7 +58,7 @@ export default function PlusTeaser() {
           <p className="landing-block__vorspann">Drei Dinge, die nur Plus kann — und keine Anzeige zwischen den Kapiteln.</p>
         </div>
         <span className="plus-coupon__plakette">
-          <Siegel text="Kostenlos" form="kreis" />
+          <Siegel text="Kostenlos" form="kreis" gross={144} />
           <em>30 Tage</em>
         </span>
       </div>
