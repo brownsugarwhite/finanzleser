@@ -19,6 +19,7 @@ import Spalten from "./spalten/Spalten";
 import NeuesteAusgabe from "./spalten/NeuesteAusgabe";
 import FinanzwortKarte from "./spiele/FinanzwortKarte";
 import SchlangeKarte from "./spiele/SchlangeKarte";
+import SolitaerKarte from "./spiele/SolitaerKarte";
 import KassensturzStart from "./kassensturz/KassensturzStart";
 import { zieleAufloesen } from "@/lib/faden/kassensturzZiele";
 import { getFadenOptionen } from "@/lib/faden/optionen";
@@ -118,6 +119,7 @@ export default async function FadenLanding() {
               der Newsletter-Knopf im Kopf weiter trifft (components/faden/Kopf.tsx). */}
           <Insel typ="flugfenster"><Flugfenster /></Insel>
           <SchlangeKarte />
+          <SolitaerKarte />
           <PlusTeaser />
           <Insel typ="leo-empfiehlt" werte={{ teaser, daten: kassensturz }}><LeoEmpfiehlt teaser={teaser} daten={kassensturz} /></Insel>
           <Insel typ="weiterreden"><WeiterredenChips /></Insel>

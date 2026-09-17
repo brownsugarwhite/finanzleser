@@ -1100,11 +1100,20 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
    durchsichtig bis deckend. Dadurch löst sich die Kante samt Schatten auf, und „Recht"
    sieht aus, als stiege es aus der Seite (Wunsch 11.09.2026, statt der Haarlinie).
 
-   Der Fuß ist der Grund, warum der Verlauf nie über Text liegt: er beginnt 140 px über
-   der Papierkante, und dort steht bei jedem Zustand nur noch Papier. */
-.faden-shell .kiosk > .kiosk-blatt:last-child { padding-bottom: 140px; }
+   Der Fuß ist der Grund, warum der Verlauf nie über Text liegt: Er beginnt genau an der
+   Oberkante des Fußes, und dort steht bei jedem Zustand nur noch Papier. Beide Maße
+   hängen deshalb an EINER Zahl.
+
+   🚨 34 statt 140 px (Wunsch 17.09.2026: „der Kassensturz hat zu viel Abstand zum
+   Kiosk"). Mit dem alten Fuß lagen zwischen der letzten Rubrik und der grünen Linie des
+   Kassensturzes 192 px — 140 leeres Papier plus die 52 des Satzrhythmus. Jetzt sind es
+   86, also anderthalb Sprossen statt fast vier. Das Auflösen funktioniert weiter: Der
+   Verlauf ist genauso lang wie der Fuß, den er auflöst, und beginnt dort durchsichtig. */
+.faden-shell .kiosk { --stapel-fuss: var(--luft-xl); }
+.faden-shell .kiosk > .kiosk-blatt:last-child { padding-bottom: var(--stapel-fuss); }
 .faden-shell .kiosk::after {
-  content: ""; position: absolute; left: -8px; right: -8px; bottom: -24px; height: 164px;
+  content: ""; position: absolute; left: -8px; right: -8px; bottom: -24px;
+  height: calc(var(--stapel-fuss) + 24px);
   z-index: 5; pointer-events: none;
   background: linear-gradient(180deg, transparent 0%, var(--paper) 85%);
 }

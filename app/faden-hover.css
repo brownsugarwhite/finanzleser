@@ -50,8 +50,29 @@
 
 /* CTA „Finanzleser entdecken ↓“ unten im Hero, blendet nach 2,2 s ein (01-css.html:476–479) */
 .faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; border: 0; background: none; color: var(--ink); font-weight: 600; font-size: var(--grad-14); display: grid; justify-items: center; gap: var(--luft-xs); letter-spacing: .02em; cursor: pointer; font-family: inherit; }
-.faden-shell .hero-cta i { width: 28px; height: 28px; border-radius: var(--radius-kreis); border: var(--strich-stark) solid var(--green); color: var(--green); display: grid; place-items: center; font-style: normal; font-size: var(--grad-13); animation: faden-wippen 2.2s ease-in-out infinite; }
-@keyframes faden-wippen { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+/* 🚨 Die Scheibe ist GEFÜLLT, nicht umrandet (Wunsch 17.09.2026: „cooler und in Tint").
+   `--tint` ist der grüne Hauch des Hauses — dieselbe Fläche wie hinter einer richtigen
+   Antwort. Darauf zwei Winkel in Markengrün, die nacheinander durchlaufen: Der vordere
+   fällt nach unten heraus, der hintere kommt von oben nach. Das ist die übliche
+   Scroll-Geste, nur als Zeichnung statt als Schriftzeichen — ein ‚↓' sitzt in jeder
+   Schrift anders und lässt sich nicht bewegen. */
+.faden-shell .hero-cta__scheibe { width: 34px; height: 34px; border-radius: var(--radius-kreis); background: var(--tint); display: grid; place-items: center; overflow: hidden; transition: background .25s, transform .25s var(--ueber); }
+.faden-shell .hero-cta:hover .hero-cta__scheibe { background: var(--green); transform: translateY(3px); }
+.faden-shell .hero-cta__scheibe svg { width: 22px; height: 22px; overflow: visible; }
+.faden-shell .hero-cta__winkel { fill: none; stroke: var(--green-ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: stroke .25s; animation: hero-winkel 1.9s var(--kurve) infinite; }
+.faden-shell .hero-cta:hover .hero-cta__winkel { stroke: var(--auf-tinte); }
+/* Der zweite Winkel läuft eine halbe Runde versetzt — so ist immer einer im Bild. */
+.faden-shell .hero-cta__winkel--b { animation-delay: -.95s; }
+@keyframes hero-winkel {
+  0%   { transform: translateY(-7px); opacity: 0; }
+  30%  { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { transform: translateY(7px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .hero-cta__winkel { animation: none; opacity: 1; }
+  .faden-shell .hero-cta__winkel--b { display: none; }
+}
 
 @media (max-width: 900px) {
   /* 01-css.html:876–877, 883 */

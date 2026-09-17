@@ -80,6 +80,7 @@
    damit über beide Spalten — also auch über die Anzeige rechts, die mit dem Spiel nichts
    zu tun hat (Fehlermeldung 17.09.2026). Am Körper ist sie genau so breit wie das Feld. */
 .faden-shell .spiel-satz--schlange > .spiel-satz__koerper,
+.faden-shell .spiel-satz--solitaer > .spiel-satz__koerper,
 .faden-shell .spiel-satz--wortspiel > .spiel-satz__koerper { border-top: var(--strich-einhaenger) solid var(--tool-spiel); padding-top: var(--luft-m); }
 
 /* ── Finanzwort: Spiel rechts, Anzeige links ────────────────────────────────────────
@@ -91,11 +92,12 @@
   .faden-shell .spiel-satz--wortspiel { grid-template-columns: minmax(0, 1fr) min-content; }
   .faden-shell .spiel-satz--wortspiel > .spiel-satz__koerper { order: 2; }
   .faden-shell .spiel-satz--wortspiel > .spiel-satz__rand { order: 1; }
-  /* 🚨 Die Anzeige behält ihr IAB-Maß. `.einschub__flaeche` ist sonst `width: 100%`, und
-     ein 160 × 600 großer Wolkenkratzer wurde in der breiten Spalte auf 290 × 1090
-     gezogen. `max-content` nimmt die natürliche Breite des Bildes — ohne dass hier eine
-     Zahl stünde, die beim nächsten Formatwechsel falsch wäre. */
-  .faden-shell .spiel-satz--wortspiel .einschub__flaeche { width: max-content; max-width: 100%; }
+  /* 🚨 Die Anzeige nimmt die ganze Restspalte (Wunsch 17.09.2026: „optimal den Platz
+     nutzen"). Sie ist deshalb KEIN festes IAB-Format mehr, sondern eine Halfpage
+     (300 × 600), die auf die Spaltenbreite skaliert — bei 262 px sind das 262 × 524,
+     also fast genau die Höhe des Spielfelds daneben. Das Seitenverhältnis bleibt; eine
+     Anzeige zu verzerren wäre keine Option. */
+  .faden-shell .spiel-satz--wortspiel .einschub__flaeche { width: 100%; }
 }
 .faden-shell .spiel-satz__rand { display: grid; gap: var(--luft-s); }
 .faden-shell .spiel-satz__notiz { margin: 0; font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }

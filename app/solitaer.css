@@ -1,0 +1,270 @@
+/* =====================================================================================
+   solitaer.css — „Solitär" im Faden (components/faden/spiele/Solitaer.tsx).
+
+   Das Brett hat KEINEN Rahmen. Die Schlange hat einen, weil ihr Spielfeld eine Fläche
+   ist, die irgendwo aufhören muss; das Solitärbrett ist selbst eine Form — ein Kreuz,
+   ein Dreieck — und ein Kasten darum würde sie zusperren. Oben hält die Tintenlinie der
+   Kopfzeile, unten die Spielraum-Kurve. Mehr braucht es nicht (Handoff, „Linien &
+   Flächen": keine Kartenboxen im Faden).
+
+   Alles Plastische kommt aus EINER Form: dem Kreis. Die Murmel ist ein Halbtonraster
+   (lib/faden/solitaer.ts), der Lochpunkt ein Punkt, der Zielring ein Ring, die
+   Aufsetzwelle ein Ring, das Siegel ein Ring. Kein Verlauf, kein Schatten, kein Filter.
+   ===================================================================================== */
+
+.faden-shell .solitaer {
+  display: grid;
+  gap: var(--luft-s);
+  width: 100%;
+  /* 🚨 Derselbe Wert wie FLUG_MS in Solitaer.tsx. Läuft die Uhr dort vor dem Keyframe
+     ab, zuckt die Murmel am Ende ihres Bogens zurück. */
+  --flug: 440ms;
+}
+
+/* ── Die Brettwahl ────────────────────────────────────────────────────────────────── */
+.faden-shell .solitaer__wahl { justify-content: flex-end; margin-bottom: var(--luft-xs); }
+.faden-shell .solitaer__wahl .chip { min-height: 32px; padding: var(--luft-xs) var(--luft-m); }
+.faden-shell .solitaer__wahlzahl { font: var(--schrift-mini); color: var(--muted); font-variant-numeric: tabular-nums; }
+.faden-shell .solitaer__wahl .chip[aria-pressed="true"] .solitaer__wahlzahl { color: var(--auf-tinte); opacity: .7; }
+
+/* ── Das Brett ────────────────────────────────────────────────────────────────────── */
+.faden-shell .solitaer__brett {
+  width: 100%;
+  max-width: 430px;
+  margin-inline: auto;
+  touch-action: manipulation;
+}
+.faden-shell .solitaer__brett:focus-visible { outline: var(--strich-stark) solid var(--spiel-ink); outline-offset: var(--luft-s); }
+.faden-shell .solitaer__brett svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+/* Das Loch: ein Punkt im Papier. Ist es ein mögliches Ziel, tritt es hervor. */
+.faden-shell .solitaer__loch { fill: var(--ink-25); transition: fill .3s, r .3s var(--kurve); }
+.faden-shell .solitaer__platz--ziel .solitaer__loch { fill: var(--spiel-ink); }
+
+/* Die Grifffläche: unsichtbar, aber sie fängt den Zeiger. Ohne sie träfe ein Klick
+   zwischen zwei Rasterpunkten der Murmel das Papier. */
+.faden-shell .solitaer__griff { fill: none; pointer-events: all; }
+.faden-shell .solitaer__platz--beweglich .solitaer__griff,
+.faden-shell .solitaer__platz--ziel .solitaer__griff { cursor: pointer; }
+
+/* ── Die Murmel ───────────────────────────────────────────────────────────────────── */
+.faden-shell .solitaer__murmel { fill: var(--ink); pointer-events: none; }
+.faden-shell .solitaer__leib {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .28s var(--ueber-sanft);
+}
+/* Anfassbar: die Murmel hebt sich eine Spur vom Papier. */
+.faden-shell .solitaer__platz--beweglich:hover .solitaer__leib { transform: translateY(-1px) scale(1.05); }
+/* Gewählt: sie liegt in der Hand — höher, größer, und das Raster fängt an zu schimmern. */
+.faden-shell .solitaer__platz--gewaehlt .solitaer__leib { transform: translateY(-1.6px) scale(1.09); }
+
+/* Das Moiré: dieselbe Rasterlage ein zweites Mal, langsam gedreht. Wo sich zwei Raster
+   überlagern, entsteht ein wanderndes Muster — der Effekt, den jeder Zeitungsdruck
+   fürchtet und den hier genau eine Murmel tragen darf. */
+.faden-shell .solitaer__moire {
+  transform-box: fill-box;
+  transform-origin: center;
+  mix-blend-mode: multiply;
+  opacity: .55;
+  animation: solitaer-moire 8s linear infinite;
+}
+@keyframes solitaer-moire { to { transform: rotate(360deg); } }
+
+/* ── Der Sprung ───────────────────────────────────────────────────────────────────── */
+/* Der Bogen zeigt vorab, welchen Weg die Murmel nehmen würde. Die Striche wandern —
+   wie die Laufschrift einer Route in einer Karte. */
+.faden-shell .solitaer__bogen {
+  fill: none;
+  stroke: var(--ink-30);
+  stroke-width: .5;
+  stroke-dasharray: 1.8 2.4;
+  stroke-linecap: round;
+  animation: solitaer-ameisen 1.2s linear infinite, solitaer-auf .3s var(--kurve) backwards;
+}
+.faden-shell .solitaer__bogen--tipp { stroke: var(--spiel-ink); stroke-width: .8; }
+@keyframes solitaer-ameisen { to { stroke-dashoffset: -4.2; } }
+@keyframes solitaer-auf { from { opacity: 0; } to { opacity: 1; } }
+
+/* Der Zielring zeichnet sich einmal herum — `pathLength=100` macht die Länge
+   brettunabhängig, sonst bräuchte jeder Halbmesser sein eigenes Strichmaß. */
+.faden-shell .solitaer__ring {
+  fill: none;
+  stroke: var(--ink-45);
+  stroke-width: .5;
+  stroke-dasharray: 100;
+  animation: solitaer-ziehen .45s var(--kurve) backwards;
+}
+.faden-shell .solitaer__platz--tipp .solitaer__ring {
+  stroke: var(--spiel-ink);
+  stroke-width: .9;
+  animation: solitaer-ziehen .45s var(--kurve) backwards, solitaer-pochen 1.5s var(--kurve) .45s infinite;
+}
+@keyframes solitaer-ziehen { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes solitaer-pochen { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+
+/* Der Flug. Die Murmel wird am ZIEL gezeichnet und per Keyframe an ihren Ausgangsort
+   zurückgesetzt; von dort fliegt sie ins Bild. Der Scheitel liegt quer zur Fahrt
+   (--mit-x/--mit-y aus `bogen()`), dazu ein Stück Maßstab: sie hebt vom Papier ab. */
+.faden-shell .solitaer__murmel--flug .solitaer__leib {
+  transition: none;
+  animation: solitaer-flug var(--flug) linear;
+}
+@keyframes solitaer-flug {
+  0%   { transform: translate(var(--von-x), var(--von-y)) scale(1); animation-timing-function: cubic-bezier(.25, .5, .4, 1); }
+  50%  { transform: translate(var(--mit-x), var(--mit-y)) scale(1.17); animation-timing-function: cubic-bezier(.6, 0, .75, .5); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* Aufsetzen: ein Ring läuft einmal aus dem Loch. */
+.faden-shell .solitaer__aufsetzen {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: .55;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: solitaer-aufsetzen .5s var(--kurve) forwards;
+}
+@keyframes solitaer-aufsetzen {
+  from { transform: scale(.45); opacity: .5; }
+  to   { transform: scale(2); opacity: 0; }
+}
+
+/* ── Zerstäuben ───────────────────────────────────────────────────────────────────
+   Die geschlagene Murmel wird nicht ausgeblendet, sie zerfällt in ihre Rasterpunkte:
+   von innen nach außen, jeder Punkt ein Stück nach draußen und nach oben, dabei
+   kleiner werdend. Weil `schirm` nach Abstand sortiert ist, reicht der Index als Takt —
+   die Auflösung läuft von der Mitte her nach außen. */
+.faden-shell .solitaer__zerfall { fill: var(--ink); pointer-events: none; }
+.faden-shell .solitaer__zerfall circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: solitaer-zerfall .5s var(--kurve) backwards;
+  animation-delay: var(--takt);
+}
+@keyframes solitaer-zerfall {
+  from { transform: translate(0, 0) scale(1); opacity: .95; }
+  to   { transform: translate(var(--vx), var(--vy)) scale(.1); opacity: 0; }
+}
+
+/* Zurückgenommen: die geschlagene Murmel wird neu gedruckt. */
+.faden-shell .solitaer__murmel--andruck .solitaer__leib { animation: solitaer-andruck .4s var(--ueber) backwards; }
+
+/* ── Das Andrucken der ganzen Seite ───────────────────────────────────────────────
+   Eine neue Partie wird gedruckt, nicht eingeblendet: Murmel für Murmel, im Takt ihrer
+   Lochnummer — von links oben nach rechts unten, wie eine Seite durch die Presse geht. */
+.faden-shell .solitaer__brett--andruck .solitaer__leib {
+  animation: solitaer-andruck .42s var(--ueber) backwards;
+  animation-delay: calc(var(--i) * 13ms);
+}
+@keyframes solitaer-andruck {
+  from { opacity: 0; transform: scale(.4); }
+  70%  { opacity: 1; }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Festgefahren ─────────────────────────────────────────────────────────────────
+   Kein Ausrufezeichen, nur ein Rütteln: die Murmeln probieren es noch einmal und
+   sitzen fest. Weil sich mit ihnen das Raster dreht, sieht man das Rütteln auch dort. */
+.faden-shell .solitaer__brett--fest .solitaer__leib {
+  animation: solitaer-zittern .45s var(--kurve) backwards;
+  animation-delay: calc(var(--i) * 9ms);
+}
+@keyframes solitaer-zittern {
+  0%, 100% { transform: none; }
+  25%      { transform: translateX(-.45px) rotate(-5deg); }
+  75%      { transform: translateX(.45px) rotate(5deg); }
+}
+
+/* ── Gelöst ───────────────────────────────────────────────────────────────────────
+   Von der letzten Murmel läuft eine Welle über die leeren Löcher — der Abstand steht als
+   `--weg` am Loch, daraus wird der Takt. Dazu zwei Ringe als Siegel und ein Raster, das
+   sich einmal ganz herumdreht. */
+.faden-shell .solitaer__brett--sieg .solitaer__loch {
+  animation: solitaer-welle .8s var(--kurve) backwards;
+  animation-delay: calc(var(--weg) * 11ms);
+}
+@keyframes solitaer-welle {
+  0%, 100% { fill: var(--ink-25); transform: scale(1); }
+  45%      { fill: var(--spiel-ink); transform: scale(2.4); }
+}
+.faden-shell .solitaer__brett--sieg .solitaer__loch { transform-box: fill-box; transform-origin: center; }
+
+.faden-shell .solitaer__murmel--letzte .solitaer__leib { animation: solitaer-kreiseln 1.6s var(--kurve); }
+@keyframes solitaer-kreiseln {
+  from { transform: rotate(0) scale(1); }
+  45%  { transform: rotate(200deg) scale(1.16); }
+  to   { transform: rotate(360deg) scale(1); }
+}
+.faden-shell .solitaer__siegel {
+  fill: none;
+  stroke: var(--spiel-ink);
+  stroke-width: .7;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: solitaer-siegel 1.1s var(--kurve) backwards;
+  animation-delay: var(--takt);
+}
+@keyframes solitaer-siegel {
+  from { transform: scale(.5); opacity: .9; }
+  to   { transform: scale(3.4); opacity: 0; }
+}
+
+/* ── Der Zeiger der Tastatursteuerung ─────────────────────────────────────────────── */
+.faden-shell .solitaer__zeiger {
+  fill: none;
+  stroke: var(--spiel-ink);
+  stroke-width: .8;
+  stroke-dasharray: 2 2;
+  pointer-events: none;
+  animation: solitaer-kreisen 6s linear infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes solitaer-kreisen { to { transform: rotate(360deg); } }
+
+/* ── Die Spielraum-Kurve ──────────────────────────────────────────────────────────── */
+.faden-shell .solitaer__raum { margin: var(--luft-xs) 0 0; display: grid; gap: var(--luft-xxs); }
+.faden-shell .solitaer__raumkopf { display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-s); }
+.faden-shell .solitaer__raumwert { font: var(--schrift-klein); color: var(--muted); font-variant-numeric: tabular-nums; }
+.faden-shell .solitaer__raumwert b { color: var(--ink); font-weight: 700; }
+.faden-shell .solitaer__raum svg { display: block; width: 100%; height: auto; }
+.faden-shell .solitaer__raumgrund { stroke: var(--rule); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.faden-shell .solitaer__raumlinie { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.faden-shell .solitaer__raumzeiger { transition: transform .4s var(--kurve); }
+.faden-shell .solitaer__raumpunkt { fill: var(--ink); }
+.faden-shell .solitaer__raumpuls { fill: none; stroke: var(--spiel-ink); stroke-width: 1; vector-effect: non-scaling-stroke; animation: solitaer-raumpuls .7s var(--kurve) forwards; }
+@keyframes solitaer-raumpuls {
+  from { r: 1; opacity: .9; }
+  to   { r: 7; opacity: 0; }
+}
+
+/* ── Stand und Knöpfe ─────────────────────────────────────────────────────────────── */
+.faden-shell .solitaer__fuss { display: flex; align-items: center; justify-content: space-between; gap: var(--luft-m); flex-wrap: wrap; min-height: 34px; }
+.faden-shell .solitaer__stand { margin: 0; flex: 1 1 14em; font: 400 var(--grad-13)/1.45 var(--sans); color: var(--muted); }
+.faden-shell .solitaer__stand b { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.faden-shell .solitaer__wink { color: var(--spiel-ink); font-style: italic; }
+.faden-shell .solitaer__knoepfe { display: flex; gap: var(--luft-s); }
+
+/* ── Ruhe ─────────────────────────────────────────────────────────────────────────
+   Wer weniger Bewegung bestellt hat, bekommt das Spiel ohne jede: Der Stand steht sofort
+   richtig, weil er nie an einer Animation hing. Die wandernden Striche am Bogen bleiben
+   als Strichelung stehen — sie sind die einzige Stelle, an der die Bewegung selbst die
+   Auskunft war, und die Strichelung sagt dasselbe. */
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .solitaer__bogen,
+  .faden-shell .solitaer__ring,
+  .faden-shell .solitaer__moire,
+  .faden-shell .solitaer__zeiger,
+  .faden-shell .solitaer__aufsetzen,
+  .faden-shell .solitaer__siegel,
+  .faden-shell .solitaer__raumpuls,
+  .faden-shell .solitaer__zerfall circle,
+  .faden-shell .solitaer__murmel .solitaer__leib,
+  .faden-shell .solitaer__brett--andruck .solitaer__leib,
+  .faden-shell .solitaer__brett--fest .solitaer__leib,
+  .faden-shell .solitaer__brett--sieg .solitaer__loch { animation: none; }
+  .faden-shell .solitaer__leib { transition: none; }
+  .faden-shell .solitaer__raumzeiger { transition: none; }
+  .faden-shell .solitaer__ring { stroke-dashoffset: 0; }
+}

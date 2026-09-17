@@ -153,16 +153,23 @@
 .faden-shell .flugfenster__flug { position: absolute; inset: 0; }
 
 .faden-shell .flugfenster__titel {
-  position: absolute; left: 50%; top: clamp(18px, 4vw, 30px); transform: translateX(-50%);
-  width: min(70%, 24ch); margin: 0; text-align: center;
+  /* 🚨 Breiter und tiefer (Wunsch 17.09.2026): Bei 24ch brach die Zeile auf drei Zeilen
+     und stand dabei zu dicht unter der Oberkante. 32ch ergibt zwei Zeilen, und der Satz
+     sitzt jetzt im oberen Drittel statt am Rand. */
+  position: absolute; left: 50%; top: clamp(30px, 6vw, 58px); transform: translateX(-50%);
+  width: min(88%, 32ch); margin: 0; text-align: center;
   font: 900 clamp(var(--grad-20), 4.2vw, var(--grad-28))/1.15 var(--serif);
   color: var(--ink); text-wrap: balance;
-  /* Der Himmel wechselt die Helligkeit; der weiße Schein hält die Zeile überall lesbar. */
-  text-shadow: 0 0 14px rgba(255, 255, 255, .7), 0 1px 0 rgba(255, 255, 255, .5);
+  /* 🚨 KEIN Schein hinter der Schrift (Wunsch 17.09.2026). Die Übergabe legt einen weißen
+     `text-shadow` darunter, damit die Zeile über jedem Himmelston trägt — gerendert sah
+     das nach Prägung aus, nicht nach Zeitungssatz. Der Himmel ist an der Stelle, an der
+     die Zeile steht, hell genug; wer die Animation dort dunkler macht, holt den Schein
+     zurück oder rückt die Zeile. */
 }
 
 .faden-shell .flugfenster__platte {
-  position: absolute; left: 50%; bottom: clamp(16px, 4vw, 26px); transform: translateX(-50%);
+  /* Weiter herauf, damit unter der Platte noch Himmel bleibt (Wunsch 17.09.2026). */
+  position: absolute; left: 50%; bottom: clamp(30px, 6vw, 58px); transform: translateX(-50%);
   width: min(100% - 2 * var(--luft-l), 430px);
   padding: var(--luft-m) var(--luft-l) var(--luft-s);
   background: rgba(250, 249, 246, .86);
@@ -192,7 +199,7 @@
 
 @media (max-width: 620px) {
   .faden-shell .flugfenster { --fenster-h: 620px; }
-  .faden-shell .flugfenster__titel { width: min(86%, 16ch); }
+  .faden-shell .flugfenster__titel { width: min(92%, 20ch); top: clamp(22px, 5vw, 34px); }
   .faden-shell .flugfenster__platte { width: calc(100% - 2 * var(--luft-m)); padding: var(--luft-m) var(--luft-m) var(--luft-s); }
 }
 @media (prefers-reduced-motion: reduce) { .faden-shell .wb-platte__stempel { animation: none; } }

@@ -59,11 +59,9 @@ export default async function FinanzwortKarte({ spiel: vorgegeben }: { spiel?: S
         <Insel typ="finanzwort" werte={werte}><Finanzwort {...werte} /></Insel>
       </div>
       <aside className="spiel-satz__rand">
-        {/* 🚨 Wolkenkratzer, nicht Rectangle: Die Spalte ist rund 265 px breit — ein
-            300-px-Rechteck würde auf 261 skaliert, und die Schrift der Anzeige läuft dann
-            über ihren eigenen Rand. 160 × 600 passt ohne Skalierung und füllt die Höhe
-            neben dem hohen Spielfeld. */}
-        <Einschub format="skyscraper" variante="neben" nr={0} />
+        {/* Halfpage (300 × 600): Sie skaliert auf die Restspalte und steht dann fast
+            genau so hoch wie das Spielfeld daneben (app/spiele.css). */}
+        <Einschub format="halfpage" variante="neben" nr={0} />
         <p className="spiel-satz__notiz">Anzeigen finanzieren die Redaktion · Plus liest werbefrei</p>
       </aside>
     </section>

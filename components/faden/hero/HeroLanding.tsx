@@ -165,7 +165,19 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
           </div>
         </div>
       </div>
-      <button type="button" className="hero-cta" onClick={entdecken}>Finanzleser entdecken<i>↓</i></button>
+      {/* Die Scheibe unter dem Text: zwei Winkel, die nacheinander nach unten durchlaufen
+          und am Rand verschwinden — die übliche Geste für „hier geht es weiter", nur
+          gezeichnet statt getippt. Ein ‚↓' als Schriftzeichen sitzt in jeder Schrift
+          anders und lässt sich nicht bewegen. */}
+      <button type="button" className="hero-cta" onClick={entdecken}>
+        Finanzleser entdecken
+        <i className="hero-cta__scheibe" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path className="hero-cta__winkel hero-cta__winkel--a" d="M7 9.5l5 5 5-5" />
+            <path className="hero-cta__winkel hero-cta__winkel--b" d="M7 9.5l5 5 5-5" />
+          </svg>
+        </i>
+      </button>
     </section>
   );
 }
