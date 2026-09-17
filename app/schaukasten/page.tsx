@@ -656,7 +656,7 @@ export default async function Schaukasten() {
         <Fortschrittsreihe nr={3} gesamt={5} />
         <p className="quelle" style={{ marginTop: "var(--luft-xl)" }}>FL Adresszeile — die Linie wächst in vier Stufen mit, der Knoten poppt bei einer vollständigen Adresse:</p>
         <div style={{ maxWidth: 430 }}>
-          <Adresszeile label="Ihre E-Mail · donnerstags" knopf="Eintragen" onSenden={() => {}} hinweis="Abmelden mit einem Klick in jeder Ausgabe." hinweisFertig="Fast geschafft: bitte den Link in der Bestätigungsmail anklicken." />
+          <Adresszeile label="Ihre E-Mail · donnerstags" knopf="Eintragen" hinweis="Abmelden mit einem Klick in jeder Ausgabe." hinweisFertig="Fast geschafft: bitte den Link in der Bestätigungsmail anklicken." />
         </div>
         <div className="kapitel__satz" style={{ marginTop: "var(--luft-xl)" }}>
           <AusDemNewsletter eintraege={auslese} />

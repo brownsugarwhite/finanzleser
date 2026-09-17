@@ -53,7 +53,12 @@ export default function Adresszeile({
   hinweisFertig,
   art = "email",
   ton = "gruen",
-  onSenden,
+  /* Ohne Empfänger ist die Zeile eine Vorführung (Schaukasten): sie spielt ihre Zustände
+     durch und schickt nichts. 🚨 Der Vorgabewert steht HIER und nicht am Aufrufer — eine
+     Funktion als Prop lässt sich aus einer Server-Komponente nicht übergeben, und der
+     Schaukasten ist eine. Gemessen 17.09.2026: /schaukasten warf HTTP 500 mit „Event
+     handlers cannot be passed to Client Component props". */
+  onSenden = () => {},
 }: {
   label: string;
   platzhalter?: string;
@@ -64,7 +69,7 @@ export default function Adresszeile({
   art?: AdressArt;
   ton?: AdressTon;
   /** Gibt einen Text zurück, wenn es NICHT geklappt hat; sonst nichts. */
-  onSenden: (wert: string) => void | string | Promise<void | string>;
+  onSenden?: (wert: string) => void | string | Promise<void | string>;
 }) {
   const [wert, setWert] = useState("");
   const [fokus, setFokus] = useState(false);
