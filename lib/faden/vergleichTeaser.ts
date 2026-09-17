@@ -17,7 +17,7 @@
  */
 import { getVergleichDaten } from "@/lib/financeads/laden";
 import { defLite, kategorieDef } from "@/lib/financeads/registry";
-import { hauptspalte, kennwertSpalte, laufzeitParam, zinskurve } from "@/lib/financeads/kursblatt";
+import { bandform, hauptspalte, kennwertSpalte, laufzeitParam, zinskurve } from "@/lib/financeads/kursblatt";
 import { formatGeld, formatKennwert, formatProzent, formatZahl } from "@/lib/financeads/format";
 import type { SpalteDef, VergleichProdukt } from "@/lib/financeads/typen";
 import type { WerkzeugVerweis } from "@/lib/faden/werkzeugIndex";
@@ -58,14 +58,37 @@ export interface TeaserSaeule {
   wert: string;
 }
 
+/**
+ * Ein Punkt des Streubands — die kleine Schwester des Kursblatt-Bands.
+ *
+ * Anders als eine Säule trägt er keine Höhe, sondern eine STELLE: wo das Angebot auf der
+ * Preisachse liegt. Wo zwei Angebote dicht beieinander liegen, stapeln sie sich; die
+ * Etage kommt von hier, damit im Bauteil nichts gerechnet wird.
+ */
+export interface TeaserStreu {
+  /** 5–95, von links. */
+  x: number;
+  /** 0 = auf der Achse, jede weitere Etage eine Reihe höher. */
+  etage: number;
+  best: boolean;
+  /** Für Titel und `aria-label` — nie gerendert. */
+  wert: string;
+}
+
 export interface VergleichTeaser {
   /**
-   * Welche Grafik der Teaser trägt: die Zinskurve über die Laufzeiten, wo es eine gibt,
-   * sonst das Säulenband über die Angebote. Dieselbe Entscheidung wie im Kursblatt
-   * (`bandform`), nur ohne die Mengengrenze: Die kleinen Säulen hier tragen keine
-   * Beschriftung und laufen deshalb auch bei vierzig Angeboten nicht ineinander.
+   * Welche Grafik der Teaser trägt — dieselbe Entscheidung wie im Kursblatt, aus
+   * DERSELBEN Funktion (`bandform`): die Zinskurve, wo die Kategorie eine Laufzeit hat,
+   * bis 16 Angebote das Säulenband, darüber das Streuband aus Punkten.
+   *
+   * 🚨 Hier stand die Mengengrenze bewusst NICHT, mit der Begründung, die kleinen Säulen
+   * trügen ja keine Beschriftung. Das stimmt, war aber die falsche Frage: Bei 32 Tarifen
+   * sind die Säulen 7 px breit mit einer Haarlinie dazwischen — sie lesen sich als
+   * graue Fläche, nicht als Markt. Und die Vorschau zeigte eine andere Form als die
+   * Seite dahinter (Wunsch 17.09.2026: „wenn das Baumdiagramm zu Kreisen wird, bitte
+   * auch in der Vorschau die kleinen Kreise").
    */
-  form: "kurve" | "saeulen";
+  form: "kurve" | "saeulen" | "streuung";
   slug: string;
   titel: string;
   href: string;
@@ -86,7 +109,13 @@ export interface VergleichTeaser {
   saeulen: TeaserSaeule[];
   /** Nur bei `form: "kurve"`. */
   kurve?: TeaserPunkt[];
-  /** Höhe der Ø-Linie in Prozent und ihr Etikett („Ø 5,40 €“). */
+  /** Nur bei `form: "streuung"`. */
+  streu?: TeaserStreu[];
+  /**
+   * Lage der Ø-Linie in Prozent und ihr Etikett („Ø 5,40 €“). Bei Säulen ist das die
+   * HÖHE, beim Streuband die Stelle auf der Achse — beides derselbe Gedanke, nur auf
+   * der jeweils tragenden Achse.
+   */
   schnitt: number;
   schnittText: string;
   /** „Bestwert · 83 € im Jahr gespart“ bzw. „Bestwert · 1,4 Prozentpunkte mehr“. */
@@ -202,6 +231,62 @@ function kurveTeaser(
 }
 
 /**
+ * Die Stelle eines Wertes auf der Achse des Streubands, in Prozent.
+ *
+ * 🚨 Links steht der BESTE, nicht der kleinste. Das Kursblatt legt seine Achse nach dem
+ * rohen Wert und schreibt die Enden dazu („günstig ↔ teuer"); im Teaser gibt es dafür
+ * keinen Platz, dort sagt es die Fußzeile: links der Bestwert in Türkis, rechts der
+ * schwächste. Liefen die Punkte andersherum, widerspräche die Grafik ihrer eigenen
+ * Bildunterschrift — und der Säulenreihe daneben, die ebenfalls links beginnt.
+ *
+ * 5 % Rand an beiden Enden wie im Kursblatt (K:473), damit kein Punkt an der Kante klebt.
+ */
+function achsenLage(w: number, werte: number[], guenstiger: boolean): number {
+  const min = Math.min(...werte);
+  const max = Math.max(...werte);
+  if (max === min) return 50;
+  const anteil = guenstiger ? (w - min) / (max - min) : (max - w) / (max - min);
+  return Math.round((5 + anteil * 90) * 10) / 10;
+}
+
+/**
+ * Das Streuband: ein Punkt je Angebot, gestapelt wo es eng wird.
+ *
+ * Gebündelt wird nach NÄHE, nicht nach gleichem Wert — Klassen von 2,6 % der Bandbreite,
+ * dieselbe Zahl wie im Kursblatt. Zwei Tarife mit 131 € und 134 € stünden sonst
+ * übereinander gedruckt.
+ *
+ * 🚨 Anders als im Kursblatt fällt hier NICHTS weg. Das große Band zeigt ab der fünften
+ * Etage ein „+n"; im Teaser wäre diese Beschriftung kleiner als der Punkt, den sie
+ * ersetzt. Die fünfte bleibt deshalb auf der obersten Reihe stehen — zwei Punkte, die
+ * sich berühren, sind ehrlicher als ein verschwiegener Tarif. Gemessen an den vier
+ * Vergleichen der Zeile (17.09.2026) reicht der höchste Stapel bis Etage 3.
+ */
+const STREU_KLASSE = 2.6;
+const STREU_ETAGEN = 4;
+
+function streuBand(werte: number[], guenstiger: boolean, best: number, spalte: SpalteDef): TeaserStreu[] {
+  const belegt = new Map<number, number>();
+  let bestGesetzt = false;
+  // Sortiert, damit der Stapel von links nach rechts wächst und der Bestwert unten sitzt.
+  const sortiert = [...werte].sort((a, b) => (guenstiger ? a - b : b - a));
+  return sortiert.map((w) => {
+    const x = achsenLage(w, werte, guenstiger);
+    const klasse = Math.round(x / STREU_KLASSE);
+    const belegtJetzt = belegt.get(klasse) ?? 0;
+    belegt.set(klasse, belegtJetzt + 1);
+    const ist = w === best && !bestGesetzt;
+    if (ist) bestGesetzt = true;
+    return {
+      x,
+      etage: Math.min(belegtJetzt, STREU_ETAGEN - 1),
+      best: ist,
+      wert: formatKennwert({ ...spalte, ab: false }, w),
+    };
+  });
+}
+
+/**
  * Ein Teaser aus einem Schnappschuss. `null`, wenn es nichts zu zeigen gibt: Klasse B,
  * kein Schnappschuss, keine Hauptspalte oder weniger als zwei Zahlen — ein Band aus
  * einer Säule ist kein Markt.
@@ -250,6 +335,12 @@ export async function teaserFuer(slug: string, verweis: WerkzeugVerweis | undefi
   const min = Math.min(...werte);
   const max = Math.max(...werte);
 
+  /* Säulen oder Punkte — entschieden von derselben Funktion wie im Kursblatt, damit die
+     Vorschau nie eine andere Form zeigt als die Seite dahinter. Die Kurve ist oben schon
+     abgebogen, hier bleiben `saeulen` und `streuung`. */
+  const form = bandform(defLite(def), werte.length, false);
+  const streu = form === "streuung" ? streuBand(werte, guenstiger, best, spalte) : undefined;
+
   // Günstig nach teuer, also der Bestwert links.
   const sortiert = [...werte].sort((a, b) => (guenstiger ? a - b : b - a));
   const saeulen: TeaserSaeule[] = sortiert.map((w) => ({
@@ -267,7 +358,7 @@ export async function teaserFuer(slug: string, verweis: WerkzeugVerweis | undefi
 
   return {
     ...rahmen,
-    form: "saeulen",
+    form,
     ab: Boolean(spalte.ab),
     /** Wo mehr besser ist, ist der Bestwert eine OBERgrenze. */
     bis: !guenstiger,
@@ -275,7 +366,9 @@ export async function teaserFuer(slug: string, verweis: WerkzeugVerweis | undefi
     periode,
     spanne: spanne?.lang,
     saeulen,
-    schnitt: hoehe(schnitt),
+    streu,
+    // Beim Streuband trägt die Achse den Durchschnitt, nicht die Höhe.
+    schnitt: streu ? achsenLage(schnitt, werte, guenstiger) : hoehe(schnitt),
     schnittText: `Ø ${spalte.art === "prozent" ? formatProzent(schnitt) : formatKennwert({ ...spalte, ab: false }, schnitt)}`,
     bestFuss: spanne ? spanne.fuss : `Bestwert · ${bestText}`,
     randFuss: `${guenstiger ? "teuerster" : "schwächster"} ${formatKennwert({ ...spalte, ab: false }, rand)}`,

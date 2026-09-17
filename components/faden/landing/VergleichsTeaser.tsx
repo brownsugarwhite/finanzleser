@@ -19,6 +19,7 @@
  */
 import { useFaden } from "@/components/faden/FadenProvider";
 import Marktband from "./Marktband";
+import Punktband from "./Punktband";
 import Zinsband from "./Zinsband";
 import type { VergleichTeaser } from "@/lib/faden/vergleichTeaser";
 
@@ -52,10 +53,19 @@ export default function VergleichsTeaser({ teaser }: { teaser: VergleichTeaser[]
               {t.spanne && <span className="vgl-teaser__spanne">{t.spanne}</span>}
             </span>
 
-            {/* Welche Grafik: die Zinskurve über die Laufzeiten, wo es eine gibt, sonst
-                das Säulenband über die Angebote (lib/faden/vergleichTeaser.ts). */}
+            {/* Welche Grafik — entschieden in lib/faden/vergleichTeaser.ts, mit
+                derselben Regel wie das Kursblatt: Kurve, wo es eine Laufzeit gibt, bis
+                16 Angebote Säulen, darüber Punkte. */}
             {t.form === "kurve" && t.kurve ? (
               <Zinsband punkte={t.kurve} bestFuss={t.bestFuss} randFuss={t.randFuss} />
+            ) : t.form === "streuung" && t.streu ? (
+              <Punktband
+                streu={t.streu}
+                schnitt={t.schnitt}
+                schnittText={t.schnittText}
+                bestFuss={t.bestFuss}
+                randFuss={t.randFuss}
+              />
             ) : (
               <Marktband
                 saeulen={t.saeulen}
@@ -72,11 +82,15 @@ export default function VergleichsTeaser({ teaser }: { teaser: VergleichTeaser[]
           </a>
         ))}
       </div>
-      {/* Pflichtangabe und Lesehilfe in einem — der Satz erklärt, was eine Säule ist. */}
+      {/* Pflichtangabe und Lesehilfe in einem. 🚨 Der Satz muss alle drei Formen der
+          Zeile erklären, nicht nur die Säule — sonst sucht der Leser bei 32 Tarifen nach
+          einer Höhe, die dort keine Bedeutung mehr hat. */}
       <p className="vgl-teaser__fussnote">
-        Anzeige · Vergleiche mit Partnerlinks. Jede Säule ist ein Tarif, sortiert von
-        günstig nach teuer; die Höhe zeigt die Ersparnis gegenüber dem teuersten Tarif —
-        der Bestwert ragt heraus; die gestrichelte Linie ist der Marktdurchschnitt.
+        Anzeige · Vergleiche mit Partnerlinks. Jede Marke ist ein Tarif: Säulen und
+        Punkte laufen vom besten links zum teuersten rechts — die Säule zeigt in ihrer
+        Höhe die Ersparnis, der Punkt in seiner Lage die Stelle im Markt. Wo eine
+        Laufzeit im Spiel ist, zeigt die Kurve den besten Wert je Dauer. Die gestrichelte
+        Linie ist der Marktdurchschnitt.
       </p>
     </>
   );

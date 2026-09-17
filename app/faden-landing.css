@@ -260,3 +260,40 @@
   .faden-shell .zinsband[data-sicht="an"] .zinsband__punkt.ist-best b { animation: none !important; opacity: 1; }
   .faden-shell .zinsband__feld svg { clip-path: none; }
 }
+
+/* -- Das Streuband im Teaser (components/faden/landing/Punktband.tsx) ---------------
+   Die dritte Form. Ab 17 Angeboten wird aus jeder Säule ein Punkt — dieselbe Grenze wie
+   im Kursblatt (`bandform`), damit die Vorschau zeigt, was die Seite dahinter zeigt.
+   Der Punkt sieht aus wie der der Zinskurve; nur seine Achse bedeutet etwas anderes. */
+.faden-shell .punktband { display: block; margin-top: var(--luft-l); }
+.faden-shell .punktband__feld { position: relative; display: block; height: var(--band-h, 48px); }
+.faden-shell .punktband__punkt { position: absolute; transform: translate(-50%, 50%); opacity: 0; }
+.faden-shell .punktband[data-sicht="an"] .punktband__punkt { animation: marktband-sicht .3s both; }
+/* 🚨 Maße und Ton vom großen Band geerbt (`.kb-band__punkt`: 10 px, volle Tinte), nur
+   eine Spur kleiner, weil der Teaser halb so breit ist. Der Punkt stand hier erst in
+   7 px auf --ink-45 und verschwand neben den Säulen der Nachbarteaser. */
+.faden-shell .punktband__punkt b { display: block; width: 8px; height: 8px; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-fein) solid var(--ink); box-sizing: border-box; transition: background-color .3s; }
+.faden-shell .vgl-teaser:hover .punktband__punkt b { background: var(--ink-16); }
+/* Der Bestwert ist gefüllt, größer und pulst — wie an der Kurve. */
+.faden-shell .punktband__punkt.ist-best b,
+.faden-shell .vgl-teaser:hover .punktband__punkt.ist-best b { --puls-marke: var(--puls-vergleich); width: 12px; height: 12px; background: var(--tuerkis); border: 0; }
+.faden-shell .punktband[data-sicht="an"] .punktband__punkt.ist-best b { animation: fl-punkt 2.4s ease-in-out 1.4s infinite; }
+/* 🚨 Die Ø-Linie steht SENKRECHT. Beim Säulenband liegt der Durchschnitt auf einer
+   Höhe, hier auf einer Stelle der Achse — dieselbe Aussage, um 90 Grad gedreht. */
+.faden-shell .punktband__schnitt { position: absolute; top: 0; bottom: 0; border-left: var(--strich-haar) dashed var(--ink-45); opacity: 0; }
+.faden-shell .punktband[data-sicht="an"] .punktband__schnitt { animation: marktband-sicht .4s 1.1s both; }
+.faden-shell .punktband__schnitt em { position: absolute; left: var(--luft-xs); top: 0; padding: 0 var(--luft-xxs); background: var(--paper); font: 600 var(--grad-kicker)/1 var(--sans); font-style: normal; color: var(--muted); white-space: nowrap; }
+/* Steht der Durchschnitt weit rechts, kippt sein Etikett auf die andere Seite — sonst
+   läuft es aus dem Teaser heraus.
+   🚨 Über ein `data-`Attribut, nicht über `[style*="left: 7"]`: dieselbe Zeichenfolge
+   steht in „left: 7.2%" wie in „left: 71.5%". */
+.faden-shell .punktband__schnitt[data-seite="rechts"] em { left: auto; right: var(--luft-xs); }
+.faden-shell .punktband__grund { display: block; height: var(--strich-haar); background: var(--ink-45); transform-origin: left; }
+.faden-shell .punktband[data-sicht="an"] .punktband__grund { animation: marktband-grund .9s var(--kurve) both; }
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .punktband[data-sicht="an"] .punktband__punkt,
+  .faden-shell .punktband[data-sicht="an"] .punktband__punkt.ist-best b,
+  .faden-shell .punktband[data-sicht="an"] .punktband__schnitt,
+  .faden-shell .punktband[data-sicht="an"] .punktband__grund { animation: none !important; opacity: 1; transform: translate(-50%, 50%); }
+  .faden-shell .punktband[data-sicht="an"] .punktband__schnitt { transform: none; }
+}
