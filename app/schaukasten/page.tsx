@@ -38,6 +38,7 @@ import LeoFragt from "@/components/faden/leo/LeoFragt";
 import FadenSpiel from "@/components/faden/spiele/FadenSpiel";
 import Schlange from "@/components/faden/spiele/Schlange";
 import Finanzwort from "@/components/faden/spiele/Finanzwort";
+import SolitaerKarte from "@/components/faden/spiele/SolitaerKarte";
 import SchaukastenModus from "@/components/faden/SchaukastenModus";
 import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
 import Zeitungskopf from "@/components/faden/Zeitungskopf";
@@ -49,6 +50,9 @@ import Fortschrittsreihe from "@/components/faden/kassensturz/Fortschrittsreihe"
 import AusDemNewsletter from "@/components/faden/landing/AusDemNewsletter";
 import Adresszeile from "@/components/faden/Adresszeile";
 import PlusTeaser from "@/components/faden/landing/PlusTeaser";
+import Flugfenster from "@/components/faden/landing/Flugfenster";
+import VergleichsTeaser from "@/components/faden/landing/VergleichsTeaser";
+import { teaserZeile } from "@/lib/faden/vergleichTeaser";
 import WeiterredenChips from "@/components/faden/landing/WeiterredenChips";
 import VergleichKoerper from "@/components/vergleich/VergleichKoerper";
 import Setzkasten from "@/components/kursblatt/Setzkasten";
@@ -88,6 +92,11 @@ export default async function Schaukasten() {
   // Werkzeug-Index. Erfundene Beispielzeilen sagen über die Gestaltung wenig; echte
   // Titel zeigen sofort, wie lange Namen umbrechen und wo die Punktführung reißt.
   const index = await getWerkzeugIndex();
+  /* Die Vergleichs-Teaser mit ECHTEN Zahlen — derselbe Aufruf wie auf der Startseite.
+     🚨 Absichtlich nicht erfunden: Der Teaser entscheidet seine Form an der Menge der
+     Angebote (`bandform`), und genau das soll hier prüfbar sein. Vier Abrufe, höchstens
+     zwei gleichzeitig, danach 24 h im Data-Cache (lib/faden/vergleichTeaser.ts). */
+  const teaser = await teaserZeile(index);
   const ausIndex = (typ: "rechner" | "checkliste" | "dokumente", n: number) =>
     [...index.entries()]
       .filter(([k]) => k.startsWith(`${typ}:`))
@@ -581,6 +590,17 @@ export default async function Schaukasten() {
             <p className="spiel-satz__notiz">Steht am Ende eines Kapitels, wenn der Faden etwas zu feiern hat.</p>
           </div>
         </div>
+
+        <h3 style={{ marginTop: "var(--luft-xl)" }}>Solitär</h3>
+        <p>
+          🚨 Das einzige Spiel OHNE Anzeige daneben: die Vorlage
+          (<code>docs/design_handoff_finanzleser_solitaer</code>) bringt ihren eigenen
+          zweispaltigen Satz mit — Brett links, Kennzahlen und Schale rechts. In einer
+          halben Satzbreite fiele der auf eine Spalte zusammen. Die Murmel ist ein
+          Glaskörper aus dem Tokenverzeichnis (<code>--glas-*</code>, <code>--katzenauge</code>),
+          kein Bauteil-Verlauf; dieselben Token tragen Liegen, Zeigen, In-der-Hand und Flug.
+        </p>
+        <SolitaerKarte />
     </>) },
 
     { titel: "Listen, Karten und Mein Bereich", inhalt: (<>
@@ -660,8 +680,26 @@ export default async function Schaukasten() {
         </div>
         <div className="kapitel__satz" style={{ marginTop: "var(--luft-xl)" }}>
           <AusDemNewsletter eintraege={auslese} />
+          {/* Der Flug ZUM Newsletter, mit dem Eintragen darin (Übergabe Baustein 4).
+              🚨 In einer Insel, sonst steht im eingefrorenen Kapitel ein Foto statt der
+              Animation — dieselbe Falle wie bei den Spielen. */}
+          <Insel typ="flugfenster"><Flugfenster /></Insel>
           <PlusTeaser />
           <WeiterredenChips />
+        </div>
+
+        <h3 style={{ marginTop: "var(--luft-xl)" }}>Die Vergleichs-Teaser · alle drei Bandformen</h3>
+        <p>
+          Echte Zahlen aus dem Vergleichs-Schnappschuss, nicht erfunden — nur so lässt
+          sich prüfen, was hier zu prüfen ist: <strong>die Form entscheidet die Menge.</strong>{" "}
+          Wo eine Kategorie eine Laufzeit hat, zeigt der Teaser die <em>Zinskurve</em>
+          (Festgeld, sieben Anlagedauern). Bis 16 Angebote steht das <em>Säulenband</em>,
+          darüber das <em>Streuband</em> aus Punkten — dieselbe Grenze wie im Kursblatt,
+          entschieden von derselben Funktion (<code>bandform</code>). Zahnzusatz mit
+          32 Tarifen fällt darüber, Ratenkredit mit 14 und Tierkranken mit 12 nicht.
+        </p>
+        <div className="wort wort--leo">
+          <VergleichsTeaser teaser={teaser} />
         </div>
     </>) },
 
