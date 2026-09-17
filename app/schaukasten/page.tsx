@@ -47,6 +47,9 @@ import { schriftgrade, harteFarben, knopfformen, abstaende, radien, schatten } f
 import Button from "@/components/ui/Button";
 import Einschub from "@/components/faden/Einschub";
 import Fortschrittsreihe from "@/components/faden/kassensturz/Fortschrittsreihe";
+import KassensturzStart from "@/components/faden/kassensturz/KassensturzStart";
+import { getFadenOptionen } from "@/lib/faden/optionen";
+import { zieleAufloesen } from "@/lib/faden/kassensturzZiele";
 import AusDemNewsletter from "@/components/faden/landing/AusDemNewsletter";
 import Adresszeile from "@/components/faden/Adresszeile";
 import PlusTeaser from "@/components/faden/landing/PlusTeaser";
@@ -97,6 +100,12 @@ export default async function Schaukasten() {
      Angebote (`bandform`), und genau das soll hier prüfbar sein. Vier Abrufe, höchstens
      zwei gleichzeitig, danach 24 h im Data-Cache (lib/faden/vergleichTeaser.ts). */
   const teaser = await teaserZeile(index);
+  /* Der Kassensturz mit den ECHTEN Fragen aus den Faden-Optionen — dieselben Daten und
+     dieselben aufgelösten Ziele wie im Kapitel „Heute" und auf /kassensturz. Mit
+     erfundenen Fragen ließe sich weder der Fahrplan noch der Beleg prüfen: beide zählen
+     an den Segmenten des echten Katalogs entlang. */
+  const { kassensturz } = await getFadenOptionen();
+  const ksZiele = kassensturz ? await zieleAufloesen(kassensturz) : {};
   const ausIndex = (typ: "rechner" | "checkliste" | "dokumente", n: number) =>
     [...index.entries()]
       .filter(([k]) => k.startsWith(`${typ}:`))
@@ -490,14 +499,26 @@ export default async function Schaukasten() {
     </>) },
 
     { titel: "Vergleichsrechner", inhalt: (<>
-        <p className="vorspann">Der eigene Vergleich aus der financeads-API, im Kursblatt-Satz: Zeitungskopf, „Ihre Angaben“ mit Lineal, Setzzeile und Register, Säulenfeld oder Zinskurve, drei Kennzahlen, Podest und Angebotsliste mit Balken und Details. Klasse-B-Kategorien (Versicherungen, für die der Partner keine Beiträge liefert) zeigen stattdessen die Anbieterliste — ohne Band, ohne Kennzahlen, ohne Gewinner.</p>
-        {/* 🚨 Drei, nicht zwei — und zwar absichtlich je EINER pro Bandform:
-            Tagesgeld zeigt das STREUBAND, Festgeld die ZINSKURVE (die dritte Spalte „Land"
-            gibt es auch nur dort), Haftpflicht die Klasse B ganz ohne Band. Bis zum
-            16.09.2026 standen hier nur Tagesgeld und Haftpflicht — die Zinskurve kam im
-            Schaukasten also überhaupt nicht vor, obwohl sie gebaut ist. */}
-        <VergleichKoerper slug="tagesgeldvergleich" skin="faden" />
+        <p className="vorspann">Der eigene Vergleich aus der financeads-API, im Kursblatt-Satz: Zeitungskopf, „Ihre Angaben“ mit Lineal, Setzzeile und Register, der Marktüberblick in seiner jeweiligen Form (Zinskurve, Säulenfeld oder Punkte-Streuband), drei Kennzahlen, Podest und Angebotsliste mit Balken und Details. Klasse-B-Kategorien (Versicherungen, für die der Partner keine Beiträge liefert) zeigen stattdessen die Anbieterliste — ohne Band, ohne Kennzahlen, ohne Gewinner.</p>
+        {/* 🚨 Vier, und zwar je EINER pro Marktüberblick — das ist der Zweck dieser
+            Auswahl, nicht die Themenvielfalt:
+
+              Festgeld    ZINSKURVE   (Laufzeit-Kategorie; die Spalte „Land" gibt es
+                                       auch nur hier)
+              Ratenkredit SÄULENBAND  (14 Angebote, also unter der Grenze von 16)
+              Zahnzusatz  STREUBAND   (32 Tarife, also darüber)
+              Haftpflicht KLASSE B    (keine Beiträge vom Partner: Anbieterliste ohne
+                                       Band, ohne Kennzahlen, ohne Gewinner)
+
+            🚨 Hier stand bis eben Tagesgeld statt Ratenkredit und Zahnzusatz, mit dem
+            Kommentar „Tagesgeld zeigt das Streuband". Das stimmte am 16.09.2026 und war
+            am 17.09. falsch: Tagesgeld hat seitdem `band: "kurve"` in der Registry und
+            zeigt dieselbe Kurve wie Festgeld. Der Schaukasten führte damit zweimal die
+            Kurve vor und Säulen wie Punkte überhaupt nicht — geprüft werden konnte also
+            gerade das nicht, was die Regel `bandform()` entscheidet. */}
         <VergleichKoerper slug="festgeldvergleich" skin="faden" />
+        <VergleichKoerper slug="ratenkredit-vergleich" skin="faden" />
+        <VergleichKoerper slug="zahnzusatzversicherung-vergleich" skin="faden" />
         <VergleichKoerper slug="private-haftpflichtversicherung-vergleich" skin="faden" />
     </>) },
     { titel: "Spiele", inhalt: (<>
@@ -605,7 +626,6 @@ export default async function Schaukasten() {
 
     { titel: "Listen, Karten und Mein Bereich", inhalt: (<>
         <ListenKarte kicker="Aus dem Bestand" gruppen={listen} />
-        <div style={{ marginTop: 18 }}><KassensturzTeaser /></div>
         <div style={{ marginTop: 18 }}>
           <span className="kicker kicker--gruen">Mein Bereich</span>
           <MeinBereich regeln={WAECHTER} />
@@ -667,14 +687,47 @@ export default async function Schaukasten() {
         </div>
     </>) },
 
+    { titel: "Der Kassensturz", inhalt: (<>
+        <p className="vorspann">
+          Der ganze Ablauf, nicht nur sein Anriss: <strong>Deckblatt mit Fahrplan</strong>,
+          die Antwortkarten als Kassentasten, die <strong>Schätzfrage am Lineal</strong>,
+          der Punkte-Flug, der <strong>Beleg</strong> in der rechten Spalte, Tacho, Ampel
+          und der Stempel am Ende. Klicken Sie sich durch — der Stand liegt in diesem
+          Browser, „Von vorn" setzt ihn zurück.
+        </p>
+        <p>
+          🚨 Die Fragen sind die <strong>echten</strong> aus den Faden-Optionen, nicht
+          erfundene. Fahrplan und Beleg zählen an den Segmenten des Katalogs entlang; mit
+          Beispielfragen stünde hier eine Mechanik, die es so nicht gibt.
+        </p>
+        <p>
+          🚨 Und eine bewusste Abweichung von der Übergabe: <strong>der Beleg zählt
+          abwärts von 100.</strong> Die Vorlage gibt jeder Antwort feste Punkte (12/6/0);
+          unser Katalog kommt aus dem CMS und kennt keine. Gezeigt wird deshalb, was jede
+          Antwort an demselben Score bewegt, den auch der Tacho zeigt
+          (<code>belegZeilen</code> in <code>components/faden/kassensturz/logik.ts</code>).
+          Sobald das CMS Punkte je Antwort führt, zählt der Bon aufwärts — dafür ändert
+          sich nur diese eine Funktion.
+        </p>
+        {kassensturz
+          ? <Insel typ="kassensturz" werte={{ daten: kassensturz, ziele: ksZiele }}><KassensturzStart daten={kassensturz} ziele={ksZiele} /></Insel>
+          : <p className="quelle">Kein Kassensturz in den Faden-Optionen — das CMS liefert gerade keinen Katalog.</p>}
+
+        <h3 style={{ marginTop: "var(--luft-xl)" }}>Die Fortschrittsreihe</h3>
+        <p className="quelle">Erledigt, laufend, offen — sie steht im Deckblatt und über den Fragen:</p>
+        <Fortschrittsreihe nr={3} gesamt={5} />
+
+        <h3 style={{ marginTop: "var(--luft-xl)" }}>Der Anriss im Fließtext</h3>
+        <p className="quelle">Was an anderer Stelle im Faden auf den Kassensturz zeigt:</p>
+        <KassensturzTeaser />
+    </>) },
+
     { titel: "Die Blöcke der Startseite", inhalt: (<>
         <p>
           Dieselben Bausteine, die das Kapitel „Heute" tragen. Alle stehen auf dem Papier,
           alle tragen denselben Blockkopf und denselben Abstand.
         </p>
-        <p className="quelle">Fortschrittsreihe des Kassensturzes — erledigt, laufend, offen:</p>
-        <Fortschrittsreihe nr={3} gesamt={5} />
-        <p className="quelle" style={{ marginTop: "var(--luft-xl)" }}>FL Adresszeile — die Linie wächst in vier Stufen mit, der Knoten poppt bei einer vollständigen Adresse:</p>
+        <p className="quelle">FL Adresszeile — die Linie wächst in vier Stufen mit, der Knoten poppt bei einer vollständigen Adresse:</p>
         <div style={{ maxWidth: 430 }}>
           <Adresszeile label="Ihre E-Mail · donnerstags" knopf="Eintragen" hinweis="Abmelden mit einem Klick in jeder Ausgabe." hinweisFertig="Fast geschafft: bitte den Link in der Bestätigungsmail anklicken." />
         </div>
