@@ -145,7 +145,15 @@
 /* ═══ Vergleichs-Teaser (Übergabe „Finanzleser Heute", Baustein 2) ═══════════════════
    Zwei nebeneinander auf Satzbreite, getrennt durch Haarlinien — kein Kasten, kein
    Schatten. Die Bildkarte von vorher ist weg: An ihrer Stelle steht der Markt selbst. */
-.faden-shell .vgl-teaser__raster { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--luft-l); border-bottom: var(--strich-haar) solid var(--ink-30); }
+/* 🚨 Das Raster bricht aus Leos Spalte AUS (Wunsch 17.09.2026: „über die ganze Breite").
+   `.wort--leo` ist ein Raster aus 60-px-Gasse und Textspalte; alles darin landet in
+   Spalte 2. Die Teaser sollen beide Spalten nehmen — Leos Kopf und sein Satz bleiben, wo
+   sie sind, der Markt darunter nimmt den ganzen Satzspiegel.
+   Der Selektor ist ein NACHFAHRE, kein Kind: Die Teaser stecken in einer `Insel`, und die
+   ist `display: contents` — fürs Raster unsichtbar, für den Selektor nicht. */
+.faden-shell .wort--leo .vgl-teaser__raster,
+.faden-shell .wort--leo .vgl-teaser__fussnote { grid-column: 1 / -1; }
+.faden-shell .vgl-teaser__raster { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--luft-l); border-top: var(--strich-haar) solid var(--rule-strong); border-bottom: var(--strich-haar) solid var(--ink-30); }
 @media (max-width: 620px) { .faden-shell .vgl-teaser__raster { grid-template-columns: minmax(0, 1fr); } }
 .faden-shell .vgl-teaser { position: relative; display: grid; align-content: start; padding: var(--luft-l); text-decoration: none; color: var(--ink); min-width: 0; }
 .faden-shell .vgl-teaser:nth-child(2n) { border-left: var(--strich-haar) solid var(--rule); }
@@ -154,16 +162,6 @@
   .faden-shell .vgl-teaser:nth-child(2n) { border-left: 0; }
   .faden-shell .vgl-teaser:nth-child(n + 2) { border-top: var(--strich-haar) solid var(--rule); }
 }
-
-/* Der Hover-Rahmen: vier Haarlinien, die sich in drei Schritten ziehen — oben von links,
-   dann rechts von oben, zuletzt unten und links. Reines CSS, kein Zustand. */
-.faden-shell .vgl-teaser__rahmen { position: absolute; inset: var(--luft-s) 0; pointer-events: none; }
-.faden-shell .vgl-teaser__rahmen em { position: absolute; background: var(--ink); transition: transform .18s var(--kurve); }
-.faden-shell .vgl-teaser__rahmen em:nth-child(1) { left: 0; right: 0; top: 0; height: var(--strich-haar); transform: scaleX(0); transform-origin: left; }
-.faden-shell .vgl-teaser__rahmen em:nth-child(2) { top: 0; bottom: 0; right: 0; width: var(--strich-haar); transform: scaleY(0); transform-origin: top; transition-delay: .16s; }
-.faden-shell .vgl-teaser__rahmen em:nth-child(3) { left: 0; right: 0; bottom: 0; height: var(--strich-haar); transform: scaleX(0); transform-origin: right; transition-delay: .32s; }
-.faden-shell .vgl-teaser__rahmen em:nth-child(4) { top: 0; bottom: 0; left: 0; width: var(--strich-haar); transform: scaleY(0); transform-origin: bottom; transition-delay: .32s; }
-.faden-shell .vgl-teaser:hover .vgl-teaser__rahmen em, .faden-shell .vgl-teaser:focus-visible .vgl-teaser__rahmen em { transform: scale(1); }
 
 .faden-shell .vgl-teaser__kopf { display: flex; align-items: baseline; justify-content: space-between; gap: var(--luft-s); flex-wrap: wrap; }
 .faden-shell .vgl-teaser__bestand { font: italic 300 var(--grad-11)/1.4 var(--serif); color: var(--muted); white-space: nowrap; }
@@ -186,7 +184,10 @@
 /* ── Das Säulen-Marktband ───────────────────────────────────────────────────────────
    Die Höhen kommen als Prozent (lib/faden/vergleichTeaser.ts) — dieselbe Rechnung
    trägt das große Band im Kursblatt, nur mit anderer Feldhöhe. */
-.faden-shell .marktband { display: block; margin-top: var(--luft-s); }
+/* 🚨 `--luft-l` statt `--luft-s`: Der pulsende Punkt sitzt ÜBER der Bestwertsäule und
+   ragt damit acht Pixel über das Band hinaus. Mit dem kleinen Abstand klebte sein Schein
+   an der Zeile darüber (Fehlermeldung 17.09.2026). */
+.faden-shell .marktband { display: block; margin-top: var(--luft-l); }
 .faden-shell .marktband__feld { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: var(--luft-xxs); height: var(--band-h, 48px); }
 .faden-shell .marktband--dicht .marktband__feld { gap: var(--strich-haar); }
 .faden-shell .marktband__saeule { position: relative; flex: 1 1 0; min-width: var(--strich-stark); max-width: 9px; background: var(--ink-30); border-radius: var(--radius-kante) var(--radius-kante) 0 0; transform-origin: bottom; transform: scaleY(0); }
@@ -224,7 +225,38 @@
   .faden-shell .marktband[data-sicht="an"] .marktband__grund,
   .faden-shell .marktband[data-sicht="an"] .marktband__punkt,
   .faden-shell .marktband[data-sicht="an"] .marktband__schnitt { animation: none; transform: none; opacity: 1; }
-  .faden-shell .vgl-teaser__rahmen em { transition: none; }
 }
 
 .faden-shell .weiterreden .chips { margin-top: var(--luft-xs); }
+
+/* ── Die Mini-Zinskurve im Teaser (components/faden/landing/Zinsband.tsx) ───────────
+   Wo eine Kategorie eine Laufzeit hat, zeigt der Teaser nicht die Streuung der Anbieter,
+   sondern was die Laufzeit ausmacht — die kleine Schwester der Kurve im Kursblatt. */
+.faden-shell .zinsband { display: block; margin-top: var(--luft-l); }
+.faden-shell .zinsband__feld { position: relative; display: block; height: var(--band-h, 48px); }
+/* 🚨 Die Linie wird von links AUFGEDECKT, nicht mit `stroke-dasharray` gezeichnet.
+   Das viewBox wird mit `preserveAspectRatio="none"` ungleichmäßig gestreckt; zusammen mit
+   `vector-effect: non-scaling-stroke` rechnet der Strichmusterraum dann in Schirmpixeln,
+   die Nutzereinheiten des Pfades aber nicht — gemessen am 17.09.2026 riss die Linie
+   dadurch mitten im Band ab. Ein `clip-path` kennt diese Zweideutigkeit nicht. */
+.faden-shell .zinsband__feld svg { display: block; width: 100%; height: 100%; overflow: visible; clip-path: inset(0 100% 0 0); }
+.faden-shell .zinsband__linie { fill: none; stroke: var(--tuerkis); stroke-width: var(--strich-stark); stroke-linecap: round; stroke-linejoin: round; }
+.faden-shell .zinsband[data-sicht="an"] .zinsband__feld svg { animation: zinsband-zeichnen .9s var(--kurve) both; }
+@keyframes zinsband-zeichnen { to { clip-path: inset(0 -6% 0 0); } }
+/* Die Punkte liegen als runde Knoten ÜBER dem gestreckten SVG — im SVG selbst würden sie
+   mit `preserveAspectRatio="none"` zu Ellipsen. */
+.faden-shell .zinsband__punkt { position: absolute; transform: translate(-50%, 50%); opacity: 0; }
+.faden-shell .zinsband[data-sicht="an"] .zinsband__punkt { animation: marktband-sicht .3s both; }
+.faden-shell .zinsband__punkt b { display: block; width: 7px; height: 7px; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-fein) solid var(--tuerkis); box-sizing: border-box; }
+.faden-shell .zinsband__punkt.ist-best b { --puls-marke: var(--puls-vergleich); width: 11px; height: 11px; background: var(--tuerkis); border: 0; }
+.faden-shell .zinsband[data-sicht="an"] .zinsband__punkt.ist-best b { animation: fl-punkt 2.4s ease-in-out 1.4s infinite; }
+.faden-shell .zinsband__grund { display: block; height: var(--strich-haar); background: var(--ink-45); transform-origin: left; }
+.faden-shell .zinsband[data-sicht="an"] .zinsband__grund { animation: marktband-grund .9s var(--kurve) both; }
+.faden-shell .zinsband__achse { display: flex; justify-content: space-between; margin-top: var(--luft-xxs); font: 500 var(--grad-kicker)/1.3 var(--sans); color: var(--muted); }
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .zinsband[data-sicht="an"] .zinsband__feld svg,
+  .faden-shell .zinsband[data-sicht="an"] .zinsband__punkt,
+  .faden-shell .zinsband[data-sicht="an"] .zinsband__grund,
+  .faden-shell .zinsband[data-sicht="an"] .zinsband__punkt.ist-best b { animation: none !important; opacity: 1; }
+  .faden-shell .zinsband__feld svg { clip-path: none; }
+}

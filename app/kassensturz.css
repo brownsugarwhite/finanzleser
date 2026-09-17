@@ -12,6 +12,11 @@
 .faden-shell .ks { display: grid; gap: 0; min-width: 0; }
 .faden-shell .kasten--ks { min-width: 0; }
 .faden-shell .ks .ikon { width: 20px; height: 20px; vertical-align: -5px; flex: none; }
+/* 🚨 Der Einhänger sitzt am KOPF des Satzes, nicht an der Bühne — er gilt für beide
+   Spalten (Wunsch 17.09.2026). `.ks` behält ihn nur dort, wo es allein steht (Schaukasten,
+   Ratgeber-Teaser): ohne `.ks-satz` darüber greift die zweite Regel. */
+.faden-shell .ks-satz__kopf { grid-column: 1 / -1; border-top: var(--strich-einhaenger) solid var(--green); padding-top: var(--luft-m); }
+.faden-shell .ks-satz .ks { border-top: 0; padding-top: 0; }
 .faden-shell .ks { border-top: var(--strich-einhaenger) solid var(--green); padding-top: var(--luft-m); }
 .faden-shell .ks__kopf { display: flex; justify-content: space-between; align-items: center; gap: var(--luft-m); flex-wrap: wrap; }
 .faden-shell .ks__marke { display: inline-flex; align-items: center; gap: var(--luft-s); }
@@ -133,7 +138,10 @@
    Der Kassensturz ist damit kein Kasten mehr, sondern ein SATZ aus zwei Spalten. Die
    alten `.kasten--ks`-Regeln bleiben stehen, solange die Alt-Seite sie noch braucht.
    ===================================================================================== */
-.faden-shell .ks-satz { display: grid; grid-template-columns: minmax(0, 1fr) 252px; gap: var(--luft-xl); align-items: start; position: relative; min-width: 0; scroll-margin-top: 110px; }
+.faden-shell .ks-satz { display: grid; grid-template-columns: minmax(0, 1fr) 252px; gap: 0 var(--luft-xl); align-items: start; position: relative; min-width: 0; scroll-margin-top: 110px; }
+/* Die Fortschrittsreihe trägt ihren eigenen Abstand nach unten (`.ks__fortschritt`);
+   zwischen Kopf und Spalten braucht das Raster deshalb keinen weiteren. */
+.faden-shell .ks-satz > .ks { padding-top: 0; }
 @media (max-width: 760px) {
   /* Eng: eine Spalte, der Beleg rutscht unter die Bühne und steht mittig. */
   .faden-shell .ks-satz { grid-template-columns: minmax(0, 1fr); gap: var(--luft-xl); }

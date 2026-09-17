@@ -289,12 +289,17 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
 
   return (
     <div className={"ks-satz" + (fertig ? " fertig" : "")} id="kassensturz" ref={kastenRef}>
-      <div className="ks">
+      {/* 🚨 Einhänger, Kicker und Fortschritt gehören über BEIDE Spalten (Wunsch
+          17.09.2026). Sie beschreiben den ganzen Kassensturz, nicht nur die Bühne — und
+          eine grüne Linie, die auf halber Satzbreite endet, liest sich wie ein Fehler. */}
+      <div className="ks-satz__kopf">
         <div className="ks__kopf">
           <span className="kicker kicker--gruen ks__marke"><i /> {daten.titel}{daten.untertitel ? ` · ${daten.untertitel}` : ""}</span>
           <span className="ks__stand">{stand.text}</span>
         </div>
         <Fortschrittsreihe nr={stand.nr} gesamt={stand.gesamt} />
+      </div>
+      <div className="ks">
         <div className={"ks__buehne" + (buehne ? ` ${buehne}` : "")}>
           {frage && istSchaetzfrage(frage) && (
             <SchaetzFrage key={frage.id} f={frage} onTipp={(w, p) => tipp(frage, w, p)} onWeiter={(w) => naechste({ ...antworten, [frage.id]: w }, idx + 1)} />

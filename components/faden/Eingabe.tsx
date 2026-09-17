@@ -104,7 +104,15 @@ export default function Eingabe() {
   const [versicherer, setVersicherer] = useState<Versicherer | null>(null);
   const beschaeftigt = leo.status === "submitted" || leo.status === "streaming";
   // Auto-Grow wie im Leo-Chat der Live-Seite: Höhe an den Inhalt, dann interner Scroll.
-  const wachsen = (ta: HTMLTextAreaElement) => { ta.style.height = "auto"; ta.style.height = `${Math.min(ta.scrollHeight, FELD_MAX)}px`; };
+  /* 🚨 `data-voll` schaltet den Rollbalken frei. Ohne das Attribut steht `overflow: hidden`
+     am Feld — `auto` reserviert die Rinne schon bei einem Pixel Überhang, und das leere
+     Feld zeigte dauerhaft einen Streifen (app/faden.css). */
+  const wachsen = (ta: HTMLTextAreaElement) => {
+    ta.style.height = "auto";
+    const voll = ta.scrollHeight > FELD_MAX;
+    ta.style.height = `${Math.min(ta.scrollHeight, FELD_MAX)}px`;
+    if (voll) ta.dataset.voll = ""; else delete ta.dataset.voll;
+  };
   useEffect(() => { if (feld.current) wachsen(feld.current); }, [wert]);
 
   useEffect(() => {

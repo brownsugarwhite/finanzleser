@@ -20,11 +20,12 @@ import { useEffect, useMemo, useState } from "react";
 import type { DefLite, VergleichDaten, VergleichQuelle } from "@/lib/financeads/typen";
 import { useVergleichZustand } from "@/lib/financeads/useVergleichZustand";
 import { formatKennwert, formatStand } from "@/lib/financeads/format";
-import { achsenEnden, eingabenSatz, hauptspalte, kennwertSpalte, laufzeitParam, nebenspalten, podestSpalten } from "@/lib/financeads/kursblatt";
+import { achsenEnden, bandform, eingabenSatz, hauptspalte, kennwertSpalte, laufzeitParam, nebenspalten, podestSpalten } from "@/lib/financeads/kursblatt";
 import { kennzahlenBauen } from "@/lib/financeads/kennzahlen";
 import { useLauf } from "@/lib/kursblatt/useLauf";
 import { fmtProzent } from "@/lib/kursblatt/zahl";
 import Saeulenband from "@/components/kursblatt/teile/Saeulenband";
+import Streuband from "@/components/kursblatt/teile/Streuband";
 import Zinskurve from "@/components/kursblatt/teile/Zinskurve";
 import Kennzahlen from "@/components/kursblatt/teile/Kennzahlen";
 import Podest from "@/components/kursblatt/teile/Podest";
@@ -102,6 +103,10 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
   // Fertig geliefert: die Kurve braucht alle Laufzeit-Varianten, und ins HTML reist nur
   // die Voreinstellung. Gerechnet wird sie deshalb im Server (VergleichKoerper.tsx).
   const kurve = daten.kurve ?? null;
+  /* Welche Form den Marktüberblick trägt, entscheidet EINE Regel für alle Kategorien
+     (lib/financeads/kursblatt.ts). Kurve, wo es eine Laufzeit gibt; Säulen, solange ihre
+     Beschriftungen Platz haben; darüber wieder das Punkte-Streuband. */
+  const form = useMemo(() => bandform(def, z.zeilen.length, Boolean(kurve && dauer && kennwert)), [def, z.zeilen.length, kurve, dauer, kennwert]);
   // 🚨 Die Kurve liegt beim Basisbetrag des Schnappschusses (siehe `zinskurve`). Weicht
   // der Leser davon ab, muss das dastehen — sonst liest man eine Kurve, die für die
   // eigenen Zahlen gar nicht gilt.
@@ -170,7 +175,7 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
           <span className="kb__kicker">
             Marktüberblick{eingabenSatz(def, quelle.fest, z.params) ? ` · ${eingabenSatz(def, quelle.fest, z.params)}` : ""}
           </span>
-          {kurve && dauer && kennwert ? (
+          {form === "kurve" && kurve && dauer && kennwert ? (
             <>
               {/* F:71-72 — bei einer Laufzeitachse fragt die Überschrift nach der Bindung,
                   nicht nach der Streuung. */}
@@ -201,22 +206,47 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
                   gestreut wird, sagt der Kicker über dem Band — und dort steht seit Runde 2
                   auch, für welche Eingaben. */}
               <h2 className="kb__h3">Wie weit liegen die {z.zeilen.length} {def.mehrzahl} auseinander?</h2>
-              <p className="kb__erklaer">
-                Jede Säule ist ein Angebot, sortiert von {achsen[0]} nach {achsen[1]}. Die Höhe
-                zeigt, wie viel Sie gegenüber dem {achsen[1]}sten Angebot sparen — der Bestwert
-                ragt heraus, die gestrichelte Linie ist der Durchschnitt.
-                <span className="kb-markt__tipp"> Säule antippen, um das Angebot unten zu öffnen.</span>
-              </p>
-              <Saeulenband
-                haupt={haupt}
-                zeilen={z.zeilen}
-                best={best}
-                hover={hover}
-                onHover={setHover}
-                /* K:476 — ein Tipp auf die Säule öffnet die Zeile unten in der Liste. */
-                onOeffnen={(id) => { setHover(id); setOffen(id); }}
-                druck={lauf.druck}
-              />
+              {form === "saeulen" ? (
+                <>
+                  <p className="kb__erklaer">
+                    Jede Säule ist ein Angebot, sortiert von {achsen[0]} nach {achsen[1]}. Die Höhe
+                    zeigt, wie viel Sie gegenüber dem {achsen[1]}sten Angebot sparen — der Bestwert
+                    ragt heraus, die gestrichelte Linie ist der Durchschnitt.
+                    <span className="kb-markt__tipp"> Säule antippen, um das Angebot unten zu öffnen.</span>
+                  </p>
+                  <Saeulenband
+                    haupt={haupt}
+                    zeilen={z.zeilen}
+                    best={best}
+                    hover={hover}
+                    onHover={setHover}
+                    /* K:476 — ein Tipp auf die Säule öffnet die Zeile unten in der Liste. */
+                    onOeffnen={(id) => { setHover(id); setOffen(id); }}
+                    druck={lauf.druck}
+                  />
+                </>
+              ) : (
+                <>
+                  {/* Über sechzehn Angeboten überdrucken sich die Wertbeschriftungen der
+                      Säulen — dann zeigt das Punkte-Streuband die Verteilung. */}
+                  <p className="kb__erklaer">
+                    Jeder Punkt ist ein Angebot – links {achsen[0]}, rechts {achsen[1]}. Der türkise
+                    Punkt ist der Bestwert, die gestrichelte Linie der Durchschnitt.
+                    <span className="kb-markt__tipp"> Punkt antippen, um das Angebot unten zu öffnen.</span>
+                  </p>
+                  <Streuband
+                    haupt={haupt}
+                    neben={neben[0]}
+                    zeilen={z.zeilen}
+                    best={best}
+                    hover={hover}
+                    onHover={setHover}
+                    onOeffnen={(id) => { setHover(id); setOffen(id); }}
+                    spalte={lauf.spalte}
+                    druck={lauf.druck}
+                  />
+                </>
+              )}
             </>
           )}
           <Kennzahlen werte={kennzahlen} />

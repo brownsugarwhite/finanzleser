@@ -12,11 +12,14 @@
  * ein echter Tarif aus dem Schnappschuss. Ein Teaser ohne Zahlen kommt gar nicht erst
  * hierher (`lib/faden/vergleichTeaser.ts` gibt dann `null` zurück).
  *
- * Der Hover-Rahmen zeichnet sich in drei Schritten (oben → rechts → unten und links) und
- * ist reines CSS: vier Linien mit `transform: scale`, gestaffelt über `transition-delay`.
+ * 🚨 KEIN Hover-Rahmen. Die Übergabe zeichnet beim Überfahren vier Linien um den Teaser;
+ * im Satz sah das nach einer Karte aus, und der Faden kennt keine Karten (Wunsch
+ * 17.09.2026: „ohne den Hover-Effekt der Card-Outline"). Geblieben ist, was den Teaser
+ * lebendig macht: Titel und Preis reagieren, die Säulen dunkeln nach.
  */
 import { useFaden } from "@/components/faden/FadenProvider";
 import Marktband from "./Marktband";
+import Zinsband from "./Zinsband";
 import type { VergleichTeaser } from "@/lib/faden/vergleichTeaser";
 
 export default function VergleichsTeaser({ teaser }: { teaser: VergleichTeaser[] }) {
@@ -32,9 +35,6 @@ export default function VergleichsTeaser({ teaser }: { teaser: VergleichTeaser[]
             href={t.href}
             onClick={(e) => { e.preventDefault(); navigieren(t.href); }}
           >
-            {/* Der Hover-Rahmen: vier Linien, die sich nacheinander ziehen. */}
-            <i className="vgl-teaser__rahmen" aria-hidden="true"><em /><em /><em /><em /></i>
-
             <span className="vgl-teaser__kopf">
               <span className="kicker kicker--tool"><i className="dot dot--vergleich" aria-hidden="true" />Vergleich</span>
               <span className="vgl-teaser__bestand">{t.bestand}</span>
@@ -52,13 +52,19 @@ export default function VergleichsTeaser({ teaser }: { teaser: VergleichTeaser[]
               {t.spanne && <span className="vgl-teaser__spanne">{t.spanne}</span>}
             </span>
 
-            <Marktband
-              saeulen={t.saeulen}
-              schnitt={t.schnitt}
-              schnittText={t.schnittText}
-              bestFuss={t.bestFuss}
-              randFuss={t.randFuss}
-            />
+            {/* Welche Grafik: die Zinskurve über die Laufzeiten, wo es eine gibt, sonst
+                das Säulenband über die Angebote (lib/faden/vergleichTeaser.ts). */}
+            {t.form === "kurve" && t.kurve ? (
+              <Zinsband punkte={t.kurve} bestFuss={t.bestFuss} randFuss={t.randFuss} />
+            ) : (
+              <Marktband
+                saeulen={t.saeulen}
+                schnitt={t.schnitt}
+                schnittText={t.schnittText}
+                bestFuss={t.bestFuss}
+                randFuss={t.randFuss}
+              />
+            )}
 
             <span className="vgl-teaser__mehr">
               <span className="strich-link strich-link--gross">{t.mehr}<i /></span>

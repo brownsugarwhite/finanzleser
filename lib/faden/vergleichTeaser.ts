@@ -16,8 +16,8 @@
  * Layout schon warm ist — also vier REST-Abrufe und sonst nichts.
  */
 import { getVergleichDaten } from "@/lib/financeads/laden";
-import { kategorieDef } from "@/lib/financeads/registry";
-import { hauptspalte } from "@/lib/financeads/kursblatt";
+import { defLite, kategorieDef } from "@/lib/financeads/registry";
+import { hauptspalte, kennwertSpalte, laufzeitParam, zinskurve } from "@/lib/financeads/kursblatt";
 import { formatGeld, formatKennwert, formatProzent, formatZahl } from "@/lib/financeads/format";
 import type { SpalteDef, VergleichProdukt } from "@/lib/financeads/typen";
 import type { WerkzeugVerweis } from "@/lib/faden/werkzeugIndex";
@@ -26,13 +26,28 @@ import { saeulenSkala, SOCKEL_TEASER } from "@/lib/kursblatt/saeulen";
 /**
  * Die vier Vergleiche der Zeile. Breit gestreut — sparen, leihen, Gesundheit, Tier —
  * und alle vier tragen echte Zahlen (Klasse A, Schnappschuss vorhanden).
+ *
+ * 🚨 Festgeld statt Tagesgeld (Wunsch 17.09.2026). Beide tragen seit heute dieselbe
+ * Zinskurve; nebeneinander stünde zweimal dieselbe Form über zwei fast gleichen
+ * Produkten. Festgeld hat die längere Achse (sieben Anlagedauern statt vier).
  */
 export const TEASER_VERGLEICHE = [
-  "tagesgeldvergleich",
+  "festgeldvergleich",
   "ratenkredit-vergleich",
   "zahnzusatzversicherung-vergleich",
   "hundekrankenversicherung-vergleich",
 ];
+
+/** Ein Punkt der Mini-Zinskurve: Lage in Prozent der Bandbreite und Höhe. */
+export interface TeaserPunkt {
+  /** 0–100, von links. */
+  x: number;
+  /** 0–100, von unten. */
+  y: number;
+  best: boolean;
+  label: string;
+  wert: string;
+}
 
 /** Eine Säule: ihre Höhe in Prozent des Bandes, ob sie der Bestwert ist, und ihr Wert. */
 export interface TeaserSaeule {
@@ -44,6 +59,13 @@ export interface TeaserSaeule {
 }
 
 export interface VergleichTeaser {
+  /**
+   * Welche Grafik der Teaser trägt: die Zinskurve über die Laufzeiten, wo es eine gibt,
+   * sonst das Säulenband über die Angebote. Dieselbe Entscheidung wie im Kursblatt
+   * (`bandform`), nur ohne die Mengengrenze: Die kleinen Säulen hier tragen keine
+   * Beschriftung und laufen deshalb auch bei vierzig Angeboten nicht ineinander.
+   */
+  form: "kurve" | "saeulen";
   slug: string;
   titel: string;
   href: string;
@@ -62,6 +84,8 @@ export interface VergleichTeaser {
   /** „bis 83 € im Jahr sparen“ — fehlt, wo sich kein ehrlicher Satz bilden lässt. */
   spanne?: string;
   saeulen: TeaserSaeule[];
+  /** Nur bei `form: "kurve"`. */
+  kurve?: TeaserPunkt[];
   /** Höhe der Ø-Linie in Prozent und ihr Etikett („Ø 5,40 €“). */
   schnitt: number;
   schnittText: string;
@@ -123,6 +147,61 @@ function ohneVergleich(titel: string): string {
 }
 
 /**
+ * Der Teaser einer Kategorie mit Laufzeitkurve (Festgeld, Tagesgeld, Baufinanzierung).
+ *
+ * Er zeigt nicht, wie weit die Anbieter auseinanderliegen, sondern was die LAUFZEIT
+ * ausmacht — dieselbe Aussage wie das große Kursblatt, auf 48 px eingedampft. Die
+ * Koordinaten sind Prozente des Bandes; gerechnet wird nichts im Bauteil.
+ */
+function kurveTeaser(
+  rahmen: { slug: string; titel: string; href: string; bestand: string; mehr: string },
+  punkte: { wert: string; label: string; kurz: string; best: number; schnitt: number }[],
+  kennwert: SpalteDef,
+  dauerLabel: string,
+): VergleichTeaser | null {
+  if (punkte.length < 3) return null;
+  const hoch = kennwert.richtung !== "runter";
+  const werte = punkte.map((p) => p.best);
+  const lo = Math.min(...werte);
+  const hi = Math.max(...werte);
+  /* Sockel und Deckel wie im Säulenband: Die beste Stelle steht oben, die schwächste
+     bleibt ein Stummel — sonst läge bei kleinen Unterschieden alles auf einer Linie. */
+  const y = (w: number) => (hi === lo ? 60 : Math.round(16 + ((hoch ? w - lo : hi - w) / (hi - lo)) * 84));
+  const bestWert = hoch ? hi : lo;
+  const randWert = hoch ? lo : hi;
+  const bestPunkt = punkte.find((p) => p.best === bestWert)!;
+  const randPunkt = punkte.find((p) => p.best === randWert)!;
+  const kurz = (w: number) => formatKennwert({ ...kennwert, ab: false }, w);
+
+  const spanne = hi - lo;
+  const spanneText = kennwert.art === "prozent"
+    ? `${formatZahl(spanne, 2)} Prozentpunkte je ${dauerLabel}`
+    : `${formatGeld(spanne)} je ${dauerLabel}`;
+
+  return {
+    ...rahmen,
+    form: "kurve",
+    ab: false,
+    bis: hoch,
+    wert: kurz(bestWert),
+    periode: kennwert.kurz ?? kennwert.label,
+    spanne: spanne > 0 ? `bis ${spanneText}` : undefined,
+    saeulen: [],
+    kurve: punkte.map((p) => ({
+      x: punkte.length === 1 ? 50 : Math.round((punkte.indexOf(p) / (punkte.length - 1)) * 100),
+      y: y(p.best),
+      best: p.best === bestWert,
+      label: p.kurz,
+      wert: kurz(p.best),
+    })),
+    schnitt: 0,
+    schnittText: "",
+    bestFuss: `Bestwert ${kurz(bestWert)} · ${bestPunkt.kurz}`,
+    randFuss: `${randPunkt.kurz}: ${kurz(randWert)}`,
+  };
+}
+
+/**
  * Ein Teaser aus einem Schnappschuss. `null`, wenn es nichts zu zeigen gibt: Klasse B,
  * kein Schnappschuss, keine Hauptspalte oder weniger als zwei Zahlen — ein Band aus
  * einer Säule ist kein Markt.
@@ -138,6 +217,29 @@ export async function teaserFuer(slug: string, verweis: WerkzeugVerweis | undefi
 
   const variante = daten.varianten.find((v) => v.schluessel === daten.standard) || daten.varianten[0];
   if (!variante) return null;
+
+  const stand = new Date(daten.stand);
+  const standText = Number.isNaN(stand.getTime())
+    ? ""
+    : stand.toLocaleDateString("de-DE", { day: "numeric", month: "short" });
+  const rahmen = {
+    slug,
+    titel: ohneVergleich(verweis.titel),
+    href: verweis.href,
+    bestand: `${daten.anzahl} ${def.mehrzahl}${standText ? ` · Stand ${standText}` : ""}`,
+    /* „Tarife vergleichen" statt „Tarife nebeneinander" (Wunsch 17.09.2026) — im kleinen
+       Knopf zählt das Verb, nicht die Anordnung. */
+    mehr: `${def.mehrzahl} vergleichen`,
+  };
+
+  /* ── Die Kurve, wo die Kategorie eine hat ──────────────────────────────────────────
+     Dieselbe Rechnung wie im Kursblatt, aus DEMSELBEN Schnappschuss: `getVergleichDaten`
+     liefert hier noch alle Laufzeit-Varianten (auf der Vergleichsseite werden sie vor dem
+     Ausliefern auf eine gekürzt, deshalb steht die Kurve dort schon fertig in den Daten). */
+  const kennwert = def.kursblatt?.band === "kurve" ? kennwertSpalte(def) : undefined;
+  const dauer = kennwert ? laufzeitParam(def) : undefined;
+  const kurve = kennwert && dauer ? zinskurve(defLite(def), daten.varianten, kennwert.key, def.kursblatt?.ohne) : null;
+  if (kurve && kennwert && dauer) return kurveTeaser(rahmen, kurve.punkte, kennwert, dauer.label);
   const werte = variante.produkte
     .map((p: VergleichProdukt) => p.kennzahlen[spalte.key])
     .filter((w): w is number => typeof w === "number");
@@ -162,17 +264,10 @@ export async function teaserFuer(slug: string, verweis: WerkzeugVerweis | undefi
   const bestText = formatKennwert({ ...spalte, ab: false }, best);
   const spanne = spanneSatz(spalte, Math.abs(max - min), guenstiger, bestText);
   const periode = periodeAus(spalte).text;
-  const stand = new Date(daten.stand);
-  const standText = Number.isNaN(stand.getTime())
-    ? ""
-    : stand.toLocaleDateString("de-DE", { day: "numeric", month: "short" });
 
   return {
-    slug,
-    titel: ohneVergleich(verweis.titel),
-    href: verweis.href,
-    bestand: `${daten.anzahl} ${def.mehrzahl}${standText ? ` · Stand ${standText}` : ""}`,
-    mehr: `${def.mehrzahl} nebeneinander`,
+    ...rahmen,
+    form: "saeulen",
     ab: Boolean(spalte.ab),
     /** Wo mehr besser ist, ist der Bestwert eine OBERgrenze. */
     bis: !guenstiger,

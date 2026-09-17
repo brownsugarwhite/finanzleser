@@ -149,6 +149,17 @@ const KATEGORIEN: KategorieDef[] = [
     ],
     bestwert: { key: "ertrag", richtung: "hoch" },
     filter: [{ key: "sicherung", label: "nur deutsche Einlagensicherung", wert: "Deutschland" }],
+    /* Dieselbe Kurve wie beim Festgeld (Wunsch 17.09.2026: „die schöne Version öfter
+       benutzen"). Tagesgeld hat dieselbe Frage — lohnt es sich, länger festzulegen? —,
+       dieselben vier Anlagedauern im Schnappschuss und dieselben Spalten.
+       🚨 Achse ist der ZINS, nicht der Ertrag: Der Ertrag steigt mit der Dauer ganz von
+       selbst, eine Ertragskurve sagte nur „länger = mehr". Genau darum steht beim
+       Festgeld `kennwert: "zins"`. */
+    kursblatt: {
+      band: "kurve", podest: 1, stempel: "Höchster Ertrag",
+      kennwert: "zins",
+      ohne: { key: "zins", ist: 0, text: "mit 0 % Zinsen" },
+    },
     sortierung: [{ key: "ertrag", label: "Ertrag" }, { key: "zins", label: "Zins" }],
     totalLabel: "Ertrag",
     suchwoerter: ["tagesgeld", "tagesgeldkonto", "zinsen", "sparen", "sparkonto", "geld parken", "notgroschen"],
@@ -513,6 +524,11 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "rate", label: "Monatsrate", kurz: "Rate / Monat", art: "geld", richtung: "runter" },
     ],
     bestwert: { key: "effzins", richtung: "runter" },
+    /* Die eine Frage, die vor jeder Baufinanzierung steht: Wie teuer wird eine längere
+       Zinsbindung? Genau das zeichnet die Kurve — vier Bindungen liegen im Schnappschuss.
+       `podest: 3` ändert nichts, es ist die Vorgabe; es steht hier nur, weil `KursblattDef`
+       es verlangt. */
+    kursblatt: { band: "kurve", podest: 3, stempel: "Bestwert" },
     sortierung: [{ key: "effzins", label: "Effektivzins" }, { key: "rate", label: "Rate" }, { key: "restschuld", label: "Restschuld" }],
     totalLabel: "Rate / Monat",
     suchwoerter: ["baufinanzierung", "immobilienkredit", "hauskauf", "hypothek", "zinsbindung", "tilgung", "anschlussfinanzierung", "forward-darlehen", "bauzinsen"],

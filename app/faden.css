@@ -1367,15 +1367,25 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 .faden-shell .suchpille-wrap:focus-within > .suchpille { box-shadow: 0 0 0 2px var(--ink); }
 /* Die Feldhöhe steht fest (Wrapper und Pille sollen sich decken); wird der Kasten höher,
    verteilt `space-between` die Zeile nach oben und die Fußzeile nach unten. */
-.faden-shell .suchpille__feld { position: relative; display: grid; gap: 2px; padding: 22px 76px 12px 24px; min-height: var(--pille-h); align-content: space-between; }
+/* 🚨 6 px Fuß statt 12 (Wunsch 17.09.2026: „Versicherer auswählen näher an den unteren
+   Rand"). Die Zeile ist 22 px hoch und stand mittig zwischen Text und Kante; jetzt sitzt
+   sie unten in der Pille, wo sie als Fußnote gelesen wird und nicht als zweite Zeile. */
+.faden-shell .suchpille__feld { position: relative; display: grid; gap: 2px; padding: 22px 76px 6px 24px; min-height: var(--pille-h); align-content: space-between; }
 .faden-shell .hero-landing__pille .suchpille__feld { min-height: var(--pille-h-landing); }
 .faden-shell .suchpille textarea {
   border: 0; background: none; resize: none; outline: none; padding: 0; margin: 0;
   /* 🚨 Ganze Pixel als Zeilenhöhe, nicht 1.3. 17 × 1.3 = 22,1 px — der Kasten rundet auf
      22 ab, der Inhalt bleibt 23 hoch, und das leere Feld zeigte einen Rollbalken. */
   font: 400 var(--grad-18)/var(--grad-22) var(--sans); color: var(--ink); width: 100%;
-  max-height: 66px; overflow-y: auto; display: block; scrollbar-width: thin;
+  /* 🚨 `overflow-y: hidden`, bis der Text wirklich über drei Zeilen geht. Chromium zeigte
+     sonst schon im leeren Feld einen Rollbalkenstreifen (Fehlermeldung 17.09.2026) —
+     `auto` reserviert die Rinne, sobald `scrollHeight` auch nur ein Pixel über der Höhe
+     liegt, und beim Aufrunden der Zeilenhöhe ist das ständig der Fall. Die Handler in
+     Eingabe.tsx und HeroLanding.tsx schalten auf `auto`, sobald `--pille-feld-max`
+     erreicht ist. */
+  max-height: 66px; overflow-y: hidden; display: block; scrollbar-width: thin;
 }
+.faden-shell .suchpille textarea[data-voll] { overflow-y: auto; }
 .faden-shell .suchpille textarea::placeholder { color: var(--muted); opacity: 1; }
 .faden-shell .suchpille__fuss { display: flex; justify-content: flex-end; min-height: 22px; }
 /* Der runde Senden-Knopf klebt oben rechts wie in der Live-Sprechblase. */

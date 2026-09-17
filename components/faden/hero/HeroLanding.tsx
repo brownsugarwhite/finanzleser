@@ -124,7 +124,15 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
                   placeholder="Sende Leo eine Nachricht ..."
                   autoComplete="off"
                   value={wert}
-                  onChange={(e) => { setWert(e.target.value); const ta = e.currentTarget; ta.style.height = "auto"; ta.style.height = `${Math.min(ta.scrollHeight, 66)}px`; }}
+                  /* `data-voll` schaltet den Rollbalken frei — siehe app/faden.css. */
+                  onChange={(e) => {
+                    setWert(e.target.value);
+                    const ta = e.currentTarget;
+                    ta.style.height = "auto";
+                    const voll = ta.scrollHeight > 66;
+                    ta.style.height = `${Math.min(ta.scrollHeight, 66)}px`;
+                    if (voll) ta.dataset.voll = ""; else delete ta.dataset.voll;
+                  }}
                   onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); senden(e); } }}
                 />
                 <div className="suchpille__fuss">

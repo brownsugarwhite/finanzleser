@@ -59,12 +59,16 @@ export default function KassensturzStart({ daten, ziele }: { daten: KassensturzD
   const anzahl = Math.max(1, offeneFragen(daten.fragen || [], {}).length);
   return (
     <div className="ks-satz" id="kassensturz">
-      <div className="ks ks-deck">
+      {/* Einhänger, Kicker und Fortschritt über beide Spalten — wie im laufenden
+          Kassensturz, damit der Übergang formgleich bleibt. */}
+      <div className="ks-satz__kopf">
         <div className="ks__kopf">
           <span className="kicker kicker--gruen ks__marke"><i /> {daten.titel}{untertitel}</span>
           <span className="ks__stand">{erg ? "Ausgewertet" : begonnen ? "Angefangen" : "Noch nicht begonnen"}</span>
         </div>
         <Fortschrittsreihe nr={erg ? anzahl + 1 : 0} gesamt={anzahl} />
+      </div>
+      <div className="ks ks-deck">
         <div className="ks__buehne">
           {erg ? (
             <>

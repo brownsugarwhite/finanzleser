@@ -1013,11 +1013,43 @@
 .kb .kb-band__legende-schnitt { display: inline-flex; align-items: center; gap: var(--luft-s); font: 500 var(--grad-12) var(--sans); color: var(--muted); }
 .kb .kb-band__legende-schnitt i { width: 16px; border-top: var(--strich-haar) dashed var(--muted); flex: none; }
 
-/* 🚨 Hier stand das Punkte-Streuband: eine Achse, ein Punkt je Angebot, dazu Klassen,
-   Etagen und ein „+3" über jedem Stapel, damit sich die Punkte nicht überdruckten. Die
-   Übergabe „Finanzleser Heute" (Baustein 2b, 17.09.2026) ersetzt es durch das Säulenfeld
-   weiter unten — dort bekommt jedes Angebot denselben Platz, und die Höhe sagt, was es
-   besser macht. Geblieben sind Legende und Fußzeile: beide trägt das Säulenfeld weiter. */
+/* 🚨 Streuband UND Säulenfeld — beide bleiben. Die Übergabe „Finanzleser Heute"
+   (Baustein 2b) hat das Säulenfeld gebracht, und es ist die schönere Form; aber seine
+   Wertbeschriftungen überdrucken sich ab siebzehn Angeboten. Darüber übernimmt wieder das
+   Punkte-Streuband. Welche Form wann, entscheidet `bandform()` in
+   lib/financeads/kursblatt.ts — an EINER Stelle, nicht im Bauteil.
+   Legende und Fußzeile teilen sich beide. */
+/* 22 px Grundlinie + 5 Etagen à 12 px + 8 px Luft = 90 px. Fest, damit das Band nicht
+   springt, wenn ein Stapel wächst. */
+.kb .kb-band__feld { position: relative; height: 90px; }
+.kb .kb-band__achse { position: absolute; left: 0; right: 0; bottom: 22px; height: 1px; background: var(--ink); }
+/* Beide Stiele laufen von der Grundlinie bis zur Oberkante des Bandes. */
+.kb .kb-band__schnitt { position: absolute; bottom: 22px; height: 68px; border-left: var(--strich-haar) dashed var(--muted); transition: left .7s var(--kurve); }
+.kb .kb-band__faden { position: absolute; bottom: 22px; height: 68px; width: 1px; background: var(--tuerkis); transform-origin: bottom; transition: left .7s var(--kurve); }
+/* 🚨 1,5 px Kontur, nicht 2. Die Vorlage setzt `border: '1.5px solid #334A27'`; bei 10 px
+   Durchmesser ist der halbe Pixel ein Viertel der Kontur — der Unterschied zwischen einem
+   feinen Punkt und einem gedruckten Ring. Größen wie in der Vorlage: 10 · 14 (Bestwert) ·
+   16 (überfahren). */
+.kb .kb-band__punkt {
+  position: absolute; width: 10px; height: 10px; transform: translate(-50%, 50%);
+  border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-fein) solid var(--ink);
+  box-sizing: border-box; padding: 0; cursor: pointer;
+  transition: left .7s var(--kurve), bottom .5s, width .25s, height .25s, background .25s;
+}
+.kb .kb-band__punkt[data-hell="an"] { width: 16px; height: 16px; background: var(--ink); z-index: 2; }
+.kb .kb-band__punkt[data-ist="an"] {
+  width: 14px; height: 14px; background: var(--tuerkis); border: 0;
+  animation: fl-puls 2.2s infinite;
+}
+/* „+3" über einem Stapel, der mehr als fünf Angebote fasst. */
+.kb .kb-band__mehr { position: absolute; bottom: 80px; transform: translateX(-50%); font: 600 var(--grad-kicker) var(--sans); color: var(--muted); white-space: nowrap; }
+/* Der Tooltip hängt OBEN am Band (Runde 2), nicht mehr unter der Achse. */
+.kb .kb-band__tip {
+  position: absolute; top: -4px; padding: var(--luft-xs) var(--luft-s);
+  background: var(--ink); color: var(--auf-tinte); font: 500 var(--grad-12) var(--sans);
+  white-space: nowrap; transition: opacity .2s, left .3s; pointer-events: none; z-index: 3;
+}
+
 .kb .kb-band__fuss {
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline; gap: var(--luft-s);
   font: 500 var(--grad-11) var(--sans); color: var(--muted);

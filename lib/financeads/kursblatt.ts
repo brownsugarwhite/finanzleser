@@ -211,19 +211,59 @@ export function kennwertSpalte(def: DefLite): SpalteDef | undefined {
   return eigen ?? hauptspalte(def);
 }
 
+/* ─── Welche Form trägt den Marktüberblick? ───────────────────────────────────────────
+   Drei Bänder für dieselbe Aufgabe, und jedes hat seine Grenze:
+
+     kurve     der beste Wert je Laufzeit — nur wo es eine Laufzeit gibt und die Frage
+               „lohnt sich länger?" die eigentliche ist (Registry: `kursblatt.band`)
+     saeulen   eine Säule je Angebot, jede mit ihrem Wert darüber. Die schönste Form,
+               aber die Beschriftungen überdrucken sich, sobald es zu viele werden
+     streuung  ein Punkt je Angebot auf einer Achse. Trägt beliebig viele, zeigt dafür
+               die Verteilung statt der Einzelwerte
+
+   🚨 Die Grenze ist gemessen, nicht geraten: Bei 728 px Satzbreite braucht ein Wert wie
+   „2,39 %" rund 38 px. Ab 17 Angeboten bleiben je Spalte weniger als 43 px, und die
+   Zahlen laufen ineinander (gesehen am 17.09.2026 auf Tagesgeld mit 41 Angeboten). */
+export const SAEULEN_MAX = 16;
+
+export type Bandform = "kurve" | "saeulen" | "streuung";
+
+export function bandform(def: DefLite, anzahl: number, hatKurve: boolean): Bandform {
+  if (hatKurve && def.kursblatt?.band === "kurve") return "kurve";
+  return anzahl > SAEULEN_MAX ? "streuung" : "saeulen";
+}
+
 // ─── Zinskurve ────────────────────────────────────────────────────────────────────────
 
 /**
  * Der Parameter, der die Laufzeit setzt — Achse der Zinskurve.
  *
- * Generisch statt hartverdrahtet: eine Auswahlliste mit mindestens drei Einträgen, deren
- * Einheit oder Beschriftung nach Zeit klingt. Beim Festgeld sind das die sieben
- * Anlagedauern, bei der Baufinanzierung wäre es die Zinsbindung.
+ * Generisch statt hartverdrahtet: mindestens drei Stufen, und die BESCHRIFTUNG nennt eine
+ * Dauer. Beim Festgeld sind das die sieben Anlagedauern, bei der Baufinanzierung die
+ * Zinsbindung, beim Kredit die Laufzeit.
+ *
+ * 🚨 Die Dauer erkennt man am LABEL, nicht an der Einheit — dieselbe Lehre wie in
+ * `eingabenSatz` weiter oben. „Alter" hat die Einheit „Jahre", ist aber keine Dauer:
+ * Gemessen am 17.09.2026 hielt die alte Fassung `age` bei Zahnzusatz, Tierkranken und
+ * Auslandskranken für eine Laufzeit. Die Kurve hätte dort „Lohnt sich länger binden?
+ * Der beste Beitrag je Alter" geheißen.
+ *
+ * 🚨 Auch ZAHLEN-Parameter zählen, wenn sie Voreinstellungen mitbringen: Die Laufzeit
+ * eines Kredits ist ein Schieberegler mit fünf Stufen, keine Auswahlliste — und genau die
+ * fünf stehen im Schnappschuss.
  */
+const DAUER = /laufzeit|dauer|bindung/i;
+
 export function laufzeitParam(def: DefLite): ParamDef | undefined {
   return def.params.find(
-    (p) => p.typ === "wahl" && (p.optionen?.length ?? 0) >= 3 && /monat|jahr|dauer|laufzeit|bindung/i.test(`${p.einheit ?? ""} ${p.label}`),
+    (p) => DAUER.test(p.label) && (p.typ === "wahl" ? (p.optionen?.length ?? 0) >= 3 : (p.presets?.length ?? 0) >= 3),
   );
+}
+
+/** Die Stufen eines Laufzeit-Parameters als Wert/Label-Paare — Auswahlliste oder Presets. */
+function laufzeitStufen(p: ParamDef): { wert: string | number; label: string }[] {
+  if (p.typ === "wahl") return p.optionen ?? [];
+  return (p.presets ?? []).map((n) => ({ wert: n, label: `${n} ${p.einheit ?? ""}`.trim() }));
 }
 
 export interface KurveWert {
@@ -269,10 +309,15 @@ export function zinskurve(
 ): Zinskurve | null {
   const p = laufzeitParam(def);
   if (!p || !varianten.length) return null;
+  /* 🚨 „Best" heißt nicht immer „am meisten". Beim Festgeld ist der höchste Zins der beste,
+     beim Kredit der niedrigste. Vorher stand hier fest `Math.max` — eine Kreditkurve hätte
+     die TEUERSTEN Angebote als Bestlinie gezeichnet. */
+  const richtung = def.spalten.find((x) => x.key === spalteKey)?.richtung;
+  const besser = (werte: number[]) => (richtung === "runter" ? Math.min(...werte) : Math.max(...werte));
   const basis = varianten[0].params;
   const punkte: KurveWert[] = [];
 
-  for (const o of p.optionen ?? []) {
+  for (const o of laufzeitStufen(p)) {
     const gesucht = paramSchluessel({ ...basis, [p.key]: String(o.wert) });
     const v = varianten.find((x) => x.schluessel === gesucht);
     if (!v) continue;
@@ -285,7 +330,7 @@ export function zinskurve(
       wert: String(o.wert),
       label: o.label,
       kurz: kurzDauer(Number(o.wert), o.label),
-      best: Math.max(...werte),
+      best: besser(werte),
       schnitt: werte.reduce((a, b) => a + b, 0) / werte.length,
     });
   }
