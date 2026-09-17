@@ -47,7 +47,7 @@ import Button from "@/components/ui/Button";
 import Einschub from "@/components/faden/Einschub";
 import Fortschrittsreihe from "@/components/faden/kassensturz/Fortschrittsreihe";
 import AusDemNewsletter from "@/components/faden/landing/AusDemNewsletter";
-import WochenbriefTeaser from "@/components/faden/landing/WochenbriefTeaser";
+import Adresszeile from "@/components/faden/Adresszeile";
 import PlusTeaser from "@/components/faden/landing/PlusTeaser";
 import WeiterredenChips from "@/components/faden/landing/WeiterredenChips";
 import VergleichKoerper from "@/components/vergleich/VergleichKoerper";
@@ -654,9 +654,12 @@ export default async function Schaukasten() {
         </p>
         <p className="quelle">Fortschrittsreihe des Kassensturzes — erledigt, laufend, offen:</p>
         <Fortschrittsreihe nr={3} gesamt={5} />
+        <p className="quelle" style={{ marginTop: "var(--luft-xl)" }}>FL Adresszeile — die Linie wächst in vier Stufen mit, der Knoten poppt bei einer vollständigen Adresse:</p>
+        <div style={{ maxWidth: 430 }}>
+          <Adresszeile label="Ihre E-Mail · donnerstags" knopf="Eintragen" onSenden={() => {}} hinweis="Abmelden mit einem Klick in jeder Ausgabe." hinweisFertig="Fast geschafft: bitte den Link in der Bestätigungsmail anklicken." />
+        </div>
         <div className="kapitel__satz" style={{ marginTop: "var(--luft-xl)" }}>
           <AusDemNewsletter eintraege={auslese} />
-          <WochenbriefTeaser />
           <PlusTeaser />
           <WeiterredenChips />
         </div>

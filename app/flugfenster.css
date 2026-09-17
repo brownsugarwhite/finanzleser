@@ -30,7 +30,8 @@
 
 .faden-shell .flugfenster {
   /* ── Maße ── */
-  --fenster-h: 450px;        /* Abstand der beiden Linien */
+  --fenster-h: 560px;        /* Abstand der beiden Linien — seit Baustein 4 höher:
+                                Schlagzeile oben, Glasplatte unten, Flieger dazwischen */
   --luft: 5px;               /* Abstand des Fensters zur Linie */
   /* ── Flug ── */
   --dauer: 18s;              /* eine volle Wolkenschleife */
@@ -137,3 +138,61 @@
   .faden-shell .flugfenster__lage--w2 { transform: scale(1.4); opacity: .85; }
   .faden-shell .flugfenster__lage--w3 { transform: scale(2.1); opacity: .5; }
 }
+
+/* ═══ Baustein 4 · Leos Wochenbrief liegt IM Fenster ════════════════════════════════
+   Übergabe „Finanzleser Heute", 17.09.2026: Die Schlagzeile steht mittig oben, die
+   Glasplatte mit der FL Adresszeile mittig unten, und der Flieger fliegt dazwischen
+   durch die Mitte. Kein Verlauf, keine Papierfläche, keine Inhaltsliste — die steht im
+   eigenen Block darüber.
+
+   🚨 Die Fläche darf wachsen (Wunsch 17.09.), aber die beiden Linien und ihr Abstand
+   bleiben, wie sie sind: sie sind der Rahmen des Fensters im Textfluss. Wer die Höhe
+   ändert, ändert `--fenster-h` — `--luft` ist der Abstand zur Linie und bleibt. */
+
+/* Die Bühne und der Flieger liegen unter dem Satz. */
+.faden-shell .flugfenster__flug { position: absolute; inset: 0; }
+
+.faden-shell .flugfenster__titel {
+  position: absolute; left: 50%; top: clamp(18px, 4vw, 30px); transform: translateX(-50%);
+  width: min(70%, 24ch); margin: 0; text-align: center;
+  font: 900 clamp(var(--grad-20), 4.2vw, var(--grad-28))/1.15 var(--serif);
+  color: var(--ink); text-wrap: balance;
+  /* Der Himmel wechselt die Helligkeit; der weiße Schein hält die Zeile überall lesbar. */
+  text-shadow: 0 0 14px rgba(255, 255, 255, .7), 0 1px 0 rgba(255, 255, 255, .5);
+}
+
+.faden-shell .flugfenster__platte {
+  position: absolute; left: 50%; bottom: clamp(16px, 4vw, 26px); transform: translateX(-50%);
+  width: min(100% - 2 * var(--luft-l), 430px);
+  padding: var(--luft-m) var(--luft-l) var(--luft-s);
+  background: rgba(250, 249, 246, .86);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: var(--strich-haar) solid rgba(255, 255, 255, .75);
+  border-radius: var(--radius-kante);
+  box-shadow: 0 18px 40px -22px rgba(51, 74, 39, .55);
+  text-align: center;
+}
+/* Die Adresszeile steht auf der Platte links ausgerichtet, nur der Hinweis mittig. */
+.faden-shell .flugfenster__platte .az { text-align: left; }
+.faden-shell .flugfenster__platte .az__hinweis { text-align: center; }
+.faden-shell .flugfenster__platte .az__hinweis a { text-decoration: underline; }
+
+/* Der Stempel nach dem Eintragen — dieselbe Figur wie „GEPRÜFT" auf dem Beleg. */
+.faden-shell .wb-platte__stempel {
+  position: absolute; right: var(--luft-m); top: calc(-1 * var(--luft-l));
+  padding: var(--luft-xs) var(--luft-s);
+  border: 2.5px solid var(--green-ink); border-radius: var(--radius-kante);
+  background: rgba(255, 255, 255, .7);
+  font: 900 var(--grad-13)/1 var(--serif); letter-spacing: .14em; text-transform: uppercase;
+  color: var(--green-ink); transform: rotate(-11deg);
+  animation: fl-stempel .7s var(--ueber) both;
+}
+.faden-shell .wb-platte__fertig { display: grid; gap: var(--luft-xs); text-align: left; }
+.faden-shell .wb-platte__fertig p { margin: 0; font: 400 var(--grad-13)/1.5 var(--sans); color: var(--ink); }
+
+@media (max-width: 620px) {
+  .faden-shell .flugfenster { --fenster-h: 620px; }
+  .faden-shell .flugfenster__titel { width: min(86%, 16ch); }
+  .faden-shell .flugfenster__platte { width: calc(100% - 2 * var(--luft-m)); padding: var(--luft-m) var(--luft-m) var(--luft-s); }
+}
+@media (prefers-reduced-motion: reduce) { .faden-shell .wb-platte__stempel { animation: none; } }

@@ -5,6 +5,11 @@
  * ein Fenster in voller Satzbreite. Dahinter fliegt ein Papierflieger aus Zeitungspapier
  * Richtung Horizont — drei Wolkenlagen, die nacheinander aus dem Fluchtpunkt wachsen.
  *
+ * Seit der Übergabe „Finanzleser Heute" (Baustein 4, 17.09.2026) liegt der Wochenbrief
+ * IM Fenster: die Schlagzeile oben, die Glasplatte mit der FL Adresszeile unten, der
+ * Flieger dazwischen. Der eigene Teaser darunter ist entfallen — zwei Aufforderungen zum
+ * selben Newsletter im Abstand einer Linie lasen sich wie ein Versehen.
+ *
  * 🚨 Der Trick sitzt im CSS, nicht hier: Die Bühne ist `position: fixed` und hängt am
  * Viewport, das Fenster beschneidet sie mit `clip-path`. Beim Scrollen wandert das
  * Fenster über ein stehendes Bild. Warum `clip-path` und nicht `overflow` — und was an
@@ -20,6 +25,7 @@
  * sie beim Aufklappen als echte Komponente wieder ein.
  */
 import { useEffect, useState } from "react";
+import WochenbriefFeld from "./WochenbriefFeld";
 
 /** Von hinten nach vorn — 1 ist die fernste Lage, 3 die, die einen streift. */
 const WOLKEN = ["w1", "w2", "w3"] as const;
@@ -121,16 +127,16 @@ export default function Flugfenster() {
   }, [fenster, flieger, nah]);
 
   return (
-    <section className="flugfenster" data-ruht={nah ? undefined : ""} aria-labelledby="flug-kicker">
+    <section className="flugfenster" id="wochenbrief-heute" data-ruht={nah ? undefined : ""} aria-labelledby="flug-kicker">
       {/* Die Aufforderung steht ÜBER der ersten Linie (Wunsch 17.09.2026) — sie ist der
           Blockkopf des Flugs, und der Flug führt zum Eintragen darunter. Damit trägt der
           Abschnitt einen Namen und ist nicht mehr `aria-hidden`; nur die Bilder selbst
           bleiben für den Vorleser stumm. */}
       <span className="kicker kicker--gruen flugfenster__kicker" id="flug-kicker">Newsletter abonnieren</span>
       <i className="flugfenster__linie" />
-      <div className="flugfenster__ausschnitt" ref={setFenster} aria-hidden="true">
+      <div className="flugfenster__ausschnitt" ref={setFenster}>
         {geladen && (
-          <>
+          <div className="flugfenster__flug" aria-hidden="true">
             <div className="flugfenster__buehne">
               <div className="flugfenster__lage flugfenster__lage--himmel">
                 <img src="/assets/flug/himmel.webp" width={1046} height={1046} alt="" decoding="async" />
@@ -144,8 +150,13 @@ export default function Flugfenster() {
             <div className="flugfenster__flieger">
               <img ref={setFlieger} src="/assets/flug/flieger.webp" width={1007} height={535} alt="" decoding="async" />
             </div>
-          </>
+          </div>
         )}
+        {/* Schlagzeile oben, Glasplatte unten — der Flieger fliegt dazwischen durch. */}
+        <h3 className="flugfenster__titel">Mit Leos Wochenbrief bleiben Sie immer auf dem neuesten Stand.</h3>
+        <div className="flugfenster__platte">
+          <WochenbriefFeld />
+        </div>
       </div>
       <i className="flugfenster__linie" />
     </section>

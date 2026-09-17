@@ -1775,3 +1775,76 @@ body[data-schaukasten] .faden-shell .klappe[data-zu] { height: auto; padding-top
 /* ── Schaukasten: die Bausteine des Ergebnisses nebeneinander ─────────────────────── */
 .faden-shell .schau-teile { display: grid; gap: var(--luft-xxl); margin-top: var(--luft-l); }
 .faden-shell .schau-teil > .quelle { margin: var(--luft-xs) 0 var(--luft-m); }
+
+/* =====================================================================================
+   FL Adresszeile — das Kontaktfeld der Übergabe „Finanzleser Heute“
+   (components/faden/Adresszeile.tsx). Ein Bauteil, drei Orte: Wochenbrief im
+   Flugfenster, Ergebnis des Kassensturzes, und künftig überall, wo eine Adresse
+   abgefragt wird.
+
+   Der Ton der Zeile (`--ton`) steht am Wurzelknoten und färbt Label, Gültigkeitslinie,
+   Knoten und Knopfscheibe. Mehr Farbe hat das Bauteil nicht.
+   ===================================================================================== */
+.faden-shell .az { --ton: var(--green-ink); display: grid; gap: var(--luft-xs); width: 100%; animation-duration: .45s; animation-timing-function: var(--kurve); }
+.faden-shell .az--marke { --ton: var(--green); }
+.faden-shell .az--tuerkis { --ton: var(--tuerkis); }
+.faden-shell .az__kopf { display: flex; align-items: baseline; justify-content: space-between; gap: var(--luft-s); }
+.faden-shell .az__label { color: var(--muted); transition: color .25s; cursor: pointer; }
+.faden-shell .az.ist-fokus .az__label, .faden-shell .az.ist-fertig .az__label { color: var(--ton); }
+.faden-shell .az.ist-fehler .az__label { color: var(--pink); }
+.faden-shell .az__status { font: var(--schrift-hinweis); color: var(--muted); }
+.faden-shell .az.ist-gueltig .az__status { color: var(--green-ink); }
+
+/* Die Zeile bricht unter ~340 px um; der Knopf rutscht dann unter das Feld und nach rechts. */
+.faden-shell .az__zeile { display: flex; flex-wrap: wrap; align-items: center; gap: var(--luft-s) var(--luft-m); min-height: 44px; }
+.faden-shell .az__feld { position: relative; flex: 1 1 200px; min-width: 0; align-self: stretch; display: flex; align-items: center; }
+/* 🚨 `-webkit-text-fill-color`: Browser grauen gesperrte Formularfelder über diese
+   Eigenschaft aus, und die schlägt `color`. Ohne die Zeile steht die Quittung blass da. */
+.faden-shell .az__eingabe { width: 100%; border: 0; background: none; padding: 0 var(--luft-m) 0 0; font: 400 var(--grad-16) var(--sans); color: var(--ink); -webkit-text-fill-color: currentColor; opacity: 1; }
+.faden-shell .az__eingabe:focus { outline: 0; }
+.faden-shell .az__eingabe::placeholder { font: italic 300 var(--grad-15) var(--serif); color: var(--muted); opacity: .75; }
+/* Nach dem Eintragen hebt sich der getippte Text weg, die Quittung druckt sich an seine Stelle. */
+.faden-shell .az.ist-fertig .az__eingabe { opacity: 0; transform: translateY(-14px); transition: opacity .3s, transform .3s; }
+.faden-shell .az__quittung { position: absolute; left: 0; font: italic 400 var(--grad-15) var(--serif); color: var(--green-ink); animation: az-druck .5s var(--kurve) both; }
+
+/* Vier Linien übereinander: Grundlinie, Gültigkeit, und im Fokus die Doppellinie. */
+.faden-shell .az__grund { position: absolute; left: 0; right: 0; bottom: 0; height: var(--strich-haar); background: var(--ink-30); }
+.faden-shell .az__gueltig { position: absolute; left: 0; right: 0; bottom: 0; height: var(--strich-haar); background: var(--ton); transform-origin: left; transition: transform .5s var(--kurve); }
+.faden-shell .az.ist-fehler .az__gueltig, .faden-shell .az.ist-fehler .az__grund { background: var(--pink); }
+.faden-shell .az__doppel { position: absolute; left: 0; right: 0; background: var(--ink); transform: scaleX(0); transition: transform .45s var(--kurve); }
+.faden-shell .az__doppel--1 { bottom: -1px; height: var(--strich-stark); }
+.faden-shell .az__doppel--2 { bottom: -5px; height: var(--strich-haar); transition-delay: .08s; }
+.faden-shell .az.ist-fokus .az__doppel { transform: scaleX(1); }
+.faden-shell .az.ist-fehler .az__doppel { background: var(--pink); }
+
+/* Der Knoten am rechten Linienende poppt, sobald die Adresse vollständig ist. */
+.faden-shell .az__knoten { position: absolute; right: 0; bottom: 0; width: 9px; height: 9px; border-radius: var(--radius-kreis); background: var(--ton); border: var(--strich-stark) solid var(--paper); box-sizing: content-box; transform: translate(50%, 50%) scale(0); transition: transform .5s var(--ueber); }
+.faden-shell .az.ist-gueltig .az__knoten { transform: translate(50%, 50%) scale(1); }
+
+/* Der Knopf: Pille mit Scheibe, in der der Papierflieger sitzt. */
+.faden-shell .az__knopf { -webkit-text-fill-color: currentColor; opacity: 1; display: inline-flex; align-items: center; gap: var(--luft-s); margin-left: auto; height: 44px; padding: 0 var(--luft-xs) 0 var(--luft-l); border: var(--strich-fein) solid var(--ink-35); border-radius: var(--radius-pille); background: none; color: var(--ink); font: 500 var(--grad-15) var(--sans); cursor: pointer; white-space: nowrap; transition: border-color .25s, background .3s, color .3s, transform .2s; }
+.faden-shell .az.ist-gueltig .az__knopf { border-color: var(--ink); }
+.faden-shell .az__scheibe { width: 34px; height: 34px; border-radius: var(--radius-kreis); background: var(--ink-30); display: grid; place-items: center; flex: none; transition: background .3s; }
+.faden-shell .az.ist-gueltig .az__scheibe { background: var(--ton); }
+.faden-shell .az__scheibe svg { width: 16px; height: 16px; fill: var(--auf-tinte); }
+.faden-shell .az__scheibe svg .az__haken { fill: none; stroke: var(--auf-tinte); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 20; stroke-dashoffset: 20; animation: az-haken .45s var(--kurve) .1s forwards; }
+/* Absenden: der Flieger fliegt aus dem Knopf heraus, der Knopf sackt kurz zusammen. */
+.faden-shell .az.ist-unterwegs .az__knopf { transform: scale(.96); }
+.faden-shell .az.ist-unterwegs .az__scheibe svg { animation: az-flug .8s var(--kurve) forwards; }
+.faden-shell .az.ist-fertig .az__knopf { background: var(--ink); border-color: var(--ink); color: var(--auf-tinte); cursor: default; }
+.faden-shell .az.ist-fertig .az__scheibe { background: var(--green); }
+
+.faden-shell .az__hinweis { margin: 0; font: 400 var(--grad-11)/1.45 var(--sans); color: var(--ink); }
+.faden-shell .az.ist-fehler .az__hinweis { color: var(--pink); }
+.faden-shell .az__hinweis a { color: inherit; }
+
+@keyframes az-druck { 0% { opacity: 0; transform: translateY(6px); letter-spacing: .05em; } 60% { opacity: 1; letter-spacing: .005em; } 100% { opacity: 1; transform: none; letter-spacing: normal; } }
+@keyframes az-haken { to { stroke-dashoffset: 0; } }
+@keyframes az-flug { to { transform: translate(64px, -70px) rotate(-28deg) scale(.5); opacity: 0; } }
+@keyframes az-schuettel { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-5px); } 45% { transform: translateX(5px); } 70% { transform: translateX(-3px); } }
+@keyframes az-schuettel2 { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-5px); } 45% { transform: translateX(5px); } 70% { transform: translateX(-3px); } }
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .az { animation: none !important; }
+  .faden-shell .az__doppel, .faden-shell .az__gueltig, .faden-shell .az__knoten { transition: none; }
+  .faden-shell .az.ist-unterwegs .az__scheibe svg, .faden-shell .az__quittung, .faden-shell .az__scheibe svg .az__haken { animation: none; stroke-dashoffset: 0; }
+}

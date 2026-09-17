@@ -25,7 +25,6 @@ import { getFadenOptionen } from "@/lib/faden/optionen";
 import Begruessung from "./Begruessung";
 import AusDemNewsletter from "./landing/AusDemNewsletter";
 import Flugfenster from "./landing/Flugfenster";
-import WochenbriefTeaser from "./landing/WochenbriefTeaser";
 import PlusTeaser from "./landing/PlusTeaser";
 import LeoEmpfiehlt from "./landing/LeoEmpfiehlt";
 import WeiterredenChips from "./landing/WeiterredenChips";
@@ -113,10 +112,11 @@ export default async function FadenLanding() {
           {kassensturz && <Insel typ="kassensturz" werte={{ daten: kassensturz, ziele: ksZiele }}><KassensturzStart daten={kassensturz} ziele={ksZiele} /></Insel>}
           <FinanzwortKarte />
           <AusDemNewsletter eintraege={auslese} />
-          {/* Der Flug zum Newsletter: reines Bild, kein Text — er leitet vom Inhalt der
-              Auslese zum Eintragen darunter über. */}
+          {/* Der Flug ZUM Newsletter — und das Eintragen liegt seit dem 17.09.2026 darin
+              (Übergabe Baustein 4). Der eigene Wochenbrief-Teaser darunter ist deshalb
+              entfallen; sein Anker `#wochenbrief-heute` sitzt jetzt am Flugfenster, damit
+              der Newsletter-Knopf im Kopf weiter trifft (components/faden/Kopf.tsx). */}
           <Insel typ="flugfenster"><Flugfenster /></Insel>
-          <WochenbriefTeaser />
           <SchlangeKarte />
           <PlusTeaser />
           <Insel typ="leo-empfiehlt" werte={{ teaser, daten: kassensturz }}><LeoEmpfiehlt teaser={teaser} daten={kassensturz} /></Insel>
