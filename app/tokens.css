@@ -206,6 +206,31 @@
   --holo-hauch: radial-gradient(110% 85% at 88% 86%, rgba(176,240,255,.7) 0%, rgba(176,240,255,0) 62%);
   --holo-glanz: linear-gradient(26deg, rgba(255,255,255,0) 14%, rgba(255,255,255,.9) 40%, rgba(255,255,255,0) 66%);
 
+  /* ── Das Murmelglas ─────────────────────────────────────────────────────────────
+     Der Werkstoff des Solitärbretts — wie die Holo-Folie eine Farbe des Hauses, nur
+     räumlich: ein Glaskörper mit einem Katzenauge darin. Er steht hier und nicht im
+     Bauteil, weil Werkstoff und Zustand zusammengehören — derselbe Körper liegt ruhig,
+     hebt sich beim Zeigen, liegt in der Hand und fliegt.
+     🚨 Die Innentiefe ist SCHWARZ, nicht Tinte. Das ist neben der gedrückten Taste der
+     zweite Ort im Haus, an dem Schwarz stimmt: Glas verschluckt Licht in seiner Tiefe,
+     es tönt es nicht. */
+  --glas-hoch: #4f6c3b;           /* die Lichtseite des Glaskörpers */
+  --glas-tief: #1d2b15;           /* sein Grund */
+  --glas-koerper: radial-gradient(circle at 50% 58%, var(--glas-hoch) 0, var(--ink) 52%, var(--glas-tief) 100%);
+  --glas-glanz: radial-gradient(circle at 33% 28%, rgba(255,255,255,.95) 0, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 32%),
+                radial-gradient(circle at 70% 82%, rgba(255,255,255,.18) 0, rgba(255,255,255,0) 28%);
+  /* Das Katzenauge — das Band im Glas. Klein gibt es nur den hellen Kern davon. */
+  --katzenauge: linear-gradient(90deg, rgba(69,161,23,.25), #7fcc4a 35%, #c4f09e 50%, #7fcc4a 65%, rgba(69,161,23,.25));
+  --katzenauge-klein: linear-gradient(90deg, transparent, #a9e07c, transparent);
+  --glas-innen: inset 0 -2px 4px rgba(0, 0, 0, .3);
+  --glas-liegt: 0 3px 5px -2px rgba(51, 74, 39, .55), var(--glas-innen);
+  --glas-zeigt: 0 8px 10px -4px rgba(51, 74, 39, .5), var(--glas-innen);
+  --glas-hand:  0 16px 16px -7px rgba(51, 74, 39, .55), var(--glas-innen), 0 0 0 2px var(--paper), 0 0 0 3.5px var(--green);
+  --glas-flug:  0 22px 18px -8px rgba(51, 74, 39, .45), var(--glas-innen);
+  --glas-klein: 0 2px 3px -1px rgba(51, 74, 39, .5);
+  /* Das leere Loch im Brett — eine Mulde, kein Ring. Belegt verschwindet sie wieder. */
+  --loch-tiefe: inset 0 1px 2px var(--ink-25);
+
   --radius-kante: 2px;            /* die einzige erlaubte Abrundung einer FLÄCHE */
   --radius-pille: 999px;          /* Pille, Knopf, Chip, Feld — und jedes GERÄT */
   /* 🚨 Flächen und Geräte sind zweierlei. Eine Fläche trägt Text (Kasten, Dialog, Karte,

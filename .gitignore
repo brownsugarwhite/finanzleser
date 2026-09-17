@@ -85,6 +85,11 @@ docs/design_handoff_finanzleser_heute/public/icons/
 docs/design_handoff_finanzleser_heute/public/assets/leo.svg
 docs/design_handoff_finanzleser_heute/support.js
 docs/design_handoff_finanzleser_heute/.DS_Store
+
+# Design-Übergabe „Solitär" (17.09.2026): README und die .dc.html sind versioniert,
+# support.js ist wie bei den anderen nur die Laufzeit des Prototyp-Werkzeugs.
+docs/design_handoff_finanzleser_solitaer/support.js
+docs/design_handoff_finanzleser_solitaer/.DS_Store
 Finanzleser Chat-Design Phase 2.zip
 
 # Die ZIP-Exporte aus Claude Design und was beim Auspacken im Projektstamm landet.

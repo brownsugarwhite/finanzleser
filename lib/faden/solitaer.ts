@@ -1,411 +1,176 @@
 /**
- * Solitär — die Bretter, die Züge und die Halbton-Murmel.
+ * Solitär — Brett, Züge und Bewertung.
  *
- * Wie `lib/faden/schlange.ts` trägt diese Datei alles, was sich ohne React sagen lässt:
- * Geometrie, Regelwerk, Zeichenvorschrift. Das Spiel steht in
- * `components/faden/spiele/Solitaer.tsx`, sein Aussehen in `app/solitaer.css`.
+ * Vorlage: `Finanzleser Solitär - Rätselseite.dc.html` (Handoff „Finanzleser Chat-Design
+ * Phase 2_solitär", 17.09.2026). Diese Datei trägt alles, was sich ohne React sagen
+ * lässt; das Spiel steht in `components/faden/spiele/Solitaer.tsx`, sein Aussehen in
+ * `app/solitaer.css`.
  *
- * ── Die Murmel ───────────────────────────────────────────────────────────────────────
- * Eine Murmel ist keine Scheibe mit Verlauf, sondern eine GEDRUCKTE Kugel: ein
- * Halbtonraster aus lauter Kreisen, deren Größe die Beleuchtung trägt. Groß im Schatten,
- * winzig im Licht, weg im Glanzpunkt. Damit besteht das ganze Brett aus einer einzigen
- * Grundform — dem Kreis — und sieht trotzdem plastisch aus. Das Raster steht wie im
- * Zeitungsdruck auf 45°.
+ * 🚨 Hier stand bis zum 17.09.2026 eine andere Fassung: Murmeln als Halbtonraster aus
+ * SVG-Kreisen, mit Sprungparabel, Spielraum-Kurve und rechnendem Tipp. Sie ist ersetzt,
+ * nicht ergänzt — die neue Vorlage baut die Murmel als Glaskörper aus CSS-Verläufen und
+ * das Brett als Prozentraster ohne SVG. Wer die alte Fassung sucht: `git log lib/faden/solitaer.ts`.
  *
- * 🚨 Die Deckung ist FLÄCHENTREU: `r = halbeTeilung · √Deckung`. Wer den Halbmesser
- * stattdessen linear an die Helligkeit hängt, bekommt eine Kugel, die in der Mitte
- * ausgewaschen und am Rand verstopft ist — der Druckfehler, den jede Rasterweite kennt.
+ * ── Die drei Bretter ────────────────────────────────────────────────────────────────
+ * Alle drei sind nachgerechnet (Löser, 17.09.2026):
  *
- * ── Die Drehung ──────────────────────────────────────────────────────────────────────
- * Eine gewählte Murmel DREHT sich. Gedreht wird aber nicht das Raster, sondern die
- * MASERUNG: die Punkte bleiben, wo sie sind, und nur ihre Deckung wird von einem Muster
- * moduliert, das auf der Kugelfläche sitzt. Jeder Punkt kennt seine Länge und Breite
- * (`lon`, `lat`) auf der Kugel; die Länge wandert mit dem Drehwinkel, und weil sich die
- * Länge am Rand viel schneller ändert als in der Mitte, staucht sich das Muster genau
- * dort — die Verkürzung, an der das Auge eine Drehung erkennt.
+ *   englisch    7 × 7 ohne die vier 2 × 2-Ecken, 33 Löcher, 32 Murmeln.
+ *               Mitte leer → auf EINE Murmel in der Mitte lösbar (31 Züge, nachgespielt).
+ *   europäisch  zusätzlich die vier Diagonalfelder, 37 Löcher, 36 Murmeln.
+ *   dreieck     fünf Reihen, 15 Löcher, 14 Murmeln — das Einsteigerbrett.
+ *               Spitze leer → auf eine Murmel lösbar, und zwar NUR in der Spitze selbst.
  *
- * 🚨 Zwei Irrwege, beide ausprobiert und beide falsch:
+ * 🚨 Das Dreieck steht auf einem DREIECKSGITTER: sechs Sprungrichtungen statt vier, und
+ * die Reihen sind um eine halbe Zelle gegeneinander versetzt. Alles, was nach Geometrie
+ * fragt — Richtungen, Rasterweite, Lage eines Lochs — geht deshalb über `art`.
  *
- *  1. **Zweite Rasterlage, langsam gedreht (Moiré).** Zwei Raster übereinander sind kein
- *     Glanz, sondern Unruhe — das Grundraster der Murmel verschwand darin.
- *  2. **Das Raster als Punktwolke auf der Kugel wirklich drehen.** Klingt richtig, ergibt
- *     aber einen RING: ein Gitter, das auf dem PAPIER gleichmäßig liegt, liegt auf der
- *     KUGEL nicht gleichmäßig — zur Silhouette hin deckt derselbe Papierfleck immer mehr
- *     Kugelfläche ab. Nach einer Vierteldrehung sitzen deshalb alle dichten Punkte am
- *     Rand und die Mitte ist leer. Wer die Wolke dreht, braucht ein kugelgleichmäßiges
- *     Gitter — und hat dann nicht mehr das Halbtonraster, das die Murmel ausmacht.
- *
- * Die Maserung ist außerdem umsonst zu haben: die Punkte behalten ihren Platz, je Bild
- * ändert sich nur ihr Halbmesser. Ein Schreibvorgang je Punkt statt dreier.
- *
- * Die Stärke fährt beim Anfassen von 0 hoch. Bei Stärke 0 steht exakt das ruhende Bild
- * da — der Übergang vom Liegen zum Drehen hat deshalb keinen Sprung.
- *
- * ── Die Bretter ──────────────────────────────────────────────────────────────────────
- * Zwei, und beide sind nachgerechnet (Löser, 17.09.2026):
- *
- *   Kreuz 33    Mitte leer  → auf EINE Murmel in der Mitte lösbar (31 Züge, nachgespielt).
- *   Dreieck 15  Spitze leer → auf eine lösbar, und zwar NUR in der Spitze selbst.
- *
- * 🚨 Ein drittes, „leichteres" Brett lag nahe und ist genau daran gescheitert: 5 × 5 ohne
- * Ecken (21 Löcher, Mitte leer) lässt sich NIE auf eine Murmel bringen — es bleiben
- * mindestens vier übrig. Ein Brett, das man nicht gewinnen kann, ist kein leichtes Brett.
+ * 🚨 Ein „kleines Kreuz" (5 × 5 ohne Ecken, 21 Löcher) lag als Einsteigerbrett nahe und
+ * ist genau daran gescheitert: es lässt sich NIE auf eine Murmel bringen, es bleiben
+ * mindestens vier. Ein Brett, das man nicht gewinnen kann, ist kein leichtes Brett.
  */
 
-export type Loch = { x: number; y: number };
-export type Zug = { von: number; ueber: number; nach: number };
-export type Punkt = { x: number; y: number; r: number };
-/** Ein Rasterpunkt mit seinem Ort auf der Kugel — Grundlage der Maserung. */
-export type Drehpunkt = { x: number; y: number; lon: number; lat: number; grund: number };
-export type BrettName = "kreuz" | "dreieck";
+export type Brettart = "englisch" | "europäisch" | "dreieck";
+export type Zelle = { r: number; c: number };
+export type Murmel = { id: number; r: number; c: number; weg: boolean; faellt: boolean; rot: number };
+/** Ein Sprung: Murmel `id` springt über `mid` auf (r, c). */
+export type Zug = { id: number; mid: number; r: number; c: number };
+export type Ergebnis = { n: number; mitte: boolean };
 
-export type Brett = {
-  name: BrettName;
-  titel: string;
-  loecher: Loch[];
-  zuege: Zug[];
-  /** Maße des viewBox — jedes Brett bringt seinen eigenen Zuschnitt mit. */
-  breite: number;
-  hoehe: number;
-  radius: number;
-  /** Das Halbtonraster EINER Murmel, in Bretteinheiten um (0,0). */
-  schirm: Punkt[];
-  /** Dieselben Punkte mit Länge und Breite auf der Kugel — für die Drehung. */
-  wolke: Drehpunkt[];
-  /** Loch, das zu Beginn frei bleibt. */
-  leer: number;
-  /** Loch, in dem die letzte Murmel stehen muss, damit es ein Meisterstück ist. */
-  ziel: number;
+export const MITTE = 3;
+
+/** Die Wahl, die im Spiel angeboten wird — Name, Kurzform, Lochzahl. */
+export const BRETTER: { art: Brettart; name: string; loecher: number }[] = [
+  { art: "englisch", name: "Englisch", loecher: 33 },
+  { art: "europäisch", name: "Europäisch", loecher: 37 },
+  { art: "dreieck", name: "Dreieck", loecher: 15 },
+];
+
+/** Das Loch, das zu Beginn frei bleibt — und in dem die letzte Murmel stehen soll. */
+export const zielLoch = (art: Brettart): Zelle => (art === "dreieck" ? { r: 0, c: 0 } : { r: MITTE, c: MITTE });
+
+/** Sprungrichtungen: vier auf dem Quadratgitter, sechs auf dem Dreiecksgitter. */
+const RICHTUNGEN: Record<"quadrat" | "dreieck", [number, number][]> = {
+  quadrat: [[1, 0], [-1, 0], [0, 1], [0, -1]],
+  dreieck: [[0, 1], [0, -1], [1, 0], [-1, 0], [1, 1], [-1, -1]],
 };
 
-/* ── Maße ───────────────────────────────────────────────────────────────────────────
-   Alles hängt am Lochabstand. Die Murmel ist 0,39 davon — dicht genug, dass das Brett
-   voll aussieht, und weit genug, dass zwischen zwei Murmeln Papier bleibt. */
-const RADIUS_ANTEIL = 0.39;
-const RAND_ANTEIL = 0.95;
-
-/* ── Das Halbtonraster ──────────────────────────────────────────────────────────────
-   Licht von links oben, wie bei jeder gedruckten Kugel. Die Zahlen sind gemessen, nicht
-   geraten: mit flacherem Licht verliert die Murmel ihre Rundung, mit steilerem wird sie
-   eine Scheibe mit Fleck. */
-const LICHT = einheit(-0.42, -0.52, 0.745);
-const BLICK: [number, number, number] = [0, 0, 1];
-const HALB = einheit(LICHT[0] + BLICK[0], LICHT[1] + BLICK[1], LICHT[2] + BLICK[2]);
-
-const RASTER_WINKEL = (45 * Math.PI) / 180;   /* die Rasterweite des Schwarzauszugs */
-const RASTER_WEITE = 1 / 5.4;                 /* Punktabstand, als Anteil des Halbmessers */
-const GLANZ_HAERTE = 18;
-const KANTE = 5;                              /* wie scharf der Rand nachdunkelt */
-
-/** Drei Nachkommastellen — mehr trägt kein SVG-Attribut, und weniger sieht man. */
-const rund = (n: number) => Math.round(n * 1000) / 1000;
-
-function einheit(x: number, y: number, z: number): [number, number, number] {
-  const l = Math.hypot(x, y, z) || 1;
-  return [x / l, y / l, z / l];
-}
-
 /**
- * Das Raster einer Murmel: Punkte auf einem um 45° gedrehten Gitter, Fläche nach Deckung.
- * Die Reihenfolge ist von innen nach außen sortiert — so kann das Zerstäuben beim
- * Geschlagenwerden von der Mitte her laufen, ohne dass jemand nachsortieren muss.
- */
-/** Die Gitterpunkte des 45°-Rasters innerhalb der Scheibe, in Bretteinheiten. */
-function gitter(radius: number): { x: number; y: number; d: number }[] {
-  const weite = radius * RASTER_WEITE;
-  const reichweite = Math.ceil(radius / weite) + 1;
-  const sin = Math.sin(RASTER_WINKEL);
-  const cos = Math.cos(RASTER_WINKEL);
-  const aus: { x: number; y: number; d: number }[] = [];
-  for (let a = -reichweite; a <= reichweite; a++) {
-    for (let b = -reichweite; b <= reichweite; b++) {
-      const x = (a * cos - b * sin) * weite;
-      const y = (a * sin + b * cos) * weite;
-      const d = Math.hypot(x, y) / radius;
-      if (d > 1.05) continue;
-      aus.push({ x, y, d });
-    }
-  }
-  return aus;
-}
-
-/**
- * Die Deckung an einer Stelle der Kugel: Grundhelligkeit, Streulicht, Glanz — gedeckelt,
- * damit auch im hellsten Fleck ein Punkt stehen bleibt (ohne Deckel bekommt die Murmel
- * ein Loch). Dazu der Anzug am Rand, damit sie eine Silhouette hat.
+ * Rasterweite und Murmelgröße je Brett, in ZELLEN.
  *
- * 🚨 Der weiche Saum ist das, was die Murmel RUND macht. Ohne ihn endet das Raster an
- * einer harten Kante, und weil das Gitter auf 45° steht, ist diese Kante ein Achteck —
- * 33 Achtecke auf dem Brett, und keiner weiß, warum es klemmt.
+ * Das Brett ist immer ein Quadrat und immer prozentual besetzt; nur die Zahl der Zellen
+ * ändert sich. Die Murmel behält ihren Anteil an der Zelle (0,728), damit sie auf dem
+ * Dreieck nicht plötzlich verloren wirkt — 15 Murmeln auf derselben Fläche wie 33
+ * brauchen mehr Durchmesser, nicht mehr Luft.
  */
-function deckungAn(nx: number, ny: number, nz: number, d: number): number {
-  const streu = Math.max(0, nx * LICHT[0] + ny * LICHT[1] + nz * LICHT[2]);
-  const glanz = Math.pow(Math.max(0, nx * HALB[0] + ny * HALB[1] + nz * HALB[2]), GLANZ_HAERTE);
-  const hell = Math.min(0.95, 0.12 + 0.6 * streu + 0.3 * glanz);
-  const saum = Math.min(1, Math.max(0, (1.03 - d) / (0.9 * RASTER_WEITE)));
-  return Math.min(1, Math.max(0, 1 - hell) + 0.3 * Math.pow(d, KANTE)) * saum;
+const MURMEL_JE_ZELLE = 0.728;
+export function raster(art: Brettart) {
+  const spalten = art === "dreieck" ? 5 : 7;
+  return { spalten, zelle: 100 / spalten, murmel: (100 / spalten) * MURMEL_JE_ZELLE };
 }
 
-const punktHalbmesser = (deckung: number, weite: number) => (weite / 2) * Math.sqrt(deckung) * 1.24;
-
-/**
- * Das Raster einer ruhenden Murmel. Die Reihenfolge ist von innen nach außen sortiert —
- * so läuft das Zerstäuben der geschlagenen Murmel von der Mitte her, ohne dass jemand
- * nachsortieren muss.
- */
-export function murmelSchirm(radius: number): Punkt[] {
-  const weite = radius * RASTER_WEITE;
-  const aus: Punkt[] = [];
-  for (const { x, y, d } of gitter(radius)) {
-    const z = Math.sqrt(Math.max(0, 1 - d * d));
-    const r = punktHalbmesser(deckungAn(x / radius, y / radius, z, d), weite);
-    if (r < weite * 0.04) continue;
-    aus.push({ x: rund(x), y: rund(y), r: rund(r) });
+/** Lage eines Lochs im Brett, in Prozent — die einzige Stelle, die Geometrie kennt. */
+export function platz(art: Brettart, r: number, c: number): { left: string; top: string } {
+  const { spalten } = raster(art);
+  let sx: number;
+  let sy: number;
+  if (art === "dreieck") {
+    // Reihe r trägt r+1 Löcher, um eine halbe Zelle nach rechts gerückt je Reihe weniger.
+    // Die Höhe einer Dreiecksreihe ist √3/2 einer Zelle; der Satz wird darin zentriert.
+    const hoch = Math.sqrt(3) / 2;
+    sx = 0.5 + c + (4 - r) / 2;
+    sy = (spalten - (4 * hoch + 1)) / 2 + 0.5 + r * hoch;
+  } else {
+    sx = c + 0.5;
+    sy = r + 0.5;
   }
-  return aus.sort((p, q) => Math.hypot(p.x, p.y) - Math.hypot(q.x, q.y));
+  return { left: `${(sx / spalten * 100).toFixed(3)}%`, top: `${(sy / spalten * 100).toFixed(3)}%` };
 }
 
-/* ── Die Maserung ───────────────────────────────────────────────────────────────────
-   Zwei Wellen über Länge und Breite, gegeneinander versetzt: das ergibt Schlieren, die
-   sich winden, statt Streifen, die ringeln. Eine Murmel hat Schlieren. */
-/* 🚨 Die Ausschläge sind bewusst klein. Bei .34/.22 lag auf der Lichtseite der Murmel
-   plötzlich ein dunkler Fleck — die Maserung überstimmte das Licht, und aus der Kugel
-   wurde eine gemusterte Scheibe. Das Muster darf die Modellierung TÖNEN, nicht schlagen. */
-const MASER = (lon: number, lat: number) =>
-  0.26 * Math.sin(3 * lon + 2 * lat) + 0.15 * Math.sin(5 * lon - 1.5 * lat + 0.8);
-
-/** Dieselben Punkte wie `murmelSchirm`, dazu ihr Ort auf der Kugel und ihre Ruhedeckung. */
-export function drehWolke(radius: number): Drehpunkt[] {
-  const weite = radius * RASTER_WEITE;
-  const aus: Drehpunkt[] = [];
-  for (const { x, y, d } of gitter(radius)) {
-    const z = Math.sqrt(Math.max(0, 1 - d * d));
-    const nx = x / radius;
-    const ny = y / radius;
-    const grund = deckungAn(nx, ny, z, d);
-    if (punktHalbmesser(grund, weite) < weite * 0.04) continue;   // dieselbe Schwelle wie im Ruhebild
-    aus.push({ x: rund(x), y: rund(y), lon: Math.atan2(nx, z), lat: Math.asin(Math.min(1, Math.max(-1, ny))), grund });
+/** Gehört (r, c) zum Brett? */
+export function gueltig(art: Brettart, r: number, c: number): boolean {
+  if (art === "dreieck") return r >= 0 && r <= 4 && c >= 0 && c <= r;
+  if (r < 0 || c < 0 || r > 6 || c > 6) return false;
+  if (art === "europäisch") {
+    // Die Raute des europäischen Bretts: alles im Abstand 4, ohne die Spitzen der Arme.
+    const dr = Math.abs(r - MITTE);
+    const dc = Math.abs(c - MITTE);
+    return dr + dc <= 4 && dr <= 3 && dc <= 3 && !(dr === 3 && dc >= 2) && !(dc === 3 && dr >= 2);
   }
-  return aus.sort((p, q) => Math.hypot(p.x, p.y) - Math.hypot(q.x, q.y));
+  return (r >= 2 && r <= 4) || (c >= 2 && c <= 4);
 }
 
-/**
- * Die Halbmesser der Punkte bei Drehwinkel `winkel`. `staerke` fährt die Maserung hoch
- * (0 = Ruhebild). Positionen ändern sich nie — deshalb gibt es hier nur Zahlen zurück.
- */
-export function drehBild(wolke: Drehpunkt[], radius: number, winkel: number, staerke: number): number[] {
-  const weite = radius * RASTER_WEITE;
-  const aus: number[] = new Array(wolke.length);
-  for (let i = 0; i < wolke.length; i++) {
-    const p = wolke[i];
-    const deckung = Math.min(1, Math.max(0, p.grund * (1 + staerke * MASER(p.lon + winkel, p.lat))));
-    aus[i] = punktHalbmesser(deckung, weite);
-  }
+export function zellen(art: Brettart): Zelle[] {
+  const aus: Zelle[] = [];
+  const n = art === "dreieck" ? 5 : 7;
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (gueltig(art, r, c)) aus.push({ r, c });
   return aus;
 }
 
-/* ── Die Bretter ───────────────────────────────────────────────────────────────────── */
+/** Die Murmel auf einem Feld — geschlagene zählen nicht mit. */
+export function bei(murmeln: Murmel[], r: number, c: number): Murmel | undefined {
+  return murmeln.find((m) => !m.weg && m.r === r && m.c === c);
+}
 
-/** Züge aus einem Gitter: für jede Richtung Nachbar und Loch dahinter. */
-function zuegeBauen(schluessel: string[], richtungen: [number, number][], zelle: (i: number) => [number, number]): Zug[] {
-  const platz = new Map(schluessel.map((s, i) => [s, i]));
+/** Alle Sprünge, die diese eine Murmel gerade machen kann. */
+export function zuegeFuer(art: Brettart, m: Murmel, murmeln: Murmel[]): Zug[] {
   const aus: Zug[] = [];
-  for (let i = 0; i < schluessel.length; i++) {
-    const [a, b] = zelle(i);
-    for (const [da, db] of richtungen) {
-      const ueber = platz.get(`${a + da},${b + db}`);
-      const nach = platz.get(`${a + 2 * da},${b + 2 * db}`);
-      if (ueber !== undefined && nach !== undefined) aus.push({ von: i, ueber, nach });
-    }
+  if (m.weg) return aus;
+  for (const [dr, dc] of RICHTUNGEN[art === "dreieck" ? "dreieck" : "quadrat"]) {
+    const mitte = bei(murmeln, m.r + dr, m.c + dc);
+    const r = m.r + 2 * dr;
+    const c = m.c + 2 * dc;
+    if (mitte && gueltig(art, r, c) && !bei(murmeln, r, c)) aus.push({ id: m.id, mid: mitte.id, r, c });
   }
   return aus;
 }
 
-/** Das englische Kreuz: 7 × 7 ohne die vier 2 × 2-Ecken, 33 Löcher. */
-function bauKreuz(): Brett {
-  const T = 10;
-  const rand = T * RAND_ANTEIL;
-  const muster = ["..XXX..", "..XXX..", "XXXXXXX", "XXXXXXX", "XXXXXXX", "..XXX..", "..XXX.."];
-  const gitter: [number, number][] = [];
-  muster.forEach((zeile, y) => [...zeile].forEach((z, x) => { if (z === "X") gitter.push([x, y]); }));
-  const schluessel = gitter.map(([x, y]) => `${x},${y}`);
-  const radius = T * RADIUS_ANTEIL;
-  const mitte = schluessel.indexOf("3,3");
-  return {
-    name: "kreuz",
-    titel: "Kreuz",
-    loecher: gitter.map(([x, y]) => ({ x: rund(rand + x * T), y: rund(rand + y * T) })),
-    zuege: zuegeBauen(schluessel, [[1, 0], [-1, 0], [0, 1], [0, -1]], (i) => gitter[i]),
-    breite: rund(6 * T + 2 * rand),
-    hoehe: rund(6 * T + 2 * rand),
-    radius: rund(radius),
-    schirm: murmelSchirm(radius),
-    wolke: drehWolke(radius),
-    leer: mitte,
-    ziel: mitte,
-  };
+export function alleZuege(art: Brettart, murmeln: Murmel[]): Zug[] {
+  return murmeln.flatMap((m) => zuegeFuer(art, m, murmeln));
 }
 
 /**
- * Das Dreieck: fünf Reihen, 15 Löcher, oben das freie.
- * Sechs Richtungen statt vier — auf dem Dreiecksgitter springt es auch schräg.
- */
-function bauDreieck(): Brett {
-  const T = 15;
-  const rand = T * RAND_ANTEIL;
-  const hoch = (T * Math.sqrt(3)) / 2;
-  const gitter: [number, number][] = [];
-  for (let r = 0; r < 5; r++) for (let c = 0; c <= r; c++) gitter.push([r, c]);
-  const schluessel = gitter.map(([r, c]) => `${r},${c}`);
-  const radius = T * RADIUS_ANTEIL;
-  const spitze = schluessel.indexOf("0,0");
-  return {
-    name: "dreieck",
-    titel: "Dreieck",
-    loecher: gitter.map(([r, c]) => ({ x: rund(rand + (c + (4 - r) / 2) * T), y: rund(rand + r * hoch) })),
-    zuege: zuegeBauen(schluessel, [[0, 1], [0, -1], [1, 0], [-1, 0], [1, 1], [-1, -1]], (i) => gitter[i]),
-    breite: rund(4 * T + 2 * rand),
-    hoehe: rund(4 * hoch + 2 * rand),
-    radius: rund(radius),
-    schirm: murmelSchirm(radius),
-    wolke: drehWolke(radius),
-    leer: spitze,
-    ziel: spitze,
-  };
-}
-
-export const BRETTER: Record<BrettName, Brett> = { kreuz: bauKreuz(), dreieck: bauDreieck() };
-export const BRETT_NAMEN: BrettName[] = ["kreuz", "dreieck"];
-
-/* ── Regelwerk ─────────────────────────────────────────────────────────────────────── */
-
-export function anfangsFeld(brett: Brett): boolean[] {
-  return brett.loecher.map((_, i) => i !== brett.leer);
-}
-
-export function offeneZuege(brett: Brett, feld: boolean[]): Zug[] {
-  return brett.zuege.filter((z) => feld[z.von] && feld[z.ueber] && !feld[z.nach]);
-}
-
-export function zuegeVon(brett: Brett, feld: boolean[], loch: number): Zug[] {
-  return brett.zuege.filter((z) => z.von === loch && feld[z.von] && feld[z.ueber] && !feld[z.nach]);
-}
-
-export function ziehe(feld: boolean[], zug: Zug): boolean[] {
-  const neu = feld.slice();
-  neu[zug.von] = false;
-  neu[zug.ueber] = false;
-  neu[zug.nach] = true;
-  return neu;
-}
-
-export const murmeln = (feld: boolean[]) => feld.reduce((s, m) => s + (m ? 1 : 0), 0);
-
-/* ── Der Tipp ──────────────────────────────────────────────────────────────────────
-   Eine Tiefensuche mit Merkliste, gemischter Zugfolge und Deckel. Findet sie eine
-   Fortsetzung, die auf eine einzige Murmel führt, ist der Tipp ein Zug, der das Spiel
-   noch gewinnbar lässt — sonst nur ein Zug, der überhaupt geht.
-
-   🚨 Der Deckel ist kein Schönheitsfehler, sondern der Grund, warum das im Browser geht:
-   auf vollem Brett ist die Suche aussichtslos (die Zufallssuche braucht Sekunden), mit
-   jeder geschlagenen Murmel wird sie billiger. Früh im Spiel ist ohnehin fast jeder Zug
-   in Ordnung — der Tipp muss dann nur zeigen, DASS es weitergeht. */
-const DECKEL = 45000;
-const ANLAEUFE = 4;
-
-export function tippZug(brett: Brett, feld: boolean[]): { zug: Zug; sicher: boolean } | null {
-  const offen = offeneZuege(brett, feld);
-  if (!offen.length) return null;
-  for (let anlauf = 0; anlauf < ANLAEUFE; anlauf++) {
-    const gesehen = new Set<string>();
-    let knoten = 0;
-    const lauf = (stand: boolean[], zahl: number): Zug | true | null => {
-      if (zahl === 1) return true;
-      if (++knoten > DECKEL) return null;
-      const k = stand.map((m) => (m ? "1" : "0")).join("");
-      if (gesehen.has(k)) return null;
-      gesehen.add(k);
-      const moeglich = offeneZuege(brett, stand);
-      for (let i = moeglich.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [moeglich[i], moeglich[j]] = [moeglich[j], moeglich[i]];
-      }
-      for (const z of moeglich) if (lauf(ziehe(stand, z), zahl - 1)) return z;
-      return null;
-    };
-    const erster = lauf(feld, murmeln(feld));
-    if (erster && erster !== true) return { zug: erster, sicher: true };
-  }
-  return { zug: offen[Math.floor(Math.random() * offen.length)], sicher: false };
-}
-
-/* ── Der Bogen ─────────────────────────────────────────────────────────────────────
-   Eine springende Murmel beschreibt keine Gerade und auch keinen Knick. Die Bahn ist eine
-   echte Wurfparabel: waagerecht gleichförmig, quer dazu `4t(1−t)` — also null an beiden
-   Enden, eins in der Mitte. Ausgegeben werden VIER Stützstellen (0, ¼, ½, ¾), die als
-   CSS-Keyframes linear verbunden werden; bei vier Stützstellen liegt der größte Fehler
-   gegen die wahre Parabel unter einem Prozent der Sprungweite.
-
-   Die Auslenkung steht quer zur Fahrt — nach oben, wo es geht, sonst nach rechts. So
-   bekommt auch ein senkrechter Sprung eine sichtbare Kurve statt einer Geraden.
-
-   🚨 Der Maßstab gehört zur Bahn, nicht zur Zier: die Murmel wird auf dem Scheitel
-   größer, weil sie näher am Auge ist. Steigt sie ohne zu wachsen, sieht der Sprung aus
-   wie ein Schieben auf dem Papier. Die Werte stehen im Keyframe (app/solitaer.css),
-   weil sie für jeden Sprung dieselben sind — anders als die Wege hier. */
-const AUSSCHLAG = 0.44;
-const STUFEN = [0, 0.25, 0.5, 0.75];
-
-export function bogen(brett: Brett, zug: Zug) {
-  const a = brett.loecher[zug.von];
-  const b = brett.loecher[zug.nach];
-  const dx = b.x - a.x;
-  const dy = b.y - a.y;
-  const laenge = Math.hypot(dx, dy) || 1;
-  let qx = -dy / laenge;
-  let qy = dx / laenge;
-  if (qy > 0 || (qy === 0 && qx < 0)) { qx = -qx; qy = -qy; }
-  const weite = laenge * AUSSCHLAG;
-  /* Die Murmel wird am ZIEL gezeichnet; alle Wege sind deshalb Rückwege dorthin. */
-  return STUFEN.map((t) => {
-    const hoch = 4 * t * (1 - t);
-    return { x: rund(-dx * (1 - t) + qx * weite * hoch), y: rund(-dy * (1 - t) + qy * weite * hoch) };
-  });
-}
-
-/** Das nächste Loch in einer Richtung — für die Steuerung mit den Pfeiltasten. */
-export function nachbarIn(brett: Brett, von: number, rx: number, ry: number): number {
-  const a = brett.loecher[von];
-  let beste = -1;
-  let wert = Infinity;
-  brett.loecher.forEach((b, i) => {
-    if (i === von) return;
-    const dx = b.x - a.x;
-    const dy = b.y - a.y;
-    const weg = Math.hypot(dx, dy);
-    const anteil = (dx * rx + dy * ry) / weg;
-    if (anteil < 0.5) return;                        // nicht in dieser Richtung
-    const preis = weg / anteil + (1 - anteil) * 60;  // nah und geradeaus gewinnt
-    if (preis < wert) { wert = preis; beste = i; }
-  });
-  return beste < 0 ? von : beste;
-}
-
-/**
- * Der Sprungbogen als Pfad — dieselbe Parabel, die die Murmel fliegt, nur sichtbar.
+ * Die Ausgangsstellung: alle Löcher belegt außer der Mitte.
  *
- * Als quadratische Bézierkurve, nicht als Streckenzug: eine quadratische Bézier IST eine
- * Parabel. Mit dem Steuerpunkt auf der doppelten Auslenkung deckt sie sich exakt mit der
- * Flugbahn — der gezeigte Weg ist damit der geflogene, nicht bloß einer, der ihm ähnelt.
+ * `rot` ist der Winkel des Katzenauges — `(i · 47) mod 140 − 70`. Die 47 ist teilerfremd
+ * zu 140, deshalb liegt keine zweite Murmel im selben Winkel wie ihre Nachbarin, und das
+ * Brett sieht aus wie eine Handvoll echter Murmeln statt wie ein Stempelmuster.
  */
-export function bogenPfad(brett: Brett, zug: Zug): string {
-  const a = brett.loecher[zug.von];
-  const b = brett.loecher[zug.nach];
-  const scheitel = bogen(brett, zug)[2];          // Stützstelle t = ½, relativ zum Ziel
-  const mx = (a.x + b.x) / 2;
-  const my = (a.y + b.y) / 2;
-  // Scheitel absolut, daraus der Steuerpunkt: C = 2·Scheitel − Mitte.
-  const sx = b.x + scheitel.x;
-  const sy = b.y + scheitel.y;
-  return `M${rund(a.x)} ${rund(a.y)} Q${rund(2 * sx - mx)} ${rund(2 * sy - my)} ${rund(b.x)} ${rund(b.y)}`;
+export function aufstellen(art: Brettart): Murmel[] {
+  const leer = zielLoch(art);
+  return zellen(art)
+    .filter((z) => !(z.r === leer.r && z.c === leer.c))
+    .map((z, i) => ({ id: i, r: z.r, c: z.c, weg: false, faellt: false, rot: ((i * 47) % 140) - 70 }));
+}
+
+/** Abstand zum Startloch — gibt beim Aufstellen den Takt, in dem die Murmeln fallen.
+    Auf dem Quadrat ist das der Ring um die Mitte, auf dem Dreieck die Reihe unter der
+    Spitze; beide Male rieseln die Murmeln von innen nach außen ins Brett. */
+export const ringAbstand = (art: Brettart, r: number, c: number) =>
+  art === "dreieck" ? r : Math.max(Math.abs(r - MITTE), Math.abs(c - MITTE));
+
+/* ── Die Bewertung ────────────────────────────────────────────────────────────────
+   Die Punktwerte sind die Vorschläge des Handoffs („an die Stempelkarte anzupassen").
+   🚨 Eine Stempelkarte gibt es im Repo noch nicht — die Zeile wird gezeigt, aber nichts
+   gutgeschrieben. Sobald es sie gibt, ist `punkte` der einzige Anknüpfungspunkt. */
+export type Bewertung = {
+  geloest: boolean;
+  stempel: "Perfekt" | "Gelöst" | "Festgefahren";
+  /** Der Stempel und der Rang stehen in Grün, wenn das Spiel gelöst ist. */
+  gruen: boolean;
+  rang: string;
+  text: string;
+  punkte: string;
+};
+
+export function bewerten(f: Ergebnis, art: Brettart = "englisch"): Bewertung {
+  const geloest = f.n === 1;
+  const gruen = geloest;
+  // Auf dem Dreieck ist das Ziel nicht die Mitte, sondern die Spitze — dasselbe Loch,
+  // das zu Beginn frei war. Der Text muss das sagen, sonst sucht der Leser eine Mitte.
+  const ort = art === "dreieck" ? "in der Spitze" : "in der Mitte";
+  if (f.n === 1 && f.mitte) return { geloest, gruen, stempel: "Perfekt", rang: "Experte · Perfekt", text: `Die eine Murmel, genau ${ort}. Das schaffen die wenigsten.`, punkte: "+30 Punkte" };
+  if (f.n === 1) return { geloest, gruen, stempel: "Gelöst", rang: "Experte", text: `Eine Murmel übrig – nur nicht ${ort}. Fast die schönste Lösung.`, punkte: "+20 Punkte" };
+  if (f.n === 2) return { geloest, gruen, stempel: "Festgefahren", rang: "Kenner", text: "Zwei Murmeln übrig. Sehr gut – die letzte ist die schwerste.", punkte: "+10 Punkte" };
+  if (f.n <= 4) return { geloest, gruen, stempel: "Festgefahren", rang: "Leser", text: `${f.n} Murmeln übrig. Beim nächsten Mal eine weniger?`, punkte: "+5 Punkte" };
+  return { geloest, gruen, stempel: "Festgefahren", rang: "Festgefahren", text: `${f.n} Murmeln übrig und kein Zug mehr. Aufstellen und noch einmal.`, punkte: "" };
 }
