@@ -214,11 +214,30 @@
 # WORDPRESS_API_URL steht auch hier NICHT — die gehört ins Netlify-UI (Regel 14).
 [context.dev.environment]
   NEXT_PUBLIC_SITE_URL = "https://dev.finanzleser.de"
+  NEXT_PUBLIC_SCHAUKASTEN = "1"
+  NEXT_PUBLIC_ENTWURF = "1"
 
 # Deploy-Previews und Branch-Deploys
 [context.deploy-preview.environment]
   NEXT_PUBLIC_SITE_URL = "https://staging.finanzleser.de"
   NEXT_PUBLIC_ADSENSE = "1"
+  # Die Abnahmerouten /schaukasten und /entwurf/kursblatt. Ohne diese beiden Schalter
+  # antwortet ein Produktions-Build dort mit 404 (lib/faden/flag.ts) — gemessen am
+  # 17.09.2026 am Preview von PR #10: `/` lieferte 200 mit der Faden-Hülle,
+  # `/schaukasten` 404.
+  #
+  # 🚨 Warum hier und nicht im Netlify-UI, anders als WORDPRESS_API_URL oben: Regel 14
+  # zielt auf Werte, die zur LAUFZEIT gebraucht werden — die erreichen aus netlify.toml
+  # nur den Build, und Build und Functions läsen dann verschiedene Wahrheiten. Ein
+  # `NEXT_PUBLIC_*` wird beim Bauen fest in den Code gesetzt und existiert zur Laufzeit
+  # gar nicht mehr. Genau dafür ist diese Datei da, und hier steht der Schalter
+  # versioniert und auf die Vorschau begrenzt.
+  #
+  # Production und Staging bekommen ihn NICHT: staging.finanzleser.de ist die Live-Seite
+  # (Memory `project_single_wp_architecture`). Beide Routen tragen zusätzlich
+  # `noindex, nofollow` und stehen in robots.txt.
+  NEXT_PUBLIC_SCHAUKASTEN = "1"
+  NEXT_PUBLIC_ENTWURF = "1"
 
 # Hinweis: noindex-Header für Staging wird in next.config.ts gesetzt
 # (env-basiert über NEXT_PUBLIC_SITE_URL — funktioniert verlässlich
