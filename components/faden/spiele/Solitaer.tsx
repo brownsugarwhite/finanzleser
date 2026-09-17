@@ -43,17 +43,19 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import SpielKopf from "./SpielKopf";
 import {
-  BRETTER, BRETT_NAMEN, anfangsFeld, bogen, bogenPfad, murmeln, nachbarIn,
+  BRETTER, BRETT_NAMEN, anfangsFeld, bogen, bogenPfad, drehBild, murmeln, nachbarIn,
   offeneZuege, tippZug, ziehe, zuegeVon,
   type BrettName, type Zug,
 } from "@/lib/faden/solitaer";
 
-const FLUG_MS = 440;       // so lange ist eine Murmel in der Luft (= --flug)
-const ZERFALL_MS = 700;    // so lange zerstäubt die geschlagene
+const FLUG_MS = 520;       // so lange ist eine Murmel in der Luft (= --flug)
+const ZERFALL_MS = 780;    // so lange zerstäubt die geschlagene (Lauf + letzter Takt)
+const DREH_MS = 6200;      // eine volle Umdrehung der gewählten Murmel
+const DREH_BILD = 33;      // ~30 Bilder je Sekunde reichen für eine so ruhige Drehung
 const SPEICHER = "fl-solitaer-beste";
 
 type Bestwerte = Partial<Record<BrettName, number>>;
-type Ueberblendung = { nach: number; vonX: number; vonY: number; mitX: number; mitY: number };
+type Ueberblendung = { nach: number; stufen: { x: number; y: number }[] };
 
 const TASTEN: Record<string, [number, number]> = {
   ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0],
@@ -80,6 +82,7 @@ export default function Solitaer() {
   const [welle, setWelle] = useState<number | null>(null);
   const [andruck, setAndruck] = useState<number | null>(null);
 
+  const drehung = useRef<SVGGElement | null>(null);
   const uhren = useRef<number[]>([]);
   const merke = useCallback((id: number) => { uhren.current.push(id); }, []);
   useEffect(() => () => uhren.current.forEach(clearTimeout), []);
@@ -155,7 +158,7 @@ export default function Solitaer() {
     setGewaehlt(null);
     setTipp(null);
     setAndruck(null);
-    setFlug({ nach: zug.nach, ...bogen(brett, zug) });
+    setFlug({ nach: zug.nach, stufen: bogen(brett, zug) });
     setFort(zug.ueber);
     setWelle(zug.nach);
     merke(window.setTimeout(() => { setFlug(null); setWelle(null); }, FLUG_MS));
@@ -177,7 +180,7 @@ export default function Solitaer() {
     setTipp(null);
     setWelle(null);
     setFort(null);
-    setFlug({ nach: zug.von, ...bogen(brett, { von: zug.nach, ueber: zug.ueber, nach: zug.von }) });
+    setFlug({ nach: zug.von, stufen: bogen(brett, { von: zug.nach, ueber: zug.ueber, nach: zug.von }) });
     setAndruck(zug.ueber);
     merke(window.setTimeout(() => setFlug(null), FLUG_MS));
     merke(window.setTimeout(() => setAndruck(null), ZERFALL_MS));
@@ -217,6 +220,38 @@ export default function Solitaer() {
     if (e.key === "Escape") { setGewaehlt(null); setTipp(null); }
     if (e.key === "z" || e.key === "Backspace") { e.preventDefault(); zurueck(); }
   };
+
+  /* Die Drehung läuft über rAF und schreibt DIREKT ins DOM — kein React-Rendern je Bild,
+     und weil nur Halbmesser wandern, ist es EIN Attribut je Punkt. Sie hält nur, solange
+     eine Murmel gewählt ist; im Hintergrund-Tab hält der Browser rAF ohnehin an. Wer
+     weniger Bewegung bestellt hat, bekommt das Ruhebild.
+
+     🚨 `staerke` fährt in 420 ms von 0 hoch. Bei 0 ist das Bild Punkt für Punkt das
+     ruhende — ohne diese Rampe springt die angefasste Murmel im ersten Bild um. */
+  useEffect(() => {
+    if (gewaehlt == null) return;
+    const g = drehung.current;
+    if (!g) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let id = 0;
+    let start = 0;
+    let letzte = 0;
+    const lauf = (jetzt: number) => {
+      if (!start) start = jetzt;
+      if (jetzt - letzte >= DREH_BILD) {
+        letzte = jetzt;
+        const seit = jetzt - start;
+        const bild = drehBild(brett.wolke, brett.radius, (seit / DREH_MS) * Math.PI * 2, Math.min(1, seit / 420));
+        const kinder = g.children;
+        for (let n = 0; n < bild.length && n < kinder.length; n++) {
+          (kinder[n] as SVGCircleElement).setAttribute("r", bild[n].toFixed(2));
+        }
+      }
+      id = requestAnimationFrame(lauf);
+    };
+    id = requestAnimationFrame(lauf);
+    return () => cancelAnimationFrame(id);
+  }, [gewaehlt, brett]);
 
   const murmelId = `fl-murmel-${brett.name}`;
   const mitte = brett.loecher[letzte < 0 ? brett.ziel : letzte];
@@ -276,16 +311,23 @@ export default function Solitaer() {
             const weg = Math.round(Math.hypot(l.x - mitte.x, l.y - mitte.y));
             return (
               <g key={i} className={klasse} style={{ "--i": i, "--weg": weg } as React.CSSProperties}>
-                <circle className="solitaer__loch" cx={l.x} cy={l.y} r={brett.radius * 0.22} />
+                {/* 🚨 Nur am FREIEN Platz. Unter einer Murmel schimmerte der graue Punkt
+                    zwischen den Rasterpunkten hindurch und machte ihre Mitte schmutzig —
+                    das Raster ist nun einmal ein Sieb, keine Fläche. */}
+                {!feld[i] && <circle className="solitaer__loch" cx={l.x} cy={l.y} r={brett.radius * 0.22} />}
                 {ziel && <circle className="solitaer__ring" cx={l.x} cy={l.y} r={brett.radius * 0.85} pathLength={100} />}
                 {feld[i] && !istFlug && (
                   <g className={"solitaer__murmel" + (andruck === i ? " solitaer__murmel--andruck" : "") + (letzte === i ? " solitaer__murmel--letzte" : "")} transform={`translate(${l.x} ${l.y})`}>
                     <g className="solitaer__leib">
-                      <use href={`#${murmelId}`} />
-                      {/* Die zweite Rasterlage: sie dreht sich langsam über der ersten, und
-                          aus der Überlagerung entsteht ein wanderndes Moiré. Nur hier — eine
-                          drehende Lage je Brett ist bezahlbar, 33 wären es nicht. */}
-                      {gewaehlt === i && <use className="solitaer__moire" href={`#${murmelId}`} />}
+                      {/* Der Anker hält den Umriss der Gruppe fest. Ohne ihn wandert die
+                          Bezugsmitte von `transform-box: fill-box` mit der drehenden Wolke,
+                          und das Anheben der gewählten Murmel zappelt. */}
+                      <circle className="solitaer__anker" r={brett.radius} />
+                      {gewaehlt === i
+                        ? <g className="solitaer__kugel" ref={drehung}>
+                            {brett.wolke.map((p, n) => <circle key={n} cx={p.x} cy={p.y} r={brett.schirm[n]?.r ?? 0} />)}
+                          </g>
+                        : <use href={`#${murmelId}`} />}
                     </g>
                   </g>
                 )}
@@ -317,7 +359,7 @@ export default function Solitaer() {
                 key={`flug-${verlauf.length}`}
                 className="solitaer__murmel solitaer__murmel--flug"
                 transform={`translate(${brett.loecher[flug.nach].x} ${brett.loecher[flug.nach].y})`}
-                style={{ "--von-x": `${flug.vonX}px`, "--von-y": `${flug.vonY}px`, "--mit-x": `${flug.mitX}px`, "--mit-y": `${flug.mitY}px` } as React.CSSProperties}
+                style={Object.fromEntries(flug.stufen.flatMap((p, n) => [[`--f${n}-x`, `${p.x}px`], [`--f${n}-y`, `${p.y}px`]])) as React.CSSProperties}
               >
                 <g className="solitaer__leib"><use href={`#${murmelId}`} /></g>
               </g>

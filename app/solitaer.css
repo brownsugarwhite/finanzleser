@@ -18,7 +18,7 @@
   width: 100%;
   /* 🚨 Derselbe Wert wie FLUG_MS in Solitaer.tsx. Läuft die Uhr dort vor dem Keyframe
      ab, zuckt die Murmel am Ende ihres Bogens zurück. */
-  --flug: 440ms;
+  --flug: 520ms;
 }
 
 /* ── Die Brettwahl ────────────────────────────────────────────────────────────────── */
@@ -59,60 +59,79 @@
 /* Gewählt: sie liegt in der Hand — höher, größer, und das Raster fängt an zu schimmern. */
 .faden-shell .solitaer__platz--gewaehlt .solitaer__leib { transform: translateY(-1.6px) scale(1.09); }
 
-/* Das Moiré: dieselbe Rasterlage ein zweites Mal, langsam gedreht. Wo sich zwei Raster
-   überlagern, entsteht ein wanderndes Muster — der Effekt, den jeder Zeitungsdruck
-   fürchtet und den hier genau eine Murmel tragen darf. */
-.faden-shell .solitaer__moire {
-  transform-box: fill-box;
-  transform-origin: center;
-  mix-blend-mode: multiply;
-  opacity: .55;
-  animation: solitaer-moire 8s linear infinite;
-}
-@keyframes solitaer-moire { to { transform: rotate(360deg); } }
+/* Die gewählte Murmel DREHT sich: dasselbe Raster, als Punktwolke auf der Kugel
+   verstanden und um die Hochachse gedreht (lib/faden/solitaer.ts, `kugelBild`). Es gibt
+   nichts zu gestalten — die Punkte tragen ihre Lage und ihre Größe selbst.
+
+   🚨 Hier lag vorher eine ZWEITE Rasterlage darüber, langsam gedreht, für ein Moiré.
+   Zwei Raster übereinander sind aber kein Glanz, sondern Unruhe: das Grundraster der
+   Murmel verschwand darin, und die angefasste Murmel war der lauteste Punkt des Bretts.
+   Eine Lage, die sich wirklich dreht, sagt dasselbe ruhiger.
+
+   Der Anker hält den Umriss der Gruppe fest (siehe Solitaer.tsx). Er zeichnet nichts. */
+.faden-shell .solitaer__anker { fill: none; stroke: none; }
 
 /* ── Der Sprung ───────────────────────────────────────────────────────────────────── */
 /* Der Bogen zeigt vorab, welchen Weg die Murmel nehmen würde. Die Striche wandern —
    wie die Laufschrift einer Route in einer Karte. */
+/* 🚨 Feiner UND deutlicher ist kein Widerspruch: die Deutlichkeit einer Haarlinie kommt
+   aus dem TON, nicht aus der Stärke. Der Strich ist von .5 auf .3 heruntergegangen und
+   von `--ink-30` auf volle Tinte hoch; die Striche stehen enger. So liest sich der Bogen
+   als gezogene Linie statt als grauer Schleier. */
 .faden-shell .solitaer__bogen {
   fill: none;
-  stroke: var(--ink-30);
-  stroke-width: .5;
-  stroke-dasharray: 1.8 2.4;
+  stroke: var(--ink);
+  stroke-width: .3;
+  stroke-dasharray: 1.1 1.9;
   stroke-linecap: round;
   animation: solitaer-ameisen 1.2s linear infinite, solitaer-auf .3s var(--kurve) backwards;
 }
-.faden-shell .solitaer__bogen--tipp { stroke: var(--spiel-ink); stroke-width: .8; }
-@keyframes solitaer-ameisen { to { stroke-dashoffset: -4.2; } }
+.faden-shell .solitaer__bogen--tipp { stroke: var(--spiel-ink); stroke-width: .55; }
+@keyframes solitaer-ameisen { to { stroke-dashoffset: -3; } }
 @keyframes solitaer-auf { from { opacity: 0; } to { opacity: 1; } }
 
-/* Der Zielring zeichnet sich einmal herum — `pathLength=100` macht die Länge
-   brettunabhängig, sonst bräuchte jeder Halbmesser sein eigenes Strichmaß. */
+/* Der Zielring: ein GESCHLOSSENER, feiner Kreis um den freien Punkt. Er zieht sich
+   zusammen, statt sich zu zeichnen.
+   🚨 Vorher lief er als Strich einmal herum (`stroke-dasharray` + `stroke-dashoffset`).
+   Das sah während der halben Sekunde nach einem offenen Ring aus, und ein offener Ring
+   liest sich nicht als Ziel, sondern als Ausschnitt. Jetzt steht er von der ersten
+   Bildhälfte an ganz da; die Bewegung liegt im Maßstab. */
 .faden-shell .solitaer__ring {
   fill: none;
   stroke: var(--ink-45);
-  stroke-width: .5;
-  stroke-dasharray: 100;
-  animation: solitaer-ziehen .45s var(--kurve) backwards;
+  stroke-width: .35;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: solitaer-ringen .4s var(--ueber-sanft) backwards;
 }
 .faden-shell .solitaer__platz--tipp .solitaer__ring {
   stroke: var(--spiel-ink);
-  stroke-width: .9;
-  animation: solitaer-ziehen .45s var(--kurve) backwards, solitaer-pochen 1.5s var(--kurve) .45s infinite;
+  stroke-width: .6;
+  animation: solitaer-ringen .4s var(--ueber-sanft) backwards, solitaer-pochen 1.5s var(--kurve) .4s infinite;
 }
-@keyframes solitaer-ziehen { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes solitaer-ringen {
+  from { transform: scale(1.5); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
 @keyframes solitaer-pochen { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
 
-/* Der Flug. Die Murmel wird am ZIEL gezeichnet und per Keyframe an ihren Ausgangsort
-   zurückgesetzt; von dort fliegt sie ins Bild. Der Scheitel liegt quer zur Fahrt
-   (--mit-x/--mit-y aus `bogen()`), dazu ein Stück Maßstab: sie hebt vom Papier ab. */
+/* Der Flug. Die Murmel wird am ZIEL gezeichnet und per Keyframe auf ihren Ausgangsort
+   zurückgesetzt; von dort fliegt sie ins Bild. Die vier Stützstellen (--f0 … --f3) stehen
+   auf der Wurfparabel aus `bogen()` — waagerecht gleichförmig, quer dazu 4t(1−t). Der
+   Zeitverlauf ist deshalb LINEAR: die Krümmung steckt in den Stützstellen, eine Kurve
+   obendrauf würde die Bahn verziehen.
+
+   Der Maßstab macht daraus einen Sprung statt eines Schiebens: 1 → 1,34 → 1 nach
+   derselben Parabel (1 + .34 · 4t(1−t)). Die Murmel kommt dem Auge entgegen. */
 .faden-shell .solitaer__murmel--flug .solitaer__leib {
   transition: none;
   animation: solitaer-flug var(--flug) linear;
 }
 @keyframes solitaer-flug {
-  0%   { transform: translate(var(--von-x), var(--von-y)) scale(1); animation-timing-function: cubic-bezier(.25, .5, .4, 1); }
-  50%  { transform: translate(var(--mit-x), var(--mit-y)) scale(1.17); animation-timing-function: cubic-bezier(.6, 0, .75, .5); }
+  0%   { transform: translate(var(--f0-x), var(--f0-y)) scale(1); }
+  25%  { transform: translate(var(--f1-x), var(--f1-y)) scale(1.255); }
+  50%  { transform: translate(var(--f2-x), var(--f2-y)) scale(1.34); }
+  75%  { transform: translate(var(--f3-x), var(--f3-y)) scale(1.255); }
   100% { transform: translate(0, 0) scale(1); }
 }
 
@@ -136,11 +155,15 @@
    kleiner werdend. Weil `schirm` nach Abstand sortiert ist, reicht der Index als Takt —
    die Auflösung läuft von der Mitte her nach außen. */
 .faden-shell .solitaer__zerfall { fill: var(--ink); pointer-events: none; }
+/* 🚨 `both`, nicht `backwards`. Mit `backwards` hält ein Punkt nur VOR seinem Takt den
+   Anfangszustand; sobald sein Lauf durch ist, fällt er auf seinen natürlichen Zustand
+   zurück — voll sichtbar. Weil die Punkte gestaffelt starten, war die geschlagene Murmel
+   nach dem Zerstäuben für zwei Zehntel wieder da, Punkt für Punkt. `both` hält auch das
+   Ende fest. Dieselbe Falle beim Siegel weiter unten. */
 .faden-shell .solitaer__zerfall circle {
   transform-box: fill-box;
   transform-origin: center;
-  animation: solitaer-zerfall .5s var(--kurve) backwards;
-  animation-delay: var(--takt);
+  animation: solitaer-zerfall .5s var(--kurve) var(--takt) 1 normal both;
 }
 @keyframes solitaer-zerfall {
   from { transform: translate(0, 0) scale(1); opacity: .95; }
@@ -218,8 +241,7 @@
   stroke-width: .7;
   transform-box: fill-box;
   transform-origin: center;
-  animation: solitaer-siegel 1.1s var(--kurve) backwards;
-  animation-delay: var(--takt);
+  animation: solitaer-siegel 1.1s var(--kurve) var(--takt) 1 normal both;
 }
 @keyframes solitaer-siegel {
   from { transform: scale(.5); opacity: .9; }
@@ -268,14 +290,17 @@
    als Strichelung stehen — sie sind die einzige Stelle, an der die Bewegung selbst die
    Auskunft war, und die Strichelung sagt dasselbe. */
 @media (prefers-reduced-motion: reduce) {
-  .faden-shell .solitaer__bogen,
-  .faden-shell .solitaer__ring,
-  .faden-shell .solitaer__moire,
-  .faden-shell .solitaer__zeiger,
+  /* 🚨 Was nur AUS Bewegung besteht, wird nicht angehalten, sondern weggelassen. Ein
+     angehaltenes Zerstäuben ist eine Murmel, die acht Zehntel zu lange liegen bleibt und
+     dann verschwindet; ein angehaltenes Siegel sind zwei Ringe, die für immer um die
+     letzte Murmel stehen. Ohne Bewegung ist schlicht nichts davon nötig. */
+  .faden-shell .solitaer__zerfall,
   .faden-shell .solitaer__aufsetzen,
   .faden-shell .solitaer__siegel,
-  .faden-shell .solitaer__raumpuls,
-  .faden-shell .solitaer__zerfall circle,
+  .faden-shell .solitaer__raumpuls { display: none; }
+  .faden-shell .solitaer__bogen,
+  .faden-shell .solitaer__ring,
+  .faden-shell .solitaer__zeiger,
   .faden-shell .solitaer__murmel .solitaer__leib,
   .faden-shell .solitaer__brett--andruck .solitaer__platz .solitaer__leib,
   .faden-shell .solitaer__brett--andruck .solitaer__platz--beweglich .solitaer__leib,
@@ -283,5 +308,5 @@
   .faden-shell .solitaer__brett--sieg .solitaer__loch { animation: none; }
   .faden-shell .solitaer__leib { transition: none; }
   .faden-shell .solitaer__raumzeiger { transition: none; }
-  .faden-shell .solitaer__ring { stroke-dashoffset: 0; }
+
 }

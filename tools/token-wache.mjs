@@ -29,7 +29,7 @@ const APP = join(WURZEL, "app");
  *  das ist die Alt-Seite und steht nicht im Umbau. */
 export const DATEIEN = [
   "faden.css", "faden-landing.css", "faden-hover.css", "kassensturz.css",
-  "finanzwort.css", "spiele.css", "schlange.css", "leo-fragt.css",
+  "finanzwort.css", "spiele.css", "schlange.css", "solitaer.css", "leo-fragt.css",
   "statistik-formen.css", "kursblatt.css", "vergleich.css", "rechner.css",
   "gamification.css",
 ];
