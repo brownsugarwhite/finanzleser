@@ -38,26 +38,107 @@
   .faden-shell .auslese__eintrag .inhalt__linie { display: none; }
 }
 
-/* ---------- Wochenbrief-Teaser ---------- */
-.faden-shell .wb-teaser__satz { display: grid; gap: var(--luft-l) var(--luft-xl); align-items: start; }
-.faden-shell .wb-teaser__bild { width: 100%; max-width: 220px; height: auto; justify-self: center; }
-@media (min-width: 760px) { .faden-shell .wb-teaser__satz { grid-template-columns: minmax(0, 1fr) 220px; } }
+/* ── Finanzleser Plus als Abo-Coupon (Übergabe „Finanzleser Heute", Baustein 5) ─────
+   🚨 Hier stand der Wochenbrief-Teaser (`.wb-teaser__*`). Er ist entfallen: der
+   Wochenbrief liegt seit dem 17.09.2026 IM Flugfenster (app/flugfenster.css).
 
-/* ---------- Finanzleser Plus: plakativ, mit Grafik ---------- */
-.faden-shell .plus-teaser__satz { display: grid; gap: var(--luft-l) var(--luft-xl); align-items: center; margin-top: var(--luft-m); }
-@media (min-width: 720px) { .faden-shell .plus-teaser__satz { grid-template-columns: minmax(0, 1fr) 240px; } }
-.faden-shell .plus-teaser__text { display: grid; justify-items: start; gap: var(--luft-m); }
+   Der Plus-Block steht jetzt in einer gestrichelten Schnittlinie, und auf der oberen
+   Linie sitzt eine Schere. Beim Überfahren wandert sie einmal quer hindurch und
+   schneidet dabei — genau das, was man mit einem Coupon tut. */
+.faden-shell .plus-coupon { position: relative; border: var(--strich-haar) dashed var(--ink-45); padding: var(--luft-l) clamp(var(--luft-l), 4vw, var(--luft-xl)); }
 /* Die Schlagzeile des Plus-Blocks ist die größte der Seite — hier wird geworben. */
-.faden-shell .plus-teaser__schlag { margin: 0; font: 900 clamp(var(--grad-26), 3.2vw, var(--grad-44))/1.1 var(--serif); color: var(--ink); letter-spacing: -.015em; }
-.faden-shell .plus-teaser__bild { width: 100%; max-width: 240px; height: auto; justify-self: center; }
-.faden-shell .plus-teaser__preis { margin: calc(-1 * var(--luft-s)) 0 0; }
-/* Die drei Leistungen als Dreispalter mit Haarlinie darüber — Zeitungssatz, kein Kärtchen. */
-.faden-shell .plus-teaser__punkte { list-style: none; margin: var(--luft-l) 0 0; padding: 0; display: grid; gap: var(--luft-l) var(--luft-xl); }
-@media (min-width: 720px) { .faden-shell .plus-teaser__punkte { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.faden-shell .plus-teaser__punkte li { display: grid; gap: var(--luft-xs); align-content: start; border-top: var(--strich-haar) solid var(--rule-strong); padding-top: var(--luft-s); }
-.faden-shell .plus-teaser__punkte b { font: var(--schrift-zeile); }
-.faden-shell .plus-teaser__punkte span { font: var(--schrift-klein); color: var(--muted); }
-.faden-shell .plus-teaser__punkte .strich-link { justify-self: start; margin-top: var(--luft-xs); }
+.faden-shell .plus-teaser__schlag { margin: 0; font: 900 clamp(var(--grad-26), 3.2vw, var(--grad-34))/1.12 var(--serif); color: var(--ink); letter-spacing: -.015em; text-wrap: balance; }
+
+/* Die Schere: 20 × 20 Papiergrund auf der Linie, um 90° gegen den Uhrzeigersinn gedreht
+   (Wunsch 17.09.2026), damit die Klingen quer zur Schnittlinie stehen. */
+.faden-shell .plus-coupon__schere {
+  position: absolute; top: -10px; left: var(--luft-l); z-index: 1;
+  width: 20px; height: 20px; display: grid; place-items: center;
+  background: var(--paper); color: var(--ink);
+  transform: rotate(-90deg);
+  transition: left 1.6s var(--kurve);
+}
+.faden-shell .plus-coupon:hover .plus-coupon__schere { left: calc(100% - 44px); }
+.faden-shell .plus-coupon__schere svg { display: block; overflow: visible; }
+/* Die kleine Schneidbewegung: die beiden Klingen klappen im Takt auf und zu, solange die
+   Schere unterwegs ist. Gedreht wird um die Ösen, nicht um die Mitte. */
+.faden-shell .plus-coupon__klinge--a, .faden-shell .plus-coupon__oese--a { transform-origin: 6px 6px; }
+.faden-shell .plus-coupon__klinge--b, .faden-shell .plus-coupon__oese--b { transform-origin: 6px 18px; }
+.faden-shell .plus-coupon:hover .plus-coupon__klinge--a, .faden-shell .plus-coupon:hover .plus-coupon__oese--a { animation: plus-schnipp-a .34s ease-in-out 8; }
+.faden-shell .plus-coupon:hover .plus-coupon__klinge--b, .faden-shell .plus-coupon:hover .plus-coupon__oese--b { animation: plus-schnipp-b .34s ease-in-out 8; }
+@keyframes plus-schnipp-a { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(9deg); } }
+@keyframes plus-schnipp-b { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-9deg); } }
+
+/* Kopf: Schlagzeile links, die runde Plakette rechts. */
+.faden-shell .plus-coupon__satz { display: grid; gap: var(--luft-l) var(--luft-xl); align-items: center; margin-top: var(--luft-m); }
+@media (min-width: 720px) { .faden-shell .plus-coupon__satz { grid-template-columns: minmax(0, 1fr) 168px; } }
+.faden-shell .plus-coupon__text { display: grid; gap: var(--luft-s); }
+/* Die Plakette: dieselbe Holo-Folie wie das Bestwert-Siegel, nur rund
+   (components/kursblatt/teile/Siegel.tsx, form="kreis"). Auf ihr steht nur das Wort;
+   „30 Tage" darunter, der Preis in der Fußzeile — Stufe 1 hat keine Anmeldung, und eine
+   Zahl auf dem Abzeichen verspräche einen Kauf, den es nicht gibt. */
+.faden-shell .plus-coupon__plakette { justify-self: center; display: grid; justify-items: center; gap: var(--luft-xs); }
+.faden-shell .plus-coupon__plakette .kb-siegel { transform: rotate(-7deg); filter: drop-shadow(0 2px 0 var(--ink-12)); }
+.faden-shell .plus-coupon__plakette .kb-siegel__text { font: 900 var(--grad-16)/1 var(--serif); letter-spacing: .05em; text-indent: .05em; }
+.faden-shell .plus-coupon__plakette em { font: var(--schrift-hinweis); color: var(--muted); }
+
+/* Das Leistungsverzeichnis: Glyph, Text, Verweis — drei Zeilen mit Haarlinie. */
+.faden-shell .plus-coupon__punkte { list-style: none; margin: var(--luft-l) 0 0; padding: 0; border-top: var(--strich-haar) solid var(--rule-strong); }
+.faden-shell .plus-coupon__punkte li { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; align-items: center; gap: var(--luft-m); padding: var(--luft-m) 0; border-bottom: var(--strich-haar) solid var(--rule-fein); transition: padding-left .3s var(--kurve); }
+.faden-shell .plus-coupon__punkte li:hover { padding-left: var(--luft-s); }
+.faden-shell .plus-coupon__punkte li.ist-spaeter { color: var(--muted); }
+.faden-shell .plus-coupon__zeile { display: grid; gap: var(--luft-xxs); min-width: 0; }
+.faden-shell .plus-coupon__zeile b { font: var(--schrift-zeile); }
+.faden-shell .plus-coupon__zeile small { font: 400 var(--grad-13)/1.5 var(--sans); color: var(--muted); }
+.faden-shell .plus-coupon__punkte .strich-link { white-space: nowrap; }
+.faden-shell .plus-coupon__punkte li:hover .strich-link i { width: 34px; }
+.faden-shell .plus-coupon__fuss { display: flex; align-items: center; gap: var(--luft-m) var(--luft-l); flex-wrap: wrap; margin-top: var(--luft-l); }
+.faden-shell .plus-coupon__fuss .quelle { margin: 0; }
+@media (max-width: 560px) {
+  .faden-shell .plus-coupon__punkte li { grid-template-columns: 40px minmax(0, 1fr); }
+  .faden-shell .plus-coupon__punkte li > :last-child { grid-column: 2; }
+}
+
+/* ── Die drei Glyphen (40 × 30, reines CSS) ─────────────────────────────────────────
+   Sie reagieren auf das Überfahren ihrer Zeile: der Koffer fächert auf, der Wächter
+   schlägt schneller, die PDF-Seite füllt ihre Zeilen. Ein Icon-Satz wäre schwerer und
+   könnte auf nichts davon reagieren. */
+.faden-shell .plus-glyph { position: relative; display: block; width: 40px; height: 30px; }
+.faden-shell .plus-glyph i { position: absolute; display: block; }
+
+/* Aktenkoffer: drei Kärtchen, im Ruhezustand leicht gefächert. */
+.faden-shell .plus-glyph--koffer i { top: 6px; left: 14px; width: 12px; height: 17px; background: var(--auflage); border: var(--strich-haar) solid var(--ink); border-bottom-width: var(--strich-stark); transition: transform .45s var(--ueber); }
+.faden-shell .plus-glyph--koffer i:nth-child(1) { transform: rotate(-6deg) translateX(-3px); }
+.faden-shell .plus-glyph--koffer i:nth-child(2) { transition-delay: .04s; }
+.faden-shell .plus-glyph--koffer i:nth-child(3) { transform: rotate(6deg) translateX(3px); transition-delay: .08s; }
+.faden-shell .plus-coupon__punkte li:hover .plus-glyph--koffer i:nth-child(1) { transform: rotate(-18deg) translateX(-8px); }
+.faden-shell .plus-coupon__punkte li:hover .plus-glyph--koffer i:nth-child(2) { transform: translateY(-3px); }
+.faden-shell .plus-coupon__punkte li:hover .plus-glyph--koffer i:nth-child(3) { transform: rotate(18deg) translateX(8px); }
+
+/* Wächter: ein Punkt, zwei Ringe, die nach außen laufen. */
+.faden-shell .plus-glyph--waechter i { top: 10px; left: 15px; width: 10px; height: 10px; border-radius: var(--radius-kreis); }
+.faden-shell .plus-glyph--waechter i:nth-child(1) { background: var(--green); }
+.faden-shell .plus-glyph--waechter i:nth-child(2), .faden-shell .plus-glyph--waechter i:nth-child(3) { border: var(--strich-fein) solid var(--green); animation: plus-ring 2.6s var(--kurve) infinite; }
+.faden-shell .plus-glyph--waechter i:nth-child(3) { animation-delay: .9s; }
+.faden-shell .plus-coupon__punkte li:hover .plus-glyph--waechter i:nth-child(2), .faden-shell .plus-coupon__punkte li:hover .plus-glyph--waechter i:nth-child(3) { animation-duration: 1.3s; }
+@keyframes plus-ring { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(2.6); opacity: 0; } }
+
+/* PDF: eine Seite mit vier angerissenen Zeilen, die sich beim Überfahren füllen. */
+.faden-shell .plus-glyph--pdf { background: var(--auflage); width: 16px; height: 22px; margin: var(--luft-xs) 0 0 12px; border: var(--strich-haar) solid var(--muted); }
+.faden-shell .plus-glyph--pdf i { left: 3px; right: 3px; height: var(--strich-haar); background: var(--muted); transform-origin: left; transition: transform .35s var(--kurve); }
+.faden-shell .plus-glyph--pdf i:nth-child(1) { top: 5px; transform: scaleX(.4); }
+.faden-shell .plus-glyph--pdf i:nth-child(2) { top: 9px; transform: scaleX(.6); transition-delay: .05s; }
+.faden-shell .plus-glyph--pdf i:nth-child(3) { top: 13px; transform: scaleX(.3); transition-delay: .1s; }
+.faden-shell .plus-glyph--pdf i:nth-child(4) { top: 17px; transform: scaleX(.5); transition-delay: .15s; }
+.faden-shell .plus-coupon__punkte li:hover .plus-glyph--pdf i { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .plus-coupon__schere { transition: none; }
+  .faden-shell .plus-coupon:hover .plus-coupon__klinge--a, .faden-shell .plus-coupon:hover .plus-coupon__klinge--b,
+  .faden-shell .plus-coupon:hover .plus-coupon__oese--a, .faden-shell .plus-coupon:hover .plus-coupon__oese--b,
+  .faden-shell .plus-glyph--waechter i { animation: none; }
+  .faden-shell .plus-glyph i { transition: none; }
+}
 
 /* ---------- Leo empfiehlt: Vergleiche als Vorschau ---------- */
 /* Die Karten stehen in Leos Spalte, also rechts der 60-px-Gasse von `.wort--leo`. */

@@ -675,7 +675,11 @@
    jedes Mal anders. Aufbau in zwei Ebenen, weil `background-attachment: fixed` nur
    ohne transformierten Vorfahr aufs Fenster zeigt — die Drehung sitzt außen, die Folie
    innen. Der Text liegt darüber, damit er von der Folie nicht eingefärbt wird. */
-/* ── Das Siegel: eine Briefmarke ──────────────────────────────────────────────────
+/* 🚨 Die Siegel-Regeln stehen OHNE `.kb` davor: seit dem 17.09.2026 trägt auch der
+   Abo-Coupon der Startseite ein Siegel (rund, `form="kreis"`), und dort gibt es kein
+   `.kb` über ihm. Der Klassenname ist mit `kb-` ohnehin eindeutig. Nur die
+   Container-Query bleibt am Kursblatt — sie fragt dessen Breite ab.
+   ── Das Siegel: eine Briefmarke ──────────────────────────────────────────────────
    Vorlage: „FL Siegel.dc.html" (Runde 2, Punkt 1). Form, Zähnung, Innenrahmen und
    Schimmer stehen im Bauteil (components/kursblatt/teile/Siegel.tsx) — hier steht nur,
    wie es im Satz sitzt.
@@ -685,29 +689,29 @@
      · Runde 2 ein Pastellstreifen mit weichem Schatten — hübsch, aber nicht die Vorlage.
    Es ist eine BRIEFMARKE: gezahnter Rand, Holo-Folie, dünner Innenrahmen, harter
    1-px-Schatten. Und die Folie steht still, während die Marke darüber wegscrollt. */
-.kb .kb-siegel {
+.kb-siegel {
   position: relative; display: inline-block; isolation: isolate;
   /* 🚨 Weniger Drehung als in der Vorlage (−8°). Der User am 16.09.2026: „weniger
      rotiert". −4° reicht, damit die Marke aufgeklebt wirkt und nicht schief hängt. */
   transform: rotate(-4deg);
   filter: drop-shadow(0 1px 0 var(--ink-25));
 }
-.kb .kb-siegel svg { display: block; overflow: visible; }
-.kb .kb-siegel__text {
+.kb-siegel svg { display: block; overflow: visible; }
+.kb-siegel__text {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   /* 🚨 Feiner als die Vorlage (700). Der User: „die schrift muss feiner sein" — 500 auf
      einer hellen Folie liest sich als Prägung, 700 als Aufdruck. */
   font: 500 var(--grad-13)/1 var(--sans); letter-spacing: .13em;
   text-indent: .13em; text-transform: uppercase; color: var(--ink); white-space: nowrap;
 }
-.kb .kb-siegel--klein .kb-siegel__text { font-size: var(--grad-12); }
+.kb-siegel--klein .kb-siegel__text { font-size: var(--grad-12); }
 /* Der Schimmer zieht schräg über die Marke — zweimal derselbe Verlauf, damit ein neuer
    Lauf auch dann startet, wenn der alte noch läuft. */
 @keyframes kb-schimmer { 0% { transform: translateX(-160%) skewX(-22deg); } 100% { transform: translateX(300%) skewX(-22deg); } }
 @keyframes kb-schimmer2 { 0% { transform: translateX(-160%) skewX(-22deg); } 100% { transform: translateX(300%) skewX(-22deg); } }
-.kb .kb-siegel__schimmer { transform-box: fill-box; transform: translateX(-160%) skewX(-22deg); }
+.kb-siegel__schimmer { transform-box: fill-box; transform: translateX(-160%) skewX(-22deg); }
 @container kb (max-width: 559px) { .kb .kb-siegel--klein { display: none; } }
-@media (prefers-reduced-motion: reduce) { .kb .kb-siegel__schimmer { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .kb-siegel__schimmer { animation: none !important; } }
 
 /* ── Stempel-Presets (K:242-247) ──────────────────────────────────────────────────── */
 .kb .kb-presets { display: flex; align-items: center; gap: var(--luft-m) var(--luft-m); flex-wrap: wrap; }
