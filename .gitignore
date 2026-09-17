@@ -87,10 +87,12 @@ docs/design_handoff_finanzleser_heute/support.js
 docs/design_handoff_finanzleser_heute/.DS_Store
 Finanzleser Chat-Design Phase 2.zip
 
-# Design-Übergaben des Kursblatts: die maßgebliche Fassung (Runde 2) liegt versioniert
-# unter docs/design_handoff_finanzleser_kursblatt/. Die drei Ordner und zwei ZIPs, die
-# beim Auspacken im Projektstamm landen, sind ältere Runden bzw. dieselben Dateien noch
-# einmal — sie gehören nicht ins Repo und dürfen gelöscht werden.
+# Die ZIP-Exporte aus Claude Design und was beim Auspacken im Projektstamm landet.
+# 🚨 Am 17.09.2026 aufgeräumt: die fünf ZIPs und die drei Ordner
+# `design_handoff_finanzleser_kursblatt{, 2, 3}` liegen jetzt im Schwester-Repo unter
+# ../finanzleser-assets/design-uebergaben/ (mit README). Die maßgeblichen Fassungen
+# stehen versioniert in docs/design_handoff_finanzleser_{faden,kursblatt,heute}/.
+# Die Regeln bleiben stehen, damit der nächste Export nicht wieder im Stamm auftaucht.
 /design_handoff_finanzleser_kursblatt/
 /design_handoff_finanzleser_kursblatt [0-9]/
 /Finanzleser Chat-Design*.zip
