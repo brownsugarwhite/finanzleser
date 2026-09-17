@@ -27,6 +27,10 @@
      Danach saß die Pille schief und der Satz war sechs Pixel zu breit.
      Layoutmaße gehören NICHT auf die Abstandsleiter (app/tokens.css, Regel 4). */
   --mitte-rand: 11px;
+  /* Der Einzug der Kapitelliste im Verzeichnis: die Abschnitte eines Kapitels rücken
+     unter dessen Titel ein. Ein Layoutmaß, kein Satzabstand — deshalb ein eigener
+     Name und nicht die Abstandsleiter (app/tokens.css, Regel 4). */
+  --verlauf-einzug: 26px;
   /* Die Breite, in der gesetzt wird: --spalte minus das Padding von #mitte (2 × Rand).
      Die 728 px des Kursblatt-Handoffs waren bis hierher ein Rechenrest, den nur
      Kommentare kannten — seit dem 13.09. ein Name, auf den man sich berufen kann. */
@@ -374,7 +378,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .verlauf__toc { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s var(--kurve); }
 .faden-shell .verlauf__toc[data-offen="1"] { grid-template-rows: 1fr; }
 .faden-shell .verlauf__toc-fach { overflow: hidden; }
-.faden-shell .verlauf ol { list-style: none; margin: 0; padding: 4px 0 6px 26px; border-bottom: var(--strich-haar) solid var(--rule-soft); }
+.faden-shell .verlauf ol { list-style: none; margin: 0; padding: 4px 0 6px var(--verlauf-einzug); border-bottom: var(--strich-haar) solid var(--rule-soft); }
 /* 🚨 `align-items: flex-start`, nicht `center`. In der Vorlage ist jede Abschnittszeile
    einzeilig, Strich und Text liegen dort auf derselben Mitte (beide bei 13,5 px gemessen).
    Unsere Abschnitte sind ganze Fragen und laufen über zwei Zeilen; zentriert schwebte der
