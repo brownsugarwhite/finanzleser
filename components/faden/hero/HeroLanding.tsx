@@ -13,11 +13,23 @@
  * stünden zwei Suchpillen gleichzeitig da. Die Einfahrt selbst macht faden.css.
  *
  * Dazu unter der Pille die Werkzeugreihe (Rechner · Vergleiche · Checklisten, Klick
- * öffnet das Finanztools-Registerblatt), die Dokumentenzahl und der CTA „Finanzleser
- * entdecken ↓", der zu „Heute" scrollt. Alles steht sofort — seit dem 13.09.2026 hat der
- * Hero keine Auftrittsanimation mehr.
+ * öffnet das Finanztools-Registerblatt) und der CTA „Finanzleser entdecken ↓", der zu
+ * „Heute" scrollt. Alles steht sofort — seit dem 13.09.2026 hat der Hero keine
+ * Auftrittsanimation mehr.
+ *
+ * Übergabe „Finanzleser Heute", Baustein 1 (17.09.2026): Die Reihe ist zentriert, drei
+ * gleich breite Spalten mit Haarlinie dazwischen, je Spalte Kicker mit Werkzeugpunkt,
+ * die Zahl groß und mittig, darunter der kursive Halbsatz. Kein Link-Text mehr — die
+ * ganze Spalte IST der Link. Hover: Kicker in Werkzeugfarbe, Punkt schlägt doppelt,
+ * Zahl wächst leicht, Unterstrich fährt aus der Mitte auf.
+ *
+ * 🚨 Zwei Abweichungen von der Übergabe, beide vom User:
+ *   – „im Faden" hinter der Zahl fällt weg, die Zahl steht allein und mittig.
+ *   – Die Werkzeugfarben kommen aus dem Tokenverzeichnis (Vergleiche türkis, Checklisten
+ *     lila), nicht aus der Übergabe — dort waren Vergleiche dunkeltürkis und Checklisten
+ *     grün, und Grün ist im Haus die Marke, kein Werkzeug.
  */
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useFaden } from "@/components/faden/FadenProvider";
 import Spark from "@/components/ui/Spark";
@@ -26,13 +38,12 @@ import LeoChatSendButton from "@/components/ui/LeoChatSendButton";
 import VersichererSelect from "@/components/ui/VersichererSelect";
 import type { Versicherer } from "@/lib/versicherer";
 import { reduzierteBewegung } from "@/lib/faden/belohnung";
-import { Trenner, useHoverBox } from "@/components/faden/spalten/HoverBox";
 
 /** Werkzeugreihe (TOOLS, 03c-hero.html:7). Reiter-Schlüssel wie REITER in kopf/Blatt.tsx; Zahlen wie im Prototyp. */
 const WERKZEUGE = [
-  { key: "rechner", name: "Rechner", zahl: 56, text: "Unterhalt, Rente, Steuer, Kredit", ziel: "Zu den Rechnern" },
-  { key: "vergleich", name: "Vergleiche", zahl: 43, text: "Tarife nebeneinander", ziel: "Zu den Vergleichen" },
-  { key: "checkliste", name: "Checklisten", zahl: 207, text: "Schritt für Schritt, als PDF", ziel: "Zu den Checklisten" },
+  { key: "rechner", name: "Rechner", zahl: 56, text: "Unterhalt, Rente, Steuer, Kredit" },
+  { key: "vergleich", name: "Vergleiche", zahl: 43, text: "Tarife nebeneinander" },
+  { key: "checkliste", name: "Checklisten", zahl: 207, text: "Schritt für Schritt, als PDF" },
 ] as const;
 /** Der Hero gehört nur an den Anfang eines Fadens; kommt man später zur Startseite zurück, hängt sich nur „Heute“ an. */
 export type HeroZahlen = Partial<Record<"rechner" | "vergleich" | "checkliste", number>>;
@@ -58,8 +69,6 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
   const pille = useRef<HTMLFormElement>(null);
   const feld = useRef<HTMLTextAreaElement>(null);
   const [versicherer, setVersicherer] = useState<Versicherer | null>(null);
-  const reihe = useRef<HTMLDivElement>(null);
-  useHoverBox(reihe, ".werkzeug-k", { radius: 14, oben: 16, unten: 16 });
 
   // Die Eingabe des Fadens fährt von unten herein, sobald die OBERE Pille aus dem Bild
   // gescrollt ist (Wunsch vom 13.09.2026) — nicht erst, wenn der ganze Hero durch ist.
@@ -129,17 +138,21 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
           </div>
         </div>
         <div className="landing-unten">
-          <div className="werkzeugreihe" ref={reihe}>
-            {WERKZEUGE.map((w, i) => (
-              <Fragment key={w.key}>
-                {i > 0 && <Trenner voll />}
-                <Link className="werkzeug-k" href="/finanztools" onClick={(e) => werkzeug(e, w.key)}>
-                  <span className="kicker kicker--tool"><i className={`dot dot--${w.key}`} />{w.name}</span>
-                  <b>{zahlen?.[w.key] ?? w.zahl}<small>im Faden</small></b>
-                  <span>{w.text}</span>
-                  <span className="strich-link strich-link--gross">{w.ziel}<i /></span>
-                </Link>
-              </Fragment>
+          <div className="werkzeugreihe">
+            {WERKZEUGE.map((w) => (
+              <Link
+                key={w.key}
+                className="werkzeug-k"
+                href="/finanztools"
+                onClick={(e) => werkzeug(e, w.key)}
+                /* Der Ton der Spalte: Kicker im Hover, Puls des Punktes, Unterstrich. */
+                style={{ ["--ton" as string]: `var(--tool-${w.key})` } as React.CSSProperties}
+              >
+                <span className="kicker kicker--tool"><i className={`dot dot--${w.key}`} />{w.name}</span>
+                <b>{zahlen?.[w.key] ?? w.zahl}</b>
+                <span className="werkzeug-k__sub">{w.text}</span>
+                <i className="werkzeug-k__strich" aria-hidden="true" />
+              </Link>
             ))}
           </div>
         </div>

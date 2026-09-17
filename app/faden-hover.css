@@ -24,18 +24,29 @@
 /* Werkzeugreihe im Hero: drei Kacheln, Trenner mit kurzen Linien, docken beim Laden an (01-css.html:482, 486, 488–493) */
 .faden-shell .landing-unten { align-self: start; width: min(820px, 94%); display: grid; justify-items: center; will-change: opacity, transform; }
 .faden-shell .landing-sub b { font-weight: 700; font-variant-numeric: tabular-nums; }
-.faden-shell .werkzeugreihe { position: relative; display: flex; align-items: stretch; justify-content: center; width: 100%; margin-top: var(--luft-s); }
-.faden-shell .werkzeugreihe .trenner { --linie: 28px; }
-.faden-shell .werkzeugreihe .trenner--voll { --linie: 78px; }
-/* 🚨 Hier stand ein Einblendzustand für die Trennlinien. Er war nötig, solange die
+/* Übergabe „Finanzleser Heute", Baustein 1 (17.09.2026): drei gleich breite Spalten,
+   zentriert, dazwischen eine Haarlinie — kein Trenner mit Spark und keine Hover-Box mehr.
+   🚨 Hier stand ein Einblendzustand für die Trennlinien. Er war nötig, solange die
    Kacheln nacheinander andockten — die Striche standen sonst im leeren Raum. Seit dem
    13.09.2026 hat der Hero gar keine Auftrittsanimation mehr: alles steht sofort. */
-.faden-shell .werkzeug-k { flex: 1 1 0; max-width: 236px; text-align: left; border: 0; background: none; padding: var(--luft-m) var(--luft-l); display: grid; gap: var(--luft-xs); align-content: center; cursor: pointer; position: relative; z-index: 1; color: var(--ink); text-decoration: none; }
-.faden-shell .werkzeug-k b { font-family: var(--serif); font-size: var(--grad-26); font-weight: 900; line-height: 1.1; }
-.faden-shell .werkzeug-k b small { font-size: var(--grad-13); font-weight: 700; color: var(--muted); margin-left: var(--luft-s); font-family: var(--sans); }
-.faden-shell .werkzeug-k span { font-size: var(--grad-13); color: var(--muted); }
-.faden-shell .werkzeug-k .strich-link--gross { margin-top: var(--luft-xs); font-size: var(--grad-13); }
-.faden-shell .werkzeug-k:hover > .strich-link--gross i { width: 30px; }
+.faden-shell .werkzeugreihe { position: relative; display: flex; align-items: stretch; justify-content: center; width: min(600px, 100%); margin: var(--luft-l) auto 0; }
+.faden-shell .werkzeug-k { flex: 1 1 0; min-width: 0; position: relative; display: grid; justify-items: center; align-content: start; gap: var(--luft-xs); padding: var(--luft-s) var(--luft-m) var(--luft-m); text-align: center; text-decoration: none; color: var(--ink); cursor: pointer; }
+.faden-shell .werkzeug-k + .werkzeug-k { border-left: var(--strich-haar) solid var(--rule-mid); }
+/* Die Zahl steht allein und mittig (Wunsch 17.09.2026 — „im Faden" ist gestrichen). */
+.faden-shell .werkzeug-k b { font: 900 var(--grad-26)/1 var(--serif); letter-spacing: -.02em; font-variant-numeric: tabular-nums; transition: transform .4s var(--ueber); }
+.faden-shell .werkzeug-k__sub { font: var(--schrift-hinweis); color: var(--muted); text-wrap: balance; }
+.faden-shell .werkzeug-k .kicker { transition: color .25s; white-space: nowrap; }
+.faden-shell .werkzeug-k:hover .kicker { color: var(--ton); }
+.faden-shell .werkzeug-k:hover b { transform: scale(1.08); }
+/* Der Punkt schlägt doppelt — dieselben Keyframes wie der Bestwertpunkt im Kursblatt. */
+.faden-shell .werkzeug-k:hover .dot { animation: fl-punkt 1.8s ease-in-out infinite; }
+/* Der Unterstrich fährt aus der Mitte auf, in der Werkzeugfarbe der Spalte. */
+.faden-shell .werkzeug-k__strich { position: absolute; left: var(--luft-m); right: var(--luft-m); bottom: var(--luft-xxs); height: var(--strich-stark); background: var(--ton); transform: scaleX(0); transition: transform .35s var(--kurve); }
+.faden-shell .werkzeug-k:hover .werkzeug-k__strich { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .werkzeug-k:hover .dot { animation: none; }
+  .faden-shell .werkzeug-k b, .faden-shell .werkzeug-k__strich { transition: none; }
+}
 
 /* CTA „Finanzleser entdecken ↓“ unten im Hero, blendet nach 2,2 s ein (01-css.html:476–479) */
 .faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; border: 0; background: none; color: var(--ink); font-weight: 600; font-size: var(--grad-14); display: grid; justify-items: center; gap: var(--luft-xs); letter-spacing: .02em; cursor: pointer; font-family: inherit; }
@@ -44,10 +55,12 @@
 
 @media (max-width: 900px) {
   /* 01-css.html:876–877, 883 */
-  .faden-shell .werkzeugreihe { flex-wrap: wrap; justify-content: center; } .faden-shell .werkzeugreihe .trenner { display: none; }
-  .faden-shell .werkzeug-k { max-width: none; flex: 1 1 100%; padding: var(--luft-s) var(--luft-m); display: flex; align-items: baseline; gap: var(--luft-s); }
-  .faden-shell .werkzeug-k b { font-size: var(--grad-20); } .faden-shell .werkzeug-k > span:not(.kicker):not(.strich-link--gross) { display: none; } .faden-shell .werkzeug-k b small { display: none; }
-  .faden-shell .werkzeug-k .strich-link--gross { margin: 0 0 0 auto; display: inline-flex; white-space: nowrap; }
+  /* Übergabe: unter 560 px Containerbreite steht die Reihe als Spalte, die Haarlinie
+     wandert von links nach oben („eng"). */
+  .faden-shell .werkzeugreihe { flex-direction: column; }
+  .faden-shell .werkzeug-k { padding: var(--luft-s) var(--luft-m); }
+  .faden-shell .werkzeug-k + .werkzeug-k { border-left: 0; border-top: var(--strich-haar) solid var(--rule); }
+  .faden-shell .werkzeug-k b { font-size: var(--grad-22); }
   .faden-shell .hbox { display: none; }
   .faden-shell .hero-cta { bottom: 10px; }
 }
