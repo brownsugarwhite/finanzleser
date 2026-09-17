@@ -304,8 +304,12 @@
      92 –     die Marken: die Skalenzahlen selbst, jede ein Knopf
    Gesamt 126 px statt 118 — bei einer Reihe weniger.
    ─────────────────────────────────────────────────────────────────────────────────── */
-.kb .kb-lineal {
-  position: relative; width: 100%; height: 126px;
+.kb-lineal {
+  /* 🚨 134 statt 126: Die Marken beginnen bei 92 px und sind 36 px hoch (Polster plus
+     Zeile). Bei 126 px schnitt das Fenster sie auf halber Höhe ab — auf jeder
+     Vergleichsseite standen die Skalenzahlen halbiert da. Gemessen am 17.09.2026, als
+     das Lineal in die Schätzfrage des Kassensturzes kam. */
+  position: relative; width: 100%; height: 134px;
   user-select: none;
   /* Eigener Container, damit der Bedienhinweis an der Breite DES LINEALS hängt und nicht
      an der des Satzspiegels (FL Lineal:87 prüft `w >= 520`). */
@@ -314,30 +318,30 @@
 /* 🚨 Der Griff deckt das GANZE Lineal — Nadel, Spitze und Fenster sitzen darin und
    rechnen ihre Abstände von seiner Oberkante. Ein `top: 42px` hier verschiebt alles
    darunter um 42 px, und die Marken landen im nächsten Feld. */
-.kb .kb-lineal__griff { position: absolute; inset: 0; touch-action: none; cursor: grab; outline: 0; }
-.kb .kb-lineal--zieht .kb-lineal__griff { cursor: grabbing; }
-.kb .kb-lineal__griff:focus-visible { outline: var(--strich-stark) solid var(--green); outline-offset: 2px; }
+.kb-lineal__griff { position: absolute; inset: 0; touch-action: none; cursor: grab; outline: 0; }
+.kb-lineal--zieht .kb-lineal__griff { cursor: grabbing; }
+.kb-lineal__griff:focus-visible { outline: var(--strich-stark) solid var(--green); outline-offset: 2px; }
 
 /* L:18 — die Spur läuft links und rechts aus, statt an einer Kante abzuschneiden. */
-.kb .kb-lineal__fenster {
-  position: absolute; left: 0; right: 0; top: 28px; height: 84px; overflow: hidden;
+.kb-lineal__fenster {
+  position: absolute; left: 0; right: 0; top: 28px; height: 106px; overflow: hidden;
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 /* L:19 + :83 — im Prototyp `left:0` plus gemessener Versatz; hier `left:50%` und der Wert
    als Verschiebung. Gleiche Geometrie, aber schon im gelieferten HTML richtig. */
-.kb .kb-lineal__spur {
-  position: absolute; left: 50%; top: 0; height: 84px;
+.kb-lineal__spur {
+  position: absolute; left: 50%; top: 0; height: 106px;
   transform: translateX(calc(-1 * var(--kb-x)));
   transition: transform .55s var(--kurve);
 }
-.kb .kb-lineal--zieht .kb-lineal__spur { transition: none; }
+.kb-lineal--zieht .kb-lineal__spur { transition: none; }
 
-.kb .kb-lineal__grundlinie { position: absolute; left: 0; right: 0; top: 42px; height: 1px; background: var(--ink); }
+.kb-lineal__grundlinie { position: absolute; left: 0; right: 0; top: 42px; height: 1px; background: var(--ink); }
 
 /* L:24-26 — drei Strichhöhen. Als Kachel statt als Knoten: eine Kachel je Periode,
    sonst entstünde an der Kachelgrenze eine Naht. Reihenfolge = Stapelung von oben:
    groß (18 px, Tinte) über mittel (12 px) über klein (7 px). */
-.kb .kb-lineal__striche {
+.kb-lineal__striche {
   position: absolute; left: 0; right: 0; top: 42px; height: 18px;
   background-image:
     linear-gradient(90deg, var(--ink) 0 1px, transparent 1px),
@@ -350,7 +354,7 @@
 
 /* Die Marken: die Skalenzahlen SIND die Marken. Ein Klick springt hin; wo ein Name
    gegeben ist („5 Jahre“), steht der Name statt der Zahl und wiegt schwerer. */
-.kb .kb-lineal__marke {
+.kb-lineal__marke {
   position: absolute; top: 64px; transform: translateX(-50%);
   border: 0; background: transparent; padding: var(--luft-xs) var(--luft-s); cursor: pointer;
   font: 500 var(--grad-11) var(--sans); color: var(--muted);
@@ -359,8 +363,8 @@
 }
 /* 🚨 Auch eine benannte Marke bleibt eine Marke: grau und 11 px. Sie stand hier in
    700/12/Tinte und wog damit schwerer als die Zahl darüber, um die es geht. */
-.kb .kb-lineal__marke[data-benannt="an"] { font-weight: 600; color: var(--ink); }
-.kb .kb-lineal__marke:hover { color: var(--kb-lineal-farbe); transform: translateX(-50%) translateY(-1px); }
+.kb-lineal__marke[data-benannt="an"] { font-weight: 600; color: var(--ink); }
+.kb-lineal__marke:hover { color: var(--kb-lineal-farbe); transform: translateX(-50%) translateY(-1px); }
 
 /* L:32-33 — Nadel mit Papier-Aura, damit sie über den Strichen frei steht.
    🚨 Sie reicht UNTER die Achse. In der Vorlage liegt die Achse bei 20 px und der Balken
@@ -368,23 +372,23 @@
    über die Skala hinaussteht. Bei uns lag er bündig auf der Achse (48…70 bei Achse 70)
    und sah dadurch aus, als stünde er davor statt darauf. Unsere Achse liegt bei 70:
    Balken 54…76, Spitze 48…54. */
-.kb .kb-lineal__nadel {
+.kb-lineal__nadel {
   position: absolute; left: 50%; top: 54px; width: 2px; height: 22px;
   background: var(--kb-lineal-farbe); transform: translateX(-50%);
   box-shadow: 0 0 0 3px var(--paper);
 }
-.kb .kb-lineal__spitze {
+.kb-lineal__spitze {
   position: absolute; left: 50%; top: 48px; width: 0; height: 0; transform: translateX(-50%);
   border-left: 5px solid transparent; border-right: 5px solid transparent;
   border-bottom: 6px solid var(--kb-lineal-farbe);
 }
 
 /* L:34 — der Wert steht als Eingabefeld ÜBER der Nadel, gestrichelt unterstrichen. */
-.kb .kb-lineal__wertzeile {
+.kb-lineal__wertzeile {
   position: absolute; left: 0; right: 0; top: 0; z-index: 2; height: 40px;
   display: flex; justify-content: center; align-items: baseline; gap: 7px;
 }
-.kb .kb-lineal__wert {
+.kb-lineal__wert {
   text-align: center; border: 0; border-bottom: var(--strich-haar) dashed var(--ink-35);
   /* 🚨 Die ZAHL bleibt Tinte (Handoff Runde 2: „Werkzeugfarbe nur für Nadel, Bogen,
      Linie und Kicker — die Zahl bleibt Tinte #334A27"). Sie stand hier in der
@@ -393,21 +397,21 @@
   padding: 0 0 var(--luft-xs); outline: 0; font-variant-numeric: tabular-nums; cursor: text;
 }
 /* Die Einheit steht neben dem Feld — kursiv, grau, auf der Grundlinie der Zahl. */
-.kb .kb-lineal__einheit { font: italic 300 var(--grad-15) var(--serif); color: var(--muted); pointer-events: none; }
-.kb .kb-lineal__wert:focus { border-bottom: var(--strich-haar) solid var(--ink); background: transparent; }
+.kb-lineal__einheit { font: italic 300 var(--grad-15) var(--serif); color: var(--muted); pointer-events: none; }
+.kb-lineal__wert:focus { border-bottom: var(--strich-haar) solid var(--ink); background: transparent; }
 
 /* L:35 — Bedienhinweis oben rechts; verschwindet nach der ersten Berührung. */
-.kb .kb-lineal__hinweis {
+.kb-lineal__hinweis {
   position: absolute; right: 0; top: var(--luft-s);
   display: flex; align-items: center; gap: var(--luft-s);
   font: var(--schrift-hinweis); color: var(--muted);
   transition: opacity .5s; pointer-events: none;
 }
-.kb .kb-lineal__hinweis i { display: inline-block; width: 14px; height: 1px; background: currentColor; animation: fl-hand 1.8s ease-in-out infinite; }
-.kb .kb-lineal[data-hinweis="aus"] .kb-lineal__hinweis { opacity: 0; }
+.kb-lineal__hinweis i { display: inline-block; width: 14px; height: 1px; background: currentColor; animation: fl-hand 1.8s ease-in-out infinite; }
+.kb-lineal[data-hinweis="aus"] .kb-lineal__hinweis { opacity: 0; }
 /* L:87 — unter 520 px Breite ist kein Platz für den Hinweis. */
 @container lineal (max-width: 519px) {
-  .kb .kb-lineal__hinweis { opacity: 0; }
+  .kb-lineal__hinweis { opacity: 0; }
 }
 
 /* ═══ Die gemeinsame Anatomie der fünf Bausteine ══════════════════════════════════════

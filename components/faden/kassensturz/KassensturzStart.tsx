@@ -19,6 +19,8 @@ import { useState, useSyncExternalStore } from "react";
 import type { KassensturzDaten } from "@/lib/faden/optionen";
 import Kassensturz, { type Ziel } from "./Kassensturz";
 import Fortschrittsreihe from "./Fortschrittsreihe";
+import Fahrplan from "./Fahrplan";
+import Beleg from "./Beleg";
 import Button from "@/components/ui/Button";
 import { KS_EREIGNIS, KS_SPEICHER, datumLang, offeneFragen } from "./logik";
 
@@ -56,29 +58,37 @@ export default function KassensturzStart({ daten, ziele }: { daten: KassensturzD
   // Fortschritt im Lauf darunter (gemessen 12.09.2026: acht Segmente).
   const anzahl = Math.max(1, offeneFragen(daten.fragen || [], {}).length);
   return (
-    <div className="ks ks-deck" id="kassensturz">
-      <div className="ks__kopf">
-        <span className="kicker kicker--gruen ks__marke"><i /> {daten.titel}{untertitel}</span>
-        <span className="ks__stand">{erg ? "Ausgewertet" : begonnen ? "Angefangen" : "Noch nicht begonnen"}</span>
+    <div className="ks-satz" id="kassensturz">
+      <div className="ks ks-deck">
+        <div className="ks__kopf">
+          <span className="kicker kicker--gruen ks__marke"><i /> {daten.titel}{untertitel}</span>
+          <span className="ks__stand">{erg ? "Ausgewertet" : begonnen ? "Angefangen" : "Noch nicht begonnen"}</span>
+        </div>
+        <Fortschrittsreihe nr={erg ? anzahl + 1 : 0} gesamt={anzahl} />
+        <div className="ks__buehne">
+          {erg ? (
+            <>
+              <div className="ks__frage">Ihr Kassensturz vom {datumLang(erg.datum)} · Score {erg.score}</div>
+              <p className="ks__hinweis">Profil, Ampel und Ihre Lücken liegen bereit. Die Werte ändern sich jedes Jahr; in sechs Monaten lohnt ein neuer Durchgang.</p>
+              <span className="ks-deck__start"><Button label="Ergebnis ansehen" onClick={() => setOffen(true)} /></span>
+            </>
+          ) : (
+            <>
+              <div className="ks__frage">Wie gut sind Sie eigentlich aufgestellt?</div>
+              <p className="ks__hinweis">{anzahl} Fragen, eine Schätzung, keine Tastatur. Rechts druckt sich Ihr Beleg mit — am Ende stehen darauf Profil, Ampel und die drei größten Lücken.</p>
+              {/* Der Fahrplan beantwortet, was vor jedem Fragebogen steht: wie lange das
+                  dauert und was am Ende herauskommt. */}
+              <Fahrplan fragen={anzahl} />
+              {/* Der Name ist der Haken für die Sonden (tools/faden-*-mess.mjs) — der Knopf
+                  selbst kommt unverändert von der Live-Seite und trägt keine eigene Klasse. */}
+              <span className="ks-deck__start"><Button label={begonnen ? "Weitermachen" : "Kassensturz starten"} onClick={() => setOffen(true)} /></span>
+            </>
+          )}
+        </div>
       </div>
-      <Fortschrittsreihe nr={erg ? anzahl + 1 : 0} gesamt={anzahl} />
-      <div className="ks__buehne">
-        {erg ? (
-          <>
-            <div className="ks__frage">Ihr Kassensturz vom {datumLang(erg.datum)} · Score {erg.score}</div>
-            <p className="ks__hinweis">Profil, Ampel und Ihre Lücken liegen bereit. Die Werte ändern sich jedes Jahr; in sechs Monaten lohnt ein neuer Durchgang.</p>
-            <span className="ks-deck__start"><Button label="Ergebnis ansehen" onClick={() => setOffen(true)} /></span>
-          </>
-        ) : (
-          <>
-            <div className="ks__frage">Wie gut sind Sie eigentlich aufgestellt?</div>
-            <p className="ks__hinweis">{anzahl} Fragen, keine Tastatur. Am Ende sehen Sie Ihr Profil, Ihre Ampel und Ihre drei größten Lücken — sofort und vollständig.</p>
-            {/* Der Name ist der Haken für die Sonden (tools/faden-*-mess.mjs) — der Knopf
-                selbst kommt unverändert von der Live-Seite und trägt keine eigene Klasse. */}
-            <span className="ks-deck__start"><Button label={begonnen ? "Weitermachen" : "Kassensturz starten"} onClick={() => setOffen(true)} /></span>
-          </>
-        )}
-      </div>
+      {/* Der Beleg steht schon auf dem Deckblatt — leer, aber sichtbar: Er ist das
+          Versprechen, dass hier etwas mitgeschrieben wird. */}
+      <Beleg daten={daten} antworten={{}} />
     </div>
   );
 }

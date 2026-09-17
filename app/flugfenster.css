@@ -181,8 +181,8 @@
 .faden-shell .wb-platte__stempel {
   position: absolute; right: var(--luft-m); top: calc(-1 * var(--luft-l));
   padding: var(--luft-xs) var(--luft-s);
-  border: 2.5px solid var(--green-ink); border-radius: var(--radius-kante);
-  background: rgba(255, 255, 255, .7);
+  border: var(--strich-stempel) solid var(--green-ink); border-radius: var(--radius-kante);
+  background: var(--stempel-grund);
   font: 900 var(--grad-13)/1 var(--serif); letter-spacing: .14em; text-transform: uppercase;
   color: var(--green-ink); transform: rotate(-11deg);
   animation: fl-stempel .7s var(--ueber) both;

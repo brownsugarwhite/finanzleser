@@ -155,3 +155,75 @@ export function standSchreiben(s: KassensturzStand | null): void {
   } catch { /* voll oder gesperrt */ }
   try { document.dispatchEvent(new Event(KS_EREIGNIS)); } catch { /* kein DOM */ }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────────────
+   Der BELEG (Übergabe „Finanzleser Heute“, Baustein 3)
+
+   Neben der Bühne druckt sich ein Kassenbon mit: je Frage eine Zeile mit Thema, Antwort
+   und dem, was sie den Stand gekostet oder gebracht hat, darunter die Zwischensumme.
+
+   🚨 EINE Abweichung von der Übergabe, und sie ist eine bewusste: Dort trägt jede
+   Antwort feste Punkte (12 / 6 / 0), die im Prototyp im Fragenkatalog stehen. Unser
+   Fragenkatalog kommt aus dem CMS und kennt keine Punkte je Antwort — die würden hier
+   erfunden. Stattdessen zeigt der Beleg, was jede Antwort am SCORE bewegt hat: derselbe
+   Score, der am Ende im Tacho steht (`ergebnis`), aufgeschlüsselt nach Antworten. Eine
+   Antwort, die eine Lücke öffnet, kostet; eine, die eine Stärke belegt, bringt.
+   Der Bon zählt darum abwärts von 100 statt aufwärts von 0 — wie ein Kassenbon eben.
+
+   Sobald das CMS Punkte je Antwort führt, kann der Beleg wieder aufwärts zählen; die
+   Darstellung müsste dafür nichts ändern, nur diese Funktion.
+   ───────────────────────────────────────────────────────────────────────────────────── */
+
+/** Lesbares Thema einer Frage für den Beleg. Das CMS kann `thema` setzen. */
+const THEMA: Record<string, string> = {
+  status: "Status", haushalt: "Haushalt", wohnen: "Wohnen", arbeitskraft: "Arbeitskraft",
+  vorsorge: "Vorsorge", einkuenfte: "Einkünfte", versicherungen: "Versicherungen",
+  schaetz: "Rentenwissen", notgroschen: "Notgroschen", haftpflicht: "Haftpflicht",
+  hausrat: "Hausrat", vertraege: "Verträge", steuer: "Steuer", kinder: "Kinder",
+};
+export function themaFuer(f: KassensturzFrage): string {
+  const eigen = (f as { thema?: string }).thema;
+  if (eigen) return eigen;
+  return THEMA[f.id] || f.id.charAt(0).toUpperCase() + f.id.slice(1);
+}
+
+/** Die Antwort so kurz, dass sie in eine Bon-Zeile passt. */
+export function wertKurz(f: KassensturzFrage, v: Antwort | undefined): string {
+  if (v === undefined) return "—";
+  if (Array.isArray(v)) return v.length ? `${v.length} von ${f.optionen?.length ?? v.length}` : "keine";
+  if (typeof v === "number") return betrag(v, f.einheit ?? "€");
+  return v.length > 16 ? v.slice(0, 15) + "…" : v;
+}
+
+export interface BelegZeile {
+  id: string;
+  /** „01“ … */
+  nr: string;
+  thema: string;
+  wert: string;
+  /** Was die Antwort am Score bewegt hat; `null`, solange die Zeile nicht gebucht ist. */
+  punkte: number | null;
+  gebucht: boolean;
+}
+
+/**
+ * Die Zeilen des Belegs zum aktuellen Antwortstand. Die Reihenfolge ist die der offenen
+ * Fragen — dieselbe, die auch die Fortschrittsreihe zählt.
+ */
+export function belegZeilen(d: KassensturzDaten, a: Antworten): BelegZeile[] {
+  const offen = offeneFragen(d.fragen, a);
+  let bisher: Antworten = {};
+  let stand = ergebnis(d, bisher).score;
+  return offen.map((f, i) => {
+    const v = a[f.id];
+    const gebucht = v !== undefined;
+    let punkte: number | null = null;
+    if (gebucht) {
+      bisher = { ...bisher, [f.id]: v };
+      const neu = ergebnis(d, bisher).score;
+      punkte = neu - stand;
+      stand = neu;
+    }
+    return { id: f.id, nr: String(i + 1).padStart(2, "0"), thema: themaFuer(f), wert: wertKurz(f, v), punkte, gebucht };
+  });
+}

@@ -1,7 +1,11 @@
 "use client";
 
 /**
- * Finanz-Kassensturz (Port aus dem Prototyp, 04-js-inhalt.html `kassensturzKasten()`):
+ * Finanz-Kassensturz — Baustein 3 der Übergabe „Finanzleser Heute" (17.09.2026): links
+ * die Bühne, rechts der Beleg, der bei jeder Antwort eine Zeile mitdruckt. Die Punkte
+ * fliegen von der gedrückten Taste zur Zwischensumme.
+ *
+ * Port aus dem Prototyp, 04-js-inhalt.html `kassensturzKasten()`:
  * acht Fragen als Karten mit Ikon, Bedingungen (`wenn`), Fortschrittslinie, ruhiger
  * Bühnenwechsel, Schätzfrage mit Regler, Mehrfachauswahl. Am Ende Profil, Ampel,
  * Tacho-Score, Lückenkarten mit echten Zielen, Teilen, Aktenkoffer, 30 Punkte + Wappen.
@@ -15,6 +19,10 @@ import { useFaden } from "@/components/faden/FadenProvider";
 import { reduzierteBewegung } from "@/lib/faden/belohnung";
 import Ikon from "./Ikon";
 import Fortschrittsreihe from "./Fortschrittsreihe";
+import Beleg from "./Beleg";
+import Lineal from "@/components/kursblatt/eingabe/Lineal";
+import Adresszeile from "@/components/faden/Adresszeile";
+import Button from "@/components/ui/Button";
 import { LeoRede } from "@/components/faden/leo/Blase";
 import Tacho from "./Tacho";
 import { type Antworten, KASSENSTURZ_URL, betrag, datumLang, ergebnis, heuteLokal, ikonFuer, istSchaetzfrage, naechsterIndex, offeneFragen, schaetzPunkte, standLesen, standSchreiben } from "./logik";
@@ -54,12 +62,18 @@ function SparkZier() {
   );
 }
 
-/** Antworten als Karten mit Ikon; die gewählte füllt sich dunkel (Morph von links). */
-function Karten({ daten, f, gewaehlt, onKlick }: { daten: KassensturzDaten; f: KassensturzFrage; gewaehlt: (o: string) => boolean; onKlick: (o: string) => void }) {
+/**
+ * Antworten als Karten mit Ikon — in der Übergabe sind es Tasten einer Registrierkasse:
+ * gedrückt sinken sie ein, füllen sich mit Tinte und schicken ihre Punkte zum Beleg.
+ *
+ * 🚨 `onKlick` bekommt den Knoten mit: Der Punkte-Flug startet an der gedrückten Taste,
+ * und ihre Lage ist nur hier bekannt.
+ */
+function Karten({ daten, f, gewaehlt, onKlick }: { daten: KassensturzDaten; f: KassensturzFrage; gewaehlt: (o: string) => boolean; onKlick: (o: string, el: HTMLElement) => void }) {
   return (
     <div className="ks__karten">
       {(f.optionen || []).map((o, i) => (
-        <button key={o} type="button" className={"ks__karte" + (gewaehlt(o) ? " gewaehlt" : "")} style={{ animationDelay: `${i * 60}ms` }} onClick={() => onKlick(o)} aria-pressed={gewaehlt(o)}>
+        <button key={o} type="button" className={"ks__karte" + (gewaehlt(o) ? " gewaehlt" : "")} style={{ animationDelay: `${i * 70}ms` }} onClick={(e) => onKlick(o, e.currentTarget)} aria-pressed={gewaehlt(o)}>
           <Ikon name={ikonFuer(daten, f, o)} />
           <b>{o}</b>
         </button>
@@ -75,40 +89,56 @@ function anteil(w: number, min: number, max: number): number {
 }
 
 function SchaetzFrage({ f, onTipp, onWeiter }: { f: KassensturzFrage; onTipp: (wert: number, punkte: number) => void; onWeiter: (wert: number) => void }) {
-  const min = f.min ?? 0, max = f.max ?? 100, schritt = f.schritt ?? 10;
+  const min = f.min ?? 600, max = f.max ?? 2400, schritt = f.schritt ?? 50;
   const einheit = f.einheit ?? "€";
   const richtig = f.richtig ?? 0;
-  // Startwert wie im Prototyp (1500), in die Spanne der Frage geklemmt; das CMS kann `start` setzen.
-  const [wert, setWert] = useState(() => Math.min(max, Math.max(min, f.start ?? 1500)));
+  // Startwert wie im Prototyp, in die Spanne der Frage geklemmt; das CMS kann `start` setzen.
+  const [wert, setWert] = useState(() => Math.min(max, Math.max(min, f.start ?? 1400)));
   const [aufgeloest, setAufgeloest] = useState(false);
-  const abw = Math.abs(wert - richtig);
   const pts = schaetzPunkte(wert, richtig);
+  // Urteil und Farbe wie in der Übergabe: Volltreffer ≤ 150, nah dran ≤ 350, sonst weit weg.
+  const abw = Math.abs(wert - richtig);
+  const urteil = abw <= 150 ? "gut" : abw <= 350 ? "nah" : "weit";
   return (
     <>
       <div className="ks__frage">{f.text}</div>
-      <div className={"ks__regler" + (aufgeloest ? " ist-auf" : "")}>
-        <div className="ks__bahn">
-          <input type="range" min={min} max={max} step={schritt} value={wert} disabled={aufgeloest} aria-label="Schätzung" onChange={(e) => setWert(+e.target.value)} style={{ ["--anteil" as string]: `${anteil(wert, min, max)}%` }} />
-          <span className="ks__fahne" style={{ left: `${anteil(wert, min, max)}%` }}>{betrag(wert, einheit)}</span>
-          {aufgeloest && (
-            <>
-              <span className="ks__spanne" style={{ left: `${Math.min(anteil(wert, min, max), anteil(richtig, min, max))}%`, width: `${Math.abs(anteil(richtig, min, max) - anteil(wert, min, max))}%` }} />
-              <span className="ks__wahr" style={{ left: `${anteil(richtig, min, max)}%` }}><i />{betrag(richtig, einheit)}</span>
-            </>
-          )}
-        </div>
-        <div className="ks__spanneWerte"><span>{betrag(min, einheit)}</span><span>{betrag(max, einheit)}</span></div>
+      <p className="ks__hinweis">Ziehen Sie das Lineal unter der Nadel hindurch. Danach zeige ich den echten Wert.</p>
+      {/* 🚨 Dasselbe Lineal wie im Kursblatt (FL Lineal aus der Kursblatt-Übergabe), nicht
+          ein zweiter Regler daneben. Nach dem Tipp liegt eine durchsichtige Sperre darauf:
+          Das Lineal soll stehen bleiben, wo der Leser es gelassen hat — ein `disabled`
+          könnte es nicht, das Bauteil kennt keinen solchen Zustand. */}
+      <div className={"ks-schaetz" + (aufgeloest ? " ist-gesperrt" : "")}>
+        <Lineal
+          wert={wert}
+          onWert={setWert}
+          min={min}
+          max={max}
+          schritt={schritt}
+          px={7}
+          major={Math.max(1, Math.round(500 / schritt))}
+          mittel={Math.max(1, Math.round(250 / schritt))}
+          einheit={einheit}
+          werkzeug="gruen"
+          ariaLabel="Ihre Schätzung"
+        />
+        {aufgeloest && <i className="ks-schaetz__sperre" aria-hidden="true" />}
       </div>
       {!aufgeloest ? (
-        <button type="button" className="ks__weiter" onClick={() => { setAufgeloest(true); onTipp(wert, pts); }}>Das ist mein Tipp<i>→</i></button>
+        <span className="ks-deck__start"><Button label="Tipp abgeben" onClick={() => { setAufgeloest(true); onTipp(wert, pts); }} /></span>
       ) : (
         <>
-          <div className="ks__aufloesung ks__rein">
-            <b>{abw <= 100 ? "Fast genau getroffen." : abw <= 400 ? "Nah dran." : "Weiter weg, als die meisten denken."}</b>{" "}
-            Richtig sind {betrag(richtig, einheit)} — Sie lagen {betrag(abw, einheit)} daneben.
-            <span className="ks__genau">{pts} Punkte</span>
-            {f.quelle && <small>{f.quelle}</small>}
+          {/* Die Auflösung: eine Zeile mit Tipp-Marke, Spanne und Wahrheits-Knoten. */}
+          <div className="ks-aufl" data-urteil={urteil}>
+            <i className="ks-aufl__grund" aria-hidden="true" />
+            <i className="ks-aufl__spanne" style={{ left: `${Math.min(anteil(wert, min, max), anteil(richtig, min, max))}%`, width: `${Math.abs(anteil(richtig, min, max) - anteil(wert, min, max))}%` }} aria-hidden="true" />
+            <span className="ks-aufl__tipp" style={{ left: `${anteil(wert, min, max)}%` }}><em>Ihr Tipp {betrag(wert, einheit)}</em></span>
+            <span className="ks-aufl__wahr" style={{ left: `${anteil(richtig, min, max)}%` }}><em>tatsächlich {betrag(richtig, einheit)}</em></span>
           </div>
+          <p className="ks-aufl__urteil" data-urteil={urteil}>
+            {urteil === "gut" ? "Volltreffer — Sie kennen Ihre Zahlen." : urteil === "nah" ? "Nah dran." : "Weit weg — gut, dass Sie es jetzt wissen."}
+            {pts > 0 && <b> +{pts} Punkte</b>}
+            {f.quelle && <small>{f.quelle}</small>}
+          </p>
           <button type="button" className="ks__weiter ks__rein" onClick={() => onWeiter(wert)}>Weiter<i>→</i></button>
         </>
       )}
@@ -127,6 +157,13 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
   const [mail, setMail] = useState("");
   const [datum, setDatum] = useState("");
   const gesperrt = useRef(false); // eine Einzelwahl je Frage, bis die Bühne gewechselt hat
+  /**
+   * Der Punkte-Flug: ein Chip, der von der gedrückten Taste zur Zwischensumme des Belegs
+   * fliegt. Die Koordinaten sind SEITENKOORDINATEN (inklusive Scrollstand), damit der
+   * Chip im Wurzelelement absolut liegen kann und an keinem `overflow` hängen bleibt.
+   */
+  const [flug, setFlug] = useState<{ id: number; x0: number; y0: number; x1: number; y1: number; text: string; ton: string } | null>(null);
+  const flugId = useRef(0);
   const timer = useRef<number[]>([]);
   const fertig = idx >= fragen.length;
   const frage = fertig ? null : fragen[idx];
@@ -190,12 +227,35 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
     wechsel(() => setIdx(i));
   }, [daten, fragen, wechsel, spaeter, belohne, zumKasten]);
 
-  const waehlen = (f: KassensturzFrage, o: string) => {
+  /** Was diese Antwort am Stand bewegt — dieselbe Rechnung wie im Beleg. */
+  const punkteFuer = (vorher: Antworten, nachher: Antworten) => ergebnis(daten, nachher).score - ergebnis(daten, vorher).score;
+
+  /** Den Chip von der Taste zur Zwischensumme schicken. */
+  const fliegen = (el: HTMLElement | null, punkte: number) => {
+    if (!el || reduzierteBewegung()) return;
+    const ziel = kastenRef.current?.querySelector<HTMLElement>(".ks-beleg__zahl");
+    if (!ziel) return;
+    const a = el.getBoundingClientRect();
+    const b = ziel.getBoundingClientRect();
+    const id = ++flugId.current;
+    setFlug({
+      id,
+      x0: a.right + window.scrollX - 12, y0: a.top + window.scrollY + a.height / 2,
+      x1: b.left + window.scrollX + b.width / 2, y1: b.top + window.scrollY + b.height / 2,
+      text: punkte > 0 ? `+${punkte}` : String(punkte),
+      ton: punkte > 0 ? "plus" : punkte < 0 ? "minus" : "null",
+    });
+    spaeter(() => setFlug((x) => (x && x.id === id ? null : x)), 700);
+  };
+
+  const waehlen = (f: KassensturzFrage, o: string, el?: HTMLElement) => {
     if (gesperrt.current || antworten[f.id] === o) return;
     gesperrt.current = true;
     const neu = { ...antworten, [f.id]: o };
+    fliegen(el ?? null, punkteFuer(antworten, neu));
     setAntworten(neu);
-    spaeter(() => naechste(neu, idx + 1), reduzierteBewegung() ? 0 : 320);
+    // 640 ms: so lange bleibt die Taste gedrückt, bevor die Bühne wechselt (Übergabe).
+    spaeter(() => naechste(neu, idx + 1), reduzierteBewegung() ? 0 : 640);
   };
   const umschalten = (f: KassensturzFrage, o: string) => {
     const alt = antworten[f.id];
@@ -228,7 +288,7 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
   };
 
   return (
-    <div className={"kasten kasten--pink kasten--ks" + (fertig ? " fertig" : "")} id="kassensturz" ref={kastenRef}>
+    <div className={"ks-satz" + (fertig ? " fertig" : "")} id="kassensturz" ref={kastenRef}>
       <div className="ks">
         <div className="ks__kopf">
           <span className="kicker kicker--gruen ks__marke"><i /> {daten.titel}{daten.untertitel ? ` · ${daten.untertitel}` : ""}</span>
@@ -250,68 +310,97 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
           {frage && !istSchaetzfrage(frage) && !frage.mehrfach && (
             <>
               <div className="ks__frage">{frage.text}</div>
-              <Karten daten={daten} f={frage} gewaehlt={gewaehltIn(frage)} onKlick={(o) => waehlen(frage, o)} />
+              <Karten daten={daten} f={frage} gewaehlt={gewaehltIn(frage)} onKlick={(o, el) => waehlen(frage, o, el)} />
             </>
           )}
           {fertig && (
             <>
               <div className="ks__zier ks__rein" style={verzug(0)}><i /><SparkZier /><i /></div>
-              <span className="kicker ks__rein" style={verzug(1)}>Ihr Ergebnis · sofort und vollständig</span>
-              <div className="ks__kopfzeile ks__rein" style={verzug(2)}>
-                <div className="ks__profilblock">
-                  <p className="ks__profil">{erg.profil}</p>
-                  <div className="ks__ampel">
-                    {erg.gut.map((g) => <span key={`gut-${g}`}>{g}</span>)}
-                    {erg.luecken.map((l) => <span key={`rot-${l.kurz}`} className="rot">{l.kurz}</span>)}
+              {/* Tacho links, Urteil rechts — Übergabe „Finanzleser Heute", Baustein 3. */}
+              <div className="ks-erg ks__rein" style={verzug(1)}>
+                <div className="ks-erg__tacho"><Tacho wert={erg.score} max={100} label="von 100" verzug={500} /></div>
+                <div className="ks-erg__urteil">
+                  <span className="kicker">Ihr Ergebnis</span>
+                  <h4 className="ks-erg__schlag">{erg.score >= 75 ? "Solide aufgestellt." : erg.score >= 45 ? "Gute Basis — mit Lücken." : "Da fehlt Grundlegendes."}</h4>
+                  <p className="ks-erg__vorspann">{erg.profil}</p>
+                  {/* Die Ampel: drei Punkte, einer leuchtet. Welcher, sagt der Score. */}
+                  <div className="ks-ampel" data-stufe={erg.score >= 75 ? "gruen" : erg.score >= 45 ? "gelb" : "rot"}>
+                    <i className="ks-ampel__rot" /><i className="ks-ampel__gelb" /><i className="ks-ampel__gruen" />
+                    <span>{erg.score >= 75 ? "Grün · gut aufgestellt" : erg.score >= 45 ? "Gelb · Grundlage steht, es fehlt etwas" : "Rot · hier fehlt Grundlegendes"}</span>
                   </div>
+                  {erg.gut.length > 0 && <p className="ks-erg__gut">Belegt: {erg.gut.join(" · ")}</p>}
                 </div>
-                <div className="ks__tacho"><Tacho wert={erg.score} max={100} label="von 100" verzug={500} /></div>
               </div>
-              <div className="ks__erg-karten ks__rein" style={verzug(3)}>
-                {erg.luecken.map((l, i) => (
-                  <div className="ks__erg" key={l.kurz || i}>
-                    <span className="ks__erg-ikon"><Ikon name={l.ikon} /></span>
-                    <span className="ks__nr">{i + 1}</span>
-                    <h4>{l.titel}</h4>
-                    <p>{l.text}</p>
-                    <div className="links">
-                      {l.links.map((x) => {
-                        const z = ziele[`${x.typ}:${x.slug}`] || { href: `/suche?q=${encodeURIComponent(x.text)}`, titel: x.text };
-                        return <a key={`${x.typ}:${x.slug}`} className="strich-link" href={z.href} title={z.titel !== x.text ? z.titel : undefined}>{x.text}</a>;
-                      })}
-                    </div>
-                  </div>
-                ))}
-                {!erg.luecken.length && (
-                  <div className="ks__erg ks__erg--gut">
-                    <span className="ks__erg-ikon"><Ikon name="schildJa" /></span>
-                    <h4>Nichts Dringendes.</h4>
-                    <p>Wiederholen Sie den Kassensturz in sechs Monaten; die Werte ändern sich jedes Jahr.</p>
-                  </div>
-                )}
+
+              {/* Die größten Lücken — `ergebnis()` sortiert sie bereits nach Gewicht. */}
+              {erg.luecken.length > 0 && (
+                <div className="ks-luecken ks__rein" style={verzug(2)}>
+                  <span className="kicker ks-luecken__kopf">{erg.luecken.length === 1 ? "Ihre größte Lücke" : `Ihre ${erg.luecken.length} größten Lücken`}</span>
+                  <ol>
+                    {erg.luecken.map((l, i) => (
+                      <li key={l.kurz || i} style={{ animationDelay: `calc(.25s + ${i} * .12s)` }}>
+                        <span className="ks-luecken__nr">{i + 1}</span>
+                        <span className="ks-luecken__satz">
+                          <b>{l.titel}</b>
+                          <small>{l.text}</small>
+                        </span>
+                        <span className="ks-luecken__wege">
+                          {l.links.map((x) => {
+                            const z = ziele[`${x.typ}:${x.slug}`] || { href: `/suche?q=${encodeURIComponent(x.text)}`, titel: x.text };
+                            return <a key={`${x.typ}:${x.slug}`} className="strich-link" href={z.href} title={z.titel !== x.text ? z.titel : undefined}>{x.text}<i /></a>;
+                          })}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              )}
+              {!erg.luecken.length && (
+                <div className="ks__erg ks__erg--gut ks__rein" style={verzug(2)}>
+                  <span className="ks__erg-ikon"><Ikon name="schildJa" /></span>
+                  <h4>Nichts Dringendes.</h4>
+                  <p>Wiederholen Sie den Kassensturz in sechs Monaten; die Werte ändern sich jedes Jahr.</p>
+                </div>
+              )}
+
+              {/* Zustellung: dieselbe Adresszeile wie im Wochenbrief, nur in Markengrün
+                  und mit anderem Versprechen. */}
+              <div className="ks-zustellung ks__rein" style={verzug(3)}>
+                <Adresszeile
+                  label="Ergebnis als PDF an"
+                  knopf="Schicken"
+                  ton="marke"
+                  onSenden={() => { toast(PLUS_HINWEIS); return PLUS_HINWEIS; }}
+                  hinweis="Nur der Beleg als PDF, kein Newsletter."
+                />
               </div>
               <div className="ks__aktionen ks__rein" style={verzug(4)}>
                 <button type="button" className="strich-link" onClick={teilen}>Ergebnis teilen</button>
                 <button type="button" className="strich-link strich-link--still" onClick={() => inDenKoffer(`Kassensturz vom ${datumLang(datum || heuteLokal())}`)}>In den Aktenkoffer</button>
-                <button type="button" className="strich-link strich-link--still" onClick={neuStarten}>Neu starten</button>
-              </div>
-              <div className="wort wort--leo ks__nachher ks__rein" style={verzug(5)}>
-                <span className="kicker kicker--gruen">Leo</span>
-                <LeoRede>
-                  <p>Soll ich Ihnen das als PDF schicken? Dann erinnere ich Sie in sechs Monaten daran, den Kassensturz zu wiederholen — mit Vorher-nachher-Vergleich. Die Zahlen ändern sich jedes Jahr.</p>
-                </LeoRede>
-                <form className="ks__zustellung" onSubmit={(e) => { e.preventDefault(); toast(PLUS_HINWEIS); }}>
-                  <div className="ks__feld">
-                    <input type="email" placeholder="ihre@adresse.de" aria-label="E-Mail für das Kassensturz-PDF" value={mail} onChange={(e) => setMail(e.target.value)} />
-                    <button type="submit" className="ks__senden">Schicken</button>
-                  </div>
-                  <button type="button" className="ks__wa" onClick={() => toast(PLUS_HINWEIS)}><Ikon name="flieger" /> Lieber per WhatsApp</button>
-                </form>
+                <button type="button" className="strich-link strich-link--still" onClick={neuStarten}>Noch einmal</button>
               </div>
             </>
           )}
         </div>
       </div>
+
+      {/* Der Beleg steht rechts und klebt beim Scrollen — er ist die zweite Hälfte des
+          Bauteils, nicht eine Randnotiz. Im Ergebnis bleibt er stehen und trägt den
+          Stempel. */}
+      <Beleg daten={daten} antworten={antworten} fertig={fertig} />
+
+      {/* Der Punkte-Flug liegt im Wurzelknoten, damit ihn kein `overflow` beschneidet. */}
+      {flug && (
+        <span
+          key={flug.id}
+          className="ks-flug"
+          data-ton={flug.ton}
+          style={{ ["--x0" as string]: `${flug.x0}px`, ["--y0" as string]: `${flug.y0}px`, ["--x1" as string]: `${flug.x1}px`, ["--y1" as string]: `${flug.y1}px` } as CSSProperties}
+          aria-hidden="true"
+        >
+          {flug.text}
+        </span>
+      )}
     </div>
   );
 }

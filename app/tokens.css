@@ -92,6 +92,7 @@
   --rot-hauch: #FBEAE8;           /* rot: falsch, Fehler */
   --tuerkis-grund: rgba(6, 212, 150, .07);  /* Grund der Bestwertzeile in einer Liste */
   --schleier: rgba(0, 0, 0, .35);  /* hinter einer Schublade — der einzige Ort für Schwarz */
+  --stempel-grund: rgba(255, 255, 255, .7); /* unter einem Stempel bleibt das Papier durchscheinend */
 
   /* Werkzeugfarben — der Punkt vor dem Kicker, die Linie über dem Einhänger. */
   --tool-rechner: var(--pink);
@@ -117,6 +118,7 @@
      gegen die Haarlinien des Satzes und der Block hatte keinen Anfang mehr. Sie bleibt
      bei 3 px — sie ist das einzige Farbsignal, das einen Block eröffnet. */
   --strich-einhaenger: 3px;       /* eröffnet einen Block, trägt die Werkzeugfarbe */
+  --strich-stempel: 2.5px;        /* die Kontur eines aufgesetzten Stempels */
   /* Die Doppellinie: 2 px Linie, 2 px Luft, 1 px Linie. Als VERLAUF auf einem 5-px-hohen
      Element — so hängt sie an einem einzigen Knoten und lässt sich drehen.
      Der Schatten-Zwilling ist für Blöcke, die die Linie als Kante tragen (Tabellenkopf,
@@ -232,6 +234,13 @@
   /* Zwei Sonderfälle, die sich nicht auf eine Höhe zurückführen lassen. */
   --schatten-oben:      0 -10px 26px -10px rgba(51, 74, 39, .2), 0 2px 7px rgba(51, 74, 39, .07);
   --schatten-blatt:     2px 4px 0 var(--ink-08), 0 24px 40px -22px var(--ink-45);
+  /* Der Kassenbon wirft seinen Schatten als `filter: drop-shadow` — gleiche Schreibweise
+     wie ein Schatten, aber an der Zickzack-Kante entlang statt am Rechteck. */
+  --schatten-zettel:    0 14px 16px rgba(51, 74, 39, .18);
+  /* Die eine Vertiefung im Haus: eine gedrückte Taste. Sie ist der einzige Ort, an dem
+     ein Schatten nach INNEN fällt — und der einzige, an dem Schwarz richtig ist: eine
+     eingesunkene Fläche verschluckt Licht, sie tönt es nicht. */
+  --schatten-taste:     inset 0 3px 0 rgba(0, 0, 0, .25);
 
   /* Die Doppellinie als Schatten, in Tinte und in Grau (Jahresübersicht). */
   --doppellinie-muted:  0 3px 0 -2px var(--muted);
