@@ -72,6 +72,19 @@ docs/https___www.finanzleser.de_-Coverage-Drilldown-*/
 docs/design_handoff_finanzleser_faden/public/
 docs/design_handoff_finanzleser_faden/support.js
 docs/design_handoff_finanzleser_faden/.DS_Store
+
+# Design-Übergabe „Finanzleser Heute" (17.09.2026): dieselbe Regel wie oben. README und
+# die drei .dc.html sind die Übergabe; der public/-Ordner daneben ist eine Kopie unserer
+# eigenen Icons (28 Dateien, bis auf Zeilenenden identisch geprüft) und support.js ist
+# die Laufzeit des Prototyp-Werkzeugs.
+# AUSNAHME wochenbrief-himmel.png: das Bild liegt NIRGENDWO sonst — /assets/flug/himmel.webp
+# im Projekt ist ein anderer, quadratischer Ausschnitt (1046x1046 gegen 1456x880).
+# Die Freigabe gilt dem ORDNER, sonst greift die unverankerte Regel `assets/` von oben.
+docs/design_handoff_finanzleser_heute/public/icons/
+!docs/design_handoff_finanzleser_heute/public/assets/
+docs/design_handoff_finanzleser_heute/public/assets/leo.svg
+docs/design_handoff_finanzleser_heute/support.js
+docs/design_handoff_finanzleser_heute/.DS_Store
 Finanzleser Chat-Design Phase 2.zip
 
 # Design-Übergaben des Kursblatts: die maßgebliche Fassung (Runde 2) liegt versioniert
