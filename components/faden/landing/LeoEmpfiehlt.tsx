@@ -2,11 +2,14 @@
 
 /**
  * Leo am Ende der Startseite: ein Satz, darunter die Vergleiche, die sich für diesen
- * Leser lohnen.
+ * Leser lohnen — als Teaser mit Säulen-Marktband (Übergabe „Finanzleser Heute",
+ * Baustein 2).
  *
- * Wer den Kassensturz gemacht hat, sieht die Vergleiche aus seinen eigenen Lücken —
- * derselbe Rechenweg wie im Ergebnis (`ergebnis()`), nur auf die Vergleichslinks
- * eingedampft. Ohne Kassensturz stehen die vier meistgesuchten Policen da.
+ * 🚨 Die Zeile zeigt seit dem 17.09.2026 nur noch Vergleiche der Klasse A. Die neun
+ * Versicherungskategorien der Klasse B liefern von financeads keine Beiträge — Preiszeile
+ * und Säulenband hätten dort nichts zu zeigen. Entscheidung des Users. Was vom Kassensturz
+ * bleibt: Leos Satz richtet sich weiter nach dem Ergebnis, und ein Vergleich, der in den
+ * Lücken vorkommt UND Zahlen hat, rückt in der Zeile nach vorn.
  *
  * 🚨 Leo tippt hier NICHT. Die Schreibmaschine gehört dem Gruß ganz oben; ein zweites
  * Tippen wäre genau die Verzögerung, die seit dem 12.09.2026 weg sein soll.
@@ -20,13 +23,11 @@
  * derselben Seite, deshalb hört die Komponente zusätzlich auf `KS_EREIGNIS`.
  */
 import { useSyncExternalStore } from "react";
-import { useFaden } from "@/components/faden/FadenProvider";
 import { LeoRede } from "@/components/faden/leo/Blase";
 import { KS_EREIGNIS, KS_SPEICHER, ergebnis, type Antworten } from "@/components/faden/kassensturz/logik";
 import type { KassensturzDaten } from "@/lib/faden/optionen";
-import type { Ziel } from "@/components/faden/kassensturz/Kassensturz";
-
-export interface Empfehlung { titel: string; href: string; text?: string }
+import type { VergleichTeaser } from "@/lib/faden/vergleichTeaser";
+import VergleichsTeaser from "./VergleichsTeaser";
 
 function abonnieren(cb: () => void): () => void {
   window.addEventListener("storage", cb);
@@ -40,11 +41,8 @@ function serverLesen(): string | null {
   return null;
 }
 
-/** Platzhaltergrafiken, bis die Vergleiche eigene Bilder aus dem CMS mitbringen. */
-const BILDER = ["/assets/visuals/rechner_placeholder.svg", "/assets/general/rechner_visual.png", "/assets/visuals/animalVisual.svg", "/assets/general/checklisten_visual.png"];
-
-/** Vergleiche aus den Lücken des Kassensturzes, in der Reihenfolge des Ergebnisses. */
-function ausKassensturz(roh: string | null, daten: KassensturzDaten | null, ziele: Record<string, Ziel>, anzahl: number): Empfehlung[] {
+/** Die Vergleichs-Slugs aus den Lücken des Kassensturzes, in der Reihenfolge des Ergebnisses. */
+function luecken(roh: string | null, daten: KassensturzDaten | null): string[] {
   if (!roh || !daten) return [];
   let antworten: Antworten | null = null;
   try {
@@ -52,47 +50,33 @@ function ausKassensturz(roh: string | null, daten: KassensturzDaten | null, ziel
     if (s?.fertig && s.antworten) antworten = s.antworten;
   } catch { return []; }
   if (!antworten) return [];
-  const aus: Empfehlung[] = [];
+  const aus: string[] = [];
   for (const l of ergebnis(daten, antworten).luecken) {
-    for (const x of l.links) {
-      if (x.typ !== "vergleich") continue;
-      const z = ziele[`vergleich:${x.slug}`];
-      if (z && !aus.some((a) => a.href === z.href)) aus.push({ titel: z.titel, href: z.href });
-      if (aus.length >= anzahl) return aus;
-    }
+    for (const x of l.links) if (x.typ === "vergleich" && !aus.includes(x.slug)) aus.push(x.slug);
   }
   return aus;
 }
 
-export default function LeoEmpfiehlt({ gaengig, daten, ziele }: { gaengig: Empfehlung[]; daten: KassensturzDaten | null; ziele: Record<string, Ziel> }) {
-  const { navigieren } = useFaden();
+export default function LeoEmpfiehlt({ teaser, daten }: { teaser: VergleichTeaser[]; daten: KassensturzDaten | null }) {
   const roh = useSyncExternalStore(abonnieren, lesen, serverLesen);
-  const eigene = ausKassensturz(roh, daten, ziele, gaengig.length);
-  // Immer gleich viele Chips: die eigenen zuerst, mit den gängigen aufgefüllt.
-  const liste = eigene.length
-    ? [...eigene, ...gaengig.filter((g) => !eigene.some((e) => e.href === g.href))].slice(0, gaengig.length)
-    : gaengig;
-  if (!liste.length) return null;
+  const eigene = luecken(roh, daten);
+  if (!teaser.length) return null;
+
+  // Ein Vergleich, der in den Lücken vorkommt UND Zahlen hat, rückt nach vorn.
+  const vorn = eigene.filter((slug) => teaser.some((t) => t.slug === slug));
+  const liste = vorn.length
+    ? [...vorn.map((slug) => teaser.find((t) => t.slug === slug)!), ...teaser.filter((t) => !vorn.includes(t.slug))]
+    : teaser;
 
   const satz = eigene.length
-    ? "Nach Ihrem Kassensturz lohnen sich diese Vergleiche zuerst. Ich zeige Ihnen die Tarife nebeneinander — mit Quelle und Stand."
-    : "Das fragen mich Leser am häufigsten. Ich stelle Ihnen die Tarife nebeneinander — mit Quelle und Stand.";
+    ? "Nach Ihrem Kassensturz lohnen sich diese Vergleiche zuerst. Ich stelle Ihnen die Tarife nebeneinander — der Markt steht schon hier, mit Quelle und Stand."
+    : "Das fragen mich Leser am häufigsten. Ich stelle Ihnen die Tarife nebeneinander — der Markt steht schon hier, mit Quelle und Stand.";
 
   return (
     <div className="wort wort--leo leo-empfiehlt" id="leo-empfiehlt">
       <span className="kicker kicker--gruen">Leo · Ihr Finanzagent</span>
       <LeoRede text={satz}><p>{satz}</p></LeoRede>
-      <div className="leo-empfiehlt__reihe">
-        {liste.map((v, i) => (
-          <a key={v.href} className="vgl-karte" href={v.href} onClick={(e) => { e.preventDefault(); navigieren(v.href); }}>
-            <img className="vgl-karte__bild" src={BILDER[i % BILDER.length]} width={496} height={419} alt="" loading="lazy" decoding="async" />
-            <span className="kicker kicker--tool"><i className="dot dot--vergleich" aria-hidden="true" />Vergleich</span>
-            <b className="vgl-karte__titel">{v.titel}</b>
-            {v.text && <span className="vgl-karte__text">{v.text}</span>}
-            <span className="strich-link strich-link--gross">Tarife nebeneinander<i /></span>
-          </a>
-        ))}
-      </div>
+      <VergleichsTeaser teaser={liste} />
     </div>
   );
 }

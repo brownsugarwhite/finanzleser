@@ -61,15 +61,89 @@
 
 /* ---------- Leo empfiehlt: Vergleiche als Vorschau ---------- */
 /* Die Karten stehen in Leos Spalte, also rechts der 60-px-Gasse von `.wort--leo`. */
-.faden-shell .leo-empfiehlt__reihe { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: var(--luft-l) var(--luft-l); margin-top: var(--luft-l); }
-.faden-shell .vgl-karte { display: grid; align-content: start; gap: var(--luft-xs); border-top: var(--strich-haar) solid var(--rule-strong); padding-top: var(--luft-s); text-decoration: none; color: var(--ink); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
-.faden-shell .vgl-karte:hover { transform: translateY(-3px); }
-/* Das Bild sitzt ÜBER der Linie — wie das Visual über dem Ratgeberkopf. */
-.faden-shell .vgl-karte__bild { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; margin-bottom: var(--luft-s); background: var(--placeholder); }
-.faden-shell .vgl-karte__titel { font: 700 var(--grad-18)/1.25 var(--serif); }
-.faden-shell .vgl-karte:hover .vgl-karte__titel { color: var(--green-ink); }
-.faden-shell .vgl-karte__text { font: var(--schrift-klein); color: var(--muted); }
-.faden-shell .vgl-karte .strich-link--gross { margin-top: var(--luft-xs); font-size: var(--grad-13); }
+/* ═══ Vergleichs-Teaser (Übergabe „Finanzleser Heute", Baustein 2) ═══════════════════
+   Zwei nebeneinander auf Satzbreite, getrennt durch Haarlinien — kein Kasten, kein
+   Schatten. Die Bildkarte von vorher ist weg: An ihrer Stelle steht der Markt selbst. */
+.faden-shell .vgl-teaser__raster { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--luft-l); border-bottom: var(--strich-haar) solid var(--ink-30); }
+@media (max-width: 620px) { .faden-shell .vgl-teaser__raster { grid-template-columns: minmax(0, 1fr); } }
+.faden-shell .vgl-teaser { position: relative; display: grid; align-content: start; padding: var(--luft-l); text-decoration: none; color: var(--ink); min-width: 0; }
+.faden-shell .vgl-teaser:nth-child(2n) { border-left: var(--strich-haar) solid var(--rule); }
+.faden-shell .vgl-teaser:nth-child(n + 3) { border-top: var(--strich-haar) solid var(--rule); }
+@media (max-width: 620px) {
+  .faden-shell .vgl-teaser:nth-child(2n) { border-left: 0; }
+  .faden-shell .vgl-teaser:nth-child(n + 2) { border-top: var(--strich-haar) solid var(--rule); }
+}
 
-/* ---------- Weiterreden mit Leo ---------- */
+/* Der Hover-Rahmen: vier Haarlinien, die sich in drei Schritten ziehen — oben von links,
+   dann rechts von oben, zuletzt unten und links. Reines CSS, kein Zustand. */
+.faden-shell .vgl-teaser__rahmen { position: absolute; inset: var(--luft-s) 0; pointer-events: none; }
+.faden-shell .vgl-teaser__rahmen em { position: absolute; background: var(--ink); transition: transform .18s var(--kurve); }
+.faden-shell .vgl-teaser__rahmen em:nth-child(1) { left: 0; right: 0; top: 0; height: var(--strich-haar); transform: scaleX(0); transform-origin: left; }
+.faden-shell .vgl-teaser__rahmen em:nth-child(2) { top: 0; bottom: 0; right: 0; width: var(--strich-haar); transform: scaleY(0); transform-origin: top; transition-delay: .16s; }
+.faden-shell .vgl-teaser__rahmen em:nth-child(3) { left: 0; right: 0; bottom: 0; height: var(--strich-haar); transform: scaleX(0); transform-origin: right; transition-delay: .32s; }
+.faden-shell .vgl-teaser__rahmen em:nth-child(4) { top: 0; bottom: 0; left: 0; width: var(--strich-haar); transform: scaleY(0); transform-origin: bottom; transition-delay: .32s; }
+.faden-shell .vgl-teaser:hover .vgl-teaser__rahmen em, .faden-shell .vgl-teaser:focus-visible .vgl-teaser__rahmen em { transform: scale(1); }
+
+.faden-shell .vgl-teaser__kopf { display: flex; align-items: baseline; justify-content: space-between; gap: var(--luft-s); flex-wrap: wrap; }
+.faden-shell .vgl-teaser__bestand { font: italic 300 var(--grad-11)/1.4 var(--serif); color: var(--muted); white-space: nowrap; }
+/* `min-height` hält die Preiszeilen der beiden Spalten auf einer Höhe, auch wenn ein
+   Titel einzeilig bleibt. Lange Wörter trennen statt über die Kante zu laufen. */
+.faden-shell .vgl-teaser__titel { margin-top: var(--luft-s); font: 700 clamp(var(--grad-18), 2.9vw, var(--grad-20))/1.2 var(--serif); min-height: 2.4em; hyphens: auto; text-wrap: balance; }
+.faden-shell .vgl-teaser:hover .vgl-teaser__titel { color: var(--green-ink); }
+
+.faden-shell .vgl-teaser__preis { display: flex; align-items: baseline; justify-content: space-between; gap: var(--luft-xs) var(--luft-s); flex-wrap: wrap; margin-top: var(--luft-m); }
+.faden-shell .vgl-teaser__zahl { display: flex; align-items: baseline; gap: var(--luft-xs); }
+.faden-shell .vgl-teaser__zahl em { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }
+.faden-shell .vgl-teaser__zahl b { font: 900 var(--grad-26)/1 var(--serif); color: var(--tuerkis); font-variant-numeric: tabular-nums; transition: transform .3s var(--ueber); transform-origin: left bottom; }
+.faden-shell .vgl-teaser:hover .vgl-teaser__zahl b { transform: scale(1.06); }
+.faden-shell .vgl-teaser__spanne { font: 600 var(--grad-12) var(--sans); color: var(--green-ink); }
+
+.faden-shell .vgl-teaser__mehr { margin-top: var(--luft-m); padding-top: var(--luft-m); border-top: var(--strich-haar) dotted var(--ink-35); }
+.faden-shell .vgl-teaser:hover .vgl-teaser__mehr .strich-link i { width: 30px; }
+.faden-shell .vgl-teaser__fussnote { margin: var(--luft-m) 0 0; font: var(--schrift-hinweis); color: var(--muted); }
+
+/* ── Das Säulen-Marktband ───────────────────────────────────────────────────────────
+   Die Höhen kommen als Prozent (lib/faden/vergleichTeaser.ts) — dieselbe Rechnung
+   trägt das große Band im Kursblatt, nur mit anderer Feldhöhe. */
+.faden-shell .marktband { display: block; margin-top: var(--luft-s); }
+.faden-shell .marktband__feld { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: var(--luft-xxs); height: var(--band-h, 48px); }
+.faden-shell .marktband--dicht .marktband__feld { gap: var(--strich-haar); }
+.faden-shell .marktband__saeule { position: relative; flex: 1 1 0; min-width: var(--strich-stark); max-width: 9px; background: var(--ink-30); border-radius: var(--radius-kante) var(--radius-kante) 0 0; transform-origin: bottom; transform: scaleY(0); }
+.faden-shell .marktband--dicht .marktband__saeule { max-width: 7px; }
+.faden-shell .vgl-teaser:hover .marktband__saeule { background: var(--ink-45); }
+.faden-shell .marktband__saeule.ist-best, .faden-shell .vgl-teaser:hover .marktband__saeule.ist-best { background: var(--tuerkis); }
+.faden-shell .marktband[data-sicht="an"] .marktband__saeule { animation: marktband-auf .55s var(--ueber-sanft) both; }
+@keyframes marktband-auf { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+/* Der Doppelschlag über der Bestwertsäule — dieselben Keyframes wie der Bestwertpunkt
+   im Kursblatt (`fl-puls`, app/kursblatt.css). Die Zentrierung steckt IN den Keyframes
+   (`translate(-50%, -50%)`); der Punkt trägt sie darum auch im Ruhezustand, sonst spränge
+   er beim Anlaufen der Animation um seine halbe Größe. */
+.faden-shell .marktband__punkt { position: absolute; left: 50%; top: calc(-1 * var(--luft-s)); width: var(--luft-s); height: var(--luft-s); border-radius: var(--radius-kreis); background: var(--tuerkis); transform: translate(-50%, -50%); opacity: 0; }
+.faden-shell .marktband[data-sicht="an"] .marktband__punkt { animation: marktband-sicht .3s 1.2s both, fl-puls 2.4s ease-in-out 1.5s infinite; }
+@keyframes marktband-sicht { to { opacity: 1; } }
+
+/* Die Ø-Linie liegt auf derselben Skala wie die Säulen; ihr Etikett steht rechts darüber
+   und deckt die Linie mit Papierfarbe ab, damit es lesbar bleibt. */
+.faden-shell .marktband__schnitt { position: absolute; left: 0; right: 0; border-top: var(--strich-haar) dashed var(--ink-45); opacity: 0; }
+.faden-shell .marktband[data-sicht="an"] .marktband__schnitt { animation: marktband-sicht .4s 1.1s both; }
+.faden-shell .marktband__schnitt em { position: absolute; right: 0; bottom: var(--luft-xxs); padding-left: var(--luft-xs); background: var(--paper); font: 600 var(--grad-kicker)/1 var(--sans); font-style: normal; color: var(--muted); }
+.faden-shell .marktband__grund { display: block; height: var(--strich-haar); background: var(--ink-45); transform-origin: left; }
+.faden-shell .marktband[data-sicht="an"] .marktband__grund { animation: marktband-grund .9s var(--kurve) both; }
+@keyframes marktband-grund { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+/* Die rechte Angabe bricht nie um; die linke darf sich stauchen, sonst steht „teuerster
+   103 €" auf zwei Zeilen und die Grundlinie darüber wirkt schief. */
+.faden-shell .marktband__fuss { display: flex; align-items: baseline; justify-content: space-between; gap: var(--luft-s); margin-top: var(--luft-xs); font: 500 var(--grad-kicker)/1.3 var(--sans); color: var(--muted); }
+.faden-shell .marktband__fuss > span:last-child { flex: none; white-space: nowrap; }
+.faden-shell .marktband__best { min-width: 0; }
+.faden-shell .marktband__best { font-weight: 700; color: var(--tuerkis); }
+
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .marktband[data-sicht="an"] .marktband__saeule,
+  .faden-shell .marktband[data-sicht="an"] .marktband__grund,
+  .faden-shell .marktband[data-sicht="an"] .marktband__punkt,
+  .faden-shell .marktband[data-sicht="an"] .marktband__schnitt { animation: none; transform: none; opacity: 1; }
+  .faden-shell .vgl-teaser__rahmen em { transition: none; }
+}
+
 .faden-shell .weiterreden .chips { margin-top: var(--luft-xs); }

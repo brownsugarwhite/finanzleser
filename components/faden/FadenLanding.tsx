@@ -7,7 +7,8 @@
  */
 import { getNavItems, getLatestPosts } from "@/lib/wordpress";
 import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
-import { GAENGIGE_VERGLEICHE, empfehlungen, werkzeugeDerWoche, type AusleseEintrag } from "@/lib/faden/landing";
+import { werkzeugeDerWoche, type AusleseEintrag } from "@/lib/faden/landing";
+import { teaserZeile } from "@/lib/faden/vergleichTeaser";
 import { buildPostUrl } from "@/lib/urls";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 import { baueSpalten } from "@/lib/faden/spalten";
@@ -84,7 +85,10 @@ export default async function FadenLanding() {
     ...juengste.slice(1, 4).map((p) => ({ label: "Ratgeber", titel: decodeHtmlEntities(p.title), href: buildPostUrl(p) })),
     ...werkzeugeDerWoche(werkzeuge),
   ];
-  const gaengig = empfehlungen(werkzeuge, GAENGIGE_VERGLEICHE);
+  // Baustein 2 der Übergabe: vier Vergleichs-Teaser mit Säulen-Marktband. Die Zahlen
+  // kommen aus dem Vergleichs-Schnappschuss in WordPress — höchstens zwei Abrufe
+  // gleichzeitig, danach liegen sie 24 h im Data-Cache (lib/faden/vergleichTeaser.ts).
+  const teaser = await teaserZeile(werkzeuge);
 
   return (
     <>
@@ -115,7 +119,7 @@ export default async function FadenLanding() {
           <WochenbriefTeaser />
           <SchlangeKarte />
           <PlusTeaser />
-          <Insel typ="leo-empfiehlt" werte={{ gaengig, daten: kassensturz, ziele: ksZiele }}><LeoEmpfiehlt gaengig={gaengig} daten={kassensturz} ziele={ksZiele} /></Insel>
+          <Insel typ="leo-empfiehlt" werte={{ teaser, daten: kassensturz }}><LeoEmpfiehlt teaser={teaser} daten={kassensturz} /></Insel>
           <Insel typ="weiterreden"><WeiterredenChips /></Insel>
 
           </Begruessung>

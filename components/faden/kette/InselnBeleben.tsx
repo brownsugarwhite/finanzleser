@@ -19,7 +19,7 @@ import type { SpaltenRubrik } from "@/lib/faden/spalten";
 import type { FinanzwortProps } from "@/components/faden/spiele/Finanzwort";
 import type { KassensturzDaten } from "@/lib/faden/optionen";
 import type { Ziel } from "@/components/faden/kassensturz/Kassensturz";
-import type { Empfehlung } from "@/components/faden/landing/LeoEmpfiehlt";
+import type { VergleichTeaser } from "@/lib/faden/vergleichTeaser";
 
 interface AktionenWerte { titel: string; url: string; kurzfassung?: FadenKurzfassung; artikelId: string; pdf?: BeitragPdf | null }
 import type { InselTyp } from "./Insel";
@@ -86,7 +86,7 @@ function Koerper({ typ, arg, werte }: { typ: InselTyp; arg: string; werte: unkno
   if (typ === "vorlesen") return arg ? <Vorlesen zielId={arg} /> : null;
   if (typ === "finanzwort") return werte ? <Finanzwort {...(werte as FinanzwortProps)} /> : null;
   if (typ === "kassensturz") { const w = werte as { daten: KassensturzDaten; ziele: Record<string, Ziel> } | undefined; return w ? <KassensturzStart daten={w.daten} ziele={w.ziele} /> : null; }
-  if (typ === "leo-empfiehlt") { const w = werte as { gaengig: Empfehlung[]; daten: KassensturzDaten | null; ziele: Record<string, Ziel> } | undefined; return w ? <LeoEmpfiehlt gaengig={w.gaengig} daten={w.daten} ziele={w.ziele} /> : null; }
+  if (typ === "leo-empfiehlt") { const w = werte as { teaser: VergleichTeaser[]; daten: KassensturzDaten | null } | undefined; return w ? <LeoEmpfiehlt teaser={w.teaser} daten={w.daten} /> : null; }
   if (typ === "weiterreden") return <WeiterredenChips />;
   if (typ === "flugfenster") return <Flugfenster />;
   return null;
