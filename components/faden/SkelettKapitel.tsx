@@ -21,6 +21,8 @@ import { useLayoutEffect, useRef } from "react";
 import { merkeKnoten, zeigeAnfang } from "@/lib/faden/scrollen";
 import type { SkelettSorte } from "@/lib/faden/skelett";
 import KapitelKopf from "./KapitelKopf";
+import Einschub from "./Einschub";
+import { useFaden } from "./FadenProvider";
 
 /** Eine schimmernde Zeile; `h` in Pixeln, Standard sind 12 (Fließtext). */
 function Z({ w, h }: { w: string; h?: number }) {
@@ -37,6 +39,7 @@ function Titel({ titel, klasse, w, h }: { titel?: string; klasse: string; w: str
 
 export default function SkelettKapitel({ sorte = "seite", titel, pfad = [], lange }: { sorte?: SkelettSorte; titel?: string; pfad?: string[]; lange?: boolean }) {
   const node = useRef<HTMLElement>(null);
+  const { verlauf } = useFaden();
 
   // Sofort nach dem Einfügen dorthin springen (Prototyp: `anhaengen` + `zeigeAnfang`).
   // `immer`, weil der Sprung vom Leser ausgelöst ist — die Lesestelle hat `navigieren`
@@ -108,7 +111,12 @@ export default function SkelettKapitel({ sorte = "seite", titel, pfad = [], lang
 
   return (
     <section className={`kapitel kapitel--skelett kapitel--skelett-${sorte}`} ref={node} aria-busy="true">
-      <KapitelKopf pfad={pfad} />
+      <KapitelKopf pfad={pfad} still />
+      {/* 🚨 Die Anzeige gehört zur Silhouette: das ankommende Kapitel hat sie an derselben
+          Stelle. Sie stand bis zum 17.09.2026 in KapitelKopf; seit die Anzeige mit dem
+          Kapitel klappt, rendert jeder Ort sie selbst. Fehlte sie hier, wäre das Skelett
+          um ihre Höhe kürzer als das Kapitel, das es ersetzt. */}
+      <Einschub format="leaderboard" variante={verlauf.length ? "feed" : "top"} nr={verlauf.length} />
       <div className="kapitel__inhalt">
         <div className="artikel skelett">
           <span className="kicker skelett__hinweis">{lange ? "Dauert länger als gewohnt – der Faden wartet" : "Kette wird geladen"}</span>

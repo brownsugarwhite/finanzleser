@@ -62,6 +62,9 @@ interface FadenContextWert {
   laedtLange: boolean;
   ladeZiel: LadeZiel | null;
   kapitelUmschalten: (id: string) => void;
+  /** Das lebende Kapitel ist zusammengefaltet (Vorlage v2: jedes Kapitel lässt sich klappen, auch das aktuelle). */
+  liveZu: boolean;
+  liveUmschalten: () => void;
   koffer: string[];
   /** Eintrag ablegen; mit `von` fliegt ein Beleg vom Knopf zum Koffer im Lesezeichen. */
   inDenKoffer: (titel: string, von?: Element | null) => void;
@@ -177,7 +180,12 @@ function schnappschuss(): Schnappschuss | null {
     // nach der Ankunft des neuen Kapitels und mit Scroll-Ausgleich (siehe `abschluss`) —
     // der Faden reißt dann nicht ab: über dem neuen Kapitel steht noch der ganze Beitrag,
     // den man gerade gelesen hat.
-    offen: true,
+    //
+    // Es sei denn, der Leser hat es selbst zusammengefaltet: dann friert es gefaltet ein.
+    // Gefragt wird der DOM, nicht der React-Zustand — so bleibt `navigieren` von der
+    // Faltung unabhängig, und die Geometrie stimmt: gefaltet war das lebende Kapitel
+    // genauso hoch wie seine Kopfzeile, gefaltet ist es der Schnappschuss auch.
+    offen: !live.querySelector(":scope > .kapitel__inhalt[data-zu]"),
   };
 }
 
@@ -208,6 +216,9 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
   const [laedt, setLaedt] = useState(false);
   const [laedtLange, setLaedtLange] = useState(false);
   const [ladeZiel, setLadeZiel] = useState<LadeZiel | null>(null);
+  // Zusammengefaltetes lebendes Kapitel. Kein sessionStorage: Der Zustand gehört zum
+  // Lesen, nicht zum Kapitel — ein neues Kapitel schlägt immer offen auf.
+  const [liveZu, setLiveZu] = useState(false);
   /** Wann das Skelett erschien — es bleibt mindestens SKELETT_MIN stehen, sonst blitzt es nur auf. */
   const laedtSeit = useRef(0);
   const langeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -368,6 +379,9 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     // erst mit dem neuen Kapitel, und so lange stand das Blatt offen über dem Skelett.
     setBlatt(null);
     wandertNachNavigation.current = !!opts?.wandert;
+    // Das neue Kapitel schlägt offen auf — der Schnappschuss ist da schon gegriffen und
+    // trägt die Faltung des alten Kapitels mit sich (siehe schnappschuss()).
+    setLiveZu(false);
     const zielPfad = href.split(/[?#]/)[0];
     const friert = !!s && s.url.split(/[?#]/)[0] !== zielPfad;
     setVerlauf((alt) => {
@@ -589,10 +603,32 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     document.addEventListener("keydown", aufTaste);
     return () => { document.removeEventListener("click", aufKlick); document.removeEventListener("keydown", aufTaste); };
   }, [blatt]);
-  useEffect(() => { setBlatt(null); }, [pathname]);
+  useEffect(() => { setBlatt(null); setLiveZu(false); }, [pathname]);
 
   const kapitelUmschalten = useCallback((id: string) => {
     setVerlauf((alt) => alt.map((k) => (k.id === id ? { ...k, offen: !k.offen } : k)));
+  }, []);
+
+  /**
+   * Das lebende Kapitel zusammenfalten oder aufschlagen.
+   *
+   * Beim Zufalten scrollt der Faden zur Kopfzeile des Kapitels zurück, wenn der Leser
+   * mitten darin steht — sonst stünde er nach der Bewegung im Nichts unterhalb des
+   * Fadens. Steht er ohnehin schon darüber, bleibt alles, wo es ist.
+   */
+  const liveUmschalten = useCallback(() => {
+    setLiveZu((z) => {
+      const zu = !z;
+      if (zu) {
+        const el = document.getElementById("kapitel-live");
+        const oben = el ? el.getBoundingClientRect().top : 0;
+        if (el && oben < kopfHoehe() + 12) {
+          const reduziert = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          window.scrollTo({ top: Math.max(0, oben + window.scrollY - kopfHoehe() - 12), behavior: reduziert ? "auto" : "smooth" });
+        }
+      }
+      return zu;
+    });
   }, []);
 
   const inDenKoffer = useCallback((titel: string, von?: Element | null) => {
@@ -643,13 +679,13 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
   }, [toast, level]);
 
   const wert = useMemo<FadenContextWert>(() => ({
-    blatt, blattOeffnen, blattZu, verlauf, kapitelNr: verlauf.length + 1, navigieren, laedt, laedtLange, ladeZiel, kapitelUmschalten, koffer, inDenKoffer, kofferEntfernen, toast,
+    blatt, blattOeffnen, blattZu, verlauf, kapitelNr: verlauf.length + 1, navigieren, laedt, laedtLange, ladeZiel, kapitelUmschalten, liveZu, liveUmschalten, koffer, inDenKoffer, kofferEntfernen, toast,
     glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen,
     leo: { nachrichten: chat.messages.slice(leoAb), status: chat.status, fehler: chat.error, stop: chat.stop },
     fragen,
     punkte: konto.punkte, serie: konto.serie, wappen: konto.wappen, level, belohne,
     lesestelle, lesestelleZurueck,
-  }), [lesestelle, lesestelleZurueck, blatt, blattOeffnen, blattZu, verlauf, navigieren, laedt, laedtLange, ladeZiel, kapitelUmschalten, koffer, inDenKoffer, kofferEntfernen, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen, chat.messages, chat.status, chat.error, chat.stop, leoAb, fragen, konto, level, belohne]);
+  }), [lesestelle, lesestelleZurueck, blatt, blattOeffnen, blattZu, verlauf, navigieren, laedt, laedtLange, ladeZiel, kapitelUmschalten, liveZu, liveUmschalten, koffer, inDenKoffer, kofferEntfernen, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen, chat.messages, chat.status, chat.error, chat.stop, leoAb, fragen, konto, level, belohne]);
 
   return (
     <FadenContext.Provider value={wert}>

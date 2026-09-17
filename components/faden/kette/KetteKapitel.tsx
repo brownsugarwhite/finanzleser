@@ -24,7 +24,7 @@ import Insel from "./Insel";
 import { Fragment } from "react";
 import { CATEGORY_ICONS } from "@/lib/categoryIcons";
 import FadenSpiel from "@/components/faden/spiele/FadenSpiel";
-import KapitelKopf from "@/components/faden/KapitelKopf";
+import LebendesKapitel from "@/components/faden/LebendesKapitel";
 import FazitHeading from "@/components/ui/FazitHeading";
 import Weiterlesen from "./Weiterlesen";
 import FaqListe from "./FaqListe";
@@ -186,8 +186,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
 
   return (
     <section className="kapitel kapitel--live" id="kapitel-live" data-key={`post:${k.slug}`} data-titel={k.titel} data-pfad={pfad.join(" › ")}>
-      <KapitelKopf pfad={pfad} />
-      <div className="kapitel__inhalt">
+      <LebendesKapitel pfad={pfad}>
         <article className="artikel" id={`artikel-${k.slug}`}>
           <nav className="krumen" aria-label="Sie lesen">
             {k.krumen.map((x, i) => (
@@ -283,7 +282,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
           <Insel typ="wochenbrief"><WochenbriefKasten /></Insel>
           <GlossarDaten daten={begriffe} />
         </article>
-      </div>
+      </LebendesKapitel>
       <script type="application/json" data-eingabe-chips="" dangerouslySetInnerHTML={{ __html: JSON.stringify(chips).replace(/</g, "\\u003c") }} />
     </section>
   );

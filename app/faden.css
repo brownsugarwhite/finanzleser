@@ -302,15 +302,48 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    anderes und würde die Kopfzeilen der Ränder überschreiben. */
 .faden-shell .rand h2::after { content: ""; display: block; height: 5px; margin-top: var(--luft-s); background: var(--doppellinie); }
 .faden-shell .rand--rechts h2 { margin-bottom: 10px; }
-/* ---------- Verlauf: die schlichte Liste aus „Faden A" (nicht v2) ----------
-   Quelle: `Finanzleser Faden A - Zeitung.dc.html`, Zeile 203–216. Nummer als eigene
-   schmale Spalte, Titel in Merriweather, unter jedem Eintrag eine Haarlinie — die
-   trägt den Rhythmus, deshalb hat die Liste keinen eigenen Zeilenabstand mehr. */
+/* ---------- Verlauf: die Liste aus „Faden A v2" ----------
+   Quelle: `Finanzleser Faden A v2 - Zeitung.dc.html`, Zeile 283–290 (Kasten) und 1828
+   (Zustände). Am gerenderten Original gemessen, nicht aus dem Bild geschätzt.
+
+   Zwei Spalten: die zweistellige Nummer (16 px) und der Titel. Unter dem Titel liegt der
+   grüne Fortschrittsstrich — gelesen 100 %, hier 46 %, ungelesen 0 %. Er ist das eine
+   Farbsignal der Liste; der aktive Eintrag selbst wird nur dunkel und fett.
+
+   Halbstufen der Vorlage (13,5 / 12,5 / 10 px) rasten auf die Leiter ein: --grad-14,
+   --grad-13, --grad-kicker. So steht es in app/tokens.css, Regel 5 — die halben Pixel
+   sind am 16.09.2026 bewusst gefallen. */
 .faden-shell .rand ul { list-style: none; margin: 0; padding: 0; }
-.faden-shell .verlauf > ul > li > button { display: flex; gap: 10px; width: 100%; text-align: left; border: 0; border-bottom: var(--strich-haar) solid var(--rule-soft); background: none; padding: 8px 0; font: 400 var(--grad-14)/1.35 var(--serif); color: var(--muted); transition: color .2s; }
-.faden-shell .verlauf > ul > li > button:hover { color: var(--ink); }
-.faden-shell .verlauf > ul > li > button.aktiv { font-weight: 700; color: var(--ink); }
-.faden-shell .verlauf__nr { flex: none; min-width: 14px; font: 700 var(--grad-kicker)/1.6 var(--sans); letter-spacing: .06em; color: var(--muted); }
+/* 🚨 EINE Regel gegen das globale `p, li, span { color: --color-text-medium }` aus
+   components.css. Eine direkte Regel schlägt jede Vererbung — deshalb stand der aktive
+   Eintrag trotz `color: var(--ink)` an der Zeile grau da. Sie steht hier oben, damit die
+   Einzelfarben weiter unten (Nummer, Titel, Typ) sie überschreiben. */
+.faden-shell .verlauf span, .faden-shell .verlauf small { color: inherit; }
+.faden-shell .verlauf > ul > li > button { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 10px; width: 100%; text-align: left; border: 0; border-bottom: var(--strich-haar) solid var(--rule-soft); background: none; padding: 9px 0; }
+/* 🚨 Das Rücken beim Überfahren ist eine Verschiebung des INHALTS, kein `padding-left`.
+   Die Vorlage nimmt dort Polster; das nimmt dem Titel 6 px Breite und bricht ihn neu um,
+   solange man die Maus darauf hat. Die Haarlinie bleibt so außerdem, wo sie ist. */
+.faden-shell .verlauf > ul > li > button > * { transition: transform .3s var(--kurve); }
+.faden-shell .verlauf > ul > li > button:hover > * { transform: translateX(6px); }
+/* Zwei Klassen, nicht eine: die `inherit`-Regel oben ist mit ihrem Typselektor spezifischer als ein einzelnes `.verlauf__nr` und würde sonst gewinnen. */
+/* 🚨 `transition` ist eine Kurzform: eine eigene Regel am Kind LÖSCHT die Angabe, die von
+   `button > *` kommt. Genau daran ist das Überfahren gesprungen — die Nummer sprang, der
+   Rest glitt. Wer hier eine Übergangsangabe setzt, muss `transform` mitnennen. */
+.faden-shell .verlauf .verlauf__nr { font: 700 var(--grad-kicker)/1.7 var(--sans); letter-spacing: .06em; color: var(--muted); font-variant-numeric: tabular-nums; transition: color .3s, transform .3s var(--kurve); }
+.faden-shell .verlauf > ul > li > button.aktiv .verlauf__nr { color: var(--green); }
+.faden-shell .verlauf__zeile { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.faden-shell .verlauf > ul > li > button .verlauf__titel { font: 400 var(--grad-14)/1.35 var(--serif); color: var(--muted); transition: color .3s; }
+.faden-shell .verlauf > ul > li > button:hover .verlauf__titel { color: var(--ink); }
+.faden-shell .verlauf > ul > li > button.aktiv .verlauf__titel { font-weight: 700; color: var(--ink); }
+/* 🚨 Feste Zeilen. `data-fest` setzt components/faden/RandLinks.tsx, sobald die Umbrüche
+   ausgemessen sind (lib/faden/zeilenbruch.ts, gemessen im fetten Schnitt). Ab da bricht
+   der Browser nicht mehr selbst um — der Schriftschnitt darf sich also ändern, ohne dass
+   sich der Umbruch ändert. Ohne das Attribut läuft der Text wie bisher im Fluss. */
+.faden-shell .verlauf__titel { display: block; min-width: 0; }
+.faden-shell .verlauf__titel[data-fest] { white-space: nowrap; }
+.faden-shell .verlauf__titel[data-fest] > .verlauf__titel-sicht { display: block; }
+/* Der Fortschrittsstrich: Breite kommt als Inline-Stil aus RandLinks.tsx. */
+.faden-shell .verlauf__fortschritt { display: block; height: 1px; background: var(--green); transition: width .6s var(--kurve); }
 .faden-shell .rand__leer { color: var(--muted); font-style: italic; font-size: var(--grad-13); }
 /* Blöcke der Randspalte (Wochenbrief, Aktenkoffer): kein Kasten, nur je eine
    Trennlinie darüber und darunter — so nutzen sie die volle Spaltenbreite. */
@@ -330,15 +363,40 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .wb-form--klein input[type="email"] { flex: 1; min-width: 0; border: 0; border-bottom: var(--strich-haar) solid var(--ink); border-radius: 0; background: transparent; padding: var(--luft-s) 0; font: 400 var(--grad-14) var(--sans); color: var(--ink); }
 .faden-shell .wb-form--klein input[type="email"]::placeholder { color: var(--muted); }
 .faden-shell .wb-form__senden { border: 0; border-bottom: var(--strich-haar) solid var(--ink); background: none; padding: var(--luft-s) 0 var(--luft-s) var(--luft-s); font: 600 var(--grad-13) var(--sans); color: var(--green-ink); white-space: nowrap; }
-/* Abschnitte des Kapitels, in dem der Leser steht: eingerückt, jeder mit einem kurzen
-   Strich, der beim aktiven von 6 auf 14 px wächst. */
-.faden-shell .verlauf ol { list-style: none; margin: 0; padding: 4px 0 6px 24px; border-bottom: var(--strich-haar) solid var(--rule-soft); }
-.faden-shell .verlauf ol li button { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; border: 0; background: none; padding: 5px 0; font: 400 var(--grad-13) var(--sans); color: var(--muted); transition: color .2s, padding-left .2s; }
-.faden-shell .verlauf ol li button:hover { padding-left: 4px; color: var(--ink); }
+/* Abschnitte des Kapitels, in dem der Leser steht (Vorlage v2, Zeile 289–290): eingerückt
+   auf 26, jeder mit einem Teilstrich, der beim aktiven von 10 auf 22 px wächst und dabei
+   von --ink-45 auf --green umschlägt.
+
+   🚨 Das Auf- und Zuklappen bewegt sich — `grid-template-rows: 0fr → 1fr` auf der Hülle,
+   das Fach darunter mit `overflow: hidden` (das setzt zugleich die Mindesthöhe auf 0,
+   sonst bliebe die Zeile stehen). Die Hülle steht IMMER im Baum; ein `{aktiv && …}` im
+   JSX wäre ein Ein- und Aushängen und könnte gar nicht übergehen. */
+.faden-shell .verlauf__toc { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s var(--kurve); }
+.faden-shell .verlauf__toc[data-offen="1"] { grid-template-rows: 1fr; }
+.faden-shell .verlauf__toc-fach { overflow: hidden; }
+.faden-shell .verlauf ol { list-style: none; margin: 0; padding: 4px 0 6px 26px; border-bottom: var(--strich-haar) solid var(--rule-soft); }
+/* 🚨 `align-items: flex-start`, nicht `center`. In der Vorlage ist jede Abschnittszeile
+   einzeilig, Strich und Text liegen dort auf derselben Mitte (beide bei 13,5 px gemessen).
+   Unsere Abschnitte sind ganze Fragen und laufen über zwei Zeilen; zentriert schwebte der
+   Strich dann 8,7 px tiefer, mitten zwischen den Zeilen. Er gehört auf die ERSTE Zeile —
+   darum die halbe Zeilenhöhe als Abstand oben. */
+.faden-shell .verlauf ol li button { display: flex; align-items: flex-start; gap: 8px; width: 100%; text-align: left; border: 0; background: none; padding: 5px 0; font: 400 var(--grad-13)/1.35 var(--sans); color: var(--muted); transition: color .2s; }
+.faden-shell .verlauf ol li button:hover { color: var(--ink); }
 .faden-shell .verlauf ol li button.aktiv { font-weight: 600; color: var(--ink); }
-.faden-shell .verlauf__strich { flex: none; width: 6px; height: 1px; background: var(--ink); transition: width .3s; }
-.faden-shell .verlauf__typ { display: inline; margin-left: 6px; font: 400 var(--grad-11)/1 var(--sans); color: var(--muted); letter-spacing: .04em; }
-.faden-shell .verlauf ol li button.aktiv .verlauf__strich { width: 14px; }
+/* Der Strich hält seinen vollen Platz (22 px) und wächst darin von 10 auf 22 — so bleibt
+   die Textkante stehen, und das Rücken nach rechts macht ausschließlich `translate`. */
+.faden-shell .verlauf__strich { position: relative; flex: none; width: 22px; height: 1px; margin-top: calc(1.35em / 2 - .5px); }
+.faden-shell .verlauf__strich::before { content: ""; position: absolute; left: 0; top: 0; height: 1px; width: 10px; background: var(--ink-45); transition: width .35s var(--kurve), background-color .3s; }
+.faden-shell .verlauf ol li button.aktiv .verlauf__strich::before { width: 22px; background: var(--green); }
+/* 🚨 Beide Bewegungen müssen hier stehen: `translate` trägt den Zustand (12 px wie in der
+   Vorlage), `transform` das Überfahren. Nennt man nur eine, springt die andere — das war
+   der Sprung beim Überfahren. */
+.faden-shell .verlauf ol li .verlauf__titel { flex: 1; min-width: 0; translate: -12px 0; transition: translate .35s var(--kurve), transform .2s var(--kurve); }
+.faden-shell .verlauf ol li button.aktiv .verlauf__titel { translate: 0 0; }
+.faden-shell .verlauf ol li button > * { transition: transform .2s var(--kurve); }
+.faden-shell .verlauf ol li button:hover > * { transform: translateX(4px); }
+/* Der Typ-Zusatz ist eine Nebenangabe — er wird nicht mit ausgezeichnet. */
+.faden-shell .verlauf .verlauf__typ { display: inline; margin-left: 0; font: 400 var(--grad-11)/1 var(--sans); color: var(--muted); letter-spacing: .04em; font-weight: 400; }
 .faden-shell .glossar-rail { display: grid; gap: 6px; padding-right: 2px; }
 .faden-shell .mobil-leiste { display: none; }
 .faden-shell .schublade { display: none; }
@@ -376,7 +434,14 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kapitel__kopf--live { margin-bottom: var(--luft-l); }
 .faden-shell .kapitel__kopf--live .kicker { white-space: normal; text-align: center; }
 .faden-shell .kapitel__inhalt { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--luft-l); padding-top: var(--luft-m); }
-.faden-shell .kapitel.zu .kapitel__inhalt { display: none; } .faden-shell .kapitel.zu { padding-bottom: var(--luft-m); }
+/* 🚨 Der Ruhezustand des zugeklappten Kapitels — gesetzt von components/faden/KapitelInhalt.tsx,
+   nicht von der `.zu`-Klasse. Während der Klappbewegung ist das Attribut weg, sonst gäbe
+   es nichts zu animieren (bis 17.09.2026 stand hier `display: none`, und genau deshalb
+   war Zuklappen hart). `height: 0` statt `display: none`, weil das lebende Kapitel im
+   Baum bleibt und seine Kinder ihre echte Geometrie behalten müssen — `greifen()` misst
+   sie beim Navigieren aus. */
+.faden-shell .klappe[data-zu] { height: 0; padding-top: 0; margin-top: 0; margin-bottom: 0; overflow: hidden; }
+.faden-shell .kapitel.zu { padding-bottom: var(--luft-m); }
 .faden-shell .kapitel.zu .kapitel__kopf h2 { font-size: var(--grad-15); color: var(--muted); }
 .faden-shell .kapitel--alt:not(.zu) .kapitel__kopf h2 { font-size: var(--grad-15); color: var(--muted); }
 .faden-shell .kapitel--alt { animation: faden-wandert .5s ease; } @keyframes faden-wandert { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
@@ -1569,7 +1634,7 @@ body[data-schaukasten] .faden-shell .schau-anzeigen .einschub { display: grid; }
   body[data-schaukasten] .faden-shell .weiterlesen .antwort[hidden],
   body[data-schaukasten] .faden-shell .kurzfassung[hidden] { display: block !important; }
 }
-body[data-schaukasten] .faden-shell .kapitel.zu .kapitel__inhalt { display: grid; }
+body[data-schaukasten] .faden-shell .klappe[data-zu] { height: auto; padding-top: var(--luft-m); overflow: visible; }
 
 /* ---------- Schaukasten: der versteckte Knopf ----------
    Ein Punkt in der Ecke, der erst beim Überfahren sichtbar wird. Er gehört nicht zur

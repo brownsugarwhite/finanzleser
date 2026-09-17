@@ -4,7 +4,7 @@
  * kleine kursive Zeile darüber, große Zeile = Titel), Beschreibung, dann die Karte.
  */
 import type { ReactNode } from "react";
-import KapitelKopf from "./KapitelKopf";
+import LebendesKapitel from "./LebendesKapitel";
 import Aktionen from "./kette/Aktionen";
 import Insel from "./kette/Insel";
 
@@ -33,8 +33,7 @@ export default function KartenKapitel({
   const id = "karte-" + schluessel.replace(/[^a-z0-9-]/gi, "-");
   return (
     <section className="kapitel kapitel--live" id="kapitel-live" data-key={schluessel} data-titel={titel} data-pfad={pfad.join(" › ")}>
-      <KapitelKopf pfad={pfad} />
-      <div className="kapitel__inhalt">
+      <LebendesKapitel pfad={pfad}>
         <article className="artikel artikel--karte" id={id}>
           <nav className="krumen" aria-label="Sie lesen">
             {krumen.map((x, i) => (
@@ -54,7 +53,7 @@ export default function KartenKapitel({
           {children}
           <Insel typ="aktionen" werte={{ titel, url, artikelId: id }}><Aktionen titel={titel} url={url} artikelId={id} /></Insel>
         </article>
-      </div>
+      </LebendesKapitel>
     </section>
   );
 }

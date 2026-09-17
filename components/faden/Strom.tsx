@@ -8,9 +8,9 @@
  * Zwei Dinge stehen hier bewusst so:
  *
  *  1. Das Schnappschuss-HTML wird **erst beim Aufklappen** gesäubert und eingehängt.
- *     Vorher hingen bis zu acht komplette Artikelbäume im Dokument — unsichtbar
- *     (`.kapitel.zu .kapitel__inhalt { display: none }`), aber im DOM, und das kostet
- *     beim Scrollen.
+ *     Vorher hingen bis zu acht komplette Artikelbäume im Dokument — unsichtbar, aber im
+ *     DOM, und das kostet beim Scrollen. Das Aus- und Einhängen besorgt heute
+ *     `KapitelInhalt`; es wartet beim Zuklappen die Bewegung ab.
  *  2. Während einer Navigation zeigt der Strom das Skelett und blendet die noch alte
  *     Seite aus (Port von `ladeDann`). Ausgeblendet statt ausgehängt, weil die alte
  *     Seite bis zur RSC-Antwort das einzige `#kapitel-live` ist, an dem der Provider
@@ -26,6 +26,7 @@ import { useNavItems } from "@/lib/NavContext";
 import LeoStrom from "./leo/LeoStrom";
 import Einschub from "./Einschub";
 import SkelettKapitel from "./SkelettKapitel";
+import KapitelInhalt from "./KapitelInhalt";
 import Zeitungskopf from "./Zeitungskopf";
 import type { HeroZahlen } from "./hero/HeroLanding";
 import InselnBeleben from "./kette/InselnBeleben";
@@ -107,28 +108,37 @@ function beobachtet(el: HTMLElement | null) {
 }
 
 /**
- * Aufklappen mit Bewegung: Der Inhalt wächst von 0 auf seine Höhe (0,36 s). Liegt das
- * Kapitel über der Lesestelle, gleicht lib/faden/ausgleich.ts jedes Bild aus; liegt es
- * darunter, sieht der Leser es aufgehen. Zuklappen bleibt hart — das Kapitel steht danach
- * als Kopfzeile da, und oberhalb gleicht der Beobachter aus.
+ * Ein Kapitel wandert ans Ende des Fadens.
+ *
+ * 🚨 Erst falten, dann navigieren — in dieser Reihenfolge. Das Kapitel schrumpft an
+ * seiner Stelle auf null (0,32 s), alles darunter rückt weich nach; ERST DANACH beginnt
+ * die Navigation. Anders herum ginge es nicht: `navigieren` hängt im selben Commit das
+ * Skelett an und springt dorthin — eine Höhenänderung OBERHALB des Skeletts würde diesen
+ * Sprung verreißen (gemessen 10.09.2026: bis zu 11 887 px daneben). Während der Faltung
+ * gibt es noch kein Skelett, und `lib/faden/ausgleich.ts` hält die Lesestelle, falls das
+ * Kapitel ganz über der Lesekante liegt.
+ *
+ * Die zweite Hälfte des Positionstauschs steht schon lange bereit und war nie
+ * angeschlossen: `wandert` lässt das Kapitel am Ende wieder einschweben
+ * (`@keyframes wandert`, app/faden.css).
  */
-function KapitelInhalt({ offen, children }: { offen: boolean; children: ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const erst = useRef(true);
-  useLayoutEffect(() => {
-    const el = ref.current;
-    if (erst.current) { erst.current = false; return; }
-    if (!offen || !el || typeof el.animate !== "function" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const h = el.getBoundingClientRect().height;
-    if (!h) return;
-    el.style.overflow = "hidden";
-    const anim = el.animate([{ height: "0px", opacity: 0 }, { height: `${h}px`, opacity: 1 }], { duration: 360, easing: "cubic-bezier(.22,.61,.36,1)" });
-    const ende = () => { el.style.overflow = ""; };
-    anim.addEventListener("finish", ende, { once: true });
-    const uhr = setTimeout(() => { try { anim.cancel(); } catch { /* egal */ } ende(); }, 440);
-    return () => clearTimeout(uhr);
-  }, [offen]);
-  return <div className="kapitel__inhalt" ref={ref}>{children}</div>;
+function wandernLassen(id: string, url: string, navigieren: (href: string, opts?: { wandert?: boolean }) => void) {
+  const el = document.getElementById(`kapitel-alt-${id}`);
+  const los = () => navigieren(url, { wandert: true });
+  if (!el || typeof el.animate !== "function" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { los(); return; }
+  const h = el.getBoundingClientRect().height;
+  if (!h) { los(); return; }
+  // 🚨 Das offene Kapitel trägt `min-height` in der Höhe, die es lebend hatte (Strom, unten).
+  // Ohne diese Zeile läuft die Animation ins Leere: gemessen 17 713 → 17 158 px, also genau
+  // bis zur Mindesthöhe, und der Leser sieht nichts.
+  const mindest = el.style.minHeight;
+  el.style.minHeight = "0px";
+  el.style.overflow = "hidden";
+  const anim = el.animate([{ height: `${h}px`, opacity: 1 }, { height: "0px", opacity: 0 }], { duration: 320, easing: "cubic-bezier(.2,.8,.2,1)" });
+  let ab = false;
+  const ende = () => { if (ab) return; ab = true; el.style.overflow = ""; el.style.minHeight = mindest; los(); };
+  anim.addEventListener("finish", ende, { once: true });
+  setTimeout(ende, 420);
 }
 
 export default function Strom({ children }: { children: ReactNode; heroZahlen?: HeroZahlen }) {
@@ -165,14 +175,16 @@ export default function Strom({ children }: { children: ReactNode; heroZahlen?: 
               </button>
             </div>
           </div>
-          {k.offen && <Einschub format="leaderboard" variante={i === 0 ? "top" : "feed"} nr={i} />}
+          <KapitelInhalt offen={k.offen} klasse="kapitel__anzeige">
+            <Einschub format="leaderboard" variante={i === 0 ? "top" : "feed"} nr={i} />
+          </KapitelInhalt>
           <KapitelInhalt offen={k.offen}>
-            {k.offen && k.html ? (
+            {k.html ? (
               <Schnappschuss html={k.html} id={k.id} />
-            ) : !k.html ? (
+            ) : (
               <p className="kapitel__wieder">Dieses Kapitel lag vor dem Neuladen im Faden. <button type="button" className="strich-link" onClick={() => navigieren(k.url)}>Erneut öffnen</button></p>
-            ) : null}
-            <div className="kapitel__wieder-zeile"><button type="button" className="strich-link strich-link--still" onClick={() => navigieren(k.url)}>Kapitel ans Ende des Fadens holen ↓</button></div>
+            )}
+            <div className="kapitel__wieder-zeile"><button type="button" className="strich-link strich-link--still" onClick={() => wandernLassen(k.id, k.url, navigieren)}>Kapitel ans Ende des Fadens holen ↓</button></div>
           </KapitelInhalt>
         </section>
         </Fragment>

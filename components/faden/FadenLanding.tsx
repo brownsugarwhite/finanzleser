@@ -13,7 +13,7 @@ import { decodeHtmlEntities } from "@/lib/html-utils";
 import { baueSpalten } from "@/lib/faden/spalten";
 import { buildGlossarUrl } from "@/lib/urls";
 import { DOKUMENTE } from "@/lib/faden/bestand";
-import KapitelKopf from "./KapitelKopf";
+import LebendesKapitel from "./LebendesKapitel";
 import Spalten from "./spalten/Spalten";
 import NeuesteAusgabe from "./spalten/NeuesteAusgabe";
 import FinanzwortKarte from "./spiele/FinanzwortKarte";
@@ -91,8 +91,7 @@ export default async function FadenLanding() {
       {/* Leo steht in jedem Leo-Block und ist das erste Bild des Kapitels. */}
       <link rel="preload" as="image" href="/assets/leo.svg" fetchPriority="high" />
       <section className="kapitel kapitel--live" id="kapitel-live" data-key="heute" data-titel="Heute" data-pfad="">
-        <KapitelKopf pfad={[]} />
-        <div className="kapitel__inhalt">
+        <LebendesKapitel pfad={[]}>
           {/* Leo schreibt, sobald der Leser den Faden erreicht — die einzige Inszenierung,
               die geblieben ist. Alles andere steht ab dem ersten Paint da (Begruessung.tsx). */}
           <Begruessung>
@@ -120,7 +119,7 @@ export default async function FadenLanding() {
           <Insel typ="weiterreden"><WeiterredenChips /></Insel>
 
           </Begruessung>
-        </div>
+        </LebendesKapitel>
         <GlossarDaten daten={begriffe} />
         <script type="application/json" data-eingabe-chips="" dangerouslySetInnerHTML={{ __html: JSON.stringify(chips).replace(/</g, "\\u003c") }} />
       </section>
