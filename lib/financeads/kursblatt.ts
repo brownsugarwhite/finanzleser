@@ -80,7 +80,7 @@ function markeText(v: number, einheit?: string): string {
   return v.toLocaleString("de-DE");
 }
 
-/** Die Spalte, die das Streuband trägt: die des Bestwerts. Klasse B hat keine. */
+/** Die Spalte, die das Säulenfeld trägt: die des Bestwerts. Klasse B hat keine. */
 export function hauptspalte(def: DefLite): SpalteDef | undefined {
   if (!def.bestwert) return undefined;
   return def.spalten.find((s) => s.key === def.bestwert!.key);

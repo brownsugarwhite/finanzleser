@@ -24,7 +24,7 @@ import { achsenEnden, eingabenSatz, hauptspalte, kennwertSpalte, laufzeitParam, 
 import { kennzahlenBauen } from "@/lib/financeads/kennzahlen";
 import { useLauf } from "@/lib/kursblatt/useLauf";
 import { fmtProzent } from "@/lib/kursblatt/zahl";
-import Streuband from "@/components/kursblatt/teile/Streuband";
+import Saeulenband from "@/components/kursblatt/teile/Saeulenband";
 import Zinskurve from "@/components/kursblatt/teile/Zinskurve";
 import Kennzahlen from "@/components/kursblatt/teile/Kennzahlen";
 import Podest from "@/components/kursblatt/teile/Podest";
@@ -202,20 +202,19 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
                   auch, für welche Eingaben. */}
               <h2 className="kb__h3">Wie weit liegen die {z.zeilen.length} {def.mehrzahl} auseinander?</h2>
               <p className="kb__erklaer">
-                Jeder Punkt ist ein Angebot – links {achsen[0]}, rechts {achsen[1]}. Der türkise
-                Punkt ist der Bestwert, die gestrichelte Linie der Durchschnitt.
-                <span className="kb-markt__tipp"> Punkt antippen, um das Angebot unten zu öffnen.</span>
+                Jede Säule ist ein Angebot, sortiert von {achsen[0]} nach {achsen[1]}. Die Höhe
+                zeigt, wie viel Sie gegenüber dem {achsen[1]}sten Angebot sparen — der Bestwert
+                ragt heraus, die gestrichelte Linie ist der Durchschnitt.
+                <span className="kb-markt__tipp"> Säule antippen, um das Angebot unten zu öffnen.</span>
               </p>
-              <Streuband
+              <Saeulenband
                 haupt={haupt}
-                neben={neben[0]}
                 zeilen={z.zeilen}
                 best={best}
                 hover={hover}
                 onHover={setHover}
-                /* K:476 — ein Tipp auf den Punkt öffnet die Zeile unten in der Liste. */
+                /* K:476 — ein Tipp auf die Säule öffnet die Zeile unten in der Liste. */
                 onOeffnen={(id) => { setHover(id); setOffen(id); }}
-                spalte={lauf.spalte}
                 druck={lauf.druck}
               />
             </>

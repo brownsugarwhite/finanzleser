@@ -481,7 +481,7 @@ export default async function Schaukasten() {
     </>) },
 
     { titel: "Vergleichsrechner", inhalt: (<>
-        <p className="vorspann">Der eigene Vergleich aus der financeads-API, im Kursblatt-Satz: Zeitungskopf, „Ihre Angaben“ mit Lineal, Setzzeile und Register, Streuband oder Zinskurve, drei Kennzahlen, Podest und Angebotsliste mit Balken und Details. Klasse-B-Kategorien (Versicherungen, für die der Partner keine Beiträge liefert) zeigen stattdessen die Anbieterliste — ohne Band, ohne Kennzahlen, ohne Gewinner.</p>
+        <p className="vorspann">Der eigene Vergleich aus der financeads-API, im Kursblatt-Satz: Zeitungskopf, „Ihre Angaben“ mit Lineal, Setzzeile und Register, Säulenfeld oder Zinskurve, drei Kennzahlen, Podest und Angebotsliste mit Balken und Details. Klasse-B-Kategorien (Versicherungen, für die der Partner keine Beiträge liefert) zeigen stattdessen die Anbieterliste — ohne Band, ohne Kennzahlen, ohne Gewinner.</p>
         {/* 🚨 Drei, nicht zwei — und zwar absichtlich je EINER pro Bandform:
             Tagesgeld zeigt das STREUBAND, Festgeld die ZINSKURVE (die dritte Spalte „Land"
             gibt es auch nur dort), Haftpflicht die Klasse B ganz ohne Band. Bis zum

@@ -996,45 +996,92 @@
   flex-wrap: wrap; margin-bottom: var(--luft-s);
 }
 .kb .kb-band__legende-best { display: inline-flex; align-items: center; gap: var(--luft-s); font: 700 var(--grad-13) var(--sans); color: var(--tuerkis); }
-.kb .kb-band__legende-best i { width: 9px; height: 9px; border-radius: var(--radius-kreis); background: var(--tuerkis); flex: none; }
+/* Der Punkt der Legende schlägt doppelt (Übergabe 2b). KEIN eigenes Keyframe dafür:
+   `fl-punkt` liest seine Ringfarbe aus `--puls-marke`, und ein Wert am Element gewinnt —
+   also dieselbe Kurve, nur mit der Vergleichsfarbe eingesetzt. `fl-puls` ginge nicht, das
+   trägt eine Zentrier-Transform für absolut gesetzte Punkte. */
+.kb .kb-band__legende-best i { --puls-marke: var(--puls-vergleich); width: 9px; height: 9px; border-radius: var(--radius-kreis); background: var(--tuerkis); flex: none; animation: fl-punkt 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .kb .kb-band__legende-best i { animation: none; } }
 .kb .kb-band__legende-schnitt { display: inline-flex; align-items: center; gap: var(--luft-s); font: 500 var(--grad-12) var(--sans); color: var(--muted); }
 .kb .kb-band__legende-schnitt i { width: 16px; border-top: var(--strich-haar) dashed var(--muted); flex: none; }
 
-/* 22 px Grundlinie + 5 Etagen à 12 px + 8 px Luft = 90 px. Fest, damit das Band nicht
-   springt, wenn ein Stapel wächst. */
-.kb .kb-band__feld { position: relative; height: 90px; }
-.kb .kb-band__achse { position: absolute; left: 0; right: 0; bottom: 22px; height: 1px; background: var(--ink); }
-/* Beide Stiele laufen von der Grundlinie bis zur Oberkante des Bandes. */
-.kb .kb-band__schnitt { position: absolute; bottom: 22px; height: 68px; border-left: var(--strich-haar) dashed var(--muted); transition: left .7s var(--kurve); }
-.kb .kb-band__faden { position: absolute; bottom: 22px; height: 68px; width: 1px; background: var(--tuerkis); transform-origin: bottom; transition: left .7s var(--kurve); }
-/* 🚨 1,5 px Kontur, nicht 2. Die Vorlage setzt `border: '1.5px solid #334A27'`; bei 10 px
-   Durchmesser ist der halbe Pixel ein Viertel der Kontur — der Unterschied zwischen einem
-   feinen Punkt und einem gedruckten Ring. Größen wie in der Vorlage: 10 · 14 (Bestwert) ·
-   16 (überfahren). */
-.kb .kb-band__punkt {
-  position: absolute; width: 10px; height: 10px; transform: translate(-50%, 50%);
-  border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-fein) solid var(--ink);
-  box-sizing: border-box; padding: 0; cursor: pointer;
-  transition: left .7s var(--kurve), bottom .5s, width .25s, height .25s, background .25s;
-}
-.kb .kb-band__punkt[data-hell="an"] { width: 16px; height: 16px; background: var(--ink); z-index: 2; }
-.kb .kb-band__punkt[data-ist="an"] {
-  width: 14px; height: 14px; background: var(--tuerkis); border: 0;
-  animation: fl-puls 2.2s infinite;
-}
-/* „+3" über einem Stapel, der mehr als fünf Angebote fasst. */
-.kb .kb-band__mehr { position: absolute; bottom: 80px; transform: translateX(-50%); font: 600 var(--grad-kicker) var(--sans); color: var(--muted); white-space: nowrap; }
-/* Der Tooltip hängt OBEN am Band (Runde 2), nicht mehr unter der Achse. */
-.kb .kb-band__tip {
-  position: absolute; top: -4px; padding: var(--luft-xs) var(--luft-s);
-  background: var(--ink); color: var(--auf-tinte); font: 500 var(--grad-12) var(--sans);
-  white-space: nowrap; transition: opacity .2s, left .3s; pointer-events: none; z-index: 3;
-}
+/* 🚨 Hier stand das Punkte-Streuband: eine Achse, ein Punkt je Angebot, dazu Klassen,
+   Etagen und ein „+3" über jedem Stapel, damit sich die Punkte nicht überdruckten. Die
+   Übergabe „Finanzleser Heute" (Baustein 2b, 17.09.2026) ersetzt es durch das Säulenfeld
+   weiter unten — dort bekommt jedes Angebot denselben Platz, und die Höhe sagt, was es
+   besser macht. Geblieben sind Legende und Fußzeile: beide trägt das Säulenfeld weiter. */
 .kb .kb-band__fuss {
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline; gap: var(--luft-s);
   font: 500 var(--grad-11) var(--sans); color: var(--muted);
 }
 .kb .kb-band__fuss > span:last-child { text-align: right; }
+
+/* ── Das Säulenfeld (Übergabe „Finanzleser Heute", Baustein 2b) ─────────────────────
+   Es ersetzt das Punkte-Streuband: jedes Angebot bekommt denselben Platz, und die HÖHE
+   sagt, wie viel es gegenüber dem schlechtesten spart. Kein Stapeln, kein „+3".
+
+   Feldhöhe und Säulenbreite sind FORMEN, keine Satzabstände — sie stehen darum als
+   Zahlen hier und nicht auf der Abstandsleiter (wie das Spielfeld in finanzwort.css).
+   Die Höhen der einzelnen Säulen kommen als Prozent aus lib/kursblatt/saeulen.ts. */
+.kb .kb-saeulen { --saeulen-h: 130px; --saeulen-b: 16px; margin-top: var(--luft-l); }
+.kb .kb-saeulen--dicht { --saeulen-b: 9px; }
+.kb .kb-saeulen__feld { position: relative; display: flex; align-items: flex-end; gap: var(--luft-xs); height: var(--saeulen-h); }
+.kb .kb-saeulen--dicht .kb-saeulen__feld { gap: var(--strich-stark); }
+
+/* Der SLOT ist der Knopf, nicht die Säule: eine 16-px-Säule ist keine Tastfläche. */
+.kb .kb-saeulen__slot { position: relative; flex: 1 1 0; min-width: 0; height: 100%; border: 0; background: none; padding: 0; cursor: pointer; }
+.kb .kb-saeulen__saeule {
+  position: absolute; left: 50%; bottom: 0; transform: translateX(-50%) scaleY(0); transform-origin: bottom;
+  width: var(--saeulen-b); background: var(--ink-30); border-radius: var(--radius-kante) var(--radius-kante) 0 0;
+  transition: background .2s;
+}
+.kb .kb-saeulen__slot[data-ist="an"] .kb-saeulen__saeule { background: var(--tuerkis); }
+.kb .kb-saeulen__slot[data-hell="an"] .kb-saeulen__saeule { background: var(--ink); }
+.kb .kb-saeulen__slot:focus-visible { outline: var(--strich-stark) solid var(--green); outline-offset: var(--luft-xxs); }
+
+/* Der Wert steht über seiner Säule und wandert mit ihr. */
+.kb .kb-saeulen__wert {
+  position: absolute; left: 50%; transform: translateX(-50%); margin-bottom: var(--luft-xs);
+  font: 500 var(--grad-kicker)/1 var(--sans); color: var(--muted); white-space: nowrap;
+  font-variant-numeric: tabular-nums; transition: color .2s;
+}
+.kb .kb-saeulen__slot[data-ist="an"] .kb-saeulen__wert { font-weight: 700; color: var(--tuerkis); }
+.kb .kb-saeulen__slot[data-hell="an"] .kb-saeulen__wert { color: var(--ink); font-weight: 700; }
+
+/* Die Anbieternamen hängen UNTER der Grundlinie am Slot — so stimmt ihre Spur immer mit
+   der Säule überein, ohne ein zweites Raster daneben. */
+.kb .kb-saeulen__name {
+  position: absolute; top: 100%; left: 0; right: 0; margin-top: var(--luft-xs);
+  font: 500 var(--grad-11)/1.2 var(--sans); color: var(--muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; transition: color .2s;
+}
+.kb .kb-saeulen__slot[data-ist="an"] .kb-saeulen__name { font-weight: 700; color: var(--tuerkis); }
+.kb .kb-saeulen__slot[data-hell="an"] .kb-saeulen__name { color: var(--ink); }
+
+.kb .kb-saeulen__schnitt { position: absolute; left: 0; right: 0; border-top: var(--strich-haar) dashed var(--muted); pointer-events: none; opacity: 0; }
+.kb .kb-saeulen__grund { position: absolute; left: 0; right: 0; bottom: 0; height: var(--strich-haar); background: var(--ink); pointer-events: none; }
+/* Die Fußzeile steht unter den Namen, nicht unter der Grundlinie. */
+.kb .kb-saeulen + .kb-band__fuss, .kb .kb-band .kb-saeulen ~ .kb-band__fuss { margin-top: var(--luft-xl); }
+
+/* Auffahren: von links, gestaffelt, einmal. Die Ø-Linie kommt danach. */
+.kb .kb-saeulen__saeule { animation: kb-saeule-auf .6s var(--ueber-sanft) both; }
+.kb .kb-saeulen__schnitt { animation: kb-saeule-sicht .4s 1.2s both; }
+@keyframes kb-saeule-auf { from { transform: translateX(-50%) scaleY(0); } to { transform: translateX(-50%) scaleY(1); } }
+@keyframes kb-saeule-sicht { to { opacity: 1; } }
+
+@container kb (max-width: 559px) {
+  .kb .kb-saeulen { --saeulen-h: 110px; --saeulen-b: 10px; }
+  .kb .kb-saeulen__feld { gap: var(--strich-stark); }
+  /* Auf schmalem Schirm bleiben nur Bestwert und überfahrene Säule beschriftet. */
+  .kb .kb-saeulen__wert { display: none; }
+  .kb .kb-saeulen__slot[data-ist="an"] .kb-saeulen__wert, .kb .kb-saeulen__slot[data-hell="an"] .kb-saeulen__wert { display: block; }
+  .kb .kb-saeulen__name { display: none; }
+  .kb .kb-saeulen + .kb-band__fuss, .kb .kb-band .kb-saeulen ~ .kb-band__fuss { margin-top: var(--luft-m); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kb .kb-saeulen__saeule { animation: none; transform: translateX(-50%); }
+  .kb .kb-saeulen__schnitt { animation: none; opacity: 1; }
+}
 
 /* Zinskurve (F:74-88) — der beste Wert je Laufzeit statt eines Punkts je Angebot.
    🚨 Eigener Name, nicht `.kb-kurve`: so heißt seit Schritt 7 die Restschuldkurve des

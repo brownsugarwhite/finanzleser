@@ -75,7 +75,7 @@ export interface VergleichZustand {
   /** Gefiltert und sortiert. */
   zeilen: VergleichProdukt[];
   gezeigt: number;
-  /** Spalte des Bestwerts — trägt Streuband und Balken. */
+  /** Spalte des Bestwerts — trägt das Säulenfeld und die Balken. */
   haupt?: SpalteDef;
   /** Die übrigen Spalten, in Registry-Reihenfolge. */
   mittel: SpalteDef[];

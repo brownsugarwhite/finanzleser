@@ -21,6 +21,7 @@ import { hauptspalte } from "@/lib/financeads/kursblatt";
 import { formatGeld, formatKennwert, formatProzent, formatZahl } from "@/lib/financeads/format";
 import type { SpalteDef, VergleichProdukt } from "@/lib/financeads/typen";
 import type { WerkzeugVerweis } from "@/lib/faden/werkzeugIndex";
+import { saeulenSkala, SOCKEL_TEASER } from "@/lib/kursblatt/saeulen";
 
 /**
  * Die vier Vergleiche der Zeile. Breit gestreut — sparen, leihen, Gesundheit, Tier —
@@ -142,20 +143,10 @@ export async function teaserFuer(slug: string, verweis: WerkzeugVerweis | undefi
     .filter((w): w is number => typeof w === "number");
   if (werte.length < 2) return null;
 
+  // Dieselbe Rechnung wie im großen Band des Kursblatts, nur mit dem kleineren Sockel.
+  const { hoehe, best, rand, schnitt, guenstiger } = saeulenSkala(werte, spalte.richtung === "hoch", SOCKEL_TEASER);
   const min = Math.min(...werte);
   const max = Math.max(...werte);
-  const schnitt = werte.reduce((a, b) => a + b, 0) / werte.length;
-  const guenstiger = spalte.richtung !== "hoch";
-  const best = guenstiger ? min : max;
-  const rand = guenstiger ? max : min;
-
-  /**
-   * Die Höhe zeigt den VORSPRUNG, nicht den Wert: Der Bestwert ragt heraus, das
-   * schlechteste Angebot bleibt ein Stummel. `frac` ist 0 beim Besten und 1 beim
-   * Schlechtesten — egal, in welche Richtung die Spalte zählt.
-   */
-  const frac = (w: number) => (max === min ? 0 : guenstiger ? (w - min) / (max - min) : (max - w) / (max - min));
-  const hoehe = (w: number) => Math.round((0.16 + 0.84 * (1 - frac(w))) * 100);
 
   // Günstig nach teuer, also der Bestwert links.
   const sortiert = [...werte].sort((a, b) => (guenstiger ? a - b : b - a));
