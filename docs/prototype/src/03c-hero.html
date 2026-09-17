@@ -1,0 +1,194 @@
+
+  // ---------- Hero-Varianten: Eingabe sofort sichtbar, eine Kamerabewegung ----------
+  var HEROS = [['landing', 'Landing'], ['zeitung', 'Zeitung'], ['lichtfaeden', 'Lichtfäden'], ['anflug', 'Anflug'], ['zoom', 'Zoom']];
+  var HEROS_WEITERE = [['stapel', 'Stapel'], ['ausgabe', 'Ausgabe'], ['kompass', 'Kompass'], ['strom', 'Strom']];
+  var maus = { x: 0, y: 0 };
+  function heroStart() { var t = parseFloat(new URLSearchParams(location.search).get('t')); return performance.now() - (isNaN(t) ? 0 : t * 1000); }
+  var TOOLS = [['rechner', 'Rechner', 56, 'Unterhalt, Rente, Steuer, Kredit', 'Rechner (56)'], ['vergleich', 'Vergleiche', 43, 'Tarife nebeneinander', 'Vergleiche (43)'], ['checkliste', 'Checklisten', 207, 'Schritt für Schritt, als PDF', 'Checklisten (207)']];
+  function heroGeruest(innen, kopfzeile, unterzeile, opts) {
+    opts = opts || {};
+    var hero = el('div', 'hero'); innen.appendChild(hero); var bg = el('div', 'hero-buehne'); hero.appendChild(bg);
+    var mitte = el('div', 'hero-mitte' + (opts.klasse ? ' ' + opts.klasse : '')); mitte.innerHTML = '<span class="kicker kicker--gruen">Finanzleser · Das digitale Finanzmagazin</span><h1>' + kopfzeile + '</h1><p>' + unterzeile + '</p>';
+    var form = suchPilleBauen('Was kann ich für Sie tun?', heroAbsenden); mitte.appendChild(form);
+    var chips = el('div', 'hero-chips'); [['Zahlt die Haftpflicht bei Schlüsselverlust?', 'schluesselverlust'], ['Wie viel Unterhalt für zwei Kinder?', 'unterhalt'], ['Neueste Ratgeber', 'heute']].forEach(function (c) { var b = el('button', 'chip chip--still', c[0]); b.type = 'button'; b.onclick = function () { if (c[1] === 'heute') { introUeberspringen(); return; } starte(c[1], c[0]); }; chips.appendChild(b); }); mitte.appendChild(chips);
+    var tools = el('div', 'werkzeugreihe'); var kacheln = TOOLS.map(function (t, i) { if (i) tools.appendChild(trenner()); var k = el('button', 'werkzeug-k', '<span class="kicker kicker--tool"><i class="dot dot--' + t[0] + '"></i>' + t[1] + '</span><b>' + t[2] + '<small>im Faden</small></b><span>' + t[3] + '</span><span class="pfeil-link">Zu den ' + t[1] + 'n<i></i></span>'); k.type = 'button'; k.onclick = function () { blatt('finanztools', t[4]); window.scrollTo({ top: 0 }); }; tools.appendChild(k); return k; }); mitte.appendChild(tools); hoverBox(tools, '.werkzeug-k', 14, { oben: 16, unten: 16 }); if (/[?&]hover=1/.test(location.search)) setTimeout(function () { if (tools.hoverZeichne) tools.hoverZeichne(kacheln[0]); }, 1400);
+    hero.appendChild(mitte);
+    var cta = null; if (opts.cta !== false) { cta = el('button', 'hero-cta', 'Finanzleser entdecken<i>↓</i>'); cta.type = 'button'; cta.onclick = function () { if (sz().classList.contains('szene--zeitung')) { window.scrollTo({ top: sz().offsetTop + sz().offsetHeight - window.innerHeight + 2, behavior: reduziert ? 'auto' : 'smooth' }); } else introUeberspringen(); }; hero.appendChild(cta); setTimeout(function () { cta.classList.add('da'); }, reduziert ? 0 : (opts.ctaNach || 2200)); }
+    if (opts.mitteStart != null) mitte.style.opacity = opts.mitteStart;
+    hero.addEventListener('pointermove', function (e) { var r = hero.getBoundingClientRect(); maus.x = ((e.clientX - r.left) / r.width - 0.5) * 2; maus.y = ((e.clientY - r.top) / r.height - 0.5) * 2; });
+    return { hero: hero, bg: bg, mitte: mitte, kacheln: kacheln, form: form, cta: cta };
+  }
+  function heroAbsenden(t, ev) { document.getElementById('intro').hidden = true; window.scrollTo(0, 0); if (t) { document.getElementById('frage').value = t; senden(ev); } else { begruessung(); } }
+  // Die Eingabe löst sich beim Scrollen aus dem Hero und fliegt an ihren Platz unten; dort übernimmt die echte Zeile des Fadens (gleiche Gestalt).
+  function eingabeFlieger(wrap) {
+    var start = null, platzhalter = null;
+    return function (p) {
+      var ziel = document.getElementById('fadenPille'); var mitte = document.getElementById('mitte'); if (!ziel || !mitte) return;
+      if (p > 0.02 && !start) { var r0 = wrap.getBoundingClientRect(); start = { l: r0.left, t: r0.top, w: r0.width }; platzhalter = el('div'); platzhalter.style.height = r0.height + 'px'; wrap.parentNode.insertBefore(platzhalter, wrap); document.body.appendChild(wrap); wrap.classList.add('fliegt'); }
+      if (!start) return;
+      if (p <= 0.02) { wrap.classList.remove('fliegt'); wrap.style.cssText = ''; platzhalter.parentNode.insertBefore(wrap, platzhalter); platzhalter.remove(); start = null; ziel.style.opacity = ''; return; }
+      // Ziel ist die echte Zeile, wo immer sie gerade steht (unten angeheftet oder am Ende eines kurzen Fadens); sie bleibt
+      // unsichtbar, bis der Flug ankommt, dann übernimmt sie und die fliegende Zeile verschwindet.
+      var echt = ziel.getBoundingClientRect(); var zl = echt.left, zw = echt.width, zt = echt.top > 0 ? echt.top : window.innerHeight - 14 - wrap.offsetHeight;
+      var u = ease(seg(p, 0.1, 0.88)); var bogen = Math.sin(u * Math.PI) * 22; var an = u >= 0.999;
+      wrap.style.left = lerp(start.l, zl, u) + 'px'; wrap.style.top = (lerp(start.t, zt, u) + bogen) + 'px'; wrap.style.width = lerp(start.w, zw, u) + 'px';
+      ziel.style.opacity = an ? '' : '0'; wrap.style.opacity = an ? 0 : 1; wrap.style.pointerEvents = an ? 'none' : '';
+    };
+  }
+  // Verschwindet das Intro (Absenden, Register, Überspringen), ist eine noch fliegende Zeile hinfällig: weg damit, echte Zeile zeigen.
+  function flugAufraeumen() { document.querySelectorAll('body > .suchpille-wrap.fliegt').forEach(function (f) { f.remove(); }); var z = document.getElementById('fadenPille'); if (z) z.style.opacity = ''; }
+  new MutationObserver(function () { if (document.getElementById('intro').hidden) flugAufraeumen(); }).observe(document.getElementById('intro'), { attributes: true, attributeFilter: ['hidden'] });
+  function sz() { return document.getElementById('szene'); }
+  function kachelnAndocken(kacheln, starts, delays) { if (reduziert) { kacheln.forEach(function (k) { k.style.transition = 'none'; k.classList.add('da'); }); return; } kacheln.forEach(function (k, i) { k.style.transform = starts[i]; }); setTimeout(function () { kacheln.forEach(function (k, i) { setTimeout(function () { k.classList.add('da'); }, delays[i] * 1000); }); }, 40); }
+  function zaehler(hero) { var z = el('div', 'hero-zaehler', '<span>0</span> Dokumente gelesen · Antworten mit Quelle und Seite'); hero.appendChild(z); return function (t) { var v = Math.round(12480 * ease(Math.min(1, t / 2.6))); z.firstChild.textContent = v.toLocaleString('de-DE'); }; }
+  function exit(g, p) { g.bg.style.transform = 'translateY(' + (-p * 30) + '%)'; g.bg.style.opacity = 1 - p; }
+  var FLIEGER_SVG = '<svg viewBox="0 0 240 160"><path d="M6 92 L232 12 L142 152 L118 104 Z" fill="#fdfdfb" stroke="#334A27" stroke-width="3" stroke-linejoin="round"/><path d="M6 92 L118 104 L232 12" fill="none" stroke="#334A27" stroke-width="2.5" stroke-linejoin="round"/><path d="M118 104 L124 134" stroke="#334A27" stroke-width="2.5"/><path d="M118 104 L232 12" fill="none" stroke="#45A117" stroke-width="1.2" stroke-dasharray="3 5" opacity=".7"/></svg>';
+  function zeitungsSeite(seite) {
+    var lin = function (n) { var h = ''; for (var i = 0; i < n; i++) h += '<i></i>'; return h; };
+    if (seite === 'l') return '<div class="zt-masthead"><img src="' + LOGO + '" alt=""><div class="r"><span>Ratgeber</span><span>Finanztools</span><span>Service</span></div></div><div class="zt-titel">Schlüsselverlust: Wann die Haftpflicht zahlt</div><div class="zt-kolumnen"><div>' + lin(9) + '</div><div><div class="zt-bild"><img src="' + ICON.versicherungen + '" alt=""></div>' + lin(4) + '</div></div><div class="zt-kolumnen"><div>' + lin(6) + '</div><div class="zt-kasten"><span>Rechner</span>Grundfreibetrag 2026<div class="zt-zahl">12.348 €</div></div></div>';
+    return '<div class="zt-masthead"><div class="r"><span>Ausgabe 143</span><span>Donnerstag</span><span>Leos Wochenbrief</span></div></div><div class="zt-titel">Wie viel Unterhalt für zwei Kinder?</div><div class="zt-kolumnen"><div><div class="zt-kasten"><span>Wächter</span>Kfz-Wechselfrist<div class="zt-zahl">30. Nov.</div></div>' + lin(5) + '</div><div>' + lin(9) + '</div></div><div class="zt-kolumnen"><div>' + lin(5) + '</div><div><div class="zt-bild"><img src="' + ICON.recht + '" alt=""></div>' + lin(3) + '</div></div>';
+  }
+
+  var heroBauer = {
+    // 0 · Landing: die ruhige Startseite. Zierlinie, Kicker, Titel, Suchfeld, ein Satz. Beim Scrollen fliegt das Feld an seinen Platz unten.
+    landing: function (innen) {
+      var hero = el('div', 'hero'); innen.appendChild(hero);
+      var mitte = el('div', 'hero-mitte hero-mitte--landing'); mitte.innerHTML = '<div class="landing-oben"><div class="landing-zier"><i></i>' + SPARK + '<i></i></div><span class="landing-kicker">Das digitale Finanzmagazin</span><h1>Fragen Sie Ihren persönlichen Versicherungsberater Leo</h1></div>';
+      var pilleW = suchPilleBauen('Was kann ich für Sie tun?', heroAbsenden); mitte.appendChild(pilleW);
+      mitte.appendChild(el('p', 'landing-sub', 'Leo hat 12.480 Versicherungs- und Finanzdokumente gelesen und antwortet mit Quelle und Seite.'));
+      hero.appendChild(mitte); var flug = eingabeFlieger(pilleW);
+      return function (p) { var o = 1 - seg(p, 0, 0.55); mitte.querySelector('.landing-oben').style.opacity = o; mitte.querySelector('.landing-sub').style.opacity = o; mitte.style.transform = 'translateY(' + (-40 * seg(p, 0, 0.6)) + 'px)'; flug(p); };
+    },
+    // 0 · Die Zeitung: liegt beim Laden im Hintergrund, öffnet sich, die Kamera fährt in Position; beim Scrollen faltet sie sich zum Papierflieger und fliegt in den Bildschirm hinein.
+    zeitung: function (innen) {
+      var g = heroGeruest(innen, 'Was möchten Sie wissen?', 'Leo hat 12.480 Versicherungs- und Finanzdokumente gelesen und antwortet mit Quelle und Seite.', { mitteStart: 0, klasse: 'hero-mitte--zeitung', ctaNach: 2400 });
+      var raum = el('div', 'zt-raum'); g.bg.appendChild(raum); var kam = el('div', 'zt-kamera'); raum.appendChild(kam);
+      var schatten = el('div', 'zt-schatten'); kam.appendChild(schatten);
+      var zt = el('div', 'zt-zeitung'); kam.appendChild(zt);
+      var links = el('div', 'zt-seite zt-seite--l', zeitungsSeite('l')); var rueck = el('div', 'zt-rueck', '<img src="' + LOGO + '" alt="">'); var rechts = el('div', 'zt-seite zt-seite--r', zeitungsSeite('r')); zt.appendChild(rechts); zt.appendChild(links); zt.appendChild(rueck);
+      var flieger = el('div', 'zt-flieger', FLIEGER_SVG); raum.appendChild(flieger);
+      
+      var m = buehneMasse(); var schmal = m.w < 900; var W = schmal ? Math.min(340, m.w * 0.9) : Math.min(780, m.w * 0.84); var H = Math.round(W * 0.66);
+      [zt, schatten].forEach(function (n) { n.style.setProperty('--zt-w', W + 'px'); n.style.setProperty('--zt-h', H + 'px'); }); flieger.style.setProperty('--fl-w', Math.round(W * 0.62) + 'px'); links.style.transform = 'rotateY(180deg) translateZ(-1px)'; rueck.style.transform = 'rotateY(360deg) translateZ(1px)';
+      var tick = zaehler(g.hero); kachelnAndocken(g.kacheln, ['translate3d(0,40px,0)', 'translate3d(0,54px,0)', 'translate3d(0,40px,0)'], [1.9, 2.05, 2.2]);
+      var t0 = heroStart();
+      var eingabeFlug = eingabeFlieger(g.form);
+      return function (p) {
+        var t = reduziert ? 10 : (performance.now() - t0) / 1000; tick(t);
+        // Laden: Zeitung öffnet sich (0,2–1,6 s), Kamera fährt ein (0–2,2 s), Inhalt blendet ein (0,9–1,9 s)
+        var auf = ease(Math.min(1, Math.max(0, (t - 0.2) / 1.4))); var fahrt = ease(Math.min(1, t / 2.2)); var ein = ease(Math.min(1, Math.max(0, (t - 0.9) / 1.0)));
+        // Scrollen: p 0–0,34 falten, 0,3–0,5 wird zum Flieger, 0,42–1 Flug in die Tiefe
+        var falt = ease(seg(p, 0, 0.34)); var wechsel = ease(seg(p, 0.3, 0.5)); var flug = ease(seg(p, 0.42, 1));
+        var deckel = 180 - 180 * auf + 180 * falt; links.style.transform = 'rotateY(' + deckel + 'deg) translateZ(-1px)'; rueck.style.transform = 'rotateY(' + (deckel + 180) + 'deg) translateZ(1px)';
+        var rx = lerp(62, 16, fahrt) + 18 * falt, rz = lerp(-14, -3, fahrt) - 12 * falt, sc = lerp(0.72, 1, fahrt) * (1 - 0.25 * falt), ty = lerp(140, 30, fahrt) - 40 * falt; var tx = lerp(-W / 4, 0, auf) * (1 - falt) - (W / 4) * falt;
+        kam.style.transform = 'translate3d(' + (tx + maus.x * -10) + 'px,' + (ty + maus.y * -6) + 'px,0) rotateX(' + rx + 'deg) rotateZ(' + rz + 'deg) scale(' + sc + ')';
+        zt.style.opacity = Math.min(1, t / 0.5) * (1 - wechsel); schatten.style.opacity = 0.9 * fahrt * (1 - wechsel);
+        var z = -flug * 2400, fx = Math.sin(flug * Math.PI) * 160 + flug * 60, fy = (ty - 20) - flug * 380 + Math.sin(flug * 6) * 10 * (1 - flug);
+        flieger.style.opacity = wechsel * (1 - seg(p, 0.9, 1)); flieger.style.transform = 'translate3d(' + fx + 'px,' + fy + 'px,' + z + 'px) rotateX(' + (rx * (1 - flug) - 10 * flug) + 'deg) rotateY(' + (-14 + flug * 30) + 'deg) rotateZ(' + (rz + Math.sin(flug * 3) * 8) + 'deg)';
+        g.mitte.style.opacity = ein * (1 - seg(p, 0, 0.28)); g.mitte.style.transform = 'translate(-50%, -50%) translateY(' + (18 - 18 * ein - 60 * seg(p, 0, 0.3)) + 'px)';
+        eingabeFlug(p);
+        if (g.cta) g.cta.style.opacity = ease(Math.min(1, Math.max(0, (t - 2.2) / 0.6))) * (1 - seg(p, 0, 0.15));
+        
+        raum.style.opacity = 1 - seg(p, 0.94, 1);
+      };
+    },
+    // 1 · Lichtfäden: Das Zeichen zerfällt in Lichtfäden, die dem Betrachter entgegenkommen; dahinter blendet die Seite ein.
+    lichtfaeden: function (innen) {
+      var g = heroGeruest(innen, 'Was möchten Sie wissen?', 'Leo hat 12.480 Versicherungs- und Finanzdokumente gelesen und antwortet mit Quelle und Seite.', { mitteStart: 0.18 });
+      var raum = el('div', 'lf-raum'); g.bg.appendChild(raum);
+      var zeichen = Object.assign(el('img', 'lf-zeichen'), { src: '__LOGO_ICON__', alt: '' }); raum.appendChild(zeichen);
+      var faeden = []; var N = 34; for (var i = 0; i < N; i++) { var f = el('div', 'lf-faden'); var x = (i / (N - 1) - 0.5) * 320; f.style.left = 'calc(50% + ' + x + 'px)'; var h = 120 + Math.random() * 260; f.style.height = h + 'px'; f.style.top = 'calc(50% - ' + (h / 2) + 'px)'; raum.appendChild(f); faeden.push({ n: f, x: x, verz: Math.abs(i - N / 2) / (N / 2) * 0.35 + Math.random() * 0.2, v: 0.9 + Math.random() * 0.6 }); }
+      var tick = zaehler(g.hero); kachelnAndocken(g.kacheln, ['translate3d(0,60px,0) scale(.85)', 'translate3d(0,80px,0) scale(.85)', 'translate3d(0,60px,0) scale(.85)'], [2.0, 2.15, 2.3]);
+      var t0 = heroStart();
+      return function (p) {
+        var t = reduziert ? 10 : (performance.now() - t0) / 1000; tick(t);
+        var z = ease(Math.min(1, t / 0.9)); zeichen.style.transform = 'translate(-50%,-50%) scale(' + (1 + z * 0.35) + ')'; zeichen.style.opacity = t < 0.5 ? 1 : Math.max(0, 1 - (t - 0.5) / 0.6);
+        faeden.forEach(function (f) { var u = Math.max(0, Math.min(1, (t - 0.45 - f.verz) / (1.6 / f.v))); var zz = -80 + ease(u) * 1900; var al = u < 0.08 ? u / 0.08 : Math.max(0, 1 - Math.max(0, u - 0.6) / 0.4); f.n.style.transform = 'translate3d(' + (f.x * 0.9) + 'px,' + (maus.y * -10) + 'px,' + zz + 'px)'; f.n.style.opacity = al * 0.9; });
+        var m = ease(Math.max(0, Math.min(1, (t - 0.8) / 1.1))); g.mitte.style.opacity = 0.18 + 0.82 * m; g.mitte.style.transform = 'translate(-50%,-52%) scale(' + (0.96 + 0.04 * m) + ')';
+        raum.style.transform = 'translateZ(' + (ease(Math.min(1, t / 2.4)) * 160) + 'px) rotateY(' + (maus.x * 2) + 'deg)';
+        exit(g, p);
+      };
+    },
+    // 2 · Anflug: Ein Papierflieger kommt aus der Ferne, Wolken rauschen auf den Betrachter zu, die Eingabe steht von Anfang an.
+    anflug: function (innen) {
+      var g = heroGeruest(innen, 'Was möchten Sie wissen?', 'Leo hat 12.480 Versicherungs- und Finanzdokumente gelesen. Fragen Sie, oder greifen Sie direkt zu den Finanztools.');
+      var himmel = el('div', 'af-himmel'); g.bg.appendChild(himmel); himmel.appendChild(el('div', 'af-horizont'));
+      var wolken = []; for (var i = 0; i < 18; i++) { var w = el('div', 'af-wolke'); var b = 240 + Math.random() * 360; w.style.width = b + 'px'; w.style.height = (b * 0.4) + 'px'; himmel.appendChild(w); wolken.push({ n: w, x: (Math.random() - 0.5) * 3000, y: -220 + Math.random() * 640, z: -2800 + Math.random() * 2600, v: 240 + Math.random() * 220 }); }
+      var fl = el('div', 'af-flieger', '<svg viewBox="0 0 120 80" width="120" height="80"><path d="M4 44 L116 8 L72 74 L58 50 Z" fill="#fdfdfb" stroke="#334A27" stroke-width="3" stroke-linejoin="round"/><path d="M4 44 L58 50 L116 8" fill="none" stroke="#334A27" stroke-width="2.5" stroke-linejoin="round"/><path d="M58 50 L61 68" stroke="#334A27" stroke-width="2.5"/></svg>'); himmel.appendChild(fl);
+      var tick = zaehler(g.hero); kachelnAndocken(g.kacheln, ['translate3d(0,120px,0) scale(.75)', 'translate3d(0,150px,0) scale(.75)', 'translate3d(0,120px,0) scale(.75)'], [1.6, 1.85, 2.1]);
+      var t0 = heroStart();
+      return function (p) {
+        var t = reduziert ? 10 : (performance.now() - t0) / 1000; tick(t);
+        himmel.style.transform = 'rotateY(' + (maus.x * 3) + 'deg) rotateX(' + (-maus.y * 2) + 'deg)';
+        var tempo = 1 + 2.2 * (1 - ease(Math.min(1, t / 3.5)));
+        wolken.forEach(function (w) { var z = w.z + t * w.v * tempo; while (z > 340) z -= 3100; var al = Math.max(0, Math.min(1, (z + 2800) / 900)) * (z > 120 ? Math.max(0, 1 - (z - 120) / 220) : 1); w.n.style.transform = 'translate3d(' + w.x + 'px,' + w.y + 'px,' + z + 'px)'; w.n.style.opacity = al * 0.9; w.n.style.left = 'calc(50% - ' + (w.n.offsetWidth / 2) + 'px)'; w.n.style.top = '32%'; });
+        var f = ease(Math.min(1, t / 3.0)); var z = -2600 + f * 2900; var x = Math.sin(f * Math.PI) * 300 - 60 * f; var y = -240 + f * 60 + Math.sin(f * 7) * 16; var bank = Math.cos(f * Math.PI) * 20;
+        fl.style.transform = 'translate3d(' + x + 'px,' + y + 'px,' + z + 'px) rotateZ(' + bank + 'deg) rotateY(' + (-16 + f * 10) + 'deg)'; fl.style.opacity = t < 3.05 ? 1 : Math.max(0, 1 - (t - 3.05) / 0.35);
+        exit(g, p);
+      };
+    },
+    // 3 · Zoom: Die Kamera fährt aus dem Kleingedruckten zurück; die Eingabe steht die ganze Zeit fest in der Mitte.
+    zoom: function (innen) {
+      var g = heroGeruest(innen, 'Leo liest das Kleingedruckte. Sie fragen.', 'Aus 12.480 Dokumenten die eine Zeile, die zu Ihrer Frage passt. Mit Quelle, Seite und Paragraf.');
+      var satz = 'Versichert ist die gesetzliche Haftpflicht des Versicherungsnehmers aus den Gefahren des täglichen Lebens als Privatperson. Mitversichert ist der Verlust <b>fremder Schlüssel</b>, die sich rechtmäßig im Gewahrsam des Versicherungsnehmers befinden. Ersetzt werden die Kosten für die Änderung der Schlösser und Schließanlagen bis zu einer Höchstsumme von <b>30.000 €</b> je Versicherungsfall. Der Verlust ist dem Versicherer <b>unverzüglich</b> anzuzeigen. Die Kündigung muss dem Versicherer bis zum <b>30. November</b> zugehen. Der <b>Grundfreibetrag</b> beträgt 12.348 €. Bei <b>grober Fahrlässigkeit</b> verzichtet der Versicherer auf den Einwand. ';
+      var feld = el('div', 'zo-feld', satz.repeat(14)); g.bg.appendChild(feld);
+      var tick = zaehler(g.hero); kachelnAndocken(g.kacheln, ['translate3d(0,40px,0) scale(.6)', 'translate3d(0,60px,0) scale(.6)', 'translate3d(0,40px,0) scale(.6)'], [2.3, 2.5, 2.7]);
+      var woerter = Array.prototype.slice.call(feld.querySelectorAll('b')); var t0 = heroStart();
+      return function (p) {
+        var t = reduziert ? 10 : (performance.now() - t0) / 1000; tick(t);
+        var u = ease(Math.min(1, t / 3.0)); var s = 7 - 6 * u;
+        feld.style.transform = 'translate(' + (maus.x * -8) + 'px,' + (maus.y * -6) + 'px) scale(' + s + ')'; feld.style.opacity = 0.9 - 0.8 * u;
+        woerter.forEach(function (w, i) { w.classList.toggle('an', t > 0.4 + (i % 7) * 0.32); });
+        exit(g, p);
+      };
+    },
+    stapel: function (innen) {
+      var g = heroGeruest(innen, 'Erst lesen, dann rechnen.', 'Aus 12.480 Dokumenten werden Antworten, Rechner, Checklisten und Vergleiche. Eine Frage genügt.');
+      var st = el('div', 'st-stapel'); for (var i = 0; i < 12; i++) { var b = el('div', 'st-blatt', '<b>' + ['AVB Haftpflicht', 'Hausrat', 'Kfz-Police', 'Steuerformular', 'Tierkranken', 'Rechtsschutz'][i % 6] + '</b>' + linien(8)); b.style.transform = 'translate(' + (i * 1.6) + 'px,' + (-i * 3.2) + 'px) rotate(' + ((i % 3) - 1) * 0.9 + 'deg)'; st.appendChild(b); } g.bg.appendChild(st);
+      var tick = zaehler(g.hero);
+      var starts = g.kacheln.map(function (k) { var r = k.getBoundingClientRect(); var hr = g.hero.getBoundingClientRect(); var dx = (hr.left + hr.width / 2) - (r.left + r.width / 2); var dy = (hr.top + hr.height * 0.5 + 45) - (r.top + r.height / 2); return 'translate(' + dx + 'px,' + dy + 'px) scale(1.05, 2.3) rotate(-4deg)'; });
+      kachelnAndocken(g.kacheln, starts, [0.7, 1.3, 1.9]);
+      var t0 = heroStart();
+      return function (p) { var t = reduziert ? 10 : (performance.now() - t0) / 1000; tick(t); var sink = ease(Math.min(1, Math.max(0, (t - 0.5) / 2))); st.style.transform = 'translateY(' + (60 * sink + Math.sin(t * 1.3) * 4) + 'px) scale(' + (1 - sink * 0.12) + ')'; st.style.opacity = 1 - sink * 0.5; exit(g, p); };
+    },
+    ausgabe: function (innen) {
+      var g = heroGeruest(innen, 'Die Ausgabe von heute, gelesen von Leo.', 'Die Zeile, die zu Ihrer Frage passt, findet er in Sekunden. Fragen Sie, oder blättern Sie in den Finanztools.');
+      var kam = el('div', 'au-kamera'); var seite = el('div', 'au-seite'); var woerter = ['Schlüsselverlust', 'Düsseldorfer Tabelle', 'Kindergeld 2026', 'Grundfreibetrag', 'Kfz-Wechsel bis 30.11.', 'Hundekranken', 'Riester-Zulage', 'Mietsachschäden', 'Bonusheft', 'Unterhaltsvorschuss'];
+      var html = '<div class="m">finanzleser</div>'; for (var block = 0; block < 6; block++) { html += '<div class="au-spalten">'; for (var c = 0; c < 5; c++) { html += '<div>'; for (var r = 0; r < 9; r++) { html += (r === (c + block) % 9) ? '<s>' + woerter[(c + block * 5) % woerter.length] + '</s>' : '<i></i>'; } html += '</div>'; } html += '</div>'; }
+      seite.innerHTML = html; kam.appendChild(seite); g.bg.appendChild(kam); g.bg.appendChild(el('div', 'au-band'));
+      var tick = zaehler(g.hero); kachelnAndocken(g.kacheln, ['translate3d(0,220px,0) rotateX(50deg) scale(.8)', 'translate3d(0,220px,0) rotateX(50deg) scale(.8)', 'translate3d(0,220px,0) rotateX(50deg) scale(.8)'], [1.4, 1.9, 2.4]);
+      var t0 = heroStart(); var letzte = 0; var ws = Array.prototype.slice.call(seite.querySelectorAll('s'));
+      return function (p) { var t = reduziert ? 10 : (performance.now() - t0) / 1000; tick(t); var y = -((t * 46) % 1200) - 200; seite.style.transform = 'translateY(' + y + 'px) rotateX(' + (46 - p * 46) + 'deg) translateZ(' + (-320 + maus.y * 20) + 'px) rotateY(' + (maus.x * 2) + 'deg)'; if (t - letzte > 0.2) { letzte = t; var hr = g.hero.getBoundingClientRect(); var mitteY = hr.top + hr.height / 2; ws.forEach(function (w) { var r = w.getBoundingClientRect(); w.classList.toggle('an', Math.abs(r.top + r.height / 2 - mitteY) < 40); }); } g.bg.style.opacity = 1 - p * 0.9; };
+    },
+    kompass: function (innen) {
+      var g = heroGeruest(innen, 'Wohin soll es gehen?', 'Vier Rubriken, drei Werkzeuge, ein Agent. Die Nadel zeigt, was heute gefragt ist.');
+      var ring = el('div', 'ko-ring'); var R = 300; var cx = 320, cy = 320;
+      ring.innerHTML = '<svg viewBox="0 0 640 640"><circle cx="320" cy="320" r="' + R + '" fill="none" stroke="#334A27" stroke-width="1.5" stroke-dasharray="4 8"/><circle cx="320" cy="320" r="' + (R - 26) + '" fill="none" stroke="rgba(0,0,0,.09)" stroke-width="1"/><g id="koTicks"></g><line id="koNadel" x1="320" y1="320" x2="320" y2="' + (320 - R + 40) + '" stroke="#D3005E" stroke-width="2.5" stroke-linecap="round"/><circle cx="320" cy="320" r="5" fill="#D3005E"/></svg>';
+      g.bg.appendChild(ring);
+      var LAB = [['Fragen Sie Leo', 0, false], ['Finanzen', -62, false], ['Versicherungen', -30, false], ['Steuern', 30, false], ['Recht', 62, false], ['Rechner', 122, true], ['Checklisten', 180, true], ['Vergleiche', 238, true]];
+      var ticks = ring.querySelector('#koTicks'); for (var a = 0; a < 360; a += 10) { var rad = (a - 90) * Math.PI / 180; ticks.innerHTML += '<line x1="' + (cx + Math.cos(rad) * (R - 6)) + '" y1="' + (cy + Math.sin(rad) * (R - 6)) + '" x2="' + (cx + Math.cos(rad) * R) + '" y2="' + (cy + Math.sin(rad) * R) + '" stroke="#334A27" stroke-width="1" opacity=".5"/>'; }
+      LAB.forEach(function (l) { var rad = (l[1] - 90) * Math.PI / 180; var d = el('div', 'ko-label' + (l[2] ? ' tool' : ''), l[0]); d.style.left = (cx + Math.cos(rad) * (R + 26)) + 'px'; d.style.top = (cy + Math.sin(rad) * (R + 26)) + 'px'; ring.appendChild(d); });
+      var werte = [['1.096 €', 122], ['6 Schritte', 180], ['3 Tarife', 238]].map(function (w) { var rad = (w[1] - 90) * Math.PI / 180; var d = el('div', 'ko-wert', w[0]); d.style.left = (cx + Math.cos(rad) * (R - 70)) + 'px'; d.style.top = (cy + Math.sin(rad) * (R - 70)) + 'px'; ring.appendChild(d); return d; });
+      var nadel = ring.querySelector('#koNadel'); var tick = zaehler(g.hero);
+      var starts = [122, 180, 238].map(function (a) { var rad = (a - 90) * Math.PI / 180; return 'translate(' + (Math.cos(rad) * 120) + 'px,' + (Math.sin(rad) * 60 - 80) + 'px) scale(.6)'; }); kachelnAndocken(g.kacheln, starts, [2.6, 2.75, 2.9]);
+      var t0 = heroStart();
+      function winkelBei(t) { var ziele = [[0.9, 122], [1.7, 180], [2.5, 238], [3.4, 360]]; var von = 0, ab = 0; for (var i = 0; i < ziele.length; i++) { var bis = ziele[i][0], zw = ziele[i][1]; if (t < bis) return lerp(von, zw, ease(Math.max(0, (t - ab) / (bis - ab)))); von = zw; ab = bis; } return 360; }
+      return function (p) { var t = reduziert ? 10 : (performance.now() - t0) / 1000; tick(t); var w = winkelBei(t); nadel.setAttribute('transform', 'rotate(' + w + ' 320 320)'); werte.forEach(function (d, i) { var za = [122, 180, 238][i]; d.style.opacity = (Math.abs(w - za) < 6 || (t > 3.4)) ? 1 : 0; }); ring.style.transform = 'rotate(' + (maus.x * 5) + 'deg) scale(' + (1 - p * 0.5) + ')'; ring.style.opacity = 1 - p; };
+    },
+    strom: function (innen) {
+      var g = heroGeruest(innen, 'Alles, was Leo gelesen hat, fließt hierher.', 'Ihre Frage ist der Anfang. Die Antworten kommen mit Quelle, dazu Rechner, Checklisten und Vergleiche.');
+      var cv = el('canvas', 'sr-canvas'); g.bg.appendChild(cv); var ctx = cv.getContext('2d'); var dpr = Math.min(2, window.devicePixelRatio || 1);
+      function masse() { var r = g.hero.getBoundingClientRect(); cv.width = r.width * dpr; cv.height = r.height * dpr; return r; }
+      var r0 = masse(); var teilchen = []; for (var i = 0; i < 360; i++) teilchen.push(neu(true));
+      function neu(irgendwo) { var seite = Math.random() * 4 | 0; var x, y; if (irgendwo) { x = Math.random() * r0.width; y = Math.random() * r0.height; } else if (seite === 0) { x = -20; y = Math.random() * r0.height; } else if (seite === 1) { x = r0.width + 20; y = Math.random() * r0.height; } else if (seite === 2) { x = Math.random() * r0.width; y = -20; } else { x = Math.random() * r0.width; y = r0.height + 20; } return { x: x, y: y, vx: 0, vy: 0, w: 5 + Math.random() * 5, h: 7 + Math.random() * 6, a: Math.random() * 6.28, s: 0.35 + Math.random() * 0.65 }; }
+      var tick = zaehler(g.hero); kachelnAndocken(g.kacheln, ['translate(-320px,160px) rotate(-14deg) scale(.5)', 'translate(0,260px) scale(.5)', 'translate(320px,160px) rotate(14deg) scale(.5)'], [1.5, 1.8, 2.1]);
+      var t0 = heroStart(); var farbe = getComputedStyle(document.documentElement).getPropertyValue('--rule-strong').trim() || '#334A27';
+      return function (p) {
+        var t = reduziert ? 10 : (performance.now() - t0) / 1000; tick(t); var r = g.hero.getBoundingClientRect(); if (Math.abs(r.width - r0.width) > 2) r0 = masse();
+        var mr = g.form.getBoundingClientRect(); var tx = mr.left - r.left + mr.width / 2, ty = mr.top - r.top + mr.height / 2;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, r0.width, r0.height); ctx.strokeStyle = farbe; ctx.fillStyle = '#fdfdfb'; ctx.lineWidth = 1;
+        teilchen.forEach(function (q, i) { var dx = tx - q.x, dy = ty - q.y, d = Math.hypot(dx, dy) || 1; var kurve = Math.sin(t * 0.8 + i) * 0.25; q.vx += (dx / d) * 0.06 * q.s + (-dy / d) * kurve * 0.05 + (maus.x * 0.01); q.vy += (dy / d) * 0.06 * q.s + (dx / d) * kurve * 0.05; q.vx *= 0.985; q.vy *= 0.985; q.x += q.vx; q.y += q.vy; q.a += 0.02; if (d < 70) { teilchen[i] = neu(false); return; } var al = Math.min(1, (d - 70) / 220) * 0.75; ctx.save(); ctx.globalAlpha = al; ctx.translate(q.x, q.y); ctx.rotate(q.a); ctx.fillRect(-q.w / 2, -q.h / 2, q.w, q.h); ctx.strokeRect(-q.w / 2, -q.h / 2, q.w, q.h); ctx.beginPath(); ctx.moveTo(-q.w / 2 + 1.5, -q.h / 2 + 3); ctx.lineTo(q.w / 2 - 1.5, -q.h / 2 + 3); ctx.stroke(); ctx.restore(); });
+        g.bg.style.opacity = 1 - p;
+      };
+    }
+  };

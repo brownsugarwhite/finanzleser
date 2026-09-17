@@ -9,10 +9,11 @@ export const ADSENSE_SLOT = "2049258663";
 export const ADSENSE_ENABLED = process.env.NEXT_PUBLIC_ADSENSE === "1";
 
 // Testmodus (data-adtest="on") überall außer Production — gleiche env-basierte
-// Staging-Erkennung wie der noindex-Header in next.config.ts.
+// Erkennung wie der noindex-Header in next.config.ts.
+// 🚨 Positivliste auf die Produktions-URL: mit der früheren Prüfung auf "staging."
+// hätte dev.finanzleser.de ECHTE Ads ausgeliefert statt Testanzeigen.
 export const ADSENSE_TEST =
-  !process.env.NEXT_PUBLIC_SITE_URL ||
-  process.env.NEXT_PUBLIC_SITE_URL.includes("staging.");
+  process.env.NEXT_PUBLIC_SITE_URL !== "https://www.finanzleser.de";
 
 // IAB-Standardgrößen (2026). Bei echten Ads dient h als minHeight (CLS-Schutz),
 // die responsive Auto-Ad wählt ihre Höhe selbst.

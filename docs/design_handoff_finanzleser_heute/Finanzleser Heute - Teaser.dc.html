@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#faf9f6;color:#334A27;font-family:'Open Sans',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#2E7A0B}a:hover{color:#334A27}
+input,button{font:inherit;color:inherit}
+@keyframes fl-herz{0%{opacity:0;transform:translateY(14px) scale(.985)}55%{opacity:1;transform:translateY(-2px) scale(1.008)}78%{transform:translateY(1px) scale(.999)}100%{opacity:1;transform:none}}
+@keyframes fl-linie{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes fl-knoten{0%{transform:scale(0)}60%{transform:scale(1.6)}100%{transform:scale(1)}}
+@keyframes fl-druck{0%{opacity:0;transform:translateY(6px);letter-spacing:.05em;filter:blur(.6px)}60%{opacity:1;letter-spacing:.005em;filter:blur(0)}100%{opacity:1;transform:none;letter-spacing:normal}}
+@keyframes fl-druck2{0%{opacity:0;transform:translateY(6px);letter-spacing:.05em;filter:blur(.6px)}60%{opacity:1;letter-spacing:.005em;filter:blur(0)}100%{opacity:1;transform:none;letter-spacing:normal}}
+@keyframes fl-puls{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(69,161,23,.5)}14%{transform:scale(1.2)}28%{transform:scale(1)}42%{transform:scale(1.12)}64%{transform:scale(1);box-shadow:0 0 0 9px rgba(69,161,23,0)}}
+@keyframes fl-pulsT{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(11,127,102,.45)}14%{transform:scale(1.2)}28%{transform:scale(1)}42%{transform:scale(1.12)}64%{transform:scale(1);box-shadow:0 0 0 10px rgba(11,127,102,0)}}
+@keyframes fl-stempel{0%{transform:scale(1.7) rotate(-22deg);opacity:0}60%{transform:scale(.94) rotate(-8deg);opacity:1}100%{transform:scale(1) rotate(-11deg);opacity:1}}
+@keyframes fl-spin{to{transform:rotate(360deg)}}
+@keyframes fl-ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.6);opacity:0}}
+@keyframes fl-atmen{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+@keyframes fl-tick{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes fl-tick2{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes fl-bon{0%{transform:translateY(0)}35%{transform:translateY(3px)}100%{transform:translateY(0)}}
+@keyframes fl-bon2{0%{transform:translateY(0)}35%{transform:translateY(3px)}100%{transform:translateY(0)}}
+@keyframes fl-haken{to{stroke-dashoffset:0}}
+@keyframes fl-funke{0%{transform:scale(0) rotate(-30deg);opacity:0}45%{transform:scale(1.4) rotate(10deg);opacity:1}100%{transform:scale(.6) rotate(30deg) translateY(-6px);opacity:0}}
+@keyframes fl-icon{0%{opacity:0;transform:scale(.6) rotate(-12deg)}60%{opacity:1;transform:scale(1.1) rotate(3deg)}100%{opacity:1;transform:none}}
+@keyframes fl-icon2{0%{opacity:0;transform:scale(.6) rotate(-12deg)}60%{opacity:1;transform:scale(1.1) rotate(3deg)}100%{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div ref="{{rootRef}}" data-screen-label="Heute – Teaser-Bausteine" style="max-width:728px;margin:0 auto;padding:44px clamp(14px,3vw,24px) 140px;box-sizing:border-box;position:relative">
+
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A"><span>Ihr Faden · Heute · Runde 2</span><span>Donnerstag, 17. September 2026</span></div>
+  <div style="height:2px;background:#334A27;margin-top:8px"></div><div style="height:1px;background:#334A27;margin-top:2px"></div>
+
+  <!-- ══ Baustein 1 · Landing ══ -->
+  <div style="display:flex;align-items:center;gap:10px;margin:40px 0 16px;font:700 10px/1.3 'Open Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D3005E"><i style="width:7px;height:7px;border-radius:50%;background:#D3005E"></i><span>Baustein 1 · Landing · Finanztool-Zeile unter der Eingabe</span><i style="flex:1;height:1px;background:rgba(211,0,94,.22)"></i></div>
+
+  <section data-sicht="tools" data-screen-label="Finanztool-Zeile" style="opacity:0;animation:{{r.tools}};padding:10px 0 4px">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;margin-bottom:26px">
+      <span style="display:inline-flex;align-items:center;gap:12px"><i style="width:60px;height:1px;background:#334A27"></i><svg width="12" height="12" viewBox="0 0 12 12"><path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="#334A27"></path></svg><i style="width:60px;height:1px;background:#334A27"></i></span>
+      <span style="font:500 11px 'Merriweather',Georgia,serif;letter-spacing:.22em;text-transform:uppercase;color:#686C6A">Das digitale Finanzmagazin</span>
+      <h2 style="margin:0;font:900 clamp(26px,5vw,38px)/1.12 'Merriweather',Georgia,serif;letter-spacing:-.02em;color:#334A27;text-wrap:balance;max-width:20ch">Fragen Sie Ihren persönlichen Versicherungsberater Leo</h2>
+    </div>
+    <div aria-hidden="true" style="margin:0 auto;max-width:560px;height:58px;border-radius:29px;background:#fff;box-shadow:0 14px 34px -18px rgba(51,74,39,.4);display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 22px;box-sizing:border-box"><span style="font:400 15px 'Open Sans',sans-serif;color:#9a9e9b">Sende Leo eine Nachricht …</span><i style="width:42px;height:42px;border-radius:50%;background:#45A117;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M4 7l4-4 4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i></div>
+    <div onMouseLeave="{{toolsRaus}}" style="display:flex;flex-direction:{{toolRichtung}};justify-content:center;align-items:stretch;margin:20px auto 0;max-width:600px">
+      <sc-for list="{{tools}}" as="t" hint-placeholder-count="3">
+        <a href="#" onMouseEnter="{{t.enter}}" style="position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 14px 12px;border-left:{{t.trennerL}};border-top:{{t.trennerT}};text-decoration:none;color:#334A27;min-width:0;text-align:center">
+          <span style="display:inline-flex;align-items:center;gap:7px;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:{{t.kickerFarbe}};transition:color .25s;white-space:nowrap"><i style="width:8px;height:8px;border-radius:50%;background:{{t.farbe}};animation:{{t.pulsAnim}}"></i><span>{{t.label}}</span></span>
+          <span style="display:flex;align-items:baseline;gap:6px;white-space:nowrap"><b style="font:900 26px/1 'Merriweather',Georgia,serif;letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:inline-block;transform:{{t.zahlT}};transition:transform .4s cubic-bezier(.34,1.56,.64,1)">{{t.zahl}}</b><span style="font:italic 300 12.5px 'Merriweather',Georgia,serif;color:#686C6A">im Faden</span></span>
+          <span style="font:italic 300 12px/1.35 'Merriweather',Georgia,serif;color:#686C6A;text-wrap:balance">{{t.sub}}</span>
+          <i style="position:absolute;left:14px;right:14px;bottom:2px;height:2px;background:{{t.farbe}};transform-origin:center;transform:scaleX({{t.rs}});transition:transform .35s cubic-bezier(.2,.8,.2,1)"></i>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ══ Baustein 2 · Vergleichs-Teaser ══ -->
+  <div style="display:flex;align-items:center;gap:10px;margin:72px 0 16px;font:700 10px/1.3 'Open Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D3005E"><i style="width:7px;height:7px;border-radius:50%;background:#D3005E"></i><span>Baustein 2 · Vergleichs-Teaser · zwei nebeneinander</span><i style="flex:1;height:1px;background:rgba(211,0,94,.22)"></i></div>
+
+  <section data-sicht="vgl" data-screen-label="Vergleichs-Teaser" style="opacity:0;animation:{{r.vgl}}">
+    <div style="display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;margin-bottom:26px">
+      <img src="public/assets/leo.svg" alt="Leo" style="width:44px;height:44px;animation:fl-atmen 3.2s ease-in-out infinite">
+      <div><span style="font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#2E7A0B">Leo · Ihr Finanzagent</span>
+        <p style="margin:6px 0 0;font:italic 400 clamp(17px,2.6vw,20px)/1.5 'Merriweather',Georgia,serif;color:#334A27;max-width:60ch">Das fragen mich Leser am häufigsten. Ich stelle Ihnen die Tarife nebeneinander – der Markt steht schon hier, mit Quelle und Stand.</p></div>
+    </div>
+    <div style="height:1px;background:#334A27"></div>
+    <div onMouseLeave="{{vglRaus}}" style="display:grid;grid-template-columns:{{vglSpalten}}">
+      <sc-for list="{{vgl}}" as="v" hint-placeholder-count="4">
+        <a href="#" onMouseEnter="{{v.enter}}" style="position:relative;display:flex;flex-direction:column;padding:20px 22px 22px;border-left:{{v.trennerL}};border-top:{{v.trennerT}};text-decoration:none;color:#334A27;min-width:0;box-sizing:border-box">
+          <span aria-hidden="true" style="position:absolute;inset:8px 0;pointer-events:none">
+            <i style="position:absolute;left:0;right:0;top:0;height:1px;background:#334A27;transform-origin:left;transform:scaleX({{v.rs}});transition:transform .18s cubic-bezier(.2,.8,.2,1)"></i>
+            <i style="position:absolute;top:0;bottom:0;right:0;width:1px;background:#334A27;transform-origin:top;transform:scaleY({{v.rs}});transition:transform .18s cubic-bezier(.2,.8,.2,1) .16s"></i>
+            <i style="position:absolute;left:0;right:0;bottom:0;height:1px;background:#334A27;transform-origin:right;transform:scaleX({{v.rs}});transition:transform .18s cubic-bezier(.2,.8,.2,1) .32s"></i>
+            <i style="position:absolute;top:0;bottom:0;left:0;width:1px;background:#334A27;transform-origin:bottom;transform:scaleY({{v.rs}});transition:transform .18s cubic-bezier(.2,.8,.2,1) .32s"></i>
+          </span>
+          <span style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="display:inline-flex;align-items:center;gap:7px;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A"><i style="width:8px;height:8px;border-radius:50%;background:#0B7F66"></i><span>Vergleich</span></span><span style="font:italic 300 11.5px 'Merriweather',Georgia,serif;color:#686C6A;white-space:nowrap">{{v.n}} Tarife · Stand {{v.stand}}</span></span>
+          <b style="display:block;margin-top:10px;font:700 clamp(18px,2.9vw,21px)/1.2 'Merriweather',Georgia,serif;letter-spacing:-.01em;hyphens:auto;overflow-wrap:anywhere;min-height:2.4em;text-wrap:balance" lang="de">{{v.titel}}</b>
+          <span style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:12px;flex-wrap:wrap"><span style="display:inline-flex;align-items:baseline;gap:6px;white-space:nowrap"><span style="font:italic 300 13px 'Merriweather',Georgia,serif;color:#686C6A">ab</span><b style="font:900 26px/1 'Merriweather',Georgia,serif;color:#0B7F66;font-variant-numeric:tabular-nums;display:inline-block;transform:{{v.preisT}};transition:transform .4s cubic-bezier(.34,1.56,.64,1)">{{v.min}}</b><span style="font:italic 300 13px 'Merriweather',Georgia,serif;color:#686C6A">im Monat</span></span><span style="font:600 12px 'Open Sans',sans-serif;color:#2E7A0B;white-space:nowrap">{{v.spar}}</span></span>
+<!-- Säulen · Sieger als höchster Baum -->
+          <span style="position:relative;display:block;height:78px;margin-top:10px">
+            <span style="position:absolute;left:0;right:0;top:10px;height:48px;display:flex;align-items:flex-end;justify-content:space-between">
+              <sc-for list="{{v.saeulen}}" as="d" hint-placeholder-count="0"><i style="width:{{d.w}};height:{{d.h}};background:{{d.bg}};border:1px solid {{d.rand}};box-sizing:border-box;transform-origin:bottom;transform:scaleY({{d.s}});transition:transform .55s cubic-bezier(.34,1.3,.64,1) {{d.delay}},background .3s;border-radius:2px 2px 0 0"></i></sc-for>
+            </span>
+            <i style="position:absolute;left:0;right:0;top:{{v.avgY}};height:0;border-top:1px dashed rgba(51,74,39,.55);opacity:{{v.bandS}};transition:opacity .5s 1.1s"></i>
+            <small style="position:absolute;right:0;top:calc({{v.avgY}} - 15px);padding:0 0 0 3px;background:#faf9f6;font:600 10px 'Open Sans',sans-serif;color:#686C6A;white-space:nowrap;opacity:{{v.bandS}};transition:opacity .5s 1.1s">Ø {{v.avg}}</small>
+            <i style="position:absolute;left:0;right:0;top:58px;height:1px;background:rgba(51,74,39,.4);transform-origin:left;transform:scaleX({{v.bandS}});transition:transform .9s cubic-bezier(.2,.8,.2,1)"></i>
+            <i style="position:absolute;left:{{v.bestX}};top:0;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:#0B7F66;opacity:{{v.bandS}};animation:{{v.bestAnim}}"></i>
+            <small style="position:absolute;left:0;top:63px;font:700 10px 'Open Sans',sans-serif;color:#0B7F66;white-space:nowrap;opacity:{{v.bandS}};transition:opacity .5s 1s">Bestwert · {{v.sparKurz}} gespart</small>
+            <small style="position:absolute;right:0;top:63px;font:500 10px 'Open Sans',sans-serif;color:#686C6A;white-space:nowrap;opacity:{{v.bandS}};transition:opacity .5s 1s">teuerster {{v.max}}</small>
+          </span>
+
+          <span style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding-top:12px;border-top:1px dotted rgba(51,74,39,.35);font:500 13.5px 'Open Sans',sans-serif;color:#2E7A0B;white-space:nowrap"><span>Tarife nebeneinander</span><i style="height:1px;width:{{v.linie}};background:currentColor;transition:width .45s cubic-bezier(.2,.8,.2,1)"></i><svg width="8" height="8" viewBox="0 0 17.45 15.77" fill="none" style="margin-left:-11px;transform:rotate(180deg);flex-shrink:0"><polyline points="16.95 15.27 8.27 8.11 16.95 .5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg></span>
+        </a>
+      </sc-for>
+    </div>
+    <div style="height:1px;background:rgba(51,74,39,.3)"></div>
+    <p style="margin:10px 0 0;font:italic 300 12px/1.5 'Merriweather',Georgia,serif;color:#686C6A">Anzeige · Vergleiche mit Partnerlinks. Jede Säule ist ein Tarif, sortiert von günstig nach teuer; die Höhe zeigt die Ersparnis gegenüber dem teuersten Tarif – der Bestwert ragt heraus; die gestrichelte Linie ist der Marktdurchschnitt.</p>
+  </section>
+
+  <!-- ══ Baustein 2b · Marktüberblick im Vergleich (Kursblatt) ══ -->
+  <div style="display:flex;align-items:center;gap:10px;margin:72px 0 16px;font:700 10px/1.3 'Open Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D3005E"><i style="width:7px;height:7px;border-radius:50%;background:#D3005E"></i><span>Baustein 2b · Marktüberblick im Kursblatt · Säulen</span><i style="flex:1;height:1px;background:rgba(211,0,94,.22)"></i></div>
+
+  <section data-sicht="mu" data-screen-label="Marktüberblick" style="opacity:0;animation:{{r.mu}}">
+      <div style="border-top:2px solid #0B7F66;padding:16px 0 8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;gap:7px;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A"><i style="width:8px;height:8px;border-radius:50%;background:#0B7F66"></i>Marktüberblick · 20.000 € über 60 Monate</span><span style="font:italic 300 12px 'Merriweather',Georgia,serif;color:#686C6A">Säule antippen öffnet das Angebot</span></div>
+        <h3 style="margin:10px 0 0;font:700 clamp(19px,3vw,23px)/1.25 'Merriweather',Georgia,serif;color:#334A27;text-wrap:balance">Wie weit liegen die 12 Angebote auseinander?</h3>
+        <p style="margin:6px 0 0;font:italic 300 13.5px/1.5 'Merriweather',Georgia,serif;color:#686C6A">Jede Säule ist ein Angebot, sortiert nach Effektivzins – links günstig, rechts teuer. Die Höhe zeigt, wie viel Sie gegenüber dem teuersten Angebot sparen: Der Bestwert ragt heraus.</p>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px 18px;margin-top:16px;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;gap:8px;font:700 14px 'Open Sans',sans-serif;color:#0B7F66"><i style="width:10px;height:10px;border-radius:50%;background:#0B7F66;animation:fl-pulsT 2.2s ease-in-out infinite"></i><span>Bestwert {{muBest}} · {{muBestBank}}</span></span><span style="display:inline-flex;align-items:center;gap:8px;font:500 13px 'Open Sans',sans-serif;color:#686C6A"><i style="width:18px;height:0;border-top:1px dashed #686C6A"></i><span>Durchschnitt {{muAvg}}</span></span></div>
+        <div style="position:relative;height:{{muSaeulenH}};margin-top:14px">
+          <span style="position:absolute;left:0;right:0;top:0;height:130px;display:flex;align-items:flex-end;gap:{{muGap}}">
+            <sc-for list="{{muSaeulen}}" as="d" hint-placeholder-count="0"><span onMouseEnter="{{d.enter}}" onMouseLeave="{{d.leave}}" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:5px;min-width:0;cursor:pointer"><small style="display:{{d.wertDisplay}};font:{{d.wertFont}};color:{{d.wertFarbe}};white-space:nowrap;transition:color .25s">{{d.wert}}</small><i style="width:{{d.w}};max-width:100%;height:{{d.h}};background:{{d.bg}};border:1px solid {{d.rand}};box-sizing:border-box;transform-origin:bottom;transform:scaleY({{d.s}});transition:transform .6s cubic-bezier(.34,1.3,.64,1) {{d.delay}},background .3s;border-radius:2px 2px 0 0"></i></span></sc-for>
+          </span>
+          <i style="position:absolute;left:0;right:0;top:{{muAvgY}};height:0;border-top:1px dashed rgba(51,74,39,.6);opacity:{{muS}};transition:opacity .5s 1.2s"></i>
+          <i style="position:absolute;left:0;right:0;top:130px;height:1px;background:#334A27;transform-origin:left;transform:scaleX({{muS}});transition:transform .9s cubic-bezier(.2,.8,.2,1)"></i>
+          <span style="position:absolute;left:0;right:0;top:136px;display:{{muLabelDisplay}};gap:{{muGap}}"><sc-for list="{{muSaeulen}}" as="d" hint-placeholder-count="0"><small style="flex:1;min-width:0;text-align:center;font:{{d.labelFont}};color:{{d.labelFarbe}};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:color .25s">{{d.bank}}</small></sc-for></span>
+          <small style="position:absolute;left:0;top:{{muFussTop}};font:400 12px 'Open Sans',sans-serif;color:#686C6A">günstig</small><small style="position:absolute;left:50%;transform:translateX(-50%);top:{{muFussTop}};font:700 10.5px 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A;white-space:nowrap">Ersparnis gegenüber dem teuersten</small><small style="position:absolute;right:0;top:{{muFussTop}};font:400 12px 'Open Sans',sans-serif;color:#686C6A">teuer</small>
+        </div>
+        <!-- Kennzahlen -->
+        <div style="margin-top:20px;border-top:2px solid #334A27;box-shadow:0 3px 0 -2px #334A27;display:grid;grid-template-columns:{{muKennSpalten}}">
+          <sc-for list="{{muKenn}}" as="k" hint-placeholder-count="3"><div style="padding:16px 18px 18px;border-left:{{k.trenner}};border-top:{{k.trennerT}};min-width:0"><span style="font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A">{{k.label}}</span><b style="display:block;margin-top:6px;font:900 clamp(26px,4.4vw,34px)/1 'Merriweather',Georgia,serif;color:{{k.farbe}};font-variant-numeric:tabular-nums">{{k.wert}}</b><span style="display:block;margin-top:6px;font:italic 300 12.5px/1.4 'Merriweather',Georgia,serif;color:#686C6A">{{k.sub}}</span></div></sc-for>
+        </div>
+        <div style="height:2px;background:#334A27;margin-top:0"></div><div style="height:1px;background:#334A27;margin-top:2px"></div>
+      </div>
+  </section>
+
+  <!-- ══ Baustein 3 · Kassensturz ══ -->
+  <div style="display:flex;align-items:center;gap:10px;margin:72px 0 16px;font:700 10px/1.3 'Open Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D3005E"><i style="width:7px;height:7px;border-radius:50%;background:#D3005E"></i><span>Baustein 3 · Finanz-Kassensturz · Beleg in der rechten Spalte</span><i style="flex:1;height:1px;background:rgba(211,0,94,.22)"></i></div>
+
+  <section data-sicht="ks" id="kassensturz" data-screen-label="Kassensturz" style="opacity:0;animation:{{r.ks}}">
+    <div style="border-top:2px solid #45A117;padding-top:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#2E7A0B"><i style="width:8px;height:8px;border-radius:50%;background:#45A117;animation:fl-puls 2.4s ease-in-out infinite"></i>Finanz-Kassensturz · 3 Minuten · keine Anmeldung</span>
+        <span style="font:italic 300 13px 'Merriweather',Georgia,serif;color:#686C6A;animation:{{ksStatusAnim}}">{{ksStatus}}</span>
+      </div>
+      <div style="display:flex;gap:4px;margin:12px 0 24px">
+        <sc-for list="{{ksTape}}" as="p" hint-placeholder-count="8"><i style="flex:1;height:3px;background:{{p.bg}};transform-origin:left;animation:{{p.anim}};transition:background .4s"></i></sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:{{ksSpalten}};gap:{{ksGap}};align-items:start">
+        <div style="min-width:0;position:relative">
+          <!-- Deckblatt -->
+          <div style="display:{{ksStartDisplay}};flex-direction:column;gap:16px;animation:fl-herz .6s cubic-bezier(.2,.8,.2,1) both">
+            <h3 style="margin:0;font:900 clamp(26px,4.6vw,34px)/1.12 'Merriweather',Georgia,serif;letter-spacing:-.02em;color:#334A27;text-wrap:balance">Wie gut sind Sie eigentlich aufgestellt?</h3>
+            <p style="margin:0;font:italic 300 clamp(15px,2.3vw,16.5px)/1.55 'Merriweather',Georgia,serif;color:#686C6A;max-width:40ch">Acht Fragen, eine Schätzung, keine Tastatur. Rechts druckt sich Ihr Beleg mit – am Ende stehen darauf Profil, Ampel und die drei größten Lücken.</p>
+            <div style="position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:6px 0 2px;padding-top:14px">
+              <i style="position:absolute;left:16.6%;right:16.6%;top:14px;height:1px;background:rgba(51,74,39,.3)"></i>
+              <sc-for list="{{ksFahrplan}}" as="f" hint-placeholder-count="3"><span style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;min-width:0;animation:fl-herz .5s cubic-bezier(.2,.8,.2,1) {{f.delay}} both"><i style="width:22px;height:22px;margin-top:-11px;border-radius:50%;background:#faf9f6;border:1.5px solid #334A27;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font:900 10.5px 'Merriweather',Georgia,serif;color:#334A27">{{f.nr}}</i><b style="font:700 13px/1.3 'Merriweather',Georgia,serif;color:#334A27">{{f.titel}}</b><span style="font:italic 300 11.5px/1.4 'Merriweather',Georgia,serif;color:#686C6A;text-wrap:balance">{{f.text}}</span></span></sc-for>
+            </div>
+            <button onClick="{{ksStart}}" style="display:inline-flex;align-items:center;gap:15px;height:48px;padding:3px 3px 3px 19px;border:2px solid #334A27;outline:1px solid #334A27;outline-offset:2px;border-radius:21px;background:transparent;cursor:pointer;font:500 16px 'Open Sans',sans-serif;color:#334A27;align-self:flex-start;margin-top:4px;transition:color .2s" style-hover="color:#2E7A0B"><span>Kassensturz starten</span><span style="width:38px;height:38px;border-radius:17px;background:#45A117;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button>
+          </div>
+          <!-- Frage -->
+          <div style="display:{{ksFrageDisplay}};flex-direction:column;gap:14px;opacity:{{ksBuehneOp}};transform:translateX({{ksBuehneX}});transition:opacity .28s,transform .35s cubic-bezier(.2,.8,.2,1)">
+            <span style="font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A">Frage {{ksNr}} von 8 · {{ksThema}}</span>
+            <h3 style="margin:0;font:900 clamp(22px,3.6vw,27px)/1.2 'Merriweather',Georgia,serif;letter-spacing:-.01em;color:#334A27;text-wrap:balance">{{ksFrage}}</h3>
+            <p style="margin:-4px 0 2px;font:italic 300 14.5px/1.5 'Merriweather',Georgia,serif;color:#686C6A">{{ksHinweis}}</p>
+            <div style="display:{{ksKartenDisplay}};flex-direction:column;gap:8px">
+              <sc-for list="{{ksOptionen}}" as="o" hint-placeholder-count="3">
+                <button onClick="{{o.klick}}" style="display:grid;grid-template-columns:36px 1fr auto;align-items:center;gap:14px;border:1px solid {{o.rand}};background:{{o.bg}};color:{{o.farbe}};padding:11px 16px 11px 14px;text-align:left;cursor:pointer;min-height:56px;box-shadow:{{o.schatten}};transform:translateY({{o.y}});transition:background .25s,color .25s,border-color .25s,transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s;animation:fl-herz .45s cubic-bezier(.2,.8,.2,1) {{o.delay}} both" style-hover="border-color:#334A27;transform:translateY(-1px)"><img data-icon="{{o.icon}}" alt="" style="width:34px;height:34px;display:block;filter:{{o.iconFilter}};transition:filter .25s;animation:{{o.iconAnim}}"><span><b style="display:block;font:700 15.5px/1.3 'Merriweather',Georgia,serif">{{o.label}}</b><span style="display:block;margin-top:2px;font:400 12.5px/1.4 'Open Sans',sans-serif;opacity:.8">{{o.sub}}</span></span><span style="font:700 12px 'Open Sans',sans-serif;font-variant-numeric:tabular-nums;color:{{o.punkteFarbe}};opacity:{{o.punkteOp}};transform:scale({{o.punkteS}});transition:opacity .25s,transform .35s cubic-bezier(.34,1.56,.64,1)">{{o.punkte}}</span></button>
+              </sc-for>
+            </div>
+            <!-- Schätzfrage mit Lineal -->
+            <div style="display:{{ksSchaetzDisplay}};flex-direction:column;gap:14px">
+              <div style="position:relative">
+                <dc-import name="FL Lineal" label="Ihre Schätzung" bereich="600 bis 2.400 €" wert="{{ksSchaetz}}" on-change="{{ksSchaetzLineal}}" min="{{ksSchaetzMin}}" max="{{ksSchaetzMax}}" step="{{ksSchritt}}" px="{{ksPx}}" major="{{ksMajor}}" mittel="{{ksMittel}}" einheit="€ netto" farbe="#45A117" hint-size="100%,118px"></dc-import>
+                <i style="position:absolute;inset:0;display:{{ksSperreDisplay}}"></i>
+              </div>
+              <!-- Auflösung: Tipp und Wahrheit auf einer Linie -->
+              <div style="display:{{ksUrteilDisplay}};flex-direction:column;gap:10px;animation:fl-herz .5s cubic-bezier(.2,.8,.2,1) both">
+                <div style="position:relative;height:44px">
+                  <i style="position:absolute;left:0;right:0;top:20px;height:1px;background:rgba(51,74,39,.3)"></i>
+                  <i style="position:absolute;left:{{ksSpanneL}};width:{{ksSpanneW}};top:19px;height:3px;background:{{ksUrteilFarbe}};transform-origin:left;animation:fl-linie .6s cubic-bezier(.2,.8,.2,1) .2s both"></i>
+                  <i style="position:absolute;left:{{ksTippX}};top:15px;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;background:#fff;border:2px solid #334A27;box-sizing:border-box"></i>
+                  <small style="position:absolute;left:{{ksTippX}};top:0;transform:translateX(-50%);font:600 10.5px 'Open Sans',sans-serif;color:#334A27;white-space:nowrap">Ihr Tipp {{ksTippText}}</small>
+                  <i style="position:absolute;left:{{ksWahrX}};top:14px;width:13px;height:13px;margin-left:-6.5px;border-radius:50%;background:#45A117;box-shadow:0 0 0 2px #faf9f6;animation:fl-knoten .5s cubic-bezier(.34,1.56,.64,1) .5s both"></i>
+                  <small style="position:absolute;left:{{ksWahrX}};top:30px;transform:translateX(-50%);font:700 10.5px 'Open Sans',sans-serif;color:#2E7A0B;white-space:nowrap;animation:fl-druck .5s .6s both">tatsächlich {{ksWahrText}}</small>
+                </div>
+                <span style="font:italic 400 16px 'Merriweather',Georgia,serif;color:{{ksUrteilFarbe}};animation:fl-druck .5s cubic-bezier(.2,.8,.2,1) .4s both">{{ksUrteil}}</span>
+              </div>
+              <button onClick="{{ksTipp}}" style="display:{{ksTippDisplay}};align-items:center;gap:15px;height:48px;padding:3px 3px 3px 19px;border:2px solid #334A27;outline:1px solid #334A27;outline-offset:2px;border-radius:21px;background:transparent;cursor:pointer;font:500 16px 'Open Sans',sans-serif;color:#334A27;align-self:flex-start;transition:color .2s" style-hover="color:#2E7A0B"><span>Tipp abgeben</span><span style="width:38px;height:38px;border-radius:17px;background:#45A117;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button>
+            </div>
+            <button onClick="{{ksZurueck}}" style="display:{{ksZurueckDisplay}};align-items:center;gap:8px;border:0;background:transparent;padding:6px 0;margin-top:2px;font:500 12.5px 'Open Sans',sans-serif;color:#686C6A;cursor:pointer;align-self:flex-start;transition:color .2s" style-hover="color:#334A27"><i style="width:14px;height:1px;background:currentColor"></i><span>Zurück</span></button>
+          </div>
+          <!-- Ergebnis -->
+          <div style="display:{{ksErgebnisDisplay}};flex-direction:column;gap:24px;animation:fl-herz .7s cubic-bezier(.2,.8,.2,1) both">
+            <div style="display:grid;grid-template-columns:{{ksErgSpalten}};gap:18px;align-items:center">
+              <div style="position:relative;width:170px;height:96px;margin:0 auto"><svg viewBox="0 0 220 120" style="width:100%;height:100%;overflow:visible"><circle cx="110" cy="110" r="90" fill="none" stroke="rgba(51,74,39,.1)" stroke-width="14" stroke-dasharray="283 566" transform="rotate(180 110 110)"></circle><circle cx="110" cy="110" r="76" fill="none" stroke="#334A27" stroke-width="1" stroke-dasharray="239 478" transform="rotate(180 110 110)"></circle><circle cx="110" cy="110" r="90" fill="none" stroke="{{tachoFarbe}}" stroke-width="14" stroke-dasharray="{{tachoDash}}" transform="rotate(180 110 110)" style="transition:stroke-dasharray 1.4s cubic-bezier(.2,.8,.2,1),stroke .6s"></circle></svg><div style="position:absolute;left:calc(50% - 1px);bottom:8px;width:2px;height:60px;background:#334A27;transform-origin:bottom center;transform:rotate({{tachoNadel}});transition:transform 1.4s cubic-bezier(.34,1.3,.64,1)"></div><i style="position:absolute;left:calc(50% - 5px);bottom:3px;width:10px;height:10px;border-radius:50%;background:#334A27"></i><div style="position:absolute;left:0;right:0;bottom:-10px;text-align:center"><b style="font:900 28px/1 'Merriweather',Georgia,serif;color:#334A27;font-variant-numeric:tabular-nums">{{tachoWert}}</b><small style="display:block;font:700 10px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A;margin-top:4px">von 100</small></div></div>
+              <div><span style="font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A">Ihr Ergebnis</span><h3 style="margin:4px 0 8px;font:900 clamp(21px,3.2vw,26px)/1.2 'Merriweather',Georgia,serif;color:#334A27;text-wrap:balance">{{ksTitel}}</h3><p style="margin:0;font:400 14px/1.6 'Open Sans',sans-serif;color:#334A27">{{ksVorspann}}</p>
+                <div style="display:flex;gap:9px;margin-top:14px;align-items:center"><sc-for list="{{ampel}}" as="a" hint-placeholder-count="3"><i style="width:13px;height:13px;border-radius:50%;background:{{a.bg}};opacity:{{a.op}};box-shadow:{{a.ring}};transition:all .5s"></i></sc-for><span style="font:italic 300 13px 'Merriweather',Georgia,serif;color:#686C6A;margin-left:4px">{{ampelText}}</span></div></div>
+            </div>
+            <div>
+              <span style="display:block;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A;border-bottom:1px solid #334A27;padding-bottom:6px">Ihre drei größten Lücken</span>
+              <sc-for list="{{ksLuecken}}" as="l" hint-placeholder-count="0">
+                <a href="#" onClick="{{l.klick}}" style="display:grid;grid-template-columns:26px 1fr auto;gap:12px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(51,74,39,.12);text-decoration:none;color:#334A27;transition:padding-left .3s cubic-bezier(.2,.8,.2,1);animation:fl-herz .6s cubic-bezier(.2,.8,.2,1) {{l.delay}} both" style-hover="padding-left:6px"><span style="display:inline-flex;align-items:center;gap:6px"><i style="font:900 13px 'Merriweather',Georgia,serif;color:{{l.farbe}}">{{l.nr}}</i></span><span style="min-width:0"><b style="display:block;font:700 15px/1.3 'Merriweather',Georgia,serif">{{l.titel}}</b><span style="display:block;margin-top:3px;font:400 12.5px/1.5 'Open Sans',sans-serif;color:#686C6A">{{l.text}}</span></span><span style="display:inline-flex;align-items:center;gap:7px;font:600 12.5px 'Open Sans',sans-serif;color:#2E7A0B;white-space:nowrap"><span style="display:{{l.linkDisplay}}">{{l.link}}</span><i style="width:16px;height:1px;background:currentColor"></i></span></a>
+              </sc-for>
+            </div>
+            <div style="display:grid;grid-template-columns:{{ksMailSpalten}};gap:16px;align-items:end">
+              <dc-import name="FL Adresszeile" label="Ergebnis als PDF an" placeholder="ihre@adresse.de" knopf="Schicken" farbe="#45A117" hinweis="Nur der Beleg als PDF, kein Newsletter." hinweis-fertig="Der Beleg ist unterwegs – als PDF, mit Ihren drei Lücken." hint-size="100%,86px"></dc-import>
+              <button onClick="{{ksNeu}}" style="border:0;background:transparent;font:500 13px 'Open Sans',sans-serif;color:#686C6A;cursor:pointer;min-height:44px;padding:0 0 22px;white-space:nowrap;transition:color .2s" style-hover="color:#334A27">Noch einmal</button>
+            </div>
+          </div>
+        </div>
+        <!-- Beleg · rechte Spalte, klebt beim Scrollen -->
+        <div style="display:{{bonDisplay}};position:sticky;top:20px;width:{{bonW}};margin:{{bonMargin}};padding-bottom:12px;filter:drop-shadow(0 14px 16px rgba(51,74,39,.18));animation:{{bonAnim}}">
+          <div style="animation:{{bonBump}}">
+            <div style="background:#fff;padding:16px 16px 26px;clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),97% 100%,94% calc(100% - 8px),91% 100%,88% calc(100% - 8px),85% 100%,82% calc(100% - 8px),79% 100%,76% calc(100% - 8px),73% 100%,70% calc(100% - 8px),67% 100%,64% calc(100% - 8px),61% 100%,58% calc(100% - 8px),55% 100%,52% calc(100% - 8px),49% 100%,46% calc(100% - 8px),43% 100%,40% calc(100% - 8px),37% 100%,34% calc(100% - 8px),31% 100%,28% calc(100% - 8px),25% 100%,22% calc(100% - 8px),19% 100%,16% calc(100% - 8px),13% 100%,10% calc(100% - 8px),7% 100%,4% calc(100% - 8px),1% 100%,0 calc(100% - 8px));font-variant-numeric:tabular-nums">
+              <div style="text-align:center"><b style="display:block;font:700 11px/1.3 'Merriweather',Georgia,serif;letter-spacing:.22em;text-transform:uppercase;color:#334A27">Kassensturz</b><span style="display:block;margin-top:3px;font:400 10.5px 'Open Sans',sans-serif;color:#686C6A">finanzleser.de · Beleg {{bonNr}}</span></div>
+              <div style="border-top:1px dashed rgba(51,74,39,.35);margin:10px 0 6px"></div>
+              <sc-for list="{{bon}}" as="b" hint-placeholder-count="8">
+                <div style="display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:6px;align-items:baseline;padding:5px 0;font:400 11.5px 'Open Sans',sans-serif;color:{{b.farbe}};transition:color .3s;animation:{{b.anim}}"><span style="font:700 10px 'Open Sans',sans-serif;color:#9a9e9b">{{b.nr}}</span><span style="display:flex;align-items:baseline;gap:5px;min-width:0"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{b.label}}</span><i style="flex:1;min-width:6px;border-bottom:1px dotted rgba(51,74,39,.35);transform:translateY(-3px)"></i></span><span style="display:inline-flex;gap:7px;align-items:center;white-space:nowrap"><span style="font-weight:{{b.gewicht}}">{{b.wert}}</span><span style="font:700 11px 'Open Sans',sans-serif;color:{{b.punkteFarbe}};min-width:22px;text-align:right">{{b.punkte}}</span><svg width="10" height="9" viewBox="0 0 14 12" fill="none" style="display:{{b.hakenDisplay}}"><path d="M1.5 6.5l3.6 3.6L12.5 1.8" stroke="#45A117" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:1;animation:fl-haken .45s cubic-bezier(.2,.8,.2,1) .25s forwards"></path></svg></span></div>
+              </sc-for>
+              <div style="border-top:1px dashed rgba(51,74,39,.35);margin:8px 0 8px"></div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;font:700 11px 'Open Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#334A27"><span>{{bonSummeLabel}}</span><span data-bon-summe="" style="font:900 17px 'Merriweather',Georgia,serif;letter-spacing:0;white-space:nowrap;display:inline-block;transform:scale({{bonSummeS}});transition:transform .35s cubic-bezier(.34,1.56,.64,1)">{{bonSumme}}<small style="font:400 10.5px 'Open Sans',sans-serif;color:#686C6A;letter-spacing:0"> / 100</small></span></div>
+              <div style="height:2px;background:#334A27;margin-top:6px"></div><div style="height:1px;background:#334A27;margin-top:2px"></div>
+              <div style="margin-top:12px;text-align:center;font:italic 300 10.5px/1.45 'Merriweather',Georgia,serif;color:#686C6A">{{bonFuss}}</div>
+            </div>
+          </div>
+          <div style="position:absolute;right:12px;top:6px;padding:5px 10px;border:2.5px solid #45A117;color:#45A117;font:900 13px 'Merriweather',Georgia,serif;letter-spacing:.14em;text-transform:uppercase;transform:rotate(-11deg);opacity:{{stempelOp}};animation:{{stempelAnim}};pointer-events:none;background:rgba(255,255,255,.7)">Geprüft</div>
+          <sc-for list="{{funken}}" as="f" hint-placeholder-count="0"><svg viewBox="0 0 12 12" style="position:absolute;right:{{f.r}};top:{{f.t}};width:{{f.g}};height:{{f.g}};opacity:0;animation:{{f.anim}};pointer-events:none"><path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="#45A117"></path></svg></sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+  <b style="position:absolute;left:0;top:0;z-index:60;display:{{flugDisplay}};padding:3px 8px;border-radius:999px;background:#2E7A0B;color:#fff;font:700 13px 'Open Sans',sans-serif;transform:translate({{flugX}},{{flugY}}) scale({{flugS}});opacity:{{flugOp}};transition:{{flugTrans}};pointer-events:none;white-space:nowrap">{{flugText}}</b>
+
+  <!-- ══ Baustein 4 · Wochenbrief ══ -->
+  <div style="display:flex;align-items:center;gap:10px;margin:72px 0 16px;font:700 10px/1.3 'Open Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D3005E"><i style="width:7px;height:7px;border-radius:50%;background:#D3005E"></i><span>Baustein 4 · Leos Wochenbrief · auf der Animation</span><i style="flex:1;height:1px;background:rgba(211,0,94,.22)"></i></div>
+
+  <section data-sicht="nl" data-screen-label="Wochenbrief" style="opacity:0;animation:{{r.nl}}">
+    <div style="position:relative;border-top:1px solid #334A27;border-bottom:1px solid #334A27;overflow:hidden;background:#d9d3e6 url(public/assets/wochenbrief-himmel.png) center / cover no-repeat;aspect-ratio:{{nlRatio}};min-height:380px">
+      <h3 style="position:absolute;left:0;right:0;margin:0 auto;top:clamp(18px,4vw,30px);width:{{nlTitelW}};text-align:center;font:900 clamp(20px,4.2vw,30px)/1.15 'Merriweather',Georgia,serif;letter-spacing:-.02em;color:#334A27;text-wrap:balance;text-shadow:0 0 14px rgba(255,255,255,.7),0 1px 0 rgba(255,255,255,.5)">Mit Leos Wochenbrief bleiben Sie immer auf dem neuesten Stand.</h3>
+      <div style="position:absolute;left:clamp(16px,4vw,30px);right:clamp(16px,4vw,30px);bottom:clamp(16px,4vw,26px);display:flex;justify-content:center">
+        <div style="width:min(100%,430px);background:rgba(250,249,246,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.75);box-shadow:0 18px 40px -22px rgba(51,74,39,.55);padding:12px 16px 8px;box-sizing:border-box">
+          <dc-import name="FL Adresszeile" label="Ihre E-Mail · donnerstags" placeholder="ihre@adresse.de" knopf="Eintragen" farbe="#2E7A0B" on-senden="{{nlSenden}}" hint-size="100%,88px"></dc-import>
+          <p style="margin:-4px 0 0;font:400 11px/1.45 'Open Sans',sans-serif;color:#334A27;text-align:center">Mit dem Eintragen stimmen Sie der <a href="#" style="color:#334A27;text-decoration:underline;text-underline-offset:2px">Datenschutzerklärung</a> zu. Abmelden mit einem Klick in jeder Ausgabe.</p>
+        </div>
+      </div>
+      <div style="position:absolute;right:26px;top:26px;padding:6px 12px;border:2.5px solid #2E7A0B;color:#2E7A0B;font:900 13px 'Merriweather',Georgia,serif;letter-spacing:.14em;text-transform:uppercase;background:rgba(250,249,246,.7);opacity:{{nlStempelOp}};animation:{{nlStempelAnim}};pointer-events:none">Eingetragen</div>
+    </div>
+    <p style="margin:10px 0 0;font:italic 300 12px/1.5 'Merriweather',Georgia,serif;color:#686C6A">Standbild Ihrer Animation. Titel und Feld mittig – der Flieger fliegt dazwischen durch die Mitte; die Fläche darf auch höher werden.</p>
+  </section>
+
+  <!-- ══ Baustein 5 · Finanzleser Plus ══ -->
+  <div style="display:flex;align-items:center;gap:10px;margin:72px 0 16px;font:700 10px/1.3 'Open Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D3005E"><i style="width:7px;height:7px;border-radius:50%;background:#D3005E"></i><span>Baustein 5 · Finanzleser Plus · Abo-Coupon</span><i style="flex:1;height:1px;background:rgba(211,0,94,.22)"></i></div>
+
+  <section data-sicht="plus" data-screen-label="Finanzleser Plus" style="opacity:0;animation:{{r.plus}}">
+    <div onMouseEnter="{{schereAn}}" onMouseLeave="{{schereAus}}" style="position:relative;border:1px dashed rgba(51,74,39,.5);padding:26px clamp(18px,4vw,30px) 26px;margin-top:10px">
+      <span aria-hidden="true" style="position:absolute;top:-10px;left:{{schereX}};width:20px;height:20px;background:#faf9f6;display:{{schereDisplay}};align-items:center;justify-content:center;transition:left 1.6s cubic-bezier(.2,.8,.2,1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#334A27" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"></path></svg></span>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#2E7A0B"><span>Finanzleser Plus</span><span style="font:italic 300 12px 'Merriweather',Georgia,serif;letter-spacing:0;text-transform:none;color:#686C6A">Werbefrei lesen</span></div>
+      <div style="display:grid;grid-template-columns:{{plusKopfSpalten}};gap:24px;align-items:center;margin-top:14px">
+        <div style="min-width:0">
+          <h3 style="margin:0;font:900 clamp(26px,4.6vw,34px)/1.12 'Merriweather',Georgia,serif;letter-spacing:-.02em;color:#334A27;text-wrap:balance">Leo merkt sich Ihre Zahlen. Der Faden reißt nie ab.</h3>
+          <p style="margin:10px 0 0;font:italic 300 15px/1.5 'Merriweather',Georgia,serif;color:#686C6A;max-width:46ch">Drei Dinge, die nur Plus kann – und keine Anzeige zwischen den Kapiteln.</p>
+        </div>
+        <div style="display:flex;justify-content:center"><div style="position:relative;padding:12px 16px 11px;border:1.5px solid #2E7A0B;color:#2E7A0B;text-align:center;transform:rotate(-4deg);animation:{{plusStempelAnim}};background:rgba(255,255,255,.5)"><b style="display:block;font:900 24px/1 'Merriweather',Georgia,serif;letter-spacing:-.01em">30 Tage</b><span style="display:block;margin-top:4px;font:700 10px 'Open Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase">kostenlos</span><span style="display:block;margin-top:6px;padding-top:6px;border-top:1px solid rgba(46,122,11,.35);font:italic 300 11px 'Merriweather',Georgia,serif;color:#334A27;white-space:nowrap">dann 4,90 € im Monat</span></div></div>
+      </div>
+      <div style="margin-top:22px;border-top:1px solid #334A27">
+        <sc-for list="{{plus}}" as="f" hint-placeholder-count="3">
+          <a href="#" onMouseEnter="{{f.enter}}" onMouseLeave="{{f.leave}}" style="display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(51,74,39,.14);text-decoration:none;color:{{f.textFarbe}};transition:padding-left .3s cubic-bezier(.2,.8,.2,1)" style-hover="padding-left:6px">
+            <span style="position:relative;width:52px;height:40px;display:flex;align-items:center;justify-content:center">
+              <span style="position:relative;display:{{f.kofferDisplay}};width:40px;height:30px"><i style="position:absolute;left:14px;top:4px;width:12px;height:17px;background:#fff;border:1px solid #334A27;transform:{{f.k1}};transform-origin:bottom center;transition:transform .45s cubic-bezier(.34,1.56,.64,1)"></i><i style="position:absolute;left:14px;top:4px;width:12px;height:17px;background:#fff;border:1px solid #334A27;transform:{{f.k2}};transform-origin:bottom center;transition:transform .45s cubic-bezier(.34,1.56,.64,1) .04s"></i><i style="position:absolute;left:14px;top:4px;width:12px;height:17px;background:#fff;border:1px solid #334A27;transform:{{f.k3}};transform-origin:bottom center;transition:transform .45s cubic-bezier(.34,1.56,.64,1) .08s"></i><i style="position:absolute;left:8px;right:8px;bottom:0;height:2px;background:#334A27"></i></span>
+              <span style="position:relative;display:{{f.waechterDisplay}};width:40px;height:30px"><i style="position:absolute;left:15px;top:10px;width:10px;height:10px;border-radius:50%;background:#45A117"></i><i style="position:absolute;left:15px;top:10px;width:10px;height:10px;border-radius:50%;border:1px solid #45A117;box-sizing:border-box;animation:fl-ring {{f.ringDauer}} ease-out infinite"></i><i style="position:absolute;left:15px;top:10px;width:10px;height:10px;border-radius:50%;border:1px solid #45A117;box-sizing:border-box;animation:fl-ring {{f.ringDauer}} ease-out .9s infinite"></i></span>
+              <span style="position:relative;display:{{f.pdfDisplay}};width:40px;height:30px"><i style="position:absolute;left:12px;top:1px;width:16px;height:22px;background:#fff;border:1px solid #9a9e9b;box-sizing:border-box"></i><i style="position:absolute;left:15px;top:6px;width:10px;height:1px;background:#9a9e9b;transform-origin:left;transform:scaleX({{f.l1}});transition:transform .3s .05s"></i><i style="position:absolute;left:15px;top:10px;width:10px;height:1px;background:#9a9e9b;transform-origin:left;transform:scaleX({{f.l2}});transition:transform .3s .15s"></i><i style="position:absolute;left:15px;top:14px;width:10px;height:1px;background:#9a9e9b;transform-origin:left;transform:scaleX({{f.l3}});transition:transform .3s .25s"></i><i style="position:absolute;left:15px;top:18px;width:6px;height:1px;background:#9a9e9b;transform-origin:left;transform:scaleX({{f.l3}});transition:transform .3s .35s"></i></span>
+            </span>
+            <span style="min-width:0"><b style="display:block;font:700 16px/1.3 'Merriweather',Georgia,serif">{{f.titel}}</b><span style="display:block;margin-top:3px;font:400 13px/1.5 'Open Sans',sans-serif;color:#686C6A">{{f.text}}</span></span>
+            <span style="display:inline-flex;align-items:center;gap:8px;font:{{f.linkFont}};color:{{f.linkFarbe}};white-space:nowrap"><span>{{f.link}}</span><i style="display:{{f.linieDisplay}};height:1px;width:{{f.linie}};background:currentColor;transition:width .45s cubic-bezier(.2,.8,.2,1)"></i></span>
+          </a>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:22px">
+        <a href="#" onMouseEnter="{{plusHovAn}}" onMouseLeave="{{plusHovAus}}" style="position:relative;display:inline-flex;align-items:center;height:48px;padding:3px 44px 3px 19px;border:2px solid #334A27;outline:1px solid #334A27;outline-offset:2px;border-radius:21px;text-decoration:none;color:{{plusBtnFarbe}};font:500 16px 'Open Sans',sans-serif;overflow:hidden;transition:color .3s"><i style="position:absolute;top:3px;bottom:3px;right:3px;width:{{plusFuellW}};border-radius:19px;background:#45A117;transition:width .5s cubic-bezier(.2,.8,.2,1)"></i><span style="position:relative;z-index:1">Kostenlos anmelden</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="position:absolute;right:15px;top:calc(50% - 7px);z-index:1"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+        <span style="font:italic 300 13px 'Merriweather',Georgia,serif;color:#686C6A">Jederzeit kündbar · Ihr Faden bleibt, auch ohne Plus.</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;tempo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;normal&quot;,&quot;options&quot;:[&quot;ruhig&quot;,&quot;normal&quot;,&quot;lebhaft&quot;],&quot;tsType&quot;:&quot;'ruhig'|'normal'|'lebhaft'&quot;,&quot;section&quot;:&quot;Bewegung&quot;},
+&quot;bonZeigen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Kassensturz&quot;},
+&quot;schereZeigen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Plus-Coupon&quot;}}">
+class Component extends DCLogic {
+  state = { breite: 728, sicht: {}, zahlP: 0, hovTool: -1, hovVgl: -1, hovPlus: -1, hovMu: -1, plusHov: false, schere: false,
+    ks: { phase: 'start', schritt: 0, antworten: [], wechsel: false, gewaehlt: -1, schaetz: 1400, enthuellt: false }, bonAnzeige: 0, bonLauf: 0, tacho: 0, nlFertig: false, flug: null };
+  rootRef = React.createRef();
+  _r = {};
+  TOOLS = [['Rechner', 56, '#D3005E', 'Unterhalt, Rente, Steuer, Kredit'], ['Vergleiche', 47, '#0B7F66', 'Tarife nebeneinander'], ['Checklisten', 207, '#45A117', 'Schritt für Schritt, als PDF']];
+  VGL = [
+    { titel: 'Private Haftpflichtversicherung', min: 2.9, avg: 5.4, max: 9.8, n: 14, stand: '17. Sept.' },
+    { titel: 'Kfz-Versicherung', min: 21.4, avg: 34.6, max: 58.1, n: 18, stand: '17. Sept.' },
+    { titel: 'Hausratversicherung', min: 3.1, avg: 6.2, max: 11.4, n: 12, stand: '16. Sept.' },
+    { titel: 'Rechtsschutzversicherung', min: 14.9, avg: 22.8, max: 31.6, n: 9, stand: '15. Sept.' }
+  ];
+  MU = [['Verivox', .68], ['Smava', 2.39], ['Check24', 2.39], ['Targobank', 2.99], ['ING', 2.99], ['Santander', 3.19], ['DKB', 3.49], ['Postbank', 3.79], ['norisbank', 3.79], ['Commerzbank', 4.09], ['Sparkasse', 4.49], ['Volksbank', 4.99]];
+  KS = [
+    { thema: 'Haftpflicht', icon: 'public/icons/icon_versicherungen.svg', frage: 'Haben Sie eine Privathaftpflicht?', hinweis: 'Die eine Versicherung, die jeder braucht.', optionen: [['Ja', 'mindestens 10 Mio. € Deckung', 12, 'ja · 10 Mio.'], ['Ja, aber', 'Deckungssumme unbekannt', 6, 'ja · Summe?'], ['Nein', 'oder nur über die Eltern', 0, 'nein']], luecke: ['Privathaftpflicht prüfen', 'Deckung unbekannt oder unter 10 Mio. € – die wichtigste Police überhaupt.', 'Tarife nebeneinander'] },
+    { thema: 'Notgroschen', icon: 'public/icons/icon_rubbleCoin.svg', frage: 'Wie lange kommen Sie ohne Einkommen aus?', hinweis: 'Tagesgeld zählt, das Depot nicht.', optionen: [['Über drei Monate', 'drei Nettogehälter oder mehr', 12, '> 3 Monate'], ['Ein bis drei Monate', 'es wird eng, aber es geht', 6, '1–3 Monate'], ['Unter einem Monat', 'von Gehalt zu Gehalt', 0, '< 1 Monat']], luecke: ['Notgroschen aufbauen', 'Drei Nettogehälter auf dem Tagesgeld – erst dann lohnt sich alles andere.', 'Tagesgeld vergleichen'] },
+    { thema: 'Arbeitskraft', icon: 'public/icons/icon_anbieter.svg', frage: 'Ist Ihre Arbeitskraft abgesichert?', hinweis: 'Jeder Vierte wird vor der Rente berufsunfähig.', optionen: [['Ja, Berufsunfähigkeit', 'mit Rente bis zum Ruhestand', 12, 'BU · ja'], ['Nur Unfall', 'Unfallversicherung, keine BU', 4, 'nur Unfall'], ['Nein', 'noch nichts', 0, 'nein']], luecke: ['Arbeitskraft absichern', 'Die staatliche Erwerbsminderungsrente reicht selten. Je früher, desto günstiger.', 'BU-Rechner öffnen'] },
+    { thema: 'Vorsorge', icon: 'public/icons/time_icon.svg', frage: 'Sparen Sie fürs Alter – neben der gesetzlichen Rente?', hinweis: 'Betriebsrente, ETF-Sparplan, Riester: alles zählt.', optionen: [['Ja, jeden Monat', 'fester Betrag, automatisch', 12, 'monatlich'], ['Gelegentlich', 'wenn etwas übrig ist', 6, 'gelegentlich'], ['Noch nicht', 'die Rente wird schon reichen', 0, 'nein']], luecke: ['Rentenlücke ausrechnen', 'Wie viel fehlt im Alter wirklich? Der Rechner zeigt es in zwei Minuten.', 'Rentenrechner öffnen'] },
+    { thema: 'Rentenwissen', icon: 'public/icons/icon_quiz.svg', schaetz: true, min: 600, max: 2400, wahr: 1100, frage: 'Wie hoch ist die gesetzliche Altersrente im Schnitt – netto im Monat?', hinweis: 'Ziehen Sie das Lineal unter der Nadel hindurch. Danach zeige ich den echten Wert.', luecke: ['Rentenlücke kennen', 'Wer den Durchschnitt kennt, plant realistischer. Der Rechner zeigt Ihre eigene Lücke.', 'Rentenrechner öffnen'] },
+    { thema: 'Hausrat', icon: 'public/icons/iconCheckliste.svg', frage: 'Ist Ihr Hausrat versichert?', hinweis: 'Möbel, Technik, Fahrrad – zum Neuwert.', optionen: [['Ja', 'Versicherungssumme passt', 12, 'ja'], ['Ja, aber alt', 'Summe seit Jahren nicht geprüft', 7, 'ja · alt'], ['Nein', 'ich habe wenig Wertvolles', 3, 'nein']], luecke: ['Hausrat prüfen', '650 € pro Quadratmeter gelten als Faustregel – reicht Ihre Summe?', 'Hausrat vergleichen'] },
+    { thema: 'Verträge', icon: 'public/icons/iconDokumente.svg', frage: 'Wann haben Sie Ihre Verträge zuletzt geprüft?', hinweis: 'Strom, Handy, Versicherungen, Konto.', optionen: [['Im letzten Jahr', 'alles einmal durchgesehen', 12, '< 1 Jahr'], ['Vor zwei, drei Jahren', 'läuft eben weiter', 6, '2–3 Jahre'], ['Weiß ich nicht', 'irgendwann mal', 0, 'nie']], luecke: ['Verträge durchsehen', 'Ein Nachmittag, oft mehrere hundert Euro im Jahr. Der Wächter erinnert Sie künftig.', 'Checkliste öffnen'] },
+    { thema: 'Steuer', icon: 'public/icons/icon_steuer.svg', frage: 'Geben Sie eine Steuererklärung ab?', hinweis: 'Im Schnitt gibt es 1.095 € zurück.', optionen: [['Jedes Jahr', 'meist mit Erstattung', 12, 'jährlich'], ['Manchmal', 'wenn ich dran denke', 6, 'manchmal'], ['Nie', 'zu kompliziert', 0, 'nie']], luecke: ['Steuererklärung nachholen', 'Vier Jahre rückwirkend möglich – im Schnitt 1.095 € pro Jahr.', 'Ratgeber öffnen'] }
+  ];
+  PLUS = [['Aktenkoffer ohne Limit', 'Rechnungen, Ratgeber und Ergebnisse an einer Stelle – Leo findet sie wieder.', 'ansehen', 'koffer'], ['Wächter für alle Verträge', 'Eine Meldung, wenn sich etwas ändert, das Sie betrifft. Nicht mehr.', 'ansehen', 'waechter'], ['Ausgaben als PDF', 'Ihr Faden zum Ausdrucken – werbefrei, mit Quellen und Seite.', 'in Vorbereitung', 'pdf']];
+  T() { return { ruhig: 1.35, normal: 1, lebhaft: .65 }[this.props.tempo ?? 'normal'] ?? 1; }
+  eur(n, d = 2) { return n.toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d }) + ' €'; }
+  pct(n) { return n.toFixed(2).replace('.', ',') + ' %'; }
+  rate(z) { const r = z / 1200; return 20000 * r / (1 - Math.pow(1 + r, -60)); }
+  pts(q, a) { if (a === undefined) return 0; if (q.schaetz) { const d = Math.abs(a - q.wahr); return d <= 150 ? 12 : d <= 350 ? 6 : 2; } return q.optionen[a][2]; }
+  bonWert(q, a) { return q.schaetz ? a.toLocaleString('de-DE') + ' €' : q.optionen[a][3]; }
+  rollen(key, nach, dauer = 950) {
+    const von = this.state[key] || 0, t0 = performance.now(); cancelAnimationFrame(this._r[key]);
+    const step = now => { const p = Math.min(1, (now - t0) / (dauer * this.T())); const e = 1 - Math.pow(1 - p, 3); this.setState({ [key]: von + (nach - von) * e }); if (p < 1) this._r[key] = requestAnimationFrame(step); };
+    this._r[key] = requestAnimationFrame(step);
+  }
+  wurzel() { return this.rootRef.current || document.querySelector('[data-screen-label="Heute – Teaser-Bausteine"]') || document.body; }
+  componentDidMount() {
+    const root = this.wurzel();
+    this._ro = new ResizeObserver(es => { const w = es[0].contentRect.width; if (Math.abs(w - this.state.breite) > 2) this.setState({ breite: w }); }); this._ro.observe(root); this._roZiel = root;
+    this._io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const k = e.target.dataset.sicht; this._io.unobserve(e.target); this.setState(x => ({ sicht: { ...x.sicht, [k]: true } })); if (k === 'tools') setTimeout(() => this.rollen('zahlP', 1, 1100), 250 * this.T()); }), { rootMargin: '0px 0px -8% 0px', threshold: .06 });
+    this._beobachtet = new Set(); this.beobachten();
+    this._mo = new MutationObserver(() => this.beobachten()); this._mo.observe(root, { childList: true, subtree: true });
+    this._fallback = setTimeout(() => { if (!Object.keys(this.state.sicht).length) this.setState({ sicht: { tools: true, vgl: true, mu: true, ks: true, nl: true, plus: true } }); }, 4000);
+  }
+  beobachten() {
+    const root = this.wurzel(); if (!this._io) return;
+    if (root !== this._roZiel && root !== document.body) { this._roZiel = root; this._ro?.observe(root); }
+    root.querySelectorAll('[data-sicht]').forEach(el => { if (!this._beobachtet.has(el)) { this._beobachtet.add(el); this._io.observe(el); } });
+    root.querySelectorAll('img[data-icon]').forEach(i => { const u = i.dataset.icon; if (u && !/\{\{/.test(u) && i.getAttribute('src') !== u) i.src = u; });
+  }
+  componentDidUpdate() { this.beobachten(); }
+  componentWillUnmount() { this._ro?.disconnect(); this._io?.disconnect(); this._mo?.disconnect(); clearTimeout(this._fallback); clearTimeout(this._flugT); clearTimeout(this._ksT); Object.values(this._r).forEach(cancelAnimationFrame); }
+  score(ant) { let sum = 0; this.KS.forEach((q, i) => { sum += this.pts(q, ant[i]); }); return Math.round(sum / 96 * 100); }
+  punkteFlug(e, punkte) {
+    const ziel = document.querySelector('[data-bon-summe]'); const von = e?.currentTarget?.getBoundingClientRect(); const root = this.wurzel(); if (!ziel || !von || !root) return;
+    const z = ziel.getBoundingClientRect(), r0 = root.getBoundingClientRect();
+    clearTimeout(this._flugT);
+    this.setState({ flug: { text: `+${punkte}`, x: von.right - r0.left - 56, y: von.top - r0.top + von.height / 2 - 11, s: 1, op: 1, trans: 'none' } });
+    requestAnimationFrame(() => requestAnimationFrame(() => this.setState({ flug: { text: `+${punkte}`, x: z.left - r0.left - 8, y: z.top - r0.top - 4, s: .7, op: .95, trans: `transform ${(.65 * this.T()).toFixed(2)}s cubic-bezier(.3,.7,.3,1), opacity .2s ${(.5 * this.T()).toFixed(2)}s` } })));
+    this._flugT = setTimeout(() => this.setState({ flug: null }), 750 * this.T());
+  }
+  weiter(ant, verz) {
+    const ks = this.state.ks;
+    this.rollen('bonAnzeige', this.score(ant), 700);
+    clearTimeout(this._ksT);
+    this._ksT = setTimeout(() => {
+      const fertig = ks.schritt >= this.KS.length - 1;
+      this.setState({ ks: { ...ks, antworten: ant, gewaehlt: -1, wechsel: false, enthuellt: false, schritt: fertig ? ks.schritt : ks.schritt + 1, phase: fertig ? 'fertig' : 'frage' } });
+      if (fertig) { this.setState({ tacho: 0 }); setTimeout(() => this.rollen('tacho', this.score(ant), 1400), 200); }
+    }, verz * this.T());
+  }
+  ksWaehlen(i, e) {
+    const ks = this.state.ks; if (ks.wechsel) return;
+    const ant = ks.antworten.slice(); ant[ks.schritt] = i;
+    this.setState(x => ({ ks: { ...ks, antworten: ant, gewaehlt: i, wechsel: true }, bonLauf: x.bonLauf + 1 }));
+    this.punkteFlug(e, this.pts(this.KS[ks.schritt], i));
+    this.weiter(ant, 640);
+  }
+  ksTipp(e) {
+    const ks = this.state.ks; if (ks.wechsel || ks.enthuellt) return;
+    const ant = ks.antworten.slice(); ant[ks.schritt] = ks.schaetz;
+    this.setState(x => ({ ks: { ...ks, antworten: ant, enthuellt: true }, bonLauf: x.bonLauf + 1 }));
+    this.punkteFlug(e, this.pts(this.KS[ks.schritt], ks.schaetz));
+    setTimeout(() => this.setState(x => ({ ks: { ...x.ks, wechsel: true } })), 2300 * this.T());
+    this.weiter(ant, 2700);
+  }
+  renderVals() {
+    const s = this.state, T = this.T(), eng = s.breite < 560;
+    const reveal = k => s.sicht[k] ? `fl-herz ${(.8 * T).toFixed(2)}s cubic-bezier(.2,.8,.2,1) both` : 'none';
+    const r = { tools: reveal('tools'), vgl: reveal('vgl'), mu: reveal('mu'), ks: reveal('ks'), nl: reveal('nl'), plus: reveal('plus') };
+    // Baustein 1
+    const tools = this.TOOLS.map((t, i) => { const hov = s.hovTool === i; return { label: t[0], farbe: t[2], sub: t[3], zahl: Math.round(t[1] * s.zahlP), zahlT: hov ? 'scale(1.08)' : 'scale(1)', pulsAnim: hov ? 'fl-puls 1.6s ease-in-out infinite' : 'none', rs: hov ? 1 : 0, kickerFarbe: hov ? t[2] : '#686C6A', trennerL: !eng && i > 0 ? '1px solid rgba(51,74,39,.2)' : '0', trennerT: eng && i > 0 ? '1px solid rgba(51,74,39,.16)' : '0', enter: () => this.setState({ hovTool: i }) }; });
+    // Baustein 2 · Teaser (A/B oben, 4× A unten)
+    const an = !!s.sicht.vgl;
+    const teaser = (v, i, variante, badge, reihe) => {
+      const hov = s.hovVgl === i, frac = k => (k - v.min) / (v.max - v.min);
+      const pos = []; for (let k = 0; k < v.n; k++) { let f = k / (v.n - 1); if (k > 0 && k < v.n - 1) f += ((((k + v.n) * 7919) % 13) / 13 - .5) * .11; pos.push(Math.max(0, Math.min(1, f))); }
+      pos.sort((a, b) => a - b);
+      const hoehe = f => Math.round((.28 + .72 * f) * 44);
+      const sH = f => Math.round((.16 + .84 * (1 - f)) * 48), fAvg = frac(v.avg);
+      const saeulen = pos.map((f, k) => { const best = k === 0, besser = f < fAvg; return { h: sH(f) + 'px', w: v.n > 14 ? '7px' : '9px', bg: best ? '#0B7F66' : (hov ? 'rgba(51,74,39,.5)' : 'rgba(51,74,39,.3)'), rand: 'transparent', s: an ? 1 : 0, delay: ((.2 + k * .04) * T).toFixed(2) + 's' }; });
+      const ebenen = []; const punkte = pos.map((f, k) => { let lvl = 0; while (ebenen[lvl] !== undefined && f - ebenen[lvl] < .045) lvl++; ebenen[lvl] = f; const best = k === 0, g = best ? 11 : 9; return { x: (f * 100).toFixed(1) + '%', y: (44.5 - g / 2 - lvl * 10) + 'px', g: g + 'px', bg: best ? '#0B7F66' : '#faf9f6', rand: best ? '#0B7F66' : (hov ? '#334A27' : 'rgba(51,74,39,.6)'), anim: !an ? 'none' : best ? `fl-pulsT 2.2s ease-in-out ${(1.1 * T).toFixed(2)}s infinite` : `fl-knoten .5s cubic-bezier(.34,1.56,.64,1) ${((.45 + k * .045) * T).toFixed(2)}s both` }; });
+      const nHoehe = f => Math.round((.22 + .78 * (1 - f)) * 48);
+      const nadeln = pos.map((f, k) => { const best = k === 0; return { h: nHoehe(f) + 'px', w: best ? '2px' : '1px', g: best ? '9px' : '5px', bg: best ? '#0B7F66' : '#faf9f6', rand: best ? '#0B7F66' : (hov ? 'rgba(51,74,39,.7)' : 'rgba(51,74,39,.45)'), s: an ? 1 : 0, delay: ((.2 + k * .045) * T).toFixed(2) + 's', anim: an && best ? `fl-pulsT 2.2s ease-in-out ${(1.3 * T).toFixed(2)}s infinite` : 'none' }; });
+      const col = i % 2, sparJahr = Math.round((v.max - v.min) * 12);
+      return { titel: v.titel, n: v.n, stand: v.stand, min: this.eur(v.min), avg: this.eur(v.avg), max: this.eur(v.max), spar: `bis ${sparJahr} € im Jahr sparen`, sparKurz: `${sparJahr} €/Jahr`, avgY: (58 - sH(fAvg)) + 'px', avgX: (frac(v.avg) * 100).toFixed(1) + '%', nadelAvgY: (52 - nHoehe(frac(v.avg))) + 'px', saeulen, punkte, nadeln, bestX: (v.n > 14 ? '3.5px' : '4.5px'), bestAnim: an ? `fl-pulsT 2.2s ease-in-out ${(1.2 * T).toFixed(2)}s infinite` : 'none', flaggeAnim: an ? `fl-druck .5s cubic-bezier(.2,.8,.2,1) ${(1 * T).toFixed(2)}s both` : 'none', bandS: an ? 1 : 0, rs: hov ? 1 : 0, preisT: hov ? 'scale(1.06)' : 'scale(1)', linie: hov ? '34px' : '18px', saeulenDisplay: variante === 'saeulen' ? 'block' : 'none', punkteDisplay: variante === 'punkte' ? 'block' : 'none', nadelnDisplay: variante === 'nadeln' ? 'block' : 'none', badge, badgeDisplay: badge ? 'inline-block' : 'none', trennerL: reihe === 1 ? (!eng && col === 1 ? '1px solid rgba(51,74,39,.16)' : '0') : (!eng && i > 0 ? '1px solid rgba(51,74,39,.16)' : '0'), trennerT: reihe === 1 ? ((eng ? i > 10 : i > 11) ? '1px solid rgba(51,74,39,.16)' : '0') : (eng && i > 0 ? '1px solid rgba(51,74,39,.16)' : '0'), enter: () => this.setState({ hovVgl: i }) };
+    };
+        const vgl = this.VGL.map((v, k) => teaser(v, k + 10, 'saeulen', '', 1));
+    // Baustein 2b · Marktüberblick
+    const muAn = !!s.sicht.mu, zMin = .5, zMax = 5.2, fz = z => (z - zMin) / (zMax - zMin);
+    const zinsen = this.MU.map(m => m[1]), muAvgZ = zinsen.reduce((a, b) => a + b, 0) / zinsen.length;
+    const raten = zinsen.map(z => this.rate(z)), bestRate = raten[0], avgRate = raten.reduce((a, b) => a + b, 0) / raten.length;
+    const muH = z => Math.round((.14 + .86 * (1 - fz(z))) * 130);
+    const muSaeulen = this.MU.map((m, i) => { const best = i === 0, hov = s.hovMu === i, besser = m[1] < muAvgZ; return { bank: m[0], wert: this.pct(m[1]), h: muH(m[1]) + 'px', w: eng ? '10px' : '16px', bg: best ? '#0B7F66' : hov ? '#334A27' : 'rgba(51,74,39,.32)', rand: 'transparent', s: muAn ? 1 : 0, delay: ((.25 + i * .05) * T).toFixed(2) + 's', wertDisplay: eng && !best && !hov ? 'none' : 'block', wertFont: best ? "700 11px 'Open Sans',sans-serif" : "500 10px 'Open Sans',sans-serif", wertFarbe: best ? '#0B7F66' : hov ? '#334A27' : '#686C6A', labelFont: best ? "700 9.5px 'Open Sans',sans-serif" : "500 9.5px 'Open Sans',sans-serif", labelFarbe: best ? '#0B7F66' : hov ? '#334A27' : '#686C6A', enter: () => this.setState({ hovMu: i }), leave: () => this.setState({ hovMu: -1 }) }; });
+    const stapel = {}; const muPunkte = this.MU.map((m, i) => { const key = m[1].toFixed(2); const lvl = stapel[key] || 0; stapel[key] = lvl + 1; const best = i === 0, g = best ? 16 : 12, hov = s.hovMu === i; return { x: (fz(m[1]) * 100).toFixed(1) + '%', y: (110.5 - g / 2 - lvl * 15) + 'px', g: g + 'px', bg: best ? '#0B7F66' : hov ? '#334A27' : '#faf9f6', rand: best ? '#0B7F66' : '#334A27', anim: !muAn ? 'none' : best ? `fl-pulsT 2.2s ease-in-out ${(1.2 * T).toFixed(2)}s infinite` : `fl-knoten .5s cubic-bezier(.34,1.56,.64,1) ${((.5 + i * .06) * T).toFixed(2)}s both`, enter: () => this.setState({ hovMu: i }), leave: () => this.setState({ hovMu: -1 }) }; });
+    const muHov = s.hovMu >= 0 ? this.MU[s.hovMu] : null;
+    const muKenn = [['Beste Rate', this.eur(bestRate, 0), 'im Monat, Verivox', '#0B7F66'], ['Ø Rate', this.eur(avgRate, 0), 'im Monat, alle 12 Angebote', '#686C6A'], ['Ihre Ersparnis', this.eur((avgRate - bestRate) * 60, 0), 'Bestwert statt Ø über 60 Monate', '#45A117']].map((k, i) => ({ label: k[0], wert: k[1], sub: k[2], farbe: k[3], trenner: !eng && i > 0 ? '1px solid rgba(51,74,39,.2)' : '0', trennerT: eng && i > 0 ? '1px solid rgba(51,74,39,.16)' : '0' }));
+    const muNH = z => Math.round((.14 + .86 * (1 - fz(z))) * 130);
+    const muNadeln = this.MU.map((m, i) => { const best = i === 0, hov = s.hovMu === i; return { bank: m[0], wert: this.pct(m[1]), spar: this.eur((this.rate(zMax) - this.rate(m[1])) * 60, 0), h: muNH(m[1]) + 'px', w: best ? '2px' : '1px', g: best ? '14px' : '8px', bg: best ? '#0B7F66' : hov ? '#334A27' : '#faf9f6', rand: best ? '#0B7F66' : hov ? '#334A27' : 'rgba(51,74,39,.5)', s: muAn ? 1 : 0, delay: ((.25 + i * .06) * T).toFixed(2) + 's', anim: muAn && best ? `fl-pulsT 2.2s ease-in-out ${(1.4 * T).toFixed(2)}s infinite` : 'none', flaggeDisplay: best ? 'block' : 'none', flaggeTop: '-4px', flaggeAnim: muAn ? `fl-druck .5s cubic-bezier(.2,.8,.2,1) ${(1.1 * T).toFixed(2)}s both` : 'none', labelFont: best ? "700 9.5px 'Open Sans',sans-serif" : "500 9.5px 'Open Sans',sans-serif", labelFarbe: best ? '#0B7F66' : hov ? '#334A27' : '#686C6A', enter: () => this.setState({ hovMu: i }), leave: () => this.setState({ hovMu: -1 }) }; });
+    const muVarianten = [{ badge: 'A · Säulen', lead: 'Jede Säule ist ein Angebot, sortiert nach Effektivzins – links günstig, rechts teuer. Je höher die Säule, desto teurer der Kredit.', saeulenDisplay: 'block', punkteDisplay: 'none', nadelnDisplay: 'none', abstand: '44px' }, { badge: 'B · Punkte', lead: 'Jeder Punkt ist ein Angebot auf der Zinslinie – links günstig, rechts teuer. Gleiche Zinsen stapeln sich.', saeulenDisplay: 'none', punkteDisplay: 'block', nadelnDisplay: 'none', abstand: '44px' }, { badge: 'C · Nadeln', lead: 'Jede Nadel ist ein Angebot; je höher, desto mehr sparen Sie gegenüber dem teuersten. Der Bestwert ragt heraus und trägt die Fahne.', saeulenDisplay: 'none', punkteDisplay: 'none', nadelnDisplay: 'block', abstand: '0' }];
+    // Baustein 3
+    const ks = s.ks, frage = ks.phase === 'frage', fertig = ks.phase === 'fertig', q = this.KS[ks.schritt];
+    const ksTape = this.KS.map((_, i) => { const gebucht = i < ks.schritt || fertig || (i === ks.schritt && (ks.wechsel || ks.enthuellt)); return { bg: gebucht ? '#45A117' : i === ks.schritt && frage ? '#334A27' : 'rgba(51,74,39,.14)', anim: i === ks.schritt && frage && !ks.wechsel && !ks.enthuellt ? 'fl-linie .6s cubic-bezier(.2,.8,.2,1) both' : i === ks.schritt && (ks.wechsel || ks.enthuellt) ? `fl-tick${s.bonLauf % 2 ? '2' : ''} .4s ease-out` : 'none' }; });
+    const ksOptionen = (q.optionen || []).map((o, i) => { const gew = ks.gewaehlt === i; return { label: o[0], sub: o[1], punkte: `+${o[2]}`, icon: q.icon, iconFilter: gew ? 'brightness(0) invert(1)' : 'none', iconAnim: `fl-icon${ks.schritt % 2 ? '2' : ''} .6s cubic-bezier(.34,1.56,.64,1) ${(.1 + i * .07) * T}s both`, delay: (i * .07 * T).toFixed(2) + 's', rand: gew ? '#334A27' : 'rgba(51,74,39,.28)', bg: gew ? '#334A27' : 'rgba(255,255,255,.45)', farbe: gew ? '#faf9f6' : '#334A27', schatten: gew ? 'inset 0 3px 0 rgba(0,0,0,.25)' : 'none', y: gew ? '2px' : '0', punkteFarbe: gew ? '#a9e07c' : '#45A117', punkteOp: gew ? 1 : .55, punkteS: gew ? 1.25 : 1, klick: e => { e.preventDefault(); this.ksWaehlen(i, e); } }; });
+    const luecken = this.KS.map((k, i) => ({ q: k, i, p: ks.antworten[i] !== undefined ? this.pts(k, ks.antworten[i]) : 12 })).sort((a, b) => a.p - b.p).slice(0, 3);
+    const ksLuecken = fertig ? luecken.map((l, n) => ({ nr: String(n + 1).padStart(2, '0'), titel: l.q.luecke[0], text: l.q.luecke[1], link: l.q.luecke[2], linkDisplay: eng ? 'none' : 'inline', farbe: l.p === 0 ? '#D3005E' : l.p < 12 ? '#D99A00' : '#45A117', delay: ((.25 + n * .12) * T).toFixed(2) + 's', klick: e => e.preventDefault() })) : [];
+    const score = this.score(ks.antworten), gut = score >= 75, mittel = score >= 45 && !gut;
+    const ampelFarbe = gut ? '#45A117' : mittel ? '#D99A00' : '#D3005E';
+    const ampel = [['#D3005E', !gut && !mittel], ['#D99A00', mittel], ['#45A117', gut]].map(a => ({ bg: a[0], op: a[1] ? 1 : .18, ring: a[1] ? `0 0 0 3px #faf9f6, 0 0 0 4px ${a[0]}` : 'none' }));
+    const bon = this.KS.map((k, i) => { const a = ks.antworten[i], da = a !== undefined, p = this.pts(k, a); return { nr: String(i + 1).padStart(2, '0'), label: k.thema, wert: da ? this.bonWert(k, a) : '—', punkte: da ? `+${p}` : '', gewicht: da ? 600 : 400, farbe: da ? '#334A27' : '#9a9e9b', punkteFarbe: da && p >= 12 ? '#2E7A0B' : da && p === 0 ? '#D3005E' : '#686C6A', hakenDisplay: da && p >= 12 ? 'block' : 'none', anim: da && i === ks.schritt && (ks.wechsel || ks.enthuellt) ? `fl-druck${s.bonLauf % 2 ? '2' : ''} .5s cubic-bezier(.2,.8,.2,1) both` : 'none' }; });
+    const sq = q.schaetz ? q : null, sPts = sq ? this.pts(sq, ks.schaetz) : 0, sf = v => sq ? ((v - sq.min) / (sq.max - sq.min) * 100) : 0;
+    const funken = fertig ? [[-6, -8, 14, 0], [52, -12, 10, .12], [70, 26, 12, .2], [-2, 30, 9, .28]].map(f => ({ r: f[0] + 'px', t: f[1] + 'px', g: f[2] + 'px', anim: `fl-funke .9s cubic-bezier(.2,.8,.2,1) ${((.95 + f[3]) * T).toFixed(2)}s both` })) : [];
+    const flug = s.flug, bonZeigen = this.props.bonZeigen ?? true;
+    // Baustein 5
+    const plus = this.PLUS.map((f, i) => { const hov = s.hovPlus === i, pdf = f[3] === 'pdf'; return { titel: f[0], text: f[1], link: f[2], textFarbe: pdf ? '#686C6A' : '#334A27', kofferDisplay: f[3] === 'koffer' ? 'block' : 'none', waechterDisplay: f[3] === 'waechter' ? 'block' : 'none', pdfDisplay: pdf ? 'block' : 'none', k1: hov ? 'rotate(-18deg) translateX(-8px)' : 'rotate(-6deg) translateX(-3px)', k2: hov ? 'translateY(-3px)' : 'none', k3: hov ? 'rotate(18deg) translateX(8px)' : 'rotate(6deg) translateX(3px)', ringDauer: hov ? '1.3s' : '2.6s', l1: hov ? 1 : .4, l2: hov ? 1 : .6, l3: hov ? 1 : .3, linkFont: pdf ? "italic 300 12.5px 'Merriweather',Georgia,serif" : "600 13px 'Open Sans',sans-serif", linkFarbe: pdf ? '#686C6A' : '#2E7A0B', linieDisplay: pdf ? 'none' : 'block', linie: hov ? '34px' : '18px', enter: () => this.setState({ hovPlus: i }), leave: () => this.setState({ hovPlus: -1 }) }; });
+    return {
+      r, tools, toolRichtung: eng ? 'column' : 'row', toolsRaus: () => this.setState({ hovTool: -1 }),
+      vgl, vglSpalten: eng ? '1fr' : 'repeat(2,minmax(0,1fr))', vglRaus: () => this.setState({ hovVgl: -1 }),
+      muVarianten, muSaeulen, muPunkte, muNadeln, muNadelAvgY: (130 - muNH(muAvgZ)) + 'px', muKenn, muS: muAn ? 1 : 0, muBest: this.pct(this.MU[0][1]), muBestBank: this.MU[0][0], muAvg: this.pct(muAvgZ), muAvgY: (130 - muH(muAvgZ)) + 'px', muAvgX: (fz(muAvgZ) * 100).toFixed(1) + '%', muBestX: (fz(this.MU[0][1]) * 100).toFixed(1) + '%',
+      muGap: eng ? '3px' : '6px', muLabelDisplay: eng ? 'none' : 'flex', muFussTop: eng ? '138px' : '154px', muSaeulenH: eng ? '160px' : '176px', muKennSpalten: eng ? '1fr' : 'repeat(3,minmax(0,1fr))',
+      muTip: muHov ? `${muHov[0]} · ${this.pct(muHov[1])} · ${this.eur(this.rate(muHov[1]), 0)}/Monat` : '', muTipOp: muHov ? 1 : 0, muTipX: muHov ? (fz(muHov[1]) * 100).toFixed(1) + '%' : '0', muTipY: '0px',
+      ksStatus: fertig ? 'Ausgewertet' : frage ? `Frage ${ks.schritt + 1} von 8` : 'Noch nicht begonnen', ksStatusAnim: `fl-druck${ks.schritt % 2 ? '2' : ''} .4s both`, ksTape,
+      ksSpalten: eng || !bonZeigen ? '1fr' : 'minmax(0,1fr) 252px', ksGap: eng ? '30px' : '30px',
+      ksFahrplan: [['8 Fragen antippen', 'ohne Tastatur, eine Schätzung'], ['Beleg druckt mit', 'jede Antwort eine Zeile, Punkte laufen'], ['Ergebnis sofort', 'Profil, Ampel, drei Lücken']].map((f, i) => ({ nr: i + 1, titel: f[0], text: f[1], delay: ((.15 + i * .12) * T).toFixed(2) + 's' })),
+      ksStartDisplay: ks.phase === 'start' ? 'flex' : 'none', ksFrageDisplay: frage ? 'flex' : 'none', ksErgebnisDisplay: fertig ? 'flex' : 'none',
+      ksBuehneOp: ks.wechsel ? 0 : 1, ksBuehneX: ks.wechsel ? '-16px' : '0', ksNr: ks.schritt + 1, ksThema: q.thema, ksFrage: q.frage, ksHinweis: q.hinweis, ksIcon: q.icon, ksIconAnim: `fl-icon${ks.schritt % 2 ? '2' : ''} .6s cubic-bezier(.34,1.56,.64,1) both`, ksOptionen,
+      ksKartenDisplay: sq ? 'none' : 'flex',
+      ksSchaetzDisplay: sq ? 'flex' : 'none', ksSchaetz: ks.schaetz, ksSchaetzMin: sq ? sq.min : 0, ksSchaetzMax: sq ? sq.max : 100, ksSchritt: 50, ksPx: 7, ksMajor: 10, ksMittel: 5,
+      ksSchaetzLineal: v => this.setState(x => ({ ks: { ...x.ks, schaetz: v } })), ksSperreDisplay: ks.enthuellt ? 'block' : 'none', ksEnthuellt: ks.enthuellt,
+      ksTipp: e => this.ksTipp(e), ksTippDisplay: ks.enthuellt ? 'none' : 'inline-flex', ksUrteilDisplay: ks.enthuellt ? 'flex' : 'none',
+      ksTippX: sf(ks.schaetz).toFixed(1) + '%', ksTippText: ks.schaetz.toLocaleString('de-DE') + ' €', ksWahrX: sq ? sf(sq.wahr).toFixed(1) + '%' : '0', ksWahrText: sq ? sq.wahr.toLocaleString('de-DE') + ' €' : '',
+      ksSpanneL: sq ? Math.min(sf(ks.schaetz), sf(sq.wahr)).toFixed(1) + '%' : '0', ksSpanneW: sq ? Math.abs(sf(ks.schaetz) - sf(sq.wahr)).toFixed(1) + '%' : '0',
+      ksUrteil: sPts >= 12 ? 'Volltreffer – Sie kennen Ihre Zahlen. +12' : sPts >= 6 ? 'Nah dran. +6' : 'Weit weg – gut, dass Sie es jetzt wissen. +2', ksUrteilFarbe: sPts >= 12 ? '#2E7A0B' : sPts >= 6 ? '#B07D00' : '#D3005E',
+      ksZurueckDisplay: ks.schritt > 0 && !ks.enthuellt ? 'inline-flex' : 'none', ksZurueck: () => { if (ks.schritt > 0 && !ks.wechsel) this.setState({ ks: { ...ks, schritt: ks.schritt - 1 } }); },
+      ksStart: () => this.setState({ ks: { ...ks, phase: 'frage', schritt: 0 } }),
+      ksNeu: () => { this.setState({ ks: { phase: 'start', schritt: 0, antworten: [], wechsel: false, gewaehlt: -1, schaetz: 1400, enthuellt: false }, bonAnzeige: 0, tacho: 0 }); },
+      ksErgSpalten: eng ? '1fr' : '170px minmax(0,1fr)', ksMailSpalten: eng ? '1fr' : 'minmax(0,1fr) auto',
+      tachoDash: fertig ? `${(s.tacho / 100 * 283).toFixed(0)} 566` : '0 566', tachoNadel: `${-90 + (fertig ? s.tacho : 0) * 1.8}deg`, tachoFarbe: ampelFarbe, tachoWert: Math.round(s.tacho),
+      ksTitel: gut ? 'Solide aufgestellt.' : mittel ? 'Gute Basis – mit Lücken.' : 'Da fehlt Grundlegendes.', ksVorspann: gut ? 'Die Grundlagen sitzen. Drei Stellen lohnen trotzdem einen zweiten Blick.' : mittel ? 'Das Wichtigste ist da. An drei Stellen fehlt Schutz, der schnell nachzuholen ist.' : 'Keine Sorge: Die drei größten Lücken unten schließen Sie an einem Nachmittag.',
+      ampel, ampelText: gut ? 'Grün · gut aufgestellt' : mittel ? 'Gelb · ausbaufähig' : 'Rot · dringend', ksLuecken,
+      bonDisplay: bonZeigen ? 'block' : 'none', bonW: eng ? 'min(100%,300px)' : '100%', bonMargin: eng ? '0 auto' : '0', bonAnim: s.sicht.ks ? `fl-herz .8s cubic-bezier(.2,.8,.2,1) .25s both` : 'none', bonBump: ks.wechsel || ks.enthuellt ? `fl-bon${s.bonLauf % 2 ? '2' : ''} .35s cubic-bezier(.2,.8,.2,1) both` : 'none', bon, bonNr: '№ 0917', bonSummeLabel: fertig ? 'Summe' : 'Zwischensumme', bonSumme: Math.round(s.bonAnzeige), bonSummeS: ks.wechsel || ks.enthuellt ? 1.18 : 1,
+      bonFuss: fertig ? 'Vielen Dank. Beleg als PDF unten anfordern.' : frage ? `${ks.schritt + (ks.wechsel || ks.enthuellt ? 1 : 0)} von 8 gebucht` : 'Noch nichts gebucht · Fragen antippen', stempelOp: fertig ? 1 : 0, stempelAnim: fertig ? `fl-stempel .7s cubic-bezier(.34,1.56,.64,1) ${(.6 * T).toFixed(2)}s both` : 'none', funken,
+      flugDisplay: flug ? 'block' : 'none', flugText: flug ? flug.text : '', flugX: (flug ? flug.x : 0) + 'px', flugY: (flug ? flug.y : 0) + 'px', flugS: flug ? flug.s : 1, flugOp: flug ? flug.op : 0, flugTrans: flug ? flug.trans : 'none',
+      nlRatio: eng ? '3 / 4.6' : '1456 / 880', nlTitelW: eng ? 'min(86%, 16ch)' : 'min(70%, 24ch)',
+      nlSenden: () => this.setState({ nlFertig: true }), nlStempelOp: s.nlFertig ? 1 : 0, nlStempelAnim: s.nlFertig ? 'fl-stempel .7s cubic-bezier(.34,1.56,.64,1) .1s both' : 'none',
+      plus, plusKopfSpalten: eng ? '1fr' : 'minmax(0,1fr) 168px', plusStempelAnim: s.sicht.plus ? `fl-stempel .7s cubic-bezier(.34,1.56,.64,1) ${(.5 * T).toFixed(2)}s both` : 'none',
+      schereDisplay: (this.props.schereZeigen ?? true) ? 'flex' : 'none', schereX: s.schere ? 'calc(100% - 44px)' : '22px', schereAn: () => this.setState({ schere: true }), schereAus: () => this.setState({ schere: false }),
+      plusFuellW: s.plusHov ? 'calc(100% - 6px)' : '38px', plusBtnFarbe: s.plusHov ? '#fff' : '#334A27', plusHovAn: () => this.setState({ plusHov: true }), plusHovAus: () => this.setState({ plusHov: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

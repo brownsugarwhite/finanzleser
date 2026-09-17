@@ -1,0 +1,1114 @@
+[
+  {
+    "slug": "duesseldorfer-tabelle",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag, Freigabe Redaktion",
+        "saetze": [
+          "Die Düsseldorfer Tabelle ist die Richtlinie der Familiengerichte für den Kindesunterhalt; Gesetzeskraft hat sie nicht, angewendet wird sie überall.",
+          "2026 steigt der Mindestunterhalt in allen Altersstufen um 4 Euro: 486 Euro bis 5 Jahre, 558 Euro bis 11, 653 Euro bis 17, 698 Euro für Volljährige, jeweils in der ersten Einkommensgruppe bis 2.100 Euro.",
+          "Vom Tabellenbetrag geht bei Minderjährigen das halbe Kindergeld ab (129,50 Euro), bei Volljährigen das ganze; die Zahlbeträge ändern sich dadurch meist nur um wenige Euro.",
+          "Die Selbstbehalte bleiben bei 1.450 Euro (erwerbstätig) und 1.200 Euro (nicht erwerbstätig); neu geregelt ist der Elternunterhalt mit 2.650 Euro Selbstbehalt.",
+          "Wer die eigenen Zahlen wissen will, braucht das bereinigte Nettoeinkommen und das Alter der Kinder; der Unterhaltsrechner nimmt beides."
+        ],
+        "quellen": [
+          "Düsseldorfer Tabelle 2026, OLG Düsseldorf",
+          "§ 1612a BGB (Mindestunterhalt)",
+          "BGH-Beschluss vom Oktober 2024 zum Selbstbehalt beim Elternunterhalt"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Bedarfssätze 2026: Wer bekommt wie viel?",
+          "status": "freigegeben",
+          "frage": "Gilt der Tabellenbetrag auch, wenn ich zwei Kinder habe?",
+          "antwort": "Die Tabelle rechnet mit zwei Unterhaltsberechtigten als Regelfall. Bei nur einem Kind kann eine Einkommensgruppe höher, bei drei oder mehr eine Gruppe tiefer eingestuft werden. Der Betrag je Kind hängt also auch von der Zahl der Berechtigten ab.",
+          "quellen": [
+            "Düsseldorfer Tabelle 2026, Anmerkung 1"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Bedarfssätze 2026: Wer bekommt wie viel?",
+          "status": "freigegeben",
+          "frage": "Warum steht in meinem Titel ein anderer Betrag als in der Tabelle?",
+          "antwort": "Der Titel nennt meist den Zahlbetrag, die Tabelle den Bedarf vor Kindergeldabzug. Bei Minderjährigen zieht man die Hälfte des Kindergelds ab, 2026 also 129,50 Euro. Dynamische Titel passen sich der neuen Tabelle automatisch an.",
+          "quellen": [
+            "§ 1612b BGB (Kindergeldanrechnung)",
+            "Beitrag, Abschnitt Bedarfssätze"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Elternunterhalt: Erstmals wieder konkrete Regelungen",
+          "status": "freigegeben",
+          "frage": "Ab welchem Einkommen muss ich für meine Eltern zahlen?",
+          "antwort": "Seit 2020 greift das Sozialamt erst ab 100.000 Euro Jahresbrutto auf Kinder zu. Darüber gilt 2026 ein Selbstbehalt von 2.650 Euro im Monat, vom Einkommen darüber bleiben 70 Prozent unangetastet.",
+          "quellen": [
+            "Angehörigen-Entlastungsgesetz (§ 94 SGB XII)",
+            "Düsseldorfer Tabelle 2026, Abschnitt D"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Elternunterhalt: Erstmals wieder konkrete Regelungen",
+          "status": "freigegeben",
+          "frage": "Zählt das Einkommen meiner Ehefrau mit?",
+          "antwort": "Nicht direkt. Der Ehegatte hat einen eigenen Selbstbehalt von 2.120 Euro; sein Einkommen erhöht aber das Familieneinkommen, aus dem sich Ihr Anteil berechnet. Verpflichtet ist nur das Kind, nicht das Schwiegerkind.",
+          "quellen": [
+            "Düsseldorfer Tabelle 2026, Abschnitt D",
+            "BGH XII ZB 590/22"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "duesseldorfer",
+        "unterhalt",
+        "selbstbehalt",
+        "kindergeld"
+      ],
+      "leo_einwuerfe": [
+        {
+          "nach": "heading-3",
+          "typ": "rechner",
+          "slug": "unterhalt",
+          "grund": "Ihre Zahlen statt der Tabelle",
+          "nach_titel": "Bedarfssätze 2026: Wer bekommt wie viel?"
+        },
+        {
+          "nach": "heading-4",
+          "typ": "checkliste",
+          "slug": "duesseldorfer-tabelle",
+          "grund": "Schritt für Schritt zum Zahlbetrag",
+          "nach_titel": "Wie wird der tatsächliche Zahlbetrag berechnet?"
+        }
+      ],
+      "dazu_passt": [
+        {
+          "typ": "post",
+          "slug": "kindesunterhalt"
+        },
+        {
+          "typ": "post",
+          "slug": "unterhaltsvorschuss"
+        },
+        {
+          "typ": "post",
+          "slug": "elternunterhalt"
+        }
+      ],
+      "waechter_regeln": [
+        "unterhalt.tabelle",
+        "unterhalt.kindergeld_abzug_minderjaehrig",
+        "unterhalt.selbstbehalt",
+        "kindergeld.monatlich_je_kind"
+      ]
+    }
+  },
+  {
+    "slug": "unterhaltsvorschuss",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag, Freigabe Redaktion",
+        "saetze": [
+          "Zahlt der andere Elternteil keinen oder nur unregelmäßigen Unterhalt, springt das Jugendamt mit dem Unterhaltsvorschuss ein, unabhängig vom Einkommen des betreuenden Elternteils.",
+          "2026 sind das 227 Euro bis 5 Jahre, 299 Euro bis 11 und 394 Euro bis 17 Jahre: Mindestunterhalt minus volles Kindergeld; weil beides gestiegen ist, bleiben die Beträge gleich.",
+          "Alleinerziehend ist, wer mehr als 60 Prozent der Betreuung trägt; ab dem 12. Geburtstag des Kindes braucht der betreuende Elternteil mindestens 600 Euro Bruttoeinkommen oder das Kind darf kein Bürgergeld beziehen.",
+          "Der Antrag geht ans Jugendamt, oft online; rückwirkend gibt es höchstens einen Monat. Das Land holt sich das Geld beim zahlungspflichtigen Elternteil zurück.",
+          "Eine neue Partnerschaft schadet nicht, eine Heirat beendet den Anspruch."
+        ],
+        "quellen": [
+          "Unterhaltsvorschussgesetz (UVG) §§ 1, 2, 7",
+          "BVerwG, Urteil vom 12. Dezember 2023 (Betreuungsquote)",
+          "Düsseldorfer Tabelle 2026"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer hat Anspruch auf Unterhaltsvorschuss?",
+          "status": "freigegeben",
+          "frage": "Wir betreuen im Wechselmodell 50 zu 50. Bekomme ich Unterhaltsvorschuss?",
+          "antwort": "Nein. Seit dem Urteil des Bundesverwaltungsgerichts vom Dezember 2023 gilt nur als alleinerziehend, wer mehr als 60 Prozent der Betreuung trägt. Beim echten Wechselmodell fehlt diese Voraussetzung.",
+          "quellen": [
+            "BVerwG 5 C 9.22, Urteil vom 12. Dezember 2023",
+            "§ 1 Abs. 1 UVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer hat Anspruch auf Unterhaltsvorschuss?",
+          "status": "freigegeben",
+          "frage": "Was passiert, wenn ich mit meinem neuen Partner zusammenziehe?",
+          "antwort": "Nichts, solange Sie nicht heiraten. Das Zusammenleben ohne Trauschein lässt den Anspruch bestehen; erst die Eheschließung beendet ihn, weil das Gesetz an den Familienstand anknüpft.",
+          "quellen": [
+            "§ 1 Abs. 1 Nr. 2 UVG",
+            "Beitrag, Abschnitt Anspruch"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist der Unterhaltsvorschuss 2026?",
+          "status": "freigegeben",
+          "frage": "Warum ist der Betrag 2026 nicht gestiegen, obwohl der Mindestunterhalt höher ist?",
+          "antwort": "Weil der Vorschuss der Mindestunterhalt abzüglich des vollen Kindergelds ist. Beide stiegen um 4 Euro, also blieb die Differenz gleich: 227, 299 und 394 Euro.",
+          "quellen": [
+            "§ 2 Abs. 1 UVG",
+            "Düsseldorfer Tabelle 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist der Unterhaltsvorschuss 2026?",
+          "status": "freigegeben",
+          "frage": "Zahlt der andere Elternteil einen Teil, bekomme ich dann den Rest?",
+          "antwort": "Ja. Unterhaltszahlungen des anderen Elternteils werden angerechnet, der Vorschuss deckt die Lücke bis zum Mindestunterhalt minus Kindergeld. Regelmäßige Zahlungen in voller Höhe schließen den Anspruch aus.",
+          "quellen": [
+            "§ 2 Abs. 3 UVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Rückforderung und Rechtsverfolgung",
+          "status": "freigegeben",
+          "frage": "Muss ich den Vorschuss zurückzahlen, wenn ich später wieder heirate?",
+          "antwort": "Nein, Sie nicht. Zurückgefordert wird beim unterhaltspflichtigen Elternteil; der Anspruch geht auf das Land über. Sie müssen nur Änderungen unverzüglich melden, sonst drohen Rückforderungen für zu viel gezahlte Monate.",
+          "quellen": [
+            "§ 7 UVG (Übergang von Ansprüchen)",
+            "§ 5 UVG (Ersatzpflicht bei unterlassener Mitteilung)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "unterhaltsvorschuss",
+        "unterhalt",
+        "kindergeld",
+        "betreuungsquote"
+      ],
+      "leo_einwuerfe": [
+        {
+          "nach": "heading-3",
+          "typ": "rechner",
+          "slug": "unterhalt",
+          "grund": "Wie viel dem anderen Elternteil zusteht",
+          "nach_titel": "Wie hoch ist der Unterhaltsvorschuss 2026?"
+        },
+        {
+          "nach": "heading-5",
+          "typ": "checkliste",
+          "slug": "unterhaltsvorschuss",
+          "grund": "Unterlagen für den Antrag",
+          "nach_titel": "Antragstellung: Wo und wie beantrage ich den Unterhaltsvorschuss?"
+        }
+      ],
+      "dazu_passt": [
+        {
+          "typ": "post",
+          "slug": "kindesunterhalt"
+        },
+        {
+          "typ": "post",
+          "slug": "duesseldorfer-tabelle"
+        },
+        {
+          "typ": "post",
+          "slug": "kindergeld"
+        }
+      ],
+      "waechter_regeln": [
+        "unterhalt.tabelle",
+        "kindergeld.monatlich_je_kind"
+      ]
+    }
+  },
+  {
+    "slug": "kindergeld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag, Freigabe Redaktion",
+        "saetze": [
+          "Kindergeld gibt es 2026 mit 259 Euro im Monat je Kind, ohne Staffelung und ohne Einkommensgrenze; Bestandsfamilien bekommen die Erhöhung automatisch.",
+          "Gezahlt wird bis zum 18. Geburtstag, in Ausbildung, Studium oder Übergangszeiten bis 25, bei Arbeitslosigkeit bis 21, bei Behinderung ohne Altersgrenze.",
+          "Der Antrag geht an die Familienkasse der Bundesagentur für Arbeit; rückwirkend zahlt sie höchstens sechs Monate, also lieber früh beantragen.",
+          "Am Jahresende prüft das Finanzamt von selbst, ob der Kinderfreibetrag von 9.756 Euro günstiger ist; das lohnt ab etwa 85.000 Euro zu versteuerndem Einkommen bei Paaren.",
+          "Wer wenig verdient, sollte Kinderzuschlag bis 297 Euro und den Kindersofortzuschlag prüfen."
+        ],
+        "quellen": [
+          "§§ 62 ff. EStG (Kindergeld)",
+          "§ 32 Abs. 6 EStG (Kinderfreibetrag 2026)",
+          "Bundeskindergeldgesetz § 6a (Kinderzuschlag)"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie hoch ist das Kindergeld 2026?",
+          "status": "freigegeben",
+          "frage": "Bekomme ich für das dritte Kind mehr als für das erste?",
+          "antwort": "Nein, seit 2023 nicht mehr. Jedes Kind bringt denselben Betrag, 2026 sind das 259 Euro. Die frühere Staffelung nach Geschwisterfolge ist abgeschafft.",
+          "quellen": [
+            "§ 66 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer hat Anspruch?",
+          "status": "freigegeben",
+          "frage": "Mein Kind studiert im Ausland. Läuft das Kindergeld weiter?",
+          "antwort": "Ja, solange das Kind unter 25 ist, in Ausbildung steht und seinen Wohnsitz in Deutschland behält oder im EU-Ausland lebt. Bei einem Auslandsstudium außerhalb der EU zählt, ob es die Wohnung bei den Eltern weiter nutzt, etwa in den Semesterferien.",
+          "quellen": [
+            "§ 63 Abs. 1 Satz 6 EStG",
+            "BFH III R 46/17"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Auszahlungstermine 2026",
+          "status": "freigegeben",
+          "frage": "Woher weiß ich, wann mein Kindergeld kommt?",
+          "antwort": "Die Endziffer Ihrer Kindergeldnummer bestimmt den Termin: 0 und 1 am Monatsanfang, 2 bis 5 zur Mitte, 6 und 7 in der zweiten Hälfte, 8 und 9 am Ende. Einen Anspruch auf einen bestimmten Tag gibt es nicht.",
+          "quellen": [
+            "Auszahlungsplan der Familienkasse 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Wann endet der Anspruch?",
+          "status": "freigegeben",
+          "frage": "Mein Kind hat die Ausbildung abgeschlossen und arbeitet 30 Stunden. Gibt es noch Kindergeld?",
+          "antwort": "Nein. Nach der ersten Berufsausbildung zählt ein Kind nur weiter, wenn es höchstens 20 Stunden pro Woche arbeitet oder in einer zweiten Ausbildung steht. Bei 30 Stunden endet der Anspruch.",
+          "quellen": [
+            "§ 32 Abs. 4 Satz 2 und 3 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Zusätzliche Familienleistungen",
+          "status": "freigegeben",
+          "frage": "Kann ich Kinderzuschlag neben dem Kindergeld bekommen?",
+          "antwort": "Ja, wenn Sie als Paar mindestens 900 Euro oder alleinerziehend 600 Euro brutto verdienen und ohne den Zuschlag Bürgergeld bräuchten. 2026 sind bis zu 297 Euro je Kind möglich, dazu Vorteile wie Bildungsleistungen und oft Kita-Beitragsfreiheit.",
+          "quellen": [
+            "§ 6a BKGG",
+            "Beitrag, Abschnitt Zusätzliche Familienleistungen"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kindergeld",
+        "einkommensteuer",
+        "elterngeld",
+        "kinderfreibetrag",
+        "guenstigerpruefung"
+      ],
+      "leo_einwuerfe": [
+        {
+          "nach": "heading-2",
+          "typ": "rechner",
+          "slug": "kindergeld",
+          "grund": "Kindergeld oder Freibetrag: was bei Ihnen zählt",
+          "nach_titel": "Wie hoch ist das Kindergeld 2026?"
+        },
+        {
+          "nach": "heading-4",
+          "typ": "checkliste",
+          "slug": "kindergeld",
+          "grund": "Antrag ohne Rückfragen der Familienkasse",
+          "nach_titel": "Kindergeldantrag: So funktioniert’s"
+        }
+      ],
+      "dazu_passt": [
+        {
+          "typ": "post",
+          "slug": "elterngeld"
+        },
+        {
+          "typ": "post",
+          "slug": "kindesunterhalt"
+        },
+        {
+          "typ": "post",
+          "slug": "unterhaltsvorschuss"
+        }
+      ],
+      "waechter_regeln": [
+        "kindergeld.monatlich_je_kind",
+        "kindergeld.kinderfreibetrag_gesamt_beide_eltern",
+        "lohnsteuer.grundfreibetrag"
+      ]
+    }
+  },
+  {
+    "slug": "kindesunterhalt",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag, Freigabe Redaktion",
+        "saetze": [
+          "Kindesunterhalt zahlt der Elternteil, bei dem das Kind nicht überwiegend lebt; der andere leistet Naturalunterhalt durch Betreuung.",
+          "Grundlage ist das bereinigte Nettoeinkommen und die Düsseldorfer Tabelle mit 15 Einkommensgruppen; 2026 liegt der Mindestunterhalt bei 486, 558 und 653 Euro je Altersstufe.",
+          "Bei Minderjährigen geht das halbe Kindergeld ab, bei Volljährigen das ganze; ein Achtjähriger bei 2.500 Euro netto kostet 484,50 Euro im Monat.",
+          "Reicht das Geld nicht für alle, greift die Mangelfallberechnung: Der Selbstbehalt von 1.450 Euro bleibt, der Rest wird anteilig verteilt.",
+          "Mit 18 ändert sich alles: Beide Eltern zahlen anteilig, bis die erste Ausbildung abgeschlossen ist; auswärts Studierende bekommen pauschal 990 Euro."
+        ],
+        "quellen": [
+          "§§ 1601 ff. BGB",
+          "§ 1612a BGB (Mindestunterhalt)",
+          "Düsseldorfer Tabelle 2026"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie wird Kindesunterhalt 2026 berechnet?",
+          "status": "freigegeben",
+          "frage": "Was heißt bereinigtes Nettoeinkommen genau?",
+          "antwort": "Das Nettoeinkommen abzüglich berufsbedingter Aufwendungen, pauschal 5 Prozent, mindestens 50 und höchstens 150 Euro, sowie Schulden und Altersvorsorge in angemessener Höhe. Was nach diesen Abzügen bleibt, bestimmt die Einkommensgruppe.",
+          "quellen": [
+            "Düsseldorfer Tabelle 2026, Anmerkung A 3",
+            "Beitrag, Abschnitt Berechnung"
+          ]
+        },
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie wird Kindesunterhalt 2026 berechnet?",
+          "status": "freigegeben",
+          "frage": "Ich habe nur ein Kind. Rutsche ich in eine höhere Gruppe?",
+          "antwort": "In der Regel ja. Die Tabelle geht von zwei Berechtigten aus; bei nur einem Kind stufen Gerichte meist eine Einkommensgruppe höher ein, solange der Selbstbehalt gewahrt bleibt.",
+          "quellen": [
+            "Düsseldorfer Tabelle 2026, Anmerkung 1"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Was passiert bei unzureichendem Einkommen – die Mangelfallberechnung?",
+          "status": "freigegeben",
+          "frage": "Darf ich meine Arbeitszeit reduzieren, wenn ich den Unterhalt nicht schaffe?",
+          "antwort": "Gegenüber minderjährigen Kindern nicht. Es gilt die gesteigerte Erwerbsobliegenheit: Sie müssen alles Zumutbare tun, um den Mindestunterhalt zu sichern, notfalls mit einem Nebenjob. Sonst rechnet das Gericht ein fiktives Einkommen an.",
+          "quellen": [
+            "§ 1603 Abs. 2 BGB",
+            "BGH XII ZB 32/12"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Besonderheiten bei volljährigen Kindern und Ausbildung",
+          "status": "freigegeben",
+          "frage": "Mein Sohn ist 19, wohnt bei der Mutter und macht Abitur. Zahle ich weiter wie bisher?",
+          "antwort": "Ja. Bis 21, unverheiratet, im Haushalt eines Elternteils und in allgemeiner Schulausbildung gilt er als privilegiert volljährig: gleiche Regeln wie für Minderjährige, halbes Kindergeld wird abgezogen, der notwendige Selbstbehalt gilt.",
+          "quellen": [
+            "§ 1603 Abs. 2 Satz 2 BGB",
+            "Düsseldorfer Tabelle 2026, Anmerkung 7"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "unterhalt",
+        "duesseldorfer",
+        "selbstbehalt",
+        "leistungsfaehig",
+        "mangelfall"
+      ],
+      "leo_einwuerfe": [
+        {
+          "nach": "heading-2",
+          "typ": "rechner",
+          "slug": "unterhalt",
+          "grund": "Nettoeinkommen und Alter eintragen, Zahlbetrag sofort",
+          "nach_titel": "Wie wird Kindesunterhalt 2026 berechnet?"
+        },
+        {
+          "nach": "heading-3",
+          "typ": "checkliste",
+          "slug": "kindesunterhalt",
+          "grund": "Was Sie für die Berechnung brauchen",
+          "nach_titel": "Welche Unterhaltsbeträge gelten 2026?"
+        }
+      ],
+      "dazu_passt": [
+        {
+          "typ": "post",
+          "slug": "duesseldorfer-tabelle"
+        },
+        {
+          "typ": "post",
+          "slug": "unterhaltsvorschuss"
+        },
+        {
+          "typ": "post",
+          "slug": "elternunterhalt"
+        }
+      ],
+      "waechter_regeln": [
+        "unterhalt.tabelle",
+        "unterhalt.selbstbehalt",
+        "unterhalt.bedarf_studierende_eigener_haushalt",
+        "kindergeld.monatlich_je_kind"
+      ]
+    }
+  },
+  {
+    "slug": "elterngeld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag, Freigabe Redaktion",
+        "saetze": [
+          "Elterngeld ersetzt 65 bis 67 Prozent des Nettoeinkommens vor der Geburt, mindestens 300 und höchstens 1.800 Euro im Monat, bis zu 14 Monate, wenn beide Eltern Zeit nehmen.",
+          "Für Geburten ab April 2025 gilt eine Einkommensgrenze von 175.000 Euro zu versteuerndem Einkommen, für Paare wie Alleinerziehende; darüber gibt es nichts.",
+          "Basiselterngeld passt zum Ausstieg, ElterngeldPlus zur Teilzeit mit doppelter Laufzeit, der Partnerschaftsbonus belohnt vier Monate gemeinsamer Teilzeit zwischen 24 und 32 Stunden.",
+          "Der Antrag geht erst nach der Geburt an die Elterngeldstelle, rückwirkend nur drei Monate; meist digital über ElterngeldDigital.",
+          "Elterngeld ist steuerfrei, erhöht aber über den Progressionsvorbehalt den Steuersatz der übrigen Einkünfte."
+        ],
+        "quellen": [
+          "Bundeselterngeld- und Elternzeitgesetz (BEEG) §§ 1, 2, 4",
+          "§ 32b EStG (Progressionsvorbehalt)"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer hat 2026 Anspruch auf Elterngeld?",
+          "status": "freigegeben",
+          "frage": "Zählt die Einkommensgrenze brutto oder netto?",
+          "antwort": "Weder noch: Sie zählt das zu versteuernde Einkommen aus dem Steuerbescheid des Kalenderjahres vor der Geburt, für Paare zusammengerechnet. 175.000 Euro zu versteuerndes Einkommen entsprechen grob 207.000 Euro brutto.",
+          "quellen": [
+            "§ 1 Abs. 8 BEEG",
+            "Beitrag, Abschnitt Anspruch"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist das Elterngeld 2026?",
+          "status": "freigegeben",
+          "frage": "Ich bin selbstständig. Was ist meine Bemessungsgrundlage?",
+          "antwort": "Der Gewinn aus dem letzten abgeschlossenen Steuerjahr vor der Geburt, nicht die zwölf Monate wie bei Angestellten. Während des Bezugs zählt der tatsächliche Gewinn, deshalb ist die Prognose der Arbeitszeit für die Endabrechnung wichtig.",
+          "quellen": [
+            "§ 2b Abs. 2 BEEG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Basiselterngeld oder ElterngeldPlus: Welche Variante passt zu Ihnen?",
+          "status": "freigegeben",
+          "frage": "Kann ich Basiselterngeld und ElterngeldPlus mischen?",
+          "antwort": "Ja, frei kombinierbar. Ein Basismonat wird zu zwei Plus-Monaten; typisch sind einige Basismonate direkt nach der Geburt und danach Plus-Monate in Teilzeit. Nur die ersten 14 Lebensmonate sind für Basiselterngeld reserviert.",
+          "quellen": [
+            "§ 4 BEEG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Antragstellung und wichtige Fristen",
+          "status": "freigegeben",
+          "frage": "Wir haben den Antrag vergessen, das Kind ist fünf Monate alt. Ist alles verloren?",
+          "antwort": "Nicht alles. Elterngeld wird rückwirkend für die letzten drei Lebensmonate vor dem Antragsmonat gezahlt; die ersten beiden Monate sind verloren. Stellen Sie den Antrag jetzt, die Elterngeldstelle rechnet ab dem dritten Monat davor.",
+          "quellen": [
+            "§ 7 Abs. 1 BEEG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "elterngeld",
+        "nettoeinkommen",
+        "kindergeld",
+        "elterngeldplus",
+        "partnerschaftsbonus"
+      ],
+      "leo_einwuerfe": [
+        {
+          "nach": "heading-3",
+          "typ": "rechner",
+          "slug": "elterngeld",
+          "grund": "Ihr Elterngeld aus Ihrem Netto",
+          "nach_titel": "Wie hoch ist das Elterngeld 2026?"
+        },
+        {
+          "nach": "heading-6",
+          "typ": "checkliste",
+          "slug": "elterngeld",
+          "grund": "Unterlagen und Fristen für den Antrag",
+          "nach_titel": "Antragstellung und wichtige Fristen"
+        }
+      ],
+      "dazu_passt": [
+        {
+          "typ": "post",
+          "slug": "kindergeld"
+        },
+        {
+          "typ": "post",
+          "slug": "kindesunterhalt"
+        },
+        {
+          "typ": "post",
+          "slug": "steuerformulare-2024"
+        }
+      ],
+      "waechter_regeln": [
+        "elterngeld.einkommensgrenze_zu_verst_einkommen",
+        "elterngeld.basiselterngeld",
+        "elterngeld.ersatzrate_standard_prozent"
+      ]
+    }
+  },
+  {
+    "slug": "steuerformulare-2024",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag, Freigabe Redaktion",
+        "saetze": [
+          "Die Steuererklärung besteht aus dem Hauptformular ESt 1A und den Anlagen, die zu Ihrer Situation passen: N für Arbeitnehmer, Kind je Kind, Vorsorgeaufwand, Sonderausgaben.",
+          "Seit 2026 erscheinen die Formulare nur noch elektronisch; Selbstständige müssen ohnehin digital abgeben, alle anderen sollten es, weil ELSTER prüft, vorausfüllt und schneller bearbeitet wird.",
+          "Frist für 2025: 31. Juli 2026 ohne Berater, 1. März 2027 mit Berater; freiwillige Erklärungen für 2022 gehen noch bis Jahresende.",
+          "Neu 2026: Grundfreibetrag 12.348 Euro, Kinderfreibetrag 9.756 Euro, Kinderbetreuungskosten zu 80 Prozent bis 4.800 Euro, Entfernungspauschale 38 Cent ab dem ersten Kilometer.",
+          "Vor Mitte März bearbeitet das Finanzamt nichts, weil Arbeitgeber und Versicherer ihre Daten erst bis Ende Februar liefern."
+        ],
+        "quellen": [
+          "Formular-Management-System der Bundesfinanzverwaltung",
+          "§ 149 AO (Abgabefristen)",
+          "§ 32 Abs. 6 EStG, § 10 Abs. 1 Nr. 5 EStG (Kinderbetreuungskosten)"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Welche Steuerformulare benötige ich 2026?",
+          "status": "freigegeben",
+          "frage": "Ich bin Arbeitnehmer ohne Kinder und habe nichts abzusetzen. Was brauche ich?",
+          "antwort": "Nur das Hauptformular und die Anlage N. Werbungskosten bis 1.230 Euro berücksichtigt das Finanzamt ohnehin als Pauschale, die Anlage Vorsorgeaufwand kommt aus den eDaten Ihrer Krankenkasse fast von selbst.",
+          "quellen": [
+            "§ 9a EStG (Arbeitnehmer-Pauschbetrag)",
+            "Beitrag, Abschnitt Welche Formulare"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Anlagen für Arbeitnehmer: Anlage N",
+          "status": "freigegeben",
+          "frage": "Homeoffice-Pauschale und Fahrtkosten am selben Tag, geht das?",
+          "antwort": "Nein, für denselben Tag nur eines von beiden. Die Homeoffice-Pauschale von 6 Euro gilt für Tage, an denen Sie überwiegend zu Hause gearbeitet haben; für Tage im Büro nehmen Sie die Entfernungspauschale.",
+          "quellen": [
+            "§ 4 Abs. 5 Satz 1 Nr. 6c EStG",
+            "§ 9 Abs. 1 Nr. 4 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Kapitalanleger: Anlagen KAP, KAP-BET, KAP-INV",
+          "status": "freigegeben",
+          "frage": "Meine Bank hat die Abgeltungsteuer schon einbehalten. Muss ich die Anlage KAP trotzdem ausfüllen?",
+          "antwort": "Nur, wenn es sich lohnt oder das Gesetz es verlangt: bei einem persönlichen Steuersatz unter 25 Prozent für die Günstigerprüfung, bei nicht ausgeschöpftem Sparerpauschbetrag von 1.000 Euro oder bei Konten im Ausland ohne Steuerabzug.",
+          "quellen": [
+            "§ 32d Abs. 4 und 6 EStG",
+            "§ 20 Abs. 9 EStG (Sparerpauschbetrag)"
+          ]
+        },
+        {
+          "abschnitt": "heading-9",
+          "abschnitt_titel": "Elektronische Abgabe: Standard seit 2026",
+          "status": "freigegeben",
+          "frage": "Ich habe kein ELSTER-Zertifikat. Wie lange dauert das?",
+          "antwort": "Etwa zwei Wochen, weil der Aktivierungscode per Post kommt. Wer es eilig hat, nutzt den Online-Ausweis oder ELSTER-Login mit Personalausweis, dann geht die Registrierung sofort.",
+          "quellen": [
+            "elster.de, Registrierung",
+            "Beitrag, Abschnitt Elektronische Abgabe"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "einkommensteuer",
+        "grundfreibetrag",
+        "splitting",
+        "anlage-n",
+        "elster",
+        "entfernungspauschale",
+        "homeoffice-pauschale",
+        "sparerpauschbetrag",
+        "guenstigerpruefung"
+      ],
+      "leo_einwuerfe": [
+        {
+          "nach": "heading-8",
+          "typ": "checkliste",
+          "slug": "steuerformulare",
+          "grund": "Welche Anlage für wen",
+          "nach_titel": "Altersvorsorge, Kinder und Unterhalt"
+        },
+        {
+          "nach": "heading-9",
+          "nach_titel": "Elektronische Abgabe: Standard seit 2026",
+          "typ": "checkliste",
+          "slug": "elster",
+          "grund": "ELSTER-Registrierung Schritt für Schritt"
+        }
+      ],
+      "dazu_passt": [
+        {
+          "typ": "post",
+          "slug": "rentenbesteuerung"
+        },
+        {
+          "typ": "post",
+          "slug": "kindergeld"
+        },
+        {
+          "typ": "post",
+          "slug": "kfz-steuer"
+        }
+      ],
+      "waechter_regeln": [
+        "lohnsteuer.grundfreibetrag",
+        "lohnsteuer.arbeitnehmer_pauschbetrag",
+        "kindergeld.kinderfreibetrag_gesamt_beide_eltern",
+        "pendlerpauschale.pauschale_ab_21km",
+        "steuererstattung.homeoffice_pauschale_je_tag"
+      ]
+    }
+  },
+  {
+    "slug": "rentenbesteuerung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag, Freigabe Redaktion",
+        "saetze": [
+          "Wer 2026 in Rente geht, versteuert 84 Prozent der Rente; die übrigen 16 Prozent werden als fester Euro-Betrag festgeschrieben und bleiben lebenslang gleich.",
+          "Deshalb ist jede Rentenerhöhung, 2026 um 4,24 Prozent, voll steuerpflichtig, und jedes Jahr rutschen weitere Rentner in die Steuerpflicht.",
+          "Steuerfrei bleibt ein alleinstehender Neurentner 2026 bis etwa 17.426 Euro Jahresbruttorente, rund 1.452 Euro im Monat; der Grundfreibetrag liegt bei 12.348 Euro.",
+          "Die Rentenversicherung zahlt brutto, führt keine Steuer ab; wer über der Grenze liegt, muss erklären und sollte Rücklagen bilden.",
+          "Neu: Die Aktivrente lässt Beschäftigte über der Regelaltersgrenze bis 2.000 Euro im Monat steuerfrei verdienen; Kranken- und Pflegebeiträge, Krankheitskosten und Spenden senken die Last."
+        ],
+        "quellen": [
+          "§ 22 Nr. 1 Satz 3 EStG (Besteuerungsanteil)",
+          "Wachstumschancengesetz 2024 (Bremsformel)",
+          "§ 34 Abs. 2 EStG (Aktivrente)",
+          "§ 24a EStG (Altersentlastungsbetrag)"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie viel der Rente 2026 steuerpflichtig ist",
+          "status": "freigegeben",
+          "frage": "Ich bin 2019 in Rente gegangen. Gilt für mich auch 84 Prozent?",
+          "antwort": "Nein. Ihr Besteuerungsanteil ist auf 78 Prozent eingefroren, das Jahr des Rentenbeginns entscheidet ein für alle Mal. Ihr Freibetrag wurde aus der ersten vollen Jahresrente 2020 berechnet und bleibt als Euro-Betrag stehen.",
+          "quellen": [
+            "§ 22 Nr. 1 Satz 3 Buchst. a Doppelbuchst. aa EStG, Tabelle"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Bei welcher Rente zahlen Rentner 2026 keine Steuern?",
+          "status": "freigegeben",
+          "frage": "Wir sind verheiratet, beide Rentner. Zählt die Grenze für jeden einzeln?",
+          "antwort": "Nein, gemeinsam: Bei Zusammenveranlagung gilt der doppelte Grundfreibetrag von 24.696 Euro auf die Summe beider zu versteuernder Renten. Zwei Renten mit unterschiedlichem Rentenbeginn haben jeweils ihren eigenen Freibetrag.",
+          "quellen": [
+            "§ 32a Abs. 5 EStG (Splittingtarif)",
+            "Beitrag, Abschnitt Steuergrenze"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Warum Rentenerhöhungen die Steuerlast überproportional erhöhen",
+          "status": "freigegeben",
+          "frage": "Kann ich die Rentenerhöhung ablehnen, um steuerfrei zu bleiben?",
+          "antwort": "Nein, die Anpassung ist gesetzlich und nicht abwählbar. Besser: Beiträge zur Kranken- und Pflegeversicherung, Krankheitskosten und haushaltsnahe Dienstleistungen geltend machen; damit bleiben viele Rentner trotz Erhöhung unter dem Grundfreibetrag.",
+          "quellen": [
+            "§ 65 SGB VI (Rentenanpassung)",
+            "§ 10 Abs. 1 Nr. 3 EStG, § 35a EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Aktivrente 2026: Steuerfrei hinzuverdienen für erwerbstätige Rentner",
+          "status": "freigegeben",
+          "frage": "Gilt die Aktivrente auch für meinen Minijob?",
+          "antwort": "Nein. Begünstigt ist nur sozialversicherungspflichtige Beschäftigung als Arbeitnehmer nach der Regelaltersgrenze, bis 2.000 Euro im Monat. Minijobs, Selbstständigkeit und Beamtenpensionen sind ausgenommen.",
+          "quellen": [
+            "§ 34 Abs. 2 EStG (Aktivrentengesetz 2026)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "rente",
+        "grundfreibetrag",
+        "einkommensteuer",
+        "rentenfreibetrag",
+        "besteuerungsanteil",
+        "altersentlastungsbetrag",
+        "aktivrente"
+      ],
+      "leo_einwuerfe": [
+        {
+          "nach": "heading-3",
+          "typ": "rechner",
+          "slug": "rentenbesteuerung",
+          "grund": "Ob Ihre Rente über der Grenze liegt",
+          "nach_titel": "Bei welcher Rente zahlen Rentner 2026 keine Steuern?"
+        },
+        {
+          "nach": "heading-8",
+          "typ": "checkliste",
+          "slug": "rentenbesteuerung",
+          "grund": "Abzüge, die Rentner vergessen",
+          "nach_titel": "Konkrete Steuersparmöglichkeiten für Rentner"
+        }
+      ],
+      "dazu_passt": [
+        {
+          "typ": "post",
+          "slug": "steuerformulare-2024"
+        },
+        {
+          "typ": "post",
+          "slug": "berufsunfaehigkeitsversicherung"
+        },
+        {
+          "typ": "post",
+          "slug": "kindergeld"
+        }
+      ],
+      "waechter_regeln": [
+        "lohnsteuer.grundfreibetrag",
+        "rentenbesteuerung.besteuerungsanteil_2026",
+        "rente.rentenwert_ab_01jul_2026",
+        "rentenbesteuerung.werbungskosten_pauschbetrag_rente"
+      ]
+    }
+  },
+  {
+    "slug": "private-haftpflichtversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag, Freigabe Redaktion",
+        "saetze": [
+          "Nach § 823 BGB haften Sie für Schäden, die Sie anderen zufügen, mit dem ganzen Vermögen und ohne Obergrenze; die Privathaftpflicht übernimmt berechtigte Forderungen und wehrt unberechtigte ab.",
+          "Sie ist billig geworden: gute Tarife ab 25 Euro im Jahr für Singles, ab 37 Euro für Familien; trotzdem hat jeder sechste Haushalt keine.",
+          "Deckungssumme mindestens 10 Millionen Euro, besser 50, dazu Schlüsselverlust, Mietsachschäden, Forderungsausfall, Gefälligkeitsschäden und deliktunfähige Kinder.",
+          "Nicht versichert sind Vorsatz, Beruf, Kraftfahrzeuge und Schäden unter Mitversicherten; Geliehenes nur mit Baustein.",
+          "Wer einen älteren Vertrag hat, sollte vergleichen: gleiche Leistung kostet heute ein Drittel weniger."
+        ],
+        "quellen": [
+          "§ 823 BGB",
+          "Verbraucherzentrale Bundesverband, Mindestkriterien Privathaftpflicht",
+          "GDV, Versicherungsdichte private Haftpflicht"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Warum ist eine private Haftpflichtversicherung unverzichtbar?",
+          "status": "freigegeben",
+          "frage": "Ich wohne noch bei meinen Eltern. Bin ich über deren Vertrag versichert?",
+          "antwort": "Solange Sie unverheiratet sind und in der ersten Ausbildung oder im Studium stehen, meist ja, auch mit eigener Wohnung am Studienort. Mit dem ersten Job oder nach der Ausbildung brauchen Sie einen eigenen Vertrag.",
+          "quellen": [
+            "AVB Privathaftpflicht, Mitversicherte Personen",
+            "Beitrag, Abschnitt Familientarif"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Deckungssumme sollten Sie wählen?",
+          "status": "freigegeben",
+          "frage": "Reichen 5 Millionen Euro aus meinem alten Vertrag?",
+          "antwort": "Für Sachschäden ja, für schwere Personenschäden knapp: Behandlung, Pflege und Verdienstausfall eines jungen Menschen übersteigen 5 Millionen schnell. Der Aufpreis auf 50 Millionen liegt bei wenigen Euro im Jahr.",
+          "quellen": [
+            "Beitrag, Abschnitt Deckungssumme",
+            "Verbraucherzentrale, Empfehlung 10 Millionen Euro"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wer ist durch eine private Haftpflichtversicherung mitversichert?",
+          "status": "freigegeben",
+          "frage": "Mein sechsjähriger Sohn hat das Auto des Nachbarn zerkratzt. Zahlt die Versicherung?",
+          "antwort": "Nur wenn Ihr Tarif deliktunfähige Kinder ausdrücklich einschließt. Kinder unter sieben haften nicht, also haftet niemand, und ohne die Klausel zahlt auch die Haftpflicht nicht. Moderne Tarife versichern den Fall bis zu einer Summe von meist 30.000 Euro.",
+          "quellen": [
+            "§ 828 Abs. 1 BGB",
+            "AVB Privathaftpflicht, Klausel deliktunfähige Kinder"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Was ist NICHT versichert?",
+          "status": "freigegeben",
+          "frage": "Ich habe das geliehene Fahrrad eines Freundes beschädigt. Ist das ein Fall für die Haftpflicht?",
+          "antwort": "Im Standardschutz nicht, weil geliehene Sachen ausgeschlossen sind. Tarife mit dem Baustein für geliehene und gemietete Sachen decken es, oft mit Selbstbeteiligung. Prüfen Sie den Vertrag unter Mietsachschäden oder Leihsachen.",
+          "quellen": [
+            "AVB Privathaftpflicht, Ausschluss Leihsachen",
+            "Beitrag, Abschnitt Ausschlüsse"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "haftpflicht",
+        "deckungssumme",
+        "deliktunfaehig",
+        "gefaelligkeit",
+        "best-leistungs-garantie",
+        "forderungsausfall"
+      ],
+      "leo_einwuerfe": [
+        {
+          "nach": "heading-3",
+          "typ": "vergleich",
+          "slug": "private-haftpflichtversicherung-vergleich",
+          "grund": "Tarife nebeneinander, Bausteine markiert",
+          "nach_titel": "Welche Kosten entstehen für eine private Haftpflichtversicherung?"
+        },
+        {
+          "nach": "heading-8",
+          "typ": "checkliste",
+          "slug": "private-haftpflichtversicherung",
+          "grund": "Sechs Kriterien vor dem Abschluss",
+          "nach_titel": "Worauf Sie beim Abschluss achten sollten"
+        }
+      ],
+      "dazu_passt": [
+        {
+          "typ": "post",
+          "slug": "hausratversicherung"
+        },
+        {
+          "typ": "post",
+          "slug": "hundehaftpflichtversicherung"
+        },
+        {
+          "typ": "post",
+          "slug": "hausbesitzerhaftpflichtversicherung"
+        }
+      ],
+      "waechter_regeln": []
+    }
+  },
+  {
+    "slug": "hausratversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag, Freigabe Redaktion",
+        "saetze": [
+          "Die Hausratversicherung ersetzt alles Bewegliche in der Wohnung zum Neuwert, wenn Feuer, Einbruch, Leitungswasser oder Sturm es zerstören; Mieter wie Eigentümer brauchen sie, die Gebäudeversicherung deckt nur das Haus.",
+          "Sie kostet im Schnitt 35 Euro im Jahr, für 80 Quadratmeter zwischen 25 und 54 Euro je nach Stadt und Selbstbeteiligung.",
+          "Die Versicherungssumme sollte bei 650 bis 800 Euro je Quadratmeter liegen, für 80 Quadratmeter also 52.000 Euro, und der Vertrag einen Unterversicherungsverzicht enthalten.",
+          "Unverzichtbar sind der Verzicht auf den Einwand grober Fahrlässigkeit und der Elementarschutz; Fahrraddiebstahl außerhalb der Wohnung und Smart-Home-Schäden nur mit Baustein.",
+          "Preisunterschiede von 20 bis 60 Euro im Jahr bei gleicher Leistung machen den Vergleich alle paar Jahre lohnend; Kündigungsfrist drei Monate, Sonderkündigung bei Beitragserhöhung."
+        ],
+        "quellen": [
+          "Verbraucherzentrale, Versicherungssumme je Quadratmeter (Juli 2025)",
+          "GDV, Schadenstatistik Hausrat",
+          "VHB 2022 (Allgemeine Hausratversicherungsbedingungen)"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was schützt die Hausratversicherung und wer braucht sie?",
+          "status": "freigegeben",
+          "frage": "Ist mein Laptop auch im Büro oder im Zug versichert?",
+          "antwort": "Außerhalb der Wohnung nur über die Außenversicherung: meist drei Monate weltweit und bis 10 bis 20 Prozent der Versicherungssumme, bei Diebstahl nur aus verschlossenen Räumen oder bei Raub. Einfaches Liegenlassen im Zug ist kein versicherter Fall.",
+          "quellen": [
+            "VHB 2022, Abschnitt Außenversicherung"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche Schäden sind versichert und in welcher Höhe?",
+          "status": "freigegeben",
+          "frage": "Der Keller stand nach Starkregen unter Wasser. Zahlt die Hausrat?",
+          "antwort": "Nur mit Elementarschutz. Leitungswasser ist versichert, Regen- und Hochwasser von außen zählen als Elementarschaden und brauchen den Zusatzbaustein. Ohne ihn bleibt der Schaden an Ihnen hängen.",
+          "quellen": [
+            "VHB 2022, Abschnitt Elementarschäden",
+            "Beitrag, Abschnitt Zusatzbausteine"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch sollte die Versicherungssumme sein?",
+          "status": "freigegeben",
+          "frage": "Was passiert, wenn ich meine Summe zu niedrig angesetzt habe?",
+          "antwort": "Ohne Unterversicherungsverzicht kürzt der Versicherer jeden Schaden im Verhältnis: Ist der Hausrat doppelt so viel wert wie versichert, bekommen Sie die Hälfte. Mit Verzicht, den die meisten Tarife bei 650 Euro je Quadratmeter geben, zahlt er bis zur Summe voll.",
+          "quellen": [
+            "§ 75 VVG (Unterversicherung)",
+            "VHB 2022, Unterversicherungsverzicht"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wichtige Zusatzbausteine für modernen Schutz",
+          "status": "freigegeben",
+          "frage": "Mein E-Bike hat 4.000 Euro gekostet. Wie sichere ich es ab?",
+          "antwort": "Mit der Fahrradklausel, die Diebstahl auch außerhalb der Wohnung deckt, meist bis 1 bis 5 Prozent der Versicherungssumme; prüfen Sie die Höchstgrenze und die Nachtklausel. Für teure Räder ist eine eigene Fahrradversicherung oft günstiger.",
+          "quellen": [
+            "VHB 2022, Fahrradklausel",
+            "Beitrag, Abschnitt Zusatzbausteine"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "hausrat",
+        "unterversicherung",
+        "elementarschaden",
+        "fahrlaessigkeit",
+        "fels-risiken",
+        "versicherungssumme"
+      ],
+      "leo_einwuerfe": [
+        {
+          "nach": "heading-5",
+          "typ": "vergleich",
+          "slug": "hausratversicherung-vergleich",
+          "grund": "Tarife mit Elementarschutz und Fahrradklausel",
+          "nach_titel": "Was kostet eine Hausratversicherung 2026?"
+        },
+        {
+          "nach": "heading-8",
+          "typ": "checkliste",
+          "slug": "hausratversicherung",
+          "grund": "Wann ein Wechsel sich lohnt",
+          "nach_titel": "Wann lohnt sich ein Wechsel der Hausratversicherung?"
+        }
+      ],
+      "dazu_passt": [
+        {
+          "typ": "post",
+          "slug": "private-haftpflichtversicherung"
+        },
+        {
+          "typ": "post",
+          "slug": "hausbesitzerhaftpflichtversicherung"
+        },
+        {
+          "typ": "post",
+          "slug": "kfz-versicherung"
+        }
+      ],
+      "waechter_regeln": []
+    }
+  },
+  {
+    "slug": "berufsunfaehigkeitsversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag, Freigabe Redaktion",
+        "saetze": [
+          "Jeder Vierte wird im Arbeitsleben berufsunfähig, meist durch psychische Erkrankungen, Rücken oder Krebs, nur selten durch Unfälle; der Bürojob schützt nicht.",
+          "Die gesetzliche Erwerbsminderungsrente liegt im Schnitt um 1.059 Euro und setzt voraus, dass Sie keinen Beruf mehr ausüben können; die Lücke zum Netto schließt nur eine private BU.",
+          "Richtwert 70 bis 80 Prozent des Nettos als BU-Rente, Laufzeit bis 67, 3 bis 10 Prozent des Nettos als Beitrag; ein 30-jähriger Akademiker zahlt ab 35 Euro, ein Handwerker ab 113 Euro für 1.500 Euro Rente.",
+          "Früh abschließen lohnt: Schüler und Studierende bekommen den Tarif ihres Abschlusszeitpunkts lebenslang, ohne neue Gesundheitsprüfung beim Berufseinstieg.",
+          "Vorerkrankungen führen selten zur Ablehnung; die anonyme Risikovoranfrage über den Makler verhindert Einträge in der Wagnisdatei. Vier von fünf Leistungsanträgen werden bewilligt."
+        ],
+        "quellen": [
+          "GDV, BU-Statistik 2025 (Ursachen, Leistungsquote)",
+          "Franke und Bornberg, BU-Leistungsstudie 2023",
+          "Morgen & Morgen für WirtschaftsWoche, Musterkunden 2025",
+          "§ 43 SGB VI (Erwerbsminderungsrente)"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Warum ist eine Berufsunfähigkeitsversicherung wichtig?",
+          "status": "freigegeben",
+          "frage": "Was ist der Unterschied zwischen berufsunfähig und erwerbsunfähig?",
+          "antwort": "Berufsunfähig sind Sie, wenn Sie Ihren zuletzt ausgeübten Beruf zu mindestens 50 Prozent nicht mehr ausüben können; das prüft die private BU. Die gesetzliche Rente fragt nur, ob Sie irgendeine Tätigkeit noch drei Stunden täglich schaffen. Deshalb bekommen viele Berufsunfähige vom Staat nichts.",
+          "quellen": [
+            "§ 172 VVG (Berufsunfähigkeit)",
+            "§ 43 SGB VI (Erwerbsminderung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Für wen ist eine BU besonders wichtig?",
+          "status": "freigegeben",
+          "frage": "Ich bin 42 und habe noch keine BU. Lohnt sich der Abschluss noch?",
+          "antwort": "Ja, solange Sie gesund genug sind. Der Beitrag ist höher als mit 25, aber die verbleibenden 25 Jahre bis zur Rente sind genau die Zeit, in der das Risiko steigt. Wichtig ist eine Laufzeit bis 67, nicht bis 60.",
+          "quellen": [
+            "Beitrag, Abschnitt Kosten und Beitragsfaktoren"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Was kostet eine Berufsunfähigkeitsversicherung?",
+          "status": "freigegeben",
+          "frage": "Warum zahlt ein Handwerker dreimal so viel wie ein Akademiker?",
+          "antwort": "Weil die Versicherer nach Berufsgruppen kalkulieren: körperliche Belastung, Unfallgefahr und die Statistik der Leistungsfälle. Wer den Beruf wechselt, behält den einmal vereinbarten Tarif, deshalb lohnt der Abschluss in der Ausbildung.",
+          "quellen": [
+            "Morgen & Morgen, Musterkunden 2025",
+            "Beitrag, Abschnitt Kosten"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie sind die Chancen bei Vorerkrankungen?",
+          "status": "freigegeben",
+          "frage": "Ich war vor drei Jahren wegen Depression in Behandlung. Bekomme ich überhaupt einen Vertrag?",
+          "antwort": "Möglich, aber nicht bei jedem Versicherer. Psychische Diagnosen der letzten fünf bis zehn Jahre führen oft zu Ausschluss oder Zuschlag. Der Weg ist die anonyme Risikovoranfrage über einen Makler bei mehreren Versicherern, ohne Eintrag in der Wagnisdatei; verschweigen dürfen Sie nichts.",
+          "quellen": [
+            "§ 19 VVG (Anzeigepflicht)",
+            "Beitrag, Abschnitt Vorerkrankungen"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "bu",
+        "nettoeinkommen",
+        "rente",
+        "erwerbsminderungsrente",
+        "nachversicherungsgarantie",
+        "risikovoranfrage"
+      ],
+      "leo_einwuerfe": [
+        {
+          "nach": "heading-5",
+          "typ": "vergleich",
+          "slug": "berufsunfaehigkeitsversicherung-vergleich",
+          "grund": "Beiträge nach Beruf und Alter nebeneinander",
+          "nach_titel": "Was kostet eine Berufsunfähigkeitsversicherung?"
+        },
+        {
+          "nach": "heading-6",
+          "typ": "checkliste",
+          "slug": "berufsunfaehigkeitsversicherung",
+          "grund": "Gesundheitsfragen richtig beantworten",
+          "nach_titel": "Wie sind die Chancen bei Vorerkrankungen?"
+        }
+      ],
+      "dazu_passt": [
+        {
+          "typ": "post",
+          "slug": "rentenbesteuerung"
+        },
+        {
+          "typ": "post",
+          "slug": "private-haftpflichtversicherung"
+        },
+        {
+          "typ": "post",
+          "slug": "elterngeld"
+        }
+      ],
+      "waechter_regeln": [
+        "rente.rentenwert_ab_01jul_2026",
+        "beitragsbemessungsgrenzen.renten_arbeitslosen"
+      ]
+    }
+  }
+]

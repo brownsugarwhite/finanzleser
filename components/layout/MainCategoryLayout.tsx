@@ -1,4 +1,10 @@
 import Footer from "./Footer";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import KartenKapitel from "@/components/faden/KartenKapitel";
+import ListenKarte from "@/components/faden/karten/ListenKarte";
+import BlattStart from "@/components/faden/kopf/BlattStart";
+import { buildPostUrl } from "@/lib/urls";
+import type { ToolType } from "@/components/ui/ToolDots";
 import CategoryHeader from "./CategoryHeader";
 import PageAds from "./PageAds";
 import MainCategorySliderBlock from "@/components/sections/MainCategorySliderBlock";
@@ -36,6 +42,18 @@ export default async function MainCategoryLayout({
   posts,
   allCategoryPosts = {},
 }: MainCategoryLayoutProps) {
+  if (FADEN_AKTIV) {
+    const gruppen = categoryChildren.map((c) => ({
+      titel: c.name, href: `/${slug}/${c.slug}`, zahl: (allCategoryPosts[c.slug] || []).length,
+      eintraege: (allCategoryPosts[c.slug] || []).map((p) => ({ titel: p.title, untertitel: p.untertitel || undefined, href: buildPostUrl(p), tools: (p.tools || []) as ToolType[] })),
+    }));
+    return (
+      <KartenKapitel schluessel={`rubrik:${slug}`} titel={name} kicker={`Ratgeber · ${RATGEBER_LABEL[slug] || "Rubrik"}`} beschreibung={description} krumen={[{ name: "Ratgeber", href: "/" }]} url={`/${slug}`}>
+        <BlattStart schluessel="ratgeber" a={slug} />
+        <ListenKarte kicker={`${categoryChildren.length} Themen · ${posts.length || gruppen.reduce((n, g) => n + g.eintraege.length, 0)} Ratgeber`} gruppen={gruppen} />
+      </KartenKapitel>
+    );
+  }
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: name, href: `/${slug}` },

@@ -1,0 +1,569 @@
+{
+  "slug": "baufinanzierung",
+  "kopie": "vorlage-baufinanzierung",
+  "bloecke": [
+    {
+      "nach": "heading-2",
+      "statistik": {
+        "art": "kennzahlen-vierer",
+        "titel": "Der Markt 2026",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Preise für Wohnimmobilien im 1. Quartal 2026",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/06/PD26_219_61262.html",
+          "stand": "25.06.2026"
+        },
+        "kacheln": [
+          {
+            "label": "Wohnimmobilien",
+            "zahl": 1.4,
+            "einheit": "%",
+            "text": "teurer als im Vorjahresquartal",
+            "farbe": "var(--ink)"
+          },
+          {
+            "label": "Baupreise",
+            "zahl": 5.0,
+            "einheit": "%",
+            "text": "über dem Vorjahr, Mai 2026",
+            "farbe": "var(--pink)"
+          },
+          {
+            "label": "Auf dem Land",
+            "zahl": 3.6,
+            "einheit": "%",
+            "text": "Eigentumswohnungen, dünn besiedelte Kreise",
+            "farbe": "var(--green-ink)"
+          },
+          {
+            "label": "In den TOP 7",
+            "zahl": 0.3,
+            "einheit": "%",
+            "text": "Eigentumswohnungen, größte Städte",
+            "farbe": "var(--ink)"
+          }
+        ],
+        "hinweis": "Die Baupreise stammen aus der Meldung vom 22. Juli 2026, die übrigen Werte aus der Quartalsmeldung."
+      }
+    },
+    {
+      "nach": "heading-2",
+      "statistik": {
+        "art": "spannen",
+        "titel": "Was die Monatsrate kostet",
+        "untertitel": "Annuitätendarlehen mit 2 Prozent Anfangstilgung, je nach Zinssatz",
+        "einheit": "€",
+        "quelle": {
+          "name": "Eigene Berechnung, Annuitätendarlehen mit 2 Prozent Anfangstilgung",
+          "url": "https://www.finanzleser.de/finanztools/rechner/tilgungsrechner/",
+          "stand": "2026"
+        },
+        "skala": {
+          "von": 0,
+          "bis": 3000
+        },
+        "zeilen": [
+          {
+            "name": "200.000 €",
+            "min": 833,
+            "median": 1000,
+            "max": 1167
+          },
+          {
+            "name": "300.000 €",
+            "min": 1250,
+            "median": 1500,
+            "max": 1750
+          },
+          {
+            "name": "400.000 €",
+            "min": 1667,
+            "median": 2000,
+            "max": 2333
+          },
+          {
+            "name": "500.000 €",
+            "min": 2083,
+            "median": 2500,
+            "max": 2917
+          }
+        ],
+        "hinweis": "Von links nach rechts: 3 Prozent Zins, 4 Prozent (Punkt) und 5 Prozent. Ein Prozentpunkt mehr kostet bei 300.000 Euro rund 250 Euro im Monat."
+      }
+    },
+    {
+      "nach": "heading-2",
+      "statistik": {
+        "art": "linien",
+        "titel": "Bauzinsen 2026 von Monat zu Monat",
+        "untertitel": "Effektiver Jahreszins aller Wohnungsbaukredite, Neugeschäft",
+        "einheit": "%",
+        "quelle": {
+          "name": "Deutsche Bundesbank, Zinssätze für das Neugeschäft – Wohnungsbaukredite an private Haushalte",
+          "url": "https://www.bundesbank.de/resource/blob/615036/9f4efe4e8f601ff991ec86223910816f/472B63F073F071307366337C94F8C870/s510athyp-data.pdf",
+          "stand": "Juli 2026"
+        },
+        "achse": [
+          "Jan.",
+          "Feb.",
+          "März",
+          "April",
+          "Mai",
+          "Juni",
+          "Juli"
+        ],
+        "yAchse": {
+          "min": 3.6,
+          "max": 4.0
+        },
+        "reihen": [
+          {
+            "label": "Effektivzins",
+            "werte": [
+              3.77,
+              3.77,
+              3.72,
+              3.84,
+              3.93,
+              3.95,
+              3.94
+            ]
+          }
+        ],
+        "hinweis": "Der Wert mittelt über alle Zinsbindungsfristen von variabel bis über zehn Jahre. Einschließlich sonstiger Kosten lag der Jahreszins im Juli 2026 bei 3,98 Prozent."
+      }
+    },
+    {
+      "nach": "heading-3",
+      "statistik": {
+        "art": "anteilsleiste",
+        "titel": "Woraus die Kaufnebenkosten bestehen",
+        "untertitel": "Beispiel Nordrhein-Westfalen, mit Makler",
+        "einheit": "%",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Grunderwerbsteuer der Länder",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/Grafiken/Newsroom/2024/_Interaktiv/20240222-grunderwerbssteuer-bundeslaender.html",
+          "stand": "2024"
+        },
+        "stuecke": [
+          {
+            "label": "Grunderwerbsteuer",
+            "wert": 56.2
+          },
+          {
+            "label": "Maklercourtage",
+            "wert": 30.9
+          },
+          {
+            "label": "Notar und Grundbuch",
+            "wert": 12.9
+          }
+        ],
+        "hinweis": "Gerechnet mit 6,5 Prozent Grunderwerbsteuer, 3,57 Prozent Käuferanteil der Courtage und 1,5 Prozent für Notar und Grundbuch — zusammen 11,57 Prozent des Kaufpreises. In Bayern beträgt die Grunderwerbsteuer nur 3,5 Prozent."
+      }
+    },
+    {
+      "nach": "heading-5",
+      "statistik": {
+        "art": "tabelle",
+        "titel": "Was ein Prozentpunkt ausmacht",
+        "untertitel": "300.000 Euro Darlehen, 2 Prozent Anfangstilgung, nach zehn Jahren",
+        "zeilenkopf": "Kennzahl",
+        "quelle": {
+          "name": "Eigene Berechnung, Annuitätendarlehen mit 2 Prozent Anfangstilgung",
+          "url": "https://www.finanzleser.de/finanztools/rechner/tilgungsrechner/",
+          "stand": "2026"
+        },
+        "spalten": [
+          {
+            "name": "3 % Zins"
+          },
+          {
+            "name": "4 % Zins",
+            "tag": "Marktnähe 2026",
+            "hervor": true
+          },
+          {
+            "name": "5 % Zins"
+          }
+        ],
+        "zeilen": [
+          {
+            "name": "Monatsrate",
+            "werte": [
+              "1.250 €",
+              "1.500 €",
+              "1.750 €"
+            ]
+          },
+          {
+            "name": "Zinskosten in zehn Jahren",
+            "werte": [
+              "80.129 €",
+              "106.375 €",
+              "132.359 €"
+            ]
+          },
+          {
+            "name": "Restschuld nach zehn Jahren",
+            "werte": [
+              "230.129 €",
+              "226.375 €",
+              "222.359 €"
+            ]
+          },
+          {
+            "name": "Getilgt in zehn Jahren",
+            "werte": [
+              "69.871 €",
+              "73.625 €",
+              "77.641 €"
+            ]
+          }
+        ],
+        "fussnote": "Die höhere Rate tilgt kaum mehr – fast der ganze Unterschied geht in die Zinsen."
+      }
+    },
+    {
+      "nach": "heading-5",
+      "statistik": {
+        "art": "abwaegung",
+        "titel": "Lange Zinsbindung vereinbaren?",
+        "quelle": {
+          "name": "§ 489 BGB, Ordentliches Kündigungsrecht des Darlehensnehmers",
+          "url": "https://www.gesetze-im-internet.de/bgb/__489.html",
+          "stand": "2026"
+        },
+        "pro": [
+          "Die Rate steht für die ganze Zeit fest.",
+          "Kein Zinsänderungsrisiko beim Anschluss.",
+          "Nach zehn Jahren dürfen Sie ohnehin jederzeit kündigen (§ 489 BGB)."
+        ],
+        "contra": [
+          "Längere Bindung kostet Zinsaufschlag.",
+          "Bei fallenden Zinsen zahlen Sie zu lange zu viel.",
+          "Vor Ablauf ist ein Ausstieg nur gegen Vorfälligkeitsentschädigung möglich."
+        ]
+      }
+    },
+    {
+      "nach": "heading-6",
+      "statistik": {
+        "art": "saeulen",
+        "titel": "Wo Eigentumswohnungen teurer werden",
+        "untertitel": "Veränderung zum Vorjahresquartal, 1. Quartal 2026",
+        "einheit": "%",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Preise für Wohnimmobilien im 1. Quartal 2026",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/06/PD26_219_61262.html",
+          "stand": "25.06.2026"
+        },
+        "reihen": [
+          {
+            "label": "Veränderung zum Vorjahr"
+          }
+        ],
+        "kategorien": [
+          {
+            "label": "Ländliche Kreise",
+            "werte": [
+              3.6
+            ]
+          },
+          {
+            "label": "Großstädte ohne TOP 7",
+            "werte": [
+              2.9
+            ]
+          },
+          {
+            "label": "TOP 7",
+            "werte": [
+              0.3
+            ]
+          }
+        ],
+        "hinweis": "TOP 7 sind Berlin, Hamburg, München, Köln, Frankfurt am Main, Stuttgart und Düsseldorf."
+      }
+    },
+    {
+      "nach": "heading-6",
+      "statistik": {
+        "art": "kennzahlen-liste",
+        "titel": "Wohnimmobilien in Zahlen",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Preise für Wohnimmobilien im 1. Quartal 2026",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/06/PD26_219_61262.html",
+          "stand": "25.06.2026"
+        },
+        "zeilen": [
+          {
+            "name": "Wohnimmobilien zum Vorjahresquartal",
+            "wert": "+1,4 %"
+          },
+          {
+            "name": "Wohnimmobilien zum Vorquartal",
+            "wert": "+0,3 %"
+          },
+          {
+            "name": "Baupreise Wohngebäude, Mai 2026",
+            "wert": "+5,0 %"
+          },
+          {
+            "name": "Grunderwerbsteuer, niedrigster Satz",
+            "wert": "3,5 %"
+          },
+          {
+            "name": "Grunderwerbsteuer, höchster Satz",
+            "wert": "6,5 %"
+          }
+        ],
+        "hinweis": "Den niedrigsten Satz hat Bayern; 6,5 Prozent verlangen Brandenburg, Nordrhein-Westfalen, das Saarland, Schleswig-Holstein und Thüringen."
+      }
+    },
+    {
+      "nach": "heading-7",
+      "statistik": {
+        "art": "schrittfolge",
+        "titel": "Von der Selbstauskunft zur Auszahlung",
+        "quelle": {
+          "name": "§ 491a BGB, Informationspflichten bei Verbraucherdarlehensverträgen",
+          "url": "https://www.gesetze-im-internet.de/bgb/__491a.html",
+          "stand": "2026"
+        },
+        "schritte": [
+          {
+            "titel": "Haushaltsrechnung aufstellen",
+            "text": "Einnahmen, Ausgaben und Eigenkapital ehrlich gegenüberstellen."
+          },
+          {
+            "titel": "Unterlagen sammeln",
+            "text": "Gehaltsnachweise, Grundbuchauszug, Grundriss, Energieausweis."
+          },
+          {
+            "titel": "Angebote einholen und vergleichen",
+            "text": "Auf den effektiven Jahreszins achten, nicht auf den Sollzins."
+          },
+          {
+            "titel": "Notartermin und Auszahlung",
+            "text": "Erst nach Eintragung der Grundschuld fließt das Geld."
+          }
+        ]
+      }
+    },
+    {
+      "nach": "heading-7",
+      "statistik": {
+        "art": "zeitstrahl",
+        "titel": "Vom Antrag bis zum Geld",
+        "untertitel": "Übliche Dauer, ohne Verzögerungen",
+        "quelle": {
+          "name": "§ 491a und § 873 BGB",
+          "url": "https://www.gesetze-im-internet.de/bgb/__873.html",
+          "stand": "2026"
+        },
+        "stationen": [
+          {
+            "marke": "Woche 1",
+            "text": "Unterlagen einreichen",
+            "x": 0
+          },
+          {
+            "marke": "Woche 2",
+            "text": "Finanzierungszusage",
+            "x": 35
+          },
+          {
+            "marke": "Woche 4",
+            "text": "Notartermin",
+            "x": 70
+          },
+          {
+            "marke": "Woche 8",
+            "text": "Auszahlung nach Grundbucheintrag",
+            "x": 100
+          }
+        ]
+      }
+    },
+    {
+      "nach": "heading-7",
+      "statistik": {
+        "art": "begriffe",
+        "titel": "Aus dem Glossar",
+        "quelle": {
+          "name": "§ 489 und § 873 BGB",
+          "url": "https://www.gesetze-im-internet.de/bgb/__489.html",
+          "stand": "2026"
+        },
+        "begriffe": [
+          {
+            "begriff": "Beleihungsauslauf",
+            "text": "Das Darlehen im Verhältnis zum Beleihungswert. Unter 60 Prozent gibt es die besten Zinsen."
+          },
+          {
+            "begriff": "Annuität",
+            "text": "Die gleichbleibende Rate aus Zins und Tilgung. Der Zinsanteil sinkt mit der Zeit, der Tilgungsanteil steigt."
+          },
+          {
+            "begriff": "Vorfälligkeitsentschädigung",
+            "text": "Was die Bank verlangt, wenn Sie vor Ablauf der Zinsbindung aussteigen. Nach zehn Jahren entfällt sie."
+          }
+        ]
+      }
+    },
+    {
+      "nach": "heading-7",
+      "statistik": {
+        "art": "vergleichsrechner",
+        "titel": "Baufinanzierung vergleichen",
+        "slug": "baufinanzierung-vergleich",
+        "quelle": {
+          "name": "Vergleichsrechner unseres Partners",
+          "url": "https://www.finanzleser.de/finanztools/vergleiche/baufinanzierung-vergleich/",
+          "stand": "2026"
+        }
+      }
+    },
+    {
+      "statt": {
+        "typ": "tabelle",
+        "enthaelt": "Aktueller Satz"
+      },
+      "statistik": {
+        "art": "tabelle",
+        "titel": "Was die Zinsbindung kostet",
+        "untertitel": "Effektivzins nach Bindungsdauer, 2026",
+        "zeilenkopf": "Zinsbindung",
+        "quelle": {
+          "name": "Redaktionelle Marktbeobachtung finanzleser",
+          "url": "https://www.finanzleser.de/finanzen/kredite-bauen/baufinanzierung/",
+          "stand": "2026"
+        },
+        "spalten": [
+          {
+            "name": "10 Jahre",
+            "tag": "üblich",
+            "hervor": true
+          },
+          {
+            "name": "15 Jahre"
+          },
+          {
+            "name": "20 Jahre"
+          }
+        ],
+        "zeilen": [
+          {
+            "name": "Aktueller Satz",
+            "werte": [
+              "3,57–3,70 %",
+              "3,70–3,90 %",
+              "3,80–4,30 %"
+            ]
+          },
+          {
+            "name": "Aufschlag gegenüber 10 Jahren",
+            "werte": [
+              "–",
+              "rund 0,2 Punkte",
+              "bis 0,6 Punkte"
+            ]
+          },
+          {
+            "name": "Tendenz",
+            "werte": [
+              "stabil",
+              "moderat höher",
+              "höhere Risikoprämie"
+            ]
+          }
+        ],
+        "fussnote": "Nach zehn Jahren dürfen Sie ohnehin jederzeit mit sechs Monaten Frist kündigen (§ 489 BGB) — die längere Bindung kostet also Sicherheit, die Sie einseitig aufgeben dürfen."
+      }
+    }
+  ],
+  "ohneBestandsstatistiken": true,
+  "leoFragen": [
+    {
+      "abschnitt": "heading-2",
+      "abschnitt_titel": "Welche Bauzinsen gelten 2026 und wie entstehen sie?",
+      "status": "freigegeben",
+      "frage": "Warum ist mein Angebot teurer als der beworbene Bestzins?",
+      "antwort": "Der Bestzins gilt für den Idealfall: viel Eigenkapital, gutes Objekt, einwandfreie Bonität, kurze Bereitstellungszeit. Jede Abweichung kostet Aufschlag — besonders der Beleihungsauslauf. Über 80 Prozent Beleihung verlangen Banken einen deutlichen Risikoaufschlag. Im Juli 2026 lag der Durchschnittszins aller Wohnungsbaukredite bei 3,94 Prozent, einschließlich sonstiger Kosten bei 3,98.",
+      "quellen": [
+        "Deutsche Bundesbank, Zinssätze für das Neugeschäft"
+      ]
+    },
+    {
+      "abschnitt": "heading-3",
+      "abschnitt_titel": "Wie viel Eigenkapital brauchen Sie für beste Konditionen?",
+      "status": "freigegeben",
+      "frage": "Ich habe 40.000 Euro bei 350.000 Euro Kaufpreis. Reicht das?",
+      "antwort": "Knapp. Die Kaufnebenkosten allein liegen bei 10 bis 15 Prozent, in Nordrhein-Westfalen mit Makler rund 11,6 Prozent — das sind hier etwa 40.500 Euro. Ihr Eigenkapital ginge also vollständig für Steuer, Notar und Courtage drauf, die Bank müsste den Kaufpreis zu 100 Prozent finanzieren. Das geht, kostet aber spürbar mehr Zins. Zielmarke sind Nebenkosten plus 20 Prozent des Kaufpreises.",
+      "quellen": [
+        "Statistisches Bundesamt, Grunderwerbsteuer der Länder"
+      ]
+    },
+    {
+      "abschnitt": "heading-3",
+      "abschnitt_titel": "Wie viel Eigenkapital brauchen Sie für beste Konditionen?",
+      "status": "freigegeben",
+      "frage": "Kann ich ganz ohne Eigenkapital finanzieren?",
+      "antwort": "Manche Banken machen das, eine Vollfinanzierung inklusive Nebenkosten aber nur bei sehr sicherem Einkommen. Der Zinsaufschlag liegt schnell bei einem halben Prozentpunkt oder mehr, und die Tilgung beginnt bei null Sicherheitspuffer: Fällt der Immobilienwert, stehen Sie sofort unter Wasser. Bei 300.000 Euro kostet ein Prozentpunkt mehr Zins über zehn Jahre rund 26.000 Euro zusätzlich.",
+      "quellen": [
+        "Eigene Berechnung, Annuitätendarlehen mit 2 Prozent Anfangstilgung"
+      ]
+    },
+    {
+      "abschnitt": "heading-4",
+      "abschnitt_titel": "Welche KfW-Förderung passt zu Ihrer Familie 2026?",
+      "status": "freigegeben",
+      "frage": "Wir haben zwei Kinder und 80.000 Euro Haushaltseinkommen. Kommt KfW 300 infrage?",
+      "antwort": "Die Einkommensgrenze für das Programm Wohneigentum für Familien liegt bei 90.000 Euro zu versteuerndem Einkommen plus 10.000 Euro je weiterem Kind ab dem zweiten — mit zwei Kindern also 100.000 Euro. Achtung: Maßgeblich ist das zu versteuernde Einkommen aus den beiden Vorjahren, nicht das Brutto. Voraussetzung ist außerdem, dass Sie kein weiteres Wohneigentum besitzen und selbst einziehen.",
+      "quellen": [
+        "KfW-Programm 300, Wohneigentum für Familien"
+      ]
+    },
+    {
+      "abschnitt": "heading-5",
+      "abschnitt_titel": "10 oder 20 Jahre Zinsbindung – Welche ist 2026 richtig für Sie?",
+      "status": "freigegeben",
+      "frage": "Zehn oder zwanzig Jahre Zinsbindung bei 3,8 Prozent?",
+      "antwort": "Zwanzig Jahre kosten in unserer Marktbeobachtung bis zu 0,6 Prozentpunkte Aufschlag. Dafür bekommen Sie Sicherheit, die Sie einseitig wieder aufgeben dürfen: Nach zehn Jahren ab Vollauszahlung können Sie jederzeit mit sechs Monaten Frist kündigen, ohne Vorfälligkeitsentschädigung. Die lange Bindung ist also eine Wette gegen steigende Zinsen, bei der Sie das Rückfahrticket in der Tasche haben.",
+      "quellen": [
+        "§ 489 Abs. 1 Nr. 2 BGB"
+      ]
+    },
+    {
+      "abschnitt": "heading-5",
+      "abschnitt_titel": "10 oder 20 Jahre Zinsbindung – Welche ist 2026 richtig für Sie?",
+      "status": "freigegeben",
+      "frage": "Kann ich nach zehn Jahren wirklich einfach kündigen?",
+      "antwort": "Ja. Das Kündigungsrecht nach zehn Jahren ab vollständiger Auszahlung ist gesetzlich und unabdingbar — die Bank kann es weder ausschließen noch sich dafür bezahlen lassen. Die Frist beträgt sechs Monate. Sie gilt auch dann, wenn Sie eine zwanzig- oder dreißigjährige Zinsbindung vereinbart haben.",
+      "quellen": [
+        "§ 489 Abs. 1 Nr. 2 BGB"
+      ]
+    },
+    {
+      "abschnitt": "heading-6",
+      "abschnitt_titel": "Immobilienpreise 2026 – Wer profitiert von der Trendwende?",
+      "status": "freigegeben",
+      "frage": "Soll ich warten, bis die Preise fallen?",
+      "antwort": "Die Preise fallen gerade nicht: Im ersten Quartal 2026 lagen Wohnimmobilien 1,4 Prozent über dem Vorjahr, auf dem Land bei Eigentumswohnungen sogar 3,6 Prozent. Dazu kommen Baupreise, die im Mai 2026 um fünf Prozent zulegten. Wer wartet, wettet auf zwei Dinge gleichzeitig — fallende Preise und nicht gleichzeitig steigende Zinsen. Rechnen Sie lieber durch, was Sie sich bei welcher Rate leisten können.",
+      "quellen": [
+        "Statistisches Bundesamt, Preise für Wohnimmobilien im 1. Quartal 2026"
+      ]
+    },
+    {
+      "abschnitt": "heading-7",
+      "abschnitt_titel": "Baufinanzierung vergleichen – Worauf Sie achten müssen",
+      "status": "freigegeben",
+      "frage": "Was ist der Unterschied zwischen Sollzins und Effektivzins?",
+      "antwort": "Der Sollzins ist der reine Preis für das Geld. Der effektive Jahreszins rechnet zusätzlich ein, was die Finanzierung sonst noch kostet — Bearbeitungsentgelte, Auszahlungskurs, Zahlungstermine. Nur er ist vergleichbar, und nur ihn muss die Bank in der Werbung und im Verbraucherdarlehensvertrag nennen. Vergleichen Sie deshalb niemals zwei Angebote über den Sollzins.",
+      "quellen": [
+        "§ 491a BGB",
+        "§ 6 PAngV"
+      ]
+    }
+  ]
+}

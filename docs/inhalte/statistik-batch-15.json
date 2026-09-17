@@ -1,0 +1,615 @@
+[
+  {
+    "slug": "wertpapierdepot",
+    "statistiken": [
+      {
+        "abschnitt": "heading-6",
+        "abschnitt_titel": "Junior-Depots und Steuerfreibeträge",
+        "art": "torte",
+        "titel": "Der steuerfreie Rahmen für ein Kinderdepot 2026",
+        "untertitel": "Zusammensetzung aus Sparerpauschbetrag, Grundfreibetrag und Sonderausgaben-Pauschbetrag",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 20 Abs. 9, § 10c und § 32a Abs. 1 EStG (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__32a.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Sparerpauschbetrag",
+                "wert": 1000
+              },
+              {
+                "label": "Grundfreibetrag",
+                "wert": 12348
+              },
+              {
+                "label": "Sonderausgaben-Pauschbetrag",
+                "wert": 36
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: Summe 13.384 € (1.000 + 12.348 + 36). Kapitalerträge des Kindes werden nicht mit denen der Eltern zusammengerechnet; der Grundfreibetrag von 12.348 € gilt ab dem Veranlagungszeitraum 2026.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "roboadvisor",
+    "statistiken": []
+  },
+  {
+    "slug": "nachhaltige-geldanlagen",
+    "statistiken": [
+      {
+        "abschnitt": "heading-6",
+        "abschnitt_titel": "Markttrends 2026: Reifephase statt Hype",
+        "art": "balken",
+        "titel": "Institutionelles Geld treibt den nachhaltigen Fondsmarkt",
+        "untertitel": "Verwaltetes Vermögen von Artikel-8/9-Fonds in Deutschland nach Fondstyp",
+        "einheit": "Mrd. €",
+        "quelle": {
+          "name": "BVI Bundesverband Investment und Asset Management, „The sustainable fund market in the second half of 2025“",
+          "url": "https://www.bvi.de/fileadmin/user_upload/Statistik/Research/2026_04_Snapshot_Sustainability__H2_2025__web.pdf",
+          "stand": "31.12.2025",
+          "sekundaer": true
+        },
+        "reihen": [
+          {
+            "key": "h2_2025",
+            "label": "Ende 2025",
+            "werte": [
+              {
+                "label": "Publikumsfonds",
+                "wert": 773
+              },
+              {
+                "label": "Spezialfonds",
+                "wert": 480
+              }
+            ]
+          }
+        ],
+        "hinweis": "Sekundärquelle (Fondsverband BVI, keine amtliche Statistik): Insgesamt rund 1.250 Mrd. € Ende Dezember 2025. Publikumsfonds mit Nachhaltigkeitsmerkmalen verzeichneten im zweiten Halbjahr 2025 Nettoabflüsse von 6,2 Mrd. €, während Spezialfonds 7,8 Mrd. € Nettozuflüsse erhielten.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "kryptowaehrung",
+    "statistiken": [
+      {
+        "abschnitt": "heading-5",
+        "abschnitt_titel": "Steuerliche Behandlung von Kryptowährungen in Deutschland",
+        "art": "saeulen",
+        "titel": "Die Freigrenze für Veräußerungsgewinne stieg 2024 auf 1.000 Euro",
+        "untertitel": "Entwicklung der Freigrenze für private Veräußerungsgeschäfte nach § 23 EStG",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 23 Abs. 3 Satz 5 EStG; Gesetzentwurf der Bundesregierung zum Wachstumschancengesetz, BT-Drucksache 20/8628",
+          "url": "https://www.gesetze-im-internet.de/estg/__23.html",
+          "stand": "ab Veranlagungszeitraum 2024"
+        },
+        "reihen": [
+          {
+            "key": "freigrenze",
+            "label": "Freigrenze",
+            "werte": [
+              {
+                "label": "bis 2007",
+                "wert": 512
+              },
+              {
+                "label": "2008–2023",
+                "wert": 600
+              },
+              {
+                "label": "ab 2024",
+                "wert": 1000
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Freigrenze gilt für alle privaten Veräußerungsgeschäfte eines Kalenderjahres zusammen, auch für Kryptowerte; wird sie überschritten, ist der gesamte Gewinn steuerpflichtig, nicht nur der übersteigende Teil.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt": "heading-6",
+        "abschnitt_titel": "Sicherheitsrisiken und Wallet-Technologie",
+        "art": "saeulen",
+        "titel": "Verdachtsmeldungen mit Kryptobezug schwanken stark",
+        "untertitel": "Von der FIU registrierte Verdachtsmeldungen mit dem Meldegrund Kryptowerte",
+        "einheit": "",
+        "quelle": {
+          "name": "Financial Intelligence Unit (Generalzolldirektion), Jahresbericht 2024",
+          "url": "https://www.zoll.de/SharedDocs/Downloads/DE/Links-fuer-Inhaltseiten/Fachthemen/FIU/fiu_jahresbericht_2024.pdf",
+          "stand": "2024"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Verdachtsmeldungen",
+            "werte": [
+              {
+                "label": "2020",
+                "wert": 2057
+              },
+              {
+                "label": "2021",
+                "wert": 5234
+              },
+              {
+                "label": "2022",
+                "wert": 9302
+              },
+              {
+                "label": "2023",
+                "wert": 8049
+              },
+              {
+                "label": "2024",
+                "wert": 8711
+              }
+            ]
+          }
+        ],
+        "hinweis": "2024 entfielen davon über 6.000 Meldungen auf Kreditinstitute und Finanzdienstleistungsinstitute, darunter 2.748 von Crypto-Asset-Service-Providern.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "investition-in-gold",
+    "statistiken": [
+      {
+        "abschnitt": "heading-3",
+        "abschnitt_titel": "Wie funktionieren Gold-Investments in der Praxis?",
+        "art": "balken",
+        "titel": "Goldmünzen dürfen einen geringeren Feingehalt haben als Barren",
+        "untertitel": "Gesetzlicher Mindestfeingehalt für steuerfreies Anlagegold",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 25c Abs. 2 UStG (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/ustg_1980/__25c.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "feingehalt",
+            "label": "Mindestfeingehalt",
+            "werte": [
+              {
+                "label": "Goldmünzen",
+                "wert": 90
+              },
+              {
+                "label": "Goldbarren",
+                "wert": 99.5
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: 900 bzw. 995 Tausendstel Feingehalt entsprechen 90,0 % bzw. 99,5 % Goldanteil. Münzen müssen zusätzlich nach 1800 geprägt sein, in ihrem Ursprungsland gesetzliches Zahlungsmittel (gewesen) sein und dürfen im Preis den Goldwert um höchstens 80 % übersteigen.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "investition-in-sachwerte",
+    "statistiken": [
+      {
+        "abschnitt": "heading-2",
+        "abschnitt_titel": "Was macht Sachwerte zu attraktiven Inflationsschutz-Anlagen?",
+        "art": "saeulen",
+        "titel": "Die Inflation ist seit 2022 wieder auf rund 2 Prozent gesunken",
+        "untertitel": "Verbraucherpreise in Deutschland, Veränderung gegenüber Vorjahr",
+        "einheit": "%",
+        "quelle": {
+          "name": "Statistisches Bundesamt (Destatis), Pressemitteilungen zur Inflationsrate",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_019_611.html",
+          "stand": "Januar 2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Inflationsrate",
+            "werte": [
+              {
+                "label": "2021",
+                "wert": 3.1
+              },
+              {
+                "label": "2022",
+                "wert": 6.9
+              },
+              {
+                "label": "2023",
+                "wert": 5.9
+              },
+              {
+                "label": "2024",
+                "wert": 2.2
+              },
+              {
+                "label": "2025",
+                "wert": 2.2
+              }
+            ]
+          }
+        ],
+        "regler": {
+          "label": "Angenommene Inflationsrate",
+          "min": 0,
+          "max": 8,
+          "schritt": 0.1,
+          "start": 2.2,
+          "einheit": "%",
+          "formel": {
+            "typ": "rechner",
+            "rechner": "inflation",
+            "eingabe": "inflationsrateProzent",
+            "ausgabe": "verlustProzent",
+            "basis": {
+              "betrag": 10000,
+              "jahre": 10
+            }
+          },
+          "ergebnis": "Kaufkraftverlust von 10.000 € nach 10 Jahren",
+          "ergebnisEinheit": "%"
+        },
+        "hinweis": "2024 und 2025 lag die Inflationsrate mit jeweils 2,2 % deutlich unter den Höchstständen von 2022 (6,9 %) und 2023 (5,9 %).",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "fonds",
+    "statistiken": [
+      {
+        "abschnitt": "heading-6",
+        "abschnitt_titel": "Was bedeuten Sparerpauschbetrag und Steuern für Fondsanleger?",
+        "art": "balken",
+        "titel": "Sparerpauschbetrag verdoppelt sich für gemeinsam veranlagte Paare",
+        "untertitel": "Steuerfreier Betrag für Kapitalerträge pro Jahr",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 20 Abs. 9 EStG (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__20.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Einzelperson",
+                "wert": 1000
+              },
+              {
+                "label": "Zusammen veranlagte Ehegatten",
+                "wert": 2000
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Sparer-Pauschbetrag ersetzt den Abzug tatsächlicher Werbungskosten vollständig und darf nicht überschritten werden.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "etf-exchange-traded-funds",
+    "statistiken": [
+      {
+        "abschnitt": "heading-4",
+        "abschnitt_titel": "Vorteile von ETF",
+        "art": "balken",
+        "titel": "Die Teilfreistellung ist bei Immobilienfonds am höchsten",
+        "untertitel": "Steuerfreier Anteil der Erträge nach Fondstyp für Privatanleger",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 20 InvStG (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/invstg_2018/__20.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "typ",
+            "label": "Teilfreistellung",
+            "werte": [
+              {
+                "label": "Aktienfonds",
+                "wert": 30
+              },
+              {
+                "label": "Mischfonds",
+                "wert": 15
+              },
+              {
+                "label": "Immobilienfonds",
+                "wert": 60
+              },
+              {
+                "label": "Auslands-Immobilienfonds",
+                "wert": 80
+              }
+            ]
+          }
+        ],
+        "hinweis": "Ein ETF gilt als Aktienfonds, wenn er fortlaufend mindestens 51 % seines Wertes in Kapitalbeteiligungen anlegt; ein Mischfonds-ETF braucht mindestens 25 % Aktienanteil.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "etc-exchange-traded-commodities",
+    "statistiken": [
+      {
+        "abschnitt": "heading-3",
+        "abschnitt_titel": "Wie unterscheiden sich ETCs von ETFs?",
+        "art": "balken",
+        "titel": "OGAW dürfen höchstens 40 Prozent auf einen Emittenten setzen",
+        "untertitel": "Anlagegrenzen für Investmentfonds (OGAW) nach dem Kapitalanlagegesetzbuch",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 206 Abs. 1 KAGB (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/kagb/__206.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "grenzen",
+            "label": "Anlagegrenze",
+            "werte": [
+              {
+                "label": "Einzelner Emittent (Standard)",
+                "wert": 5
+              },
+              {
+                "label": "Einzelner Emittent (mit Öffnungsklausel)",
+                "wert": 10
+              },
+              {
+                "label": "Summe aller Positionen über 5 %",
+                "wert": 40
+              }
+            ]
+          }
+        ],
+        "hinweis": "Diese Risikomischungspflicht gilt nur für OGAW-Fonds wie ETFs; ETCs sind rechtlich Schuldverschreibungen und unterliegen ihr nicht, weshalb sie auch auf einzelne Rohstoffe konzentriert sein dürfen.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "einlagensicherung",
+    "statistiken": [
+      {
+        "abschnitt": "heading-3",
+        "abschnitt_titel": "Schutzgrenzen 2026: Das müssen Sie wissen",
+        "art": "saeulen",
+        "titel": "Nach bestimmten Lebensereignissen schützt der Staat 500.000 Euro",
+        "untertitel": "Deckungssummen der gesetzlichen Einlagensicherung",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 7 Abs. 4, § 8 Abs. 1 und 2 EinSiG (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/einsig/__8.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "schutz",
+            "label": "Schutzgrenze",
+            "werte": [
+              {
+                "label": "Standard",
+                "wert": 100000
+              },
+              {
+                "label": "Gemeinschaftskonto (2 Inhaber)",
+                "wert": 200000
+              },
+              {
+                "label": "Temporär, 6 Monate",
+                "wert": 500000
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: Bei einem Gemeinschaftskonto steht jedem Kontoinhaber ein eigener Anspruch bis 100.000 € zu; bei zwei Inhabern zu gleichen Anteilen ergibt das 200.000 € Gesamtschutz. Die erhöhte Deckungssumme von 500.000 € gilt nur für bestimmte Einzahlungen (z. B. aus Immobilienverkauf oder Heirat) und nur sechs Monate nach Gutschrift.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt": "heading-6",
+        "abschnitt_titel": "Wertpapiere und Depots: Andere Regeln",
+        "art": "balken",
+        "titel": "Anlegerentschädigung deckt weit weniger als Einlagensicherung",
+        "untertitel": "Maximale gesetzliche Entschädigung im Vergleich",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 4 Abs. 2 Anlegerentschädigungsgesetz (AnlEntG); § 8 Abs. 1 EinSiG (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/eaeg/__4.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "schutz",
+            "label": "Maximale Entschädigung",
+            "werte": [
+              {
+                "label": "Anlegerentschädigung (Wertpapiergeschäfte)",
+                "wert": 20000
+              },
+              {
+                "label": "Einlagensicherung (Bankguthaben)",
+                "wert": 100000
+              }
+            ]
+          }
+        ],
+        "hinweis": "Bei der Anlegerentschädigung sind zusätzlich nur 90 % der Forderung gedeckt – wer mehr als rund 22.222 € Forderung hat, bekommt trotzdem höchstens 20.000 € ausgezahlt.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "festgeld",
+    "statistiken": [
+      {
+        "abschnitt": "heading-8",
+        "abschnitt_titel": "Einlagensicherung und Bonitätsprüfung: Sicherheit beim Festgeld",
+        "art": "saeulen",
+        "titel": "Auch beim Festgeld schützt der Staat bis 500.000 Euro",
+        "untertitel": "Deckungssummen der gesetzlichen Einlagensicherung",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 7 Abs. 4, § 8 Abs. 1 und 2 EinSiG (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/einsig/__8.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "schutz",
+            "label": "Schutzgrenze",
+            "werte": [
+              {
+                "label": "Standard",
+                "wert": 100000
+              },
+              {
+                "label": "Gemeinschaftskonto (2 Inhaber)",
+                "wert": 200000
+              },
+              {
+                "label": "Temporär, 6 Monate",
+                "wert": 500000
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: Bei einem Gemeinschaftskonto steht jedem Kontoinhaber ein eigener Anspruch bis 100.000 € zu; bei zwei Inhabern zu gleichen Anteilen ergibt das 200.000 € Gesamtschutz.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt": "heading-9",
+        "abschnitt_titel": "Steuerliche Behandlung von Festgeldzinsen 2026",
+        "art": "balken",
+        "titel": "Mit Soli zahlen Sparer effektiv 26,375 Prozent auf Zinsen",
+        "untertitel": "Abgeltungsteuer und effektive Steuerlast inklusive Solidaritätszuschlag",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 32d Abs. 1 EStG; § 4 SolzG 1995 (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__32d.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "steuer",
+            "label": "Steuersatz",
+            "werte": [
+              {
+                "label": "Abgeltungsteuer",
+                "wert": 25
+              },
+              {
+                "label": "Effektiv inkl. Solidaritätszuschlag",
+                "wert": 26.375
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: Solidaritätszuschlag = 5,5 % auf die Abgeltungsteuer (25 % × 1,055 = 26,375 %). Kirchensteuer kommt bei Kirchenmitgliedschaft zusätzlich hinzu und wurde hier nicht eingerechnet.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "tagesgeld",
+    "statistiken": [
+      {
+        "abschnitt": "heading-3",
+        "abschnitt_titel": "Aktuelle Zinsentwicklung und Prognosen für 2026",
+        "art": "saeulen",
+        "titel": "Der EZB-Einlagesatz steigt 2026 erstmals seit drei Jahren",
+        "untertitel": "Leitzins für die Einlagefazilität der Europäischen Zentralbank",
+        "einheit": "%",
+        "quelle": {
+          "name": "Europäische Zentralbank, Leitzinsen der EZB (offizielle Übersicht)",
+          "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html",
+          "stand": "17.06.2026"
+        },
+        "reihen": [
+          {
+            "key": "ezb",
+            "label": "Einlagesatz",
+            "werte": [
+              {
+                "label": "09/2023",
+                "wert": 4
+              },
+              {
+                "label": "06/2024",
+                "wert": 3.75
+              },
+              {
+                "label": "12/2024",
+                "wert": 3
+              },
+              {
+                "label": "06/2025",
+                "wert": 2
+              },
+              {
+                "label": "06/2026",
+                "wert": 2.25
+              }
+            ]
+          }
+        ],
+        "regler": {
+          "label": "Ihr angenommener Zinssatz",
+          "min": 0,
+          "max": 5,
+          "schritt": 0.1,
+          "start": 2.25,
+          "einheit": "%",
+          "formel": {
+            "typ": "rechner",
+            "rechner": "zinseszins",
+            "eingabe": "zinssatzPa",
+            "ausgabe": "endkapital",
+            "basis": {
+              "startkapital": 10000,
+              "monatlicheSparrate": 0,
+              "laufzeitJahre": 1
+            }
+          },
+          "ergebnis": "Guthaben nach einem Jahr (aus 10.000 €)",
+          "ergebnisEinheit": "€"
+        },
+        "hinweis": "Banken orientieren ihre variablen Tagesgeldzinsen am EZB-Einlagesatz; am 17. Juni 2026 hob die EZB den Satz erstmals seit September 2023 wieder an.",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  }
+]

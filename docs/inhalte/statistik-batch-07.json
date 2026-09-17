@@ -1,0 +1,675 @@
+[
+  {
+    "slug": "basisrente",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie wird die Basisrente im Alter besteuert?",
+        "art": "saeulen",
+        "titel": "So stark steigt der steuerpflichtige Rentenanteil bis 2058",
+        "untertitel": "Besteuerungsanteil von Leibrenten nach dem Jahr des Rentenbeginns",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 22 Nr. 1 Satz 3 Buchstabe a EStG (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__22.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "beginn",
+            "label": "Rentenbeginn",
+            "werte": [
+              {
+                "label": "2005",
+                "wert": 50
+              },
+              {
+                "label": "2010",
+                "wert": 60
+              },
+              {
+                "label": "2015",
+                "wert": 70
+              },
+              {
+                "label": "2020",
+                "wert": 80
+              },
+              {
+                "label": "2026",
+                "wert": 84
+              },
+              {
+                "label": "2030",
+                "wert": 86
+              },
+              {
+                "label": "2040",
+                "wert": 91
+              },
+              {
+                "label": "2058",
+                "wert": 100
+              }
+            ]
+          }
+        ],
+        "hinweis": "Seit 2023 steigt der Anteil um 0,5 Prozentpunkte pro Jahr. Wer 2026 in die Auszahlung startet, versteuert dauerhaft 84 Prozent seiner Basisrente – auch spätere Rentenerhöhungen bleiben zu diesem Anteil steuerpflichtig.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "ruerup-rente",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch ist der Rürup-Höchstbetrag 2026?",
+        "art": "balken",
+        "titel": "Verheiratete dürfen doppelt so viel absetzen wie Ledige",
+        "untertitel": "Steuerlich absetzbarer Höchstbetrag für Basisrenten-Beiträge 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 10 Abs. 3 EStG (Gesetze im Internet); abgeleitet aus SVBezGrV 2026 und RVBeitrSBek 2026",
+          "url": "https://www.gesetze-im-internet.de/estg/__10.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Ledige",
+                "wert": 30826
+              },
+              {
+                "label": "Verheiratete (zusammen veranlagt)",
+                "wert": 61652
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Höchstbetrag entspricht dem Höchstbeitrag zur knappschaftlichen Rentenversicherung und verdoppelt sich bei einer Zusammenveranlagung. Er gilt unabhängig davon, ob jemand tatsächlich in die knappschaftliche Rentenversicherung einzahlt.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "riester-rente",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch sind die Riester-Zulagen 2026?",
+        "art": "balken",
+        "titel": "Kinder ab Jahrgang 2008 bringen deutlich mehr Zulage",
+        "untertitel": "Jährliche Riester-Zulagen 2026 je Person bzw. Kind",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 84, § 85 EStG (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__84.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Grundzulage",
+                "wert": 175
+              },
+              {
+                "label": "Kinderzulage (vor 2008 geboren)",
+                "wert": 185
+              },
+              {
+                "label": "Kinderzulage (ab 2008 geboren)",
+                "wert": 300
+              }
+            ]
+          }
+        ],
+        "hinweis": "Berufseinsteiger unter 25 Jahren erhalten im ersten Beitragsjahr einmalig zusätzlich 200 Euro Bonus zur Grundzulage. Die Werte gelten für Verträge nach bisherigem Riester-Recht; ab 2027 löst das neue Altersvorsorgedepot die Förderung für Neuverträge ab.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "betriebliche-altersversorgung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was ist betriebliche Altersversorgung?",
+        "art": "saeulen",
+        "titel": "bAV-Anwartschaften seit 2001 um rund 45 Prozent gestiegen",
+        "untertitel": "Aktive Anwartschaften in der betrieblichen Altersversorgung, in Millionen",
+        "einheit": "Mio.",
+        "quelle": {
+          "name": "Bundesministerium für Arbeit und Soziales (BMAS), Meldung „Ende 2021 mehr als 21 Millionen aktive Anwartschaften in der betrieblichen Altersversorgung“",
+          "url": "https://www.bmas.de/DE/Service/Presse/Meldungen/2023/traegerbefragung-zur-verbreitung-der-betrieblichen-altersversorgung.html",
+          "stand": "2023 (Erhebungsstand: Ende 2021)"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Aktive Anwartschaften",
+            "werte": [
+              {
+                "label": "2001",
+                "wert": 14.56
+              },
+              {
+                "label": "2021",
+                "wert": 21.165
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Zahl umfasst alle fünf Durchführungswege der betrieblichen Altersversorgung zusammen, erhoben im Rahmen der zehnten BMAS-Trägerbefragung.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Welche fünf Durchführungswege stehen zur Verfügung?",
+        "art": "balken",
+        "titel": "Direktversicherung ist der meistgenutzte Durchführungsweg",
+        "untertitel": "Vertragsbestand nach Durchführungsweg Ende 2024, in Millionen",
+        "einheit": "Mio.",
+        "quelle": {
+          "name": "Gesamtverband der Deutschen Versicherungswirtschaft (GDV), Statistik „Bestand an Verträgen der betrieblichen Altersversorgung (bAV)“",
+          "url": "https://www.gdv.de/gdv/statistik/statistiken-zur-deutschen-versicherungswirtschaft-uebersicht/lebensversicherung/bestand-an-vertraegen-der-betrieblichen-altersversorgung-bav--188386",
+          "stand": "17.09.2025 (Datenstand 31.12.2024)"
+        },
+        "reihen": [
+          {
+            "key": "2024",
+            "label": "2024",
+            "werte": [
+              {
+                "label": "Direktversicherung",
+                "wert": 8.8
+              },
+              {
+                "label": "Rückdeckungsversicherung (für Unterstützungskasse/Direktzusage)",
+                "wert": 3.7
+              },
+              {
+                "label": "Pensionskasse",
+                "wert": 3.3
+              }
+            ]
+          }
+        ],
+        "hinweis": "Rückdeckungsversicherungen sichern die Zusagen von Unterstützungskassen und Direktzusagen ab. Pensionsfonds weist der GDV in dieser Statistik nicht separat aus.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "direktversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Welche steuerlichen Vorteile bietet die Direktversicherung 2026?",
+        "art": "balken",
+        "titel": "Nur die Hälfte der Steuerförderung ist auch sozialversicherungsfrei",
+        "untertitel": "Steuerfreier und sozialversicherungsfreier Höchstbetrag 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 3 Nr. 63 EStG und § 1 Abs. 1 Nr. 9 Sozialversicherungsentgeltverordnung (SvEV), abgeleitet mit SVBezGrV 2026",
+          "url": "https://www.gesetze-im-internet.de/estg/__3.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Steuerfrei (8 % der Beitragsbemessungsgrenze)",
+                "wert": 8112
+              },
+              {
+                "label": "Sozialversicherungsfrei (4 % der Beitragsbemessungsgrenze)",
+                "wert": 4056
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: 8 % bzw. 4 % der Beitragsbemessungsgrenze der allgemeinen Rentenversicherung 2026 (101.400 Euro) ergeben 8.112 Euro bzw. 4.056 Euro.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Grundsicherung und anrechnungsfreie Beträge 2026",
+        "art": "balken",
+        "titel": "Höchstens 281,50 Euro Betriebsrente bleiben anrechnungsfrei",
+        "untertitel": "Freibetragsregelung für Betriebsrenten in der Grundsicherung 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 82 Abs. 4 SGB XII (Gesetze im Internet) und BMAS-Pressemitteilung zur Fortschreibung der Regelbedarfe 2026",
+          "url": "https://www.gesetze-im-internet.de/sgb_12/__82.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Sockelfreibetrag",
+                "wert": 100
+              },
+              {
+                "label": "Höchstgrenze (50 % Regelbedarfsstufe 1)",
+                "wert": 281.5
+              },
+              {
+                "label": "Regelbedarfsstufe 1",
+                "wert": 563
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: 50 Prozent von 563 Euro (Regelbedarfsstufe 1, 2026 gegenüber 2025 unverändert) ergeben 281,50 Euro. Zusätzlich zum Sockelbetrag von 100 Euro bleiben 30 Prozent des übersteigenden Einkommens aus zusätzlicher Altersvorsorge anrechnungsfrei, gedeckelt auf diese Höchstgrenze.",
+        "abschnitt": "heading-6",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "gehaltsumwandlung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Änderungen bei der Gehaltsumwandlung 2026",
+        "art": "saeulen",
+        "titel": "Minijob-Grenze steigt 2026 stärker als in den Vorjahren",
+        "untertitel": "Monatliche Minijob-Verdienstgrenze im Zeitverlauf",
+        "einheit": "€",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung Baden-Württemberg, Pressemitteilung „Minijob-Verdienstgrenze steigt 2026 auf 603 Euro“",
+          "url": "https://www.deutsche-rentenversicherung.de/BadenWuerttemberg/DE/Presse/Pressemitteilungen/2025/251222_Minijob",
+          "stand": "22.12.2025"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Minijob-Grenze",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 556
+              },
+              {
+                "label": "2026",
+                "wert": 603
+              },
+              {
+                "label": "2027",
+                "wert": 633
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Minijob-Grenze ist seit 2022 dynamisch an den gesetzlichen Mindestlohn gekoppelt; dieser steigt 2026 von 12,82 auf 13,90 Euro pro Stunde.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "gesetzliche-rente",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Beitragssätze und Grenzen 2026 im Überblick",
+        "art": "saeulen",
+        "titel": "Beitragsbemessungsgrenze steigt 2026 um 400 Euro im Monat",
+        "untertitel": "Monatliche Beitragsbemessungsgrenze der allgemeinen Rentenversicherung",
+        "einheit": "€",
+        "quelle": {
+          "name": "Sozialversicherungsrechengrößen-Verordnung 2025 und 2026 (SVBezGrV), § 4",
+          "url": "https://www.gesetze-im-internet.de/svbezgrv_2026/BJNR1160A0025.html",
+          "stand": "2026 (Vorjahreswert: SVBezGrV 2025)"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "BBG allgemeine Rentenversicherung",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 8050
+              },
+              {
+                "label": "2026",
+                "wert": 8450
+              }
+            ]
+          }
+        ],
+        "hinweis": "Jährlich entspricht das 96.600 Euro (2025) bzw. 101.400 Euro (2026).",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Rentenberechnung und Rentenwert 2026",
+        "art": "saeulen",
+        "titel": "So viel Rente ergeben Ihre Entgeltpunkte ab Juli 2026",
+        "untertitel": "Monatliche Bruttorente je nach Anzahl der Entgeltpunkte",
+        "einheit": "€",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung, Meldung „Rentenanpassung 2026: Renten steigen im Juli um 4,24 Prozent“",
+          "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Ueber-uns-und-Presse/Presse/Meldungen/2026/260305-rentenanpassung-2026",
+          "stand": "05.03.2026"
+        },
+        "reihen": [
+          {
+            "key": "ep",
+            "label": "Bruttorente",
+            "werte": [
+              {
+                "label": "30 Punkte",
+                "wert": 1275.6
+              },
+              {
+                "label": "40 Punkte",
+                "wert": 1700.8
+              },
+              {
+                "label": "50 Punkte",
+                "wert": 2126
+              }
+            ]
+          }
+        ],
+        "regler": {
+          "label": "Ihr Jahresbruttoeinkommen",
+          "min": 20000,
+          "max": 100000,
+          "schritt": 5000,
+          "start": 50000,
+          "einheit": "€",
+          "formel": {
+            "typ": "rechner",
+            "rechner": "rente",
+            "eingabe": "jahresBrutto",
+            "ausgabe": "renteMonatlich",
+            "basis": {
+              "geburtsjahr": 1975,
+              "beitragsjahre": 45,
+              "bekannteEntgeltpunkte": 0
+            }
+          },
+          "ergebnis": "Ihre geschätzte Bruttorente im Monat (bei 45 Beitragsjahren)",
+          "ergebnisEinheit": "€"
+        },
+        "hinweis": "abgeleitet: Entgeltpunkte × aktueller Rentenwert (42,52 Euro ab 1. Juli 2026). Der Regler nimmt vereinfachend 45 Beitragsjahre mit gleichbleibendem Jahresbrutto an.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "rentenversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch ist die durchschnittliche Altersrente in Deutschland?",
+        "art": "balken",
+        "titel": "Männer erhalten im Schnitt 415 Euro mehr Altersrente als Frauen",
+        "untertitel": "Durchschnittliche Altersrente ab 35 Versicherungsjahren, Bundesdurchschnitt 2024",
+        "einheit": "€",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung, Rentenatlas 2024",
+          "url": "https://www.deutsche-rentenversicherung.de/BadenWuerttemberg/DE/Presse/Pressemitteilungen/2024/241126_Meldung_Rentenatlas-2024.html",
+          "stand": "26.11.2024"
+        },
+        "reihen": [
+          {
+            "key": "2024",
+            "label": "2024",
+            "werte": [
+              {
+                "label": "Männer",
+                "wert": 1809
+              },
+              {
+                "label": "Frauen",
+                "wert": 1394
+              }
+            ]
+          }
+        ],
+        "hinweis": "Bezieht sich auf Altersrenten mit mindestens 35 Versicherungsjahren. Der Wert über alle Altersrenten hinweg liegt niedriger, da dort auch kürzere Versicherungsverläufe einfließen.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wie wird die Rente besteuert?",
+        "art": "saeulen",
+        "titel": "Steuerpflichtiger Rentenanteil steigt bis 2058 auf 100 Prozent",
+        "untertitel": "Besteuerungsanteil von Leibrenten nach dem Jahr des Rentenbeginns",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 22 Nr. 1 Satz 3 Buchstabe a EStG (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__22.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "beginn",
+            "label": "Rentenbeginn",
+            "werte": [
+              {
+                "label": "2005",
+                "wert": 50
+              },
+              {
+                "label": "2010",
+                "wert": 60
+              },
+              {
+                "label": "2015",
+                "wert": 70
+              },
+              {
+                "label": "2020",
+                "wert": 80
+              },
+              {
+                "label": "2026",
+                "wert": 84
+              },
+              {
+                "label": "2030",
+                "wert": 86
+              },
+              {
+                "label": "2040",
+                "wert": 91
+              },
+              {
+                "label": "2058",
+                "wert": 100
+              }
+            ]
+          }
+        ],
+        "hinweis": "Seit 2023 steigt der Anteil um 0,5 Prozentpunkte pro Jahr. Bei Rentenbeginn 2026 bleiben dauerhaft 16 Prozent der Rente steuerfrei.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "rentenbeitrag",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Beitragsbemessungsgrenze – Wer zahlt wie viel?",
+        "art": "balken",
+        "titel": "Knappschaftliche Beitragsbemessungsgrenze deutlich höher",
+        "untertitel": "Monatliche Beitragsbemessungsgrenze 2026 nach Rentenversicherungszweig",
+        "einheit": "€",
+        "quelle": {
+          "name": "Sozialversicherungsrechengrößen-Verordnung 2026 (SVBezGrV 2026), § 4",
+          "url": "https://www.gesetze-im-internet.de/svbezgrv_2026/BJNR1160A0025.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Allgemeine Rentenversicherung",
+                "wert": 8450
+              },
+              {
+                "label": "Knappschaftliche Rentenversicherung",
+                "wert": 10400
+              }
+            ]
+          }
+        ],
+        "hinweis": "Jährlich entspricht das 101.400 Euro bzw. 124.800 Euro.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "rentenversicherungsbeitrag",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Welche Rolle spielt die Beitragsbemessungsgrenze?",
+        "art": "saeulen",
+        "titel": "Beitragsbemessungsgrenze 2026 um 400 Euro monatlich höher",
+        "untertitel": "Monatliche Beitragsbemessungsgrenze der allgemeinen Rentenversicherung",
+        "einheit": "€",
+        "quelle": {
+          "name": "Sozialversicherungsrechengrößen-Verordnung 2025 und 2026 (SVBezGrV), § 4",
+          "url": "https://www.gesetze-im-internet.de/svbezgrv_2026/BJNR1160A0025.html",
+          "stand": "2026 (Vorjahreswert: SVBezGrV 2025)"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "BBG allgemeine Rentenversicherung",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 8050
+              },
+              {
+                "label": "2026",
+                "wert": 8450
+              }
+            ]
+          }
+        ],
+        "hinweis": "Jährlich entspricht das 96.600 Euro (2025) bzw. 101.400 Euro (2026).",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "renteninformation",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was bringt Ihnen jeder Rentenpunkt ab Juli 2026?",
+        "art": "saeulen",
+        "titel": "Rentenwert steigt zum 1. Juli 2026 um 4,24 Prozent",
+        "untertitel": "Aktueller Rentenwert je Entgeltpunkt und Monat",
+        "einheit": "€",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung, Meldung „Rentenanpassung 2026: Renten steigen im Juli um 4,24 Prozent“",
+          "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Ueber-uns-und-Presse/Presse/Meldungen/2026/260305-rentenanpassung-2026",
+          "stand": "05.03.2026"
+        },
+        "reihen": [
+          {
+            "key": "zeitraum",
+            "label": "Rentenwert",
+            "werte": [
+              {
+                "label": "Bis 30.06.2026",
+                "wert": 40.79
+              },
+              {
+                "label": "Ab 01.07.2026",
+                "wert": 42.52
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Erhöhung um 4,24 Prozent geht auf die Haltelinie von 48 Prozent beim Rentenniveau zurück, die bis zur Rentenanpassung 2031 gilt.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "rentenerhoehung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie kommt die Rentenerhöhung 2026 zustande?",
+        "art": "saeulen",
+        "titel": "Rentenerhöhung 2026 fällt deutlich stärker aus als 2025",
+        "untertitel": "Rentenanpassung zum 1. Juli, in Prozent",
+        "einheit": "%",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung, FAQ „Rentenanpassung 2026“",
+          "url": "https://www.deutsche-rentenversicherung.de/SharedDocs/FAQ/Gesetzesaenderungen/Rentenanpassung/FAQ-Rentenanpassung-2026/Rentenanpassung-2026",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Rentenanpassung",
+            "werte": [
+              {
+                "label": "2022 (West)",
+                "wert": 5.35
+              },
+              {
+                "label": "2023 (West)",
+                "wert": 4.39
+              },
+              {
+                "label": "2024",
+                "wert": 4.57
+              },
+              {
+                "label": "2025",
+                "wert": 3.74
+              },
+              {
+                "label": "2026",
+                "wert": 4.24
+              }
+            ]
+          }
+        ],
+        "hinweis": "2022 und 2023 galten in Ost- und Westdeutschland noch unterschiedliche Anpassungssätze (hier: Westwerte); seit der Anpassung 2024 gilt bundeseinheitlich ein Satz.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  }
+]

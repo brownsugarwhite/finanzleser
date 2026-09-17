@@ -1,24 +1,14 @@
 // Serverseitige FAQ-Extraktion für das FAQPage-JSON-LD der Artikelseite.
 // Erkennung über die Yoast-Klassen (.schema-faq-section/-question/-answer) —
-// HINWEIS: Parsing-Logik synchron halten mit extractFaqBlock/normalizeFaq in
-// components/sections/ArticleContent.tsx (dort fürs Akkordeon-Rendering).
+// normalizeFaq/stripTags kommen aus lib/articleHtml.ts (dieselbe Quelle wie das
+// Akkordeon-Rendering in components/sections/ArticleContent.tsx).
 
 export interface FaqPair {
   q: string;
   a: string;
 }
 
-function stripTags(html: string): string {
-  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-}
-
-function normalizeFaq(html: string): string {
-  if (!html.includes("schema-faq")) return html;
-  return html.replace(
-    /<(strong|h3)([^>]*)class="schema-faq-question"([^>]*)>\s*<\/\1>\s*<strong>([\s\S]*?)<\/strong>/g,
-    '<$1$2class="schema-faq-question"$3>$4</$1>'
-  );
-}
+import { normalizeFaq, stripTags } from "./articleHtml";
 
 /** Frage/Antwort-Paare (als Klartext) aus dem Artikel-HTML — leer, wenn kein FAQ-Block. */
 export function extractFaqPairs(html?: string): FaqPair[] {

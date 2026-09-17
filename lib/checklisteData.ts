@@ -2,6 +2,7 @@ import "server-only";
 import { getChecklisteBySlug, CONTENT_REVALIDATE } from "@/lib/wordpress";
 import { parsePDF, type CheckboxPosition } from "@/lib/checklisteParser";
 import type { ChecklisteData } from "@/components/checkliste/types";
+import { medienUrl } from "@/lib/faden/medien";
 
 export interface ChecklisteInlineData {
   data: ChecklisteData;
@@ -20,7 +21,7 @@ export interface ChecklisteInlineData {
  */
 export async function loadChecklisteData(slug: string): Promise<ChecklisteInlineData | null> {
   const checkliste = await getChecklisteBySlug(slug);
-  const pdfUrl = checkliste?.pdfUrl;
+  const pdfUrl = medienUrl(checkliste?.pdfUrl);
   if (!pdfUrl) return null;
 
   const response = await fetch(pdfUrl, { next: { revalidate: CONTENT_REVALIDATE } });

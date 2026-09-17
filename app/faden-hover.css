@@ -1,0 +1,104 @@
+/* ── Hover-Box, Trenner, Werkzeugreihe im Hero, Hero-CTA (Port aus dem Prototyp, 01-css.html:41–42, 476–498, 806, 876–884) ── */
+
+/* Spark dreht, solange der Hover-Rahmen an seinem Trenner liegt (01-css.html:42) */
+.faden-shell .spark.dreht { animation: faden-spark-spin 4s linear infinite; }
+
+/* Trenner: 9 px breit, zwei Linien (--linie) mit Spark in der Mitte (01-css.html:483–487) */
+.faden-shell .trenner { --linie: 70px; flex: none; width: 9px; position: relative; }
+.faden-shell .trenner .spark { position: absolute; left: 50%; top: 50%; margin: calc(-1 * var(--luft-s)) 0 0 calc(-1 * var(--luft-s)); }
+.faden-shell .trenner::before, .faden-shell .trenner::after { content: ""; position: absolute; left: 4px; width: 1px; height: var(--linie); background: var(--rule-strong); }
+.faden-shell .trenner::before { bottom: calc(50% + 11px); } .faden-shell .trenner::after { top: calc(50% + 11px); }
+/* Durchgehender Trenner (Werkzeugreihe im Hero): eine Linie statt zweier, kein Spark.
+   `--linie` ist hier die GANZE Höhe, deshalb 78 px = die alte Spannweite 2 × (11 + 28).
+   Der Hover-Rahmen dockt damit exakt dort an wie vorher. Der Spark bleibt unsichtbar
+   im DOM, weil die Geometrie in HoverBox.tsx ihn als Anker vermisst. */
+.faden-shell .trenner--voll .spark { visibility: hidden; }
+.faden-shell .trenner--voll::before { top: 50%; bottom: auto; height: var(--linie); transform: translateY(-50%); }
+.faden-shell .trenner--voll::after { content: none; }
+
+/* Hover-Box (abgerundet), gezeichnet als SVG (01-css.html:495–498, 806) */
+.faden-shell .hbox { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 0; }
+.faden-shell .hbox path.seg { fill: none; stroke: var(--rule-strong); stroke-width: 1; }
+/* Eigene Sparks an den Außenkanten gibt es nicht mehr — die Kanten laufen durch. */
+
+/* Werkzeugreihe im Hero: drei Kacheln, Trenner mit kurzen Linien, docken beim Laden an (01-css.html:482, 486, 488–493) */
+.faden-shell .landing-unten { align-self: start; width: min(820px, 94%); display: grid; justify-items: center; will-change: opacity, transform; }
+.faden-shell .landing-sub b { font-weight: 700; font-variant-numeric: tabular-nums; }
+/* Übergabe „Finanzleser Heute", Baustein 1 (17.09.2026): drei gleich breite Spalten,
+   zentriert, dazwischen eine Haarlinie — kein Trenner mit Spark und keine Hover-Box mehr.
+   🚨 Hier stand ein Einblendzustand für die Trennlinien. Er war nötig, solange die
+   Kacheln nacheinander andockten — die Striche standen sonst im leeren Raum. Seit dem
+   13.09.2026 hat der Hero gar keine Auftrittsanimation mehr: alles steht sofort. */
+.faden-shell .werkzeugreihe { position: relative; display: flex; align-items: stretch; justify-content: center; width: min(600px, 100%); margin: var(--luft-l) auto 0; }
+.faden-shell .werkzeug-k { flex: 1 1 0; min-width: 0; position: relative; display: grid; justify-items: center; align-content: start; gap: var(--luft-xs); padding: var(--luft-s) var(--luft-m) var(--luft-m); text-align: center; text-decoration: none; color: var(--ink); cursor: pointer; }
+.faden-shell .werkzeug-k + .werkzeug-k { border-left: var(--strich-haar) solid var(--rule-mid); }
+/* Die Zahl steht allein und mittig (Wunsch 17.09.2026 — „im Faden" ist gestrichen). */
+.faden-shell .werkzeug-k b { font: 900 var(--grad-26)/1 var(--serif); letter-spacing: -.02em; font-variant-numeric: tabular-nums; transition: transform .4s var(--ueber); }
+.faden-shell .werkzeug-k__sub { font: var(--schrift-hinweis); color: var(--muted); text-wrap: balance; }
+.faden-shell .werkzeug-k .kicker { transition: color .25s; white-space: nowrap; }
+.faden-shell .werkzeug-k:hover .kicker { color: var(--ton); }
+.faden-shell .werkzeug-k:hover b { transform: scale(1.08); }
+/* Der Punkt schlägt doppelt — dieselben Keyframes wie der Bestwertpunkt im Kursblatt. */
+.faden-shell .werkzeug-k:hover .dot { animation: fl-punkt 1.8s ease-in-out infinite; }
+/* Der Unterstrich fährt aus der Mitte auf, in der Werkzeugfarbe der Spalte. */
+.faden-shell .werkzeug-k__strich { position: absolute; left: var(--luft-m); right: var(--luft-m); bottom: var(--luft-xxs); height: var(--strich-stark); background: var(--ton); transform: scaleX(0); transition: transform .35s var(--kurve); }
+.faden-shell .werkzeug-k:hover .werkzeug-k__strich { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .werkzeug-k:hover .dot { animation: none; }
+  .faden-shell .werkzeug-k b, .faden-shell .werkzeug-k__strich { transition: none; }
+}
+
+/* CTA „Finanzleser entdecken ↓“ unten im Hero, blendet nach 2,2 s ein (01-css.html:476–479) */
+.faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; border: 0; background: none; color: var(--ink); font-weight: 600; font-size: var(--grad-14); display: grid; justify-items: center; gap: var(--luft-xs); letter-spacing: .02em; cursor: pointer; font-family: inherit; }
+/* ── Der Faden unter dem CTA ────────────────────────────────────────────────────────
+   🚨 Keine Scheibe, kein Winkel aus dem Baukasten, kein Grün (Wunsch 17.09.2026:
+   „minimalistisch, kreativ, in Tinte"). Was dort hängt, ist der Faden: eine Haarlinie, an
+   der ein Tintentropfen herunterrinnt. Wo er ankommt, SCHREIBT er die Pfeilspitze — sie
+   zeichnet sich genau in dem Augenblick, in dem er sie erreicht.
+
+   Drei Haarlinien und ein Punkt, alles in `--ink`. Die Bewegung trägt die Aussage „nach
+   unten"; die Form muss es nicht mehr. */
+.faden-shell .hero-cta__faden { display: block; color: var(--ink); transition: transform .3s var(--kurve); }
+.faden-shell .hero-cta:hover .hero-cta__faden { transform: translateY(3px); }
+.faden-shell .hero-cta__faden svg { display: block; width: 12px; height: 32px; overflow: visible; }
+.faden-shell .hero-cta__schnur { stroke: currentColor; stroke-width: 1; }
+.faden-shell .hero-cta__tropfen { fill: currentColor; animation: hero-tropfen 2.6s var(--kurve) infinite; }
+.faden-shell .hero-cta__spitze {
+  fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;
+  /* 14 ist etwas mehr als die Pfadlänge (2 × 6,8) — mit Reserve, damit nichts stehen bleibt. */
+  stroke-dasharray: 14; stroke-dashoffset: 14;
+  animation: hero-spitze 2.6s var(--kurve) infinite;
+}
+.faden-shell .hero-cta:hover .hero-cta__tropfen,
+.faden-shell .hero-cta:hover .hero-cta__spitze { animation-duration: 1.5s; }
+
+/* Oben schwillt der Tropfen an, rinnt herunter und versickert an der Spitze. */
+@keyframes hero-tropfen {
+  0%   { transform: translateY(2px) scale(.2); opacity: 0; }
+  12%  { transform: translateY(4px) scale(1); opacity: 1; }
+  62%  { transform: translateY(20px) scale(1); opacity: 1; }
+  74%  { transform: translateY(23px) scale(.3); opacity: .5; }
+  100% { transform: translateY(23px) scale(0); opacity: 0; }
+}
+/* Die Spitze zeichnet sich, sobald er ankommt, und bleibt bis zum nächsten Tropfen. */
+@keyframes hero-spitze {
+  0%, 62% { stroke-dashoffset: 14; }
+  78%     { stroke-dashoffset: 0; }
+  100%    { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .hero-cta__tropfen { animation: none; opacity: 0; }
+  .faden-shell .hero-cta__spitze { animation: none; stroke-dashoffset: 0; }
+}
+
+@media (max-width: 900px) {
+  /* 01-css.html:876–877, 883 */
+  /* Übergabe: unter 560 px Containerbreite steht die Reihe als Spalte, die Haarlinie
+     wandert von links nach oben („eng"). */
+  .faden-shell .werkzeugreihe { flex-direction: column; }
+  .faden-shell .werkzeug-k { padding: var(--luft-s) var(--luft-m); }
+  .faden-shell .werkzeug-k + .werkzeug-k { border-left: 0; border-top: var(--strich-haar) solid var(--rule); }
+  .faden-shell .werkzeug-k b { font-size: var(--grad-22); }
+  .faden-shell .hbox { display: none; }
+  .faden-shell .hero-cta { bottom: 10px; }
+}

@@ -1,0 +1,315 @@
+
+  // ======================================================================
+  // 05 · Neue Elemente (Runde 13): Anbieter-Karte, Vergleichstabelle, BU-Rechner mit interaktiven Säulen, Torte, Tacho,
+  // Dokument-Vorlage, Wochen-Quiz, Wappen-Album, Rubbellos, Gewusst-Box, Wächter-Karte, Koffer-Karte, Lebensereignis,
+  // Wochenbrief-Ausgabe, Level, Anchor-Anzeige (mobil), Leerzustände, Teilen-Dialog, Übergabe an Finconext,
+  // Mikroanimationen (Koffer-Flug, Glossar-Flug, Verlauf, Frage steigt auf). Alles innerhalb der einen IIFE, vor dem Boot.
+  // ======================================================================
+
+  // ---------- Strich-Ikonen (24er-Raster), passend zu Sparks und Trennlinien ----------
+  var IKON = {
+    koffer: '<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M9 7.5V5.5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5.5v2M3 12h18"/>',
+    werkzeug: '<path d="M14.5 6.5a4 4 0 0 0-5.3 5.3L4 17l3 3 5.2-5.2a4 4 0 0 0 5.3-5.3l-2.6 2.6-2.2-.6-.6-2.2z"/>',
+    sessel: '<path d="M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M3 13a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5H3zM6 18v2M18 18v2"/>',
+    hut: '<path d="M3 10l9-4 9 4-9 4zM7 12v4c0 1.5 2.5 3 5 3s5-1.5 5-3v-4M21 10v5"/>',
+    person: '<circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+    paar: '<circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="3"/><path d="M2 20c1-4 3.5-6 7-6s6 2 7 6M14 20c.5-3 2-4.5 4-4.5s3.5 1.5 4 4.5"/>',
+    familie: '<circle cx="8" cy="7" r="3"/><circle cx="16" cy="7" r="3"/><circle cx="12" cy="14" r="2"/><path d="M2 20c1-3.5 3-5.5 6-5.5M22 20c-1-3.5-3-5.5-6-5.5M9 21c.5-2 1.5-3 3-3s2.5 1 3 3"/>',
+    allein: '<circle cx="10" cy="7" r="3.2"/><circle cx="17" cy="12" r="2"/><path d="M3 20c1-4 3.5-6 7-6M14 20c.3-2.5 1.5-4 3-4s2.7 1.5 3 4"/>',
+    schluessel: '<circle cx="8" cy="12" r="4"/><path d="M12 12h9M18 12v3M15 12v2"/>',
+    haus: '<path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/>',
+    haus2: '<path d="M2 12l7-6 7 6M4 11v8h10v-8M14 9l4-3 4 3v10h-8"/>',
+    dach: '<path d="M2 12L12 3l10 9M5 10v10h14V10M9 20v-5h6v5"/>',
+    schildJa: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+    schildNein: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9.5 9.5l5 5M14.5 9.5l-5 5"/>',
+    schild: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',
+    frage: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17h.01"/>',
+    bank: '<path d="M3 10l9-6 9 6M4 10h16M6 10v7M10 10v7M14 10v7M18 10v7M3 20h18"/>',
+    kurve: '<path d="M3 20h18M4 16l5-6 4 3 7-8M16 5h4v4"/>',
+    sanduhr: '<path d="M6 3h12M6 21h12M8 3c0 5 4 6 4 9s-4 4-4 9M16 3c0 5-4 6-4 9s4 4 4 9"/>',
+    schirm: '<path d="M3 12a9 9 0 0 1 18 0zM12 12v6a2 2 0 0 0 4 0M12 3v1"/>',
+    sofa: '<path d="M4 11V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3M2 13a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4H2zM5 17v2M19 17v2"/>',
+    waage: '<path d="M12 3v18M5 21h14M3 7h18M6 7l-3 7a3 3 0 0 0 6 0zM18 7l-3 7a3 3 0 0 0 6 0z"/>',
+    unfall: '<path d="M12 3l9 16H3zM12 9v5M12 17h.01"/>',
+    spar: '<path d="M4 12a6 5 0 0 1 12 0h2l2 2-2 2v1a2 2 0 0 1-2 2h-1l-1-2H9l-1 2H7a2 2 0 0 1-2-2v-1a4 4 0 0 1-1-4M9 7l1-3 3 2"/>',
+    sparHalb: '<path d="M4 12a6 5 0 0 1 12 0h2l2 2-2 2v1a2 2 0 0 1-2 2h-1l-1-2H9l-1 2H7a2 2 0 0 1-2-2v-1a4 4 0 0 1-1-4M8 12h6"/>',
+    sparLeer: '<path d="M4 12a6 5 0 0 1 12 0h2l2 2-2 2v1a2 2 0 0 1-2 2h-1l-1-2H9l-1 2H7a2 2 0 0 1-2-2v-1a4 4 0 0 1-1-4M9 10l4 4M13 10l-4 4"/>',
+    glocke: '<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0"/>',
+    telefon: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+    mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+    pin: '<path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/>',
+    dokument: '<path d="M6 3h8l4 4v14H6zM14 3v4h4M9 12h6M9 16h6"/>',
+    link: '<path d="M10 14a4 4 0 0 0 5.6 0l3-3a4 4 0 0 0-5.6-5.6l-1 1M14 10a4 4 0 0 0-5.6 0l-3 3a4 4 0 0 0 5.6 5.6l1-1"/>',
+    drucker: '<path d="M7 8V3h10v5M5 8h14a2 2 0 0 1 2 2v6h-4v4H7v-4H3v-6a2 2 0 0 1 2-2zM7 14h10"/>',
+    stern: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+    pfeil: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    flieger: '<path d="M3 11l18-8-8 18-2-8z"/>',
+    offline: '<path d="M2 8.5a16 16 0 0 1 20 0M5 12a11 11 0 0 1 14 0M8.5 15.5a6 6 0 0 1 7 0M12 19h.01M3 3l18 18"/>',
+    auto: '<path d="M5 16l1.5-5h11L19 16M3 16h18v3H3zM7 19v2M17 19v2"/>',
+    baby: '<circle cx="12" cy="7" r="4"/><path d="M6 21v-3a6 6 0 0 1 12 0v3"/>',
+    ringe: '<circle cx="9" cy="13" r="5"/><circle cx="15" cy="13" r="5"/>',
+    hund: '<path d="M4 10l3-6 4 3h3l3-3 3 6-2 2v6H6v-6zM9 14h.01M15 14h.01M11 17h2"/>',
+    haken: '<path d="M5 12l5 5 9-10"/>',
+    kalender: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    lupe: '<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>',
+    scheine: '<rect x="3" y="7" width="18" height="11" rx="2"/><circle cx="12" cy="12.5" r="2.5"/><path d="M6 10h.01M18 15h.01"/>',
+    hand: '<path d="M7 11V5a1.5 1.5 0 0 1 3 0v5M10 10V4a1.5 1.5 0 0 1 3 0v6M13 10V5a1.5 1.5 0 0 1 3 0v7M16 12l1.5-2.5a1.5 1.5 0 0 1 2.5 1.5l-2 5A6 6 0 0 1 12 20H11a5 5 0 0 1-4-2L4 14a1.5 1.5 0 0 1 2.3-1.9L7 13"/>'
+  };
+  function ikon(name, cls) { return '<svg class="ikon' + (cls ? ' ' + cls : '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (IKON[name] || IKON.stern) + '</svg>'; }
+  window.ikon = ikon; window.IKON = IKON;
+  var FARBEN = ['var(--green)', 'var(--pink)', 'var(--tool-vergleich)', 'var(--tool-checkliste)', 'var(--tool-dokumente)', '#9CCB86'];
+  function neuerKasten(ton, kicker, titel, extraKlasse) { var k = el('article', 'kasten' + (ton ? ' kasten--' + ton : '') + (extraKlasse ? ' ' + extraKlasse : '')); if (kicker) k.appendChild(el('span', 'kicker' + (ton === 'pink' ? ' kicker--pink' : ' kicker--gruen'), kicker)); if (titel) k.appendChild(el('h3', null, titel)); return k; }
+  function gestaffelt(container, sel) { Array.prototype.forEach.call(container.querySelectorAll(sel || ':scope > *'), function (n, i) { n.classList.add('ks__rein'); n.style.animationDelay = (i * 70) + 'ms'; }); }
+
+  // ---------- Diagramme: Torte (Kreisdiagramm im Stil der Liveseite), Tacho (Halbkreis), Säulen (interaktiv) ----------
+  function torte(teile, quelle, opts) {
+    opts = opts || {}; var wrap = el('div', 'torte'); var R = 80, cx = 100, cy = 100; var svg = '<svg viewBox="0 0 200 200" role="img" aria-label="Kreisdiagramm">'; var a0 = -Math.PI / 2; var summe = teile.reduce(function (s, t) { return s + t[1]; }, 0);
+    teile.forEach(function (t, i) { var a1 = a0 + 2 * Math.PI * t[1] / summe; var x0 = cx + R * Math.cos(a0), y0 = cy + R * Math.sin(a0), x1 = cx + R * Math.cos(a1), y1 = cy + R * Math.sin(a1); var gross = (a1 - a0) > Math.PI ? 1 : 0; svg += '<path class="torte__stueck" data-i="' + i + '" d="M' + cx + ' ' + cy + ' L' + x0.toFixed(2) + ' ' + y0.toFixed(2) + ' A' + R + ' ' + R + ' 0 ' + gross + ' 1 ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + ' Z" fill="' + FARBEN[i % FARBEN.length] + '" style="animation-delay:' + (i * 90) + 'ms"/>'; a0 = a1; });
+    if (opts.mitte) svg += '<circle cx="100" cy="100" r="34" fill="var(--white)"/><text x="100" y="97" text-anchor="middle" class="torte__wert">' + opts.mitte + '</text><text x="100" y="113" text-anchor="middle" class="torte__label">' + (opts.mitteLabel || '') + '</text>';
+    var bild = el('div', 'torte__bild', svg + '</svg>'); wrap.appendChild(bild);
+    var ul = el('ul', 'torte__legende'); teile.forEach(function (t, i) { var li = el('li', null, '<i style="background:' + FARBEN[i % FARBEN.length] + '"></i><span>' + t[0] + '</span><b>' + t[1] + (opts.einheit || ' %') + '</b>'); li.onmouseenter = function () { bild.querySelectorAll('.torte__stueck').forEach(function (p) { p.style.opacity = p.dataset.i == i ? 1 : .35; }); }; li.onmouseleave = function () { bild.querySelectorAll('.torte__stueck').forEach(function (p) { p.style.opacity = 1; }); }; ul.appendChild(li); }); wrap.appendChild(ul);
+    var aussen = el('div'); aussen.appendChild(wrap); if (quelle) aussen.appendChild(el('p', 'quelle', quelle)); return aussen;
+  }
+  function tacho(wert, max, label, opts) {
+    opts = opts || {}; var w = el('div', 'tacho'); var R = 70, U = Math.PI * R; var anteil = Math.max(0, Math.min(1, wert / max)); var farbe = opts.farbe || (anteil < .4 ? 'var(--pink)' : anteil < .7 ? '#9CCB86' : 'var(--green)');
+    w.innerHTML = '<svg viewBox="0 0 180 100" role="img" aria-label="' + label + '"><path d="M20 90 A70 70 0 0 1 160 90" fill="none" stroke="var(--rule)" stroke-width="12" stroke-linecap="round"/><path class="tacho__bogen" d="M20 90 A70 70 0 0 1 160 90" fill="none" stroke="' + farbe + '" stroke-width="12" stroke-linecap="round" stroke-dasharray="' + U + '" stroke-dashoffset="' + U + '"/></svg><div class="tacho__wert"><b>0</b><small>' + label + '</small></div>';
+    var b = w.querySelector('b'); var bogen = w.querySelector('.tacho__bogen'); var t0 = null;
+    function lauf(now) { if (!t0) t0 = now; var t = Math.min(1, (now - t0) / (reduziert ? 1 : 1100)); var e = 1 - Math.pow(1 - t, 3); b.textContent = Math.round(wert * e) + (opts.einheit || ''); bogen.style.strokeDashoffset = U * (1 - anteil * e); if (t < 1) requestAnimationFrame(lauf); }
+    setTimeout(function () { requestAnimationFrame(lauf); }, opts.verzug || 200); return w;
+  }
+  // Säulen: vertikale Statistik, die sich mit Werten ändert. gibt .setze(werte) zurück; Höhen laufen per Transition.
+  function saeulen(spalten, opts) {
+    opts = opts || {}; var w = el('div', 'saeulen'); var max = opts.max || Math.max.apply(null, spalten.map(function (s) { return s.wert; })) || 1; var reihe = el('div', 'saeulen__reihe'); w.appendChild(reihe); var items = [];
+    spalten.forEach(function (s, i) { var c = el('div', 'saeule'); c.innerHTML = '<div class="saeule__stab"><b class="saeule__wert" style="bottom:0">' + (opts.format ? opts.format(s.wert) : s.wert) + '</b><i style="height:0;background:' + (s.farbe || FARBEN[i % FARBEN.length]) + '"></i></div><span class="saeule__label">' + s.label + '</span>'; reihe.appendChild(c); items.push(c); });
+    function setze(werte, neuMax) { if (neuMax) max = neuMax; werte.forEach(function (v, i) { var c = items[i]; if (!c) return; var pct = Math.round(100 * Math.max(0, v) / max); c.querySelector('i').style.height = pct + '%'; c.querySelector('.saeule__wert').style.bottom = 'calc(' + pct + '% + 6px)'; c.querySelector('.saeule__wert').textContent = opts.format ? opts.format(v) : v; c.classList.toggle('saeule--null', v <= 0); }); }
+    w.setze = setze; setTimeout(function () { setze(spalten.map(function (s) { return s.wert; })); }, 60); if (opts.quelle) w.appendChild(el('p', 'quelle', opts.quelle)); return w;
+  }
+  window.torte = torte; window.tacho = tacho; window.saeulen = saeulen;
+
+  // ---------- Rechner: Berufsunfähigkeit mit interaktiven Säulen ----------
+  function buRechner() {
+    var w = el('div', 'rechner bu'); var netto = 2800, alter = 35;
+    var felder = el('div', 'bu__felder'); felder.innerHTML = '<label><span>Ihr Netto im Monat</span><input type="range" min="1200" max="6000" step="50" value="' + netto + '" data-f="netto"><b data-w="netto">' + eur(netto) + '</b></label><label><span>Ihr Alter</span><input type="range" min="20" max="58" step="1" value="' + alter + '" data-f="alter"><b data-w="alter">' + alter + ' Jahre</b></label>'; w.appendChild(felder);
+    var bars = saeulen([{ label: 'Ihr Netto', wert: netto, farbe: 'var(--placeholder)' }, { label: 'Erwerbs­minderungs­rente', wert: Math.round(netto * .34), farbe: 'var(--pink)' }, { label: 'Empfohlene BU-Rente', wert: Math.round(netto * .75), farbe: 'var(--green)' }, { label: 'Ihre Lücke ohne BU', wert: Math.round(netto * .41), farbe: '#9CCB86' }], { max: 6000, format: eur, quelle: 'Erwerbsminderungsrente: rund ein Drittel des letzten Netto bei voller EM (Deutsche Rentenversicherung, Durchschnitt 2025). Empfehlung 75 bis 80 Prozent (Verbraucherzentrale). Beispielrechnung.' }); w.appendChild(bars);
+    var fazit = el('div', 'bu__fazit'); w.appendChild(fazit);
+    function rechne() { var em = Math.round(netto * .34), bu = Math.round(netto * .75), luecke = bu - em; var beitrag = Math.round(bu / 100 * (2.3 + Math.max(0, alter - 25) * .09)); bars.setze([netto, em, bu, luecke], 6000); fazit.innerHTML = '<b>' + eur(luecke) + ' im Monat</b> fehlen Ihnen ohne Berufsunfähigkeitsversicherung. Eine BU-Rente von ' + eur(bu) + ' kostet mit ' + alter + ' Jahren etwa <b>' + eur(beitrag) + ' im Monat</b>; je früher, desto günstiger.'; }
+    felder.querySelectorAll('input').forEach(function (i) { i.oninput = function () { if (i.dataset.f === 'netto') { netto = +i.value; felder.querySelector('[data-w=netto]').textContent = eur(netto); } else { alter = +i.value; felder.querySelector('[data-w=alter]').textContent = alter + ' Jahre'; } rechne(); }; });
+    rechne(); var akt = el('div', 'reihe'); var koffer = el('button', 'textlink textlink--still', 'In den Aktenkoffer'); koffer.onclick = function () { inDenKoffer('BU-Rechner · Lücke ' + fazit.querySelector('b').textContent, koffer); }; var wae = el('button', 'textlink textlink--still', 'Wächter: wenn sich die EM-Rente ändert'); wae.onclick = function () { starte('waechterkarte', 'Wächter setzen'); }; akt.appendChild(koffer); akt.appendChild(wae); w.appendChild(akt);
+    return w;
+  }
+  kaesten.rechnerBU = { typ: 'Rechner', dot: 'rechner', ton: 'pink', titel: 'Berufsunfähigkeit: Wie groß ist Ihre Lücke?', slug: 'bu-rechner', url: '/finanztools/rechner/bu-rechner/', glossar: ['bu', 'nettoeinkommen'], ohneGlossar: true, krumen: [['Finanztools', 'finanztools'], ['Rechner', 'finanztools', 'Rechner (56)']], body: buRechner };
+
+  // ---------- Vergleich als Tabelle (Privathaftpflicht) ----------
+  var TARIFE = [
+    { name: 'Comfort', anbieter: 'Ammerländer', beitrag: 3.9, deckung: 50, schluessel: 30000, fahrl: true, sb: 0, partner: true },
+    { name: 'Vario', anbieter: 'Haftpflichtkasse', beitrag: 4.6, deckung: 50, schluessel: 50000, fahrl: true, sb: 0, partner: true },
+    { name: 'Klassik', anbieter: 'VHV', beitrag: 3.2, deckung: 20, schluessel: 10000, fahrl: false, sb: 150, partner: false },
+    { name: 'Premium', anbieter: 'Degenia', beitrag: 5.1, deckung: 100, schluessel: 100000, fahrl: true, sb: 0, partner: true }
+  ];
+  function vergleichTabelle() {
+    var w = el('div', 'vtab'); var filter = false, sort = 'beitrag';
+    var kopf = el('div', 'vtab__filter'); kopf.innerHTML = '<label class="schalter"><input type="checkbox"><i></i><span>Nur mit Schlüsselverlust ab 30.000 €</span></label><span class="vtab__sort">Sortiert nach <button data-s="beitrag" class="aktiv">Beitrag</button> · <button data-s="deckung">Deckung</button> · <button data-s="schluessel">Schlüsselverlust</button></span>'; w.appendChild(kopf);
+    var tab = el('table', 'vtab__tabelle'); w.appendChild(tab); var hinweis = el('p', 'quelle', 'Beispielwerte, Stand September 2026. Beiträge für eine Einzelperson ohne Vorschäden. Partner-Tarife führen zum Finconext-Rechner, andere zum Anbieter.'); w.appendChild(hinweis);
+    function bau() { var liste = TARIFE.filter(function (t) { return !filter || t.schluessel >= 30000; }).sort(function (a, b) { return sort === 'beitrag' ? a.beitrag - b.beitrag : b[sort] - a[sort]; }); var best = liste[0]; tab.innerHTML = '<thead><tr><th>Tarif</th><th>Beitrag</th><th>Deckung</th><th>Schlüssel­verlust</th><th>Grobe Fahr­lässigkeit</th><th>Selbst­beteiligung</th><th></th></tr></thead>'; var tb = el('tbody'); liste.forEach(function (t, i) { var tr = el('tr', t === best ? 'best' : ''); tr.style.animationDelay = (i * 60) + 'ms'; tr.innerHTML = '<td><b>' + t.anbieter + '</b><small>' + t.name + (t.partner ? ' · Finconext-Partner' : '') + '</small></td><td class="zahl"><b>' + t.beitrag.toFixed(2).replace('.', ',') + ' €</b><small>im Monat</small></td><td class="zahl">' + t.deckung + ' Mio. €</td><td class="zahl">' + eur(t.schluessel) + '</td><td>' + (t.fahrl ? '<span class="ja">' + ikon('haken') + ' mitversichert</span>' : '<span class="nein">Kürzung möglich</span>') + '</td><td class="zahl">' + (t.sb ? eur(t.sb) : 'keine') + '</td><td></td>'; var b = el('button', 'btn btn--klein' + (t.partner ? ' btn--primary' : ''), t.partner ? 'Angebot' : 'Zum Anbieter'); b.onclick = function () { if (t.partner) uebergabe('Privathaftpflicht · ' + t.anbieter + ' ' + t.name, ['Schlüsselverlust bis ' + eur(t.schluessel), 'Deckungssumme ' + t.deckung + ' Mio. €', 'Einzelperson, keine Vorschäden'], b); else toast('Anbieterseite (Demo)'); }; tr.lastChild.appendChild(b); tb.appendChild(tr); }); tab.appendChild(tb); }
+    kopf.querySelector('input').onchange = function (e) { filter = e.target.checked; bau(); };
+    kopf.querySelectorAll('button').forEach(function (b) { b.onclick = function () { sort = b.dataset.s; kopf.querySelectorAll('button').forEach(function (x) { x.classList.toggle('aktiv', x === b); }); bau(); }; });
+    bau(); return w;
+  }
+  kaesten.vergleichHaftpflicht = { typ: 'Anzeige · Vergleich mit Partnerlinks', dot: 'vergleich', ton: 'tuerkis', titel: 'Privathaftpflicht mit Schlüsselverlust: vier Tarife', slug: 'privathaftpflicht-vergleich', url: '/finanztools/vergleiche/privathaftpflicht/', glossar: ['deckungssumme', 'selbstbeteiligung', 'fahrlaessigkeit'], ohneGlossar: true, krumen: [['Finanztools', 'finanztools'], ['Vergleiche', 'finanztools', 'Vergleiche (43)']], body: vergleichTabelle };
+
+  // ---------- Anbieter-Karte (Kontaktseite eines Versicherers) ----------
+  function anbieterKarte() {
+    var w = el('div', 'anbieter-k');
+    w.innerHTML = '<div class="anbieter-k__kopf"><span class="monogramm">LVM</span><div><b>LVM Versicherung</b><small>Münster · kein Finconext-Partner · Kontaktseite aus dem Bestand (147 Anbieter)</small><div class="reihe"><span class="chip chip--still">Kfz</span><span class="chip chip--still">Hausrat</span><span class="chip chip--still">Haftpflicht</span><span class="chip chip--still">Wohngebäude</span></div></div></div>';
+    var sp = el('div', 'anbieter-k__spalten');
+    sp.innerHTML = '<div><span class="kicker">' + ikon('telefon') + ' Kontakt</span><p><b>0251 702-0</b><br>Mo bis Fr 8 bis 18 Uhr</p><p>info@lvm.de<br>Kolde-Ring 21, 48126 Münster</p></div>'
+      + '<div><span class="kicker">' + ikon('kalender') + ' Kündigen</span><p>Frist <b>ein Monat</b> zum Ablauf, Kfz zum <b>30. November</b>. Schriftlich genügt, E-Mail reicht seit 2022.</p></div>'
+      + '<div><span class="kicker">' + ikon('unfall') + ' Schaden melden</span><p>Online-Formular oder Telefon, Fotos anhängen, <b>Frist eine Woche</b>. Bei Diebstahl zuerst zur Polizei.</p></div>';
+    w.appendChild(sp); gestaffelt(sp);
+    var akt = el('div', 'reihe'); var v = el('button', 'btn btn--klein btn--primary', 'Kündigungsvorlage ausfüllen'); v.onclick = function () { starte('vorlage', 'Kündigung Kfz-Versicherung'); }; var vgl = el('button', 'btn btn--klein', 'Wechsel prüfen: Tarife nebeneinander'); vgl.onclick = function () { starte('tarife', 'Privathaftpflicht vergleichen'); }; var wae = el('button', 'textlink textlink--still', 'Wächter: 30 Tage vor der Frist'); wae.onclick = function () { starte('waechterkarte', 'Wächter setzen'); }; akt.appendChild(v); akt.appendChild(vgl); akt.appendChild(wae); w.appendChild(akt);
+    return w;
+  }
+  kaesten.anbieterLVM = { typ: 'Anbieter', dot: 'dokumente', ton: 'terra', titel: 'LVM Versicherung: Kontakt, Kündigung, Schaden', slug: 'lvm-versicherung', url: '/lvm-versicherung/', ohneGlossar: true, krumen: [['Service', 'service'], ['Anbieter', 'service']], body: anbieterKarte };
+
+  // ---------- Dokument-Vorlage: Kündigung Kfz, Felder füllen den Brief ----------
+  function vorlage() {
+    var w = el('div', 'vorlage'); var d = { vers: 'LVM Versicherung', nr: '', zum: '30.11.2026', name: '' };
+    var felder = el('div', 'vorlage__felder'); felder.innerHTML = '<label><span>Versicherer</span><select data-f="vers"><option>LVM Versicherung</option><option>HUK24</option><option>Allianz</option><option>Andere</option></select></label><label><span>Vertragsnummer</span><input data-f="nr" placeholder="KV-123456"></label><label><span>Kündigung zum</span><input data-f="zum" value="30.11.2026"></label><label><span>Ihr Name</span><input data-f="name" placeholder="Vor- und Nachname"></label>'; w.appendChild(felder);
+    var blatt = el('div', 'brief'); w.appendChild(blatt);
+    function schreibe() { blatt.innerHTML = '<div class="brief__absender">' + (d.name || '<i>Ihr Name</i>') + '<br><i>Ihre Anschrift</i></div><div class="brief__empf">' + d.vers + '<br>Kundenservice</div><div class="brief__datum">7. September 2026</div><b class="brief__betreff">Kündigung der Kfz-Versicherung, Vertrag ' + (d.nr || '<i>Nummer</i>') + '</b><p>Sehr geehrte Damen und Herren,</p><p>hiermit kündige ich den oben genannten Vertrag fristgerecht zum <b>' + (d.zum || '<i>Datum</i>') + '</b>, hilfsweise zum nächstmöglichen Zeitpunkt. Bitte bestätigen Sie mir die Kündigung schriftlich und nennen Sie mir den Beendigungszeitpunkt.</p><p>Mit freundlichen Grüßen</p><div class="brief__unterschrift">' + (d.name || '<i>Ihr Name</i>') + '</div>'; }
+    felder.querySelectorAll('input, select').forEach(function (i) { i.oninput = i.onchange = function () { d[i.dataset.f] = i.value; schreibe(); }; }); schreibe();
+    var akt = el('div', 'reihe'); ['Als PDF', 'Als Word'].forEach(function (t) { var b = el('button', 'btn btn--klein' + (t === 'Als PDF' ? ' btn--primary' : ''), t); b.onclick = function () { toast(t + ' erzeugt (Demo)'); }; akt.appendChild(b); }); var k = el('button', 'textlink textlink--still', 'In den Aktenkoffer'); k.onclick = function () { inDenKoffer('Kündigung Kfz · ' + d.vers, k); }; akt.appendChild(k); w.appendChild(akt);
+    return w;
+  }
+  kaesten.vorlageKfz = { typ: 'Dokument · Vorlage', dot: 'dokumente', ton: 'terra', titel: 'Kündigung Kfz-Versicherung', slug: 'kuendigung-kfz', url: '/service/dokumente/kuendigung-kfz/', ohneGlossar: true, krumen: [['Service', 'service'], ['Dokumente', 'service']], body: vorlage };
+
+  // ---------- Spiele: Wochen-Quiz, Wappen-Album, Rubbellos, Gewusst-Box ----------
+  var QUIZ = [
+    { f: 'Wie hoch ist der Grundfreibetrag 2026 für Alleinstehende?', o: ['12.348 €', '11.604 €', '12.000 €'], r: 0 },
+    { f: 'Bis wann kann die Kfz-Versicherung in der Regel gekündigt werden?', o: ['31. Dezember', '30. November', '1. Januar'], r: 1 },
+    { f: 'Wie viel Kindergeld gibt es 2026 pro Kind im Monat?', o: ['250 €', '255 €', '259 €'], r: 2 },
+    { f: 'Was decken gute Haftpflicht-Tarife beim Schlüsselverlust?', o: ['5.000 €', '30.000 € und mehr', '1 Million €'], r: 1 },
+    { f: 'Wie viel vom letzten Netto ersetzt die volle Erwerbsminderungsrente etwa?', o: ['Ein Drittel', 'Die Hälfte', 'Drei Viertel'], r: 0 }
+  ];
+  function quizKarte() {
+    var w = el('div', 'quiz'); var i = 0, richtig = 0, raster = []; var punkte = el('div', 'quiz__punkte'); QUIZ.forEach(function () { punkte.appendChild(el('i')); }); w.appendChild(punkte); var buehne = el('div', 'quiz__buehne'); w.appendChild(buehne);
+    function frage() { var q = QUIZ[i]; punkte.children[i].classList.add('aktiv'); buehne.innerHTML = ''; buehne.appendChild(el('span', 'ks__zaehler', 'Frage ' + (i + 1) + ' von ' + QUIZ.length)); buehne.appendChild(el('div', 'quiz__frage', q.f)); var opts = el('div', 'quiz__optionen'); q.o.forEach(function (o, j) { var b = el('button', 'quiz__option', '<i>' + 'ABC'[j] + '</i>' + o); b.onclick = function () { opts.querySelectorAll('button').forEach(function (x) { x.disabled = true; }); var ok = j === q.r; b.classList.add(ok ? 'richtig' : 'falsch'); opts.children[q.r].classList.add('richtig'); punkte.children[i].classList.add(ok ? 'ok' : 'nein'); raster.push(ok ? '🟩' : '🟥'); if (ok) richtig++; setTimeout(function () { i++; i < QUIZ.length ? frage() : ende(); }, reduziert ? 0 : 800); }; opts.appendChild(b); }); buehne.appendChild(opts); gestaffelt(opts, 'button'); }
+    function ende() { var pts = richtig * 10; buehne.innerHTML = ''; var erg = el('div', 'quiz__ergebnis'); erg.appendChild(tacho(richtig, QUIZ.length, 'von ' + QUIZ.length + ' richtig')); var t = el('div'); t.innerHTML = '<b>' + (richtig >= 4 ? 'Stark.' : richtig >= 2 ? 'Solide.' : 'Ausbaufähig.') + '</b> ' + pts + ' Punkte für Ihr Konto. Das nächste Quiz kommt am Donnerstag mit dem Wochenbrief.<div class="quiz__raster">' + raster.join('') + ' Quiz #37</div>'; erg.appendChild(t); buehne.appendChild(erg); var akt = el('div', 'reihe'); var tl = el('button', 'textlink', 'Ergebnis teilen'); tl.onclick = function () { teilenDialog('Finanzleser-Quiz #37: ' + richtig + ' von 5', 'https://www.finanzleser.de/spiele/quiz-37/', tl); }; var wb = el('button', 'textlink textlink--still', 'Wochenbrief mit Quiz abonnieren'); wb.onclick = function () { starte('wochenbrief', 'Leos Wochenbrief'); }; akt.appendChild(tl); akt.appendChild(wb); buehne.appendChild(akt); state.punkte += pts; speichern(); aktualisiereZahlen(); wappenFrei('sparen'); if (pts) belohne(w.closest('.kasten'), pts); }
+    frage(); return w;
+  }
+  kaesten.quiz = { typ: 'Spiel · Wochen-Quiz', fuss: false, dot: 'rechner', ton: 'pink', titel: 'Fünf Fragen aus der Woche', slug: 'quiz-37', url: '/spiele/quiz-37/', ohneGlossar: true, krumen: [['Finanztools', 'finanztools'], ['Spiele', 'finanztools']], body: quizKarte };
+
+  var WAPPEN = [['haftpflicht', 'Haftpflicht', 'schirm'], ['hausrat', 'Hausrat', 'sofa'], ['hund', 'Tier', 'hund'], ['steuer', 'Steuer', 'scheine'], ['rente', 'Rente', 'sessel'], ['kinder', 'Kinder', 'baby'], ['kfz', 'Kfz', 'auto'], ['wohnen', 'Wohnen', 'haus'], ['vorsorge', 'Vorsorge', 'sanduhr'], ['recht', 'Recht', 'waage'], ['sparen', 'Sparen', 'spar'], ['kassensturz', 'Kassensturz', 'kurve']];
+  state.wappen = state.wappen || ['haftpflicht'];
+  function wappenFrei(key) { if (state.wappen.indexOf(key) > -1) return; state.wappen.push(key); speichern(); var w = WAPPEN.filter(function (x) { return x[0] === key; })[0]; if (w) toast('Neues Wappen: ' + w[1] + ' · ' + state.wappen.length + ' von 12'); document.querySelectorAll('.wappen[data-k="' + key + '"]').forEach(function (n) { n.classList.remove('zu'); n.classList.add('neu'); }); }
+  window.wappenFrei = wappenFrei;
+  function wappenKarte() {
+    var w = el('div', 'album'); var g = el('div', 'album__raster'); WAPPEN.forEach(function (x, i) { var offen = state.wappen.indexOf(x[0]) > -1; var s = el('div', 'wappen' + (offen ? '' : ' zu'), '<svg viewBox="0 0 24 24" class="wappen__schild"><path d="M12 2l9 3.5v6.5c0 5.5-4 9-9 10-5-1-9-4.5-9-10V5.5z" fill="' + FARBEN[i % FARBEN.length] + '"/></svg>' + ikon(x[2]) + '<span>' + x[1] + '</span>'); s.dataset.k = x[0]; s.style.animationDelay = (i * 50) + 'ms'; g.appendChild(s); }); w.appendChild(g);
+    var stand = el('p', 'album__stand', '<b>' + state.wappen.length + ' von 12</b> Wappen. Jedes Thema, das Sie zu Ende lesen oder rechnen, bringt eines; zwölf öffnen den Versicherungs-Check bei Finconext.'); w.appendChild(stand);
+    return w;
+  }
+  kaesten.wappen = { typ: 'Sammelalbum', fuss: false, dot: 'rechner', ton: 'pink', titel: 'Ihre Wappen', slug: 'wappen', url: '/spiele/wappen/', ohneGlossar: true, krumen: [['Finanztools', 'finanztools'], ['Spiele', 'finanztools']], body: wappenKarte };
+
+  function rubbellos() {
+    var w = el('div', 'los'); w.innerHTML = '<div class="los__karte"><div class="los__unten"><span class="kicker kicker--pink">Gewusst?</span><b>Kindergeld 2026: 259 € im Monat</b><span>je Kind, ab dem dritten wie ab dem ersten. <em>+15 Punkte</em></span></div><canvas class="los__deck" width="320" height="160"></canvas></div><p class="quelle">Mit dem Finger oder der Maus freirubbeln. Ein Los am Tag.</p>';
+    var cv = w.querySelector('canvas'); var ctx = cv.getContext('2d'); var g = ctx.createLinearGradient(0, 0, 320, 160); g.addColorStop(0, '#d9dcd6'); g.addColorStop(.5, '#f1f2ee'); g.addColorStop(1, '#c9cdc4'); ctx.fillStyle = g; ctx.fillRect(0, 0, 320, 160); ctx.fillStyle = '#6b7166'; ctx.font = '700 15px Open Sans, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('Hier rubbeln', 160, 86); ctx.font = '600 10px Open Sans, sans-serif'; ctx.fillText('Los #143 · finanzleser.de', 160, 106); ctx.globalCompositeOperation = 'destination-out'; var frei = false, zuege = 0;
+    function punkt(e) { var r = cv.getBoundingClientRect(); var x = (e.clientX - r.left) * 320 / r.width, y = (e.clientY - r.top) * 160 / r.height; ctx.beginPath(); ctx.arc(x, y, 18, 0, Math.PI * 2); ctx.fill(); if (++zuege % 8 === 0 && !frei) { var d = ctx.getImageData(0, 0, 320, 160).data, leer = 0, n = 0; for (var i = 3; i < d.length; i += 4 * 9) { n++; if (d[i] === 0) leer++; } if (leer / n > .5) { frei = true; cv.classList.add('weg'); state.punkte += 15; speichern(); aktualisiereZahlen(); belohne(w.closest('.kasten'), 15); wappenFrei('kinder'); } } }
+    var unten = false; cv.addEventListener('pointerdown', function (e) { unten = true; punkt(e); }); cv.addEventListener('pointermove', function (e) { if (unten) punkt(e); }); window.addEventListener('pointerup', function () { unten = false; });
+    return w;
+  }
+  kaesten.rubbellos = { typ: 'Spiel · Rubbellos', fuss: false, dot: 'rechner', ton: 'pink', titel: 'Das Los des Tages', slug: 'los-143', url: '/spiele/los/', ohneGlossar: true, krumen: [['Finanztools', 'finanztools'], ['Spiele', 'finanztools']], body: rubbellos };
+
+  function gewusstBox(frage, antwort, quelle) { var w = el('div', 'gewusst'); w.innerHTML = '<div class="gewusst__innen"><div class="gewusst__vorn"><span class="kicker kicker--pink">Gewusst?</span><p>' + frage + '</p><button class="ks__weiter" type="button">Aufdecken<i>→</i></button></div><div class="gewusst__hinten"><span class="kicker kicker--gruen">Antwort</span><p>' + antwort + '</p>' + (quelle ? '<span class="quelle">' + quelle + '</span>' : '') + '</div></div>'; w.querySelector('button').onclick = function () { w.classList.add('offen'); }; return w; }
+  kaesten.gewusst = { typ: 'Spiel · Gewusst?', fuss: false, dot: 'rechner', ton: 'pink', titel: 'Eine Frage, eine Antwort', slug: 'gewusst', url: '/spiele/gewusst/', ohneGlossar: true, krumen: [['Finanztools', 'finanztools'], ['Spiele', 'finanztools']], body: function () { return gewusstBox('Wie lange darf ein Versicherer nach einer Schadenmeldung prüfen, bevor er zahlen muss?', 'Einen Monat nach Abschluss der Erhebungen; danach sind Verzugszinsen fällig. Spätestens nach einem Monat kann eine Abschlagszahlung verlangt werden.', 'VVG § 14') } };
+
+  // ---------- Wächter-Karte: Regeln mit Schaltern, Kanal wählen ----------
+  var WAECHTER_REGELN = [['kfz', 'Kfz-Wechselfrist', '30 Tage vor dem 30. November: drei geprüfte Angebote', 'in 55 Tagen'], ['tabelle', 'Düsseldorfer Tabelle', 'Wenn sich die Tabelle ändert: Unterhaltsergebnis neu prüfen', 'Jahreswechsel'], ['grundfreibetrag', 'Grundfreibetrag', 'Wenn sich der Wert ändert: Hinweis im Faden', 'Jahreswechsel'], ['bbg', 'Beitragsbemessungsgrenze', 'Wenn sie steigt: gespeicherte Rechnungen neu rechnen', 'Jahreswechsel'], ['em', 'Erwerbsminderungsrente', 'Wenn sich der Durchschnitt ändert: BU-Lücke neu berechnen', 'Juli']];
+  function waechterKarte() {
+    var w = el('div', 'waechter'); var liste = el('div', 'waechter__liste'); w.appendChild(liste);
+    WAECHTER_REGELN.forEach(function (r) { var an = !!state.waechter[r[0]]; var z = el('label', 'waechter__regel' + (an ? ' an' : '')); z.innerHTML = '<span class="waechter__glocke">' + ikon('glocke') + '</span><span class="waechter__text"><b>' + r[1] + '</b><small>' + r[2] + '</small></span><span class="waechter__wann">' + r[3] + '</span><span class="schalter"><input type="checkbox"' + (an ? ' checked' : '') + '><i></i></span>'; var cb = z.querySelector('input'); cb.onchange = function () { state.waechter[r[0]] = cb.checked; speichern(); z.classList.toggle('an', cb.checked); if (cb.checked) { var g = z.querySelector('.waechter__glocke'); g.classList.remove('laeutet'); void g.offsetWidth; g.classList.add('laeutet'); } stand(); }; liste.appendChild(z); }); gestaffelt(liste);
+    var kanal = el('div', 'waechter__kanal'); kanal.innerHTML = '<span class="kicker">Wie soll ich Sie erreichen?</span><div class="segment"><button class="aktiv" data-k="mail">' + ikon('mail') + ' E-Mail</button><button data-k="wa">' + ikon('flieger') + ' WhatsApp</button></div>'; w.appendChild(kanal); var waBox = el('div'); w.appendChild(waBox);
+    kanal.querySelectorAll('button').forEach(function (b) { b.onclick = function () { kanal.querySelectorAll('button').forEach(function (x) { x.classList.toggle('aktiv', x === b); }); waBox.innerHTML = ''; if (b.dataset.k === 'wa') waBox.appendChild(whatsappKarte('waechter')); else toast('Wecker per E-Mail an ihre@adresse.de (Demo)'); }; });
+    var fuss = el('p', 'waechter__stand'); w.appendChild(fuss); function stand() { var n = WAECHTER_REGELN.filter(function (r) { return state.waechter[r[0]]; }).length; fuss.innerHTML = '<b>' + n + ' Wecker aktiv.</b> Jeder einzeln abschaltbar, keine Nachricht ohne Anlass: eine Handvoll im Jahr.'; } stand();
+    return w;
+  }
+  kaesten.waechter = { typ: 'Der Wächter', dot: 'checkliste', ton: 'lila', titel: 'Wecker auf Zahlen und Fristen', slug: 'waechter', url: '/service/waechter/', ohneGlossar: true, krumen: [['Finanzleser Plus', 'plus'], ['Wächter', 'plus']], body: waechterKarte };
+
+  // ---------- Aktenkoffer-Karte: was drin liegt, was veraltet ist ----------
+  var KOFFER_DEMO = [{ titel: 'Elterngeld-Berechnung · 1.420 € im Monat', datum: '12. Januar 2026', ikon: 'scheine', alt: 'Acht Monate alt. Die Beitragsbemessungsgrenze hat sich seither geändert.', ziel: 'demo-tool' }, { titel: 'Checkliste Elternzeit · 4 von 9 erledigt', datum: '14. Januar 2026', ikon: 'haken', ziel: 'demo-tool' }];
+  function kofferKarte() {
+    var w = el('div', 'koffer'); var eintraege = state.koffer.map(function (t) { return { titel: t, datum: '7. September 2026', ikon: /Checkliste/.test(t) ? 'haken' : /Vergleich|Tarif/.test(t) ? 'waage' : /Antwort/.test(t) ? 'frage' : 'scheine', ziel: 'beleg' }; }).concat(state.plus ? KOFFER_DEMO : []);
+    if (!eintraege.length) { w.appendChild(el('div', 'koffer__leer', ikon('koffer') + '<p>Noch leer. Unter jedem Ergebnis, jeder Checkliste und jeder Antwort steht „In den Aktenkoffer“. Was dort liegt, bleibt in diesem Browser; mit Finanzleser Plus auf allen Geräten.</p>')); }
+    else { var ul = el('div', 'koffer__liste'); eintraege.forEach(function (e) { var z = el('div', 'koffer__eintrag' + (e.alt ? ' alt' : '')); z.innerHTML = '<span class="koffer__ikon">' + ikon(e.ikon) + '</span><span class="koffer__text"><b>' + e.titel + '</b><small>' + e.datum + (e.alt ? ' · ' + e.alt : '') + '</small></span>'; var akt = el('span', 'koffer__akt'); var o = el('button', 'textlink', e.alt ? 'Neu rechnen' : 'Öffnen'); o.onclick = function () { starte(e.ziel, e.titel, false, false, null, null, e.titel); }; akt.appendChild(o); var x = el('button', 'textlink textlink--still', 'Entfernen'); x.onclick = function () { var i = state.koffer.indexOf(e.titel); if (i > -1) state.koffer.splice(i, 1); speichern(); aktualisiereZahlen(); z.classList.add('weg'); setTimeout(function () { z.remove(); }, 300); }; akt.appendChild(x); z.appendChild(akt); ul.appendChild(z); }); w.appendChild(ul); gestaffelt(ul); }
+    if (!state.plus) { var s = el('div', 'koffer__sichern'); s.innerHTML = '<p>Wenn Sie den Browser schließen, ist der Koffer weg. <b>Soll ich ihn sichern?</b> Ein Feld genügt.</p>'; var f = el('form', 'reihe'); f.innerHTML = '<input type="email" placeholder="ihre@adresse.de" aria-label="E-Mail"><button class="btn btn--klein btn--primary" type="submit">Sichern</button>'; f.onsubmit = function (ev) { ev.preventDefault(); if (!f.querySelector('input').value.trim()) return; starte('plus-oeffnen', 'Finanzleser Plus'); }; s.appendChild(f); w.appendChild(s); }
+    return w;
+  }
+  kaesten.koffer = { typ: 'Mein Aktenkoffer', dot: 'checkliste', ton: 'lila', titel: 'Was Sie erarbeitet haben', slug: 'aktenkoffer', url: '/plus/aktenkoffer/', ohneGlossar: true, krumen: [['Finanzleser Plus', 'plus'], ['Aktenkoffer', 'plus']], body: kofferKarte };
+
+  // ---------- Lebensereignis: Ein Kind kommt ----------
+  var EREIGNIS_KIND = [['Vor der Geburt', [['Elterngeld ausrechnen und Aufteilung planen', 'demo-tool', 'Elterngeldrechner'], ['Mutterschaftsgeld bei der Krankenkasse beantragen', null, null], ['Kind in die Krankenversicherung: familienversichert oder privat?', 'demo-ratgeber', 'Ratgeber']]], ['Nach der Geburt', [['Kindergeld beantragen (259 € im Monat, rückwirkend 6 Monate)', 'demo-ratgeber', 'Kindergeld 2026'], ['Elterngeld beantragen: Frist drei Monate', null, null], ['Kinderfreibetrag und Steuerklasse prüfen', 'demo-tool', 'Rechner']]], ['Im ersten Jahr', [['Privathaftpflicht: Kind ist mitversichert, deliktunfähig bis 7', 'schluesselverlust', 'Ratgeber'], ['Unfallversicherung fürs Kind abwägen', 'demo-ratgeber', 'Ratgeber'], ['Sparplan fürs Kind: 25 € im Monat reichen für den Anfang', 'demo-tool', 'Rechner']]]];
+  function ereignisKarte() {
+    var w = el('div', 'ereignis'); w.appendChild(el('p', 'ereignis__vorspann', 'Sechs Anträge, drei Fristen, zwei Versicherungsfragen. In der Reihenfolge, in der sie kommen; Leo hakt mit ab und stellt die Wecker.'));
+    var tl = el('div', 'zeitleiste'); EREIGNIS_KIND.forEach(function (phase) { var p = el('div', 'phase'); p.appendChild(el('span', 'phase__titel', phase[0])); phase[1].forEach(function (s) { var z = el('label', 'schritt'); z.innerHTML = '<input type="checkbox"><span>' + s[0] + '</span>'; if (s[1]) { var b = el('button', 'chip chip--still', s[2]); b.onclick = function (ev) { ev.preventDefault(); starte(s[1], s[2]); }; z.appendChild(b); } p.appendChild(z); }); tl.appendChild(p); }); w.appendChild(tl); gestaffelt(tl, '.schritt');
+    var wae = el('div', 'ereignis__waechter'); wae.innerHTML = '<span class="kicker">' + ikon('glocke') + ' Wecker für Sie</span>'; [['Elterngeld-Frist: drei Monate nach der Geburt', true], ['Wenn sich das Kindergeld ändert', true], ['Wenn die Düsseldorfer Tabelle neu erscheint', false]].forEach(function (r) { var l = el('label', 'schalter-zeile'); l.innerHTML = '<span class="schalter"><input type="checkbox"' + (r[1] ? ' checked' : '') + '><i></i></span><span>' + r[0] + '</span>'; wae.appendChild(l); }); w.appendChild(wae);
+    return w;
+  }
+  kaesten.kind = { typ: 'Lebensereignis', dot: 'checkliste', ton: 'lila', titel: 'Ein Kind kommt: Was jetzt zu tun ist', slug: 'ein-kind-kommt', url: '/leben/ein-kind-kommt/', glossar: ['elterngeld', 'kindergeld', 'deliktunfaehig'], krumen: [['Ratgeber', 'ratgeber'], ['Recht', 'ratgeber', 'Familie'], ['Lebensereignisse', 'ratgeber']], body: ereignisKarte };
+
+  // ---------- Wochenbrief-Ausgabe als Kapitel ----------
+  function ausgabeKarte() {
+    var w = el('div', 'ausgabe'); w.innerHTML = '<div class="ausgabe__kopf"><img src="' + LOGO + '" alt="finanzleser"><div><b>Leos Wochenbrief</b><span>Ausgabe 143 · Donnerstag, 3. September 2026 · 4 Minuten</span></div></div>';
+    var antworten = el('div', 'ausgabe__antworten'); antworten.appendChild(el('span', 'kicker kicker--gruen', 'Drei Antworten der Woche'));
+    [['Zahlt die Haftpflicht, wenn ich den Schlüssel der Mietwohnung verliere?', 'Ja, wenn der Baustein „Schlüsselverlust“ drin ist. Bei 9 von 10 Partnertarifen ist er das.', 'schluesselverlust', 'Ratgeber lesen'], ['Wie viel Unterhalt für zwei Kinder bei 3.000 € netto?', 'Rund 1.096 € im Monat nach der Düsseldorfer Tabelle 2026, abzüglich halbes Kindergeld.', 'unterhalt', 'Selbst rechnen'], ['Kfz-Versicherung: lohnt der Wechsel dieses Jahr?', 'Wer drei Jahre nicht verglichen hat, spart im Schnitt über 100 €. Frist ist der 30. November.', 'waechterkarte', 'Wächter stellen']].forEach(function (a, i) { var z = el('div', 'ausgabe__antwort'); z.innerHTML = '<span class="nr">' + (i + 1) + '</span><div><b>' + a[0] + '</b><p>' + a[1] + '</p></div>'; var b = el('button', 'chip chip--leo', a[3]); b.onclick = function () { starte(a[2], a[3]); }; z.lastChild.appendChild(b); antworten.appendChild(z); }); w.appendChild(antworten); gestaffelt(antworten, '.ausgabe__antwort');
+    var unten = el('div', 'ausgabe__unten'); var wort = el('div', 'ausgabe__wort'); wort.innerHTML = '<span class="kicker kicker--pink">Finanzwort der Woche</span><b>Selbstbehalt</b><p>Der Betrag, der dem Unterhaltspflichtigen mindestens bleiben muss: 1.450 € (erwerbstätig) nach der Düsseldorfer Tabelle 2026.</p>'; var sp = el('button', 'chip chip--spiel', 'Finanzwort spielen'); sp.onclick = function () { starte('wortspiel', 'Finanzwort des Tages'); }; wort.appendChild(sp); unten.appendChild(wort); unten.appendChild(gewusstBox('Wie viele Deutsche haben keine Privathaftpflicht?', 'Rund 15 Prozent der Haushalte, obwohl sie ab 4 € im Monat zu haben ist.', 'GDV, Versicherungsdichte 2025')); w.appendChild(unten);
+    var fuss = el('p', 'ausgabe__fuss', 'Termine des Wächters: Kfz-Wechselfrist 30. November · Düsseldorfer Tabelle Jahreswechsel. Abmelden mit einem Klick in jeder Ausgabe.'); w.appendChild(fuss);
+    return w;
+  }
+  kaesten.ausgabe = { typ: 'Leos Wochenbrief · Ausgabe 143', dot: 'dokumente', ton: null, titel: 'Die Antworten der Woche, donnerstags', slug: 'wochenbrief-143', url: '/wochenbrief/143/', glossar: ['selbstbehalt', 'haftpflicht'], krumen: [['Service', 'service'], ['Wochenbrief', 'service']], body: ausgabeKarte };
+
+  // ---------- Level: Einsteiger, Kenner, Lotse ----------
+  var LEVEL = [['Einsteiger', 0, 'PDF-Guide „Trennung“'], ['Kenner', 100, 'Versicherungs-Check bei Finconext'], ['Lotse', 300, 'Akademie-Vorteile']];
+  function levelVon(p) { var l = 0; LEVEL.forEach(function (x, i) { if (p >= x[1]) l = i; }); return l; }
+  state.level = state.level == null ? levelVon(state.punkte) : state.level;
+  window.pruefeLevel = function () { var neu = levelVon(state.punkte); if (neu > state.level) { state.level = neu; speichern(); setTimeout(function () { anhaengen(levelKarte(neu), { leise: true }); }, 900); } };
+  function levelKarte(l) { var k = neuerKasten('pink', 'Neues Level', null, 'level'); var naechst = LEVEL[l + 1]; var anteil = naechst ? Math.min(1, (state.punkte - LEVEL[l][1]) / (naechst[1] - LEVEL[l][1])) : 1; var U = 2 * Math.PI * 34; k.innerHTML += '<div class="level__innen"><div class="level__ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="var(--rule)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="var(--pink)" stroke-width="6" stroke-linecap="round" stroke-dasharray="' + U + '" stroke-dashoffset="' + (U * (1 - anteil)) + '" transform="rotate(-90 40 40)"/></svg><b>' + (l + 1) + '</b></div><div><span class="level__stempel">' + LEVEL[l][0] + '</span><p><b>' + state.punkte + ' Punkte.</b> Freigeschaltet: ' + LEVEL[l][2] + '.' + (naechst ? ' Bis „' + naechst[0] + '“ fehlen ' + (naechst[1] - state.punkte) + ' Punkte.' : '') + '</p></div></div>'; var akt = el('div', 'reihe'); var b = el('button', 'chip', 'Belohnung ansehen'); b.onclick = function () { plusBlatt(); }; var w2 = el('button', 'chip chip--still', 'Wappen-Album'); w2.onclick = function () { starte('wappen', 'Meine Wappen'); }; akt.appendChild(b); akt.appendChild(w2); k.appendChild(akt); return k; }
+
+  // ---------- Anchor-Anzeige mobil (320 × 100), erscheint nach 400 px, weicht der Eingabe ----------
+  (function () { var a = el('div', 'anchor'); a.innerHTML = '<span class="einschub__label">Anzeige</span><img src="' + WERBUNG.mobile[0] + '" alt="Anzeige (Beispiel)"><button class="anchor__zu" aria-label="Anzeige schließen">✕</button>'; a.hidden = true; document.body.appendChild(a); var zu = false; a.querySelector('.anchor__zu').onclick = function () { zu = true; a.hidden = true; document.body.classList.remove('mit-anchor'); };
+    function pruefe() { var da = !zu && window.innerWidth <= 900 && window.scrollY > 400 && document.activeElement !== document.getElementById('frage') && document.getElementById('intro').hidden; a.hidden = !da; document.body.classList.toggle('mit-anchor', da); }
+    window.addEventListener('scroll', pruefe, { passive: true }); window.addEventListener('resize', pruefe); document.addEventListener('focusin', pruefe); document.addEventListener('focusout', function () { setTimeout(pruefe, 50); }); if (/[?&]anchor=1/.test(location.search)) { zu = false; setTimeout(function () { a.hidden = false; document.body.classList.add('mit-anchor'); }, 500); } })();
+
+  // ---------- Leerzustände: Leo weiß es nicht · Ladezustand (Skelett) · offline ----------
+  szenarien.frei = function (t, text) {
+    var n = el('div', 'wort wort--leo wort--leer'); n.appendChild(Object.assign(el('img'), { src: LEO, alt: 'Leo' })); var b = el('div'); b.appendChild(el('span', 'kicker kicker--gruen', 'Leo')); n.appendChild(b); anhaengen(n);
+    return warte(400).then(function () { return tippen(b, '<p>Dazu habe ich <b>keine Quelle</b> in den Bedingungen unserer Partner, und ich rate nicht. Was ich stattdessen tun kann:</p>'); }).then(function () { var r = el('div', 'leer__wege'); [['lupe', 'Im Bestand suchen', function () { var i = document.getElementById('frage'); i.value = text || ''; i.focus(); sprungSuche(i.value); }], ['mail', 'Die Redaktion fragen', function () { toast('Frage an die Redaktion übergeben (Demo). Antwort in 2 Werktagen im Faden.'); }], ['person', 'Beratung bei Finconext', function (ev) { uebergabe('Beratungsanfrage', ['Ihre Frage: „' + (text || '') + '“'], ev.currentTarget); }]].forEach(function (x) { var k = el('button', 'leer__weg', ikon(x[0]) + '<span>' + x[1] + '</span>'); k.onclick = x[2]; r.appendChild(k); }); b.appendChild(r); b.appendChild(el('p', 'quelle', 'Im Prototyp beantworte ich nur die Beispielfragen. Auf der echten Seite gilt dieselbe Regel: Ohne Quelle keine Antwort, aber immer ein Weg.')); });
+  };
+  function skelett() { var s = el('div', 'skelett'); s.innerHTML = '<span class="kicker">Kette wird geladen</span><i style="width:38%"></i><i style="width:82%"></i><i style="width:74%"></i><i class="skelett__bild"></i><i style="width:90%"></i><i style="width:64%"></i>'; return s; }
+  window.ladeDann = function (node) { if (reduziert) { anhaengen(node, { leise: true }); return; } var sk = anhaengen(skelett(), { leise: true }); setTimeout(function () { sk.replaceWith(node); letzterKnoten = node; node.classList.add('ks__rein'); }, 560); };
+  function offlineMeldung() { var m = meldung('Keine Verbindung', 'Der Faden bleibt lesbar, was schon da ist, bleibt da. Leo antwortet, sobald die Verbindung zurück ist; Ihre Frage wartet in der Zeile.', [['Verstanden', function () { m.remove(); }]]); m.classList.add('meldung--offline'); m.insertAdjacentHTML('afterbegin', ikon('offline', 'meldung__ikon')); }
+  window.addEventListener('offline', offlineMeldung); if (/[?&]offline=1/.test(location.search)) setTimeout(offlineMeldung, 1200);
+
+  // ---------- Teilen-Dialog: Zeitungsausriss mit Wegen ----------
+  var teilenBox = null;
+  function teilenDialog(titel, url, anker) {
+    if (!teilenBox) { teilenBox = el('div', 'teilen-dialog'); document.body.appendChild(teilenBox); document.addEventListener('click', function (ev) { if (teilenBox.classList.contains('offen') && !teilenBox.contains(ev.target) && !ev.target.closest('.teilen-anker')) teilenBox.classList.remove('offen'); }); document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') teilenBox.classList.remove('offen'); }); }
+    teilenBox.innerHTML = '<div class="teilen__ausriss"><span class="kicker">finanzleser.de</span><b>' + titel + '</b><small>' + url.replace('https://www.', '') + '</small></div>'; var wege = el('div', 'teilen__wege'); [['link', 'Link kopieren', function () { kopiere(url); teilenBox.querySelector('[data-w=link]').classList.add('gestempelt'); }], ['flieger', 'WhatsApp', function () { toast('WhatsApp öffnet mit dem Link (Demo)'); }], ['mail', 'E-Mail', function () { toast('E-Mail mit dem Link (Demo)'); }], ['drucker', 'Drucken', function () { toast('Druckansicht: die Kette ohne Leo (Demo)'); }]].forEach(function (x) { var b = el('button', null, ikon(x[0]) + '<span>' + x[1] + '</span>'); b.dataset.w = x[0]; b.onclick = x[2]; wege.appendChild(b); }); teilenBox.appendChild(wege);
+    anker.classList.add('teilen-anker'); var r = anker.getBoundingClientRect(); var breite = 340; var links = Math.max(8, Math.min(window.innerWidth - breite - 8, r.left)); teilenBox.style.left = (links + window.scrollX) + 'px'; teilenBox.style.top = (r.bottom + window.scrollY + 8) + 'px'; teilenBox.classList.add('offen');
+  }
+  window.teilenDialog = teilenDialog;
+
+  // ---------- Übergabe an Finconext: Karte im Faden, Papierflieger zum Rand ----------
+  function uebergabe(sparte, angaben, von) {
+    var k = neuerKasten('pink', 'Übergabe an Finconext', 'Leo bringt Sie zum Tarifrechner', 'uebergabe'); var innen = el('div', 'uebergabe__innen'); innen.innerHTML = '<p>Der Rechner bei Finconext ist selbst ein Gespräch. Mit dabei, damit Sie nichts doppelt tippen:</p><ul>' + [sparte].concat(angaben || []).map(function (a) { return '<li>' + ikon('haken') + a + '</li>'; }).join('') + '</ul><div class="uebergabe__linie"><i></i></div><p class="uebergabe__stand">Verbindung wird aufgebaut …</p>'; k.appendChild(innen);
+    var akt = el('div', 'reihe'); var z = el('button', 'textlink textlink--still', 'Zurück in den Faden'); z.onclick = function () { toast('Sie sind im Faden geblieben.'); }; akt.appendChild(z); k.appendChild(akt); anhaengen(k, { leise: true }); setTimeout(function () { zeigeAnfang(k); }, 60);
+    if (von && !reduziert) { var r = von.getBoundingClientRect(); var f = el('span', 'flug-flieger', ikon('flieger')); f.style.left = r.left + r.width / 2 + 'px'; f.style.top = r.top + r.height / 2 + 'px'; document.body.appendChild(f); f.animate([{ transform: 'translate(-50%,-50%) rotate(0deg) scale(1)', opacity: 1 }, { transform: 'translate(' + (window.innerWidth - r.left) + 'px,-160px) rotate(25deg) scale(.6)', opacity: 0 }], { duration: 900, easing: 'cubic-bezier(.4,0,.6,1)', fill: 'forwards' }).onfinish = function () { f.remove(); }; }
+    setTimeout(function () { innen.querySelector('.uebergabe__linie i').style.width = '100%'; }, 80);
+    setTimeout(function () { innen.querySelector('.uebergabe__stand').innerHTML = '<b>Im Prototyp bleibt es hier.</b> Auf der echten Seite öffnet sich jetzt finconext.de mit diesen Angaben; der Weg zurück ist ein Klick, der Faden wartet.'; }, reduziert ? 0 : 1600);
+  }
+  window.uebergabe = uebergabe;
+
+  // ---------- Mikroanimationen: Koffer-Flug, Glossar-Flug, Verlauf, Frage steigt auf ----------
+  function flugZu(vonRect, zielEl, klasse, inhalt, fertig) { if (!zielEl || reduziert) { if (fertig) fertig(); return; } var z = zielEl.getBoundingClientRect(); var f = el('span', klasse, inhalt); f.style.left = (vonRect.left + vonRect.width / 2) + 'px'; f.style.top = (vonRect.top + vonRect.height / 2) + 'px'; document.body.appendChild(f); var dx = z.left + z.width / 2 - (vonRect.left + vonRect.width / 2), dy = z.top + z.height / 2 - (vonRect.top + vonRect.height / 2); f.animate([{ transform: 'translate(-50%,-50%) scale(1)', opacity: 1 }, { transform: 'translate(calc(-50% + ' + (dx * .55) + 'px), calc(-50% + ' + (dy * .45 - 40) + 'px)) scale(.8)', opacity: 1, offset: .55 }, { transform: 'translate(calc(-50% + ' + dx + 'px), calc(-50% + ' + dy + 'px)) scale(.25)', opacity: .2 }], { duration: 650, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' }).onfinish = function () { f.remove(); if (fertig) fertig(); }; }
+  window.kofferFlug = function (von, fertig) { var btn = document.getElementById('kofferBtn'); var r = von && von.getBoundingClientRect ? von.getBoundingClientRect() : null; if (!r || !btn || getComputedStyle(btn).display === 'none') { if (fertig) fertig(); return; } flugZu(r, btn, 'flug-koffer', ikon('dokument'), function () { if (fertig) fertig(); btn.classList.remove('blinkt'); void btn.offsetWidth; btn.classList.add('blinkt'); var z = document.getElementById('kofferZahl'); if (z) { z.classList.remove('popt'); void z.offsetWidth; z.classList.add('popt'); } }); };
+  var _inSitzung = inSitzung; inSitzung = function (key, offen) { var vorher = document.querySelector('#glossarRail [data-k="' + key + '"]'); _inSitzung(key, offen); var e = document.querySelector('#glossarRail [data-k="' + key + '"]'); if (!e || vorher) return; var bm = document.getElementById('bmenu'); var rail = document.getElementById('randRechts'); if (offen && bm && bm.classList.contains('offen') && rail && rail.offsetParent) { flugZu(bm.getBoundingClientRect(), e, 'flug-begriff', '✦', function () { e.classList.add('neu'); setTimeout(function () { e.classList.remove('neu'); }, 1400); }); } else { e.classList.add('neu'); setTimeout(function () { e.classList.remove('neu'); }, 1400); } };
+  var _liste = listeAktualisieren; var kapitelZahl = 0; listeAktualisieren = function () { _liste(); var n = kapitel.length; if (n > kapitelZahl) { var li = document.querySelector('#kapitelListe li.aktiv') || document.querySelector('#kapitelListe li:last-child'); if (li) { li.classList.add('neu'); setTimeout(function () { li.classList.remove('neu'); }, 1600); } } kapitelZahl = n; };
+  var frageStart = null; var _senden = window.senden; window.senden = function (ev) { var i = document.getElementById('frage'); var r = i.getBoundingClientRect(); if (i.value.trim() && r.top > 0 && r.bottom < window.innerHeight && !reduziert) frageStart = { r: r, text: i.value.trim() }; return _senden(ev); };
+  userNachricht = function (text) { var n = el('div', 'wort wort--frage', '<span class="kicker">Ihre Frage</span><p>' + text + '</p>'); var s = frageStart; frageStart = null; if (s) n.style.opacity = 0; anhaengen(n); if (s) { flugZu(s.r, n, 'flug-frage', s.text, function () { n.style.transition = 'opacity .25s'; n.style.opacity = 1; }); } };
+
+  // ---------- Szenarien, Kapitel, Index, Vorschläge ----------
+  function kastenSzenario(key, intro, folge) { return function (t, text, o) { return leoNachricht([o && o.sprung ? intro[1] || intro[0] : intro[0]], { pause: 200 }).then(function () { kasten(kaesten[key], { leise: true }); if (folge) chips(folge); }); }; }
+  szenarien.anbieter = kastenSzenario('anbieterLVM', ['Die LVM ist kein Finconext-Partner, aber im Bestand: Kontakt, Kündigungsfrist und der Weg zur Schadenmeldung stehen hier, mit den Vorlagen dazu.', 'LVM Versicherung: Kontakt, Kündigung, Schaden.'], [{ text: 'Kündigungsvorlage', ziel: 'vorlage' }, { text: 'Tarife nebeneinander', ziel: 'tarife' }]);
+  szenarien.tarife = kastenSzenario('vergleichHaftpflicht', ['Vier Tarife nebeneinander, sortierbar nach Beitrag, Deckung oder Schlüsselverlust. Der Filter zeigt nur, was Schlüsselverlust ab 30.000 € deckt.', 'Der Vergleich Privathaftpflicht.'], [{ text: 'Was heißt Deckungssumme?', ziel: 'begriff-frage' }, { text: 'Zahlt die Haftpflicht bei Schlüsselverlust?', ziel: 'schluesselverlust' }]);
+  szenarien.bu = kastenSzenario('rechnerBU', ['Der BU-Rechner. Netto und Alter einstellen, die Säulen zeigen die Lücke zwischen gesetzlicher Erwerbsminderungsrente und dem, was Sie brauchen.', 'Der BU-Rechner.'], [{ text: 'Kassensturz: Wie gut bin ich aufgestellt?', ziel: 'kassensturz' }, { text: 'Wächter auf die EM-Rente', ziel: 'waechterkarte', leo: true }]);
+  szenarien.vorlage = kastenSzenario('vorlageKfz', ['Die Kündigungsvorlage. Vier Felder, der Brief schreibt sich beim Tippen mit; als PDF oder Word, oder gleich in den Aktenkoffer.', 'Die Kündigungsvorlage.'], [{ text: 'Wächter: 30 Tage vor der Frist', ziel: 'waechterkarte', leo: true }, { text: 'Tarife nebeneinander', ziel: 'tarife' }]);
+  szenarien.quiz = kastenSzenario('quiz', ['Fünf Fragen aus den Artikeln der Woche, zehn Punkte je Treffer. Die Rangliste ist freiwillig.', 'Das Wochen-Quiz.']);
+  szenarien.wappen = kastenSzenario('wappen', ['Ihr Album. Jedes Thema, das Sie zu Ende lesen oder rechnen, bringt ein Wappen; zwölf öffnen den Versicherungs-Check bei Finconext.', 'Ihre Wappen.']);
+  szenarien.rubbellos = kastenSzenario('rubbellos', ['Das Los des Tages: freirubbeln, eine Zahl lernen, 15 Punkte mitnehmen.', 'Das Los des Tages.']);
+  szenarien.gewusst = kastenSzenario('gewusst', ['Eine Frage, eine Antwort, eine Quelle.', 'Gewusst?']);
+  szenarien.waechterkarte = kastenSzenario('waechter', ['Der Wächter: Wecker auf Zahlen und Fristen, jeder einzeln, per E-Mail oder WhatsApp. Ich melde mich nur, wenn sich wirklich etwas ändert.', 'Ihre Wecker.'], [{ text: 'Kassensturz: Wie gut bin ich aufgestellt?', ziel: 'kassensturz' }]);
+  szenarien.kofferkarte = kastenSzenario('koffer', ['Ihr Aktenkoffer. Was älter ist als die Werte, die dahinterstehen, markiere ich; dann rechnen wir neu.', 'Ihr Aktenkoffer.']);
+  szenarien.kind = kastenSzenario('kind', ['Ein Kind kommt. Hier ist die Reihenfolge: was vor der Geburt zu tun ist, was danach, was im ersten Jahr. Ich hake mit ab und stelle die Wecker.', 'Ein Kind kommt.'], [{ text: 'Wie viel Elterngeld bekomme ich?', ziel: 'demo-tool' }, { text: 'Unterhaltsrechner 2026', ziel: 'unterhalt' }]);
+  szenarien.ausgabe = kastenSzenario('ausgabe', ['Die Ausgabe von Donnerstag: drei Antworten der Woche, das Finanzwort, die Termine des Wächters. Jeder Link führt in den Faden.', 'Die Wochenbrief-Ausgabe 143.'], [{ text: 'Wochenbrief abonnieren', ziel: 'wochenbrief' }, { text: 'Wochen-Quiz spielen', ziel: 'quiz', spiel: true }]);
+  Object.assign(NEUES_KAPITEL, { anbieter: ['LVM Versicherung', ['Service', 'Anbieter']], tarife: ['Privathaftpflicht: Tarife nebeneinander', ['Finanztools', 'Vergleiche']], bu: ['BU-Rechner', ['Finanztools', 'Rechner']], vorlage: ['Kündigung Kfz-Versicherung', ['Service', 'Dokumente']], quiz: ['Wochen-Quiz #37', ['Finanztools', 'Spiele']], wappen: ['Wappen-Album', ['Finanzleser Plus', 'Wappen']], rubbellos: ['Los des Tages', ['Finanztools', 'Spiele']], gewusst: ['Gewusst?', ['Finanztools', 'Spiele']], waechterkarte: ['Der Wächter', ['Finanzleser Plus', 'Wächter']], kofferkarte: ['Mein Aktenkoffer', ['Finanzleser Plus', 'Aktenkoffer']], kind: ['Ein Kind kommt', ['Ratgeber', 'Recht', 'Familie']], ausgabe: ['Wochenbrief · Ausgabe 143', ['Service', 'Wochenbrief']] });
+  [['Anbieter', 'LVM Versicherung: Kontakt, Kündigung, Schaden', 'anbieter'], ['Vergleich', 'Privathaftpflicht: vier Tarife nebeneinander', 'tarife'], ['Rechner', 'BU-Rechner: Wie groß ist Ihre Lücke?', 'bu'], ['Dokument', 'Kündigung Kfz-Versicherung (Vorlage)', 'vorlage'], ['Spiel', 'Wochen-Quiz #37', 'quiz'], ['Spiel', 'Wappen-Album', 'wappen'], ['Spiel', 'Los des Tages', 'rubbellos'], ['Service', 'Der Wächter: Wecker stellen', 'waechterkarte'], ['Plus', 'Mein Aktenkoffer', 'kofferkarte'], ['Ratgeber', 'Ein Kind kommt: Was jetzt zu tun ist', 'kind'], ['Wochenbrief', 'Ausgabe 143', 'ausgabe']].forEach(function (e) { INDEX.push(e); });
+  FOLGE_CHIPS.schluesselverlust.splice(2, 0, { text: 'Tarife nebeneinander', ziel: 'tarife' }); FOLGE_CHIPS.unterhalt.splice(0, 0, { text: 'Ein Kind kommt: Was jetzt zu tun ist', ziel: 'kind' }); FOLGE_CHIPS.kassensturz.splice(0, 0, { text: 'BU-Rechner: Ihre Lücke', ziel: 'bu' });
+  FOLGE_CHIPS.tarife = [{ text: 'LVM: Kontakt und Kündigung', ziel: 'anbieter' }, { text: 'Kündigungsvorlage', ziel: 'vorlage' }, { text: 'Kassensturz: Wie gut bin ich aufgestellt?', ziel: 'kassensturz' }];
+  FOLGE_CHIPS.quiz = [{ text: 'Los des Tages', ziel: 'rubbellos', spiel: true }, { text: 'Meine Wappen', ziel: 'wappen' }, { text: 'Finanzwort des Tages', ziel: 'wortspiel', spiel: true }];
+  FRAGE_NACH.tarife = 'haftpflicht'; FRAGE_NACH.bu = 'kassensturz'; FRAGE_NACH.kind = 'kinder'; FRAGE_NACH.anbieter = 'kfz';
+
+  ARTIKEL.schluesselverlust.abschnitte[0].embed = 'torte';
+  // Plus-Blatt: Wege zu Wappen, Wächter und Koffer-Karte
+  var _plusBlatt = window.plusBlatt; window.plusBlatt = function () { _plusBlatt(); var innen = document.querySelector('#blatt .blatt__innen'); if (!innen) return; var z = el('div', 'blatt__wege'); [['wappen', 'Wappen-Album', 'wappen'], ['glocke', 'Wächter stellen', 'waechterkarte'], ['koffer', 'Aktenkoffer im Faden', 'kofferkarte'], ['stern', 'Wochen-Quiz', 'quiz']].forEach(function (x) { var b = el('button', 'chip', ikon(x[0]) + ' ' + x[1]); b.onclick = function () { blattZu(); starte(x[2], x[1]); }; z.appendChild(b); }); innen.appendChild(z); };
+
+  window.inDenKoffer = inDenKoffer;
+
+  // ---------- „Das sieht Google“: die kanonische Seite jeder Karte, mit ihrer Adresse ----------
+  window.kulissenFuer = function (def, node) {
+    if (!def || !def.url) { toast('Diese Karte hat keine eigene Adresse; sie lebt nur im Faden.'); return; }
+    var s = document.getElementById('seite'); document.getElementById('seiteUrl').innerHTML = 'www.finanzleser.de<b>' + def.url + '</b>';
+    var art = document.getElementById('seiteInhalt'); art.innerHTML = '';
+    if (def.krumen) art.appendChild(krumen(def.krumen));
+    art.appendChild(el('span', 'kicker kicker--gruen', (def.typ || 'Karte') + (def.slug ? ' · ' + def.slug : ''))); art.appendChild(el('h2', 'titel', def.titel));
+    if (node) { var kopie = node.cloneNode(true); kopie.classList.add('kasten--kulisse'); kopie.querySelectorAll('.kasten__fuss, .einwurf, .belohnung, .hbox, canvas, .krumen, h3.titel').forEach(function (x) { x.remove(); }); kopie.querySelectorAll('button, input, select').forEach(function (b) { b.disabled = true; }); art.appendChild(kopie); }
+    art.appendChild(el('p', 'quelle', 'So kommt diese Karte unter ihrer eigenen Adresse vom Server: vollständig im HTML, mit Titel, Beschreibung, Canonical, JSON-LD und Sitemap-Eintrag, ohne Leo. Im Faden ist sie ein Kapitel; Google, Bing und KI-Suchmaschinen sehen diese Seite.'));
+    s.classList.add('offen'); s.scrollTop = 0; document.body.style.overflow = 'hidden'; try { history.pushState({ kulisse: true }, '', location.href); } catch (e) {}
+  };

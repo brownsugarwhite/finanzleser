@@ -1,0 +1,186 @@
+
+  // ======================================================================
+  // 05b · Echte Inhalte aus cms-dev. tools/faden-export.mjs schreibt window.FADEN_DATEN nach 02b-daten.html;
+  //       hier werden Ratgeber, Glossar, Spiele und Options in die Strukturen des Prototyps gelegt.
+  //       Ohne 02b läuft der Prototyp mit seinen eingebauten Beispielen weiter.
+  // ======================================================================
+  var DATEN = window.FADEN_DATEN || null;
+  var TOOL_KEY = { 'rechner/unterhalt': 'unterhalt', 'vergleich/private-haftpflichtversicherung-vergleich': 'tarife', 'vergleich/hundekrankenversicherung-vergleich': 'hund', 'checkliste/private-haftpflichtversicherung': 'checkliste' };
+  var TYP_LABEL = { rechner: ['Rechner', 'rechner', 'pink'], checkliste: ['Checkliste', 'checkliste', 'lila'], vergleich: ['Vergleich', 'vergleich', 'tuerkis'], dokumente: ['Dokumente', 'dokumente', 'terra'], post: ['Ratgeber', 'rechner', 'gruen'], glossar: ['Glossar', 'rechner', 'gruen'] };
+  // Ziel aus dem Inhaltsvertrag ({ typ, slug }) → Szenario-Schlüssel des Prototyps
+  function zielKey(z) {
+    if (!z || !z.typ) return 'frei';
+    if (z.typ === 'post') return ARTIKEL[z.slug] ? z.slug : 'demo-ratgeber';
+    if (z.typ === 'glossar') return GLOSSAR[z.slug] ? 'begriff:' + z.slug : 'glossar';
+    if (z.typ === 'kassensturz' || z.typ === 'whatsapp' || z.typ === 'wochenbrief') return z.typ;
+    if (z.typ === 'keins') return 'ks-frisch';
+    var tk = TOOL_KEY[z.typ + '/' + z.slug]; if (tk) return tk; return kaesten['tool:' + z.typ + '/' + z.slug] ? 'tool:' + z.typ + '/' + z.slug : 'demo-tool';
+  }
+  function zielStarten(key, text) { if (key.indexOf('begriff:') === 0) { var k = key.slice(8); starte('begriff', 'Was bedeutet „' + (GLOSSAR[k] ? GLOSSAR[k].name : k) + '“?', false, false, null, null, null, k); } else starte(key, text); }
+  function toolTitel(typ, slug) { return (DATEN && DATEN.tools && DATEN.tools[typ + '/' + slug]) || (DATEN && DATEN.titel && DATEN.titel[slug]) || slug; }
+  function datumDe(iso) { if (!iso) return ''; var p = iso.split('-'); return p.length === 3 ? (+p[2]) + '. ' + ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'][+p[1] - 1] + ' ' + p[0] : iso; }
+
+  // ---------- Werkzeug in der Kette: echter Unterhaltsrechner, sonst Platzhalter mit Sprung zur Karte ----------
+  window.werkzeugKarte = function (t) {
+    var lab = TYP_LABEL[t.typ] || ['Werkzeug', 'rechner', 'pink']; var slugs = t.slugs || [t.slug];
+    var k = el('div', 'kasten kasten--' + lab[2] + ' kasten--inline');
+    if (t.grund) k.appendChild(el('div', 'einwurf einwurf--inline', 'Leo wirft ein: ' + t.grund));
+    k.appendChild(el('span', 'kicker kicker--tool kicker--gruen', '<i class="dot dot--' + lab[1] + '"></i>' + lab[0] + (t.nachtrag ? ' · zum Ratgeber' : ' · in der Kette')));
+    k.appendChild(el('h3', null, t.typ === 'dokumente' && slugs.length > 1 ? 'Dokumente zum Ratgeber' : toolTitel(t.typ, t.slug)));
+    var key = zielKey({ typ: t.typ, slug: t.slug });
+    if (t.typ === 'dokumente') { var ul = el('ul', 'dokumente'); slugs.forEach(function (s) { ul.appendChild(el('li', null, '<i class="dot dot--dokumente"></i>' + toolTitel(t.typ, s) + ' <small>PDF</small>')); }); k.appendChild(ul); }
+    if (key === 'unterhalt') k.appendChild(unterhaltsrechner());
+    else { k.appendChild(el('p', 'quelle', 'Auf der Seite steht hier ' + (t.typ === 'dokumente' ? 'die Dokumentliste zum Ausdrucken' : t.typ === 'checkliste' ? 'die interaktive Checkliste' : t.typ === 'vergleich' ? 'die Vergleichstabelle' : 'der interaktive Rechner') + '; der Prototyp zeigt den Platz.')); var b = el('button', 'btn btn--klein', 'Als Karte öffnen'); b.onclick = function () { starte(key, lab[0] + ': ' + toolTitel(t.typ, t.slug)); }; k.appendChild(b); }
+    return k;
+  };
+  function einwurfDef(e) { var lab = TYP_LABEL[e.typ] || ['Werkzeug', 'rechner', 'pink']; var key = zielKey(e); return { typ: lab[0], dot: lab[1], ton: lab[2], titel: toolTitel(e.typ, e.slug), slug: e.typ + '-' + e.slug, url: e.typ === 'post' ? '/' + e.slug + '/' : '/finanztools/' + (e.typ === 'rechner' ? 'rechner' : e.typ === 'checkliste' ? 'checklisten' : 'vergleiche') + '/' + e.slug + '/', grund: e.grund, krumen: [['Finanztools', 'finanztools'], [lab[0], 'finanztools']], body: function () { if (key === 'unterhalt') return unterhaltsrechner(); var d = el('div'); d.appendChild(el('p', 'quelle', 'Platzhalter im Prototyp: Auf der Seite erscheint hier das echte Werkzeug als Karte.')); var b = el('button', 'btn btn--klein', 'Als Karte öffnen'); b.onclick = function () { starte(key, lab[0] + ': ' + toolTitel(e.typ, e.slug)); }; d.appendChild(b); return d; } }; }
+
+  // ---------- Spielboxen aus dem Beitrag (Feldnamen wie im Content Studio) ----------
+  function schaetzKarte(f) {
+    var min = +f.min || 0, max = +f.max || 100, richtig = +f.antwort || 0, einheit = f.einheit || ''; var geld = einheit === '€'; var fmt = function (v) { return geld ? eur(v) : v.toLocaleString('de-DE') + (einheit ? ' ' + einheit : ''); };
+    var spanne = max - min; var step = spanne >= 20000 ? 100 : spanne >= 2000 ? 10 : 1; var start = Math.round((min + spanne / 2) / step) * step;
+    var w = el('div', 'spiel'); w.innerHTML = '<div class="frage">' + f.frage + '</div><div class="schaetz" data-f="wert">' + fmt(start) + '</div><input type="range" data-f="range" min="' + min + '" max="' + max + '" step="' + step + '" value="' + start + '" aria-label="Schätzung"><div class="antworten"><button class="chip chip--spiel" data-f="ok">Das ist mein Tipp</button></div><div class="aufloesung"></div>';
+    var range = w.querySelector('[data-f="range"]'), wert = w.querySelector('[data-f="wert"]'); range.addEventListener('input', function () { wert.textContent = fmt(+range.value); });
+    w.querySelector('[data-f="ok"]').onclick = function () { var tipp = +range.value, abw = Math.abs(tipp - richtig), rel = abw / Math.max(1, spanne), pts = rel <= .01 ? 50 : rel <= .05 ? 30 : rel <= .15 ? 10 : 0; w.classList.add('fertig'); state.punkte += pts; speichern(); aktualisiereZahlen(); if (pts > 0) belohne(w.closest('.kasten'), pts); var raster = rel <= .01 ? '🟩🟩🟩' : rel <= .05 ? '🟩🟩⬜' : rel <= .15 ? '🟩⬜⬜' : '⬜⬜⬜'; w.querySelector('.aufloesung').innerHTML = '<b>' + fmt(richtig) + '</b> ' + (f.aufloesung || '') + (f.quelle ? ' <span class="quelle">' + f.quelle + '</span>' : '') + ' Ihre Schätzung lag ' + fmt(abw) + ' daneben. <span class="punkte">+' + pts + ' Punkte</span><div class="raster" style="margin-top:8px">' + raster + '</div>'; };
+    return w;
+  }
+  function quizEinzeln(f) {
+    var w = el('div', 'quiz'); var buehne = el('div', 'quiz__buehne'); w.appendChild(buehne); buehne.appendChild(el('div', 'quiz__frage', f.frage)); var opts = el('div', 'quiz__optionen'); var richtig = 'ABCD'.indexOf((f.richtig || 'A').toUpperCase().charAt(0));
+    ['a', 'b', 'c', 'd'].forEach(function (k, j) { if (!f[k]) return; var b = el('button', 'quiz__option', '<i>' + 'ABCD'[j] + '</i>' + f[k]); b.onclick = function () { opts.querySelectorAll('button').forEach(function (x) { x.disabled = true; }); var ok = j === richtig; b.classList.add(ok ? 'richtig' : 'falsch'); if (opts.children[richtig]) opts.children[richtig].classList.add('richtig'); var erg = el('div', 'quiz__ergebnis'); erg.innerHTML = '<b>' + (ok ? 'Richtig.' : 'Leider nein.') + '</b> ' + (f.erklaerung || '') + (ok ? ' <span class="punkte">+10 Punkte</span>' : ''); buehne.appendChild(erg); if (ok) { state.punkte += 10; speichern(); aktualisiereZahlen(); belohne(w.closest('.kasten'), 10); } }; opts.appendChild(b); });
+    buehne.appendChild(opts); return w;
+  }
+  window.spielKarte = function (t) {
+    var f = t.felder || {}; var label = { mythos: 'Mythos oder Fakt?', quiz: 'Quizfrage', schaetzen: 'Schätzfrage', karte: 'Begriffskarte', gewusst: 'Schon gewusst?', test: 'Selbsttest' }[t.typ] || 'Spiel';
+    var k = el('div', 'kasten kasten--pink kasten--inline spiel-inline'); k.appendChild(el('span', 'kicker kicker--pink', 'Spiel · ' + label + ' · in der Kette'));
+    var body;
+    if (t.typ === 'mythos') body = mythos(f.aussage || f.behauptung || '', /^ja/i.test(f.stimmt || '') ? 'Fakt' : 'Mythos', f.aufloesung || '');
+    else if (t.typ === 'quiz') body = quizEinzeln(f);
+    else if (t.typ === 'schaetzen') body = schaetzKarte(f);
+    else if (t.typ === 'karte') body = gewusstBox(f.begriff || '', f.erklaerung || '', '');
+    else if (t.typ === 'test') body = gewusstBox(f.frage || '', f.antwort || '', '');
+    else body = el('p', null, f.text || f.frage || '');
+    k.appendChild(body); return k;
+  };
+
+  // ---------- Bedingungen aus den Options (Kassensturz) ----------
+  function bed(w, a) {
+    if (!w) return true; if (w.alle) return w.alle.every(function (x) { return bed(x, a); }); var v = a[w.feld];
+    if ('ist' in w) return v === w.ist; if ('nicht' in w) return v !== w.nicht; if (w['in']) return w['in'].indexOf(v) > -1;
+    if ('ohne' in w) return (v || []).indexOf(w.ohne) === -1; if ('mit' in w) return (v || []).indexOf(w.mit) > -1; if ('gesetzt' in w) return !!v === !!w.gesetzt; return true;
+  }
+
+  if (DATEN) {
+    // ---------- Ratgeber ----------
+    var lebenslage = function (a) { var s = (a.slug + ' ' + a.titel).toLowerCase(); return /kind|unterhalt|elterngeld|düsseldorf/.test(s) ? 'kinder' : /rente/.test(s) ? 'rente' : /steuer|elster/.test(s) ? 'steuer' : /haftpflicht|hausrat/.test(s) ? 'haftpflicht' : /hund|tier/.test(s) ? 'hund' : /kfz|auto/.test(s) ? 'kfz' : 'kassensturz'; };
+    DATEN.artikel.forEach(function (a) {
+      ARTIKEL[a.slug] = a; NEUES_KAPITEL[a.slug] = [a.titel, a.krumen.map(function (k) { return k[0]; })]; INDEX.push(['Ratgeber', a.titel, a.slug]); FRAGE_NACH[a.slug] = lebenslage(a);
+      szenarien[a.slug] = function (tiefLink, text, o) {
+        o = o || {}; var s = a.kurzSaetze || [];
+        var p = tiefLink ? leoNachricht(['Willkommen zurück. Sie haben den Ratgeber „' + a.titel + '“ geöffnet. Er steht hier ganz' + (o.abschnitt ? ', ich springe zu der Stelle, die verlinkt war.' : '. Fragen Sie mich zu jedem Abschnitt, grüne Begriffe erklären sich auf Tipp.')], { pause: 300 })
+          : o.sprung ? leoNachricht(['Hier ist der Ratgeber „' + a.titel + '“, ganz ausgerollt. Fragen Sie mich zu jedem Abschnitt, oder lassen Sie sich die Kurzfassung geben.'], { pause: 250 })
+          : leoNachricht(s.length ? [s.slice(0, 2).join(' '), 'Der Ratgeber dazu, Stand ' + a.stand.replace('aktualisiert ', '') + ':'] : ['Der Ratgeber dazu:'], { quellen: a.quellen });
+        return p.then(function () { kette(a.slug, { abschnitt: o.abschnitt }); return warte(tiefLink ? 1400 : 900); });
+      };
+      szenarien['kurzfassung-' + a.slug] = function () { return leoNachricht(a.leoKurz || ['Zu diesem Ratgeber gibt es noch keine Kurzfassung.'], { quellen: a.quellen }).then(function () { chips(a.dazu.slice(0, 2).map(function (d) { return { text: d[0], ziel: zielKey({ typ: d[2] || 'post', slug: d[1] }) }; })); }); };
+      FOLGE_CHIPS[a.slug] = [{ text: 'Kurzfassung von Leo', ziel: 'kurzfassung-' + a.slug }].concat(a.dazu.slice(0, 2).map(function (d) { return { text: d[0], ziel: zielKey({ typ: d[2] || 'post', slug: d[1] }) }; })).concat([{ text: 'Kassensturz: Wie gut bin ich aufgestellt?', ziel: 'kassensturz' }]);
+    });
+    // ---------- Werkzeuge: jede Karte aus dem CMS (Rechner, Vergleich, Checkliste, Dokument) ist im Prototyp eine eigene Karte mit Titel und Adresse ----------
+    var TOOL_PFAD = { rechner: 'rechner', vergleich: 'vergleiche', checkliste: 'checklisten', dokumente: 'dokumente' };
+    var TOOL_REITER = { rechner: 'Rechner', vergleich: 'Vergleiche', checkliste: 'Checklisten' };
+    var TOOL_SATZ = { rechner: ['Hier ist der Rechner „{t}“. Auf der Seite rechnet er direkt hier im Faden, der Prototyp zeigt den Platz.', 'Der Rechner „{t}“, als Karte im Faden.'], vergleich: ['Hier ist der Vergleich „{t}“. Auf der Seite stehen die Tarife hier nebeneinander, mit Partnerlinks und Kennzeichnung.', 'Der Vergleich „{t}“, als Karte im Faden.'], checkliste: ['Hier ist die Checkliste „{t}“. Auf der Seite haken Sie sie direkt hier ab, der Stand landet im Aktenkoffer.', 'Die Checkliste „{t}“, als Karte im Faden.'], dokumente: ['Hier ist das Dokument „{t}“: Vorschau, Download, und ich erkläre die Felder auf Nachfrage.', 'Das Dokument „{t}“, als Karte im Faden.'] };
+    var toolThema = {}; // typ/slug → Thema des ersten Beitrags, der das Werkzeug einbettet
+    DATEN.artikel.forEach(function (a) { var tn = (a.krumen[2] || [])[0] || ''; a.abschnitte.forEach(function (ab) { (ab.teile || []).forEach(function (t) { if (!t.typ || !TOOL_PFAD[t.typ]) return; (t.slugs || [t.slug]).forEach(function (sl) { var id = t.typ + '/' + sl; if (sl && !toolThema[id]) toolThema[id] = tn; }); }); }); });
+    var reiter = { rechner: [], vergleich: [], checkliste: [] }, dokumente = [];
+    Object.keys(DATEN.tools).sort(function (x, y) { return DATEN.tools[x].localeCompare(DATEN.tools[y], 'de'); }).forEach(function (id) {
+      var p = id.split('/'), typ = p[0], slug = p[1], titel = DATEN.tools[id]; if (!TOOL_PFAD[typ]) return;
+      var lab = TYP_LABEL[typ] || ['Werkzeug', 'rechner', 'pink']; var key = 'tool:' + id; var url = '/finanztools/' + TOOL_PFAD[typ] + '/' + slug + '/';
+      kaesten[key] = { typ: lab[0], dot: lab[1], ton: lab[2], titel: titel, slug: typ + '-' + slug, url: url, krumen: [['Finanztools', 'finanztools'], [typ === 'dokumente' ? 'Dokumente' : TOOL_REITER[typ], typ === 'dokumente' ? 'service' : 'finanztools', typ === 'dokumente' ? 'dokumente' : TOOL_REITER[typ] + ' (' + Object.keys(DATEN.tools).filter(function (k) { return k.indexOf(typ + '/') === 0; }).length + ')']],
+        body: function () { var d = el('div'); if (typ === 'dokumente') { var ul = el('ul', 'dokumente'); ul.appendChild(el('li', null, '<i class="dot dot--dokumente"></i>' + titel + ' <small>PDF</small>')); d.appendChild(ul); } d.appendChild(el('p', 'quelle', 'Auf der Seite steht hier ' + (typ === 'dokumente' ? 'die Vorschau mit Download' : typ === 'checkliste' ? 'die interaktive Checkliste' : typ === 'vergleich' ? 'die Vergleichstabelle mit Partnerlinks' : 'der interaktive Rechner') + '; der Prototyp zeigt den Platz. Adresse: finanzleser.de' + url)); return d; } };
+      szenarien[key] = kastenSzenario(key, TOOL_SATZ[typ].map(function (t) { return t.replace('{t}', titel); }));
+      NEUES_KAPITEL[key] = [titel, ['Finanztools', typ === 'dokumente' ? 'Dokumente' : TOOL_REITER[typ]]];
+      if (typ === 'dokumente') dokumente.push([titel, 'PDF' + (toolThema[id] ? ' · ' + toolThema[id] : ''), key]); else reiter[typ].push([titel, toolThema[id] || 'Finanztool', TOOL_KEY[id] || key]);
+    });
+    Object.keys(FINANZTOOLS.reiter).forEach(function (k) { delete FINANZTOOLS.reiter[k]; });
+    ['rechner', 'vergleich', 'checkliste'].forEach(function (typ) { FINANZTOOLS.reiter[TOOL_REITER[typ] + ' (' + reiter[typ].length + ')'] = reiter[typ]; });
+    FINANZTOOLS.meist = FINANZTOOLS.meist.filter(function (m) { return m[1] !== 'demo'; }); var rb = Object.keys(DATEN.tools).filter(function (k) { return k.indexOf('rechner/') === 0 && /rentenbesteuerung/i.test(DATEN.tools[k]); })[0]; if (rb) FINANZTOOLS.meist.push([DATEN.tools[rb], zielKey({ typ: 'rechner', slug: rb.split('/')[1] }), 'rechner']);
+    SERVICE.dokumente = dokumente;
+    // ---------- Rubriken und Themen für Register und Zeitungsspalten aus den Krumen der Beiträge (ersetzt die Demo-Listen) ----------
+    var rubReihe = ['finanzen', 'versicherungen', 'steuern', 'recht'], neuR = {}, neuT = {};
+    DATEN.artikel.forEach(function (a) {
+      var k1 = a.krumen[1] || [], k2 = a.krumen[2] || [];
+      var rk = k1[2] || a.rubrik || 'finanzen', rn = k1[0] || rk, tk = k2[3] || rk + '-weitere', tn = k2[0] || 'Weitere Themen';
+      if (!neuR[rk]) neuR[rk] = { titel: rn, themen: [], zahl: 0 };
+      if (!neuT[tk]) { neuT[tk] = { name: tn, liste: [], werkzeuge: [], _w: {} }; neuR[rk].themen.push(tk); }
+      neuR[rk].zahl++; neuT[tk].liste.push([a.titel, 'Ratgeber · ' + (a.lesezeit || ''), a.slug]);
+      a.abschnitte.forEach(function (ab) { (ab.teile || []).forEach(function (t) { if (!/^(rechner|checkliste|vergleich)$/.test(t.typ) || !t.slug) return; var id = t.typ + '/' + t.slug; if (neuT[tk]._w[id]) return; neuT[tk]._w[id] = 1; neuT[tk].werkzeuge.push([(TYP_LABEL[t.typ] || ['Werkzeug'])[0] + ': ' + toolTitel(t.typ, t.slug), zielKey({ typ: t.typ, slug: t.slug }), t.typ]); }); });
+    });
+    Object.keys(neuT).forEach(function (k) { neuT[k].liste.sort(function (x, y) { return x[0].localeCompare(y[0], 'de'); }); neuT[k].werkzeuge = neuT[k].werkzeuge.slice(0, 6); delete neuT[k]._w; });
+    Object.keys(neuR).forEach(function (k) { neuR[k].themen.sort(function (x, y) { return neuT[y].liste.length - neuT[x].liste.length || neuT[x].name.localeCompare(neuT[y].name, 'de'); }); });
+    Object.keys(RUBRIKEN).forEach(function (k) { delete RUBRIKEN[k]; }); Object.keys(THEMEN).forEach(function (k) { delete THEMEN[k]; });
+    rubReihe.concat(Object.keys(neuR)).forEach(function (k) { if (neuR[k] && !RUBRIKEN[k]) RUBRIKEN[k] = neuR[k]; });
+    Object.keys(neuT).forEach(function (k) { THEMEN[k] = neuT[k]; });
+    // Glossar: Verweise erst jetzt, weil sie auf ARTIKEL zeigen
+    Object.keys(GLOSSAR).forEach(function (k) { delete GLOSSAR[k]; });
+    DATEN.glossar.forEach(function (g) {
+      var e = { name: g.name, varianten: g.varianten || [], erkl: g.erkl, frage: g.frage ? [g.frage] : null, antwort: g.antwort, quelle: g.quelle, rubrik: g.rubrik, wappen: g.wappen };
+      if (g.ratgeber) { var rk = zielKey({ typ: 'post', slug: g.ratgeber }); e.ratgeber = [DATEN.titel[g.ratgeber] || g.ratgeber, rk === 'demo-ratgeber' ? 'demo' : rk, ARTIKEL[g.ratgeber] ? ARTIKEL[g.ratgeber].krumen.map(function (k) { return k[0]; }) : null]; }
+      if (g.tool) { var p = g.tool.split('/'); var tk = zielKey({ typ: p[0], slug: p[1] }); e.tool = [(TYP_LABEL[p[0]] || ['Werkzeug'])[0] + ': ' + toolTitel(p[0], p[1]), tk === 'demo-tool' ? 'demo' : tk, (TYP_LABEL[p[0]] || ['', 'rechner'])[1]]; }
+      GLOSSAR[g.slug] = e;
+    });
+    // Suchindex: Demo-Ziele und die Beispielbegriffe raus, echte Begriffe, Werkzeuge, Rubriken und Themen rein
+    for (var ix = INDEX.length - 1; ix >= 0; ix--) { var e = INDEX[ix]; if (e[2] === 'demo' || e[0] === 'Begriff' || (typeof e[2] === 'string' && e[2].indexOf('blatt:ratgeber') === 0)) INDEX.splice(ix, 1); }
+    Object.keys(GLOSSAR).forEach(function (k) { INDEX.push(['Begriff', GLOSSAR[k].name, 'begriff:' + k]); });
+    Object.keys(kaesten).forEach(function (k) { if (k.indexOf('tool:') === 0) INDEX.push([kaesten[k].typ, kaesten[k].titel, k]); });
+    Object.keys(RUBRIKEN).forEach(function (rk) { INDEX.push(['Rubrik', RUBRIKEN[rk].titel, 'blatt:ratgeber:' + rk]); RUBRIKEN[rk].themen.forEach(function (tk) { INDEX.push(['Thema', THEMEN[tk].name + ' · ' + RUBRIKEN[rk].titel, 'blatt:ratgeber:' + rk + ':' + tk]); }); });
+    var RANG = { Ratgeber: 0, Rubrik: 1, Thema: 1, Rechner: 2, Vergleich: 2, Checkliste: 2, Begriff: 3, Dokumente: 4 }; INDEX.sort(function (x, y) { return (RANG[x[0]] === undefined ? 5 : RANG[x[0]]) - (RANG[y[0]] === undefined ? 5 : RANG[y[0]]); });
+    BEGRIFF_RX = null; BEGRIFF_MAP = null; // Verlinkungs-Regex neu aufbauen, falls sie beim Laden schon aus den Beispielbegriffen entstand
+    // ---------- Spiele nach Datum ----------
+    var heute = new Date().toISOString().slice(0, 10);
+    var spielAm = function (typ) { var l = DATEN.spiele.filter(function (s) { return s.typ === typ; }).sort(function (a, b) { return (a.datum || '').localeCompare(b.datum || ''); }); return l.filter(function (s) { return s.datum >= heute; })[0] || l[l.length - 1] || null; };
+    var fw = spielAm('finanzwort'); if (fw && fw.felder.wort) { WORTSPIEL = { nr: datumDe(fw.datum), wort: fw.felder.wort.toUpperCase(), key: fw.felder.begriff, hinweis1: fw.felder.hinweis1 || '', hinweis2: fw.felder.hinweis2 || '' }; if (!GLOSSAR[WORTSPIEL.key]) GLOSSAR[WORTSPIEL.key] = { name: fw.felder.wort, varianten: [], erkl: fw.felder.erklaerung || '' }; NEUES_KAPITEL.wortspiel = ['Finanzwort des Tages · ' + datumDe(fw.datum), ['Spiel']]; kaesten.wortspiel.titel = 'Finanzwort · ' + datumDe(fw.datum); }
+    var qz = DATEN.spiele.filter(function (s) { return s.typ === 'quiz' && s.felder.fragen; }).sort(function (a, b) { return (b.datum || '').localeCompare(a.datum || ''); })[0];
+    if (qz) { QUIZ = qz.felder.fragen.map(function (q) { return { f: q.frage, o: ['a', 'b', 'c', 'd'].map(function (k) { return q[k]; }).filter(Boolean), r: 'ABCD'.indexOf((q.richtig || 'A').toUpperCase().charAt(0)), e: q.erklaerung }; }); kaesten.quiz.titel = qz.titel; kaesten.quiz.slug = qz.slug; kaesten.quiz.url = '/spiele/' + qz.slug + '/'; NEUES_KAPITEL.quiz = ['Wochen-Quiz ' + (qz.felder.nr || ''), ['Finanztools', 'Spiele']]; }
+    var gw = spielAm('gewusst'); if (gw) { kaesten.gewusst.body = function () { return gewusstBox(gw.felder.frage, gw.felder.antwort, gw.felder.quelle); }; kaesten.gewusst.titel = gw.titel.replace(/^Gewusst\? · /, ''); }
+    var my = spielAm('mythos'); if (my) { kaesten.spielUnterhalt.body = function () { return mythos(my.felder.aussage, /^ja/i.test(my.felder.stimmt || '') ? 'Fakt' : 'Mythos', my.felder.aufloesung + (my.felder.quelle ? ' (' + my.felder.quelle + ')' : '')); }; kaesten.spielUnterhalt.titel = 'Mythos oder Fakt? · ' + datumDe(my.datum); kaesten.spielUnterhalt.slug = my.slug; kaesten.spielUnterhalt.url = '/spiele/' + my.slug + '/'; }
+    var sc = spielAm('schaetzen'); if (sc) { kaesten.tagesfrage.body = function () { return schaetzKarte(sc.felder); }; kaesten.tagesfrage.titel = 'Zahl des Tages · ' + datumDe(sc.datum); kaesten.tagesfrage.slug = sc.slug; kaesten.tagesfrage.url = '/spiele/' + sc.slug + '/'; NEUES_KAPITEL.tagesfrage = ['Zahl des Tages · ' + datumDe(sc.datum), ['Spiel']]; }
+    // ---------- Options ----------
+    var O = DATEN.options || {};
+    if (O.faden_kassensturz && O.faden_kassensturz.fragen) {
+      var ks = O.faden_kassensturz;
+      KS_FRAGEN = ks.fragen.map(function (f) { var c = {}; Object.keys(f).forEach(function (k) { c[k] = f[k]; }); if (f.wenn) c.wenn = function (a) { return bed(f.wenn, a); }; return c; });
+      if (ks.ikonen) Object.keys(ks.ikonen).forEach(function (k) { KS_IKON[k] = ks.ikonen[k]; });
+      ksErgebnis = function (a) {
+        var luecken = (ks.luecken || []).filter(function (l) { return bed(l.wenn, a); }).map(function (l) { return { kurz: l.kurz, t: l.titel, s: l.text, links: (l.links || []).map(function (x) { return [x.text, zielKey(x)]; }) }; });
+        var gut = (ks.gut || []).filter(function (g) { return bed(g.wenn, a); }).map(function (g) { return g.kurz; });
+        var pr = ks.profil || {}; var n = Math.min(luecken.length, (ks.score && ks.score.max_luecken) || 3); var profil = (pr.vorlage || '').replace('{status}', (pr.status || {})[a.status] || 'berufstätig').replace('{haushalt}', (pr.haushalt || {})[a.haushalt] || 'im eigenen Haushalt').replace('{wohnen}', (pr.wohnen || {})[a.wohnen] || 'zur Miete').replace('{schluss}', (pr.schluss || {})[String(n)] || '');
+        return { profil: profil, luecken: luecken.slice(0, n), gut: gut };
+      };
+    }
+    if (O.faden_leo_fragt) {
+      var ALT = { kfz: ['kfz-frisch', 'kfz-alt', 'kfz-kein'], hund: ['hund-op', 'hund-voll', 'hund-nein'], kinder: ['kinder-1', 'kinder-2', 'kinder-3'], kassensturz: ['ks-frisch', 'kassensturz', 'kassensturz'], weiterlesen: ['whatsapp', 'wochenbrief'] };
+      O.faden_leo_fragt.forEach(function (f) { var d = { text: f.text }; if (f.art === 'chips') d.chips = (f.chips || []).map(function (c, i) { return [c.text, (ALT[f.key] && ALT[f.key][i]) || zielKey(c.ziel)]; }); else if (f.regler) { d.min = f.regler.min; d.max = f.regler.max; d.wert = f.regler.wert; d.einheit = f.regler.einheit || ''; d.ziel = f.key === 'haftpflicht' ? 'beitrag' : zielKey(f.ziel); d.antwort = function (v) { return (f.antwort_vorlage || 'Mein Wert: {wert}').replace('{wert}', v); }; } else return; LEO_FRAGEN[f.key] = d; });
+    }
+    if (O.faden_waechter_regeln) WAECHTER_REGELN = O.faden_waechter_regeln.map(function (r) { var wann = r.termin || (r.stichtag ? 'bis ' + r.stichtag.replace(/^(\d\d)-(\d\d)$/, '$2.$1.') : r.ausloeser && r.ausloeser.art === 'ereignis' ? 'beim Ereignis' : 'auf Zuruf'); return [r.key, r.titel, r.regel, wann]; });
+    if (O.faden_lebensereignisse) { var kind = O.faden_lebensereignisse.filter(function (e) { return e.key === 'kind'; })[0]; if (kind) EREIGNIS_KIND = kind.phasen.map(function (p) { return [p.titel, p.schritte.map(function (s) { return [s.text, zielKey(s), (TYP_LABEL[s.typ] || ['Öffnen'])[0]]; })]; }); }
+    if (O.faden_level) LEVEL = O.faden_level.map(function (l) { return [l.name, l.ab, l.belohnung]; });
+    // ---------- Einstiege: Vorschläge, Eingabe, Links im Text ----------
+    var vorschlaege = DATEN.artikel.slice(0, 3).map(function (a) { var f = []; a.abschnitte.forEach(function (ab) { f = f.concat(ab.fragen || []); }); return { text: f[0] ? f[0].f : a.titel, ziel: a.slug }; });
+    STANDARD_CHIPS = vorschlaege.concat([{ text: 'Kassensturz: Wie gut bin ich aufgestellt?', ziel: 'kassensturz' }, { text: 'Finanzwort des Tages', ziel: 'wortspiel', spiel: true }]);
+    var norm = function (s) { return s.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss'); };
+    window.sucheArtikel = function (t) { var w = norm(t).split(/[^a-z0-9]+/).filter(function (x) { return x.length >= 4; }); if (!w.length) return null; var best = null, bs = 0; DATEN.artikel.forEach(function (a) { var h = norm(a.titel + ' ' + a.slug + ' ' + (a.kicker || '')); var s = w.reduce(function (n, x) { return n + (h.indexOf(x) > -1 ? 1 : 0); }, 0); if (s > bs) { bs = s; best = a.slug; } }); return best; };
+    var altSenden = window.senden; window.senden = function (ev) { var i = document.getElementById('frage'); var t = i.value.trim(); var s = t ? sucheArtikel(t) : null; if (s && !/schl[üu]ssel|finanzwort|wordle|glossar|finconext|wochenbrief|newsletter|w[äa]chter|zahl des tages/i.test(t)) { ev.preventDefault(); i.value = ''; starte(s, t); return false; } return altSenden(ev); };
+    document.getElementById('strom').addEventListener('click', function (ev) {
+      var a = ev.target.closest && ev.target.closest('a[href]'); if (!a || !a.closest('.artikel')) return; var href = a.getAttribute('href') || '';
+      if (!/finanzleser\.de|^\//.test(href)) { a.target = '_blank'; a.rel = 'noopener'; return; }
+      ev.preventDefault(); var segs = href.replace(/^https?:\/\/(www\.)?finanzleser\.de/, '').replace(/[#?].*$/, '').split('/').filter(Boolean); var s = segs.length ? segs[segs.length - 1] : null; var label = a.textContent.trim();
+      if (s && ARTIKEL[s]) starte(s, label);
+      else if (s && GLOSSAR[s]) zielStarten('begriff:' + s);
+      else if (segs[0] === 'finanztools' && segs.length === 3) { var typ = { rechner: 'rechner', vergleiche: 'vergleich', checklisten: 'checkliste', dokumente: 'dokumente' }[segs[1]]; starte(typ ? zielKey({ typ: typ, slug: s }) : 'demo-tool', label); }
+      else if (segs[0] === 'finanztools') { blatt('finanztools'); window.scrollTo({ top: 0 }); }
+      else if (segs[0] === 'glossar') { blatt('service', 'glossar'); window.scrollTo({ top: 0 }); }
+      else if (segs[0] && RUBRIKEN[segs[0]] && segs.length <= 2) { blatt('ratgeber', segs[0], segs[1] && THEMEN[segs[1]] ? segs[1] : null); window.scrollTo({ top: 0 }); }
+      else if (!segs.length) { blatt('ratgeber'); window.scrollTo({ top: 0 }); }
+      else toast('„' + label + '“ ist im Prototyp noch nicht als Karte enthalten');
+    });
+    if (window.console) console.info('Faden-Daten: ' + DATEN.artikel.length + ' Ratgeber, ' + DATEN.glossar.length + ' Glossar, ' + DATEN.spiele.length + ' Spiele, Stand ' + DATEN.stand.slice(0, 10) + ' aus ' + DATEN.quelle);
+  }

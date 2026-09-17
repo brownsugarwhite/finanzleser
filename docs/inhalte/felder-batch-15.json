@@ -1,0 +1,947 @@
+[
+  {
+    "slug": "wertpapierdepot",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Ohne Wertpapierdepot geht keine Aktie und kein ETF-Sparplan: Es ist das Konto, in dem Wertpapiere digital in Girosammelverwahrung liegen, mit einem Verrechnungskonto für Käufe und Erlöse, das manche Broker wie Trade Republic mit 2 Prozent verzinsen.",
+          "Die Kostenunterschiede sind groß: Neobroker wie Trade Republic, Scalable Capital oder Finanzen.net Zero führen das Depot kostenlos, Orders kosten 0 bis 1 Euro, ETF-Sparpläne nichts; Direktbanken verlangen bis 10 Euro je Order und 4,95 Euro plus 0,25 Prozent je Sparplanausführung, Filialbanken wie die Sparkasse 2,95 Euro im Monat und 10 bis 15 Euro je Trade. Über zehn Jahre sind das schnell 450 Euro und mehr.",
+          "Wählen Sie nach Nutzung: kostenlose Sparpläne für ETF-Sparer, niedrige Ordergebühren für aktive Anleger, Handelsplatzauswahl für internationale Titel, Beratung nur bei echtem Bedarf; Einlagensicherung und Regulierung sind bei allen gleich.",
+          "Junior-Depots für Kinder nutzen deren eigene Freibeträge: 1.000 Euro Sparerpauschbetrag plus 12.348 Euro Grundfreibetrag plus 36 Euro Sonderausgabenpauschale, zusammen rund 13.384 Euro steuerfreie Erträge im Jahr, mit Nichtveranlagungsbescheinigung ohne Steuerabzug; laut Beitrag zahlt der Staat ab 2027 zehn Euro monatlich ins Altersvorsorgedepot jedes Kindes ab sechs Jahren.",
+          "Eröffnung dauert per Videoident Minuten, der Freistellungsauftrag gehört sofort dazu, ein Depotwechsel ist kostenlos und dauert zwei bis vier Wochen. Wertpapiere bleiben als Sondervermögen auch bei Bankpleite Ihr Eigentum, das Verrechnungskonto ist bis 100.000 Euro gesichert; das Verbot der Rückvergütungen von Handelsplätzen ab Mitte 2026 ändert an den Gebühren wenig."
+        ],
+        "quellen": [
+          "Depotgesetz, § 5 (Sammelverwahrung)",
+          "§ 44 Abs. 2 Satz 2 EStG (Sparerpauschbetrag)",
+          "MiFIR-Review, Verbot von Payment for Order Flow",
+          "Beitrag Wertpapierdepot"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Depot-Anbieter im Überblick",
+          "status": "freigegeben",
+          "frage": "Ich bin 62 und will 80.000 Euro in ETFs anlegen. Ist ein Neobroker für mich zu riskant?",
+          "antwort": "Nein, das Risiko liegt in der Anlage, nicht beim Broker: Ihre ETF-Anteile sind Sondervermögen und bleiben Ihr Eigentum, auch wenn Trade Republic oder Scalable Capital pleitegehen, das Verrechnungskonto ist bei der Partnerbank bis 100.000 Euro gesichert. Was Sie prüfen sollten, ist die Bedienung: Neobroker laufen fast nur per App, telefonischer Service ist knapp, Steuerbescheinigungen und Depotauszüge kommen digital. Wenn Sie Wert auf Telefon, Web-Oberfläche und einen Ansprechpartner legen, ist eine Direktbank wie ING, Comdirect oder DKB mit kostenlosen ETF-Sparplänen und 5 bis 10 Euro je Order der bessere Mittelweg; bei 80.000 Euro und wenigen Käufen fallen die Gebühren kaum ins Gewicht.",
+          "quellen": [
+            "Beitrag, Abschnitt Depot-Anbieter",
+            "§ 92 KAGB (Sondervermögen)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Gebühren beim Wertpapierdepot verstehen",
+          "status": "freigegeben",
+          "frage": "Was kostet mich ein Sparplan von 200 Euro monatlich über 20 Jahre bei 1,5 Prozent Ausführungsgebühr im Vergleich zu null?",
+          "antwort": "1,5 Prozent auf 200 Euro sind 3 Euro je Ausführung, über 240 Monate 720 Euro, die zudem nicht angelegt wurden; mit 6 Prozent Rendite fehlen am Ende rund 1.400 Euro im Depot, bei einem kostenlosen Sparplan nichts. Bei der Sparkasse mit 2,95 Euro Monatsgebühr kommen weitere 708 Euro plus entgangene Rendite dazu, insgesamt fast 3.000 Euro Unterschied. Achten Sie deshalb bei Sparplänen zuerst auf die Ausführungsgebühr, dann auf die ETF-Auswahl; die Gebühren des ETFs selbst, die TER, sind bei allen Brokern gleich, weil sie im Fonds anfallen.",
+          "quellen": [
+            "Beitrag, Abschnitt Gebühren",
+            "Beitrag, FAQ Depotgebühren und Rendite"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Junior-Depots und Steuerfreibeträge",
+          "status": "freigegeben",
+          "frage": "Wem gehört das Geld im Junior-Depot, und kann ich es später für mich verwenden?",
+          "antwort": "Es gehört dem Kind, und zwar unwiderruflich: Eltern verwalten das Depot nur als gesetzliche Vertreter, dürfen es aber nur im Interesse des Kindes nutzen, etwa für Ausbildung oder Führerschein, nicht für die eigene Küche. Mit 18 verfügt das Kind allein. Steuerlich ist das der Grund für die Freibeträge, denn die Erträge sind seine; Schenkungen bis 400.000 Euro je Elternteil in zehn Jahren bleiben schenkungsteuerfrei. Beachten Sie, dass Vermögen des Kindes über 15.000 Euro später beim BAföG und ab 25 Jahren bei der Familienversicherung Erträge über 535 Euro im Monat eine Rolle spielen. Wer flexibel bleiben will, spart im eigenen Depot und schenkt später.",
+          "quellen": [
+            "§ 1626, § 1643 BGB",
+            "§ 16 ErbStG",
+            "§ 29 BAföG"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Wertpapierdepot eröffnen und wechseln",
+          "status": "freigegeben",
+          "frage": "Verliere ich beim Depotwechsel meine alten Einstandskurse und die Steuerdaten?",
+          "antwort": "Nein, bei einem Übertrag innerhalb Deutschlands muss die alte Bank die Anschaffungsdaten samt Kaufdatum und Kurs elektronisch an die neue melden; die neue Bank rechnet bei späteren Verkäufen damit ab, und Verlustverrechnungstöpfe können Sie sich per Bescheinigung übertragen lassen. Fehlen die Daten, etwa bei Übertrag aus dem Ausland, setzt die neue Bank eine Ersatzbemessungsgrundlage von 30 Prozent des Verkaufserlöses an, was Sie in der Steuererklärung mit Belegen korrigieren können. Beantragen Sie den Wechsel beim neuen Anbieter, der holt die Papiere; zwei bis vier Wochen lang können Sie nicht handeln, Sparpläne laufen Sie besser erst nach dem Übertrag um.",
+          "quellen": [
+            "§ 43a Abs. 2 EStG",
+            "Beitrag, Abschnitt Eröffnen und wechseln"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "wertpapierdepot",
+        "verrechnungskonto",
+        "neobroker",
+        "ordergebuehr",
+        "juniordepot",
+        "sondervermoegen",
+        "sparerpauschbetrag",
+        "freistellungsauftrag",
+        "einlagensicherung",
+        "altersvorsorgedepot"
+      ]
+    }
+  },
+  {
+    "slug": "roboadvisor",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Ein Robo-Advisor legt Geld nach einem Fragebogen zu Zielen und Risikobereitschaft automatisch in ETF- und Anleiheportfolios an, überwacht Kurse, schichtet bei Abweichung von der Zielaufteilung um und optimiert teils Steuern; deutsche Anbieter verwalten 2026 rund 32 Milliarden Euro.",
+          "Der größte Vorteil ist Disziplin: Privatanleger verlieren durch Panikverkäufe, Gier und Timing-Versuche im Schnitt 3 bis 4 Prozentpunkte Rendite im Jahr, der Algorithmus hält Kurs und hält Depots durch Rebalancing und Anleihen schwankungsärmer.",
+          "Die Gesamtkosten liegen zwischen 0,10 und 2,94 Prozent, im Mittel 0,96 Prozent im Jahr, also 480 Euro bei 50.000 Euro: Servicegebühr 0,40 bis 1,20 Prozent plus ETF-Kosten von 0,12 bis 0,25 Prozent, Handel und Depot meist inklusive; über 20 Jahre kann der Unterschied zwischen billigstem und teuerstem Anbieter 50.000 Euro ausmachen.",
+          "Das Geld liegt als Sondervermögen auf Ihren Namen bei einer regulierten Partnerbank und ist bei Pleite des Anbieters sicher, wie die Insolvenz von Cashboard 2017 zeigte; Barguthaben sind bis 100.000 Euro gesichert, alle Anbieter stehen unter BaFin-Aufsicht und den Cyber-Regeln der DORA-Verordnung.",
+          "Quirion ist mit 0,48 Prozent Preisführer, Scalable Capital Marktführer mit 23 Risikoklassen, LIQID Premiumanbieter mit Private Equity, Oskar für Kinder, Growney günstig, cominvest im Echtgeld-Ranking Mai 2026 vorn; Quirion erzielte 2025 mit dem globalen Aktienportfolio 11,56 Prozent. Passend für Einsteiger, Familien und alle ohne Zeit und Börsenwissen; wer selbst zwei ETFs bespart, spart die Servicegebühr."
+        ],
+        "quellen": [
+          "§ 15 WpIG, § 34f GewO (Zulassung)",
+          "Verordnung (EU) 2022/2554 DORA",
+          "Echtgeld-Test brokervergleich.de, Mai 2026",
+          "Beitrag Robo Advisor"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie ein Robo Advisor funktioniert",
+          "status": "freigegeben",
+          "frage": "Was passiert mit meinem Robo-Depot, wenn die Börse um 30 Prozent einbricht?",
+          "antwort": "Ihr Depot fällt entsprechend Ihrer Aktienquote mit, bei 70 Prozent Aktien also um etwa 20 Prozent, und der Algorithmus verkauft nicht in Panik, sondern kauft beim Rebalancing Aktien nach, weil deren Anteil unter die Zielquote gerutscht ist; genau das ist in der Erholung der Renditevorteil gegenüber Anlegern, die aussteigen. Nur Anbieter mit dynamischem Risikomanagement wie Scalable Capital senken die Aktienquote bei steigender Volatilität automatisch, was Verluste begrenzt, aber die Erholung teils verpasst. Prüfen Sie vor dem Einstieg, ob Sie einen 20-Prozent-Rückgang aushalten, sonst wählen Sie eine niedrigere Risikoklasse; Geld, das Sie in fünf Jahren brauchen, gehört nicht ins Robo-Depot.",
+          "quellen": [
+            "Beitrag, Abschnitt Emotionale Fehler",
+            "Beitrag, Abschnitt Top-Anbieter"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Die Kostenstruktur eines Robo Advisor 2026",
+          "status": "freigegeben",
+          "frage": "Lohnt sich der Robo-Advisor bei 0,75 Prozent Gebühr gegenüber einem Welt-ETF, den ich selbst bespare?",
+          "antwort": "Rein rechnerisch nicht: Bei 30.000 Euro und 7 Prozent Rendite kostet der Robo über 20 Jahre rund 22.000 Euro mehr Endvermögen als der selbst besparte Welt-ETF mit 0,2 Prozent TER und kostenlosem Sparplan. Der Robo lohnt sich nur, wenn Sie sonst gar nicht anlegen, bei Crashs erfahrungsgemäß verkaufen würden oder das Rebalancing zwischen Aktien und Anleihen nicht selbst machen wollen; diesen Wert muss die Gebühr aufwiegen. Ein Mittelweg ist ein Multi-Asset-ETF mit fester Aktienquote, etwa 60 zu 40, für 0,2 bis 0,3 Prozent, der das Rebalancing intern erledigt.",
+          "quellen": [
+            "Beitrag, Abschnitt Kostenstruktur",
+            "Beitrag, Abschnitt Robo Advisor vs. Selbstanlage"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Sicherheit: Sondervermögen und BaFin-Regulierung",
+          "status": "freigegeben",
+          "frage": "Wie komme ich an mein Geld, wenn der Robo-Advisor Insolvenz anmeldet?",
+          "antwort": "Über die Partnerbank, bei der Ihr Depot auf Ihren Namen geführt wird, etwa Baader Bank, DAB oder Quirin Privatbank: Die ETF-Anteile sind Sondervermögen und gehören Ihnen, Sie können sie verkaufen oder in ein anderes Depot übertragen lassen, das Barguthaben ist bis 100.000 Euro einlagengesichert. Bei Cashboard 2017 kamen alle Kunden binnen Wochen an ihr Vermögen. Nachteil ist, dass die Verwaltung und das Rebalancing enden und Sie das Portfolio selbst weiterführen oder zu einem anderen Robo umziehen müssen. Behalten Sie deshalb die Zugangsdaten der Partnerbank und die Depotauszüge, nicht nur die App des Anbieters.",
+          "quellen": [
+            "§ 92 KAGB",
+            "Beitrag, Abschnitt Sicherheit"
+          ]
+        },
+        {
+          "abschnitt": "heading-9",
+          "abschnitt_titel": "Top-Anbieter 2026 im Überblick",
+          "status": "freigegeben",
+          "frage": "Welcher Robo-Advisor passt für 50 Euro im Monat für mein Enkelkind?",
+          "antwort": "Oskar ist auf Kinderdepots ausgelegt, nimmt Sparpläne ab 25 Euro, führt das Depot auf den Namen des Kindes mit dessen Freibeträgen und lässt Großeltern als Einzahler zu, kostet aber rund 1 Prozent im Jahr; Quirion ist mit 0,48 Prozent günstiger und bietet ebenfalls Kinderdepots, Growney ab 25 Euro mit etwa 0,7 Prozent. Bei so kleinen Beträgen ist der absolute Unterschied gering, 50 Euro monatlich über 18 Jahre ergeben bei 6 Prozent rund 19.000 Euro, die Gebühr macht 1.500 bis 2.500 Euro davon aus. Noch günstiger wäre ein kostenloser ETF-Sparplan im Junior-Depot einer Direktbank, wenn die Eltern die Eröffnung übernehmen, denn nur sie dürfen ein Kinderdepot eröffnen.",
+          "quellen": [
+            "Beitrag, Abschnitt Top-Anbieter",
+            "§ 1629 BGB (Vertretung des Kindes)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "robo-advisor",
+        "rebalancing",
+        "sondervermoegen",
+        "etf",
+        "ter",
+        "einlagensicherung",
+        "juniordepot"
+      ]
+    }
+  },
+  {
+    "slug": "nachhaltige-geldanlagen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Nachhaltige Geldanlagen wählen Unternehmen nach Umwelt, Sozialem und Unternehmensführung aus, den ESG-Kriterien, mit drei Ansätzen: Ausschluss von Waffen, Tabak oder Kohle, Best-in-Class als beste jeder Branche und Impact Investing mit messbarer Wirkung wie Green Bonds für Wind- und Solarprojekte; das FNG-Siegel kennzeichnet geprüfte Fonds. 55 Prozent der Deutschen kennen den Begriff, 14 Prozent investieren.",
+          "Rendite kostet Nachhaltigkeit langfristig nicht: Von 2011 bis 2026 lag der MSCI World SRI mit 478 Punkten leicht vor dem MSCI World mit 469, 2025 blieb er mit 14,45 Prozent aber hinter 21,60 Prozent zurück; der SRI enthält 380 statt 1.319 Unternehmen, also weniger Streuung. Ein Xtrackers MSCI World ESG kostet 0,20 Prozent.",
+          "Grüne Banken wie UmweltBank, GLS, Ethikbank und Tomorrow finanzieren nur nachhaltige Projekte und bieten Festgeld bis 3 Prozent ab 1.000 bis 2.500 Euro Mindestanlage, mit gesetzlicher Einlagensicherung bis 100.000 Euro.",
+          "Laut Beitrag ersetzt die Reform der Offenlegungsverordnung die Artikel-8- und Artikel-9-Einstufung durch drei Kategorien, Nachhaltig, Übergang und ESG-Grundlagen, ohne Bestandsschutz für bestehende Fonds, mit Anwendung frühestens Ende 2027; das soll Greenwashing eindämmen, dessen Warnsignale vage Versprechen, fehlende Transparenz und hohe fossile Anteile sind.",
+          "Der Markt ist in der Reifephase: weniger Hype, mehr selektive Strategien und Übergangsmodelle statt pauschaler Branchenausschlüsse; nur 20 Prozent der Berater melden hohes Kundeninteresse, vor vier Jahren über 50. Prüfen Sie Kriterien, Ansatz, Kosten und Streuung, bevor Sie investieren."
+        ],
+        "quellen": [
+          "Verordnung (EU) 2019/2088 (Offenlegungsverordnung)",
+          "Forum Nachhaltige Geldanlagen, FNG-Siegel",
+          "MSCI Index Factsheets 2026",
+          "Beitrag Nachhaltige Geldanlagen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was sind nachhaltige Geldanlagen?",
+          "status": "freigegeben",
+          "frage": "Ist ein ESG-ETF wirklich ohne Ölkonzerne und Rüstung?",
+          "antwort": "Nicht automatisch: Die ESG-Varianten des MSCI World schließen nur umstrittene Waffen, Tabak und Kohle aus und gewichten den Rest nach ESG-Noten, sodass laut Beitrag noch 5,8 Prozent in fossilen Energien stecken; der strengere SRI-Index reduziert das auf 3,1 Prozent, weil er nur das beste Viertel je Branche nimmt und konventionelle Waffen sowie Öl- und Gasförderung ausschließt. Ganz ohne Öl kommen nur Fonds mit expliziten Fossil-Free-Regeln oder Paris-aligned-Benchmarks aus. Prüfen Sie im Factsheet die Ausschlussliste und die zehn größten Positionen, das dauert fünf Minuten und sagt mehr als der Name.",
+          "quellen": [
+            "MSCI ESG- und SRI-Indexmethodik",
+            "Beitrag, Abschnitt Greenwashing erkennen"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie performen nachhaltige ETFs 2026?",
+          "status": "freigegeben",
+          "frage": "Warum lag der nachhaltige Weltindex 2025 sieben Prozentpunkte hinter dem normalen?",
+          "antwort": "Weil der SRI-Index Konzentration und Branchen anders gewichtet: Er kappt Einzeltitel bei 5 Prozent, sodass die großen US-Techwerte, die 2025 den Markt trugen, untergewichtet waren, und er enthält keine Energieaktien, die von hohen Preisen profitierten. In Jahren, in denen wenige Schwergewichte laufen, hinkt er hinterher, in Jahren mit breiter Erholung oder Techschwäche liegt er vorn, wie 2023 mit 28 gegenüber 24 Prozent. Über 15 Jahre glich sich das aus. Wer den Vergleich nicht aushält, nimmt eine ESG-Variante ohne Kappung, die dem Mutterindex enger folgt.",
+          "quellen": [
+            "Beitrag, Abschnitt Performance nachhaltiger ETFs",
+            "MSCI World SRI Factsheet"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Regulatorische Änderungen 2026",
+          "status": "freigegeben",
+          "frage": "Mein Fonds ist Artikel 9. Muss ich wegen der Reform etwas tun?",
+          "antwort": "Nein, aber beobachten: Laut Beitrag müssen sich alle Fonds nach der reformierten Offenlegungsverordnung neu in die Kategorien Nachhaltig, Übergang oder ESG-Grundlagen einordnen, ohne Bestandsschutz, mit 18 Monaten Übergang nach Verabschiedung, also frühestens Ende 2027. Ihr Artikel-9-Fonds wird dann vermutlich als Nachhaltig eingestuft, könnte aber, wenn er fossile Übergangsunternehmen hält, in die Übergangskategorie rutschen; die Fondsgesellschaft muss Sie über die Änderung der Anlagebedingungen informieren, und Sie können kostenlos aussteigen. Für Ihre Steuer oder die Teilfreistellung ändert sich nichts.",
+          "quellen": [
+            "Verordnung (EU) 2019/2088, Art. 8 und 9",
+            "Beitrag, Abschnitt Regulatorische Änderungen"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Praktische Tipps für Anleger",
+          "status": "freigegeben",
+          "frage": "Ich möchte 10.000 Euro nachhaltig anlegen, ohne Kursrisiko. Was geht?",
+          "antwort": "Festgeld bei einer grünen Bank: UmweltBank bis 3 Prozent bei 10 Jahren ab 2.500 Euro, GLS Sparbrief zwei bis zehn Jahre ab 1.000 Euro, Ethikbank und Tomorrow mit Tages- und Sparkonten, alle mit gesetzlicher Einlagensicherung bis 100.000 Euro und Auszahlung binnen sieben Tagen im Pleitefall. Die Banken finanzieren damit erneuerbare Energien, ökologische Landwirtschaft und Sozialprojekte, die sie meist namentlich offenlegen. Der Zins liegt etwas unter den besten konventionellen Angeboten von 3,4 Prozent, dafür ist die Verwendung transparent. Green Bonds mit 2 bis 4 Prozent tragen dagegen Kurs- und Emittentenrisiko und sind kein Ersatz für Festgeld.",
+          "quellen": [
+            "Beitrag, Abschnitt Grüne Banken",
+            "Einlagensicherungsgesetz, § 8"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "nachhaltige-geldanlage",
+        "esg",
+        "fng-siegel",
+        "offenlegungsverordnung",
+        "greenwashing",
+        "etf",
+        "einlagensicherung"
+      ]
+    }
+  },
+  {
+    "slug": "kryptowaehrung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Kryptowährungen sind digitales Geld auf einer Blockchain, einem verteilten Kassenbuch, das alle Transaktionen speichert und per Konsensverfahren wie Proof of Work bei Bitcoin oder Proof of Stake bei Ethereum abgesichert wird; Eigentum ist der Besitz des privaten Schlüssels. Laut Beitrag liegt die Marktkapitalisierung 2026 über 2,4 Billionen Dollar, Bitcoin hält rund 60 Prozent, Ethereum folgt mit rund 375 Milliarden.",
+          "Stablecoins wie USDT und USDC sind an den Dollar gebunden und bewegen mehr Volumen als Visa und Mastercard zusammen; die EU-Verordnung MiCA verlangt seit 2024 Lizenz und 1:1-Reserven, weshalb EU-Börsen den Handel mit Tether für EU-Kunden eingestellt haben. Einen Einlagenschutz wie beim Bankkonto gibt es nicht.",
+          "Steuerlich gelten Kryptowerte als private Wirtschaftsgüter: Gewinne sind nach einem Jahr Haltefrist komplett steuerfrei, davor mit dem persönlichen Steuersatz steuerpflichtig, wenn alle privaten Veräußerungsgewinne im Jahr die Freigrenze von 1.000 Euro erreichen; gerechnet wird nach FIFO. Ab 2026 erfassen Krypto-Dienstleister nach DAC8 alle Transaktionen und melden sie ab 2027 an die Finanzbehörden.",
+          "Sicherheit heißt regulierte Börse, Zwei-Faktor-Authentifizierung, keine Links aus E-Mails, Seed-Phrase offline und Schweigen über den eigenen Bestand; größere Bestände gehören in eine Hardware-Wallet ohne Internetverbindung, nur ein kleiner Teil in Hot Wallets zum Handeln. 2024 gab es 8.711 Geldwäscheverdachtsmeldungen mit Kryptobezug.",
+          "Institutionelle Anleger wie Pensionskassen und Versicherer investieren über Bitcoin-ETFs, BlackRock tokenisiert Staatsanleihen, Real World Assets und Layer-2-Lösungen wachsen; die Kurse bleiben hochvolatil, Hacks und Betrug kosteten allein in neun Monaten 2024 über zwei Milliarden Dollar. Nur Geld einsetzen, dessen Verlust Sie verkraften."
+        ],
+        "quellen": [
+          "§ 23 Abs. 1 Nr. 2 EStG",
+          "BMF-Schreiben vom 06.03.2025 zu Kryptowerten",
+          "Verordnung (EU) 2023/1114 (MiCA)",
+          "Richtlinie (EU) 2023/2226 (DAC8)",
+          "Beitrag Kryptowährung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was sind Kryptowährungen und wie funktionieren sie?",
+          "status": "freigegeben",
+          "frage": "Kann ich Bitcoin auch ohne Börse und Wallet über mein Depot kaufen?",
+          "antwort": "Ja, über börsengehandelte Krypto-ETNs wie die von ETC Group, 21Shares oder VanEck, die physisch mit Bitcoin hinterlegt sind und wie eine Aktie im Depot liegen; Sie brauchen keine Wallet, keinen Schlüssel und keine Kryptobörse, zahlen aber 0,2 bis 1,5 Prozent Verwaltungsgebühr und tragen ein Emittentenrisiko wie bei ETCs. Steuerlich hat der Bundesfinanzhof physisch hinterlegte Bitcoin-ETNs mit Auslieferungsanspruch wie direkt gehaltene Coins behandelt, also steuerfrei nach einem Jahr, ohne Anspruch gilt Abgeltungsteuer. Für kleine Beträge und Einsteiger ist das der einfachste Weg, für größere Summen ist die eigene Hardware-Wallet günstiger und unabhängig vom Emittenten.",
+          "quellen": [
+            "BFH VIII R 7/23 (Krypto-ETN)",
+            "Beitrag, Abschnitt Institutionelle Adoption"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Steuerliche Behandlung von Kryptowährungen in Deutschland",
+          "status": "freigegeben",
+          "frage": "Ich habe Bitcoin 2023 gekauft, 2025 in Ethereum getauscht und 2026 verkauft. Wann war das steuerpflichtig?",
+          "antwort": "Beim Tausch 2025: Der Tausch Bitcoin gegen Ethereum ist eine Veräußerung der Bitcoin, der Gewinn war nach über einem Jahr Haltefrist aber steuerfrei. Mit dem Tausch begann für die Ethereum eine neue Haltefrist; der Verkauf 2026 innerhalb eines Jahres ist steuerpflichtig, wenn Ihre privaten Veräußerungsgewinne des Jahres, auch aus Gold oder Kunst, 1.000 Euro oder mehr betragen, dann ab dem ersten Euro mit Ihrem Steuersatz. Halten Sie die Ethereum bis 2027, ist auch dieser Gewinn steuerfrei. Dokumentieren Sie jede Transaktion mit Datum, Kurs und Gebühren, die Börsen liefern seit DAC8 Jahresreports, und tragen Sie steuerpflichtige Gewinne in der Anlage SO ein.",
+          "quellen": [
+            "§ 23 Abs. 1 Nr. 2 und Abs. 3 EStG",
+            "BMF-Schreiben vom 06.03.2025, Rz. 53 ff."
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Sicherheitsrisiken und Wallet-Technologie",
+          "status": "freigegeben",
+          "frage": "Was passiert mit meinen Coins auf der Hardware-Wallet, wenn ich sterbe?",
+          "antwort": "Ohne Seed-Phrase sind sie für die Erben unwiederbringlich verloren, denn niemand kann den Schlüssel zurücksetzen; deshalb gehört die Seed-Phrase mit einer Anleitung an einen Ort, den die Erben nach dem Tod finden, etwa ein Bankschließfach oder ein versiegelter Umschlag beim Notar, und ins Testament ein Hinweis, ohne die Wörter selbst dort abzudrucken. Erben müssen den Bestand mit dem Kurs am Todestag zur Erbschaftsteuer anmelden, Freibeträge 500.000 Euro für Ehepartner, 400.000 je Kind. Die Haltefrist des Erblassers läuft für die Erben weiter, ein Verkauf nach über einem Jahr seit dem ursprünglichen Kauf bleibt einkommensteuerfrei. Prüfen Sie Multi-Signatur-Lösungen oder Verwahrer mit Nachlassregelung, wenn die Summe groß ist.",
+          "quellen": [
+            "§ 12 ErbStG (Bewertung)",
+            "§ 23 Abs. 1 Satz 3 EStG (Rechtsnachfolge)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Marktentwicklung und institutionelle Adoption",
+          "status": "freigegeben",
+          "frage": "Wie viel Krypto darf ins Depot, wenn ich für die Rente spare?",
+          "antwort": "Höchstens 5 Prozent des Anlagevermögens, sagen die meisten Verbraucherschützer und Vermögensverwalter, und nur Geld, das Sie zehn Jahre nicht brauchen; Bitcoin verlor in den Abschwüngen 2018 und 2022 jeweils über 70 Prozent, und ein Totalverlust bei einzelnen Coins oder Börsen ist möglich. Fünf Prozent reichen aus, um an einer Verdreifachung spürbar teilzuhaben, ohne dass ein Absturz den Ruhestand gefährdet. Konzentrieren Sie sich auf Bitcoin und allenfalls Ethereum, meiden Sie kleine Token, und rebalancieren Sie jährlich zurück auf die Quote, was Gewinne sichert und die Haltefrist beachtet. Der Kern der Altersvorsorge bleibt ein breiter Aktien-ETF.",
+          "quellen": [
+            "Beitrag, Abschnitt Marktentwicklung",
+            "Verbraucherzentrale, Hinweise zu Kryptoanlagen"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kryptowaehrung",
+        "blockchain",
+        "stablecoin",
+        "mica",
+        "wallet",
+        "spekulationsfrist",
+        "emittentenrisiko"
+      ]
+    }
+  },
+  {
+    "slug": "investition-in-gold",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Gold dient als Krisenschutz und Beimischung von 5 bis 10 Prozent des Portfolios, gestützt von Zentralbankkäufen um 800 Tonnen im Jahr, US-Staatsschulden und Geopolitik; laut Beitrag schwankte der Preis 2026 zwischen 3.600 und 5.400 Dollar je Unze, Goldman Sachs erwartet 5.400, J.P. Morgan bis 6.300 Dollar, ein Gramm Feingold kostet über 110 Euro.",
+          "Physisches Anlagegold ist mehrwertsteuerfrei: Barren ab 995 Tausendstel, Münzen ab 900 Tausendstel, nach 1800 geprägt, einst Zahlungsmittel und höchstens 80 Prozent über Goldwert, etwa Krügerrand, Philharmoniker und Maple Leaf; anonym kaufen geht bis 1.999,99 Euro, darüber mit Ausweis, dazu kommen Tresor oder Schließfach und Versicherung.",
+          "Gold-ETCs wie Xetra-Gold und Euwax Gold II sind mit physischem Gold hinterlegt, handelbar wie Aktien und mit Auslieferungsanspruch steuerlich wie Barren behandelt; Euwax Gold II kommt ohne Lagergebühr aus, Xetra-Gold oft mit Depotgebühren, WisdomTree kostet 0,12 Prozent. Goldminenaktien folgen dem Preis nur indirekt und unterliegen der Abgeltungsteuer.",
+          "Gewinne aus Gold und hinterlegten ETCs sind nach einem Jahr Haltefrist steuerfrei ohne Obergrenze, davor gilt eine Freigrenze von 1.000 Euro, die kein Freibetrag ist; das hat der Bundesfinanzhof bestätigt.",
+          "Risiken sind fehlende Zinsen und Dividenden, hohe Schwankungen nach Rekordhochs, Zinsanstieg und Dollarstärke sowie bei ETCs das Emittentenrisiko einer Schuldverschreibung. Praktisch: Depot bei einem Neobroker, Sparplan auf Euwax Gold II zur Glättung, mindestens zwölf Monate halten, physisches Gold von Degussa, Pro Aurum oder Heraeus als Notreserve."
+        ],
+        "quellen": [
+          "§ 25c UStG (Anlagegold)",
+          "§ 23 Abs. 1 Nr. 2 EStG",
+          "BFH VIII R 4/15 (Xetra-Gold)",
+          "World Gold Council, Gold Demand Trends",
+          "Beitrag Investition in Gold"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie funktionieren Gold-Investments in der Praxis?",
+          "status": "freigegeben",
+          "frage": "Barren oder Münzen, und welche Größe ist beim Kauf am günstigsten?",
+          "antwort": "Je größer die Einheit, desto niedriger der Aufschlag auf den Goldwert: Ein 1-Gramm-Barren kostet 15 bis 25 Prozent über Materialwert, eine Unze Krügerrand 3 bis 5 Prozent, ein 100-Gramm-Barren 1 bis 2 Prozent. Für die meisten sind Unzenmünzen der beste Kompromiss, weil sie weltweit bekannt sind, ohne Zertifikat angekauft werden und sich in Teilen verkaufen lassen; Barren ab 100 Gramm lohnen sich bei größeren Summen, wenn sie von LBMA-zertifizierten Herstellern wie Heraeus oder Umicore stammen und im Blister bleiben. Vergleichen Sie beim Kauf den Aufschlag über gold.de und beim Verkauf den Ankaufspreis, der 1 bis 3 Prozent unter dem Kurs liegt.",
+          "quellen": [
+            "Beitrag, Abschnitt Physisches Gold",
+            "Beitrag, Abschnitt Praktische Umsetzung"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Warum ist die steuerliche Behandlung so attraktiv?",
+          "status": "freigegeben",
+          "frage": "Ich habe Gold für 8.000 Euro vor acht Monaten gekauft und verkaufe jetzt für 9.500. Was zahle ich?",
+          "antwort": "Der Gewinn von 1.500 Euro überschreitet die Freigrenze von 1.000 Euro, also ist er komplett steuerpflichtig, nicht nur die 500 Euro darüber, mit Ihrem persönlichen Steuersatz, bei 35 Prozent rund 525 Euro; zusammengerechnet werden alle privaten Veräußerungsgeschäfte des Jahres, auch Krypto oder Kunst. Warten Sie vier Monate bis zum Ablauf der Jahresfrist, ist der gesamte Gewinn steuerfrei, egal wie hoch. Alternativ verkaufen Sie jetzt nur einen Teil, sodass der Gewinn unter 1.000 Euro bleibt, und den Rest nach Ablauf der Frist; bei mehreren Käufen gilt für die Zuordnung die FIFO-Reihenfolge, der zuerst gekaufte Barren gilt als zuerst verkauft.",
+          "quellen": [
+            "§ 23 Abs. 3 Satz 5 EStG (Freigrenze)",
+            "Beitrag, Abschnitt Steuerliche Behandlung"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie hoch sollte der Gold-Anteil im Portfolio sein?",
+          "status": "freigegeben",
+          "frage": "Gold ist auf Rekordhoch. Ist der Einstieg jetzt nicht viel zu spät?",
+          "antwort": "Für eine Absicherung gibt es keinen richtigen Zeitpunkt, nur die richtige Größe: Wer Gold als Beimischung von 5 bis 10 Prozent hält, will nicht auf den Preis wetten, sondern für den Fall vorsorgen, dass Aktien und Währung gleichzeitig fallen. Nach Rekordhochs sind Rücksetzer von 10 bis 20 Prozent wie im März 2026 üblich, deshalb ist ein Sparplan über zwölf bis 24 Monate auf einen hinterlegten ETC die bessere Wahl als ein Einmalkauf, er glättet den Einstieg. Wer heute nichts hat, kauft die Hälfte der Zielquote jetzt und den Rest in Raten; wer die Quote überschritten hat, verkauft nach Ablauf der Jahresfrist steuerfrei zurück auf 10 Prozent.",
+          "quellen": [
+            "Beitrag, Abschnitt Gold-Anteil im Portfolio",
+            "Beitrag, Abschnitt Risiken"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Welche Risiken bestehen bei Gold-Investments?",
+          "status": "freigegeben",
+          "frage": "Was passiert mit meinem Xetra-Gold, wenn die Deutsche Börse Commodities insolvent geht?",
+          "antwort": "Xetra-Gold ist eine Schuldverschreibung, kein Sondervermögen, deshalb hätten Sie formal nur eine Forderung gegen den Emittenten; das Gold ist aber zu 95 Prozent physisch im Tresor von Clearstream hinterlegt, der Rest als Lieferansprüche, und über eine Treuhandstruktur den Anlegern zugeordnet, sodass es im Insolvenzfall nicht den Gläubigern des Emittenten zufällt, sondern für Sie verwertet oder ausgeliefert wird. Ein Totalverlust ist damit sehr unwahrscheinlich, eine Verzögerung möglich. Wer auch das nicht will, lässt sich Gold ausliefern, ab 100 Gramm mit Kosten von 2 bis 5 Prozent, oder hält einen Teil physisch. Streuen Sie größere Bestände auf zwei Emittenten.",
+          "quellen": [
+            "Beitrag, Abschnitt Risiken",
+            "Verkaufsprospekt Xetra-Gold, Abschnitt Besicherung"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "anlagegold",
+        "gold-etc",
+        "spekulationsfrist",
+        "emittentenrisiko",
+        "sachwert",
+        "etc"
+      ]
+    }
+  },
+  {
+    "slug": "investition-in-sachwerte",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Sachwerte wie Immobilien, Edelmetalle, Rohstoffe, Aktien als Anteile an Unternehmen und Photovoltaikanlagen haben einen Wert in sich und verlieren bei Inflation nicht wie Bargeld und Anleihen an Substanz; bei 2,4 Prozent Inflation 2025 und Tagesgeld um 3 Prozent bleibt nach Steuern real fast nichts, Sachwerte brachten langfristig 5 bis 8 Prozent.",
+          "Edelmetalle liefen 2025 laut Beitrag stark: Silber plus 147 Prozent auf 71 Dollar, Gold plus 64 Prozent auf 4.315 Dollar, Kupfer über 11.000 Dollar je Tonne, getrieben von KI-Rechenzentren, Solarindustrie und Energiewende; empfohlen sind 5 bis 10 Prozent Edelmetalle als Absicherung, nicht als Renditemotor.",
+          "Photovoltaik-Direktinvestments liefern 20 Jahre EEG-Vergütung; mit Investitionsabzugsbetrag bis 50 Prozent, Sonderabschreibung und degressiver AfA sinkt die Steuerlast in den ersten drei Jahren um bis zu 70 Prozent der Investition, bei 850 bis 1.200 Euro je Kilowatt ergeben sich Nachsteuerrenditen von 9 bis 13 Prozent. Batteriespeicher und Schwarmspeicher sind der neue Trend.",
+          "Immobilien bringen 3 bis 6 Prozent Rendite mit steigenden Mieten und real entwerteten Schulden; gefragt sind energieeffiziente Wohnungen in stabilen Lagen. Alternative Sachwerte wie Luxusuhren mit bis 147 Prozent oder Whisky mit 373 Prozent in zehn Jahren, Kunst und Antiquitäten sind Liebhabermärkte mit hohen Spannen.",
+          "Risiken sind Illiquidität, Lager- und Instandhaltungskosten, nötiges Fachwissen und Preisschwankungen; Wald, Flugzeuge oder Rohstoffe sind keine Heilsbringer. Streuen Sie über mehrere Sachwertklassen und richten Sie Anlagehorizont und Risikobereitschaft daran aus."
+        ],
+        "quellen": [
+          "§ 7g EStG (Investitionsabzugsbetrag)",
+          "§ 21 EEG 2023",
+          "Statistisches Bundesamt, Verbraucherpreisindex 2025",
+          "Beitrag Investition in Sachwerte"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was macht Sachwerte zu attraktiven Inflationsschutz-Anlagen?",
+          "status": "freigegeben",
+          "frage": "Sind Aktien wirklich Sachwerte, obwohl sie an der Börse so schwanken?",
+          "antwort": "Ja, eine Aktie ist ein Anteil an Fabriken, Marken, Patenten und Mitarbeitern eines Unternehmens, das seine Preise mit der Inflation anheben kann, deshalb schlagen breit gestreute Aktien die Inflation über Jahrzehnte am zuverlässigsten, real um 5 bis 7 Prozent im Jahr. Die Schwankung ist der Preis dafür: In Inflationsschocks wie 2022 fallen Aktien zunächst mit, weil steigende Zinsen die Bewertungen drücken, erholen sich aber, sobald die Gewinne nachziehen. Gold und Immobilien schwanken weniger sichtbar, weil sie nicht täglich bewertet werden, nicht weil sie stabiler wären. Wer Inflationsschutz will, kombiniert einen Welt-ETF als Kern mit 5 bis 10 Prozent Gold und gegebenenfalls Wohneigentum.",
+          "quellen": [
+            "Beitrag, Abschnitt Sachwerte als Inflationsschutz",
+            "Deutsches Aktieninstitut, Rendite-Dreieck"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Photovoltaik-Investments: Staatliche Garantien optimal nutzen",
+          "status": "freigegeben",
+          "frage": "Wie funktioniert der doppelte Steuerhebel bei einer gekauften PV-Anlage konkret?",
+          "antwort": "Sie kaufen als Gewerbetreibende eine Anlage auf einem fremden Dach oder in einem Solarpark, etwa für 100.000 Euro: Schon im Jahr vor der Anschaffung dürfen Sie 50 Prozent, also 50.000 Euro, als Investitionsabzugsbetrag vom Gewinn oder Gehalt abziehen, im Kaufjahr dann 20 Prozent Sonderabschreibung plus die degressive Abschreibung von bis zu 30 Prozent, sodass binnen zwei bis drei Jahren rund 70 Prozent der Summe steuermindernd wirken; bei 42 Prozent Grenzsteuersatz sind das rund 29.000 Euro Steuerersparnis. Voraussetzung sind ein Gewinn unter 200.000 Euro, Nutzung zu mindestens 90 Prozent betrieblich und der Kauf binnen drei Jahren nach dem Abzug, sonst wird rückwirkend verzinst nachversteuert. Die Einspeiseerlöse von 20 Jahren versteuern Sie später, meist im Ruhestand mit niedrigerem Satz. Kleine Anlagen bis 30 Kilowatt sind ohnehin einkommensteuerfrei und für diesen Hebel ungeeignet.",
+          "quellen": [
+            "§ 7g Abs. 1 bis 5 EStG",
+            "§ 7 Abs. 2 EStG (degressive AfA)",
+            "§ 3 Nr. 72 EStG (kleine PV-Anlagen)"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Immobilien als Sachwert: Chancen im Jahr 2026",
+          "status": "freigegeben",
+          "frage": "Ich habe 60.000 Euro. Reicht das für eine vermietete Wohnung als Inflationsschutz?",
+          "antwort": "Als Eigenkapital für eine Wohnung um 250.000 Euro ja, wenn Sie Nebenkosten von 10 bis 12 Prozent, also 25.000 bis 30.000 Euro, daraus bezahlen und 200.000 Euro zu rund 3,5 Prozent finanzieren; die Rate von etwa 1.000 Euro decken 900 Euro Kaltmiete nur zusammen mit dem Steuervorteil aus Abschreibung und Zinsen. Die Rechnung geht nur bei mindestens 4 Prozent Mietrendite, guter Lage und einem Energieausweis besser als E auf, sonst drohen Sanierungskosten. Wer weder Vermieterarbeit noch Klumpenrisiko will, kauft mit den 60.000 Euro einen Immobilien-ETF oder offenen Immobilienfonds mit 3 bis 4 Prozent oder bleibt bei Aktien-ETF plus Gold; das ist liquide und streut breiter.",
+          "quellen": [
+            "Beitrag, Abschnitt Immobilien als Sachwert",
+            "§ 7 Abs. 4 EStG (Gebäude-AfA)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Risiken von Sachwertinvestitionen: Was sollten Anleger beachten?",
+          "status": "freigegeben",
+          "frage": "Mir werden Anteile an Luxusuhren ab 50 Euro angeboten. Ist das seriös?",
+          "antwort": "Es kann seriös sein, ist aber ein spekulatives Nischeninvestment: Sie kaufen digitale Bruchteile an Uhren, die die Plattform lagert und irgendwann verkauft, ohne laufende Erträge, mit Gebühren von 2 bis 5 Prozent beim Kauf plus Lager- und Verkaufsprovision, ohne geregelten Zweitmarkt und ohne Einlagensicherung; geht die Plattform pleite, entscheidet die Vertragsgestaltung, ob die Uhr Ihnen gehört oder in die Insolvenzmasse fällt. Die 147 Prozent der letzten zehn Jahre stammen aus der Blase bis 2022, seither sind viele Modelle 30 Prozent gefallen. Prüfen Sie BaFin-Prospekt oder Ausnahme, Treuhänderstruktur und Rückgaberecht, und investieren Sie höchstens Spielgeld. Als Inflationsschutz taugt so etwas nicht.",
+          "quellen": [
+            "Beitrag, Abschnitt Alternative Sachwerte",
+            "Vermögensanlagengesetz, § 2 (Ausnahmen)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "sachwert",
+        "inflationsschutz",
+        "inflation",
+        "anlagegold",
+        "etf",
+        "spekulationsfrist"
+      ]
+    }
+  },
+  {
+    "slug": "fonds",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Ein Fonds bündelt das Geld vieler Anleger, das ein Fondsmanager nach festen Regeln in Aktien, Anleihen, Immobilien oder Rohstoffe streut; das Vermögen ist Sondervermögen und bei Pleite der Gesellschaft geschützt, gesetzliche Streuungsregeln begrenzen das Risiko. In Deutschland sind über 2.000 ETFs und mehr als 700 Dachfonds mit 210 Milliarden Euro handelbar.",
+          "Die Hauptarten: Aktienfonds mit langfristig 3 bis 8 Prozent Rendite und Risikoklasse 4 bis 6, Rentenfonds mit Anleihen und Pfandbriefen für Sicherheitsorientierte, Mischfonds als Multi-Asset-Mix in defensiv, ausgewogen und dynamisch, Geldmarktfonds für kurzfristiges Parken; Dachfonds investieren in andere Fonds.",
+          "Kosten entscheiden über Jahrzehnte: aktive Aktienfonds kosten laut Bundesbank-Analyse im Schnitt 1,68 Prozent im Jahr, ETFs 0,23 Prozent, dazu bei aktiven Fonds 3 bis 5 Prozent Ausgabeaufschlag, Erfolgsgebühren und interne Transaktionskosten von 0,5 bis 3 Prozent; über 0,3 Prozent sind Welt-ETFs zu teuer.",
+          "Als Basis empfiehlt sich ein breit gestreuter Weltaktien-ETF, mit dem Anleger in keinem beliebigen 15-Jahres-Zeitraum der Vergangenheit Geld verloren; Auswahlkriterien sind Ziel, Horizont, Risikotoleranz, Fondsvolumen ab 100 Millionen Euro, Kosten, Bilanz des Managements und Streuung.",
+          "Erträge unterliegen der Abgeltungsteuer von 25 Prozent plus Soli und Kirchensteuer, davor bleiben 1.000 Euro Sparerpauschbetrag, 2.000 Euro für Paare, per Freistellungsauftrag rückwirkend zum Jahresanfang frei; Kinder haben eigene 1.000 Euro, bei Einkommen unter dem Grundfreibetrag von 12.348 Euro hilft die Nichtveranlagungsbescheinigung. Risiken sind Markt, Währung, Liquidität und Management."
+        ],
+        "quellen": [
+          "Kapitalanlagegesetzbuch, §§ 92, 206 ff.",
+          "Deutsche Bundesbank, Fondskostenanalyse Januar 2026",
+          "§ 20, § 44a EStG",
+          "Beitrag Fonds"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was sind Fonds und wie funktionieren sie?",
+          "status": "freigegeben",
+          "frage": "Was ist der Unterschied zwischen ausschüttend und thesaurierend, und was ist besser für mich?",
+          "antwort": "Ein ausschüttender Fonds zahlt Dividenden und Zinsen ein- bis viermal im Jahr auf Ihr Verrechnungskonto aus, ein thesaurierender legt sie sofort wieder an und lässt den Anteilswert wachsen. Für den Vermögensaufbau ist Thesaurieren bequemer und nutzt den Zinseszins automatisch, seit 2018 wird dafür jährlich eine kleine Vorabpauschale besteuert, damit der Fiskus nicht bis zum Verkauf wartet. Ausschüttend lohnt sich, wenn Sie den Sparerpauschbetrag von 1.000 Euro sonst nicht ausschöpfen, weil die Ausschüttungen ihn Jahr für Jahr steuerfrei nutzen, oder wenn Sie im Ruhestand laufende Erträge wollen. Viele Anleger fahren zweigleisig: ausschüttend bis zum Freibetrag, den Rest thesaurierend.",
+          "quellen": [
+            "§ 18 InvStG (Vorabpauschale)",
+            "§ 20 Abs. 9 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie wählen Sie den richtigen Fonds 2026 aus?",
+          "status": "freigegeben",
+          "frage": "Mein Bankberater empfiehlt einen Mischfonds mit 1,6 Prozent Kosten und 4 Prozent Aufschlag. Ist das ein gutes Angebot?",
+          "antwort": "Für die Bank ja, für Sie kaum: Der Aufschlag von 4 Prozent kostet bei 20.000 Euro sofort 800 Euro, und 1,6 Prozent Jahresgebühr fressen bei 5 Prozent Bruttorendite ein Drittel des Ertrags, über 20 Jahre rund 12.000 Euro gegenüber einem Multi-Asset-ETF mit gleicher Aktienquote für 0,25 Prozent. Studien zeigen, dass die meisten aktiven Mischfonds ihre Vergleichsindizes nach Kosten nicht schlagen. Fragen Sie nach dem Rabatt auf den Ausgabeaufschlag, den Direktbanken und Fondsvermittler meist zu 100 Prozent gewähren, oder kaufen Sie denselben Fonds über die Börse ohne Aufschlag. Besser noch: Welt-ETF plus Tagesgeld in Ihrer gewünschten Mischung, das ist derselbe Effekt für ein Zehntel der Kosten.",
+          "quellen": [
+            "Beitrag, Abschnitt Kosten",
+            "S&P SPIVA Europe Scorecard 2025"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Was bedeuten Sparerpauschbetrag und Steuern für Fondsanleger?",
+          "status": "freigegeben",
+          "frage": "Ich habe den Freistellungsauftrag vergessen und die Bank hat Steuern abgezogen. Ist das Geld weg?",
+          "antwort": "Nein: Stellen Sie den Freistellungsauftrag noch im laufenden Jahr, erstattet die Bank die zu viel einbehaltene Abgeltungsteuer meist automatisch, weil der Auftrag rückwirkend zum 1. Januar gilt; für frühere Jahre holen Sie sie über die Anlage KAP in der Steuererklärung zurück, indem Sie die Steuerbescheinigung der Bank einreichen und den Sparerpauschbetrag beantragen. Das geht vier Jahre rückwirkend, wenn Sie nicht zur Abgabe verpflichtet waren. Vermeiden Sie den Fehler bei mehreren Banken durch Aufteilung des Freibetrags nach erwarteten Erträgen, die Summe darf 1.000 Euro nicht überschreiten, das Finanzamt gleicht das über die Steuer-ID ab.",
+          "quellen": [
+            "§ 44b Abs. 5 EStG",
+            "§ 32d Abs. 4 EStG",
+            "§ 169 AO (Festsetzungsfrist)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Risiken und Chancen richtig einschätzen",
+          "status": "freigegeben",
+          "frage": "Was passiert mit meinem Geld, wenn ein Fonds geschlossen oder verschmolzen wird?",
+          "antwort": "Bei einer Schließung verkauft die Gesellschaft alle Titel und zahlt den Erlös zum Tageswert aus, was bei schlechtem Markt Verluste festschreibt und Gewinne steuerpflichtig macht; bei einer Verschmelzung erhalten Sie Anteile des aufnehmenden Fonds im Wertverhältnis, steuerneutral, wenn beide im selben Land aufgelegt sind. Beides wird mindestens einen Monat vorher angekündigt, Sie können vorher kostenlos verkaufen. Ein Verlust des Kapitals ist damit nicht verbunden, das Sondervermögen bleibt geschützt. Betroffen sind meist kleine Fonds unter 50 Millionen Euro; wählen Sie deshalb Fonds mit über 100 Millionen Euro Volumen und breiter Anlegerbasis. Offene Immobilienfonds können zudem die Rücknahme aussetzen, dort gelten zwölf Monate Kündigungsfrist.",
+          "quellen": [
+            "§ 100, § 181 ff. KAGB",
+            "§ 23 InvStG (Verschmelzung)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "investmentfonds",
+        "sondervermoegen",
+        "ter",
+        "ausgabeaufschlag",
+        "risikoklasse",
+        "sparerpauschbetrag",
+        "abgeltungsteuer",
+        "etf"
+      ]
+    }
+  },
+  {
+    "slug": "etf-exchange-traded-funds",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Ein ETF bildet einen Index wie DAX oder MSCI World nach, entweder durch Kauf der enthaltenen Aktien, physisch oder per Sampling, oder synthetisch über einen Swap mit einer Bank, dessen Kontrahentenrisiko auf 10 Prozent des Fondsvermögens begrenzt ist; gehandelt wird börsentäglich zum laufend berechneten Nettoinventarwert, Market Maker halten die Spanne eng. Weltweit stecken über 20 Billionen Dollar in ETFs, in Deutschland hielten 2025 14,1 Millionen Menschen Aktien oder Fonds.",
+          "Der Preiskampf drückt die Kosten: Invesco senkte die TER seines MSCI-World-ETF auf 0,05 Prozent, DWS den FTSE All-World auf 0,07, Amundi liegt bei 0,12, iShares Core bei 0,20; bei 10.000 Euro über 30 Jahre machen 0,15 Prozentpunkte mehrere tausend Euro aus. Dazu kommen Ordergebühren, Spread von etwa 0,1 Prozent und Depotkosten, häufiges Handeln frisst den Vorteil.",
+          "Vorteile sind Streuung über 1.300 Titel aus 23 Ländern, Kosten von 0,05 bis 0,5 statt 1,5 bis 2,5 Prozent bei aktiven Fonds, kein Ausgabeaufschlag, Handel wie Aktien, volle Transparenz, Schutz als Sondervermögen und 30 Prozent Teilfreistellung bei Aktien-ETFs; die meisten aktiven Fonds schlagen ihren Index nach Kosten nicht.",
+          "Risiken bleiben das Marktrisiko, Klumpen wie 73 Prozent USA und 29 Prozent Technologie im MSCI World, das Kontrahentenrisiko synthetischer ETFs, seltene Schließungen und kleine Tracking-Differenzen. Produkttypen sind Aktien-, Anleihen-, Rohstoff-, Sektor-, Faktor-, Dividenden-, ESG-, Low-Volatility- und Multi-Asset-ETFs, aktive ETFs erreichten 2 Billionen Dollar.",
+          "Bewährt ist Core-Satellite: 60 bis 80 Prozent in einen günstigen Welt-ETF, den Rest in Schwellenländer, Europa oder Themen, Themen nie über 10 bis 20 Prozent; 2026 rücken geografische Streuung gegen die US-Dominanz, defensive Low-Volatility-ETFs und Value- und Dividendenstrategien in den Fokus. Wichtiger als Perfektion ist eine Strategie, die man über Marktzyklen durchhält."
+        ],
+        "quellen": [
+          "Richtlinie 2009/65/EG (UCITS), Art. 52",
+          "§ 20 InvStG (Teilfreistellung)",
+          "MSCI World Factsheet 2026",
+          "Beitrag ETF"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie funktionieren ETF?",
+          "status": "freigegeben",
+          "frage": "Soll ich einen physischen oder einen synthetischen ETF nehmen?",
+          "antwort": "Für Welt- und Europaindizes ist der physische ETF die einfachere Wahl: Er hält die Aktien wirklich, ist transparent und ohne Bankpartner. Synthetische ETFs haben einen Vorteil bei US-Indizes wie dem S&P 500, weil sie über den Swap die amerikanische Quellensteuer auf Dividenden von 15 Prozent sparen und deshalb rund 0,2 Prozentpunkte im Jahr besser abschneiden; das Kontrahentenrisiko ist auf 10 Prozent des Vermögens begrenzt und praktisch täglich besichert. Bei Rohstoffen und Schwellenländern sind synthetische Varianten oft die einzigen effizienten. Vergleichen Sie statt der Bauart die Tracking-Differenz der letzten fünf Jahre, sie zeigt, was nach allen Kosten beim Anleger ankam.",
+          "quellen": [
+            "Beitrag, Abschnitt Wie funktionieren ETF",
+            "Art. 52 UCITS-Richtlinie"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Gebühren und Kosten verstehen",
+          "status": "freigegeben",
+          "frage": "Lohnt es sich, meinen ETF mit 0,20 Prozent TER gegen den neuen mit 0,05 Prozent zu tauschen?",
+          "antwort": "Für neue Sparraten ja, für den Bestand meist nein: Beim Verkauf versteuern Sie die aufgelaufenen Gewinne mit 26,375 Prozent auf 70 Prozent des Ertrags, bei 20.000 Euro Gewinn also rund 3.700 Euro sofort, während die Ersparnis von 0,15 Prozentpunkten bei 50.000 Euro nur 75 Euro im Jahr beträgt; erst nach über 30 Jahren wäre der Tausch vorn, dazu kommen Ordergebühren und Spread. Lenken Sie stattdessen den Sparplan auf den günstigeren ETF und lassen Sie den alten liegen, so wächst der Anteil des billigen Fonds automatisch. Prüfen Sie außerdem die Tracking-Differenz, denn ein ETF mit 0,20 Prozent TER kann durch Wertpapierleihe genauso gut abschneiden wie einer mit 0,05.",
+          "quellen": [
+            "§ 20 InvStG",
+            "Beitrag, Abschnitt Gebühren und Kosten"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Risiken bei ETF",
+          "status": "freigegeben",
+          "frage": "Mein MSCI-World-ETF besteht zu 73 Prozent aus US-Aktien. Muss ich das ändern?",
+          "antwort": "Nicht zwingend, aber bewusst entscheiden: Der Anteil spiegelt die Marktkapitalisierung, die USA sind nun einmal der größte Aktienmarkt, und ein Welt-ETF nach Marktgewicht ist keine falsche Wette. Wer die Konzentration auf wenige US-Techkonzerne mit 29 Prozent Technologie senken will, ergänzt 10 bis 20 Prozent Schwellenländer, etwa über den FTSE All-World oder MSCI ACWI, die sie enthalten, und 10 Prozent Europa; eine Gleichgewichtung nach Wirtschaftsleistung wäre 40 Prozent USA. Nachhaltige SRI-Varianten kappen zudem jede Aktie bei 5 Prozent. Vermeiden Sie hektisches Umschichten nach Schlagzeilen, eine feste Aufteilung mit jährlichem Rebalancing reicht.",
+          "quellen": [
+            "Beitrag, Abschnitt Risiken",
+            "MSCI ACWI und FTSE All-World Indexmethodik"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "ETF-Strategien für 2026",
+          "status": "freigegeben",
+          "frage": "Ich bin 30 und habe 20.000 Euro geerbt. Alles auf einmal in den Welt-ETF oder in Raten?",
+          "antwort": "Statistisch ist die Einmalanlage in zwei von drei Fällen besser, weil das Geld sofort arbeitet und Märkte häufiger steigen als fallen; psychologisch fällt vielen der Einstieg in Raten leichter, weil ein Crash direkt nach der Einmalanlage schwer auszuhalten ist. Ein pragmatischer Kompromiss: die Hälfte sofort, den Rest in sechs bis zwölf Monatsraten, das begrenzt das Pech beim Zeitpunkt und beendet das Grübeln. Vorher gehören drei Monatsgehälter als Notgroschen aufs Tagesgeld und teure Kredite getilgt. Mit 30 und 35 Jahren Horizont ist ein Welt-ETF zu 100 Prozent vertretbar, wenn Sie einen zwischenzeitlichen Verlust von 40 Prozent aushalten, sonst mischen Sie 20 bis 30 Prozent Anleihen-ETF bei.",
+          "quellen": [
+            "Vanguard, Dollar-cost averaging vs. lump sum, 2023",
+            "Beitrag, Abschnitt ETF-Strategien"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "etf",
+        "replikation",
+        "ter",
+        "tracking-differenz",
+        "klumpenrisiko",
+        "core-satellite",
+        "teilfreistellung",
+        "sondervermoegen",
+        "rebalancing"
+      ]
+    }
+  },
+  {
+    "slug": "etc-exchange-traded-commodities",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "ETCs sind börsengehandelte, unbefristete Schuldverschreibungen, die den Preis eines Rohstoffs abbilden, seit 2006 an der Frankfurter Börse: Edelmetalle wie Gold, Silber, Platin und Palladium, Industriemetalle wie Kupfer, Energie wie Öl und Gas sowie Agrarrohstoffe wie Weizen oder Kaffee; ETFs dürfen wegen der Streuungspflicht keinen einzelnen Rohstoff halten, ETCs füllen diese Lücke.",
+          "Der entscheidende Unterschied zum ETF: ETCs sind kein Sondervermögen, sondern Forderungen gegen den Emittenten, bei dessen Insolvenz Verluste drohen; gemindert wird das durch Besicherung, physisch mit Metall im Tresor wie bei Xetra-Gold mit 95 Prozent Gold und 5 Prozent Lieferansprüchen, oder synthetisch über Swaps mit täglich angepassten Sicherheiten, was Kontrahentenrisiko bringt.",
+          "Öl-, Gas- und Agrar-ETCs halten Terminkontrakte, die vor Ablauf in den nächsten gerollt werden; ist der neue Kontrakt teurer, entstehen Rollverluste, die den Ertrag über Jahre deutlich unter die Preisentwicklung drücken. Designated Sponsors stellen laufend Kurse und sichern die Handelbarkeit.",
+          "Kosten sind eine Gesamtkostenquote von 0,00 bis 0,99 Prozent im Jahr für Lagerung, Versicherung, Verwaltung und Indexlizenz, ein Spread von 0,1 bis 0,5 Prozent je nach Liquidität, Rollkosten bei Terminkontrakten und die Depotgebühren des Brokers.",
+          "Prüfen Sie vor dem Kauf die Bonität des Emittenten, das Besicherungsmodell und die Kosten; physisch hinterlegte Edelmetall-ETCs sind die sicherste Variante und bei Gold mit Auslieferungsanspruch steuerlich nach einem Jahr steuerfrei, alle anderen ETCs unterliegen der Abgeltungsteuer. Die Anlegerentschädigung greift bei ETCs nicht."
+        ],
+        "quellen": [
+          "Richtlinie 2009/65/EG, Art. 50 und 52 (Streuung)",
+          "BFH VIII R 4/15",
+          "Beitrag ETC"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie unterscheiden sich ETCs von ETFs?",
+          "status": "freigegeben",
+          "frage": "Wenn ETCs riskanter sind als ETFs, warum gibt es keinen Gold-ETF?",
+          "antwort": "Weil die EU-Fondsregeln UCITS jedem Fonds vorschreiben, sein Vermögen zu streuen, höchstens 10 Prozent in einen Emittenten und keine direkte Anlage in physische Rohstoffe; ein Fonds, der nur Gold hält, ist in Europa nicht zulässig. In der Schweiz oder den USA gibt es echte Gold-ETFs, die in Deutschland nicht vertrieben werden dürfen. Der ETC ist der Ersatz: eine Schuldverschreibung, deren Emittentenrisiko durch das hinterlegte Gold und eine Treuhandkonstruktion weitgehend neutralisiert ist. Wer Rohstoffe als Fonds will, nimmt einen breit gestreuten Rohstoff-ETF auf einen Index mit vielen Rohstoffen, der über Swaps abbildet, oder Aktien von Minen- und Rohstoffkonzernen.",
+          "quellen": [
+            "Art. 50, 52 UCITS-Richtlinie",
+            "Beitrag, Abschnitt Unterschiede zu ETFs"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie funktioniert die Besicherung bei ETCs?",
+          "status": "freigegeben",
+          "frage": "Ist mein Silber-ETC genauso sicher wie Xetra-Gold?",
+          "antwort": "Kommt auf das Produkt an: Physisch hinterlegte Silber-ETCs wie die von WisdomTree oder iShares lagern das Metall in Tresoren in London und sind ähnlich sicher, kosten aber 0,4 bis 0,5 Prozent, weil Silber pro Wert mehr Lagerplatz braucht; synthetische Silber-ETCs auf Terminkontrakte tragen zusätzlich Kontrahenten- und Rollrisiko. Anders als bei Gold ist bei Silber die Auslieferung wegen der Mehrwertsteuer von 19 Prozent unattraktiv, und Gewinne unterliegen nach Ansicht der Finanzverwaltung der Abgeltungsteuer, sofern kein Lieferanspruch besteht; mit Lieferanspruch ist die Rechtslage umstritten. Prüfen Sie im Prospekt „physically backed“, den Lagerort und den Treuhänder.",
+          "quellen": [
+            "Beitrag, Abschnitt Besicherung",
+            "BMF-Schreiben zu § 20 EStG, Rz. 57"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Kosten entstehen bei ETCs?",
+          "status": "freigegeben",
+          "frage": "Warum hat mein Öl-ETC in einem Jahr verloren, obwohl der Ölpreis gestiegen ist?",
+          "antwort": "Wegen der Rollkosten: Der ETC hält keinen Tank voll Öl, sondern Terminkontrakte, die monatlich auslaufen und in den nächsten getauscht werden müssen; ist der spätere Kontrakt teurer als der aktuelle, sogenanntes Contango, verliert der ETC bei jedem Rollen ein paar Prozent, über ein Jahr leicht 10 bis 20 Prozent, mehr als der Ölpreis stieg. Dazu kommen Gebühr und Dollar-Wechselkurs. Öl-ETCs eignen sich deshalb nur für kurzfristige Wetten, nicht zum Halten; wer langfristig auf Energie setzen will, nimmt Aktien von Ölkonzernen oder einen breiten Rohstoffindex mit optimierter Rollstrategie. Bei Edelmetall-ETCs mit physischer Hinterlegung gibt es dieses Problem nicht.",
+          "quellen": [
+            "Beitrag, Abschnitt Rollover-Effekt",
+            "Beitrag, Abschnitt Kosten"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Welche Risiken sollten Sie beachten?",
+          "status": "freigegeben",
+          "frage": "Wie viel Prozent meines Depots dürfen in Rohstoff-ETCs stecken?",
+          "antwort": "Gold als Absicherung 5 bis 10 Prozent, alle anderen Rohstoffe zusammen höchstens weitere 5 Prozent, denn Industriemetalle, Öl und Agrargüter bringen langfristig kaum Ertrag, nur Preisschwankungen und Rollkosten, und sind bereits in den Aktien der Rohstoffkonzerne Ihres Welt-ETFs enthalten. Kupfer und Silber profitieren zwar von Energiewende und KI-Nachfrage, ihre Preise fielen aber 2025 nach dem Anstieg teils um 30 Prozent binnen Wochen. Wer eine Rohstoffquote will, nimmt einen breiten Rohstoff-ETF mit 20 bis 30 Rohstoffen statt einzelner ETCs und verteilt auf zwei Emittenten. Rohstoffe sind eine Beimischung gegen Inflationsschocks, kein Renditebaustein.",
+          "quellen": [
+            "Beitrag, Abschnitt Risiken",
+            "Beitrag Investition in Sachwerte, Abschnitt Edelmetalle"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "etc",
+        "emittentenrisiko",
+        "rollover",
+        "sondervermoegen",
+        "gold-etc",
+        "ter",
+        "abgeltungsteuer"
+      ]
+    }
+  },
+  {
+    "slug": "einlagensicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Zeigt Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Einlagensicherung schützt Guthaben auf Giro-, Tagesgeld-, Festgeld- und Sparkonten bis 100.000 Euro je Person und Bank, EU-weit, kostenlos und ohne Antrag; im Pleitefall zahlt die Entschädigungseinrichtung deutscher Banken binnen sieben Werktagen. Die Grenze gilt je Bank insgesamt, nicht je Konto, bei Gemeinschaftskonten für jeden Inhaber, also 200.000 Euro.",
+          "Sechs Monate lang bis 500.000 Euro geschützt sind Beträge aus Immobilienverkauf, Heirat, Scheidung, Renteneintritt, Kündigung, Geburt, Krankheit, Versicherungsleistungen oder Entschädigungen, damit vorübergehend hohe Summen nicht verteilt werden müssen.",
+          "Private Banken sichern über den freiwilligen Einlagensicherungsfonds des Bankenverbands zusätzlich bis 3 Millionen Euro je Sparer, ab 2030 1 Million, begrenzt auf 8,75 Prozent des Eigenkapitals der Bank, ohne Rechtsanspruch; Sparkassen und Genossenschaftsbanken stützen sich über die Institutssicherung gegenseitig, bevor es zur Pleite kommt, faktisch unbegrenzt, rechtlich ebenfalls mit 100.000 Euro Anspruch.",
+          "Wertpapiere im Depot sind Sondervermögen und bleiben Eigentum, nur das Verrechnungskonto fällt unter die 100.000 Euro; kann eine Bank Wertpapiergeschäfte nicht erfüllen, greift die Anlegerentschädigung mit 90 Prozent bis 20.000 Euro.",
+          "Bei Auslandsbanken gilt das Sicherungssystem des Sitzlands mit 100.000 Euro, dessen Verlässlichkeit von der Bonität des Staates abhängt; sicher sind Länder mit AAA- oder AA-Rating wie Deutschland, Niederlande, Luxemburg, Österreich, Skandinavien. Größere Vermögen verteilt man auf mehrere unabhängige Banken, Länder und Gemeinschaftskonten; Deutsche Bank und Postbank zählen als eine Bank."
+        ],
+        "quellen": [
+          "Einlagensicherungsgesetz, §§ 8, 14",
+          "Anlegerentschädigungsgesetz, § 4",
+          "Statut des Einlagensicherungsfonds des Bundesverbands deutscher Banken",
+          "Beitrag Einlagensicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Schutzgrenzen 2026: Das müssen Sie wissen",
+          "status": "freigegeben",
+          "frage": "Wir haben 180.000 Euro aus dem Hausverkauf auf dem Gemeinschaftskonto. Müssen wir das aufteilen?",
+          "antwort": "Nein, gleich doppelt nicht: Auf einem Gemeinschaftskonto hat jeder von Ihnen einen Anspruch von 100.000 Euro, zusammen 200.000, und Erlöse aus dem Verkauf einer privat genutzten Immobilie sind ab Gutschrift sechs Monate lang bis 500.000 Euro je Person geschützt. Nach Ablauf der sechs Monate gilt wieder die normale Grenze; wenn das Geld dann noch nicht für den nächsten Kauf verwendet ist, verteilen Sie es auf eine zweite Bank oder eine Sparkasse mit Institutssicherung. Legen Sie den Kaufvertrag und den Kontoauszug mit der Gutschrift ab, die Entschädigungseinrichtung verlangt im Ernstfall den Nachweis der Herkunft.",
+          "quellen": [
+            "§ 8 Abs. 2 EinSiG",
+            "Beitrag, Abschnitt Schutzgrenzen"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Freiwillige Zusatzsicherung bei privaten Banken",
+          "status": "freigegeben",
+          "frage": "Meine Bank wirbt mit Einlagenschutz bis 3 Millionen Euro. Kann ich mich darauf verlassen?",
+          "antwort": "Nur bedingt: Der freiwillige Fonds des Bankenverbands hat bisher jeden Kunden entschädigt, auch bei Greensill 2021 mit über zwei Milliarden Euro, aber es gibt keinen Rechtsanspruch, die Grenze sinkt 2030 auf 1 Million Euro, und sie liegt zudem bei 8,75 Prozent des haftenden Eigenkapitals der Bank, bei kleinen Banken also unter 3 Millionen; die genaue Grenze Ihrer Bank steht auf der Website des Bankenverbands. Fällt eine Großbank, wäre der Fonds überfordert. Rechtlich sicher sind nur die 100.000 Euro; wer mehr hat, verteilt oder nutzt die Institutssicherung der Sparkassen und Volksbanken, die präventiv stützt und seit den Siebzigern keinen Kunden hat verlieren lassen, ebenfalls ohne Rechtsanspruch.",
+          "quellen": [
+            "Statut des Einlagensicherungsfonds, § 6",
+            "Beitrag, Abschnitt Freiwillige Zusatzsicherung"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wertpapiere und Depots: Andere Regeln",
+          "status": "freigegeben",
+          "frage": "Wann greift die Anlegerentschädigung mit nur 20.000 Euro überhaupt?",
+          "antwort": "Fast nie, und das ist die gute Nachricht: Sie greift nur, wenn eine Bank oder ein Wertpapierinstitut Kundengelder oder Wertpapiere, die es für Sie hätte verwahren müssen, veruntreut hat oder nicht herausgeben kann, etwa bei Betrug wie bei Phoenix Kapitaldienst 2005. Normale Depots sind davon nicht betroffen, weil Ihre Aktien und ETFs als Sondervermögen bei Clearstream liegen und bei einer Bankpleite einfach auf eine andere Bank übertragen werden. Das Guthaben auf dem Verrechnungskonto ist Einlage und über die 100.000 Euro gesichert. Vorsicht ist nur bei Anbietern ohne deutsche oder EU-Lizenz geboten, etwa manchen Krypto- oder CFD-Plattformen, dort gibt es weder Sondervermögen noch Entschädigung.",
+          "quellen": [
+            "§ 1 Abs. 4, § 4 AnlEntG",
+            "Beitrag, Abschnitt Wertpapiere und Depots"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Auslandsbanken: Bonität ist wichtig",
+          "status": "freigegeben",
+          "frage": "Eine Bank aus Malta bietet 3,8 Prozent Festgeld über ein deutsches Portal. Ist mein Geld dort sicher?",
+          "antwort": "Formal ja, bis 100.000 Euro über den maltesischen Einlagensicherungsfonds, praktisch mit Fragezeichen: Malta hat nur ein A-Rating, der Fonds ist klein und müsste bei einer größeren Pleite vom Staat aufgefüllt werden, die Auszahlung kann Wochen dauern und läuft in Fremdsprache über die deutsche Entschädigungseinrichtung nur als Postfach. Für einen Zinsaufschlag von 0,3 Prozentpunkten gegenüber deutschen oder niederländischen Angeboten lohnt sich das Risiko kaum: Bei 50.000 Euro sind das 150 Euro im Jahr. Verbraucherzentralen empfehlen nur Banken aus Ländern mit AA- oder AAA-Rating; wer trotzdem zugreift, bleibt deutlich unter 100.000 Euro und prüft, dass die Bank direkt Mitglied im Sicherungssystem ist, nicht nur eine Zweigstelle.",
+          "quellen": [
+            "Beitrag, Abschnitt Auslandsbanken",
+            "Richtlinie 2014/49/EU (Einlagensicherungssysteme)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "einlagensicherung",
+        "institutssicherung",
+        "einlagensicherungsfonds",
+        "anlegerentschaedigung",
+        "sondervermoegen",
+        "verrechnungskonto"
+      ]
+    }
+  },
+  {
+    "slug": "festgeld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Festgeld ist Geld, das für eine feste Laufzeit von einem Monat bis zehn Jahren zu einem garantierten Zins bei einer Bank liegt, ohne Zugriff und ohne Kursrisiko; 2026 gibt es je nach Laufzeit und Bank 2,0 bis 3,4 Prozent bei einem EZB-Einlagenzins von 2,0 Prozent, oft von europäischen Banken mit deutscher oder eigener Einlagensicherung.",
+          "Es passt für Geld, das in der Laufzeit sicher nicht gebraucht wird, und schützt vor sinkenden Zinsen; Tagesgeld bleibt für Notgroschen und Flexibilität, beide ergänzen sich. Mindestanlagen liegen zwischen null und 2.500 Euro, viele Banken verlängern automatisch, wer das nicht will, kündigt rechtzeitig.",
+          "Die Zinsstrukturkurve ist 2026 wieder normal, längere Laufzeiten bringen mehr, der Aufschlag über drei Jahre ist aber klein; sinnvoll sind meist ein bis drei Jahre, kurze Laufzeiten unter einem Jahr für Zwischenparken, lange nur für Anleger, die das Zinsniveau fixieren wollen und Zinsanstiege verschmerzen.",
+          "Die Festgeldtreppe teilt die Summe in gleiche Tranchen mit Laufzeiten von einem bis fünf Jahren; jedes Jahr wird eine fällig und wandert zum aktuellen Zins in die längste Laufzeit, so bleiben Flexibilität und die höheren Zinsen langer Laufzeiten erhalten und das Zinsänderungsrisiko wird gestreut.",
+          "Bis 100.000 Euro je Bank und Kunde gilt die gesetzliche Einlagensicherung EU-weit, deutsche Privatbanken sichern freiwillig mehr, Sparkassen unbegrenzt; größere Summen verteilen, bei Auslandsbanken auf AA- oder AAA-Länder achten. Zinsen unterliegen der Abgeltungsteuer von 26,375 Prozent, davor bleiben 1.000 Euro Sparerpauschbetrag per Freistellungsauftrag, bei Einkommen unter 12.348 Euro hilft die Nichtveranlagungsbescheinigung."
+        ],
+        "quellen": [
+          "Einlagensicherungsgesetz, § 8",
+          "§ 20, § 44a EStG",
+          "EZB-Leitzinsbeschlüsse 2026",
+          "Beitrag Festgeld"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie funktioniert die Festgeldanlage?",
+          "status": "freigegeben",
+          "frage": "Komme ich im Notfall vorzeitig an mein Festgeld?",
+          "antwort": "In der Regel nicht, das ist der Preis für den festen Zins; einige Banken lassen eine vorzeitige Kündigung in Härtefällen wie Arbeitslosigkeit, Krankheit oder Tod des Kontoinhabers zu, meist mit Verlust der Zinsen oder einer Vorschusszinsstrafe, andere schließen sie ganz aus. Bei Insolvenz einer Bank wird das Festgeld über die Einlagensicherung binnen sieben Werktagen ausgezahlt, das ist der einzige garantierte Zugriff. Legen Sie deshalb nur Geld fest, das Sie über die Laufzeit sicher entbehren können, halten Sie drei Monatsgehälter als Notgroschen auf dem Tagesgeld und nutzen Sie die Festgeldtreppe, damit jedes Jahr ein Teil frei wird.",
+          "quellen": [
+            "Beitrag, Abschnitt Funktionsweise",
+            "AGB der Festgeldanbieter, Kündigungsregeln"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Die beste Laufzeit wählen: 3, 6, 12 oder 24 Monate?",
+          "status": "freigegeben",
+          "frage": "Die EZB soll die Zinsen halten. Soll ich jetzt fünf Jahre zu 3 Prozent festlegen?",
+          "antwort": "Nur mit einem Teil: Bei 3 Prozent über fünf Jahre sichern Sie sich einen realen Ertrag, solange die Inflation bei 2 bis 2,7 Prozent bleibt, verzichten aber auf jede Chance auf höhere Zinsen und auf Zugriff. Da der Aufschlag gegenüber zwei Jahren mit 2,9 Prozent nur 0,1 Prozentpunkte beträgt, ist die lange Bindung schlecht bezahlt. Besser die Treppe: je ein Fünftel auf ein, zwei, drei, vier und fünf Jahre, dann sind Sie beim Zinsanstieg mit jeder fälligen Tranche dabei und beim Zinsrückgang zu 80 Prozent gesichert. Prüfen Sie zudem, ob eine deutsche Bundesanleihe oder ein Geldmarkt-ETF mit ähnlicher Rendite und täglicher Verkaufsmöglichkeit die flexiblere Alternative ist.",
+          "quellen": [
+            "Beitrag, Abschnitt Beste Laufzeit",
+            "Beitrag, Abschnitt Treppenstrategie"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Einlagensicherung und Bonitätsprüfung: Sicherheit beim Festgeld",
+          "status": "freigegeben",
+          "frage": "Ich will 250.000 Euro sicher für zwei Jahre anlegen. Wie verteile ich das?",
+          "antwort": "Auf mindestens drei rechtlich getrennte Banken mit höchstens 95.000 Euro je Bank, damit auch die Zinsen unter der Grenze bleiben, oder als Ehepaar auf Gemeinschaftskonten mit 190.000 Euro je Bank; wählen Sie Banken aus Ländern mit AA- oder AAA-Rating und prüfen Sie, dass Konzernbanken wie Deutsche Bank und Postbank oder Consorsbank und BNP nur einmal zählen. Ein Anlageportal wie Weltsparen oder Zinspilot erleichtert die Streuung über ein Konto, die Sicherung gilt trotzdem je Partnerbank. Alternativ nimmt eine Sparkasse oder Volksbank die ganze Summe mit faktisch unbegrenzter Institutssicherung, meist zu niedrigerem Zins; oder Sie kaufen eine zweijährige Bundesanleihe mit rund 2 Prozent, für die der Bund unbegrenzt haftet.",
+          "quellen": [
+            "§ 8 EinSiG",
+            "Beitrag, Abschnitt Einlagensicherung und Bonität"
+          ]
+        },
+        {
+          "abschnitt": "heading-9",
+          "abschnitt_titel": "Steuerliche Behandlung von Festgeldzinsen 2026",
+          "status": "freigegeben",
+          "frage": "Mein Festgeld über drei Jahre zahlt die Zinsen erst am Ende aus. Wann versteuere ich sie?",
+          "antwort": "Im Jahr des Zuflusses, also bei Auszahlung am Ende, und zwar den gesamten Zins auf einmal; das kann den Sparerpauschbetrag von 1.000 Euro in dem Jahr sprengen, während er in den Vorjahren ungenutzt verfällt. Bei 30.000 Euro zu 3 Prozent sind das 2.700 Euro Zinsen auf einmal, 1.700 Euro davon steuerpflichtig, statt dreimal 900 Euro steuerfrei bei jährlicher Gutschrift. Wählen Sie deshalb bei mehrjährigem Festgeld Angebote mit jährlicher Zinszahlung oder verteilen Sie Laufzeiten so, dass jedes Jahr Zinsen fließen; die Festgeldtreppe erledigt das nebenbei. Bei Auslandsbanken ohne deutschen Steuerabzug müssen Sie die Zinsen selbst in der Anlage KAP angeben.",
+          "quellen": [
+            "§ 11 Abs. 1 EStG (Zuflussprinzip)",
+            "§ 20 Abs. 9 EStG",
+            "Beitrag, Abschnitt Steuerliche Behandlung"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "festgeld",
+        "festgeldtreppe",
+        "zinsstrukturkurve",
+        "einlagenzins",
+        "einlagensicherung",
+        "sparerpauschbetrag",
+        "tagesgeld"
+      ]
+    }
+  },
+  {
+    "slug": "tagesgeld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Tagesgeld ist ein verzinstes Konto ohne Laufzeit, Kündigungsfrist und Gebühren, aber auch ohne Karte; Ein- und Auszahlungen laufen über das Referenzkonto. Der Zins ist variabel und kann täglich geändert werden, er folgt dem EZB-Einlagenzins von 2,0 Prozent; laut Beitrag liegen Aktionszinsen im Juni 2026 bei 2,5 bis 4,0 Prozent, Standardzinsen bei 1,2 bis 2,3, der Durchschnitt bei 1,85 Prozent.",
+          "Aktionszinsen gelten drei bis sechs Monate für Neukunden oder neues Geld, danach fällt der Zins auf den Standard; entscheidend für die langfristige Wahl ist der Basiszins, wer aktiv wechselt, kann mit Zins-Hopping mehr herausholen. Für das zweite Halbjahr erwarten Beobachter stabile EZB-Zinsen und leicht steigende Tagesgeldzinsen im Wettbewerb um Einlagen.",
+          "Guthaben sind EU-weit bis 100.000 Euro je Bank und Kunde gesichert, bei Gemeinschaftskonten 200.000, nach Immobilienverkauf, Heirat, Scheidung, Renteneintritt oder Kündigung sechs Monate lang bis 500.000 Euro; deutsche Privatbanken sichern freiwillig mehr, Sparkassen und Volksbanken faktisch unbegrenzt. Bevorzugt werden Banken aus AA- oder AAA-Ländern.",
+          "Zinsen unterliegen der Abgeltungsteuer von 25 Prozent plus Soli, zusammen 26,375 Prozent, die die Bank automatisch abführt; mit Freistellungsauftrag bleiben 1.000 Euro je Person und 2.000 Euro für Paare steuerfrei, bei mehreren Banken aufgeteilt.",
+          "Tagesgeld ist der Platz für den Notgroschen von drei Nettomonatsgehältern und für Geld vor größeren Ausgaben, nicht für langfristigen Vermögensaufbau; achten Sie auf Zinsgutschrift monatlich statt jährlich für den Zinseszins, Mindest- und Höchstbeträge, Staffelzinsen, Zinsgarantie und Online-Service. Festgeld ergänzt für planbare Summen, das Sparbuch ist überholt."
+        ],
+        "quellen": [
+          "Einlagensicherungsgesetz, § 8",
+          "§ 20, § 44a EStG",
+          "EZB-Einlagefazilität 2026",
+          "Beitrag Tagesgeld"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Aktuelle Zinsentwicklung und Prognosen für 2026",
+          "status": "freigegeben",
+          "frage": "Lohnt sich das Zins-Hopping zwischen Neukundenangeboten wirklich?",
+          "antwort": "Bei größeren Summen ja: Wer 30.000 Euro alle vier bis sechs Monate zu einem Aktionszins von 3,5 Prozent statt zum Standard von 1,8 Prozent parkt, verdient rund 500 Euro im Jahr mehr, für zwei bis drei Kontoeröffnungen per Videoident mit je 15 Minuten Aufwand. Beachten Sie die Bedingungen: Aktionszins meist nur für neues Geld und Neukunden, Höchstbeträge von 50.000 bis 100.000 Euro, Zinsgutschrift teils erst am Ende des Aktionszeitraums, und die Freistellungsaufträge müssen bei jeder Bank neu eingerichtet und aufgeteilt werden. Bei 5.000 Euro Notgroschen bringt das Hopping 40 Euro, da bleibt man besser bei einer Bank mit gutem Basiszins.",
+          "quellen": [
+            "Beitrag, Abschnitt Zinsentwicklung",
+            "Beitrag, Abschnitt Auswahl eines Tagesgeldkontos"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie sicher ist mein Geld beim Tagesgeld?",
+          "status": "freigegeben",
+          "frage": "Was passiert konkret, wenn meine Bank pleitegeht? Muss ich einen Antrag stellen?",
+          "antwort": "Nein: Stellt die BaFin den Entschädigungsfall fest, schreibt die Entschädigungseinrichtung Sie innerhalb weniger Tage an, Sie bestätigen Ihre Kontoverbindung, und binnen sieben Werktagen ab Feststellung ist das Guthaben bis 100.000 Euro samt aufgelaufener Zinsen auf einem anderen Konto; bei ausländischen Banken zahlt das Sicherungssystem des Sitzlands, die deutsche Einrichtung hilft bei der Abwicklung. Guthaben über der Grenze melden Sie zur Insolvenztabelle an und erhalten Jahre später eine Quote. Ein Dispo oder Kredit bei derselben Bank wird nicht verrechnet. Bewahren Sie Kontoauszüge auf, und prüfen Sie im Zweifel im Register der Entschädigungseinrichtung, ob Ihre Bank Mitglied ist.",
+          "quellen": [
+            "§ 10, § 14 EinSiG",
+            "Beitrag, Abschnitt Sicherheit"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Steuern fallen auf Tagesgeldzinsen an?",
+          "status": "freigegeben",
+          "frage": "Ich bin Rentner mit 14.000 Euro Rente und 1.500 Euro Zinsen. Muss ich 25 Prozent Steuer zahlen?",
+          "antwort": "Wahrscheinlich weniger: Ihr Grenzsteuersatz liegt bei rund 15 Prozent, deshalb beantragen Sie in der Anlage KAP die Günstigerprüfung, das Finanzamt rechnet die Zinsen dann mit Ihrem persönlichen Satz statt 25 Prozent ab und erstattet die Differenz; die ersten 1.000 Euro sind ohnehin über den Freistellungsauftrag frei, bleiben also 500 Euro, die statt 132 Euro nur etwa 75 Euro Steuer kosten. Liegt Ihr zu versteuerndes Einkommen samt Zinsen unter dem Grundfreibetrag von 12.348 Euro, was bei 14.000 Euro Rente mit 84 Prozent Besteuerungsanteil und Abzügen möglich ist, beantragen Sie eine Nichtveranlagungsbescheinigung, dann behält die Bank gar nichts ein.",
+          "quellen": [
+            "§ 32d Abs. 6 EStG (Günstigerprüfung)",
+            "§ 44a Abs. 2 EStG (NV-Bescheinigung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Worauf sollten Sie bei der Auswahl eines Tagesgeldkontos achten?",
+          "status": "freigegeben",
+          "frage": "Meine Hausbank zahlt 0,5 Prozent auf Tagesgeld. Warum so wenig, wenn die EZB 2 Prozent gibt?",
+          "antwort": "Weil Ihre Bank das Geld nicht braucht: Sparkassen und Filialbanken haben mehr Einlagen als Kreditnachfrage und legen den Überschuss bei der EZB zu 2 Prozent an, die Differenz ist ihr Gewinn, und sie setzen darauf, dass Bestandskunden nicht wechseln. Direktbanken und ausländische Banken, die Kredite refinanzieren wollen, zahlen 2 bis 3,4 Prozent. Der Wechsel ist einfach, Tagesgeldkonten sind kostenlos, laufen neben dem Girokonto und brauchen keine Kündigung der Hausbank; bei 20.000 Euro bringen 2,5 Prozentpunkte mehr 500 Euro im Jahr. Fragen Sie notfalls Ihren Berater nach einem Sonderzins, manche Banken bieten ihn auf Nachfrage, sonst eröffnen Sie ein Zweitkonto online.",
+          "quellen": [
+            "Beitrag, Abschnitt Was ist Tagesgeld",
+            "Beitrag, Abschnitt Auswahl eines Tagesgeldkontos"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "tagesgeld",
+        "aktionszins",
+        "einlagenzins",
+        "notgroschen",
+        "einlagensicherung",
+        "sparerpauschbetrag",
+        "freistellungsauftrag",
+        "festgeld"
+      ]
+    }
+  }
+]

@@ -1,125 +1,80 @@
 "use client";
 
+/**
+ * Die Pille — die eine Aufforderung, die den Blick holen soll.
+ *
+ * 🚨 Bis zum 16.09.2026 stand hier die ganze Gestalt als Inline-Style: fünfzig Zeilen
+ * mit `#1a1a1a`, `17px`, `21px` Radius und einer 38-px-Scheibe mit 17 px Radius (also
+ * gar keinem Kreis). Daneben baute das Kursblatt in kb-pille dieselbe Pille ein
+ * zweites Mal, nach den Maßen des Handoffs. Jetzt gibt es eine: `.pille` in
+ * app/knoepfe.css, und beide Welten setzen sie.
+ *
+ * Die Farbe der Scheibe kommt aus `--werkzeug` (Türkis im Vergleich, Magenta im
+ * Rechner) und fällt sonst auf Grün zurück. `farbe` überschreibt sie für den Einzelfall.
+ */
+import { cn } from "@/lib/cn";
+
 interface ButtonProps {
   label: string;
   onClick?: () => void;
   disabled?: boolean;
-  textColor?: string;
-  /** Wenn gesetzt, rendert der Button als <a> (z. B. für Datei-Downloads). */
+  /** Wenn gesetzt, rendert der Knopf als <a> (z. B. für Datei-Downloads). */
   href?: string;
   download?: boolean | string;
   target?: string;
   rel?: string;
-  /** Icon im grünen Kreis: Pfeil rechts (default), nach unten, oder Download. */
+  /** Zeichen in der Scheibe: Pfeil rechts (Vorgabe), nach unten, oder Herunterladen. */
   icon?: "arrow" | "arrow-down" | "download";
+  /** Kleinere Pille (42 px) für Listenzeilen. */
+  klein?: boolean;
+  /** Die Füllung wächst beim Überfahren auf die ganze Innenfläche. */
+  /** Farbe der Scheibe, wenn nicht die Werkzeugfarbe gelten soll. */
+  farbe?: string;
+  className?: string;
+}
+
+function Zeichen({ icon }: { icon: NonNullable<ButtonProps["icon"]> }) {
+  if (icon === "download") {
+    return (
+      <svg width="11" height="12.5" viewBox="0 0 15 17" fill="none" aria-hidden="true">
+        <path d="M13.5 1.5L7.5 9.5L1.5 1.5" stroke="var(--auf-tinte)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+        <path d="M1.5 15.5L13.5 15.5" stroke="var(--auf-tinte)" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+      </svg>
+    );
+  }
+  return (
+    <svg width="11" height="15" viewBox="0 0 11 15" fill="none" aria-hidden="true"
+         style={{ overflow: "visible", transform: icon === "arrow-down" ? "rotate(90deg)" : undefined }}>
+      <path d="M1.5 1.5L9.5 7.5L1.5 13.5" stroke="var(--auf-tinte)" strokeWidth="3" fill="none"
+            strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+    </svg>
+  );
 }
 
 export default function Button({
-  label,
-  onClick,
-  disabled = false,
-  textColor,
-  href,
-  download,
-  target,
-  rel,
-  icon = "arrow",
+  label, onClick, disabled = false, href, download, target, rel,
+  icon = "arrow", klein = false, farbe, className,
 }: ButtonProps) {
-  const wrapperStyle: React.CSSProperties = {
-    backgroundColor: "transparent",
-    borderRadius: "21px",
-    paddingLeft: "20px",
-    paddingRight: "3px",
-    paddingTop: "3px",
-    paddingBottom: "3px",
-    border: "2px solid var(--color-text-primary)",
-    outline: "1px solid var(--color-text-primary)",
-    outlineOffset: "2px",
-    cursor: disabled ? "not-allowed" : "pointer",
-    opacity: disabled ? 0.5 : 1,
-    display: "flex",
-    alignItems: "center",
-    gap: "13px",
-    height: "48px",
-    alignSelf: "flex-start",
-    textDecoration: "none",
-  };
+  const klassen = cn("pille", klein && "pille--klein", className);
+  const stil = farbe ? ({ "--pille-farbe": farbe } as React.CSSProperties) : undefined;
 
-  const content = (
+  const inhalt = (
     <>
-      <div
-        style={{
-          fontFamily: "Open Sans, sans-serif",
-          fontSize: "17px",
-          color: textColor ?? "#1a1a1a",
-          fontWeight: "500",
-          lineHeight: "30px",
-          whiteSpace: "nowrap",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          margin: "0",
-        }}
-      >
-        <p style={{ margin: "0", padding: "0", color: textColor ?? "#1a1a1a" }}>{label}</p>
-      </div>
-      <div style={{ position: "relative", width: "38px", height: "38px", flexShrink: 0 }}>
-        <div
-          style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            backgroundColor: "var(--color-brand)",
-            borderRadius: "17px",
-          }}
-        />
-        {icon === "download" ? (
-          <svg
-            width="11"
-            height="12.5"
-            viewBox="0 0 15 17"
-            fill="none"
-            style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
-          >
-            <path d="M13.5001 1.50009L7.50009 9.50009L1.50009 1.50009" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
-            <path d="M1.50009 15.5001L13.5001 15.5001" stroke="white" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
-          </svg>
-        ) : (
-          <svg
-            width="11"
-            height="15"
-            viewBox="0 0 11 15"
-            fill="none"
-            style={{ position: "absolute", top: "50%", left: "50%", marginLeft: icon === "arrow-down" ? "-5.5px" : "-4.5px", marginTop: "-7.5px", overflow: "visible" }}
-          >
-            <g style={{ transformOrigin: "5.5px 7.5px", transform: icon === "arrow-down" ? "rotate(90deg)" : undefined }}>
-              <path
-                d="M1.5 1.50009L9.5 7.50009L1.5 13.5001"
-                stroke="white"
-                strokeWidth="3"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                vectorEffect="non-scaling-stroke"
-              />
-            </g>
-          </svg>
-        )}
-      </div>
+      <span className="pille__text">{label}</span>
+      <span className="pille__scheibe"><Zeichen icon={icon} /></span>
     </>
   );
 
   if (href && !disabled) {
     return (
-      <a href={href} download={download} target={target} rel={rel} style={wrapperStyle}>
-        {content}
+      <a href={href} download={download} target={target} rel={rel} className={klassen} style={stil}>
+        {inhalt}
       </a>
     );
   }
-
   return (
-    <button type="button" onClick={onClick} disabled={disabled} style={wrapperStyle}>
-      {content}
+    <button type="button" onClick={onClick} disabled={disabled} className={klassen} style={stil}>
+      {inhalt}
     </button>
   );
 }

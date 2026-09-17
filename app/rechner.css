@@ -1,42 +1,17 @@
-/* ─────────────────────────────────────────────
-   Rechner Styles
-   Alle Styles für Finanzrechner-Komponenten
-   ───────────────────────────────────────────── */
+/* =====================================================================================
+   rechner.css — was vom alten Rechner-Satz übrig ist.
 
-/* ── Layout ─────────────────────────────────── */
+   🚨 Der Satz selbst liegt seit dem Kursblatt in app/kursblatt.css; die 56 Rechner-
+   Komponenten und ihre Bausteine sind gelöscht. Hier stehen nur noch die vier Dinge, die
+   ausserhalb der Rechner weiterleben:
 
-.rechner-layout {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
+     .rechner-check*     — RechnerCheckbox, genutzt vom Newsletter-Banner
+     .rechner-button     — Knopfstil, genutzt vom Dokument-Download
+     .result-spacer / .vertical-spacer — components/ui/ResultSpacer, VerticalSpacer
+     .article-tool-embed / --divider   — der Rahmen um ein Werkzeug im Artikel
 
-.rechner-top-row {
-  display: flex;
-  align-items: stretch;
-  gap: 50px;
-  width: 100%;
-}
-
-.rechner-form-header {
-  margin-bottom: 16px;
-}
-
-.rechner-visual {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.rechner-divider {
-  width: 20px;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-}
+   112 Regelblöcke ohne Consumer sind entfallen.
+   ===================================================================================== */
 
 .vertical-spacer {
   position: absolute;
@@ -55,564 +30,13 @@
   display: block;
 }
 
-.rechner-form-col {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.rechner-layout .rechner-container {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.rechner-results-portal {
-  width: 100%;
-  /* Kein margin am leeren Portal → ohne Ergebnis bleibt der Abstand zum Spacer
-     identisch wie mit Ergebnis (gemeinsamer Bottom-Anker = .article-tool-divider). */
-  margin-top: 0;
-}
-
-.rechner-results {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  /* Abstand Hinweis/Button → Ergebnis (nur wenn Ergebnis vorhanden) */
-  margin-top: 60px;
-}
-
-.rechner-container {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.rechner-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.rechner-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin-bottom: 32px;
-  font-family: var(--font-heading);
-}
-
 .article-tool-embed .rechner-title {
   display: none;
 }
 
 /* 50px Abstand nach oben (zu Content darüber bzw. zwischen 2 Tools im Artikel). */
 .article-tool-embed {
-  margin-top: 50px;
-}
-
-/* No-Visual-Variante (Artikel): kein Platzhalterbild, Formular volle (Body-)Breite. */
-.rechner-layout--no-visual .rechner-top-row {
-  gap: 0;
-}
-.rechner-layout--no-visual .rechner-form-col {
-  flex: 1 1 100%;
-}
-
-/* ── Inputs ─────────────────────────────────── */
-
-.rechner-inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.rechner-input-wrapper {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.rechner-label {
-  font-family: 'Merriweather', Georgia, serif;
-  font-size: 0.85rem;          /* etwas kleiner */
-  color: var(--color-text-primary);
-  font-weight: 600;
-  margin-bottom: 6px;
-  margin-left: 20px;           /* 20px nach rechts */
-  display: block;
-  transition: transform 0.3s ease, color 0.2s ease;
-}
-/* Label slidet 4px hoch, sobald sich die Feld-Outline einzeichnet (Hover/Focus). */
-.rechner-input-wrapper:hover .rechner-label,
-.rechner-input-wrapper:focus-within .rechner-label,
-.rechner-select-wrapper:hover .rechner-label,
-.rechner-select-wrapper:focus-within .rechner-label {
-  transform: translateY(-4px);
-}
-/* Bei Focus NUR die Textfarbe wechseln (kein Ring ums Label). */
-.rechner-input-wrapper:focus-within .rechner-label,
-.rechner-select-wrapper:focus-within .rechner-label {
-  color: var(--color-brand-secondary);
-}
-/* Rechner-Felder: Outline-Focus-Farbe = brand-secondary. */
-.rechner-field {
-  position: relative;
-  --field-focus-color: var(--color-brand-secondary);
-}
-/* Einheit als Button am rechten Innenrand des Inputs (wie der Suchen-Button):
-   solider Rahmen, passender Radius, Abstand oben/unten/rechts, etwas kleiner. */
-.rechner-einheit-btn {
-  position: absolute;
-  top: 5px;
-  bottom: 5px;
-  right: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 12px;
-  border: 1px solid var(--color-text-primary);
-  border-radius: 14px;
-  color: var(--color-text-primary);
-  font-size: 15px;
-  line-height: 1;
-  white-space: nowrap;
-  pointer-events: none;
-  background: transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-/* Einheit-Ring auf brand-secondary, sobald das Feld fokussiert ist. */
-.rechner-field:focus-within .rechner-einheit-btn {
-  border-color: var(--color-brand-secondary);
-  color: var(--color-brand-secondary);
-}
-
-.rechner-input-container {
-  display: flex;
-  align-items: stretch;
-  gap: 0;
-  width: 100%;
-}
-
-/* Verbindungslinie zwischen Eingabefeld und Einheit-Box */
-.rechner-input-connector {
-  flex: 0 0 12px;
-  align-self: center;
-  height: 1px;
-  background: var(--color-text-primary);
-}
-
-/* Einheit in runder Box (gleicher Radius wie Input), dark text */
-.rechner-einheit-box {
-  flex: 0 0 auto;
-  min-width: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 14px;
-  border: 1px solid var(--color-text-primary);
-  border-radius: 19px;
-  color: var(--color-text-primary);
-  font-size: 18px;
-  white-space: nowrap;
-}
-
-.rechner-input {
-  border: 1px solid transparent;
-  border-radius: 19px;
-  padding: 8px 16px;
-  font-size: 18px;
-  flex: 1 1 auto;
-  min-width: 0;
-  width: 100%;
-  background: var(--color-pill-bg);
-  backdrop-filter: brightness(1.15);
-  box-shadow: 0 3px 23px rgba(0, 0, 0, 0.02);
-  color: var(--color-text-primary);
-  transition: box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-  font-family: inherit;
-}
-
-.rechner-input::placeholder {
-  color: var(--color-text-secondary);
-}
-/* Platz für den Einheit-Button am rechten Rand. */
-.rechner-input--has-unit {
-  padding-right: 64px;
-}
-
-/* Focus: 2px Ring DIREKT am Input (box-shadow outset → kein Layout-Shift), Farbe
-   brand-secondary; die äußere animierte FieldOutline (4px Abstand) ist ebenfalls
-   secondary → zusammen Button-Optik (Border + abgesetzte Outline). */
-.rechner-input:focus,
-.rechner-input.is-focused {
-  outline: none;
-  background: transparent;
-  box-shadow: 0 0 0 2px var(--color-brand-secondary);
-  backdrop-filter: none;
-  border-color: transparent;
-}
-
-.rechner-input:disabled {
-  background: var(--color-bg-subtle);
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-.rechner-einheit {
-  color: var(--color-text-medium);
-  font-size: 0.9rem;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-/* ── Slider (custom, wie Gamification-Schätzspiel) ── */
-.rechner-slider {
-  position: relative;
-  margin-bottom: 14px;
-  padding-top: 4px;
-  padding-bottom: 30px; /* Platz für die unter dem Handle hängende Bubble */
-}
-.rechner-slider-track {
-  position: relative;
-  height: 8px;
-  background: color-mix(in srgb, var(--color-text-primary) 23%, transparent);
-  cursor: pointer;
-  touch-action: none;
-}
-.rechner-slider-fill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  background: var(--color-text-primary);
-  /* Commit-Slide weich; während Drag = none (1:1, s.u.) */
-  transition: width 0.28s cubic-bezier(0.22, 1, 0.36, 1), background 0.15s ease;
-}
-/* Handle: weißer Innenkreis mit Ring (Body-Farbe), nur das Handle skaliert. */
-.rechner-slider-thumb {
-  position: absolute;
-  top: 50%;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #fff;
-  border: 3px solid var(--color-text-primary);
-  box-sizing: border-box;
-  transform: translate(-50%, -50%);
-  transition: left 0.28s cubic-bezier(0.22, 1, 0.36, 1), transform 0.14s ease, border-color 0.15s ease;
-  cursor: grab;
-}
-.rechner-slider-thumb:hover { transform: translate(-50%, -50%) scale(2); }
-/* Aktiv (Drag oder Feld-Fokus): Fill + Ring auf Secondary. */
-.rechner-slider.is-active .rechner-slider-fill { background: var(--color-brand-secondary); }
-.rechner-slider.is-active .rechner-slider-thumb { border-color: var(--color-brand-secondary); }
-.rechner-slider.is-dragging .rechner-slider-thumb { transform: translate(-50%, -50%) scale(2); cursor: grabbing; }
-/* Während Drag: left/width OHNE Übergang → stufenlos 1:1 (Scale/Farbe bleiben weich). */
-.rechner-slider.is-dragging .rechner-slider-fill { transition: background 0.15s ease; }
-.rechner-slider.is-dragging .rechner-slider-thumb { transition: transform 0.14s ease, border-color 0.15s ease; }
-.rechner-slider.is-dragging .rechner-slider-input { transition: transform 0.18s ease, background 0.15s ease; }
-
-/* Editierbare Wert-Bubble UNTER dem Handle (Pfeil nach oben, leicht runde Ecken). */
-.rechner-slider-input {
-  position: absolute;
-  top: calc(4px + 8px + 10px); /* padding-top + track-höhe + Pfeilabstand */
-  transform: translateX(-50%);
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 5px 11px;
-  background: var(--color-text-primary);
-  border-radius: 4px;
-  white-space: nowrap;
-  cursor: text;
-  transition: left 0.28s cubic-bezier(0.22, 1, 0.36, 1), transform 0.18s ease, background 0.15s ease;
-  z-index: 3;
-}
-/* Bubble nur nach unten, wenn das HANDLE größer ist (Hover über Handle oder Drag) —
-   NICHT bei Feld-Fokus oder Hover über die Bar. */
-.rechner-slider.is-handle-hover .rechner-slider-input,
-.rechner-slider.is-dragging .rechner-slider-input { transform: translate(-50%, 9px); }
-/* Pfeil folgt dem Handle (var(--arrow-x)), auch wenn die Bubble am Rand klemmt. */
-.rechner-slider-input::before {
-  content: "";
-  position: absolute;
-  left: calc(50% + var(--arrow-x, 0px));
-  top: -5px;
-  transform: translateX(-50%);
-  border: 5px solid transparent;
-  border-bottom-color: var(--color-text-primary);
-  border-top: 0;
-  transition: border-bottom-color 0.15s ease;
-}
-/* Aktiv: nur Bubble-Hintergrund + Pfeil-FARBE (kein background am ::before → kein Viereck!). */
-.rechner-slider.is-active .rechner-slider-input { background: var(--color-brand-secondary); }
-.rechner-slider.is-active .rechner-slider-input::before { border-bottom-color: var(--color-brand-secondary); }
-.rechner-slider-input-field {
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.55); /* als editierbar erkennbar */
-  outline: none;
-  color: #fff;
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 600;
-  text-align: center;
-  padding: 0 0 1px;
-  cursor: text;
-}
-.rechner-slider-input-unit {
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-/* Min/Max-Skala wie Gamification-Schätzspiel: Merriweather, Tick darüber, nah am Track. */
-.rechner-slider-scale {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 9px;
-  font-family: 'Merriweather', Georgia, serif;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--color-text-primary);
-}
-.rechner-slider-scale span {
-  position: relative;
-  padding-top: 9px;
-  transition: opacity 0.2s ease; /* faden aus, wenn die Bubble nah dran ist */
-}
-.rechner-slider-scale span::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 2px;
-  height: 5px;
-  background: var(--color-text-primary);
-}
-.rechner-slider-scale span:first-child::before { left: 1px; }
-.rechner-slider-scale span:last-child::before { right: 1px; }
-
-/* ── Auswahl-Chips: Pill + 2 Linien + Lens + Sparks wie Category-Slider Button-Mode ── */
-/* Box mit solider darkText-Umrandung um alle Chips */
-.rechner-presets-box {
-  display: inline-block;
-  max-width: 100%;
-  border: 1px solid var(--color-text-primary);
-  padding: 12px 10px 20px; /* unten etwas mehr Luft */
-  margin-bottom: 22px;
-}
-/* Überschrift ÜBER der Box */
-.rechner-presets-heading {
-  font-family: 'Merriweather', Georgia, serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
-  margin-bottom: 8px;
-}
-.rechner-presets {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 24px 36px; /* row-gap col-gap (col-gap weit genug für den Spark dazwischen) */
-  padding: 14px 24px 0; /* top: Linien-Raum, seitlich: Rand-Sparks */
-  max-width: 100%;
-}
-.rechner-preset-chip {
-  position: relative;
-  z-index: 1;
-  box-sizing: border-box;
-  border: 0;
-  background: transparent;
-  color: var(--color-text-primary);
-  padding: 5px 14px;
-  font-family: 'Merriweather', Georgia, serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.3;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color 0.18s ease;
-}
-.rechner-preset-chip:hover { color: var(--color-brand-secondary); }
-.rechner-preset-spark {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-/* dunkle Pill (Höhe/Position via gsap), eckig */
-.rechner-preset-pill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 32px;
-  width: 1px;
-  background: var(--color-text-primary);
-  overflow: hidden;
-  pointer-events: none;
-  opacity: 0;
-  z-index: 2;
-}
-/* weißes Lens-Overlay: Klon NUR der Chips, identische Geometrie (gap+padding) → Magnifier sitzt */
-.rechner-preset-lens {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 24px 36px;
-  padding: 14px 24px 0;
-}
-.rechner-preset-chip--lens {
-  box-sizing: border-box;
-  color: #fff;
-  cursor: default;
-  padding: 5px 14px;
-}
-/* Zwei dünne Linien über der Pill (Position/Breite via gsap) */
-.rechner-preset-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1px;
-  background: var(--color-text-primary);
-  pointer-events: none;
-  opacity: 0;
-  z-index: 2;
-}
-.rechner-preset-line1 { height: 2px; }
-.rechner-preset-line3 { height: 4px; }
-
-/* ── Gauge (Donut) ──────────────────────────── */
-.rechner-gauge-row {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
-}
-.rechner-gauge {
-  position: relative;
-  width: 160px;
-  height: 160px;
-  flex-shrink: 0;
-}
-.rechner-gauge-svg { width: 100%; height: 100%; display: block; }
-.rechner-gauge-center {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.rechner-gauge-value {
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  line-height: 1;
-}
-.rechner-gauge-label {
-  font-size: 13px;
-  color: var(--color-text-medium);
-  margin-top: 4px;
-  max-width: 110px;
-}
-
-/* ── Benchmark („Dein Deutschlandvergleich") — dicke, kantige Balken ── */
-.rechner-benchmark {
-  flex: 1 1 240px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.rechner-bench-heading {
-  margin: 0 0 2px 0;
-  font-family: 'Merriweather', Georgia, serif;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-.rechner-bench-bar {
-  position: relative;
-  height: 28px;
-  background: transparent;
-  border-bottom: 1px solid var(--bar, var(--color-text-primary));
-  overflow: hidden;
-}
-.rechner-bench-fill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 0; /* von gsap gesetzt */
-  background: var(--bar, var(--color-text-primary));
-}
-.rechner-bench-text {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 14px;
-  white-space: nowrap;
-  pointer-events: none;
-}
-/* Name liegt über der Füllung → Page-Farbe (lesbar auf der Bar-Farbe). */
-.rechner-bench-name {
-  color: var(--color-bg-page);
-  font-size: 13px;
-  font-weight: 600;
-}
-/* Wert steht am Bar-Ende über dem Track → in der Bar-Farbe, Merriweather, größer. */
-.rechner-bench-val {
-  color: var(--bar, var(--color-text-primary));
-  font-family: 'Merriweather', Georgia, serif;
-  font-size: 16px;
-  font-weight: 700;
-}
-
-/* ── Select ─────────────────────────────────── */
-
-.rechner-select-wrapper {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.rechner-select {
-  border: none;
-  border-radius: 15px;
-  padding: 10px 16px;
-  font-size: 16px;
-  width: 100%;
-  background: var(--color-pill-bg);
-  backdrop-filter: brightness(1.15);
-  box-shadow: 0 3px 23px rgba(0, 0, 0, 0.02);
-  color: var(--color-text-primary);
-  cursor: pointer;
-  transition: box-shadow 0.15s ease;
-  font-family: inherit;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23686C6A' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  padding-right: 32px;
-}
-
-.rechner-select option {
-  background-color: var(--color-bg-surface);
-  color: var(--color-text-primary);
-}
-
-/* Focus: 2px Ring am Select (secondary), wie beim Input. */
-.rechner-select:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--color-brand-secondary);
+  margin-top: var(--luft-xxl);
 }
 
 /* ── Checkbox (exakt wie Checkliste: animierter Haken) ───────── */
@@ -620,8 +44,8 @@
 .rechner-check {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: var(--luft-m);
+  margin-bottom: var(--luft-m);
   cursor: pointer;
   user-select: none;
 }
@@ -637,8 +61,8 @@
   width: 23px;
   height: 23px;
   min-width: 23px;
-  border: 1px solid var(--color-text-primary);
-  border-radius: 9px;
+  border: var(--strich-haar) solid var(--color-text-primary);
+  border-radius: var(--radius-kante);
   background: transparent;
   transition: background 0.2s, border-color 0.2s;
   display: flex;
@@ -652,12 +76,12 @@
   transform: translate(-50%, -50%);
   width: 17px;
   height: 17px;
-  margin-top: 1px;
+  margin-top: var(--luft-xxs);
   opacity: 0; /* unchecked komplett unsichtbar (kein Punkt-Flash) */
 }
 .rechner-check-box--checked .rechner-check-check { opacity: 1; }
 .rechner-check-label {
-  font-size: 0.95rem;
+  font-size: var(--grad-15);
   color: var(--color-text-primary);
   cursor: pointer;
 }
@@ -667,48 +91,6 @@
 
 .rechner-button--disabled {
   opacity: 0.4;
-}
-
-/* ── Results ────────────────────────────────── */
-
-.rechner-results {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 40px;
-}
-
-.rechner-results-body {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.rechner-ergebnis-header {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.rechner-ergebnis-label {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.rechner-ergebnis-label span {
-  font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 300;
-  letter-spacing: 2px;
-  color: var(--color-text-medium);
-  flex-shrink: 0;
-}
-
-.rechner-ergebnis-dot {
-  flex: 1;
-  height: 3px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='3'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23686c6a' opacity='0.7'/%3E%3C/svg%3E") repeat-x left center / 9px 3px;
 }
 
 .result-spacer {
@@ -725,198 +107,6 @@
   display: block;
 }
 
-/* ── Result Boxes ───────────────────────────── */
-
-.rechner-result-boxes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 13px;
-  margin-bottom: 13px;
-}
-
-.rechner-result-boxes > * {
-  flex: 1 1 280px;
-}
-
-.rechner-result-box {
-  background: rgba(0, 0, 0, 0.03);
-  padding: 20px 23px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: var(--color-text-primary);
-}
-
-.rechner-result-box--highlight {
-  background: rgba(255, 255, 255, 0);
-  border: 1px solid #999;
-  outline: 2px solid #999;
-  outline-offset: 2px;
-  padding: 20px 23px;
-  margin-right: 4px;
-}
-
-.rechner-result-subtext {
-  font-size: 14px;
-  color: var(--color-text-medium);
-  margin-top: 6px;
-  text-align: left;
-}
-
-.rechner-result-label {
-  font-family: var(--font-heading);
-  font-size: 14px;
-  color: var(--color-text-medium);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
-}
-
-.rechner-result-value {
-  font-size: 32px;
-  font-weight: 700;
-  font-family: var(--font-heading);
-  color: var(--color-text-primary);
-  line-height: 1.2;
-}
-
-.rechner-result-box--highlight .rechner-result-value {
-  font-size: 36px;
-  color: var(--color-brand-secondary);
-}
-
-/* ── Result Section Title ───────────────────── */
-
-.rechner-result-section-title {
-  font-size: 21px;
-  font-weight: 600 !important;
-  color: var(--color-text-primary);
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* ── Result Table ───────────────────────────── */
-
-.rechner-result-table {
-  width: 100%;
-  table-layout: auto;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin-top: 16px;
-  font-size: 0.9rem;
-  padding-top: 10px;
-  position: relative;
-}
-
-.rechner-result-table::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--color-text-medium);
-}
-
-.rechner-result-table::after {
-  content: "";
-  position: absolute;
-  top: 4px;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--color-text-medium);
-}
-
-.rechner-result-table thead th {
-  color: white;
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  padding: 2px 16px;
-  text-align: left;
-  white-space: nowrap;
-  background: var(--color-text-medium);
-}
-
-.rechner-result-table tbody tr:nth-child(even) {
-  background: rgba(0, 0, 0, 0.03);
-}
-
-.rechner-result-table tbody td {
-  padding: 14px 16px;
-  font-size: 15px;
-  color: var(--color-text-primary);
-  text-align: left;
-}
-
-.rechner-result-table th:last-child,
-.rechner-result-table td:last-child {
-  width: 1%;
-  white-space: nowrap;
-}
-
-.rechner-table-align-right {
-  text-align: right;
-}
-
-.rechner-table-label {
-  padding: 12px 16px;
-  text-align: left;
-  color: var(--color-text-primary);
-}
-
-.rechner-table-value {
-  padding: 12px 16px;
-  text-align: left;
-  color: var(--color-text-primary);
-  font-weight: 500;
-}
-
-.rechner-table-footer-label {
-  padding: 12px 0;
-  padding-top: 16px;
-  text-align: left;
-  color: var(--color-text-primary);
-  font-weight: 700;
-  border-top: 2px solid var(--color-brand-secondary);
-}
-
-.rechner-table-footer-value {
-  padding: 12px 0 12px 20px;
-  padding-top: 16px;
-  text-align: right;
-  color: var(--color-brand-secondary);
-  font-weight: 700;
-  border-top: 2px solid var(--color-brand-secondary);
-}
-
-/* ── Hinweis ────────────────────────────────── */
-
-.rechner-hinweis {
-  padding: 16px 18px;
-  font-size: 0.85rem;
-  color: #ffffff;
-  font-style: normal;
-  background: var(--color-brand-secondary);
-  border-radius: 0;
-  margin-top: 20px;
-  line-height: 1.5;
-}
-
-/* ── Loading ────────────────────────────────── */
-
-.rechner-loading {
-  padding: 40px;
-  text-align: center;
-  color: var(--color-text-secondary);
-  font-size: 14px;
-}
-
 /* ── Responsive ─────────────────────────────── */
 
 @media (max-width: 1024px) {
@@ -926,15 +116,15 @@
   /* ≤1024: Top-Row stacked, Visual full-width 270px hoch (analog Checkliste) */
   .rechner-top-row {
     flex-direction: column;
-    gap: 24px;
+    gap: var(--luft-l);
   }
   .rechner-visual {
     display: flex;
     height: 270px;
     flex: none;
     /* break out of page/article wrapper (20px padding) for full-bleed */
-    margin-left: -20px;
-    margin-right: -20px;
+    margin-left: calc(-1 * var(--luft-l));
+    margin-right: calc(-1 * var(--luft-l));
     width: calc(100% + 40px);
   }
   .rechner-divider {
@@ -954,7 +144,7 @@
   .rechner-result-box {
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
+    gap: var(--luft-s);
   }
 
   .rechner-result-box .result-value {
@@ -963,15 +153,15 @@
   }
 
   .rechner-result-table {
-    font-size: 16px;
+    font-size: var(--grad-16);
   }
 
   .rechner-result-table td {
-    padding: 8px 10px;
+    padding: var(--luft-s) var(--luft-s);
   }
 
   .rechner-select {
-    padding-right: 32px;
+    padding-right: var(--luft-xl);
   }
 }
 

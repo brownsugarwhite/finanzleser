@@ -14,6 +14,10 @@ let pending: ReturnType<typeof setTimeout> | null = null;
  */
 export function refreshScrollTriggers(delay = 150) {
   if (typeof window === "undefined") return;
+  // Im Faden gibt es keinen Konsumenten für diese Messung (Logo-Shrink und Leo-Dock leben
+  // in der alten Hülle) — und ScrollTrigger.refresh() scrollt in GSAPs _refreshAll auf 0
+  // und zurück, was jeden laufenden weichen Scroll abbricht.
+  if (document.body.classList.contains("faden-body")) return;
   if (pending) clearTimeout(pending);
   pending = setTimeout(() => {
     pending = null;

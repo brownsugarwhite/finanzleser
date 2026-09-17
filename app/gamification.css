@@ -8,31 +8,31 @@
    ───────────────────────────────────────────── */
 
 .fl-gam {
-  margin: 30px 0;
-  padding: 18px 22px;
-  background: #fdfdfb;
-  border: 1px solid var(--color-border-default);
-  border-top: 3px solid var(--color-brand);
-  border-radius: 3px;
+  margin: var(--luft-xl) 0;
+  padding: var(--luft-l) var(--luft-l);
+  background: var(--paper);
+  border: var(--strich-haar) solid var(--color-border-default);
+  border-top: var(--strich-einhaenger) solid var(--green);
+  border-radius: var(--radius-kante);
   font-family: var(--font-body);
-  font-size: 1.02rem;
+  font-size: var(--grad-16);
   line-height: 1.65;
   color: var(--color-text-primary);
 }
 
 .fl-gam-tag {
   display: block;
-  font-size: 0.7rem;
+  font-size: var(--grad-11);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-brand);
-  margin-bottom: 8px;
+  margin-bottom: var(--luft-s);
 }
 
 .fl-gam-claim {
   font-weight: 600;
-  margin: 0 0 12px;
+  margin: 0 0 var(--luft-m);
 }
 
 .fl-gam-text {
@@ -42,67 +42,67 @@
 /* Akzent je Typ – nur Oberlinie + Label */
 .fl-gam-quiz,
 .fl-gam-schaetzen {
-  border-top-color: #0a7f6b;
+  border-top-color: var(--tuerkis);
 }
 .fl-gam-quiz .fl-gam-tag,
 .fl-gam-schaetzen .fl-gam-tag {
-  color: #0a7f6b;
+  color: var(--tuerkis);
 }
 /* (Begriff-erklärt-Karte + Schon-gewusst-Box: eigener Ticket-Look weiter unten) */
 
-/* Neue Gamification-Tools: Dark-Ton lokal auf #248085 umstellen (überschreibt
+/* Neue Gamification-Tools: Dark-Ton lokal auf var(--tuerkis) umstellen (überschreibt
    --color-text-primary nur in diesen Boxen — Border, Legende, Outlines, Schrift,
    Fills, currentColor). Quiz nutzt .fl-gam-mythos-box mit. */
 .fl-gam-gewusst-box,
 .fl-gam-karte-box,
 .fl-gam-mythos-box {
-  --color-text-primary: #248085;
+  --color-text-primary: var(--tuerkis);
 }
 
 /* ── Auswahl-Buttons (Mythos/Fakt) ── */
 .fl-gam-choices {
   display: flex;
-  gap: 10px;
+  gap: var(--luft-s);
 }
 .fl-gam-choice {
   flex: 1;
-  padding: 10px 14px;
+  padding: var(--luft-s) var(--luft-m);
   font: inherit;
   font-weight: 600;
   cursor: pointer;
-  background: #fff;
-  border: 1.5px solid var(--color-border-default);
-  border-radius: 6px;
+  background: var(--paper);
+  border: var(--strich-stark) solid var(--color-border-default);
+  border-radius: var(--radius-kante);
   transition: border-color 0.15s, background 0.15s;
 }
 .fl-gam-choice:hover {
   border-color: var(--color-brand);
-  background: #f6faf2;
+  background: var(--tint);
 }
 
 /* ── Quiz-Optionen ── */
 .fl-gam-options {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--luft-s);
 }
 .fl-gam-option {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--luft-s);
   width: 100%;
-  padding: 10px 14px;
+  padding: var(--luft-s) var(--luft-m);
   font: inherit;
   text-align: left;
   cursor: pointer;
-  background: #fff;
-  border: 1.5px solid var(--color-border-default);
-  border-radius: 6px;
+  background: var(--paper);
+  border: var(--strich-stark) solid var(--color-border-default);
+  border-radius: var(--radius-kante);
   transition: border-color 0.15s, background 0.15s;
 }
 .fl-gam-option:hover:not(:disabled) {
-  border-color: #0a7f6b;
-  background: #f1f8f6;
+  border-color: var(--tuerkis);
+  background: var(--tuerkis-hauch);
 }
 .fl-gam-option:disabled {
   cursor: default;
@@ -114,63 +114,63 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
+  font-size: var(--grad-13);
   font-weight: 700;
-  border-radius: 50%;
-  background: #eef1ec;
+  border-radius: var(--radius-kreis);
+  background: var(--ink-05);
   color: var(--color-text-primary);
 }
 .fl-gam-option.right {
-  border-color: #1a7a3a;
-  background: #e8f5ec;
+  border-color: var(--green-ink);
+  background: var(--tint);
 }
 .fl-gam-option.right .fl-gam-option-key {
-  background: #1a7a3a;
-  color: #fff;
+  background: var(--green-ink);
+  color: var(--auf-tinte);
 }
 .fl-gam-option.wrong {
-  border-color: #c0392b;
-  background: #fdeceb;
+  border-color: var(--rot);
+  background: var(--rot-hauch);
 }
 .fl-gam-option.wrong .fl-gam-option-key {
-  background: #c0392b;
-  color: #fff;
+  background: var(--rot);
+  color: var(--auf-tinte);
 }
 
 /* ── Ergebnis-Box (richtig/falsch/info) ── */
 .fl-gam-result {
-  margin-top: 14px;
-  padding: 12px 14px;
-  border-radius: 6px;
-  border-left: 3px solid;
+  margin-top: var(--luft-m);
+  padding: var(--luft-m) var(--luft-m);
+  border-radius: var(--radius-kante);
+  border-left: var(--strich-einhaenger) solid;
   animation: fl-gam-fade 0.25s ease;
 }
 .fl-gam-result.is-correct {
-  background: #e8f5ec;
-  border-color: #1a7a3a;
+  background: var(--tint);
+  border-color: var(--green-ink);
 }
 .fl-gam-result.is-wrong {
-  background: #fdeceb;
-  border-color: #c0392b;
+  background: var(--rot-hauch);
+  border-color: var(--rot);
 }
 .fl-gam-result.is-info {
-  background: #f1f8f6;
-  border-color: #0a7f6b;
+  background: var(--tuerkis-hauch);
+  border-color: var(--tuerkis);
 }
 .fl-gam-reveal {
-  margin: 8px 0 0;
+  margin: var(--luft-s) 0 0;
 }
 
 /* ── Schätz-Slider ── */
 .fl-gam-slider-row {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 12px;
+  gap: var(--luft-m);
+  margin-bottom: var(--luft-m);
 }
 .fl-gam-slider {
   flex: 1;
-  accent-color: #0a7f6b;
+  accent-color: var(--tuerkis);
   cursor: pointer;
 }
 .fl-gam-slider-val {
@@ -185,7 +185,7 @@
 .fl-gam-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--luft-s);
   background: none;
   border: none;
   padding: 0;
@@ -198,7 +198,7 @@
   text-decoration: underline;
 }
 .fl-gam-toggle-icon {
-  font-size: 1.05rem;
+  font-size: var(--grad-16);
   line-height: 1;
 }
 
@@ -210,9 +210,9 @@
 /* ── Begriff erklärt – Flip-Karte ── */
 .fl-gam-karte-box {
   position: relative;
-  margin: 30px 0;
-  padding: 38px 31px 36px;
-  border: 1px solid var(--color-text-primary);
+  margin: var(--luft-xl) 0;
+  padding: var(--luft-xl) var(--luft-xl) var(--luft-xl);
+  border: var(--strich-haar) solid var(--color-text-primary);
   background: var(--color-bg-page);
   font-family: var(--font-body);
   color: var(--color-text-primary);
@@ -224,12 +224,12 @@
   transform: translateY(-50%);
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 0 10px;
+  gap: var(--luft-s);
+  padding: 0 var(--luft-s);
   background: var(--color-bg-page);
   font-family: var(--font-heading);
   font-weight: 650;
-  font-size: 1.2rem;
+  font-size: var(--grad-20);
   line-height: 1;
   color: var(--color-text-primary);
 }
@@ -243,9 +243,9 @@
    (= Kreis-⌀, Kreise berühren damit Außen- und Kartenkante) */
 .fl-karte-frame {
   position: relative;
-  padding: 9px 6px; /* oben/unten = Halbkreis-Höhe (Kreise berühren beide Kanten), seitlich −2px */
+  padding: var(--luft-s) var(--luft-s); /* oben/unten = Halbkreis-Höhe (Kreise berühren beide Kanten), seitlich −2px */
   background: var(--color-text-primary);
-  border-radius: 3px;
+  border-radius: var(--radius-kante);
   perspective: 1000px;
 }
 .fl-karte-line {
@@ -272,11 +272,11 @@
 }
 .fl-karte-circle-top {
   top: 0;
-  border-radius: 0 0 9px 9px; /* untere Hälfte (runde Unterkante zur Karte) */
+  border-radius: 0 0 var(--radius-kante) var(--radius-kante); /* untere Hälfte (runde Unterkante zur Karte) */
 }
 .fl-karte-circle-bottom {
   bottom: 0;
-  border-radius: 9px 9px 0 0; /* obere Hälfte (runde Oberkante zur Karte) */
+  border-radius: var(--radius-kante) var(--radius-kante) 0 0; /* obere Hälfte (runde Oberkante zur Karte) */
 }
 .fl-karte-flip {
   position: relative;
@@ -313,7 +313,7 @@
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   background: var(--color-bg-page);
-  border-radius: 2px; /* weiße Box spitz */
+  border-radius: var(--radius-kante); /* weiße Box spitz */
   min-height: 120px;
   display: flex;
 }
@@ -337,13 +337,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 26px 32px;
-  gap: 16px;
+  padding: var(--luft-l) var(--luft-xl);
+  gap: var(--luft-m);
 }
 .fl-karte-front .fl-karte-content {
   align-items: center;
   text-align: center;
-  gap: 10px;
+  gap: var(--luft-s);
 }
 .fl-karte-dash {
   width: 26px;
@@ -352,7 +352,7 @@
 }
 .fl-karte-term {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: var(--grad-34);
   font-weight: 700;
   line-height: 1.2;
   color: var(--color-text-primary);
@@ -365,11 +365,11 @@
   overflow-wrap: anywhere;
 }
 .fl-karte-hint {
-  font-size: 0.95rem;
+  font-size: var(--grad-15);
   color: var(--color-text-medium);
 }
 .fl-karte-def {
-  font-size: 1rem;
+  font-size: var(--grad-16);
   line-height: 1.6;
   color: var(--color-text-primary);
 }
@@ -377,8 +377,8 @@
   align-self: flex-end;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 1rem;
+  gap: var(--luft-s);
+  font-size: var(--grad-16);
   color: var(--color-text-primary);
 }
 .fl-karte-arrow {
@@ -388,9 +388,9 @@
 /* ── Schon gewusst? – Ticket / Freirubbeln ── */
 .fl-gam-gewusst-box {
   position: relative;
-  margin: 30px 0;
-  padding: 38px 31px 36px;
-  border: 1px solid var(--color-text-primary);
+  margin: var(--luft-xl) 0;
+  padding: var(--luft-xl) var(--luft-xl) var(--luft-xl);
+  border: var(--strich-haar) solid var(--color-text-primary);
   background: var(--color-bg-page);
   font-family: var(--font-body);
   color: var(--color-text-primary);
@@ -402,12 +402,12 @@
   transform: translateY(-50%);
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 0 10px;
+  gap: var(--luft-s);
+  padding: 0 var(--luft-s);
   background: var(--color-bg-page);
   font-family: var(--font-heading);
   font-weight: 650;
-  font-size: 1.2rem;
+  font-size: var(--grad-20);
   line-height: 1;
   color: var(--color-text-primary);
 }
@@ -440,8 +440,8 @@
   position: relative;
   z-index: 1;
   margin: 0;
-  padding: 31px 47px;
-  font-size: 1rem;
+  padding: var(--luft-xl) var(--luft-xxl);
+  font-size: var(--grad-16);
   line-height: 1.6;
   text-align: center;
   color: var(--color-text-primary);
@@ -476,9 +476,9 @@
 /* ── Mythos oder Fakt? ── */
 .fl-gam-mythos-box {
   position: relative;
-  margin: 30px 0;
-  padding: 38px 31px 36px;
-  border: 1px solid var(--color-text-primary);
+  margin: var(--luft-xl) 0;
+  padding: var(--luft-xl) var(--luft-xl) var(--luft-xl);
+  border: var(--strich-haar) solid var(--color-text-primary);
   background: var(--color-bg-page);
   font-family: var(--font-body);
   color: var(--color-text-primary);
@@ -492,12 +492,12 @@
   transform: translateY(-50%);
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 0 10px;
+  gap: var(--luft-s);
+  padding: 0 var(--luft-s);
   background: var(--color-bg-page);
   font-family: var(--font-heading);
   font-weight: 650;
-  font-size: 1.2rem;
+  font-size: var(--grad-20);
   line-height: 1;
   color: var(--color-text-primary);
 }
@@ -507,23 +507,23 @@
   display: block;
 }
 .fl-mythos-claim {
-  margin: 0 0 22px;
-  font-size: 1.05rem;
+  margin: 0 0 var(--luft-l);
+  font-size: var(--grad-16);
   line-height: 1.6;
-  color: var(--color-text-primary); /* = #248085 in diesen Boxen (Override) */
+  color: var(--color-text-primary); /* = var(--tuerkis) in diesen Boxen (Override) */
 }
 /* Quiz: Antwortmöglichkeiten untereinander, linksbündig im Ticket-Button. */
 .fl-quiz-options {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--luft-s);
 }
 .fl-ticket-btn.fl-quiz-opt {
   flex: 0 0 auto;
   min-height: 0;
   justify-content: center; /* Antworttext zentriert */
-  gap: 12px;
-  padding: 16px 48px; /* Platz, damit der zentrierte Text nicht den Key berührt */
+  gap: var(--luft-m);
+  padding: var(--luft-m) var(--luft-xxl); /* Platz, damit der zentrierte Text nicht den Key berührt */
   text-align: center;
 }
 /* Key (A/B/C) absolut links → Text bleibt mittig, Key mit Abstand zur Box-Kante */
@@ -535,13 +535,13 @@
   font-family: var(--font-heading);
   font-style: italic;
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: var(--grad-18);
   color: currentColor;
 }
 .fl-quiz-opt-text {
   position: relative;
   z-index: 1;
-  font-size: 1rem;
+  font-size: var(--grad-16);
   line-height: 1.4;
   text-align: center;
   color: currentColor;
@@ -562,13 +562,13 @@
   left: 31px;
   right: 31px;
   bottom: 0;
-  padding-bottom: 36px;
+  padding-bottom: var(--luft-xl);
   overflow: hidden;
   pointer-events: none;
 }
 .fl-mythos-choices {
   display: flex;
-  gap: 18px;
+  gap: var(--luft-l);
 }
 .fl-ticket-btn {
   position: relative;
@@ -629,22 +629,22 @@
 .fl-ticket-btn.is-correct .fl-quiz-opt-key,
 .fl-ticket-btn.is-correct .fl-quiz-opt-text,
 .fl-ticket-btn.is-wrong .fl-quiz-opt-key,
-.fl-ticket-btn.is-wrong .fl-quiz-opt-text { color: #fff; }
+.fl-ticket-btn.is-wrong .fl-quiz-opt-text { color: var(--auf-tinte); }
 .fl-ticket-btn-label {
   position: relative;
   z-index: 1;
   font-family: var(--font-heading);
   font-style: italic;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: var(--grad-26);
   letter-spacing: 0.02em;
   color: currentColor;
 }
 /* Antwort slidet in voller Größe von der Border hoch (translateY) + faded ein +
    gediegener Bounce. Start: ganz unter dem Clip (Antworthöhe + 36px Padding). */
 .fl-mythos-answer {
-  padding: 18px 22px;
-  color: #fff;
+  padding: var(--luft-l) var(--luft-l);
+  color: var(--auf-tinte);
   transform: translateY(calc(100% + 36px));
   opacity: 0;
   transition: transform 0.6s cubic-bezier(0.2, 1.15, 0.4, 1), opacity 0.4s ease;
@@ -658,7 +658,7 @@
   transition: transform 0.55s cubic-bezier(0.22, 0.9, 0.3, 1), opacity 0.4s ease;
 }
 .fl-mythos-answer * {
-  color: #fff;
+  color: var(--auf-tinte);
 }
 .fl-mythos-answer.is-correct {
   background: var(--color-brand);
@@ -670,7 +670,7 @@
   font-weight: 700;
 }
 .fl-mythos-answer-text {
-  margin: 8px 0 0;
+  margin: var(--luft-s) 0 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -714,22 +714,22 @@
 /* ── Schätz-Slider ── */
 .fl-schaetz {
   position: relative;
-  margin: 54px 8px 0; /* Platz für die Wert-Bubble + 4px mehr Abstand zur Frage */
+  margin: 54px var(--luft-s) 0; /* Platz für die Wert-Bubble + 4px mehr Abstand zur Frage */
 }
 /* Live-Wert-Bubble, folgt dem Thumb */
 .fl-schaetz-bubble {
   position: absolute;
   top: -42px;
   transform: translateX(-50%);
-  padding: 5px 11px;
-  background: var(--color-text-primary); /* teal #248085 */
-  color: #fff;
+  padding: var(--luft-xs) var(--luft-m);
+  background: var(--color-text-primary); /* teal var(--tuerkis) */
+  color: var(--auf-tinte);
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: var(--grad-15);
   line-height: 1;
   white-space: nowrap;
-  border-radius: 4px;
+  border-radius: var(--radius-kante);
   pointer-events: none;
   z-index: 4;
   transition: left 0.08s linear;
@@ -748,9 +748,10 @@
 .fl-schaetz-track {
   position: relative;
   height: 12px;
-  border: 1.5px solid var(--color-text-primary);
-  border-radius: 7px;
-  background: rgba(36, 128, 133, 0.12);
+  border: var(--strich-stark) solid var(--color-text-primary);
+  /* Eine Schiene ist ein Gerät, keine Fläche — Kapsel, nicht Kante. */
+  border-radius: var(--radius-pille);
+  background: var(--tuerkis-hauch);
   cursor: pointer;
   touch-action: none;
 }
@@ -758,7 +759,7 @@
   position: absolute;
   inset: 0 auto 0 0;
   background: var(--color-text-primary);
-  border-radius: 6px 0 0 6px;
+  border-radius: var(--radius-kante) 0 0 var(--radius-kante);
   transition: width 0.08s linear;
 }
 /* Drag-Thumb mit Grab-Bounce */
@@ -770,9 +771,9 @@
   margin-left: 0;
   transform: translate(-50%, -50%);
   background: var(--color-bg-page);
-  border: 3px solid var(--color-text-primary);
-  border-radius: 50%;
-  box-shadow: 0 3px 10px rgba(36, 128, 133, 0.4);
+  border: var(--strich-einhaenger) solid var(--color-text-primary);
+  border-radius: var(--radius-kreis);
+  box-shadow: var(--schatten-auflage);
   cursor: grab;
   z-index: 3;
   transition: left 0.08s linear, transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -788,9 +789,9 @@
 .fl-schaetz-scale {
   display: flex;
   justify-content: space-between;
-  margin-top: 7px;
+  margin-top: var(--luft-s);
   font-family: var(--font-heading);
-  font-size: 0.8rem;
+  font-size: var(--grad-13);
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--color-text-primary);
@@ -798,7 +799,7 @@
 }
 .fl-schaetz-scale span {
   position: relative;
-  padding-top: 9px;
+  padding-top: var(--luft-s);
 }
 .fl-schaetz-scale span::before {
   content: "";
@@ -843,22 +844,22 @@
   width: 4px;
   height: 24px;
   background: var(--color-brand);
-  border-radius: 2px;
+  border-radius: var(--radius-kante);
 }
 .fl-schaetz-target-flag {
   position: absolute;
   top: 22px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 4px 11px;
+  padding: var(--luft-xs) var(--luft-m);
   background: var(--color-brand);
-  color: #fff;
+  color: var(--auf-tinte);
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: var(--grad-14);
   line-height: 1;
   white-space: nowrap;
-  border-radius: 4px;
+  border-radius: var(--radius-kante);
 }
 .fl-schaetz-target-flag::after {
   content: "";
@@ -881,7 +882,7 @@
 /* Submit-Button — kollabiert beim Abgeben (Höhe via JS, fadet + Gap zu) */
 .fl-schaetz-actions {
   display: flex;
-  margin-top: 30px;
+  margin-top: var(--luft-xl);
   overflow: hidden;
   transition: height 0.55s cubic-bezier(0.22, 0.9, 0.3, 1), margin-top 0.5s ease, opacity 0.35s ease;
 }
@@ -893,7 +894,7 @@
   min-height: 62px;
 }
 .fl-schaetz-submit .fl-ticket-btn-label {
-  font-size: 1rem;
+  font-size: var(--grad-16);
   letter-spacing: 0.04em;
 }
 /* Auflösungs-Box farbcodiert nach Genauigkeit */
@@ -908,10 +909,10 @@
 }
 .fl-schaetz-acc {
   display: inline-block;
-  margin-left: 4px;
-  padding: 2px 9px;
-  background: rgba(255, 255, 255, 0.22);
-  border-radius: 3px;
+  margin-left: var(--luft-xs);
+  padding: var(--luft-xxs) var(--luft-s);
+  background: rgba(255, 255, 255, .22);
+  border-radius: var(--radius-kante);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -922,20 +923,20 @@
    ───────────────────────────────────────────── */
 @media (max-width: 480px) {
   .fl-gam {
-    padding: 14px 16px;
+    padding: var(--luft-m) var(--luft-m);
   }
 
   /* Gemeinsame Boxen (Mythos/Quiz/Karte/Gewusst/Schätzen) */
   .fl-gam-mythos-box,
   .fl-gam-karte-box,
   .fl-gam-gewusst-box {
-    padding: 28px 14px 28px;
-    margin: 26px 0;
+    padding: var(--luft-xl) var(--luft-m) var(--luft-xl);
+    margin: var(--luft-l) 0;
   }
   /* Schon-gewusst: Außenbox enger → mehr Platz fürs Ticket */
   .fl-gam-gewusst-box {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: var(--luft-s);
+    padding-right: var(--luft-s);
   }
   .fl-gam-answer-clip {
     left: 14px;
@@ -945,8 +946,8 @@
   .fl-gam-karte-legend,
   .fl-gam-gewusst-legend {
     left: 14px;
-    gap: 7px;
-    font-size: 1.02rem;
+    gap: var(--luft-s);
+    font-size: var(--grad-16);
   }
   .fl-gam-mythos-legend-icon,
   .fl-gam-karte-legend-icon,
@@ -955,55 +956,55 @@
     height: 22px;
   }
   .fl-mythos-claim {
-    margin-bottom: 18px;
-    font-size: 1rem;
+    margin-bottom: var(--luft-l);
+    font-size: var(--grad-16);
   }
   .fl-mythos-answer {
-    padding: 14px 16px;
+    padding: var(--luft-m) var(--luft-m);
   }
 
   /* Mythos: zwei Buttons nebeneinander, möglichst breit */
   .fl-mythos-choices {
-    gap: 10px;
+    gap: var(--luft-s);
   }
   .fl-ticket-btn {
     min-height: 64px;
   }
   .fl-ticket-btn-label {
-    font-size: 1.2rem;
+    font-size: var(--grad-20);
   }
 
   /* Quiz-Optionen: volle Breite, breiter als der Fragetext */
   .fl-gam-quiz-box .fl-mythos-claim {
-    padding-right: 24px;
+    padding-right: var(--luft-l);
   }
   .fl-ticket-btn.fl-quiz-opt {
-    padding: 13px 44px;
-    gap: 10px;
+    padding: var(--luft-m) var(--luft-xxl);
+    gap: var(--luft-s);
   }
   .fl-quiz-opt-key {
     left: 20px;
   }
   .fl-quiz-opt-key {
-    font-size: 1.05rem;
+    font-size: var(--grad-16);
   }
   .fl-quiz-opt-text {
-    font-size: 0.95rem;
+    font-size: var(--grad-15);
   }
 
   /* Begriff erklärt – Flip-Karte */
   .fl-karte-content {
-    padding: 20px 20px;
-    gap: 12px;
+    padding: var(--luft-l) var(--luft-l);
+    gap: var(--luft-m);
   }
   .fl-karte-term {
-    font-size: 1.6rem;
+    font-size: var(--grad-26);
   }
   .fl-karte-face {
     min-height: 104px;
   }
   .fl-karte-def {
-    font-size: 0.95rem;
+    font-size: var(--grad-15);
   }
 
   /* Schon gewusst – Ticket (3-zeiliger Rubbel-Hinweis braucht Höhe) */
@@ -1011,24 +1012,24 @@
     min-height: 142px;
   }
   .fl-gam-ticket-text {
-    padding: 24px 36px;
-    font-size: 0.95rem;
+    padding: var(--luft-l) var(--luft-xl);
+    font-size: var(--grad-15);
   }
 
   /* Schätz-Slider */
   .fl-schaetz {
-    margin: 50px 4px 0;
+    margin: var(--luft-xxl) var(--luft-xs) 0;
   }
   .fl-schaetz-scale {
-    font-size: 0.72rem;
+    font-size: var(--grad-12);
   }
   .fl-schaetz-actions {
-    margin-top: 24px;
+    margin-top: var(--luft-l);
   }
   .fl-ticket-btn.fl-schaetz-submit {
     min-height: 54px;
   }
   .fl-schaetz-submit .fl-ticket-btn-label {
-    font-size: 0.92rem;
+    font-size: var(--grad-15);
   }
 }

@@ -1,0 +1,906 @@
+[
+  {
+    "slug": "buergergeld",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch sind die Regelsätze?",
+        "art": "balken",
+        "titel": "Die Regelbedarfsstufen 2026 reichen von 357 bis 563 Euro",
+        "untertitel": "Monatlicher Regelsatz nach Personengruppe",
+        "einheit": "€",
+        "quelle": {
+          "name": "Bundesregierung, „Regelsätze der Sozialleistungen bleiben unverändert“",
+          "url": "https://www.bundesregierung.de/breg-de/aktuelles/nullrunde-buergergeld-2383676",
+          "stand": "1. Januar 2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Regelsatz 2026",
+            "werte": [
+              {
+                "label": "Alleinstehende/Alleinerziehende",
+                "wert": 563
+              },
+              {
+                "label": "Partner in Bedarfsgemeinschaft",
+                "wert": 506
+              },
+              {
+                "label": "Volljährige im Haushalt Dritter",
+                "wert": 451
+              },
+              {
+                "label": "Jugendliche 14–17 Jahre",
+                "wert": 471
+              },
+              {
+                "label": "Kinder 6–13 Jahre",
+                "wert": 390
+              },
+              {
+                "label": "Kinder 0–5 Jahre",
+                "wert": 357
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Beträge gelten unverändert seit 2024 – die gesetzliche Besitzschutzregelung verhindert eine rechnerische Absenkung.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wer hat Anspruch auf Bürgergeld?",
+        "art": "saeulen",
+        "titel": "Weniger erwerbsfähige Bürgergeldberechtigte im März 2026",
+        "untertitel": "Erwerbsfähige Bürgergeldberechtigte, Vorjahresvergleich",
+        "einheit": "Mio.",
+        "quelle": {
+          "name": "Bundesagentur für Arbeit, Pressemitteilung „Arbeitsmarkt im März 2026“",
+          "url": "https://www.arbeitsagentur.de/press/2026-12-arbeitsmarkt-im-maerz-2026",
+          "stand": "März 2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Erwerbsfähige Bürgergeldberechtigte",
+            "werte": [
+              {
+                "label": "März 2025",
+                "wert": 3.97
+              },
+              {
+                "label": "März 2026",
+                "wert": 3.82
+              }
+            ]
+          }
+        ],
+        "hinweis": "Gegenüber März 2025 sank die Zahl um 147.000 Personen; 7,0 Prozent der Menschen im erwerbsfähigen Alter waren im März 2026 hilfebedürftig.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "sozialhilfe",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Regelsätze und Leistungsumfang 2026",
+        "art": "balken",
+        "titel": "Der Sozialhilfe-Regelsatz reicht von 357 bis 563 Euro",
+        "untertitel": "Regelbedarfsstufen 2026 nach Personengruppe",
+        "einheit": "€",
+        "quelle": {
+          "name": "Bundesregierung, „Regelsätze der Sozialleistungen bleiben unverändert“",
+          "url": "https://www.bundesregierung.de/breg-de/aktuelles/nullrunde-buergergeld-2383676",
+          "stand": "1. Januar 2026"
+        },
+        "reihen": [
+          {
+            "key": "rbs",
+            "label": "Regelbedarfsstufe 2026",
+            "werte": [
+              {
+                "label": "RBS 1 – Alleinstehende/Alleinerziehende",
+                "wert": 563
+              },
+              {
+                "label": "RBS 2 – Paare je Partner",
+                "wert": 506
+              },
+              {
+                "label": "RBS 3 – Erwachsene in Einrichtungen",
+                "wert": 451
+              },
+              {
+                "label": "RBS 4 – Jugendliche 14–17 Jahre",
+                "wert": 471
+              },
+              {
+                "label": "RBS 5 – Kinder 6–13 Jahre",
+                "wert": 390
+              },
+              {
+                "label": "RBS 6 – Kinder 0–5 Jahre",
+                "wert": 357
+              }
+            ]
+          }
+        ],
+        "hinweis": "Dieselben Regelbedarfsstufen gelten für Bürgergeld (SGB II) und Sozialhilfe (SGB XII); 2026 bleiben sie wegen der gesetzlichen Besitzschutzregelung unverändert.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Mehrbedarfe und Sonderleistungen",
+        "art": "balken",
+        "titel": "Alleinerziehende bekommen 36 Prozent Mehrbedarf, höchstens 60",
+        "untertitel": "Zuschläge zum Regelsatz nach Lebenslage (§ 30 SGB XII)",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 30 SGB XII (Sozialgesetzbuch Zwölftes Buch, Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/sgb_12/__30.html",
+          "stand": "aktuelle Fassung 2026"
+        },
+        "reihen": [
+          {
+            "key": "gruende",
+            "label": "Mehrbedarf",
+            "werte": [
+              {
+                "label": "Alleinerziehende (Regelfall)",
+                "wert": 36
+              },
+              {
+                "label": "Schwangerschaft ab 13. Woche",
+                "wert": 17
+              },
+              {
+                "label": "Behinderung (Merkzeichen G)",
+                "wert": 17
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Alleinerziehenden-Zuschlag beginnt bei 36 Prozent (ein Kind unter 7 oder zwei bis drei Kinder unter 16) und steigt je weiterem Kind um 12 Prozentpunkte, höchstens jedoch auf 60 Prozent des Regelbedarfs.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "uebergangsgeld",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie wird das Übergangsgeld berechnet?",
+        "art": "balken",
+        "titel": "Die Rentenversicherung deckelt höher als die Krankenkasse",
+        "untertitel": "Monatliche Beitragsbemessungsgrenze 2026 nach Versicherungszweig",
+        "einheit": "€",
+        "quelle": {
+          "name": "Bundesregierung, „Beitragsbemessungsgrenzen 2026“",
+          "url": "https://www.bundesregierung.de/breg-de/aktuelles/beitragsgemessungsgrenzen-2386514",
+          "stand": "29. April 2026"
+        },
+        "reihen": [
+          {
+            "key": "grenzen",
+            "label": "Beitragsbemessungsgrenze",
+            "werte": [
+              {
+                "label": "Kranken-/Pflegeversicherung",
+                "wert": 5812.5
+              },
+              {
+                "label": "Rentenversicherung",
+                "wert": 8450
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Berechnungsgrundlage des Übergangsgeldes darf die jeweils geltende Beitragsbemessungsgrenze nicht übersteigen; sie bestimmt damit die Höchstgrenze für die Leistung.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "kurzarbeitergeld",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wann haben Sie Anspruch auf Kurzarbeitergeld?",
+        "art": "saeulen",
+        "titel": "Weniger Menschen in Kurzarbeit im Februar 2026",
+        "untertitel": "Zahl der Kurzarbeiter, Vorjahresvergleich Februar",
+        "einheit": "Tsd.",
+        "quelle": {
+          "name": "Statistisches Bundesamt (Destatis), Kurzarbeiter",
+          "url": "https://www.destatis.de/DE/Themen/Wirtschaft/Konjunkturindikatoren/Arbeitsmarkt/karb840.html",
+          "stand": "28. August 2026"
+        },
+        "reihen": [
+          {
+            "key": "monate",
+            "label": "Kurzarbeiter",
+            "werte": [
+              {
+                "label": "Februar 2025",
+                "wert": 582
+              },
+              {
+                "label": "Februar 2026",
+                "wert": 501.8
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Zahl sank gegenüber Februar 2025 um 13,8 Prozent oder 80.200 Personen; seit Januar 2026 (498.500) bewegen sich die Kurzarbeiterzahlen auf niedrigem Niveau.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Höhe des Kurzarbeitergeldes – So wird’s berechnet",
+        "art": "balken",
+        "titel": "Kurzarbeitergeld ersetzt 60 oder 67 Prozent des Ausfalls",
+        "untertitel": "Leistungssatz nach Anspruchsvoraussetzung (§ 105 SGB III)",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 105 SGB III (Sozialgesetzbuch Drittes Buch, Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/sgb_3/__105.html",
+          "stand": "aktuelle Fassung 2026"
+        },
+        "reihen": [
+          {
+            "key": "saetze",
+            "label": "Leistungssatz",
+            "werte": [
+              {
+                "label": "Regelsatz",
+                "wert": 60
+              },
+              {
+                "label": "Erhöhter Satz (u. a. mit Kind)",
+                "wert": 67
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der erhöhte Satz von 67 Prozent gilt für Arbeitnehmer, die beim Arbeitslosengeld die Voraussetzungen für den erhöhten Leistungssatz erfüllen würden – in der Praxis meist bei mindestens einem Kind.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "arbeitslosengeld",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was ist Arbeitslosengeld I?",
+        "art": "saeulen",
+        "titel": "Mehr Menschen erhielten Arbeitslosengeld im März 2026",
+        "untertitel": "Bezieher von Arbeitslosengeld I, Vorjahresvergleich März",
+        "einheit": "Tsd.",
+        "quelle": {
+          "name": "Bundesagentur für Arbeit, Pressemitteilung „Arbeitsmarkt im März 2026“",
+          "url": "https://www.arbeitsagentur.de/press/2026-12-arbeitsmarkt-im-maerz-2026",
+          "stand": "März 2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Arbeitslosengeld-Bezieher",
+            "werte": [
+              {
+                "label": "März 2025",
+                "wert": 1006
+              },
+              {
+                "label": "März 2026",
+                "wert": 1104
+              }
+            ]
+          }
+        ],
+        "hinweis": "Gegenüber März 2025 stieg die Zahl der Bezieher um 98.000 Personen.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wie lange erhalten Sie Arbeitslosengeld?",
+        "art": "saeulen",
+        "titel": "Wer länger einzahlte, bezieht länger Arbeitslosengeld",
+        "untertitel": "Anspruchsdauer nach Versicherungszeit und Alter (§ 147 Abs. 2 SGB III)",
+        "einheit": "Monate",
+        "quelle": {
+          "name": "§ 147 SGB III (Sozialgesetzbuch Drittes Buch, Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/sgb_3/__147.html",
+          "stand": "aktuelle Fassung 2026"
+        },
+        "reihen": [
+          {
+            "key": "stufen",
+            "label": "Anspruchsdauer",
+            "werte": [
+              {
+                "label": "12 Monate Vorversicherung",
+                "wert": 6
+              },
+              {
+                "label": "16 Monate",
+                "wert": 8
+              },
+              {
+                "label": "20 Monate",
+                "wert": 10
+              },
+              {
+                "label": "24 Monate",
+                "wert": 12
+              },
+              {
+                "label": "30 Monate, ab 50 Jahren",
+                "wert": 15
+              },
+              {
+                "label": "36 Monate, ab 55 Jahren",
+                "wert": 18
+              },
+              {
+                "label": "48 Monate, ab 58 Jahren",
+                "wert": 24
+              }
+            ]
+          }
+        ],
+        "hinweis": "Ab 50, 55 beziehungsweise 58 Jahren verlängert sich die Höchstdauer nur, wenn zusätzlich die jeweils genannte Vorversicherungszeit erfüllt ist.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "kuenstlersozialkasse",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was ist die Künstlersozialkasse und wie funktioniert sie?",
+        "art": "saeulen",
+        "titel": "Zahl der KSK-Versicherten sinkt seit dem Höchststand 2022",
+        "untertitel": "Versicherte der Künstlersozialkasse, jeweils zum 1. Januar",
+        "einheit": "Tsd.",
+        "quelle": {
+          "name": "Künstlersozialkasse, „KSK in Zahlen“",
+          "url": "https://www.kuenstlersozialkasse.de/service-und-medien/ksk-in-zahlen",
+          "stand": "1. Januar 2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Versicherte",
+            "werte": [
+              {
+                "label": "2021",
+                "wert": 192.5
+              },
+              {
+                "label": "2022",
+                "wert": 194
+              },
+              {
+                "label": "2023",
+                "wert": 192.6
+              },
+              {
+                "label": "2024",
+                "wert": 191.1
+              },
+              {
+                "label": "2025",
+                "wert": 186.6
+              },
+              {
+                "label": "2026",
+                "wert": 183.4
+              }
+            ]
+          }
+        ],
+        "hinweis": "Werte jeweils zum 1. Januar; nach dem Höchststand 2022 sinkt die Versichertenzahl seither leicht.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Künstlersozialabgabe für Unternehmen: Wer muss zahlen?",
+        "art": "saeulen",
+        "titel": "Künstlersozialabgabe sinkt 2026 erstmals seit 2023",
+        "untertitel": "Abgabesatz der Unternehmen in Prozent der Honorare",
+        "einheit": "%",
+        "quelle": {
+          "name": "Künstlersozialkasse, „Künstlersozialabgabe“",
+          "url": "https://www.kuenstlersozialkasse.de/unternehmen-und-verwerter/kuenstlersozialabgabe",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Abgabesatz",
+            "werte": [
+              {
+                "label": "2020",
+                "wert": 4.2
+              },
+              {
+                "label": "2021",
+                "wert": 4.2
+              },
+              {
+                "label": "2022",
+                "wert": 4.2
+              },
+              {
+                "label": "2023",
+                "wert": 5
+              },
+              {
+                "label": "2024",
+                "wert": 5
+              },
+              {
+                "label": "2025",
+                "wert": 5
+              },
+              {
+                "label": "2026",
+                "wert": 4.9
+              }
+            ]
+          }
+        ],
+        "hinweis": "Das Bundesministerium für Arbeit und Soziales legt den Satz jährlich per Verordnung fest, abhängig von der Entwicklung der gemeldeten Honorare.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "kuendigung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Kündigungsfristen 2026: Tabelle und Berechnung",
+        "art": "saeulen",
+        "titel": "Je länger die Betriebszugehörigkeit, desto länger die Frist",
+        "untertitel": "Kündigungsfrist des Arbeitgebers nach Betriebszugehörigkeit (§ 622 Abs. 2 BGB)",
+        "einheit": "Monate",
+        "quelle": {
+          "name": "§ 622 Abs. 2 BGB (Bürgerliches Gesetzbuch, Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/bgb/__622.html",
+          "stand": "aktuelle Fassung 2026"
+        },
+        "reihen": [
+          {
+            "key": "stufen",
+            "label": "Kündigungsfrist Arbeitgeber",
+            "werte": [
+              {
+                "label": "2 Jahre Betriebszugehörigkeit",
+                "wert": 1
+              },
+              {
+                "label": "5 Jahre",
+                "wert": 2
+              },
+              {
+                "label": "8 Jahre",
+                "wert": 3
+              },
+              {
+                "label": "10 Jahre",
+                "wert": 4
+              },
+              {
+                "label": "12 Jahre",
+                "wert": 5
+              },
+              {
+                "label": "15 Jahre",
+                "wert": 6
+              },
+              {
+                "label": "20 Jahre",
+                "wert": 7
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Fristen gelten für Kündigungen durch den Arbeitgeber zum Ende eines Kalendermonats; für Arbeitnehmer bleibt es unabhängig von der Betriebszugehörigkeit bei vier Wochen zum 15. oder Monatsende.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "wohnungskuendigung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Eigenbedarfskündigung: Verschärfte Anforderungen 2026",
+        "art": "balken",
+        "titel": "Vermieter müssen bei langer Mietdauer länger kündigen",
+        "untertitel": "Kündigungsfrist des Vermieters nach Mietdauer (§ 573c Abs. 1 BGB)",
+        "einheit": "Monate",
+        "quelle": {
+          "name": "§ 573c BGB (Bürgerliches Gesetzbuch, Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/bgb/__573c.html",
+          "stand": "aktuelle Fassung 2026"
+        },
+        "reihen": [
+          {
+            "key": "mietdauer",
+            "label": "Kündigungsfrist Vermieter",
+            "werte": [
+              {
+                "label": "Bis 5 Jahre Mietdauer",
+                "wert": 3
+              },
+              {
+                "label": "5 bis 8 Jahre",
+                "wert": 6
+              },
+              {
+                "label": "Über 8 Jahre",
+                "wert": 9
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Grundfrist von drei Monaten verlängert sich für den Vermieter nach fünf und nach acht Jahren seit Überlassung der Wohnung um jeweils drei weitere Monate; für den Mieter bleibt es stets bei drei Monaten.",
+        "abschnitt": "heading-6",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Eigenbedarfskündigung: Verschärfte Anforderungen 2026",
+        "art": "balken",
+        "titel": "Nach Wohnungsumwandlung gilt bis zu zehn Jahre Sperrfrist",
+        "untertitel": "Sperrfrist für Eigenbedarf und Verwertung nach § 577a BGB",
+        "einheit": "Jahre",
+        "quelle": {
+          "name": "§ 577a BGB (Bürgerliches Gesetzbuch, Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/bgb/__577a.html",
+          "stand": "aktuelle Fassung 2026"
+        },
+        "reihen": [
+          {
+            "key": "gebiete",
+            "label": "Sperrfrist",
+            "werte": [
+              {
+                "label": "Regelfall",
+                "wert": 3
+              },
+              {
+                "label": "Gebiete mit angespanntem Wohnungsmarkt",
+                "wert": 10
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die verlängerte Frist gilt nur in Gebieten, die die jeweilige Landesregierung per Rechtsverordnung für höchstens zehn Jahre bestimmt hat; sie beginnt mit der Veräußerung der umgewandelten Wohnung.",
+        "abschnitt": "heading-6",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "pfaendung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Neue Pfändungsfreibeträge ab Juli 2026",
+        "art": "saeulen",
+        "titel": "Der Pfändungsfreibetrag steigt zum Juli 2026 um 32,40 Euro",
+        "untertitel": "Monatlicher Grundfreibetrag ohne Unterhaltspflichten",
+        "einheit": "€",
+        "quelle": {
+          "name": "Bundesministerium der Justiz und für Verbraucherschutz, Pfändungsfreigrenzenbekanntmachung 2026",
+          "url": "https://www.gesetze-im-internet.de/pf_ndfreigrbek_2026/Pf%C3%A4ndfreiGrBek_2026.pdf",
+          "stand": "19. März 2026"
+        },
+        "reihen": [
+          {
+            "key": "zeitraum",
+            "label": "Grundfreibetrag",
+            "werte": [
+              {
+                "label": "Bis 30.06.2026",
+                "wert": 1555
+              },
+              {
+                "label": "Ab 01.07.2026",
+                "wert": 1587.4
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Erhöhung um 32,40 Euro fällt deutlich geringer aus als in den Vorjahren, in denen die Steigerung meist zwischen 60 und 90 Euro lag.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "So berechnet sich Ihr persönlicher Freibetrag",
+        "art": "balken",
+        "titel": "Jede unterhaltsberechtigte Person erhöht den Freibetrag",
+        "untertitel": "Pfändungsfreibetrag nach Zahl der Unterhaltspflichten ab 1. Juli 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "Bundesministerium der Justiz und für Verbraucherschutz, Pfändungsfreigrenzenbekanntmachung 2026",
+          "url": "https://www.gesetze-im-internet.de/pf_ndfreigrbek_2026/Pf%C3%A4ndfreiGrBek_2026.pdf",
+          "stand": "19. März 2026"
+        },
+        "reihen": [
+          {
+            "key": "personen",
+            "label": "Freibetrag",
+            "werte": [
+              {
+                "label": "0 Personen",
+                "wert": 1587.4
+              },
+              {
+                "label": "1 Person",
+                "wert": 2184.82
+              },
+              {
+                "label": "2 Personen",
+                "wert": 2517.65
+              },
+              {
+                "label": "3 Personen",
+                "wert": 2850.48
+              },
+              {
+                "label": "4 Personen",
+                "wert": 3183.31
+              },
+              {
+                "label": "5 Personen",
+                "wert": 3516.14
+              }
+            ]
+          }
+        ],
+        "hinweis": "Für die erste unterhaltsberechtigte Person kommen 597,42 Euro hinzu, für jede weitere 332,83 Euro.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "geringfuegige-beschaeftigung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Die Verdienstgrenze 2026",
+        "art": "saeulen",
+        "titel": "Die Minijob-Grenze steigt mit dem Mindestlohn weiter",
+        "untertitel": "Monatliche Geringfügigkeitsgrenze nach Jahr",
+        "einheit": "€",
+        "quelle": {
+          "name": "Minijob-Zentrale (Deutsche Rentenversicherung Knappschaft-Bahn-See), „Geringfügigkeits-Richtlinien 2026“",
+          "url": "https://magazin.minijob-zentrale.de/geringfuegigkeits-richtlinien-minijob-2026/",
+          "stand": "20. Januar 2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Minijob-Grenze",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 556
+              },
+              {
+                "label": "2026",
+                "wert": 603
+              },
+              {
+                "label": "2027",
+                "wert": 633
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Grenze folgt der Formel Mindestlohn × 130 ÷ 3, aufgerundet auf volle Euro; 2025 ergibt sich so aus dem damaligen Mindestlohn von 12,82 Euro, 2026 und 2027 nennt die Quelle direkt.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Sozialversicherungsbeiträge",
+        "art": "balken",
+        "titel": "Minijobber in Privathaushalten bleiben seltener rentenpflichtig",
+        "untertitel": "Anteil rentenversicherungspflichtiger Minijobber nach Bereich, Juni 2026",
+        "einheit": "%",
+        "quelle": {
+          "name": "Minijob-Zentrale, Digitaler Quartalsbericht 2. Quartal 2026",
+          "url": "https://www.minijob-zentrale.de/DE/service/minijob-statistik/Digitaler_Quartalsbericht_/Digitaler_Quartalsbericht",
+          "stand": "30. Juni 2026"
+        },
+        "reihen": [
+          {
+            "key": "bereich",
+            "label": "Rentenversicherungspflichtig",
+            "werte": [
+              {
+                "label": "Gewerblicher Bereich",
+                "wert": 20.9
+              },
+              {
+                "label": "Privathaushalte",
+                "wert": 11.3
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die übrigen Minijobber (79,1 beziehungsweise 88,7 Prozent) haben sich von der Rentenversicherungspflicht befreien lassen.",
+        "abschnitt": "heading-6",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "bafoeg",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch ist der BAföG-Höchstsatz 2026?",
+        "art": "torte",
+        "titel": "So setzt sich der BAföG-Höchstsatz von 992 Euro zusammen",
+        "untertitel": "Bestandteile des Höchstsatzes für Studierende mit eigener Wohnung",
+        "einheit": "€",
+        "quelle": {
+          "name": "Bundesministerium für Forschung, Technologie und Raumfahrt, bafög.de",
+          "url": "https://www.xn--bafg-7qa.de/bafoeg/de/das-bafoeg-alle-infos-auf-einen-blick/foerderungsarten-und-foerderungshoehe/was-sind-bedarfssaetze-und-wie-hoch-sind-sie/was-sind-bedarfssaetze-und-wie-hoch-sind-sie.html",
+          "stand": "1. August 2024"
+        },
+        "reihen": [
+          {
+            "key": "bestandteile",
+            "label": "Höchstsatz 2026",
+            "werte": [
+              {
+                "label": "Grundbedarf",
+                "wert": 475
+              },
+              {
+                "label": "Wohnpauschale",
+                "wert": 380
+              },
+              {
+                "label": "Zuschlag Kranken-/Pflegeversicherung",
+                "wert": 137
+              }
+            ]
+          }
+        ],
+        "hinweis": "Wer über die Eltern familienversichert ist, erhält keinen Zuschlag zur Kranken- und Pflegeversicherung und damit höchstens 855 Euro.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wer hat Anspruch auf BAföG?",
+        "art": "balken",
+        "titel": "2024 erhielten knapp 613.000 Menschen BAföG",
+        "untertitel": "Geförderte nach Studierende und Schüler, bundesweit",
+        "einheit": "Tsd.",
+        "quelle": {
+          "name": "Statistisches Bundesamt (Destatis), Pressemitteilung Nr. 283",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2025/08/PD25_283_214.html",
+          "stand": "1. August 2025 (Berichtsjahr 2024)"
+        },
+        "reihen": [
+          {
+            "key": "typ",
+            "label": "Geförderte 2024",
+            "werte": [
+              {
+                "label": "Studierende",
+                "wert": 483.8
+              },
+              {
+                "label": "Schüler",
+                "wert": 129
+              }
+            ]
+          }
+        ],
+        "hinweis": "Insgesamt waren das 612.800 Geförderte, vier Prozent weniger als im Vorjahr; 79 Prozent davon Studierende, 21 Prozent Schülerinnen und Schüler.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "vermoegenswirksame-leistungen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Die staatliche Förderung 2026",
+        "art": "balken",
+        "titel": "ETF-Sparpläne werden bei VL doppelt so hoch gefördert",
+        "untertitel": "Arbeitnehmer-Sparzulage nach Anlageform (§ 13 Abs. 2 5. VermBG)",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 13 Fünftes Vermögensbildungsgesetz (5. VermBG, Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/vermbg_2/__13.html",
+          "stand": "aktuelle Fassung 2026"
+        },
+        "reihen": [
+          {
+            "key": "anlage",
+            "label": "Fördersatz",
+            "werte": [
+              {
+                "label": "Fondssparpläne/ETFs",
+                "wert": 20
+              },
+              {
+                "label": "Bausparverträge",
+                "wert": 9
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Fördersatz gilt bis 400 Euro Jahresanlage bei Fondssparplänen und bis 470 Euro bei Bausparverträgen; Banksparpläne werden staatlich nicht gefördert.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Die staatliche Förderung 2026",
+        "art": "balken",
+        "titel": "Verheiratete dürfen doppelt so viel verdienen wie Ledige",
+        "untertitel": "Einkommensgrenze für die Arbeitnehmer-Sparzulage (§ 13 Abs. 1 5. VermBG)",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 13 Fünftes Vermögensbildungsgesetz (5. VermBG, Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/vermbg_2/__13.html",
+          "stand": "aktuelle Fassung 2026"
+        },
+        "reihen": [
+          {
+            "key": "status",
+            "label": "Einkommensgrenze",
+            "werte": [
+              {
+                "label": "Ledige",
+                "wert": 40000
+              },
+              {
+                "label": "Verheiratete (Zusammenveranlagung)",
+                "wert": 80000
+              }
+            ]
+          }
+        ],
+        "hinweis": "Maßgeblich ist das zu versteuernde Einkommen im Kalenderjahr der Anlage; wird die Grenze überschritten, entfällt nur die staatliche Förderung, nicht die Leistung des Arbeitgebers.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  }
+]

@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif">
+<rect width="1600" height="1000" fill="#FFFFFF"/>
+<defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/></marker></defs>
+<text x="40" y="46" font-size="22" fill="#1F2937" font-weight="700" text-anchor="start">W6 · Eine Adresse, ein Inhalt: Was der Server schickt und was der Mensch sieht</text>
+<text x="40" y="74" font-size="15" fill="#6B7280" font-weight="400" text-anchor="start">Die Seite ist der Faden. Suchmaschinen bekommen ihn ohne Leo, Menschen mit Leo. Keine zweite Ansicht, nichts zum Wechseln.</text>
+<line x1="40" y1="92" x2="1560" y2="92" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="400" y="120" width="800" height="44" rx="22" fill="#E8F5E1" stroke="#45A117" stroke-width="2"/>
+<text x="800" y="148" font-size="16" fill="#45A117" font-weight="700" text-anchor="middle">www.finanzleser.de/finanztools/rechner/unterhaltsrechner/</text>
+<line x1="600" y1="168" x2="470" y2="198" stroke="#6B7280" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="1000" y1="168" x2="1130" y2="198" stroke="#6B7280" stroke-width="2" marker-end="url(#ah)"/>
+<text x="420" y="222" font-size="14" fill="#1F2937" font-weight="700" text-anchor="middle">Was der Server schickt (Suchmaschine, KI-Suche, ohne JavaScript)</text>
+<rect x="80" y="230" width="680" height="520" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="80" y="230" width="680" height="34" rx="10" fill="#E5E7EB" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="80" y="250" width="680" height="14" fill="#E5E7EB"/>
+<circle cx="96" cy="247" r="5" fill="#FCA5A5" stroke="#FCA5A5" stroke-width="1.5"/>
+<circle cx="112" cy="247" r="5" fill="#FCD34D" stroke="#FCD34D" stroke-width="1.5"/>
+<circle cx="128" cy="247" r="5" fill="#86EFAC" stroke="#86EFAC" stroke-width="1.5"/>
+<rect x="150" y="238" width="596" height="18" rx="9" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="160" y="251" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">www.finanzleser.de/finanztools/rechner/unterhaltsrechner/</text>
+<rect x="92" y="274" width="656" height="26" rx="4" fill="#F3F4F6" stroke="#F3F4F6" stroke-width="1.5"/>
+<text x="100" y="291" font-size="10" fill="#6B7280" font-weight="400" text-anchor="start">finanzleser   Finanzen  Versicherungen  Steuern  Recht  Finanztools  Anbieter</text>
+<rect x="81" y="300" width="150" height="449" rx="0" fill="#F3F4F6" stroke="#F3F4F6" stroke-width="1.5"/>
+<text x="94" y="322" font-size="10" fill="#6B7280" font-weight="700" text-anchor="start">Verlauf (leer)</text>
+<rect x="245" y="320" width="300" height="240" rx="12" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="245" y="320" width="6" height="240" rx="3" fill="#45A117"/>
+<text x="263" y="342" font-size="10" fill="#45A117" font-weight="700" text-anchor="start">RECHNER</text>
+<text x="263" y="366" font-size="15" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Unterhaltsrechner 2026</text>
+<text x="263" y="380" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">Finanztools › Rechner</text>
+<rect x="263" y="392" width="264" height="26" rx="6" fill="#F3F4F6" stroke="#C7CCD4" stroke-width="1"/>
+<rect x="263" y="426" width="264" height="26" rx="6" fill="#F3F4F6" stroke="#C7CCD4" stroke-width="1"/>
+<rect x="263" y="464" width="264" height="40" rx="8" fill="#E8F5E1" stroke="#45A117" stroke-width="1.5"/>
+<text x="275" y="490" font-size="12" fill="#45A117" font-weight="700" text-anchor="start">Ergebnis nach Eingabe</text>
+<line x1="257" y1="522" x2="533" y2="522" stroke="#E5E7EB" stroke-width="1.5"/>
+<text x="263" y="540" font-size="11" fill="#45A117" font-weight="700" text-anchor="start">Teilen</text>
+<text x="325" y="540" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">In den Aktenkoffer</text>
+<text x="457" y="540" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Vorlesen</text>
+<rect x="245" y="575" width="300" height="150" rx="12" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="245" y="575" width="6" height="150" rx="3" fill="#45A117"/>
+<text x="263" y="597" font-size="10" fill="#45A117" font-weight="700" text-anchor="start">HÄUFIGE FRAGEN</text>
+<text x="263" y="621" font-size="15" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">So funktioniert die Tabelle</text>
+<rect x="263" y="643" width="264" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="263" y="656" width="264" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="263" y="669" width="264" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="263" y="682" width="264" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="263" y="695" width="158" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="560" y="330" width="180" height="34" rx="8" fill="#E8F5E1" stroke="#45A117" stroke-width="1.5"/>
+<text x="650" y="352" font-size="11" fill="#166534" font-weight="600" text-anchor="middle">✓ Title + Description</text>
+<rect x="560" y="376" width="180" height="34" rx="8" fill="#E8F5E1" stroke="#45A117" stroke-width="1.5"/>
+<text x="650" y="398" font-size="11" fill="#166534" font-weight="600" text-anchor="middle">✓ Canonical</text>
+<rect x="560" y="422" width="180" height="34" rx="8" fill="#E8F5E1" stroke="#45A117" stroke-width="1.5"/>
+<text x="650" y="444" font-size="11" fill="#166534" font-weight="600" text-anchor="middle">✓ JSON-LD WebApplication/FAQ</text>
+<rect x="560" y="468" width="180" height="34" rx="8" fill="#E8F5E1" stroke="#45A117" stroke-width="1.5"/>
+<text x="650" y="490" font-size="11" fill="#166534" font-weight="600" text-anchor="middle">✓ Sitemap-Eintrag</text>
+<rect x="560" y="514" width="180" height="34" rx="8" fill="#E8F5E1" stroke="#45A117" stroke-width="1.5"/>
+<text x="650" y="536" font-size="11" fill="#166534" font-weight="600" text-anchor="middle">✓ Volltext im HTML</text>
+<text x="560" y="580" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Kein Leo, keine Einwürfe.</text>
+<text x="560" y="598" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Derselbe Faden, still.</text>
+<text x="1180" y="222" font-size="14" fill="#1F2937" font-weight="700" text-anchor="middle">Was der Mensch sieht (nach dem Laden)</text>
+<rect x="840" y="230" width="680" height="520" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="840" y="230" width="680" height="34" rx="10" fill="#E5E7EB" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="840" y="250" width="680" height="14" fill="#E5E7EB"/>
+<circle cx="856" cy="247" r="5" fill="#FCA5A5" stroke="#FCA5A5" stroke-width="1.5"/>
+<circle cx="872" cy="247" r="5" fill="#FCD34D" stroke="#FCD34D" stroke-width="1.5"/>
+<circle cx="888" cy="247" r="5" fill="#86EFAC" stroke="#86EFAC" stroke-width="1.5"/>
+<rect x="910" y="238" width="596" height="18" rx="9" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="920" y="251" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">www.finanzleser.de/finanztools/rechner/unterhaltsrechner/</text>
+<rect x="852" y="274" width="656" height="26" rx="4" fill="#F3F4F6" stroke="#F3F4F6" stroke-width="1.5"/>
+<text x="860" y="291" font-size="10" fill="#6B7280" font-weight="400" text-anchor="start">finanzleser   Finanzen  Versicherungen  Steuern  Recht  Finanztools   Wochenbrief   Plus</text>
+<rect x="841" y="300" width="150" height="449" rx="0" fill="#F3F4F6" stroke="#F3F4F6" stroke-width="1.5"/>
+<text x="854" y="322" font-size="10" fill="#6B7280" font-weight="700" text-anchor="start">Verlauf</text>
+<rect x="850" y="332" width="132" height="22" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<rect x="850" y="362" width="132" height="22" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<rect x="850" y="392" width="132" height="22" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<rect x="850" y="422" width="132" height="22" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<circle cx="1020" cy="326" r="13" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<circle cx="1016.36" cy="323.816" r="2.08" fill="white"/>
+<circle cx="1023.64" cy="323.816" r="2.08" fill="white"/>
+<path d="M1014.8 329.25 Q1020 333.8 1025.2 329.25" stroke="white" stroke-width="1.5" fill="none"/>
+<rect x="1040" y="312" width="300" height="40" rx="12" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<text x="1050" y="330" font-size="10" fill="#1F2937" font-weight="400" text-anchor="start">Ich habe den Rechner geöffnet.</text>
+<text x="1050" y="344" font-size="10" fill="#1F2937" font-weight="400" text-anchor="start">Nettoeinkommen eintragen?</text>
+<rect x="1005" y="365" width="300" height="240" rx="12" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="1005" y="365" width="6" height="240" rx="3" fill="#45A117"/>
+<text x="1023" y="387" font-size="10" fill="#45A117" font-weight="700" text-anchor="start">RECHNER</text>
+<text x="1023" y="411" font-size="15" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Unterhaltsrechner 2026</text>
+<text x="1023" y="425" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">Finanztools › Rechner</text>
+<rect x="1023" y="437" width="264" height="26" rx="6" fill="#F3F4F6" stroke="#C7CCD4" stroke-width="1"/>
+<rect x="1023" y="471" width="264" height="26" rx="6" fill="#F3F4F6" stroke="#C7CCD4" stroke-width="1"/>
+<rect x="1023" y="509" width="264" height="40" rx="8" fill="#E8F5E1" stroke="#45A117" stroke-width="1.5"/>
+<text x="1035" y="535" font-size="14" fill="#45A117" font-weight="700" text-anchor="start">1.096 € / Monat</text>
+<line x1="1017" y1="567" x2="1293" y2="567" stroke="#E5E7EB" stroke-width="1.5"/>
+<text x="1023" y="585" font-size="11" fill="#45A117" font-weight="700" text-anchor="start">Teilen</text>
+<text x="1085" y="585" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">In den Aktenkoffer</text>
+<text x="1217" y="585" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Vorlesen</text>
+<rect x="1320" y="365" width="180" height="120" rx="12" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="1320" y="365" width="6" height="120" rx="3" fill="#45A117"/>
+<text x="1338" y="387" font-size="10" fill="#45A117" font-weight="700" text-anchor="start">STATISTIK</text>
+<text x="1338" y="411" font-size="15" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Ø Unterhalt</text>
+<rect x="1338" y="435" width="144" height="6" rx="3" fill="#E5E7EB"/>
+<rect x="1338" y="451" width="144" height="6" rx="3" fill="#E5E7EB"/>
+<rect x="1338" y="467" width="86" height="6" rx="3" fill="#E5E7EB"/>
+<text x="1338" y="357" font-size="11" fill="#45A117" font-weight="400" text-anchor="start" font-style="italic">Leo</text>
+<rect x="1320" y="500" width="180" height="105" rx="12" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="1320" y="500" width="6" height="105" rx="3" fill="#D3005E"/>
+<text x="1338" y="522" font-size="10" fill="#D3005E" font-weight="700" text-anchor="start">SPIEL</text>
+<text x="1338" y="546" font-size="15" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Schätzfrage</text>
+<rect x="1338" y="570" width="144" height="6" rx="3" fill="#E5E7EB"/>
+<rect x="1338" y="586" width="86" height="6" rx="3" fill="#E5E7EB"/>
+<text x="1338" y="492" font-size="11" fill="#45A117" font-weight="400" text-anchor="start" font-style="italic">Leo</text>
+<rect x="1005" y="630" width="495" height="40" rx="20" fill="#FFFFFF" stroke="#45A117" stroke-width="2"/>
+<text x="1020" y="655" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Fragen Sie Leo oder springen Sie: „unter…“</text>
+<text x="1005" y="700" font-size="11" fill="#45A117" font-weight="700" text-anchor="start">Derselbe Rechner, derselbe Text. Dazu: Leo, Verlauf, Einwürfe, Sprungleiste.</text>
+<text x="80" y="790" font-size="12" fill="#6B7280" font-weight="700" text-anchor="start">Merkmal</text>
+<text x="600" y="790" font-size="12" fill="#6B7280" font-weight="700" text-anchor="start">Suchmaschine</text>
+<text x="1000" y="790" font-size="12" fill="#6B7280" font-weight="700" text-anchor="start">Mensch</text>
+<line x1="80" y1="798" x2="1520" y2="798" stroke="#C7CCD4" stroke-width="1.5"/>
+<text x="80" y="822" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">Text, Titel, Metadaten, JSON-LD, Canonical</text>
+<text x="600" y="822" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">identisch</text>
+<text x="1000" y="822" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">identisch</text>
+<text x="80" y="848" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">Kartenkette, Rechner, Checkliste, Vergleich</text>
+<text x="600" y="848" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">vollständig im HTML</text>
+<text x="1000" y="848" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">bedienbar, mit Ergebnis</text>
+<text x="80" y="874" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">Leo-Begrüßung, Einwürfe, Verlauf, Aktenkoffer, Sprungleiste</text>
+<text x="600" y="874" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">nicht vorhanden</text>
+<text x="1000" y="874" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">kommen im Browser dazu</text>
+<text x="80" y="900" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">Eine zweite „Magazin-Ansicht“</text>
+<text x="600" y="900" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">gibt es nicht</text>
+<text x="1000" y="900" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">gibt es nicht</text>
+<rect x="40" y="958" width="14" height="14" rx="3" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<text x="60" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">SEO-Bausteine / Leo</text>
+<rect x="223" y="958" width="14" height="14" rx="3" fill="#D3005E" stroke="#D3005E" stroke-width="1.5"/>
+<text x="243" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Spiel</text>
+<rect x="308" y="958" width="14" height="14" rx="3" fill="#F3F4F6" stroke="#F3F4F6" stroke-width="1.5"/>
+<text x="328" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Verlauf</text>
+</svg>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import gsap from "@/lib/gsapConfig";
 
 /**
@@ -11,8 +11,15 @@ import gsap from "@/lib/gsapConfig";
  *
  * `radius` = Border-Radius des Feldes; Outline-Radius = radius + gap.
  * Focus-Farbe via CSS-Var `--field-focus-color` (Default brand; Rechner secondary).
+ *
+ * `mess` misst ein ANDERES Element als den Elternknoten. Das braucht jedes Feld, dessen
+ * sichtbare Fläche wächst — eine Suchpille, die ein Vorschlagsfeld ausfährt: der Wrapper
+ * behält seine Höhe (damit das Layout nicht springt), die Outline soll aber die
+ * gewachsene Fläche umfahren.
+ * `verankert` sagt, an welcher Kante das Feld im Wrapper klebt — „unten" für eine Pille,
+ * die nach oben aufmacht.
  */
-export default function FieldOutline({ radius = 19, gap = 4 }: { radius?: number; gap?: number }) {
+export default function FieldOutline({ radius = 19, gap = 4, mess, verankert = "oben" }: { radius?: number; gap?: number; mess?: RefObject<HTMLElement | null>; verankert?: "oben" | "unten" }) {
   const ref = useRef<SVGSVGElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const [box, setBox] = useState({ w: 0, h: 0 });
@@ -24,7 +31,7 @@ export default function FieldOutline({ radius = 19, gap = 4 }: { radius?: number
 
   useEffect(() => {
     const svg = ref.current;
-    const parent = svg?.parentElement;
+    const parent = mess?.current ?? svg?.parentElement;
     if (!parent) return;
     const measure = () => {
       const r = parent.getBoundingClientRect();
@@ -45,11 +52,12 @@ export default function FieldOutline({ radius = 19, gap = 4 }: { radius?: number
       document.fonts.ready.then(measure).catch(() => {});
     }
     return () => ro.disconnect();
-  }, [gap]);
+  }, [gap, mess]);
 
   useEffect(() => {
     const path = pathRef.current;
     const svg = ref.current;
+    // Gehorcht wird immer dem Elternknoten — dort liegen Hover und Fokus.
     const parent = svg?.parentElement;
     if (!path || !parent) return;
 
@@ -117,7 +125,7 @@ export default function FieldOutline({ radius = 19, gap = 4 }: { radius?: number
       // Maße sind bereits gemessen (Feld + 2×gap); positioniert wird nur top/left.
       width={w > 0 ? w : undefined}
       height={h > 0 ? h : undefined}
-      style={{ top: -gap, left: -gap }}
+      style={verankert === "unten" ? { bottom: -gap, left: -gap } : { top: -gap, left: -gap }}
     >
       {d && <path ref={pathRef} d={d} pathLength={100} vectorEffect="non-scaling-stroke" />}
     </svg>

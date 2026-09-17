@@ -1,0 +1,834 @@
+[
+  {
+    "slug": "steuern-fuer-selbststaendige",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Selbstständige zahlen Einkommensteuer auf den Gewinn nach dem Tarif mit 12.348 Euro Grundfreibetrag, Umsatzsteuer mit 19 oder 7 Prozent auf ihre Leistungen und als Gewerbetreibende Gewerbesteuer; Freiberufler sind davon befreit.",
+          "Kleinunternehmer bis 25.000 Euro Vorjahresumsatz und 100.000 Euro im laufenden Jahr weisen keine Umsatzsteuer aus, dürfen aber auch keine Vorsteuer ziehen.",
+          "Gewerbesteuer fällt für Einzelunternehmer erst über 24.500 Euro Gewerbeertrag an: Ertrag mal 3,5 Prozent mal Hebesatz der Gemeinde, ab 2027 mindestens 280 Prozent.",
+          "Vorauszahlungen laufen vierteljährlich nach der Vorjahressteuer, Einkommensteuer am 10. März, Juni, September und Dezember; 25 bis 40 Prozent der Einnahmen gehören aufs Steuerkonto.",
+          "Betriebsausgaben mindern den Gewinn: Homeoffice 6 Euro am Tag, Fahrten mit 38 Cent, Fahrzeug per Fahrtenbuch oder Ein-Prozent-Regel; Frist für 2025 ist der 31. Juli 2026, mit Berater der 30. April 2027, Belege zehn Jahre aufheben."
+        ],
+        "quellen": [
+          "§§ 2, 4, 18, 32a, 37 EStG",
+          "§ 19 UStG (Kleinunternehmer)",
+          "§§ 11, 16 GewStG",
+          "Beitrag Steuern für Selbstständige"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Welche Steuern zahlen Selbständige 2026?",
+          "status": "freigegeben",
+          "frage": "Ich bin Webdesignerin. Bin ich Freiberuflerin oder Gewerbetreibende?",
+          "antwort": "Das entscheidet das Finanzamt anhand Ihrer Tätigkeit: Gestalterische, künstlerisch geprägte Arbeit gilt als freiberuflich, reine Umsetzung und Verkauf von Vorlagen als Gewerbe. Freiberufler zahlen keine Gewerbesteuer und brauchen keine Bilanz. Beschreiben Sie im Fragebogen zur steuerlichen Erfassung genau, was Sie tun.",
+          "quellen": [
+            "§ 18 Abs. 1 Nr. 1 EStG",
+            "§ 15 Abs. 2 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Kleinunternehmerregelung: Grenzen und Vorteile 2026",
+          "status": "freigegeben",
+          "frage": "Meine Kunden sind Firmen. Lohnt sich die Kleinunternehmerregelung für mich?",
+          "antwort": "Meist nicht. Firmen ziehen die Umsatzsteuer als Vorsteuer ab, für sie ist Ihr Preis netto egal, aber Sie verlieren den Vorsteuerabzug auf Laptop, Software und Büro. Bei Privatkunden ist die Regelung dagegen ein Preisvorteil von 19 Prozent. Der Verzicht bindet fünf Jahre.",
+          "quellen": [
+            "§ 19 Abs. 1 und 3 UStG",
+            "Beitrag, Abschnitt Kleinunternehmerregelung"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Steuervorauszahlungen richtig planen",
+          "status": "freigegeben",
+          "frage": "Mein Gewinn ist eingebrochen, das Finanzamt fordert aber die alten Vorauszahlungen. Was kann ich tun?",
+          "antwort": "Beantragen Sie formlos die Herabsetzung mit einer kurzen Gewinnprognose, etwa der aktuellen betriebswirtschaftlichen Auswertung; das Finanzamt passt die Vorauszahlungen dann ab dem nächsten Termin an. Umgekehrt sollten Sie bei steigendem Gewinn selbst erhöhen lassen, sonst droht eine hohe Nachzahlung plus Vorauszahlung für das Folgejahr.",
+          "quellen": [
+            "§ 37 Abs. 3 Satz 3 EStG",
+            "Beitrag, Abschnitt Vorauszahlungen"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Abgabefristen und Steuererklärung 2026",
+          "status": "freigegeben",
+          "frage": "Welche Erklärungen muss ich als Selbstständige jedes Jahr abgeben?",
+          "antwort": "Die Einkommensteuererklärung mit Anlage S oder G und der Anlage EÜR, als Gewerbetreibende die Gewerbesteuererklärung und, außer als Kleinunternehmer, die Umsatzsteuererklärung; dazu unterjährig die Umsatzsteuervoranmeldungen. Alles elektronisch über ELSTER, für 2025 bis 31. Juli 2026, mit Berater bis 30. April 2027.",
+          "quellen": [
+            "§ 25 EStG, § 60 EStDV (Anlage EÜR)",
+            "§ 18 Abs. 3 UStG",
+            "§ 149 AO"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kleinunternehmerregelung",
+        "betriebsausgaben",
+        "gewerbesteuer",
+        "steuervorauszahlung"
+      ]
+    }
+  },
+  {
+    "slug": "steuerfreie-einnahmen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Steuerfrei bleibt 2026 das Einkommen bis 12.348 Euro, für Paare 24.696 Euro; dazu 259 Euro Kindergeld, Elterngeld und die Kinderfreibeträge.",
+          "Vom Arbeitgeber gibt es bis 50 Euro Sachbezug im Monat steuerfrei, etwa als Gutschein, 60 Euro zu persönlichen Anlässen und 7,67 Euro je Arbeitstag Essenszuschuss; wer die 50 Euro um einen Euro überschreitet, versteuert alles.",
+          "Nebenberufliche Übungsleiter bekommen 3.300 Euro, Ehrenamtliche 960 Euro im Jahr steuer- und beitragsfrei, beides kombinierbar für verschiedene Tätigkeiten.",
+          "Wer 2026 in Rente geht, hat 16 Prozent der ersten Jahresrente dauerhaft frei; Weiterarbeit über der Regelaltersgrenze bringt mit der Aktivrente 2.000 Euro im Monat steuerfrei.",
+          "Kapitalerträge bis 1.000 Euro Sparerpauschbetrag bleiben unversteuert."
+        ],
+        "quellen": [
+          "§ 3 Nr. 26, 26a EStG",
+          "§ 8 Abs. 2 Satz 11 EStG (Sachbezugsfreigrenze)",
+          "§ 32a EStG",
+          "§ 34 Abs. 2 EStG",
+          "Beitrag Steuerfreie Einnahmen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Sachbezüge: Steuerfreie Zusatzleistungen vom Arbeitgeber",
+          "status": "freigegeben",
+          "frage": "Mein Chef gibt mir 50 Euro Tankgutschein und 20 Euro Fitnesszuschuss im Monat. Ist das steuerfrei?",
+          "antwort": "Nein, zusammen sind es 70 Euro, und die 50 Euro sind eine Freigrenze, kein Freibetrag: Wird sie überschritten, sind alle 70 Euro steuer- und beitragspflichtig. Entweder der Fitnesszuschuss läuft über die separate Regelung für Gesundheitsförderung bis 600 Euro im Jahr, oder eine der Leistungen entfällt.",
+          "quellen": [
+            "§ 8 Abs. 2 Satz 11 EStG",
+            "§ 3 Nr. 34 EStG (Gesundheitsförderung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Ehrenamtliche Tätigkeit: Pauschalen für Engagement",
+          "status": "freigegeben",
+          "frage": "Ich trainiere die Jugend im Verein und bin Kassenwart. Kann ich beide Pauschalen nutzen?",
+          "antwort": "Ja, weil es zwei verschiedene Tätigkeiten sind: 3.300 Euro Übungsleiterpauschale fürs Training und 960 Euro Ehrenamtspauschale für die Kasse, zusammen 4.260 Euro steuerfrei. Für dieselbe Tätigkeit dürfen beide nicht kombiniert werden, und jede Pauschale gilt nur einmal im Jahr, auch bei mehreren Vereinen.",
+          "quellen": [
+            "§ 3 Nr. 26 und 26a EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Rentenfreibetrag für Neurentner 2026",
+          "status": "freigegeben",
+          "frage": "Ich bin 67, arbeite weiter und bekomme Rente. Was bleibt steuerfrei?",
+          "antwort": "Dreierlei: der Rentenfreibetrag von 16 Prozent Ihrer ersten vollen Jahresrente, der Grundfreibetrag von 12.348 Euro auf das übrige Einkommen und mit der Aktivrente bis zu 2.000 Euro Arbeitslohn im Monat, sofern Sie sozialversicherungspflichtig angestellt sind. Der Arbeitgeber berücksichtigt die Aktivrente automatisch.",
+          "quellen": [
+            "§ 22 Nr. 1 Satz 3 EStG",
+            "§ 34 Abs. 2 EStG (Aktivrentengesetz)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "sachbezugsfreigrenze",
+        "uebungsleiterpauschale",
+        "ehrenamtspauschale",
+        "grundfreibetrag",
+        "aktivrente"
+      ]
+    }
+  },
+  {
+    "slug": "splittingtabelle",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Splittingtabelle zeigt die Einkommensteuer für zusammen veranlagte Ehepaare und eingetragene Lebenspartner: Das gemeinsame Einkommen wird halbiert, die Steuer nach der Grundtabelle berechnet und verdoppelt.",
+          "Bis 24.696 Euro fällt 2026 nichts an; bei 50.000 Euro sind es 5.700 Euro, bei 100.000 Euro 20.596 Euro, Solidaritätszuschlag erst ab 40.700 Euro Steuer.",
+          "Der Vorteil entsteht nur bei ungleichen Einkommen: Ein Alleinverdiener mit 50.000 Euro spart gegenüber einem Single 4.848 Euro, das Maximum sind 19.471 Euro bei 556.000 Euro.",
+          "Das Splitting gilt auch im Trennungsjahr und als Gnadensplitting im Jahr nach dem Tod des Partners; die Wahl zwischen Zusammen- und Einzelveranlagung ist jedes Jahr neu möglich.",
+          "Einzelveranlagung lohnt selten, etwa bei hohen außergewöhnlichen Belastungen eines Partners, Abfindungen oder Kapitalverlusten."
+        ],
+        "quellen": [
+          "§ 32a Abs. 5 EStG",
+          "§§ 26, 26b EStG",
+          "BVerfG 2 BvR 909/06 (Lebenspartnerschaften)",
+          "Beitrag Splittingtabelle"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Für wen gilt der Splittingtarif 2026?",
+          "status": "freigegeben",
+          "frage": "Wir haben uns im Mai getrennt. Können wir für 2026 noch zusammen veranlagen?",
+          "antwort": "Ja, das Splitting gilt für das ganze Jahr, in dem Sie noch mindestens einen Tag zusammengelebt haben. Ab 2027 werden Sie einzeln veranlagt, wenn die Trennung dauerhaft ist. Beide müssen der Zusammenveranlagung zustimmen; der Partner mit dem Nachteil kann einen Ausgleich verlangen.",
+          "quellen": [
+            "§ 26 Abs. 1 Satz 1 EStG",
+            "BGH XII ZR 250/04 (Ausgleich)"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie funktioniert das Splittingverfahren?",
+          "status": "freigegeben",
+          "frage": "Wie viel Steuer zahlen wir bei 80.000 Euro gemeinsamem Einkommen?",
+          "antwort": "14.418 Euro: Die Steuer auf die Hälfte, 40.000 Euro, beträgt 7.209 Euro und wird verdoppelt. Verdienen Sie beide je 40.000 Euro, ändert das Splitting nichts; verdient einer 80.000 Euro allein, spart es gegenüber der Einzelveranlagung rund 7.300 Euro.",
+          "quellen": [
+            "§ 32a Abs. 5 EStG",
+            "Beitrag, Beispiel 80.000 Euro"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Zusammenveranlagung vs. Einzelveranlagung: Die Günstigerprüfung",
+          "status": "freigegeben",
+          "frage": "Wann ist die Einzelveranlagung besser?",
+          "antwort": "Selten, aber etwa wenn ein Partner eine Abfindung mit Fünftelregelung bekommt, hohe außergewöhnliche Belastungen hat, deren zumutbare Grenze bei getrenntem Einkommen niedriger liegt, oder Verluste aus Kapitalanlagen. Steuerprogramme rechnen beide Varianten automatisch; Sie wählen jedes Jahr neu.",
+          "quellen": [
+            "§ 26a EStG",
+            "§ 34 EStG (Fünftelregelung)",
+            "Beitrag, Abschnitt Günstigerprüfung"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "zusammenveranlagung",
+        "splitting",
+        "grundfreibetrag",
+        "solidaritaetszuschlag"
+      ]
+    }
+  },
+  {
+    "slug": "koerperschaftsteuer",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Körperschaftsteuer ist die Einkommensteuer der GmbH, UG, AG, Genossenschaften und Vereine mit Geschäftsbetrieb: 15 Prozent des Gewinns plus 5,5 Prozent Soli darauf, zusammen 15,825 Prozent, ohne Freigrenze.",
+          "Mit der Gewerbesteuer von rund 14 Prozent bei 400 Prozent Hebesatz liegt die Gesamtlast 2026 bei etwa 29,8 Prozent; Einzelunternehmer und Personengesellschaften zahlen stattdessen Einkommensteuer.",
+          "Ab 2028 sinkt der Satz jedes Jahr um einen Punkt auf 10 Prozent ab 2032, die Gesamtlast auf rund 25 Prozent.",
+          "Investitionen zwischen Juli 2025 und Ende 2027 dürfen degressiv mit bis zu 30 Prozent im ersten Jahr abgeschrieben werden.",
+          "Für die Bilanz müssen latente Steuern mit dem Satz des Jahres bewertet werden, in dem sie sich umkehren, also mit bis zu sechs verschiedenen Sätzen."
+        ],
+        "quellen": [
+          "§ 23 Abs. 1 KStG",
+          "Gesetz für ein steuerliches Investitionssofortprogramm (2025)",
+          "§ 7 Abs. 2 EStG",
+          "Beitrag Körperschaftsteuer"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer zahlt Körperschaftsteuer?",
+          "status": "freigegeben",
+          "frage": "Unser Sportverein betreibt eine Vereinsgaststätte. Zahlen wir Körperschaftsteuer?",
+          "antwort": "Nur auf den wirtschaftlichen Geschäftsbetrieb, also die Gaststätte, und nur wenn deren Einnahmen 45.000 Euro im Jahr übersteigen; darunter bleibt der Verein steuerfrei. Mitgliedsbeiträge, Spenden und der Sportbetrieb selbst sind als gemeinnützig immer befreit. Ein Freibetrag von 5.000 Euro kommt obendrauf.",
+          "quellen": [
+            "§ 5 Abs. 1 Nr. 9 KStG",
+            "§ 64 Abs. 3 AO",
+            "§ 24 KStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist die Gesamtsteuerbelastung für Kapitalgesellschaften?",
+          "status": "freigegeben",
+          "frage": "Lohnt sich eine GmbH steuerlich gegenüber dem Einzelunternehmen?",
+          "antwort": "Erst wenn Gewinne im Unternehmen bleiben: Die GmbH zahlt rund 30 Prozent, ein Einzelunternehmer bei hohem Gewinn bis 45 Prozent plus Soli, aber mit Gewerbesteueranrechnung. Sobald Sie sich den Gewinn ausschütten, kommen 26,375 Prozent Abgeltungsteuer dazu, und der Vorteil ist meist weg. Die Rechtsformwahl ist eher eine Haftungs- als eine Steuerfrage.",
+          "quellen": [
+            "§ 23 KStG, § 35 EStG, § 32d EStG",
+            "Beitrag, Abschnitt Gesamtsteuerbelastung"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Reformen kommen ab 2028?",
+          "status": "freigegeben",
+          "frage": "Soll ich Gewinne bis 2028 zurückhalten, um den niedrigeren Satz zu nutzen?",
+          "antwort": "Die Senkung trifft den Gewinn des jeweiligen Jahres, nicht Rücklagen; Gewinne von 2026 werden mit 15 Prozent besteuert, egal wann Sie sie ausschütten. Verschieben lassen sich nur Erträge selbst, etwa durch spätere Rechnungsstellung oder Investitionen mit degressiver Abschreibung, die den Gewinn in die Jahre mit niedrigeren Sätzen verlagern.",
+          "quellen": [
+            "§ 23 Abs. 1 KStG in der Fassung ab 2028",
+            "Beitrag, Abschnitt Reformen"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Was bedeutet die degressive Abschreibung für 2026?",
+          "status": "freigegeben",
+          "frage": "Wir kaufen 2026 einen Lieferwagen für 60.000 Euro. Wie viel dürfen wir abschreiben?",
+          "antwort": "Degressiv bis zu 30 Prozent im ersten Jahr, also 18.000 Euro statt 10.000 Euro linear bei sechs Jahren Nutzungsdauer; im zweiten Jahr 30 Prozent vom Restwert. Für rein elektrische Fahrzeuge gibt es sogar 75 Prozent im ersten Jahr. Später dürfen Sie zur linearen Methode wechseln, um den Rest schneller abzuschreiben.",
+          "quellen": [
+            "§ 7 Abs. 2 EStG",
+            "§ 7 Abs. 2a EStG (Elektrofahrzeuge)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "koerperschaftsteuer",
+        "gewerbesteuer",
+        "abschreibung",
+        "solidaritaetszuschlag"
+      ]
+    }
+  },
+  {
+    "slug": "umsatzsteuervoranmeldung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Wer Umsatzsteuer schuldet und über 2.000 Euro Zahllast im Vorjahr hatte, meldet sie unterjährig an: monatlich ab 9.000 Euro, sonst vierteljährlich; Kleinunternehmer und umsatzsteuerfreie Berufe sind befreit.",
+          "Frist ist der 10. des Folgemonats, elektronisch über ELSTER; für die Zahlung gibt es drei Tage Schonfrist, für die Meldung nicht.",
+          "Die Dauerfristverlängerung bringt einen Monat mehr, Monatszahler leisten dafür eine Sondervorauszahlung von einem Elftel der Vorjahresvorauszahlungen, Quartalszahler nichts.",
+          "Zu spät gemeldet kostet 0,25 Prozent der Steuer je Monat, mindestens 25 Euro; zu spät gezahlt 1 Prozent Säumniszuschlag je Monat, automatisch.",
+          "Wer gar nicht meldet, wird geschätzt, meist zu seinen Ungunsten; Gründer ab 2021 dürfen bis 2026 vierteljährlich starten."
+        ],
+        "quellen": [
+          "§ 18 Abs. 1 und 2 UStG",
+          "§§ 46 bis 48 UStDV (Dauerfristverlängerung)",
+          "§§ 152, 240 AO",
+          "Beitrag Umsatzsteuervoranmeldung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie oft müssen Sie 2026 eine Voranmeldung abgeben?",
+          "status": "freigegeben",
+          "frage": "Meine Zahllast 2025 lag bei 1.800 Euro. Muss ich 2026 überhaupt melden?",
+          "antwort": "Nein, unter 2.000 Euro Vorjahreszahllast kann das Finanzamt Sie von den Voranmeldungen befreien; dann rechnen Sie alles einmal in der Jahreserklärung ab. Die Befreiung müssen Sie nicht beantragen, das Finanzamt teilt sie mit; ohne Mitteilung melden Sie vierteljährlich weiter.",
+          "quellen": [
+            "§ 18 Abs. 2 Satz 3 UStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Abgabefristen gelten 2026?",
+          "status": "freigegeben",
+          "frage": "Der 10. Oktober 2026 ist ein Samstag. Bis wann muss die Voranmeldung raus?",
+          "antwort": "Bis Montag, den 12. Oktober, weil Fristen, die auf ein Wochenende oder einen Feiertag fallen, auf den nächsten Werktag rutschen. Die Zahlung darf mit Schonfrist bis zum 15. Oktober eingehen, die Meldung selbst muss aber am 12. übermittelt sein.",
+          "quellen": [
+            "§ 108 Abs. 3 AO",
+            "§ 240 Abs. 3 AO"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Dauerfristverlängerung – so gewinnen Sie einen Monat Zeit",
+          "status": "freigegeben",
+          "frage": "Bekomme ich die Sondervorauszahlung zurück?",
+          "antwort": "Ja, sie wird mit der Voranmeldung für Dezember verrechnet, also im Januar des Folgejahres; sie ist ein zinsloser Vorschuss, keine zusätzliche Steuer. Jedes Jahr wird sie neu aus den Vorauszahlungen des Vorjahres berechnet und bis zum 10. Februar angemeldet.",
+          "quellen": [
+            "§ 47 UStDV",
+            "§ 48 Abs. 4 UStDV"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Was passiert bei verspäteter Abgabe oder Zahlung?",
+          "status": "freigegeben",
+          "frage": "Ich habe die Meldung vergessen und zahle jetzt zwei Monate zu spät. Was kostet das?",
+          "antwort": "Bei 4.000 Euro Zahllast: Verspätungszuschlag 0,25 Prozent je Monat, also 20 Euro, mindestens aber 25 Euro je Monat, macht 50 Euro; dazu Säumniszuschlag 1 Prozent je angefangenen Monat auf den abgerundeten Betrag, 80 Euro. Zusammen 130 Euro. Beim ersten Mal sieht das Finanzamt beim Verspätungszuschlag oft ab, beim Säumniszuschlag nie.",
+          "quellen": [
+            "§ 152 Abs. 8 AO",
+            "§ 240 Abs. 1 AO"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "umsatzsteuer",
+        "vorsteuer",
+        "dauerfristverlaengerung",
+        "saeumniszuschlag",
+        "kleinunternehmerregelung"
+      ]
+    }
+  },
+  {
+    "slug": "umsatzsteuererklaerung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Umsatzsteuererklärung rechnet die Umsatzsteuer eines Jahres endgültig ab; die Voranmeldungen werden angerechnet, der Rest wird binnen einem Monat nachgezahlt oder erstattet.",
+          "Pflicht ist sie für alle Unternehmer mit steuerpflichtigen Umsätzen; Kleinunternehmer sind seit 2024 befreit, außer bei innergemeinschaftlichen Erwerben oder Aufforderung.",
+          "Kleinunternehmer bleibt, wer im Vorjahr höchstens 25.000 Euro und im laufenden Jahr höchstens 100.000 Euro Umsatz hat; die zweite Grenze wirkt sofort ab dem Umsatz, der sie überschreitet.",
+          "Frist für 2025 ist der 31. Juli 2026, mit Steuerberater der 1. März 2027, elektronisch über ELSTER, Papier nur in Härtefällen.",
+          "Mehrere Tätigkeiten werden für die Grenzen zusammengerechnet; Gründer schätzen den Umsatz des ersten Jahres."
+        ],
+        "quellen": [
+          "§ 18 Abs. 3 und 4 UStG",
+          "§ 19 UStG in der Fassung ab 2025",
+          "§ 149 AO",
+          "Beitrag Umsatzsteuererklärung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Kleinunternehmerregelung: Welche Grenzen gelten 2026?",
+          "status": "freigegeben",
+          "frage": "Ich überschreite im September die 100.000 Euro. Was passiert mit den Rechnungen davor?",
+          "antwort": "Nichts, die bleiben umsatzsteuerfrei. Erst der Umsatz, mit dem Sie die Grenze reißen, und alle folgenden sind steuerpflichtig, ab sofort mit 19 Prozent auf der Rechnung. Eine rückwirkende Besteuerung des Jahresanfangs gibt es seit 2025 nicht mehr; im nächsten Jahr sind Sie dann regulär steuerpflichtig.",
+          "quellen": [
+            "§ 19 Abs. 1 Satz 2 UStG in der Fassung ab 2025"
+          ]
+        },
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer muss eine Umsatzsteuererklärung 2026 abgeben?",
+          "status": "freigegeben",
+          "frage": "Als Kleinunternehmer habe ich Software aus Irland gekauft. Muss ich deshalb eine Erklärung abgeben?",
+          "antwort": "Ja. Bei Leistungen eines EU-Unternehmers schulden Sie als Empfänger die deutsche Umsatzsteuer, auch als Kleinunternehmer, und müssen sie anmelden und abführen, ohne Vorsteuerabzug. Dafür brauchen Sie eine Umsatzsteuer-Identifikationsnummer und geben die Jahreserklärung ab.",
+          "quellen": [
+            "§ 13b Abs. 1 und 5 UStG",
+            "§ 19 Abs. 1 Satz 3 UStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Was passiert bei Nachzahlungen und Verspätungen?",
+          "status": "freigegeben",
+          "frage": "Aus meiner Jahreserklärung ergibt sich eine Nachzahlung. Wann muss ich zahlen?",
+          "antwort": "Einen Monat nach Abgabe, ohne gesonderten Bescheid, denn die Erklärung gilt als Steueranmeldung und Sie setzen die Steuer damit selbst fest. Verpassen Sie den Termin, läuft ab dem Folgetag der Säumniszuschlag von 1 Prozent je Monat. Eine Erstattung zahlt das Finanzamt erst nach Zustimmung aus.",
+          "quellen": [
+            "§ 18 Abs. 4 UStG",
+            "§ 168 AO"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "umsatzsteuer",
+        "kleinunternehmerregelung",
+        "vorsteuer",
+        "elster"
+      ]
+    }
+  },
+  {
+    "slug": "schenkungssteuer",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Schenkungsteuer zahlt der Beschenkte auf alles über dem Freibetrag: 500.000 Euro für Ehepartner, 400.000 Euro je Kind und Elternteil, 200.000 Euro für Enkel, 20.000 Euro für Geschwister, Nichten, Schwiegereltern und Fremde; Eltern haben bei Schenkungen nur 20.000 Euro, bei Erbschaft 100.000 Euro.",
+          "Die Sätze reichen von 7 bis 30 Prozent in Steuerklasse I bis 30 und 50 Prozent in Klasse III; 200.000 Euro über dem Freibetrag kosten ein Kind 22.000 Euro.",
+          "Alle zehn Jahre stehen die Freibeträge neu zur Verfügung, deshalb überträgt ein Ehepaar mit zwei Kindern je Jahrzehnt 1,6 Millionen Euro steuerfrei.",
+          "Jede Schenkung ist binnen drei Monaten dem Finanzamt anzuzeigen, außer sie ist notariell beurkundet oder ein übliches Gelegenheitsgeschenk.",
+          "Bei Immobilien senkt ein vorbehaltener Nießbrauch den steuerpflichtigen Wert erheblich; Kettenschenkungen über Kinder an Enkel nutzen mehrere Freibeträge."
+        ],
+        "quellen": [
+          "§§ 14, 15, 16, 19, 30 ErbStG",
+          "§ 14 BewG (Kapitalwert des Nießbrauchs)",
+          "Beitrag Schenkungssteuer"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Freibeträge 2026: Höhe nach Verwandtschaftsgrad",
+          "status": "freigegeben",
+          "frage": "Meine Schwiegereltern wollen uns 100.000 Euro schenken. Wie viel Steuer fällt an?",
+          "antwort": "Das hängt davon ab, wer beschenkt wird: Ihr Partner als Kind hat 400.000 Euro Freibetrag je Elternteil, die Schenkung bleibt steuerfrei. Geht sie an Sie als Schwiegerkind, gelten 20.000 Euro und Steuerklasse II mit 15 Prozent: 12.000 Euro Steuer. Lassen Sie an das Kind schenken, das Geld gehört dann zunächst ihm.",
+          "quellen": [
+            "§ 15 Abs. 1, § 16 Abs. 1 ErbStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "10-Jahres-Regel nutzen",
+          "status": "freigegeben",
+          "frage": "Mein Vater hat mir 2018 300.000 Euro geschenkt. Wie viel kann er 2026 nachlegen?",
+          "antwort": "Noch 100.000 Euro steuerfrei, weil die Schenkung von 2018 bis 2028 mitgerechnet wird. Ab 2028 steht der volle Freibetrag von 400.000 Euro wieder zur Verfügung. Kommt das Geld von beiden Eltern, hat jeder seinen eigenen Freibetrag, auch aus gemeinsamem Vermögen.",
+          "quellen": [
+            "§ 14 Abs. 1 ErbStG",
+            "Beitrag, Beispiel Wohnung 2016"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Meldepflichten beim Finanzamt",
+          "status": "freigegeben",
+          "frage": "Meine Mutter hat mir 15.000 Euro überwiesen. Muss ich das melden?",
+          "antwort": "Streng genommen ja, binnen drei Monaten formlos ans Finanzamt, auch wenn keine Steuer anfällt; nur beurkundete Schenkungen und übliche Gelegenheitsgeschenke sind ausgenommen. Praktisch wichtig wird die Anzeige, damit spätere Schenkungen und die Erbschaft innerhalb von zehn Jahren richtig zusammengerechnet werden.",
+          "quellen": [
+            "§ 30 Abs. 1 ErbStG",
+            "§ 13 Abs. 1 Nr. 14 ErbStG (Gelegenheitsgeschenke)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Immobilienschenkungen richtig gestalten",
+          "status": "freigegeben",
+          "frage": "Ich will meiner Tochter das vermietete Haus für 600.000 Euro übertragen und die Miete behalten. Was spart der Nießbrauch?",
+          "antwort": "Der Kapitalwert des Nießbrauchs wird vom Hauswert abgezogen: Bei 20.000 Euro Jahresmiete und einem Vervielfältiger von etwa 13 bei 65 Jahren Alter sind das rund 260.000 Euro. Es bleiben 340.000 Euro, unter dem Freibetrag von 400.000 Euro, also keine Steuer; ohne Nießbrauch wären 200.000 Euro zu 11 Prozent, 22.000 Euro, fällig.",
+          "quellen": [
+            "§ 14 BewG mit Anlage 9a (Vervielfältiger)",
+            "§ 10 Abs. 5 ErbStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "erbschaftsteuer",
+        "zehnjahresfrist",
+        "niessbrauch",
+        "kettenschenkung"
+      ]
+    }
+  },
+  {
+    "slug": "lohnsteuertabelle",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Amtliche Lohnsteuertabellen gibt es seit 2003 nicht mehr; Grundlage ist der Programmablaufplan des Finanzministeriums, nach dem jede Lohnsoftware rechnet. Die Tabellen im Umlauf sind Orientierungshilfen.",
+          "Sie ordnen Bruttolohn und Steuerklasse die Lohnsteuer zu; die allgemeine Tabelle gilt für Sozialversicherungspflichtige, die besondere für Beamte und Gesellschafter-Geschäftsführer.",
+          "Eckwerte 2026: Grundfreibetrag 12.348 Euro, Kinderfreibetrag 9.756 Euro, Soli-Freigrenze 20.350 Euro, Beitragsbemessungsgrenzen 5.812,50 Euro in der Kranken- und 8.450 Euro in der Rentenversicherung im Monat.",
+          "Bei 4.000 Euro brutto bleiben in Klasse 1 rund 2.566 Euro, in Klasse 3 etwa 2.883 Euro, in Klasse 5 nur 2.220 Euro; die Jahressteuer ist am Ende gleich.",
+          "Neu 2026: Die Mindestvorsorgepauschale entfällt, es zählen die tatsächlichen Kranken- und Pflegebeiträge; Minijob-Grenze 603 Euro."
+        ],
+        "quellen": [
+          "§ 39b EStG",
+          "Programmablaufplan 2026 des Bundesministeriums der Finanzen",
+          "Sozialversicherungs-Rechengrößenverordnung 2026",
+          "Beitrag Lohnsteuertabelle"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie unterscheiden sich allgemeine und besondere Lohnsteuertabelle?",
+          "status": "freigegeben",
+          "frage": "Ich bin Beamtin. Warum zahle ich mehr Lohnsteuer als meine angestellte Kollegin mit gleichem Brutto?",
+          "antwort": "Weil bei Ihnen die besondere Tabelle gilt: Angestellte bekommen beim Lohnsteuerabzug eine Vorsorgepauschale für Renten- und Arbeitslosenbeiträge, die Sie nicht zahlen. Dafür haben Sie keine Sozialabgaben und netto trotzdem mehr; Ihre Beihilfe und private Krankenversicherung fließen mit den tatsächlichen Beiträgen ein.",
+          "quellen": [
+            "§ 39b Abs. 2 Satz 5 Nr. 3 EStG",
+            "Beitrag, Abschnitt Allgemeine und besondere Tabelle"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Steuerklassen gibt es und wie wirken sie sich aus?",
+          "status": "freigegeben",
+          "frage": "Bei 4.000 Euro brutto: Wie viel Lohnsteuer zahle ich in Klasse 1?",
+          "antwort": "Rund 630 Euro im Monat, dazu etwa 800 Euro Sozialabgaben, netto etwa 2.566 Euro. In Klasse 3 wären es nur rund 320 Euro Lohnsteuer, in Klasse 5 etwa 980 Euro; die Differenz gleicht sich in der Steuererklärung aus.",
+          "quellen": [
+            "Beitrag, Tabelle Netto bei 4.000 Euro",
+            "Programmablaufplan 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Lohnsteuertabelle 2026: Was sind die wichtigsten Eckwerte?",
+          "status": "freigegeben",
+          "frage": "Was bedeutet die Beitragsbemessungsgrenze für mein Netto?",
+          "antwort": "Oberhalb von 5.812,50 Euro brutto im Monat steigen die Kranken- und Pflegebeiträge nicht mehr, oberhalb von 8.450 Euro auch die Renten- und Arbeitslosenbeiträge nicht; jeder Euro darüber kostet nur noch Steuer. Für 2026 sind beide Grenzen gestiegen, Gutverdiener zahlen deshalb etwas mehr Sozialabgaben als 2025.",
+          "quellen": [
+            "Sozialversicherungs-Rechengrößenverordnung 2026",
+            "§ 223 Abs. 3 SGB V"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "lohnsteuer",
+        "steuerklasse",
+        "beitragsbemessungsgrenze",
+        "elstam"
+      ]
+    }
+  },
+  {
+    "slug": "lohnsteuerermaessigung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Mit dem Antrag auf Lohnsteuerermäßigung lassen Sie sich einen Freibetrag in die elektronischen Lohnsteuerabzugsmerkmale eintragen; der Arbeitgeber zieht dann jeden Monat weniger Lohnsteuer ab, statt dass Sie auf die Erstattung im Folgejahr warten.",
+          "Voraussetzung sind mehr als 600 Euro abziehbare Aufwendungen im Jahr, wobei Werbungskosten erst über dem Pauschbetrag von 1.230 Euro zählen; typisch sind lange Arbeitswege, Kinderbetreuung, Unterhalt oder Krankheitskosten.",
+          "Der Antrag geht über ELSTER oder auf Papier, für 2026 seit 1. November 2025; bis 31. Januar gilt der Freibetrag ab Jahresbeginn, danach ab dem Folgemonat, spätestens bis 30. November.",
+          "Er kann gleich für zwei Jahre beantragt werden; Wiederholungsanträge laufen vereinfacht.",
+          "Wer einen Freibetrag hat, muss eine Steuererklärung abgeben und Verschlechterungen melden; die Erstattung fällt entsprechend kleiner aus."
+        ],
+        "quellen": [
+          "§ 39a EStG",
+          "§ 46 Abs. 2 Nr. 4 EStG (Pflichtveranlagung)",
+          "Beitrag Lohnsteuerermäßigung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer hat Anspruch auf Lohnsteuerermäßigung?",
+          "status": "freigegeben",
+          "frage": "Ich pendle 30 Kilometer. Reicht das für einen Freibetrag?",
+          "antwort": "Ja: 30 Kilometer mal 220 Tage mal 38 Cent sind 2.508 Euro, davon 1.278 Euro über dem Pauschbetrag, mehr als die 600 Euro Antragsgrenze. Der Freibetrag von 1.278 Euro bringt Ihnen bei 30 Prozent Steuersatz rund 32 Euro mehr Netto im Monat.",
+          "quellen": [
+            "§ 39a Abs. 2 Satz 4 EStG",
+            "§ 9 Abs. 1 Nr. 4 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie beantrage ich die Lohnsteuerermäßigung?",
+          "status": "freigegeben",
+          "frage": "Ich stelle den Antrag erst im Juni. Verliere ich die ersten Monate?",
+          "antwort": "Nicht das Geld, nur die Verteilung: Der Jahresfreibetrag wird auf die verbleibenden sieben Monate verteilt, sodass Ihr Netto von Juli bis Dezember stärker steigt. Was Sie in den ersten Monaten zu viel gezahlt haben, kommt mit der Steuererklärung zurück.",
+          "quellen": [
+            "§ 39a Abs. 2 Satz 6 EStG",
+            "Beitrag, Abschnitt Freibetrag-Verteilung"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wichtige Regelungen für 2026",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitsweg ist kürzer geworden. Muss ich das dem Finanzamt sagen?",
+          "antwort": "Ja, Sie sind verpflichtet, Verschlechterungen zu melden, damit der Freibetrag gesenkt wird; sonst zahlen Sie zu wenig Lohnsteuer und mit der Pflicht-Steuererklärung alles nach, möglicherweise mit Zinsen. Verbesserungen dürfen Sie melden, müssen aber nicht.",
+          "quellen": [
+            "§ 39a Abs. 1 Satz 5 EStG",
+            "§ 46 Abs. 2 Nr. 4 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "lohnsteuerfreibetrag",
+        "elstam",
+        "werbungskosten",
+        "entfernungspauschale"
+      ]
+    }
+  },
+  {
+    "slug": "grundsteuer",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Seit 2025 gilt die Formel Grundsteuerwert mal Steuermesszahl mal Hebesatz: Das Finanzamt bewertet aus Bodenrichtwert, Fläche, Gebäudeart und Baujahr, die Messzahl liegt im Bundesmodell bei 0,31 Promille für Wohnen, den Hebesatz setzt die Gemeinde.",
+          "Ein Haus mit 300.000 Euro Grundsteuerwert und 500 Prozent Hebesatz kostet 465 Euro im Jahr; Bayern rechnet nur nach Fläche, Baden-Württemberg nur nach Bodenwert, Hessen mit Lagefaktor.",
+          "Der Hebesatz entscheidet: Duisburg 886 Prozent, Berlin 470, Düsseldorf 374; die Grundsteuer C erlaubt Aufschläge auf unbebautes Bauland, in Hamburg 8.000 Prozent.",
+          "Fällig ist sie in vier Raten am 15. Februar, Mai, August und November; wer am 1. Januar Eigentümer ist, zahlt das ganze Jahr, Vermieter legen sie auf die Mieter um.",
+          "Der Bundesfinanzhof hat das Bundesmodell im Dezember 2025 bestätigt; neue Werte gibt es alle sieben Jahre."
+        ],
+        "quellen": [
+          "§§ 13, 15, 25 GrStG",
+          "§§ 218 ff. BewG",
+          "§ 2 Nr. 1 BetrKV (Umlage)",
+          "Beitrag Grundsteuer"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "So berechnet sich Ihre Grundsteuer",
+          "status": "freigegeben",
+          "frage": "Mein Grundsteuerwertbescheid kam mir viel zu hoch vor. Kann ich noch etwas tun?",
+          "antwort": "Gegen den Wertbescheid ist Einspruch nur einen Monat nach Zugang möglich; danach bleibt der Nachweis eines niedrigeren Verkehrswerts per Gutachten, wenn der Grundsteuerwert ihn um mindestens 40 Prozent übersteigt, so der Bundesfinanzhof 2024. Die Gemeinde kann den Hebesatz jederzeit ändern, dagegen hilft nur der Gemeinderat.",
+          "quellen": [
+            "§ 220 Abs. 2 BewG in der Fassung des Jahressteuergesetzes 2024",
+            "BFH II B 78/23"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "So unterschiedlich sind die Hebesätze",
+          "status": "freigegeben",
+          "frage": "Warum zahlt mein Bruder in Bayern für ein größeres Haus weniger als ich in Nordrhein-Westfalen?",
+          "antwort": "Zwei Gründe: Bayern bewertet nur nach Fläche, 4 Cent je Quadratmeter Grund und 50 Cent je Quadratmeter Gebäude, ohne Lage und Wert; und viele nordrhein-westfälische Städte haben Hebesätze über 600 Prozent, weil sie auf die Einnahmen angewiesen sind. Bei gleichem Messbetrag liegt zwischen Duisburg und Ingelheim mehr als der Faktor zehn.",
+          "quellen": [
+            "Bayerisches Grundsteuergesetz Art. 3",
+            "Beitrag, Abschnitt Hebesätze"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Zahlungstermine und Umlagung",
+          "status": "freigegeben",
+          "frage": "Ich habe im März gekauft. Wer zahlt die Grundsteuer 2026?",
+          "antwort": "Gegenüber dem Finanzamt der Verkäufer, weil er am 1. Januar Eigentümer war; das Gesetz kennt keine anteilige Steuerpflicht. Im Kaufvertrag wird üblicherweise vereinbart, dass Sie ihm die Steuer ab Übergabe anteilig erstatten. Ab 2027 werden Sie selbst veranlagt.",
+          "quellen": [
+            "§ 10 Abs. 1, § 9 Abs. 1 GrStG",
+            "Beitrag, Abschnitt Zahlungstermine"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Zahlungstermine und Umlagung",
+          "status": "freigegeben",
+          "frage": "Darf mein Vermieter die höhere Grundsteuer einfach auf mich umlegen?",
+          "antwort": "Ja, wenn der Mietvertrag Betriebskosten auf Sie umlegt; die Grundsteuer steht ausdrücklich in der Betriebskostenverordnung. Die Nachforderung kommt mit der nächsten Abrechnung, bei einem Einfamilienhaus oft 30 bis 40 Euro im Monat mehr. Prüfen Sie, ob der Vermieter Einspruch gegen einen überhöhten Wert eingelegt hat.",
+          "quellen": [
+            "§ 2 Nr. 1 BetrKV",
+            "§ 556 BGB"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "grundsteuer",
+        "hebesatz",
+        "steuermessbetrag",
+        "grunderwerbsteuer"
+      ]
+    }
+  },
+  {
+    "slug": "grunderwerbsteuer",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Grunderwerbsteuer entsteht mit dem notariellen Kaufvertrag, einmalig, auf den Kaufpreis: 3,5 Prozent in Bayern und Sachsen, 4,5 in Hamburg, 5 in Baden-Württemberg, Niedersachsen, Rheinland-Pfalz, Sachsen-Anhalt und Thüringen, 5,5 in Bremen, 6 in Berlin, Hessen und Mecklenburg-Vorpommern, 6,5 in Brandenburg, Nordrhein-Westfalen, Saarland und Schleswig-Holstein.",
+          "Bei 400.000 Euro liegen zwischen dem günstigsten und teuersten Land 12.000 Euro.",
+          "Befreit sind Käufe zwischen Ehepartnern, Eltern und Kindern, Großeltern und Enkeln, Erbschaften und Schenkungen sowie Preise unter 2.500 Euro; Geschwister und Schwiegereltern nicht.",
+          "Der Notar meldet den Kauf, der Bescheid kommt nach sechs bis acht Wochen, Zahlung binnen einem Monat, erst dann gibt es die Unbedenklichkeitsbescheinigung fürs Grundbuch.",
+          "Sparen lässt sich, indem Küche, Möbel oder Sauna zum Marktpreis getrennt ausgewiesen werden; Hessen zahlt Erstkäufern mit dem Hessengeld 10.000 Euro je Person und 5.000 Euro je Kind."
+        ],
+        "quellen": [
+          "§§ 1, 3, 11, 13, 22 GrEStG",
+          "Hessisches Grunderwerbsteuer-Entlastungsgesetz (Hessengeld)",
+          "Beitrag Grunderwerbsteuer"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist die Grunderwerbsteuer 2026 in den Bundesländern?",
+          "status": "freigegeben",
+          "frage": "Wir kaufen in Nordrhein-Westfalen für 350.000 Euro. Was kommt an Nebenkosten zusammen?",
+          "antwort": "22.750 Euro Grunderwerbsteuer mit 6,5 Prozent, dazu rund 5.250 Euro für Notar und Grundbuch und bei Maklerkauf etwa 12.500 Euro Provision für Ihre Hälfte. Zusammen rund 40.000 Euro, gut 11 Prozent, die Banken nicht finanzieren und die als Eigenkapital vorhanden sein müssen.",
+          "quellen": [
+            "§ 11 GrEStG in Verbindung mit dem Landesgesetz NRW",
+            "GNotKG",
+            "§ 656c BGB (Maklerprovision)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Befreiungen und Ausnahmen gibt es?",
+          "status": "freigegeben",
+          "frage": "Ich kaufe meiner Schwester ihre Hälfte des geerbten Hauses ab. Steuerfrei?",
+          "antwort": "Nein, Geschwister sind nicht in gerader Linie verwandt, die Befreiung greift nicht. Eine Ausnahme gilt für die Auseinandersetzung einer Erbengemeinschaft: Übernimmt ein Miterbe das Grundstück aus dem Nachlass, bleibt das steuerfrei. Prüfen Sie mit dem Notar, ob Ihr Kauf noch als Erbauseinandersetzung gestaltet werden kann.",
+          "quellen": [
+            "§ 3 Nr. 3 und Nr. 6 GrEStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie läuft die Anmeldung und Zahlung ab?",
+          "status": "freigegeben",
+          "frage": "Kann ich die Grunderwerbsteuer mitfinanzieren?",
+          "antwort": "Die meisten Banken finanzieren Kaufnebenkosten nicht, weil ihnen dafür keine Sicherheit gegenübersteht; Sie brauchen den Betrag als Eigenkapital. Zahlen Sie nicht innerhalb eines Monats nach Bescheid, gibt es keine Unbedenklichkeitsbescheinigung und damit keine Eintragung im Grundbuch, dazu 1 Prozent Säumniszuschlag je Monat.",
+          "quellen": [
+            "§ 22 GrEStG",
+            "§ 240 AO"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Wie können Sie legal Steuern sparen?",
+          "status": "freigegeben",
+          "frage": "Die Einbauküche ist 12.000 Euro wert. Wie setze ich sie im Vertrag an?",
+          "antwort": "Als eigene Position mit Zeitwert im Kaufvertrag, belegt durch Rechnung und Alter; das Finanzamt akzeptiert plausible Werte bis etwa 15 Prozent des Kaufpreises. Bei 6,5 Prozent sparen Sie 780 Euro. Überhöhte Ansätze gelten als Steuerhinterziehung, und die Bank rechnet den Küchenwert nicht als Sicherheit.",
+          "quellen": [
+            "§ 2 Abs. 1 Satz 2 GrEStG (Zubehör)",
+            "Beitrag, Abschnitt Inventar"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "grunderwerbsteuer",
+        "unbedenklichkeitsbescheinigung",
+        "notarkosten",
+        "baufinanzierung"
+      ]
+    }
+  },
+  {
+    "slug": "gewerbesteuer",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Gewerbesteuer zahlen Gewerbetreibende an ihre Gemeinde; Freiberufler und Landwirte nicht. Einzelunternehmer und Personengesellschaften haben 24.500 Euro Freibetrag, Kapitalgesellschaften zahlen ab dem ersten Euro.",
+          "Formel: Gewerbeertrag minus Freibetrag mal 3,5 Prozent Messzahl mal Hebesatz; bei 80.000 Euro Gewinn und 410 Prozent sind das 7.964 Euro.",
+          "Hebesätze reichen von 200 Prozent, ab 2027 mindestens 280, bis 490 in München; der bundesweite Schnitt liegt bei etwa 400 Prozent.",
+          "Zinsen, Mieten und Leasingraten werden zu einem Viertel hinzugerechnet, wenn sie 200.000 Euro übersteigen; Grundbesitz wird gekürzt.",
+          "Einzelunternehmer rechnen das Vierfache des Messbetrags auf die Einkommensteuer an, bis 400 Prozent Hebesatz bleibt so fast nichts hängen; Vorauszahlungen am 15. Februar, Mai, August und November."
+        ],
+        "quellen": [
+          "§§ 2, 8, 9, 11, 16, 19 GewStG",
+          "§ 35 EStG (Anrechnung)",
+          "Beitrag Gewerbesteuer"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer zahlt Gewerbesteuer?",
+          "status": "freigegeben",
+          "frage": "Ich bin Ingenieur, verkaufe aber auch Messgeräte. Bin ich gewerbesteuerpflichtig?",
+          "antwort": "Für den Handel ja: Der Verkauf ist eine gewerbliche Tätigkeit, die Sie getrennt von der freiberuflichen Ingenieurleistung führen müssen, mit eigener Buchführung. Vermischen sich beide untrennbar, färbt das Gewerbe ab und die gesamte Tätigkeit wird gewerbesteuerpflichtig; bei einer Personengesellschaft schon ab 3 Prozent gewerblichem Umsatz.",
+          "quellen": [
+            "§ 15 Abs. 3 Nr. 1 EStG (Abfärbung)",
+            "BFH VIII R 6/12"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Hebesätze: Der Standort ist entscheidend",
+          "status": "freigegeben",
+          "frage": "Lohnt es sich, den Firmensitz in eine Gemeinde mit niedrigem Hebesatz zu verlegen?",
+          "antwort": "Nur wenn die Betriebsstätte wirklich dort ist: Die Gewerbesteuer geht an die Gemeinde, in der Sie tatsächlich arbeiten; ein Briefkasten reicht nicht, und bei mehreren Betriebsstätten wird nach Löhnen zerlegt. Ab 2027 steigt der Mindesthebesatz auf 280 Prozent, die extremen Steueroasen verschwinden.",
+          "quellen": [
+            "§§ 28, 29 GewStG (Zerlegung)",
+            "§ 16 Abs. 4 GewStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Entlastung durch Anrechnung auf die Einkommensteuer",
+          "status": "freigegeben",
+          "frage": "Wie viel Gewerbesteuer bleibt bei mir als Einzelunternehmer wirklich hängen?",
+          "antwort": "Bei 410 Prozent Hebesatz und 55.500 Euro Steuerbasis zahlen Sie 7.964 Euro Gewerbesteuer, dürfen aber das Vierfache des Messbetrags, 7.770 Euro, von der Einkommensteuer abziehen; es bleiben 194 Euro plus der Soli-Effekt. Bei 400 Prozent oder weniger ist die Gewerbesteuer faktisch neutral, in München mit 490 Prozent bleiben rund 1.750 Euro.",
+          "quellen": [
+            "§ 35 Abs. 1 EStG",
+            "Beitrag, Rechenbeispiel"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "gewerbesteuer",
+        "hebesatz",
+        "steuermessbetrag",
+        "koerperschaftsteuer"
+      ]
+    }
+  }
+]

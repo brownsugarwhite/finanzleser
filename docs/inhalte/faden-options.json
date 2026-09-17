@@ -1,0 +1,1135 @@
+{
+  "faden_waechter_regeln": [
+    {
+      "key": "kfz",
+      "titel": "Kfz-Wechselfrist",
+      "regel": "30 Tage vor dem 30. November: drei geprüfte Angebote zu Ihren Tarifdaten",
+      "ausloeser": {
+        "art": "termin",
+        "datum": "11-01"
+      },
+      "stichtag": "11-30",
+      "links": [
+        {
+          "typ": "vergleich",
+          "slug": "kfz-versicherung-vergleich"
+        },
+        {
+          "typ": "post",
+          "slug": "kfz-versicherung"
+        }
+      ]
+    },
+    {
+      "key": "tabelle",
+      "titel": "Düsseldorfer Tabelle",
+      "regel": "Wenn sich die Tabelle ändert: Unterhaltsergebnis neu prüfen",
+      "ausloeser": {
+        "art": "wert",
+        "pfad": "unterhalt.tabelle"
+      },
+      "termin": "Jahreswechsel",
+      "links": [
+        {
+          "typ": "rechner",
+          "slug": "unterhalt"
+        },
+        {
+          "typ": "post",
+          "slug": "duesseldorfer-tabelle"
+        }
+      ]
+    },
+    {
+      "key": "grundfreibetrag",
+      "titel": "Grundfreibetrag",
+      "regel": "Wenn sich der Wert ändert: Hinweis im Faden und Rentenrechnung neu prüfen",
+      "ausloeser": {
+        "art": "wert",
+        "pfad": "lohnsteuer.grundfreibetrag"
+      },
+      "termin": "Jahreswechsel",
+      "links": [
+        {
+          "typ": "rechner",
+          "slug": "einkommensteuer"
+        },
+        {
+          "typ": "post",
+          "slug": "rentenbesteuerung"
+        }
+      ]
+    },
+    {
+      "key": "bbg",
+      "titel": "Beitragsbemessungsgrenze",
+      "regel": "Wenn sie steigt: gespeicherte Brutto-Netto-Rechnungen neu rechnen",
+      "ausloeser": {
+        "art": "wert",
+        "pfad": "beitragsbemessungsgrenzen.renten_arbeitslosen.monatlich"
+      },
+      "termin": "Jahreswechsel",
+      "links": [
+        {
+          "typ": "rechner",
+          "slug": "brutto-netto"
+        },
+        {
+          "typ": "checkliste",
+          "slug": "beitragsbemessungsgrenzen"
+        }
+      ]
+    },
+    {
+      "key": "rentenwert",
+      "titel": "Rentenanpassung",
+      "regel": "Zum 1. Juli: Rentenrechnung und BU-Lücke neu rechnen",
+      "ausloeser": {
+        "art": "wert",
+        "pfad": "rente.rentenwert_ab_01jul_2026"
+      },
+      "termin": "Juli",
+      "links": [
+        {
+          "typ": "rechner",
+          "slug": "rente"
+        },
+        {
+          "typ": "vergleich",
+          "slug": "berufsunfaehigkeitsversicherung-vergleich"
+        }
+      ]
+    },
+    {
+      "key": "kindergeld",
+      "titel": "Kindergeld",
+      "regel": "Wenn der Betrag steigt: Unterhalt, Unterhaltsvorschuss und Kinderfreibetrag neu prüfen",
+      "ausloeser": {
+        "art": "wert",
+        "pfad": "kindergeld.monatlich_je_kind"
+      },
+      "termin": "Jahreswechsel",
+      "links": [
+        {
+          "typ": "post",
+          "slug": "kindergeld"
+        },
+        {
+          "typ": "rechner",
+          "slug": "kindergeld"
+        }
+      ]
+    },
+    {
+      "key": "steuerfrist",
+      "titel": "Steuererklärung",
+      "regel": "Sechs Wochen vor dem 31. Juli: Erinnerung mit Checkliste",
+      "ausloeser": {
+        "art": "termin",
+        "datum": "06-15"
+      },
+      "stichtag": "07-31",
+      "links": [
+        {
+          "typ": "checkliste",
+          "slug": "steuererklaerung"
+        },
+        {
+          "typ": "post",
+          "slug": "steuerformulare-2024"
+        }
+      ]
+    },
+    {
+      "key": "beitragsanpassung",
+      "titel": "Beitragsanpassung",
+      "regel": "Wenn ein Versicherer erhöht: Sonderkündigungsrecht einen Monat lang, Vergleich anstoßen",
+      "ausloeser": {
+        "art": "nutzer",
+        "hinweis": "Der Nutzer trägt Datum und Sparte der Erhöhung ein"
+      },
+      "links": [
+        {
+          "typ": "post",
+          "slug": "private-haftpflichtversicherung"
+        },
+        {
+          "typ": "post",
+          "slug": "hausratversicherung"
+        }
+      ]
+    },
+    {
+      "key": "elterngeld",
+      "titel": "Elterngeld-Frist",
+      "regel": "Nach der Geburt: Antrag innerhalb von drei Monaten, sonst gehen Monate verloren",
+      "ausloeser": {
+        "art": "ereignis",
+        "ereignis": "kind"
+      },
+      "links": [
+        {
+          "typ": "post",
+          "slug": "elterngeld"
+        },
+        {
+          "typ": "rechner",
+          "slug": "elterngeld"
+        }
+      ]
+    },
+    {
+      "key": "mindestlohn",
+      "titel": "Mindestlohn",
+      "regel": "Wenn er steigt: Minijob-Grenze und Stundenlohn neu prüfen",
+      "ausloeser": {
+        "art": "wert",
+        "pfad": "mindestlohn"
+      },
+      "termin": "Jahreswechsel",
+      "links": [
+        {
+          "typ": "rechner",
+          "slug": "mindestlohn"
+        },
+        {
+          "typ": "rechner",
+          "slug": "minijob"
+        }
+      ]
+    }
+  ],
+  "faden_kassensturz": {
+    "titel": "Finanz-Kassensturz",
+    "untertitel": "3 Minuten · keine Anmeldung",
+    "erzeugt_am": "2026-09-07",
+    "status": "freigegeben",
+    "fragen": [
+      {
+        "id": "status",
+        "text": "Sind Sie angestellt, selbstständig oder in Rente?",
+        "optionen": [
+          "Angestellt",
+          "Selbstständig",
+          "In Rente",
+          "In Ausbildung"
+        ]
+      },
+      {
+        "id": "haushalt",
+        "text": "Wer gehört zu Ihrem Haushalt?",
+        "optionen": [
+          "Ich allein",
+          "Partner oder Partnerin",
+          "Partner und Kinder",
+          "Alleinerziehend"
+        ]
+      },
+      {
+        "id": "wohnen",
+        "text": "Wohnen Sie zur Miete oder im Eigentum?",
+        "optionen": [
+          "Zur Miete",
+          "Im Eigentum",
+          "Bei der Familie"
+        ]
+      },
+      {
+        "id": "arbeitskraft",
+        "text": "Ist Ihre Arbeitskraft abgesichert, etwa mit einer Berufsunfähigkeitsversicherung?",
+        "optionen": [
+          "Ja",
+          "Nein",
+          "Weiß ich nicht"
+        ],
+        "wenn": {
+          "feld": "status",
+          "nicht": "In Rente"
+        }
+      },
+      {
+        "id": "vorsorge",
+        "text": "Wie sorgen Sie fürs Alter vor?",
+        "optionen": [
+          "Gesetzlich und betrieblich",
+          "Depot oder ETF",
+          "Immobilie",
+          "Noch gar nicht"
+        ],
+        "wenn": {
+          "feld": "status",
+          "nicht": "In Rente"
+        }
+      },
+      {
+        "id": "einkuenfte",
+        "text": "Haben Sie neben der Rente weitere Einkünfte, etwa Miete oder Kapitalerträge?",
+        "optionen": [
+          "Ja",
+          "Nein"
+        ],
+        "ikonen": {
+          "Ja": "bank",
+          "Nein": "schildNein"
+        },
+        "wenn": {
+          "feld": "status",
+          "ist": "In Rente"
+        }
+      },
+      {
+        "id": "versicherungen",
+        "text": "Welche dieser Versicherungen haben Sie? Mehrere sind möglich.",
+        "optionen": [
+          "Privathaftpflicht",
+          "Hausrat",
+          "Rechtsschutz",
+          "Unfall",
+          "Wohngebäude"
+        ],
+        "mehrfach": true
+      },
+      {
+        "id": "schaetz",
+        "schaetz": true,
+        "text": "Zwischendurch eine Schätzfrage: Wie hoch ist die Standardrente nach 45 Beitragsjahren im Monat?",
+        "min": 800,
+        "max": 3000,
+        "richtig": 1913,
+        "einheit": "€",
+        "quelle": "Deutsche Rentenversicherung: Rentenwert 42,52 € ab 1. Juli 2026 × 45 Entgeltpunkte"
+      },
+      {
+        "id": "notgroschen",
+        "text": "Haben Sie einen Notgroschen für drei Monatsausgaben?",
+        "optionen": [
+          "Ja",
+          "Teilweise",
+          "Nein"
+        ],
+        "ikonen": {
+          "Ja": "spar",
+          "Teilweise": "sparHalb",
+          "Nein": "sparLeer"
+        }
+      }
+    ],
+    "ikonen": {
+      "Angestellt": "koffer",
+      "Selbstständig": "werkzeug",
+      "In Rente": "sessel",
+      "In Ausbildung": "hut",
+      "Ich allein": "person",
+      "Partner oder Partnerin": "paar",
+      "Partner und Kinder": "familie",
+      "Alleinerziehend": "allein",
+      "Zur Miete": "schluessel",
+      "Im Eigentum": "haus",
+      "Bei der Familie": "haus2",
+      "Ja": "schildJa",
+      "Nein": "schildNein",
+      "Weiß ich nicht": "frage",
+      "Gesetzlich und betrieblich": "bank",
+      "Depot oder ETF": "kurve",
+      "Immobilie": "haus",
+      "Noch gar nicht": "sanduhr",
+      "Privathaftpflicht": "schirm",
+      "Hausrat": "sofa",
+      "Rechtsschutz": "waage",
+      "Unfall": "unfall",
+      "Wohngebäude": "dach"
+    },
+    "luecken": [
+      {
+        "kurz": "Arbeitskraft",
+        "ikon": "schildNein",
+        "wenn": {
+          "alle": [
+            {
+              "feld": "status",
+              "nicht": "In Rente"
+            },
+            {
+              "feld": "arbeitskraft",
+              "in": [
+                "Nein",
+                "Weiß ich nicht"
+              ]
+            }
+          ]
+        },
+        "titel": "Ihre Arbeitskraft ist nicht abgesichert.",
+        "text": "Jeder Vierte wird im Arbeitsleben berufsunfähig; die gesetzliche Erwerbsminderungsrente liegt im Schnitt bei rund 1.059 Euro und setzt voraus, dass Sie gar keinen Beruf mehr ausüben können.",
+        "links": [
+          {
+            "text": "BU-Tarife vergleichen",
+            "typ": "vergleich",
+            "slug": "berufsunfaehigkeitsversicherung-vergleich"
+          },
+          {
+            "text": "Ratgeber Berufsunfähigkeit",
+            "typ": "post",
+            "slug": "berufsunfaehigkeitsversicherung"
+          }
+        ]
+      },
+      {
+        "kurz": "Haftpflicht",
+        "ikon": "schirm",
+        "wenn": {
+          "feld": "versicherungen",
+          "ohne": "Privathaftpflicht"
+        },
+        "titel": "Die wichtigste Versicherung fehlt.",
+        "text": "Eine Privathaftpflicht deckt Schäden an anderen bis in Millionenhöhe, gute Tarife kosten ab 25 Euro im Jahr. Ohne sie haften Sie nach § 823 BGB mit allem, was Sie haben.",
+        "links": [
+          {
+            "text": "Tarife vergleichen",
+            "typ": "vergleich",
+            "slug": "private-haftpflichtversicherung-vergleich"
+          },
+          {
+            "text": "Ratgeber Privathaftpflicht",
+            "typ": "post",
+            "slug": "private-haftpflichtversicherung"
+          }
+        ]
+      },
+      {
+        "kurz": "Notgroschen",
+        "ikon": "sparLeer",
+        "wenn": {
+          "feld": "notgroschen",
+          "in": [
+            "Nein",
+            "Teilweise"
+          ]
+        },
+        "titel": "Kein Polster für den Ernstfall.",
+        "text": "Drei Monatsausgaben auf dem Tagesgeld sind die Basis jeder Planung; erst danach lohnt Anlegen. Ohne Polster wird jede Autoreparatur zum Kredit.",
+        "links": [
+          {
+            "text": "Tagesgeld vergleichen",
+            "typ": "vergleich",
+            "slug": "tagesgeldvergleich"
+          },
+          {
+            "text": "Ratgeber Tagesgeld",
+            "typ": "post",
+            "slug": "tagesgeld"
+          }
+        ]
+      },
+      {
+        "kurz": "Altersvorsorge",
+        "ikon": "sanduhr",
+        "wenn": {
+          "feld": "vorsorge",
+          "ist": "Noch gar nicht"
+        },
+        "titel": "Die Altersvorsorge steht noch aus.",
+        "text": "Die gesetzliche Rente ersetzt etwa die Hälfte des letzten Netto. Jedes Jahr Aufschub kostet bei 6 Prozent Rendite rund 6 Prozent Endkapital.",
+        "links": [
+          {
+            "text": "Rentenrechner",
+            "typ": "rechner",
+            "slug": "rente"
+          },
+          {
+            "text": "Zinseszinsrechner",
+            "typ": "rechner",
+            "slug": "zinseszins"
+          }
+        ]
+      },
+      {
+        "kurz": "Hausrat",
+        "ikon": "sofa",
+        "wenn": {
+          "alle": [
+            {
+              "feld": "wohnen",
+              "ist": "Zur Miete"
+            },
+            {
+              "feld": "versicherungen",
+              "ohne": "Hausrat"
+            }
+          ]
+        },
+        "titel": "Ihr Hausrat ist nicht versichert.",
+        "text": "Bei Einbruch, Wasser oder Feuer ersetzt niemand Möbel, Laptop und Fahrrad. Für eine Zweizimmerwohnung kostet das etwa 3 Euro im Monat.",
+        "links": [
+          {
+            "text": "Ratgeber Hausratversicherung",
+            "typ": "post",
+            "slug": "hausratversicherung"
+          },
+          {
+            "text": "Tarife vergleichen",
+            "typ": "vergleich",
+            "slug": "hausratversicherung-vergleich"
+          }
+        ]
+      },
+      {
+        "kurz": "Wohngebäude",
+        "ikon": "dach",
+        "wenn": {
+          "alle": [
+            {
+              "feld": "wohnen",
+              "ist": "Im Eigentum"
+            },
+            {
+              "feld": "versicherungen",
+              "ohne": "Wohngebäude"
+            }
+          ]
+        },
+        "titel": "Das Haus ist nicht versichert.",
+        "text": "Ohne Wohngebäudeversicherung mit Elementarschutz tragen Sie einen Sturm- oder Wasserschaden allein; die Bank verlangt sie meist ohnehin.",
+        "links": [
+          {
+            "text": "Ratgeber Wohngebäudeversicherung",
+            "typ": "post",
+            "slug": "wohngebaeudeversicherung"
+          },
+          {
+            "text": "Tarife vergleichen",
+            "typ": "vergleich",
+            "slug": "gebaeudeversicherung-vergleich"
+          }
+        ]
+      },
+      {
+        "kurz": "Kinder",
+        "ikon": "baby",
+        "wenn": {
+          "feld": "haushalt",
+          "in": [
+            "Partner und Kinder",
+            "Alleinerziehend"
+          ]
+        },
+        "titel": "Kinder: Unterhalt und Kindergeld prüfen.",
+        "text": "Die Düsseldorfer Tabelle ändert sich jedes Jahr, das Kindergeld auch. Ein Blick in den Rechner zeigt, ob Ihre Zahlen noch stimmen.",
+        "links": [
+          {
+            "text": "Unterhaltsrechner 2026",
+            "typ": "rechner",
+            "slug": "unterhalt"
+          },
+          {
+            "text": "Kindergeld 2026",
+            "typ": "post",
+            "slug": "kindergeld"
+          }
+        ]
+      }
+    ],
+    "gut": [
+      {
+        "kurz": "Privathaftpflicht",
+        "wenn": {
+          "feld": "versicherungen",
+          "mit": "Privathaftpflicht"
+        }
+      },
+      {
+        "kurz": "Arbeitskraft",
+        "wenn": {
+          "feld": "arbeitskraft",
+          "ist": "Ja"
+        }
+      },
+      {
+        "kurz": "Notgroschen",
+        "wenn": {
+          "feld": "notgroschen",
+          "ist": "Ja"
+        }
+      },
+      {
+        "kurz": "Altersvorsorge",
+        "wenn": {
+          "alle": [
+            {
+              "feld": "vorsorge",
+              "gesetzt": true
+            },
+            {
+              "feld": "vorsorge",
+              "nicht": "Noch gar nicht"
+            }
+          ]
+        }
+      },
+      {
+        "kurz": "Hausrat",
+        "wenn": {
+          "feld": "versicherungen",
+          "mit": "Hausrat"
+        }
+      }
+    ],
+    "score": {
+      "formel": "100 - 22 * luecken + 3 * gut",
+      "min": 12,
+      "max": 98,
+      "max_luecken": 3
+    },
+    "profil": {
+      "vorlage": "Sie sind {status}, leben {haushalt} und wohnen {wohnen}. {schluss}",
+      "status": {
+        "Angestellt": "angestellt",
+        "Selbstständig": "selbstständig",
+        "In Rente": "in Rente",
+        "In Ausbildung": "in Ausbildung"
+      },
+      "haushalt": {
+        "Ich allein": "allein",
+        "Partner oder Partnerin": "zu zweit",
+        "Partner und Kinder": "mit Partner und Kindern",
+        "Alleinerziehend": "alleinerziehend"
+      },
+      "wohnen": {
+        "Zur Miete": "zur Miete",
+        "Im Eigentum": "im Eigentum",
+        "Bei der Familie": "bei der Familie"
+      },
+      "schluss": {
+        "0": "Sie sind gut aufgestellt; es geht nur noch um Feinschliff.",
+        "1": "Eine Sache würde ich zuerst angehen.",
+        "2": "Zwei Dinge würde ich zuerst angehen.",
+        "3": "Drei Dinge würde ich zuerst angehen."
+      }
+    }
+  },
+  "faden_leo_fragt": [
+    {
+      "key": "haftpflicht",
+      "ausloeser": {
+        "art": "lebenslage",
+        "wert": "haftpflicht",
+        "nach_sekunden": 15
+      },
+      "text": "Sie lesen zur Haftpflicht: Wie viel zahlen Sie im Monat für Ihre Privathaftpflicht?",
+      "art": "regler",
+      "regler": {
+        "min": 2,
+        "max": 25,
+        "wert": 8,
+        "einheit": " €"
+      },
+      "antwort_vorlage": "Ich zahle {wert} € im Monat für die Privathaftpflicht.",
+      "ziel": {
+        "typ": "vergleich",
+        "slug": "private-haftpflichtversicherung-vergleich"
+      }
+    },
+    {
+      "key": "kinder",
+      "ausloeser": {
+        "art": "lebenslage",
+        "wert": "kinder",
+        "nach_sekunden": 15
+      },
+      "text": "Für wie viele Kinder rechnen Sie gerade?",
+      "art": "chips",
+      "chips": [
+        {
+          "text": "Eins",
+          "ziel": {
+            "typ": "rechner",
+            "slug": "unterhalt",
+            "param": {
+              "kinder": 1
+            }
+          }
+        },
+        {
+          "text": "Zwei",
+          "ziel": {
+            "typ": "rechner",
+            "slug": "unterhalt",
+            "param": {
+              "kinder": 2
+            }
+          }
+        },
+        {
+          "text": "Drei oder mehr",
+          "ziel": {
+            "typ": "rechner",
+            "slug": "unterhalt",
+            "param": {
+              "kinder": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "hund",
+      "ausloeser": {
+        "art": "lebenslage",
+        "wert": "hund",
+        "nach_sekunden": 15
+      },
+      "text": "Ist Ihr Hund schon versichert?",
+      "art": "chips",
+      "chips": [
+        {
+          "text": "Ja, OP-Schutz",
+          "ziel": {
+            "typ": "post",
+            "slug": "hunde-op-versicherung"
+          }
+        },
+        {
+          "text": "Ja, Vollschutz",
+          "ziel": {
+            "typ": "vergleich",
+            "slug": "hundekrankenversicherung-vergleich"
+          }
+        },
+        {
+          "text": "Noch nicht",
+          "ziel": {
+            "typ": "post",
+            "slug": "hundeversicherungen"
+          }
+        }
+      ]
+    },
+    {
+      "key": "kfz",
+      "ausloeser": {
+        "art": "lebenslage",
+        "wert": "kfz",
+        "nach_sekunden": 15
+      },
+      "text": "Wann haben Sie Ihre Kfz-Versicherung zuletzt verglichen?",
+      "art": "chips",
+      "chips": [
+        {
+          "text": "Dieses Jahr",
+          "ziel": {
+            "typ": "post",
+            "slug": "kfz-versicherung"
+          }
+        },
+        {
+          "text": "Länger her",
+          "ziel": {
+            "typ": "vergleich",
+            "slug": "kfz-versicherung-vergleich"
+          }
+        },
+        {
+          "text": "Kein Auto",
+          "ziel": {
+            "typ": "keins"
+          }
+        }
+      ]
+    },
+    {
+      "key": "rente",
+      "ausloeser": {
+        "art": "lebenslage",
+        "wert": "rente",
+        "nach_sekunden": 15
+      },
+      "text": "Wann gehen Sie voraussichtlich in Rente?",
+      "art": "chips",
+      "chips": [
+        {
+          "text": "In unter 5 Jahren",
+          "ziel": {
+            "typ": "rechner",
+            "slug": "rentenbeginn"
+          }
+        },
+        {
+          "text": "In 5 bis 15 Jahren",
+          "ziel": {
+            "typ": "rechner",
+            "slug": "rentenschaetzer"
+          }
+        },
+        {
+          "text": "Ich bin schon in Rente",
+          "ziel": {
+            "typ": "rechner",
+            "slug": "rentenbesteuerung"
+          }
+        }
+      ]
+    },
+    {
+      "key": "steuer",
+      "ausloeser": {
+        "art": "lebenslage",
+        "wert": "steuer",
+        "nach_sekunden": 20
+      },
+      "text": "Wie viel Erstattung hatten Sie bei der letzten Steuererklärung?",
+      "art": "regler",
+      "regler": {
+        "min": 0,
+        "max": 3000,
+        "wert": 1000,
+        "einheit": " €",
+        "schritt": 50
+      },
+      "antwort_vorlage": "Meine letzte Erstattung lag bei {wert} €.",
+      "ziel": {
+        "typ": "rechner",
+        "slug": "steuererstattung"
+      }
+    },
+    {
+      "key": "kassensturz",
+      "ausloeser": {
+        "art": "verhalten",
+        "wert": "dritte_karte",
+        "nach_sekunden": 20
+      },
+      "text": "Wann haben Sie zuletzt alle Ihre Verträge auf einen Blick gesehen?",
+      "art": "chips",
+      "chips": [
+        {
+          "text": "Dieses Jahr",
+          "ziel": {
+            "typ": "keins"
+          }
+        },
+        {
+          "text": "Länger her",
+          "ziel": {
+            "typ": "kassensturz"
+          }
+        },
+        {
+          "text": "Noch nie",
+          "ziel": {
+            "typ": "kassensturz"
+          }
+        }
+      ]
+    },
+    {
+      "key": "weiterlesen",
+      "ausloeser": {
+        "art": "verhalten",
+        "wert": "fadenende",
+        "nach_sekunden": 10
+      },
+      "text": "Soll ich Ihnen die Antworten von heute auf Ihr Handy schicken?",
+      "art": "chips",
+      "chips": [
+        {
+          "text": "Ja, per WhatsApp",
+          "ziel": {
+            "typ": "whatsapp"
+          }
+        },
+        {
+          "text": "Lieber per E-Mail",
+          "ziel": {
+            "typ": "wochenbrief"
+          }
+        }
+      ]
+    }
+  ],
+  "faden_lebensereignisse": [
+    {
+      "key": "kind",
+      "titel": "Ein Kind kommt",
+      "wappen": "kinder",
+      "phasen": [
+        {
+          "titel": "Vor der Geburt",
+          "schritte": [
+            {
+              "text": "Elterngeld ausrechnen und Aufteilung planen",
+              "typ": "rechner",
+              "slug": "elterngeld"
+            },
+            {
+              "text": "Mutterschaftsgeld bei der Krankenkasse beantragen",
+              "typ": "checkliste",
+              "slug": "mutterschaftsgeld"
+            },
+            {
+              "text": "Kind in die Krankenversicherung: familienversichert oder privat?",
+              "typ": "checkliste",
+              "slug": "familienversicherung"
+            }
+          ]
+        },
+        {
+          "titel": "Nach der Geburt",
+          "schritte": [
+            {
+              "text": "Kindergeld beantragen: 259 € im Monat, rückwirkend höchstens 6 Monate",
+              "typ": "post",
+              "slug": "kindergeld"
+            },
+            {
+              "text": "Elterngeld beantragen: Frist drei Monate",
+              "typ": "post",
+              "slug": "elterngeld"
+            },
+            {
+              "text": "Kinderfreibetrag und Steuerklasse prüfen",
+              "typ": "rechner",
+              "slug": "steuerklassen"
+            }
+          ]
+        },
+        {
+          "titel": "Im ersten Jahr",
+          "schritte": [
+            {
+              "text": "Privathaftpflicht: Kind ist mitversichert, deliktunfähig bis 7",
+              "typ": "post",
+              "slug": "private-haftpflichtversicherung"
+            },
+            {
+              "text": "Unfallversicherung fürs Kind abwägen",
+              "typ": "checkliste",
+              "slug": "unfallversicherung"
+            },
+            {
+              "text": "Sparplan fürs Kind: 25 € im Monat reichen für den Anfang",
+              "typ": "rechner",
+              "slug": "zinseszins"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "hund",
+      "titel": "Ein Hund zieht ein",
+      "wappen": "hund",
+      "phasen": [
+        {
+          "titel": "Vor dem Einzug",
+          "schritte": [
+            {
+              "text": "Hundehaftpflicht: in vielen Bundesländern Pflicht, ab 3 € im Monat",
+              "typ": "post",
+              "slug": "hundehaftpflichtversicherung"
+            },
+            {
+              "text": "Krankenversicherung: OP-Schutz oder Vollschutz?",
+              "typ": "vergleich",
+              "slug": "hundekrankenversicherung-vergleich"
+            },
+            {
+              "text": "Hundesteuer bei der Gemeinde anmelden",
+              "typ": "post",
+              "slug": "hundeversicherungen"
+            }
+          ]
+        },
+        {
+          "titel": "Im ersten Jahr",
+          "schritte": [
+            {
+              "text": "Wartezeiten beachten: meist drei Monate bis zum ersten Leistungsfall",
+              "typ": "post",
+              "slug": "hunde-op-versicherung"
+            },
+            {
+              "text": "Tierarztkosten nach GOT einplanen: 300 bis 500 € im Jahr",
+              "typ": "glossar",
+              "slug": "got"
+            },
+            {
+              "text": "Haftpflicht prüfen: Deckungssumme mindestens 5 Millionen Euro",
+              "typ": "vergleich",
+              "slug": "hundehaftpflicht-vergleich"
+            }
+          ]
+        },
+        {
+          "titel": "Später",
+          "schritte": [
+            {
+              "text": "Ab etwa 7 Jahren nehmen Versicherer kaum noch neu an",
+              "typ": "post",
+              "slug": "hundeversicherungen"
+            },
+            {
+              "text": "Reisen mit Hund: Auslandsschutz prüfen",
+              "typ": "post",
+              "slug": "tierversicherungen"
+            },
+            {
+              "text": "Rücklage fürs Tier: 2.000 € auf dem Tagesgeld",
+              "typ": "vergleich",
+              "slug": "tagesgeldvergleich"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "rente",
+      "titel": "Der Ruhestand naht",
+      "wappen": "rente",
+      "phasen": [
+        {
+          "titel": "Fünf Jahre vorher",
+          "schritte": [
+            {
+              "text": "Renteninformation lesen und Lücke berechnen",
+              "typ": "post",
+              "slug": "renteninformation"
+            },
+            {
+              "text": "Rentenbeginn und Abschläge durchrechnen",
+              "typ": "rechner",
+              "slug": "rentenbeginn"
+            },
+            {
+              "text": "Krankenversicherung im Ruhestand klären",
+              "typ": "checkliste",
+              "slug": "krankenversicherung-rentner"
+            }
+          ]
+        },
+        {
+          "titel": "Beim Übergang",
+          "schritte": [
+            {
+              "text": "Rentenantrag drei Monate vor Beginn stellen",
+              "typ": "post",
+              "slug": "gesetzliche-rente"
+            },
+            {
+              "text": "Steuer auf die Rente: 84 Prozent sind 2026 steuerpflichtig",
+              "typ": "post",
+              "slug": "rentenbesteuerung"
+            },
+            {
+              "text": "Hinzuverdienst: Aktivrente bis 2.000 € steuerfrei",
+              "typ": "post",
+              "slug": "hinzuverdienst-rente"
+            }
+          ]
+        },
+        {
+          "titel": "Im Ruhestand",
+          "schritte": [
+            {
+              "text": "Steuererklärung als Rentner: Grundfreibetrag 12.348 €",
+              "typ": "rechner",
+              "slug": "rentenbesteuerung"
+            },
+            {
+              "text": "Rentenerhöhung im Juli: Steuerpflicht neu prüfen",
+              "typ": "post",
+              "slug": "rentenerhoehung"
+            },
+            {
+              "text": "BU und Risikoleben auslaufen lassen oder kündigen",
+              "typ": "post",
+              "slug": "berufsunfaehigkeitsversicherung"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "immobilie",
+      "titel": "Ein Haus wird gekauft",
+      "wappen": "wohnen",
+      "phasen": [
+        {
+          "titel": "Vor dem Kauf",
+          "schritte": [
+            {
+              "text": "Wie viel Haus können Sie sich leisten?",
+              "typ": "rechner",
+              "slug": "annuitaet"
+            },
+            {
+              "text": "Nebenkosten: Notar, Grundbuch, Grunderwerbsteuer",
+              "typ": "checkliste",
+              "slug": "grunderwerbsteuer"
+            },
+            {
+              "text": "Eigenkapital und Zinsbindung planen",
+              "typ": "post",
+              "slug": "baufinanzierung"
+            }
+          ]
+        },
+        {
+          "titel": "Beim Kauf",
+          "schritte": [
+            {
+              "text": "Wohngebäudeversicherung mit Elementarschutz ab Übergabe",
+              "typ": "post",
+              "slug": "wohngebaeudeversicherung"
+            },
+            {
+              "text": "Haus- und Grundbesitzerhaftpflicht abschließen",
+              "typ": "post",
+              "slug": "hausbesitzerhaftpflichtversicherung"
+            },
+            {
+              "text": "Hausrat auf die neue Fläche anpassen",
+              "typ": "post",
+              "slug": "hausratversicherung"
+            }
+          ]
+        },
+        {
+          "titel": "Danach",
+          "schritte": [
+            {
+              "text": "Sondertilgung nutzen: 5 Prozent im Jahr",
+              "typ": "rechner",
+              "slug": "tilgung"
+            },
+            {
+              "text": "Grundsteuer im Blick behalten",
+              "typ": "checkliste",
+              "slug": "grundsteuer"
+            },
+            {
+              "text": "Risikolebensversicherung für den Kredit",
+              "typ": "checkliste",
+              "slug": "risikolebensversicherung"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "faden_level": [
+    {
+      "name": "Einsteiger",
+      "ab": 0,
+      "belohnung": "PDF-Guide „Trennung“"
+    },
+    {
+      "name": "Kenner",
+      "ab": 100,
+      "belohnung": "Versicherungs-Check bei Finconext"
+    },
+    {
+      "name": "Lotse",
+      "ab": 300,
+      "belohnung": "Akademie-Vorteile"
+    }
+  ]
+}

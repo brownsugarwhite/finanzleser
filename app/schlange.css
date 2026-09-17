@@ -1,0 +1,57 @@
+/* schlange.css — das Spiel „Schlange" im Faden (components/faden/spiele/Schlange.tsx).
+   Das Spielfeld ist die Bildvorlage: Papierfläche, Punktraster, dünner Rahmen in Tinte.
+   Die Schlange selbst zeichnet lib/faden/schlange.ts — hier steht nur Farbe und Bühne. */
+
+.faden-shell .schlange { display: grid; gap: 10px; width: 100%; }
+
+/* Punktraster: ein Punkt je Spielzelle, Größe und Lage also immer im Takt des Feldes. */
+.faden-shell .schlange__feld {
+  position: relative;
+  width: 100%;
+  background-color: var(--paper);
+  /* Rasterpunkte: feste 2 × 2 px, ein Punkt je Spielzelle. */
+  background-image: radial-gradient(var(--ink-16) 1px, transparent 1px);
+  aspect-ratio: var(--schlange-spalten) / var(--schlange-reihen);
+  background-size: calc(100% / var(--schlange-spalten)) calc(100% / var(--schlange-reihen));
+  background-position: calc(50% / var(--schlange-spalten)) calc(50% / var(--schlange-reihen));
+  border: var(--strich-haar) solid var(--rule-strong);
+  border-radius: 0;
+  overflow: hidden;
+  touch-action: manipulation;   /* Wischen steuert die Schlange, es soll nichts zoomen */
+  cursor: pointer;
+}
+.faden-shell .schlange__feld:focus-visible { outline: var(--strich-stark) solid var(--green); outline-offset: 3px; }
+
+.faden-shell .schlange__feld svg { display: block; width: 100%; height: 100%; }
+.faden-shell .schlange__leib { fill: var(--ink); }
+.faden-shell .schlange__happen { fill: var(--pink); }
+
+/* Der Schein: vier Striche auf den Diagonalen, die ab und zu von der Mitte nach außen
+   blitzen. `transform-box: fill-box` ist nötig, damit `transform-origin: center` im SVG
+   die Mitte der Gruppe meint und nicht den Ursprung des Koordinatensystems. */
+.faden-shell .schlange__schein {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: schlange-schein 3.6s ease-out infinite;
+}
+@keyframes schlange-schein {
+  0%, 62% { opacity: 0; transform: scale(.45); }
+  72%     { opacity: 1; transform: scale(.9); }
+  86%     { opacity: .9; transform: scale(1.12); }
+  100%    { opacity: 0; transform: scale(1.35); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .schlange__schein { animation: none; opacity: .85; }
+}
+
+/* Stand und Knopf stehen unter dem Feld, nicht darauf: das Feld zeigt immer die
+   Schlange, ohne Deckel darüber. */
+.faden-shell .schlange__fuss { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 34px; }
+.faden-shell .schlange__fuss .knopf { padding: var(--luft-xs) var(--luft-m); font-size: var(--grad-13); }
+.faden-shell .schlange__stand { margin: 0; flex: 1; font: 400 var(--grad-13)/1.4 var(--sans); color: var(--muted); }
+.faden-shell .schlange__stand b { color: var(--ink); font-weight: 700; }
+.faden-shell .schlange__wink { color: var(--green-ink); font-style: italic; }
+
+/* 🚨 Hier stand eine Entkastung für `.kasten--schlange`. Seit dem 12.09.2026 steht die
+   Schlange auf der Startseite im selben Satzraster wie im Ratgeber (`.spiel-satz`) und
+   war nie ein Kasten — die Regel hatte nichts mehr zu entkasten. */

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#faf9f6;color:#334A27;font-family:'Open Sans',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#2E7A0B}a:hover{color:#334A27}
+button{font:inherit;color:inherit}
+@keyframes fl-herz{0%{opacity:0;transform:translateY(14px) scale(.985)}55%{opacity:1;transform:translateY(-2px) scale(1.008)}78%{transform:translateY(1px) scale(.999)}100%{opacity:1;transform:none}}
+@keyframes fl-fall{0%{opacity:0;transform:translateY(-45%) scale(1.15)}65%{opacity:1;transform:translateY(5%) scale(.96)}85%{transform:translateY(-2%) scale(1.01)}100%{opacity:1;transform:none}}
+@keyframes fl-hop{0%{transform:none}50%{transform:translateY(-14%) scale(1.32);box-shadow:0 22px 18px -8px rgba(51,74,39,.45),inset 0 -2px 4px rgba(0,0,0,.3)}100%{transform:none}}
+@keyframes fl-hop2{0%{transform:none}50%{transform:translateY(-14%) scale(1.32);box-shadow:0 22px 18px -8px rgba(51,74,39,.45),inset 0 -2px 4px rgba(0,0,0,.3)}100%{transform:none}}
+@keyframes fl-wackel{0%,100%{transform:none}20%{transform:translateX(-8%) rotate(-6deg)}45%{transform:translateX(7%) rotate(5deg)}70%{transform:translateX(-4%) rotate(-3deg)}}
+@keyframes fl-wackel2{0%,100%{transform:none}20%{transform:translateX(-8%) rotate(-6deg)}45%{transform:translateX(7%) rotate(5deg)}70%{transform:translateX(-4%) rotate(-3deg)}}
+@keyframes fl-knoten{0%{transform:scale(0)}60%{transform:scale(1.5)}100%{transform:scale(1)}}
+@keyframes fl-puls{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(69,161,23,.5)}14%{transform:scale(1.2)}28%{transform:scale(1)}42%{transform:scale(1.12)}64%{transform:scale(1);box-shadow:0 0 0 9px rgba(69,161,23,0)}}
+@keyframes fl-ring{0%{transform:scale(.6);opacity:.8}100%{transform:scale(2.4);opacity:0}}
+@keyframes fl-spin{to{transform:rotate(360deg)}}
+@keyframes fl-stempel{0%{transform:scale(1.7) rotate(-22deg);opacity:0}60%{transform:scale(.94) rotate(-8deg);opacity:1}100%{transform:scale(1) rotate(-11deg);opacity:1}}
+@keyframes fl-funke{0%{transform:scale(0) rotate(-30deg);opacity:0}45%{transform:scale(1.4) rotate(10deg);opacity:1}100%{transform:scale(.6) rotate(30deg) translateY(-6px);opacity:0}}
+@keyframes fl-druck{0%{opacity:0;transform:translateY(6px);letter-spacing:.05em;filter:blur(.6px)}60%{opacity:1;letter-spacing:.005em;filter:blur(0)}100%{opacity:1;transform:none;letter-spacing:normal}}
+@keyframes fl-druck2{0%{opacity:0;transform:translateY(6px);letter-spacing:.05em;filter:blur(.6px)}60%{opacity:1;letter-spacing:.005em;filter:blur(0)}100%{opacity:1;transform:none;letter-spacing:normal}}
+@keyframes fl-tick{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+@keyframes fl-tick2{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+@keyframes fl-atmen{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+</style>
+</helmet>
+
+<div ref="{{rootRef}}" data-screen-label="Rätselseite – Solitär" style="max-width:728px;margin:0 auto;padding:44px clamp(14px,3vw,24px) 120px;box-sizing:border-box;position:relative">
+
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A"><span>Ihr Faden · Rätselseite</span><span>Donnerstag, 17. September 2026</span></div>
+  <div style="height:2px;background:#334A27;margin-top:8px"></div><div style="height:1px;background:#334A27;margin-top:2px"></div>
+
+  <section data-screen-label="Solitär" style="margin-top:40px;border-top:2px solid #334A27;padding-top:14px;animation:fl-herz .8s cubic-bezier(.2,.8,.2,1) both">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <span style="display:inline-flex;align-items:center;gap:7px;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#2E7A0B"><i style="width:8px;height:8px;border-radius:50%;background:#45A117;animation:fl-puls 2.4s ease-in-out infinite"></i>Solitär · Das Brett · ohne Zeitdruck</span>
+      <span style="font:italic 300 13px 'Merriweather',Georgia,serif;color:#686C6A;animation:{{statusAnim}}">{{status}}</span>
+    </div>
+    <h3 style="margin:14px 0 0;font:900 clamp(26px,4.6vw,34px)/1.12 'Merriweather',Georgia,serif;letter-spacing:-.02em;color:#334A27;text-wrap:balance">Eine Murmel soll bleiben.</h3>
+    <p style="margin:8px 0 0;font:italic 300 clamp(15px,2.3vw,16.5px)/1.55 'Merriweather',Georgia,serif;color:#686C6A;max-width:52ch">Springen Sie über eine Nachbarin in ein leeres Loch – die übersprungene verlässt das Brett. Am Ende bleibt im besten Fall eine einzige, genau in der Mitte.</p>
+
+    <div style="display:grid;grid-template-columns:{{spalten}};gap:{{gap}};align-items:start;margin-top:26px">
+
+      <!-- Brett -->
+      <div style="min-width:0">
+        <div onMouseLeave="{{hovAus}}" style="position:relative;width:min(100%,420px);aspect-ratio:1;margin:0 auto;user-select:none;-webkit-tap-highlight-color:transparent">
+          <sc-for list="{{loecher}}" as="l" hint-placeholder-count="0">
+            <button onClick="{{l.klick}}" aria-label="{{l.aria}}" style="position:absolute;left:{{l.left}};top:{{l.top}};width:14.28%;aspect-ratio:1;margin:-7.14% 0 0 -7.14%;border:0;padding:0;background:transparent;cursor:{{l.cursor}};display:flex;align-items:center;justify-content:center;border-radius:50%">
+              <i style="width:30%;aspect-ratio:1;border-radius:50%;border:1px solid {{l.rand}};background:{{l.bg}};box-sizing:border-box;box-shadow:{{l.schatten}};transition:background .3s,border-color .3s,transform .35s cubic-bezier(.34,1.56,.64,1);transform:scale({{l.s}})"></i>
+              <i style="position:absolute;left:35%;top:35%;width:30%;aspect-ratio:1;border-radius:50%;border:1.5px solid #45A117;box-sizing:border-box;opacity:0;animation:{{l.ringAnim}};pointer-events:none"></i>
+            </button>
+          </sc-for>
+          <sc-for list="{{murmeln}}" as="m" hint-placeholder-count="0">
+            <div onClick="{{m.klick}}" onMouseEnter="{{m.enter}}" style="position:absolute;left:{{m.left}};top:{{m.top}};width:10.4%;aspect-ratio:1;margin:-5.2% 0 0 -5.2%;border-radius:50%;background:radial-gradient(circle at 50% 58%,#4f6c3b 0,#334A27 52%,#1d2b15 100%);box-shadow:{{m.schatten}};transform:{{m.transform}};opacity:{{m.op}};z-index:{{m.z}};cursor:{{m.cursor}};pointer-events:{{m.pe}};transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),transform .32s cubic-bezier(.34,1.56,.64,1),box-shadow .32s,opacity .38s;animation:{{m.anim}}">
+              <span style="position:absolute;inset:0;border-radius:50%;overflow:hidden;transform:rotate({{m.rot}})"><span style="position:absolute;inset:0;animation:{{m.spin}}"><i style="position:absolute;left:13%;top:39%;width:74%;height:22%;border-radius:50%;background:linear-gradient(90deg,rgba(69,161,23,.25),#7fcc4a 35%,#c4f09e 50%,#7fcc4a 65%,rgba(69,161,23,.25));filter:blur(.5px)"></i></span></span>
+              <i style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 33% 28%,rgba(255,255,255,.95) 0,rgba(255,255,255,.4) 13%,rgba(255,255,255,0) 32%),radial-gradient(circle at 70% 82%,rgba(255,255,255,.18) 0,rgba(255,255,255,0) 28%);pointer-events:none"></i>
+            </div>
+          </sc-for>
+          <!-- Stempel auf dem Brett -->
+          <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:{{stempelDisplay}};pointer-events:none;z-index:8">
+            <div style="padding:8px 16px;border:3px solid {{stempelFarbe}};color:{{stempelFarbe}};font:900 clamp(18px,3.4vw,24px) 'Merriweather',Georgia,serif;letter-spacing:.16em;text-transform:uppercase;background:rgba(250,249,246,.82);white-space:nowrap;animation:fl-stempel .7s cubic-bezier(.2,.8,.2,1) .5s both">{{stempelText}}</div>
+            <sc-for list="{{funken}}" as="f" hint-placeholder-count="0"><svg viewBox="0 0 12 12" style="position:absolute;left:{{f.l}};top:{{f.t}};width:{{f.g}};height:{{f.g}};opacity:0;animation:{{f.anim}}"><path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="#45A117"></path></svg></sc-for>
+          </div>
+        </div>
+        <p style="margin:14px 0 0;text-align:center;font:italic 300 12px/1.5 'Merriweather',Georgia,serif;color:#686C6A">Murmel antippen, dann das Ziel. Ein leeres Loch antippen springt sofort, wenn nur eine Murmel es erreichen kann.</p>
+      </div>
+
+      <!-- Seitenspalte -->
+      <div style="min-width:0;display:flex;flex-direction:column;gap:22px">
+        <div style="border-top:2px solid #334A27;box-shadow:0 3px 0 -2px #334A27;display:grid;grid-template-columns:1fr 1fr">
+          <div style="padding:14px 14px 14px 0;min-width:0"><span style="font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A">Auf dem Brett</span><b style="display:block;margin-top:6px;font:900 clamp(28px,4.4vw,34px)/1 'Merriweather',Georgia,serif;color:{{uebrigFarbe}};font-variant-numeric:tabular-nums;transition:color .5s;animation:{{uebrigAnim}}">{{uebrig}}</b><span style="display:block;margin-top:6px;font:italic 300 12.5px/1.4 'Merriweather',Georgia,serif;color:#686C6A">Ziel: eine</span></div>
+          <div style="padding:14px 0 14px 14px;border-left:1px solid rgba(51,74,39,.2);min-width:0"><span style="font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A">Züge</span><b style="display:block;margin-top:6px;font:900 clamp(28px,4.4vw,34px)/1 'Merriweather',Georgia,serif;color:#334A27;font-variant-numeric:tabular-nums">{{zuege}}</b><span style="display:block;margin-top:6px;font:italic 300 12.5px/1.4 'Merriweather',Georgia,serif;color:#686C6A">{{zuegeSub}}</span></div>
+        </div>
+        <div style="height:2px;background:#334A27;margin-top:-22px"></div><div style="height:1px;background:#334A27;margin-top:-20px"></div>
+
+        <div>
+          <span style="display:block;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#686C6A;border-bottom:1px solid rgba(51,74,39,.3);padding-bottom:6px">Aus dem Spiel</span>
+          <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:8px 6px;margin-top:12px;justify-items:center">
+            <sc-for list="{{schale}}" as="s" hint-placeholder-count="0">
+              <i style="position:relative;width:13px;height:13px;border-radius:50%;border:1px solid rgba(51,74,39,.3);box-sizing:border-box;background:rgba(51,74,39,.04)"><i style="position:absolute;inset:-1px;border-radius:50%;background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.9) 0,rgba(255,255,255,0) 40%),radial-gradient(circle at 50% 58%,#4f6c3b 0,#334A27 55%,#1d2b15 100%);box-shadow:0 2px 3px -1px rgba(51,74,39,.5);opacity:{{s.op}};animation:{{s.anim}}"><i style="position:absolute;left:14%;top:40%;width:72%;height:20%;border-radius:50%;background:linear-gradient(90deg,transparent,#a9e07c,transparent);transform:rotate({{s.rot}})"></i></i></i>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display:{{ergebnisDisplay}};flex-direction:column;gap:6px;animation:fl-herz .6s cubic-bezier(.2,.8,.2,1) .4s both">
+          <span style="font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:{{stempelFarbe}}">{{rang}}</span>
+          <p style="margin:0;font:italic 400 15px/1.5 'Merriweather',Georgia,serif;color:#334A27">{{rangText}}</p>
+          <span style="display:{{punkteDisplay}};font:600 12.5px 'Open Sans',sans-serif;color:#2E7A0B">{{punkte}} auf Ihrer Stempelkarte</span>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;border-top:1px dotted rgba(51,74,39,.35);padding-top:14px">
+          <button onClick="{{zurueck}}" disabled="{{zurueckAus}}" style="display:inline-flex;align-items:center;gap:8px;border:0;background:transparent;padding:6px 0;font:500 13.5px 'Open Sans',sans-serif;color:{{zurueckFarbe}};cursor:{{zurueckCursor}};white-space:nowrap;transition:color .2s"><i style="width:14px;height:1px;background:currentColor"></i><span>Zug zurück</span></button>
+          <button onClick="{{neu}}" style="display:inline-flex;align-items:center;gap:8px;border:0;background:transparent;padding:6px 0;font:500 13.5px 'Open Sans',sans-serif;color:#2E7A0B;cursor:pointer;white-space:nowrap;transition:color .2s" style-hover="color:#334A27"><span>Neu aufstellen</span><i style="height:1px;width:{{neuLinie}};background:currentColor;transition:width .45s cubic-bezier(.2,.8,.2,1)"></i></button>
+        </div>
+        <button onClick="{{neu}}" style="display:{{nochmalDisplay}};align-items:center;gap:15px;height:48px;padding:3px 3px 3px 19px;border:2px solid #334A27;outline:1px solid #334A27;outline-offset:2px;border-radius:21px;background:transparent;cursor:pointer;font:500 16px 'Open Sans',sans-serif;color:#334A27;align-self:flex-start;transition:color .2s;animation:fl-herz .6s cubic-bezier(.2,.8,.2,1) .9s both" style-hover="color:#2E7A0B"><span>Noch einmal</span><span style="width:38px;height:38px;border-radius:17px;background:#45A117;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button>
+      </div>
+    </div>
+
+    <div style="height:1px;background:rgba(51,74,39,.3);margin-top:30px"></div>
+    <p style="margin:10px 0 0;font:italic 300 12px/1.5 'Merriweather',Georgia,serif;color:#686C6A">Das englische Brett hat 33 Löcher und 32 Murmeln. Eine einzige in der Mitte zu lassen, gilt seit dem 17. Jahrhundert als die schönste Lösung.</p>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;brett&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;englisch&quot;,&quot;options&quot;:[&quot;englisch&quot;,&quot;europäisch&quot;],&quot;tsType&quot;:&quot;'englisch'|'europäisch'&quot;,&quot;section&quot;:&quot;Brett&quot;},&quot;ziele&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hilfe&quot;},&quot;tempo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;normal&quot;,&quot;options&quot;:[&quot;ruhig&quot;,&quot;normal&quot;,&quot;lebhaft&quot;],&quot;tsType&quot;:&quot;'ruhig'|'normal'|'lebhaft'&quot;,&quot;section&quot;:&quot;Bewegung&quot;}}">
+class Component extends DCLogic {
+  state = { breite: 728, murmeln: [], sel: -1, hov: -1, hist: [], zuege: 0, aufbau: true, hop: -1, hopN: 0, wackel: -1, wackelN: 0, raus: [], fertig: null, uebrig: 0, uebrigN: 0, statusN: 0, statusAlt: '', neuHov: false };
+  rootRef = React.createRef();
+  _r = {};
+  T() { return { ruhig: 1.35, normal: 1, lebhaft: .65 }[this.props.tempo ?? 'normal'] ?? 1; }
+  brett() { return this.props.brett ?? 'englisch'; }
+  gueltig(r, c) {
+    if (r < 0 || c < 0 || r > 6 || c > 6) return false;
+    if (this.brett() === 'europäisch') { const dr = Math.abs(r - 3), dc = Math.abs(c - 3); return dr + dc <= 4 && dr <= 3 && dc <= 3 && !(dr === 3 && dc >= 2) && !(dc === 3 && dr >= 2); }
+    return (r >= 2 && r <= 4) || (c >= 2 && c <= 4);
+  }
+  zellen() { const z = []; for (let r = 0; r < 7; r++) for (let c = 0; c < 7; c++) if (this.gueltig(r, c)) z.push({ r, c }); return z; }
+  bei(murmeln, r, c) { return murmeln.find(m => !m.weg && m.r === r && m.c === c); }
+  zuegeFuer(m, murmeln) {
+    const z = []; if (m.weg) return z;
+    for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const mid = this.bei(murmeln, m.r + dr, m.c + dc), r = m.r + 2 * dr, c = m.c + 2 * dc; if (mid && this.gueltig(r, c) && !this.bei(murmeln, r, c)) z.push({ id: m.id, mid: mid.id, r, c }); }
+    return z;
+  }
+  alleZuege(murmeln) { return murmeln.flatMap(m => this.zuegeFuer(m, murmeln)); }
+  rollen(key, nach, dauer = 700) {
+    const von = this.state[key] || 0, t0 = performance.now(); cancelAnimationFrame(this._r[key]);
+    const step = now => { const p = Math.min(1, (now - t0) / (dauer * this.T())); const e = 1 - Math.pow(1 - p, 3); this.setState({ [key]: von + (nach - von) * e }); if (p < 1) this._r[key] = requestAnimationFrame(step); };
+    this._r[key] = requestAnimationFrame(step);
+  }
+  neu = () => {
+    clearTimeout(this._auf); clearTimeout(this._fall);
+    const murmeln = this.zellen().filter(z => !(z.r === 3 && z.c === 3)).map((z, i) => ({ id: i, r: z.r, c: z.c, weg: false, rot: ((i * 47) % 140) - 70 }));
+    this.setState({ murmeln, sel: -1, hist: [], zuege: 0, raus: [], fertig: null, aufbau: true, hop: -1, wackel: -1, uebrig: 0 });
+    this.rollen('uebrig', murmeln.length, 1300);
+    this._auf = setTimeout(() => this.setState({ aufbau: false }), 1700 * this.T());
+  };
+  componentDidMount() {
+    const root = this.rootRef.current || document.body;
+    this._ro = new ResizeObserver(es => { const w = es[0].contentRect.width; if (Math.abs(w - this.state.breite) > 2) this.setState({ breite: w }); }); this._ro.observe(root);
+    this.neu();
+  }
+  componentDidUpdate(p) { if ((p.brett ?? 'englisch') !== this.brett()) this.neu(); }
+  componentWillUnmount() { this._ro?.disconnect(); clearTimeout(this._auf); clearTimeout(this._fall); Object.values(this._r).forEach(cancelAnimationFrame); }
+  ziehen(z) {
+    const s = this.state;
+    const hist = [...s.hist, { murmeln: s.murmeln.map(m => ({ ...m })), raus: [...s.raus], zuege: s.zuege }];
+    const murmeln = s.murmeln.map(m => m.id === z.id ? { ...m, r: z.r, c: z.c } : m.id === z.mid ? { ...m, faellt: true } : m);
+    this.setState({ murmeln, hist, sel: -1, hov: -1, zuege: s.zuege + 1, hop: z.id, hopN: s.hopN + 1 });
+    clearTimeout(this._fall);
+    this._fall = setTimeout(() => {
+      const nach = this.state.murmeln.map(m => m.faellt ? { ...m, faellt: false, weg: true } : m);
+      const raus = [...this.state.raus, z.mid], uebrig = nach.filter(m => !m.weg).length;
+      const fertig = this.alleZuege(nach).length ? null : { n: uebrig, mitte: !!this.bei(nach, 3, 3) };
+      this.setState({ murmeln: nach, raus, fertig, hop: -1 });
+      this.rollen('uebrig', uebrig, 600);
+    }, 380 * this.T());
+  }
+  klickMurmel(m) {
+    if (this.state.fertig || m.weg || m.faellt || this.state.aufbau) return;
+    if (this.state.sel === m.id) return this.setState({ sel: -1 });
+    if (this.zuegeFuer(m, this.state.murmeln).length) this.setState({ sel: m.id });
+    else this.setState({ wackel: m.id, wackelN: this.state.wackelN + 1, sel: -1 });
+  }
+  klickLoch(r, c) {
+    const s = this.state; if (s.fertig || s.aufbau) return;
+    const alle = this.alleZuege(s.murmeln).filter(z => z.r === r && z.c === c);
+    if (s.sel >= 0) { const z = alle.find(z => z.id === s.sel); if (z) return this.ziehen(z); return this.setState({ sel: -1 }); }
+    if (alle.length === 1) this.ziehen(alle[0]);
+  }
+  zurueck = () => {
+    const s = this.state; if (!s.hist.length) return;
+    const h = s.hist[s.hist.length - 1];
+    clearTimeout(this._fall);
+    this.setState({ murmeln: h.murmeln, raus: h.raus, zuege: h.zuege, hist: s.hist.slice(0, -1), sel: -1, fertig: null, hop: -1 });
+    this.rollen('uebrig', h.murmeln.filter(m => !m.weg).length, 500);
+  };
+  renderVals() {
+    const s = this.state, eng = s.breite < 560, T = this.T(), ziele = this.props.ziele ?? true;
+    const pos = (r, c) => ({ left: ((c + .5) / 7 * 100).toFixed(3) + '%', top: ((r + .5) / 7 * 100).toFixed(3) + '%' });
+    const selM = s.murmeln.find(m => m.id === s.sel);
+    const zielListe = selM ? this.zuegeFuer(selM, s.murmeln) : [];
+    const alle = this.alleZuege(s.murmeln);
+    const loecher = this.zellen().map(z => {
+      const belegt = !!this.bei(s.murmeln, z.r, z.c), ziel = ziele && zielListe.some(t => t.r === z.r && t.c === z.c);
+      const erreichbar = !belegt && !selM && alle.filter(t => t.r === z.r && t.c === z.c).length === 1;
+      return { ...pos(z.r, z.c), klick: () => this.klickLoch(z.r, z.c), aria: `Loch ${z.r + 1}/${z.c + 1}`, cursor: ziel || erreichbar ? 'pointer' : 'default',
+        rand: ziel ? '#45A117' : 'rgba(51,74,39,.38)', bg: ziel ? '#45A117' : 'rgba(51,74,39,.06)', s: ziel ? 1.15 : 1,
+        schatten: belegt ? 'none' : 'inset 0 1px 2px rgba(51,74,39,.25)', ringAnim: ziel ? 'fl-ring 1.4s ease-out infinite' : 'none' };
+    });
+    const dist = (r, c) => Math.max(Math.abs(r - 3), Math.abs(c - 3));
+    const murmeln = s.murmeln.map(m => {
+      const sel = m.id === s.sel, hov = m.id === s.hov && !sel && !s.fertig, kann = this.zuegeFuer(m, s.murmeln).length > 0;
+      let anim = 'none';
+      if (s.aufbau) anim = `fl-fall .55s cubic-bezier(.34,1.56,.64,1) ${((.08 + dist(m.r, m.c) * .1 + ((m.r * 7 + m.c) % 3) * .03) * T).toFixed(2)}s both`;
+      else if (s.hop === m.id) anim = `fl-hop${s.hopN % 2 ? '2' : ''} ${.42 * T}s cubic-bezier(.2,.8,.2,1) both`;
+      else if (s.wackel === m.id) anim = `fl-wackel${s.wackelN % 2 ? '2' : ''} .45s cubic-bezier(.2,.8,.2,1)`;
+      const letzte = s.fertig && !m.weg;
+      return { ...pos(m.r, m.c), rot: m.rot + 'deg', klick: () => this.klickMurmel(m), enter: () => this.setState({ hov: m.id }),
+        transform: m.faellt ? 'translateY(30%) scale(.15)' : sel ? 'translateY(-9%) scale(1.1)' : hov && kann ? 'translateY(-4%)' : letzte ? 'scale(1.12)' : 'none',
+        op: m.weg || m.faellt ? 0 : 1, z: sel || s.hop === m.id ? 5 : 3, pe: m.weg ? 'none' : 'auto', cursor: kann && !s.fertig ? 'pointer' : 'default',
+        schatten: sel ? '0 16px 16px -7px rgba(51,74,39,.55),inset 0 -2px 4px rgba(0,0,0,.3),0 0 0 2px #faf9f6,0 0 0 3.5px #45A117' : hov && kann ? '0 8px 10px -4px rgba(51,74,39,.5),inset 0 -2px 4px rgba(0,0,0,.3)' : '0 3px 5px -2px rgba(51,74,39,.55),inset 0 -2px 4px rgba(0,0,0,.3)',
+        spin: sel || letzte ? `fl-spin ${letzte ? 3 : 5}s linear infinite` : 'none', anim };
+    });
+    const n = this.zellen().length - 1;
+    const schale = Array.from({ length: n }, (_, i) => { const id = s.raus[i]; const m = id !== undefined && s.murmeln.find(x => x.id === id); return { op: m ? 1 : 0, rot: (m ? m.rot : 0) + 'deg', anim: m ? 'fl-knoten .5s cubic-bezier(.34,1.56,.64,1) both' : 'none' }; });
+    const f = s.fertig, geloest = f && f.n === 1;
+    let rang = '', rangText = '', punkte = '';
+    if (f) {
+      if (f.n === 1 && f.mitte) { rang = 'Experte · Perfekt'; rangText = 'Die eine Murmel, genau in der Mitte. Das schaffen die wenigsten.'; punkte = '+30 Punkte'; }
+      else if (f.n === 1) { rang = 'Experte'; rangText = 'Eine Murmel übrig – nur nicht in der Mitte. Fast die schönste Lösung.'; punkte = '+20 Punkte'; }
+      else if (f.n === 2) { rang = 'Kenner'; rangText = 'Zwei Murmeln übrig. Sehr gut – die letzte ist die schwerste.'; punkte = '+10 Punkte'; }
+      else if (f.n <= 4) { rang = 'Leser'; rangText = `${f.n} Murmeln übrig. Beim nächsten Mal eine weniger?`; punkte = '+5 Punkte'; }
+      else { rang = 'Festgefahren'; rangText = `${f.n} Murmeln übrig und kein Zug mehr. Aufstellen und noch einmal.`; }
+    }
+    const status = f ? (geloest ? 'Gelöst' : 'Kein Zug mehr') : s.aufbau ? 'Die Murmeln legen sich' : selM ? `Murmel gewählt · ${zielListe.length} ${zielListe.length === 1 ? 'Ziel' : 'Ziele'}` : `Ihr Zug · ${alle.length} möglich`;
+    if (status !== this._statusAlt) { this._statusAlt = status; this._statusN = (this._statusN || 0) + 1; }
+    const funken = geloest ? [[-14, -18, 13], ['calc(100% - 2px)', -12, 11], [-8, 'calc(100% - 4px)', 10], ['calc(100% - 6px)', 'calc(100% - 6px)', 14]].map((k, i) => ({ l: typeof k[0] === 'number' ? k[0] + 'px' : k[0], t: typeof k[1] === 'number' ? k[1] + 'px' : k[1], g: k[2] + 'px', anim: `fl-funke .9s cubic-bezier(.2,.8,.2,1) ${(.95 + i * .1) * T}s both` })) : [];
+    const uebrig = Math.round(s.uebrig);
+    return {
+      spalten: eng ? '1fr' : 'minmax(0,1fr) 210px', gap: eng ? '26px' : '34px',
+      loecher, murmeln, schale, funken,
+      status, statusAnim: `fl-druck${this._statusN % 2 ? '2' : ''} .5s cubic-bezier(.2,.8,.2,1) both`,
+      uebrig, uebrigFarbe: f ? (geloest ? '#2E7A0B' : '#334A27') : uebrig <= 3 ? '#2E7A0B' : '#334A27', uebrigAnim: `fl-tick${s.zuege % 2 ? '2' : ''} .4s cubic-bezier(.2,.8,.2,1)`,
+      zuege: s.zuege, zuegeSub: s.zuege === 0 ? 'noch keiner' : s.zuege === 1 ? 'ein Sprung' : 'Sprünge',
+      hovAus: () => this.setState({ hov: -1 }),
+      stempelDisplay: f ? 'block' : 'none', stempelText: f ? (f.n === 1 && f.mitte ? 'Perfekt' : geloest ? 'Gelöst' : 'Festgefahren') : '', stempelFarbe: geloest ? '#45A117' : '#334A27',
+      ergebnisDisplay: f ? 'flex' : 'none', rang, rangText, punkte, punkteDisplay: punkte ? 'inline' : 'none',
+      zurueck: this.zurueck, zurueckAus: !s.hist.length, zurueckFarbe: s.hist.length ? '#334A27' : '#9a9e9b', zurueckCursor: s.hist.length ? 'pointer' : 'default',
+      neu: this.neu, neuLinie: '18px', nochmalDisplay: f ? 'inline-flex' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>

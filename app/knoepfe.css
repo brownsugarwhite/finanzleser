@@ -1,0 +1,204 @@
+/* =====================================================================================
+   knoepfe.css — VIER Formen für jede Aufforderung. Mehr gibt es nicht.
+
+   Bis zum 16.09.2026 waren es acht Familien mit rund zwanzig Varianten: `Button.tsx`
+   mit fünfzig Zeilen Inline-Style und eigener Geometrie, `.btn` in vier Spielarten,
+   `.chip` in vier, `.textlink` und `.pfeil-link` nebeneinander, kb-pille in fünf,
+   dazu kb-chip, kb-zaehlwerk__chip, st__chip, leo-chips und chip--spiel.
+   Der Schaukasten las sie aus den Stylesheets und zeigte sie untereinander — man sah
+   die Dopplung, aber niemand konnte sagen, welche Form wann gilt.
+
+   Jetzt sagt die Form, was sie ist:
+
+     .pille        die Aufforderung, die den Blick holen soll (eine je Block)
+     .knopf        die schlichte Handlung nebenbei
+     .chip         die Wahl aus vielen gleichrangigen Möglichkeiten
+     .strich-link  der Verweis im Text — kein Knopf, sondern eine Richtung
+
+   🚨 Diese Datei ist NICHT auf `.faden-shell` beschränkt. `Button.tsx` läuft auch auf
+   den Routen der Alt-Seite; wäre die Pille an den Faden gebunden, stünde dort ein
+   ungestalteter <button>.
+
+   🚨 Die Grundformen stehen doppelt im Selektor (`.pille, .faden-shell .pille`). Grund:
+   faden.css setzt `.faden-shell button { color: inherit }` — das sind 0,1,1 und schlägt
+   jede Einzelklasse. Ohne den zweiten Selektor wäre `.knopf--primaer` im Faden eine
+   dunkle Fläche mit unsichtbarer Schrift.
+
+   Sonderformen, die bleiben, weil sie wirklich etwas anderes sind: `.schalter`
+   (Kippschalter), `.kb-segment` (gleitender Block), Siegel und Preset-Stempel des
+   Kursblatts, `.taste` (die Tastatur des Finanzworts).
+   ===================================================================================== */
+
+/* ═══ 1 · Die Pille ══════════════════════════════════════════════════════════════════
+   Handoff „Buttons": 48 px hoch, Rand 2 px Tinte, dahinter eine 1-px-Outline mit 2 px
+   Abstand — die doppelte Linie der Zeitung, nur rund. Rechts eine Scheibe von 38 px in
+   der Werkzeugfarbe mit weißem Zeichen.
+   `--pille-farbe` ist der einzige Regler: Grün im Faden, Türkis im Vergleich, Magenta
+   im Rechner. */
+/* 🚨 Die Maße sind die der Vorlage, nicht die der Leiter. Eine Pille ist ein GERÄT, kein
+   Satzelement: Rahmen 2 px, darum eine 1-px-Outline mit 2 px Abstand, Radius 21 px auf
+   48 px Höhe — also ausdrücklich KEINE volle Kapsel (die wären 24 px). Genau diese
+   flacheren Enden machen sie zierlich. Und der Abstand von der Scheibe zum Rahmen ist
+   rundum derselbe: 3 px, oben wie rechts wie unten.
+
+   Alles folgt der HÖHE, damit die kleine Pille proportional dieselbe bleibt:
+     Radius  = .4375 × Höhe   (21 / 48)
+     Scheibe = .7917 × Höhe   (38 / 48)
+     Scheibenradius = .4474 × Scheibe (17 / 38) — die Form eines App-Zeichens, kein Kreis
+     Polster = .0625 × Höhe   (3 / 48)
+
+   🚨 Der 16.09.2026 hatte das durch `--radius-pille` (999 px), `--radius-kreis` und
+   Werte aus der Abstandsleiter ersetzt: aus der Pille wurde eine Kapsel, aus dem
+   App-Zeichen ein Kreis, und die Scheibe saß 1 px zu eng. */
+.pille, .faden-shell .pille {
+  --pille-farbe: var(--werkzeug, var(--green));
+  --pille-hoehe: 48px;
+  --pille-polster: calc(var(--pille-hoehe) * .0625);
+  --pille-scheibe: calc(var(--pille-hoehe) * .7917);
+  position: relative; display: inline-flex; align-items: center; align-self: flex-start;
+  height: var(--pille-hoehe); box-sizing: border-box;
+  padding: var(--pille-polster) var(--pille-polster) var(--pille-polster) calc(var(--pille-hoehe) * .4167);
+  border: var(--strich-stark) solid var(--ink);
+  outline: var(--strich-haar) solid var(--ink); outline-offset: 2px;
+  border-radius: calc(var(--pille-hoehe) * .4375); background: transparent;
+  color: var(--ink); font: 500 calc(var(--pille-hoehe) * .3542)/1 var(--sans); text-decoration: none;
+  overflow: hidden; cursor: pointer; transition: color .3s;
+}
+.pille__text { position: relative; padding-right: var(--luft-m); white-space: nowrap; }
+.pille__scheibe {
+  position: relative; flex-shrink: 0;
+  width: var(--pille-scheibe); height: var(--pille-scheibe);
+  border-radius: calc(var(--pille-scheibe) * .4474); background: var(--pille-farbe);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .35s var(--ueber);
+}
+.pille__scheibe svg { display: block; }
+/* 🚨 Hier wuchs beim Überfahren eine Füllung von der Scheibe über die ganze Innenfläche
+   (Handoff Runde 2, Punkt 7). Der User hat sie am 16.09.2026 abbestellt: der Knopf sieht
+   dabei aus, als liefe er aus. Die Pille verhält sich jetzt überall gleich — beim
+   Überfahren färbt sich die SCHRIFT, sonst nichts. Das ist dieselbe Regel wie beim
+   `.knopf`, wo der Umriss und nicht die Fläche reagiert. */
+.pille:hover, .pille:focus-visible { color: var(--pille-farbe); }
+.pille:disabled, .pille[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
+.pille__scheibe[data-schrumpft="an"] { transform: scale(.8); }
+
+/* Die kleine Pille: in einer Listenzeile, wo die große den Satz sprengen würde.
+   EINE Zahl ändert sich — alles andere rechnet sich daraus. */
+/* 🚨 Beide Selektoren, sonst schlägt `.faden-shell .pille` (0,2,0) aus dem Grundsatz
+   die Einzelklasse hier — und die kleine Pille bliebe 48 px hoch. */
+.pille--klein, .faden-shell .pille--klein { --pille-hoehe: 38px; outline: 0; }
+
+/* Auf schmalem Schirm bleibt von der kleinen Pille nur die Scheibe. */
+.pille--nur-knopf { padding-left: var(--pille-polster); }
+.pille--nur-knopf .pille__text { display: none; }
+
+/* ═══ 2 · Der Knopf ══════════════════════════════════════════════════════════════════
+   Die Handlung nebenbei: „Alle anzeigen", „Schließen", „Zurücksetzen". Ein Umriss, mehr
+   nicht. `--primaer` füllt mit Tinte statt mit Grün — eine grün gefüllte Fläche gibt es
+   im Zeitungssatz nicht, Grün trägt hier nur Punkte, Haken und Scheiben. */
+.knopf, .faden-shell .knopf {
+  display: inline-flex; align-items: center; gap: var(--luft-s);
+  border: var(--strich-haar) solid var(--rule-strong); border-radius: var(--radius-pille);
+  background: transparent; color: var(--ink);
+  padding: var(--luft-s) var(--luft-m); font: 600 var(--grad-14)/1.3 var(--sans);
+  white-space: nowrap; text-decoration: none; cursor: pointer;
+  transition: background .25s, border-color .25s, color .25s;
+}
+/* 🚨 Beim Zeigen färbt sich die KONTUR, nicht die Fläche. Ein grauer Grund unter einem
+   Umriss sieht im Zeitungssatz nach Formular aus; die Linie allein ist edler. */
+.knopf:hover { border-color: var(--ink); color: var(--green-ink); }
+.knopf.knopf--primaer { background: var(--ink); border-color: var(--ink); color: var(--auf-tinte); }
+.knopf.knopf--primaer:hover { background: var(--green-ink); border-color: var(--green-ink); color: var(--auf-tinte); }
+.knopf.knopf--still { border-color: var(--rule); color: var(--muted); }
+.knopf.knopf--still:hover { border-color: var(--ink); color: var(--ink); background: transparent; }
+.knopf--klein { padding: var(--luft-xxs) var(--luft-m); font-size: var(--grad-12); gap: var(--luft-xs); }
+.knopf:disabled { opacity: .45; cursor: not-allowed; }
+
+/* ═══ 3 · Der Chip ═══════════════════════════════════════════════════════════════════
+   Die Wahl aus vielen gleichrangigen Möglichkeiten: Leos Fragen, ein Filter, ein
+   Schnellwert.
+   🚨 Kein Punkt, keine Farbe im Ruhezustand (Entscheidung vom 16.09.2026). Eine Reihe
+   Chips soll wie eine Reihe aussehen; ein grün umrandeter darin liest sich wie eine
+   Auszeichnung, die keiner gemeint hat. Gewählt = Fläche Tinte, Schrift Papier. */
+.chip, .faden-shell .chip {
+  display: inline-flex; align-items: center; gap: var(--luft-s);
+  min-height: 40px; padding: var(--luft-s) var(--luft-m);
+  border: var(--strich-haar) solid var(--ink-25); border-radius: var(--radius-pille);
+  background: transparent; color: var(--ink);
+  font: 500 var(--grad-13)/1.35 var(--sans); text-align: left; text-decoration: none;
+  cursor: pointer;
+  transition: background .25s, border-color .25s, color .25s, transform .25s, opacity .3s;
+}
+.chip:hover { background: var(--ink-05); border-color: var(--ink); transform: translateY(-1px); }
+.chip.chip--still { color: var(--muted); }
+.chip[aria-pressed="true"], .chip[data-aktiv="an"], .chip.aktiv {
+  background: var(--ink); border-color: var(--ink); color: var(--auf-tinte);
+}
+.chip[aria-pressed="true"]:hover, .chip[data-aktiv="an"]:hover, .chip.aktiv:hover { background: var(--ink); }
+/* Eine Reihe Chips. `--rechts` schiebt sie an den rechten Rand — so stehen Leos
+   Antwortvorschläge auf der Seite, auf der Leo spricht. */
+.chips { display: flex; flex-wrap: wrap; gap: var(--luft-s); }
+.chips--rechts { justify-content: flex-end; }
+
+/* ═══ 4 · Der Strich-Link ════════════════════════════════════════════════════════════
+   Kein Knopf: ein Verweis mit Richtung. Text plus ein 18-px-Strich, der beim Überfahren
+   auf 30 px wächst; die Spitze ist dieselbe wie im Megamenü der Live-Seite.
+   `--still` ist derselbe Verweis, nur leiser — vorher hieß er `.textlink--still`. */
+.strich-link, .faden-shell .strich-link {
+  display: inline-flex; align-items: center; gap: var(--luft-s);
+  border: 0; background: none; padding: 0; text-decoration: none;
+  color: var(--green-ink); font: 700 var(--grad-13)/1.35 var(--sans); cursor: pointer;
+}
+.strich-link.strich-link--still { color: var(--muted); font-weight: 600; }
+.strich-link.strich-link--gross { font-size: var(--grad-14); font-weight: 600; color: var(--green); }
+.strich-link span { color: inherit; }
+.strich-link i {
+  display: inline-block; width: 18px; height: 1px; background: currentColor;
+  position: relative; transition: width .25s; flex: none;
+}
+.strich-link i::after {
+  content: ""; position: absolute; left: calc(100% - 3px); top: 50%;
+  width: 4.24px; height: 8px; transform: translateY(-50%); background: currentColor;
+  -webkit-mask: var(--pfeilspitze) no-repeat center / 100% 100%;
+  mask: var(--pfeilspitze) no-repeat center / 100% 100%;
+}
+.strich-link:hover i { width: 30px; }
+/* Ohne Strich bleibt der Verweis ein Verweis: dann trägt ihn die Unterstreichung. */
+.strich-link:not(:has(i)):hover { text-decoration: underline; }
+
+
+/* ═══ 5 · Der Regler ═════════════════════════════════════════════════════════════════
+   Kein eigener Knopf, aber dieselbe Frage: Wie sieht eine Bedienung im Zeitungssatz aus?
+   🚨 Vorher gab es ihn zweimal — im Schätzspiel als reiner Browser-Standard (eine blaue
+   Systemleiste mitten im Satz) und in der Statistik als Standard mit `accent-color`.
+   Jetzt eine Haarlinie mit einem Griff in Tinte, dieselbe Sprache wie die Grundlinie
+   einer Eingabe im Kursblatt. Gilt für jeden Schieberegler im Faden. */
+.faden-shell input[type="range"] {
+  appearance: none; -webkit-appearance: none;
+  width: 100%; height: 22px; background: transparent; cursor: pointer; outline: 0;
+}
+/* `--fuell` färbt die Spur bis zum Griff — wo ein Regler einen Füllstand zeigen soll
+   (Schätzfrage), setzt ihn die Komponente; sonst bleibt die Spur durchgehend hell. */
+.faden-shell input[type="range"]::-webkit-slider-runnable-track {
+  height: 1px; border: 0;
+  background: linear-gradient(to right, var(--ink) 0 var(--fuell, 0%), var(--ink-35) var(--fuell, 0%) 100%);
+}
+.faden-shell input[type="range"]::-moz-range-track {
+  height: 1px; border: 0;
+  background: linear-gradient(to right, var(--ink) 0 var(--fuell, 0%), var(--ink-35) var(--fuell, 0%) 100%);
+}
+.faden-shell input[type="range"]::-moz-range-progress { height: 1px; background: var(--ink); }
+.faden-shell input[type="range"]::-webkit-slider-thumb {
+  appearance: none; -webkit-appearance: none;
+  width: 14px; height: 14px; margin-top: -6.5px; border: 0;
+  border-radius: var(--radius-kreis); background: var(--ink);
+  box-shadow: 0 0 0 3px var(--paper);
+  transition: transform .2s var(--ueber), background .2s;
+}
+.faden-shell input[type="range"]::-moz-range-thumb {
+  width: 14px; height: 14px; border: 0;
+  border-radius: var(--radius-kreis); background: var(--ink); box-shadow: 0 0 0 3px var(--paper);
+}
+.faden-shell input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
+.faden-shell input[type="range"]:focus-visible::-webkit-slider-thumb { background: var(--green); }
+.faden-shell input[type="range"]:focus-visible::-moz-range-thumb { background: var(--green); }

@@ -4,6 +4,8 @@ import RelatedPostsSection from "@/components/sections/RelatedPostsSection";
 import { getSiteSettings, getRelatedPosts } from "@/lib/wordpress";
 import type { ArticleToolData } from "@/lib/articleToolData";
 import type { Post } from "@/lib/types";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import KetteKapitel from "@/components/faden/kette/KetteKapitel";
 
 type ArticleLayoutProps = {
   title?: string;
@@ -24,6 +26,8 @@ type ArticleLayoutProps = {
     colorVariant?: 1 | 2 | 3 | 4 | 5 | 6;
   };
   toolData?: ArticleToolData;
+  /** Vollständiger Beitrag (mit Faden-Feldern) — nur der Faden braucht ihn. */
+  post?: Post;
 };
 
 function extractLatestPostsBlock(content?: string): { categoryIds: number[]; postsToShow: number } | null {
@@ -43,6 +47,12 @@ function extractLatestPostsBlock(content?: string): { categoryIds: number[]; pos
 }
 
 export default async function ArticleLayout(props: ArticleLayoutProps) {
+  // Faden (NEXT_PUBLIC_FADEN=1): der Beitrag wird zur Kette im lebenden Kapitel; Kopf, Rails und
+  // Eingabe liefert app/layout.tsx. Related/Footer entfallen (Dazu passt + Fußnote im Faden).
+  if (FADEN_AKTIV && props.post) {
+    return <KetteKapitel post={props.post} toolData={props.toolData} />;
+  }
+
   const relatedBlock = extractLatestPostsBlock(props.content);
 
   // Related-Posts serverseitig (ISR) statt Client-Fetch — spart eine Function-

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@keyframes fl-druck{0%{opacity:0;transform:translateY(6px);letter-spacing:.05em;filter:blur(.6px)}60%{opacity:1;letter-spacing:.01em;filter:blur(0)}100%{opacity:1;transform:none;letter-spacing:normal}}
+@keyframes fl-druck2{0%{opacity:0;transform:translateY(6px);letter-spacing:.05em;filter:blur(.6px)}60%{opacity:1;letter-spacing:.01em;filter:blur(0)}100%{opacity:1;transform:none;letter-spacing:normal}}
+</style>
+</helmet>
+<div ref="{{setEl}}" onKeyDown="{{taste}}" style="position:relative;z-index:{{z}};min-width:0">
+  <span style="display:block;font:700 10.5px/1.3 'Open Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:{{kickerFarbe}};transition:color .3s;min-height:14px">{{label}}</span>
+  <button onClick="{{toggle}}" aria-haspopup="listbox" aria-expanded="{{offen}}" style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;width:100%;min-width:0;height:40px;margin-top:2px;border:0;background:transparent;padding:0;text-align:left;cursor:pointer;color:#334A27;outline:0">
+    <span style="font:700 26px/1.2 'Merriweather',Georgia,serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em;min-width:0">{{gewLabel}}</span>
+    <span style="display:flex;align-items:center;gap:12px;flex-shrink:1;min-width:0"><span style="font:italic 300 12px 'Merriweather',Georgia,serif;color:#686C6A;display:{{metaDisplay}};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{gewMeta}}</span><svg width="14" height="14" viewBox="0 0 12 12" style="display:block;transform:{{sparkT}};transition:transform .55s cubic-bezier(.34,1.56,.64,1)"><path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="{{sparkFarbe}}" style="transition:fill .3s"></path></svg></span>
+  </button>
+  <div style="position:relative;height:5px">
+    <i style="position:absolute;left:0;right:0;top:0;height:1px;background:rgba(51,74,39,.35)"></i>
+    <i style="position:absolute;left:0;right:0;top:-1px;height:2px;background:{{farbe}};transform:scaleX({{linieX}});transform-origin:center;transition:transform .45s cubic-bezier(.2,.8,.2,1)"></i>
+    <i style="position:absolute;left:0;right:0;top:3px;height:1px;background:{{farbe}};transform:scaleX({{linieX}});transform-origin:center;transition:transform .45s cubic-bezier(.2,.8,.2,1) .08s"></i>
+  </div>
+  <div style="position:absolute;left:0;top:calc(100% + 4px);min-width:100%;width:max-content;max-width:min(92vw,400px);perspective:900px;perspective-origin:50% 0;pointer-events:{{popEvents}}">
+    <div role="listbox" style="transform-origin:top center;transform:{{popT}};opacity:{{popOp}};transition:transform .5s cubic-bezier(.22,1.1,.36,1),opacity .25s;background:#faf9f6;border:1px solid rgba(51,74,39,.22);box-shadow:0 30px 40px -24px rgba(51,74,39,.45);padding:4px 0;max-height:{{maxH}};overflow:auto;scrollbar-width:thin">
+      <sc-for list="{{optionenV}}" as="o" hint-placeholder-count="0">
+        <button role="option" aria-selected="{{o.aktiv}}" onClick="{{o.klick}}" onMouseEnter="{{o.hover}}" style="display:grid;grid-template-columns:24px minmax(0,1fr) auto;align-items:baseline;gap:10px;width:100%;min-height:44px;padding:9px 16px 9px {{o.pad}};border:0;border-top:1px solid rgba(51,74,39,.08);background:{{o.bg}};text-align:left;cursor:pointer;color:#334A27;transition:background .2s,padding-left .3s cubic-bezier(.2,.8,.2,1);animation:{{o.anim}}"><i style="font:900 12px 'Merriweather',Georgia,serif;color:{{o.nrFarbe}}">{{o.nr}}</i><span style="display:flex;align-items:baseline;gap:8px;min-width:0"><span style="font:{{o.font}};white-space:nowrap">{{o.label}}</span><i style="flex:1;min-width:14px;border-bottom:1px dotted rgba(51,74,39,.4);transform:translateY(-4px);display:{{o.leader}}"></i></span><small style="font:500 12.5px 'Open Sans',sans-serif;color:{{o.metaFarbe}};white-space:nowrap">{{o.meta}}</small></button>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:420},&quot;label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Anlagedauer&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;wert&quot;:{&quot;editor&quot;:null,&quot;default&quot;:36,&quot;tsType&quot;:&quot;string|number&quot;},&quot;onChange&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(v:any)=&gt;void&quot;},&quot;optionen&quot;:{&quot;editor&quot;:null,&quot;default&quot;:[{&quot;v&quot;:12,&quot;label&quot;:&quot;12 Monate&quot;,&quot;meta&quot;:&quot;bis 3,20 %&quot;},{&quot;v&quot;:24,&quot;label&quot;:&quot;24 Monate&quot;,&quot;meta&quot;:&quot;bis 3,35 %&quot;},{&quot;v&quot;:36,&quot;label&quot;:&quot;36 Monate&quot;,&quot;meta&quot;:&quot;bis 3,45 %&quot;}],&quot;tsType&quot;:&quot;{v:any,label:string,meta?:string}[]&quot;},&quot;farbe&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#0B7F66&quot;,&quot;options&quot;:[&quot;#0B7F66&quot;,&quot;#D3005E&quot;,&quot;#45A117&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;maxHoehe&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;340px&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { offen: false, hi: -1, lauf: 0 };
+  setEl = el => { this.el = el; };
+  componentDidMount() { this.aussen = e => { if (this.state.offen && this.el && !this.el.contains(e.target)) this.setState({ offen: false }); }; document.addEventListener('pointerdown', this.aussen); }
+  componentWillUnmount() { document.removeEventListener('pointerdown', this.aussen); }
+  opt() { return this.props.optionen || []; }
+  toggle = () => this.setState(s => ({ offen: !s.offen, lauf: s.lauf + 1, hi: this.opt().findIndex(o => o.v === this.props.wert) }));
+  waehle(o) { if (this.props.onChange) this.props.onChange(o.v); this.setState({ offen: false }); }
+  taste = e => {
+    const o = this.opt(); if (!o.length) return;
+    if (e.key === 'Escape') { this.setState({ offen: false }); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); if (!this.state.offen) return this.toggle(); const d = e.key === 'ArrowDown' ? 1 : -1; this.setState(s => ({ hi: (s.hi + d + o.length) % o.length })); }
+    if (e.key === 'Enter' || e.key === ' ') { if (this.state.offen && this.state.hi >= 0) { e.preventDefault(); this.waehle(o[this.state.hi]); } }
+  };
+  renderVals() {
+    const s = this.state; const o = this.opt(); const farbe = this.props.farbe ?? '#0B7F66'; const gew = o.find(x => x.v === this.props.wert) || o[0] || { label: '–', meta: '' };
+    const D = s.lauf % 2 ? 'fl-druck2' : 'fl-druck';
+    return {
+      setEl: this.setEl, taste: this.taste, toggle: this.toggle, offen: s.offen, z: s.offen ? 40 : 1, farbe,
+      label: this.props.label ?? '', gewLabel: gew.label, gewMeta: gew.meta ?? '', metaDisplay: gew.meta ? 'inline' : 'none',
+      kickerFarbe: s.offen ? farbe : '#686C6A', sparkT: s.offen ? 'rotate(135deg) scale(1.15)' : 'none', sparkFarbe: s.offen ? farbe : '#334A27', linieX: s.offen ? 1 : 0,
+      popT: s.offen ? 'rotateX(0)' : 'rotateX(-72deg)', popOp: s.offen ? 1 : 0, popEvents: s.offen ? 'auto' : 'none', maxH: this.props.maxHoehe ?? '340px',
+      optionenV: o.map((x, i) => { const aktiv = x.v === this.props.wert; const hi = i === s.hi; return { nr: String(i + 1).padStart(2, '0'), label: x.label, meta: x.meta ?? '', aktiv, klick: () => this.waehle(x), hover: () => this.setState({ hi: i }), bg: hi ? 'rgba(51,74,39,.05)' : 'transparent', pad: hi ? '20px' : '14px', nrFarbe: aktiv ? farbe : '#45A117', font: `${aktiv ? 700 : 500} 15px 'Merriweather',Georgia,serif`, leader: x.meta ? 'block' : 'none', metaFarbe: aktiv ? farbe : '#686C6A', anim: s.offen ? `${D} .45s cubic-bezier(.2,.8,.2,1) ${.05 + i * .04}s both` : 'none' }; }),
+    };
+  }
+}
+</script>
+</body>
+</html>

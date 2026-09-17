@@ -1,4 +1,7 @@
 import type { MetadataRoute } from "next";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import { getFadenOptionen } from "@/lib/faden/optionen";
+import { heuteBerlin } from "@/lib/faden/spiele";
 import {
   getAllPosts,
   getAllRechner,
@@ -6,16 +9,19 @@ import {
   getAllChecklisten,
   getAllAnbieter,
   getAllDokumente,
+  getAllGlossar,
+  getAllSpiele,
   getNavItems,
 } from "@/lib/wordpress";
 import { SITE_URL } from "@/lib/seo";
+import { getVergleichUebersicht } from "@/lib/financeads/laden";
 import {
   buildPostUrl,
   buildRechnerUrl,
   buildVergleichUrl,
   buildChecklisteUrl,
   buildAnbieterUrl,
-  buildDokumentUrl,
+  buildDokumentUrl, buildGlossarUrl,
   buildCategoryUrl,
   buildSubcategoryUrl,
 } from "@/lib/urls";
@@ -42,6 +48,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     safe(getAllDokumente, []),
     safe(getNavItems, []),
   ]);
+  // Glossar nur mit Faden-Schalter (Stufe 1): ohne Schalter gibt es die Routen nicht.
+  const glossar = FADEN_AKTIV ? await safe(getAllGlossar, []) : [];
+  const fadenOptionen = FADEN_AKTIV ? await safe(getFadenOptionen, null) : null;
+  const spiele = FADEN_AKTIV ? await safe(getAllSpiele, []) : [];
 
   // NIE eine Rumpf-Sitemap ausliefern: Kommt eine Kern-Abfrage trotz Retries leer
   // zurück (WP-Überlast), soll die Regeneration FEHLSCHLAGEN — Next liefert dann die
@@ -91,11 +101,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const vergleichEntries: MetadataRoute.Sitemap = vergleiche.map((v) => ({
-    url: `${SITE_URL}${buildVergleichUrl(v.slug)}`,
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
+  // Vergleiche: Datum aus dem financeads-Snapshot (Konditionsstand) oder der letzten
+  // CPT-Änderung; Endpunkte, die financeads gerade nicht bedient (Index „defekt"),
+  // fallen heraus — ihre Seite ist noindex. Der Index ist ein gecachter REST-Abruf;
+  // fehlt er, bleibt das Datum weg, nie eine falsche Zahl.
+  const vergleichIndex = await safe(getVergleichUebersicht, {} as Awaited<ReturnType<typeof getVergleichUebersicht>>);
+  const vergleichEntries: MetadataRoute.Sitemap = vergleiche.flatMap((v) => {
+    const u = vergleichIndex[v.slug];
+    if (u?.defekt) return [];
+    const daten = [u?.stand, v.modified, v.date].filter((d): d is string => !!d).sort().pop();
+    return [{
+      url: `${SITE_URL}${buildVergleichUrl(v.slug)}`,
+      ...(daten ? { lastModified: new Date(daten) } : {}),
+      changeFrequency: (u ? "weekly" : "monthly") as "weekly" | "monthly",
+      priority: u ? 0.7 : 0.6,
+    }];
+  });
 
   const checklistenEntries: MetadataRoute.Sitemap = checklisten.map((c) => ({
     url: `${SITE_URL}${buildChecklisteUrl(c.slug)}`,
@@ -115,6 +136,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.5,
   }));
 
+  const glossarEntries: MetadataRoute.Sitemap = FADEN_AKTIV
+    ? [
+        { url: `${SITE_URL}/glossar`, changeFrequency: "weekly" as const, priority: 0.6 },
+        ...glossar.map((g) => ({ url: `${SITE_URL}${buildGlossarUrl(g.slug)}`, changeFrequency: "yearly" as const, priority: 0.4 })),
+        // Kassensturz, Lebenslagen, Finanzwort (nur schon erschienene Tage); /plus ist noindex und bleibt draußen.
+        ...(fadenOptionen?.kassensturz ? [{ url: `${SITE_URL}/kassensturz`, changeFrequency: "monthly" as const, priority: 0.6 }] : []),
+        ...(fadenOptionen?.lebensereignisse.length ? [{ url: `${SITE_URL}/lebenslagen`, changeFrequency: "monthly" as const, priority: 0.5 }, ...fadenOptionen.lebensereignisse.map((e) => ({ url: `${SITE_URL}/lebenslagen/${e.key}`, changeFrequency: "monthly" as const, priority: 0.5 }))] : []),
+        ...spiele.filter((s) => s.typ === "finanzwort" && s.status !== "entwurf" && s.datum && s.datum <= heuteBerlin()).map((s) => ({ url: `${SITE_URL}/spiele/${s.slug}`, changeFrequency: "yearly" as const, priority: 0.3 })),
+      ]
+    : [];
+
   return [
     ...staticEntries,
     ...categoryEntries,
@@ -124,6 +156,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...checklistenEntries,
     ...anbieterEntries,
     ...dokumentEntries,
+    ...glossarEntries,
   ];
 }
 

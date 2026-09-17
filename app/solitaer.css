@@ -1,0 +1,310 @@
+/* =====================================================================================
+   solitaer.css — „Solitär · Das Brett" (components/faden/spiele/Solitaer.tsx).
+
+   Vorlage: `docs/design_handoff_finanzleser_solitaer/Finanzleser Solitär - Rätselseite.dc.html`
+   (Handoff vom 17.09.2026), gerendert und vermessen. Die Vorlage schreibt jede Regel als
+   Inline-Style ans Element; hier steht sie als Klasse, und am Element bleiben nur noch
+   DATEN: Lage im Raster, Drehwinkel des Katzenauges, Taktversatz einer Animation.
+
+   🚨 Diese Datei hat einen Vorgänger. Bis zum 17.09.2026 war die Murmel ein Halbtonraster
+   aus SVG-Kreisen mit Sprungparabel und Spielraum-Kurve. Die neue Vorlage baut sie als
+   GLASKÖRPER aus CSS-Verläufen und das Brett als Prozentraster ohne ein einziges SVG.
+   Beides nebeneinander gäbe es nicht — die alte Fassung steht im Verlauf.
+
+   ── Was aus dem Haus kommt statt aus der Vorlage ──────────────────────────────────────
+
+   1. **Der Stempel dreht auf −4°, nicht auf −11°.** `fl-stempel` ist ein GLOBALES
+      Keyframe (kursblatt.css) und wurde am 16.09.2026 ausdrücklich flacher gestellt
+      („weniger rotiert"). Ein zweiter Stempelwinkel im Haus wäre eine Regel gegen eine
+      Entscheidung. Wer die −11° der Vorlage hier doch will, braucht ein eigenes Keyframe.
+   2. **Der Punkt vor dem Kicker nimmt `fl-punkt`** statt eines eigenen Pulses — dasselbe
+      Bild, dieselbe Dauer, 1 px weniger Schattenweite.
+   3. **Der Statuswechsel nimmt `fl-druck`/`fl-druck2`** aus kursblatt.css; die Vorlage
+      führt dieselbe Animation mit 1 px und einem Hundertstel em Unterschied.
+   4. **Die Pille ist `.pille`** (components/ui/Button.tsx) — die Maße der Vorlage sind
+      die der Hauspille, bis auf den Pixel.
+   5. **Nachbarschaften der Tinte sind auf die Leiter gerundet:** .38 → `--ink-35`,
+      .06/.04 → `--ink-05`, #9a9e9b → `--ink-45`. Unterscheidbar ist davon nichts.
+
+   Alles auf `.faden-shell` gescoped, damit die alte Beitragsseite nichts abbekommt.
+   ===================================================================================== */
+
+.faden-shell .solitaer {
+  /* Die Maße des Bretts. Sie gehören dem Spiel, nicht dem Satz: das Brett ist ein Gerät
+     mit eigener Geometrie (7 × 7 Zellen), keine Textspalte. */
+  --so-brett: 420px;              /* größte Kantenlänge des Bretts */
+  --so-rand: 210px;               /* Breite der Seitenspalte */
+  --so-zelle: 14.28%;             /* eine Rasterzelle — 1/7 */
+  --so-halb: -7.14%;              /* halbe Zelle, zum Zentrieren */
+  --so-murmel: 10.4%;             /* Durchmesser einer Murmel */
+  --so-murmel-halb: -5.2%;
+  --so-loch: 30%;                 /* Ring im Loch, bezogen auf die Zelle */
+
+  display: block;
+  animation: fl-herz calc(.8s * var(--tempo)) var(--kurve) both;
+}
+/* 🚨 Die eröffnende Linie steht NICHT hier. Die Vorlage setzt 2 px Tinte an die Sektion;
+   im Haus eröffnet ein Block mit 3 px in der Werkzeugfarbe, und die trägt bei einem Spiel
+   `.spiel-satz--solitaer > .spiel-satz__koerper` (app/spiele.css) — dieselbe Regel wie
+   bei Schlange und Finanzwort. Zwei Blockanfänge im selben Kapitel, die verschieden
+   aussehen, lesen sich als zwei verschiedene Ränge. */
+
+/* ── Kopfzeile ────────────────────────────────────────────────────────────────────
+   Gestalt und Tintenlinie kommen aus `.spiel-kopf` (app/spiele.css). Hier steht nur, was
+   der Status zusätzlich tut: Er DRUCKT sich ein, wenn er sich ändert. Zwei Namen, weil
+   eine laufende Animation sonst nicht neu startet (siehe Kopf von kursblatt.css).
+   🚨 `.spiel-kopf__hinweis` steht auf `white-space: nowrap` — der Status ist kurz, auf
+   schmalem Schirm bricht die Zeile stattdessen um (`flex-wrap`). */
+.faden-shell .solitaer__status--a { animation: fl-druck calc(.5s * var(--tempo)) var(--kurve) both; }
+.faden-shell .solitaer__status--b { animation: fl-druck2 calc(.5s * var(--tempo)) var(--kurve) both; }
+
+.faden-shell .solitaer__titel { margin: 0; font: 900 clamp(var(--grad-26), 4.6vw, var(--grad-34))/1.12 var(--serif); letter-spacing: -.02em; color: var(--ink); text-wrap: balance; }
+.faden-shell .solitaer__anriss { margin: var(--luft-s) 0 0; font: italic 300 clamp(var(--grad-15), 2.3vw, var(--grad-16))/1.55 var(--serif); color: var(--muted); max-width: 52ch; }
+
+/* ── Satz: Brett links, Seitenspalte rechts ───────────────────────────────────────
+   🚨 Die Umbruchmarke steckt NICHT in einer Media Query. Das Spiel steht im Faden neben
+   Schubladen, die ein- und ausfahren — seine Breite ändert sich ohne jeden Fensterwechsel.
+   Die Komponente misst sich selbst (ResizeObserver) und setzt `--eng`. */
+.faden-shell .solitaer__satz { display: grid; grid-template-columns: minmax(0, 1fr) var(--so-rand); gap: var(--luft-xl); align-items: start; margin-top: var(--luft-l); }
+.faden-shell .solitaer__satz--eng { grid-template-columns: minmax(0, 1fr); gap: var(--luft-l); }
+.faden-shell .solitaer__spalte { min-width: 0; }
+
+/* ── Das Brett ────────────────────────────────────────────────────────────────────
+   Alles darin liegt PROZENTUAL — das Brett braucht deshalb kein einziges Maß in px und
+   keine Messung in JavaScript. Es ist immer quadratisch und höchstens 420 px breit. */
+.faden-shell .solitaer__brett {
+  position: relative;
+  width: min(100%, var(--so-brett));
+  aspect-ratio: 1;
+  margin: 0 auto;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Die Löcher ───────────────────────────────────────────────────────────────────── */
+.faden-shell .solitaer__loch {
+  position: absolute; width: var(--so-zelle); aspect-ratio: 1;
+  margin: var(--so-halb) 0 0 var(--so-halb);
+  border: 0; padding: 0; background: transparent; border-radius: var(--radius-kreis);
+  display: flex; align-items: center; justify-content: center;
+  cursor: default;
+}
+.faden-shell .solitaer__loch--offen { cursor: pointer; }
+.faden-shell .solitaer__loch:focus-visible { outline: var(--strich-stark) solid var(--green); outline-offset: -2px; }
+/* Die Schale im Loch. Leer liegt sie vertieft, belegt ist der Schatten weg — sonst
+   zeichnete sich unter jeder Murmel ein zweiter Rand ab. */
+.faden-shell .solitaer__schale {
+  width: var(--so-loch); aspect-ratio: 1; border-radius: var(--radius-kreis); box-sizing: border-box;
+  border: var(--strich-haar) solid var(--ink-35); background: var(--ink-05);
+  box-shadow: var(--loch-tiefe);
+  transition: background .3s, border-color .3s, transform .35s var(--ueber);
+}
+.faden-shell .solitaer__loch--belegt .solitaer__schale { box-shadow: none; }
+.faden-shell .solitaer__loch--ziel .solitaer__schale { border-color: var(--green); background: var(--green); transform: scale(1.15); }
+/* Der Zielring schlägt Wellen — er läuft nur am Zielloch. */
+.faden-shell .solitaer__zielring {
+  position: absolute; left: 35%; top: 35%; width: var(--so-loch); aspect-ratio: 1;
+  border-radius: var(--radius-kreis); border: var(--strich-fein) solid var(--green);
+  box-sizing: border-box; opacity: 0; pointer-events: none;
+}
+.faden-shell .solitaer__loch--ziel .solitaer__zielring { animation: fl-ring calc(1.4s * var(--tempo)) ease-out infinite; }
+
+/* ── Die Murmel ───────────────────────────────────────────────────────────────────
+   Ein Glaskörper (Werkstoff in tokens.css, `--glas-*`), darin ein gedrehtes Katzenauge,
+   darüber der Glanz. Drei Ebenen, keine davon ist ein Bild.
+   🚨 `left`/`top` sind Übergänge, nicht Sprünge: eine springende Murmel wandert sichtbar
+   in ihr neues Loch. Deshalb muss jede Murmel über ihre `id` denselben Knoten behalten —
+   wer die Liste nach Feldern statt nach Murmeln rendert, bekommt Teleportation. */
+.faden-shell .solitaer__murmel {
+  position: absolute; width: var(--so-murmel); aspect-ratio: 1;
+  margin: var(--so-murmel-halb) 0 0 var(--so-murmel-halb);
+  border: 0; padding: 0; border-radius: var(--radius-kreis);
+  background: var(--glas-koerper);
+  box-shadow: var(--glas-liegt);
+  z-index: 3; cursor: default;
+  transition:
+    left calc(.42s * var(--tempo)) var(--kurve),
+    top calc(.42s * var(--tempo)) var(--kurve),
+    transform calc(.32s * var(--tempo)) var(--ueber),
+    box-shadow calc(.32s * var(--tempo)),
+    opacity calc(.38s * var(--tempo));
+}
+.faden-shell .solitaer__murmel--kann { cursor: pointer; }
+.faden-shell .solitaer__murmel:focus-visible { outline: var(--strich-stark) solid var(--green); outline-offset: 3px; }
+/* Zeigen, in der Hand, fallen, als letzte stehen bleiben. */
+.faden-shell .solitaer__murmel--zeigt { transform: translateY(-4%); box-shadow: var(--glas-zeigt); }
+.faden-shell .solitaer__murmel--gewaehlt { transform: translateY(-9%) scale(1.1); box-shadow: var(--glas-hand); z-index: 5; }
+.faden-shell .solitaer__murmel--letzte { transform: scale(1.12); }
+.faden-shell .solitaer__murmel--faellt { transform: translateY(30%) scale(.15); opacity: 0; }
+/* Geschlagen: unsichtbar, unklickbar — aber IM BAUM, damit „Zug zurück" sie zurückholen
+   kann, ohne dass sie neu einfliegt. */
+.faden-shell .solitaer__murmel--weg { opacity: 0; pointer-events: none; }
+
+.faden-shell .solitaer__auge { position: absolute; inset: 0; border-radius: var(--radius-kreis); overflow: hidden; transform: rotate(var(--rot)); }
+.faden-shell .solitaer__augeDreh { position: absolute; inset: 0; }
+.faden-shell .solitaer__augeDreh--dreht { animation: fl-spin calc(5s * var(--tempo)) linear infinite; }
+.faden-shell .solitaer__augeDreh--schnell { animation-duration: calc(3s * var(--tempo)); }
+.faden-shell .solitaer__band { position: absolute; left: 13%; top: 39%; width: 74%; height: 22%; border-radius: var(--radius-kreis); background: var(--katzenauge); filter: blur(.5px); }
+.faden-shell .solitaer__glanz { position: absolute; inset: 0; border-radius: var(--radius-kreis); background: var(--glas-glanz); pointer-events: none; }
+
+/* Aufstellen, Springen, Wackeln — die drei Bewegungen der Murmel. */
+.faden-shell .solitaer__murmel--rieselt { animation: fl-fall calc(.55s * var(--tempo)) var(--ueber) calc(var(--takt) * var(--tempo)) both; }
+.faden-shell .solitaer__murmel--hop-a { animation: fl-hop calc(.42s * var(--tempo)) var(--kurve) both; z-index: 5; }
+.faden-shell .solitaer__murmel--hop-b { animation: fl-hop2 calc(.42s * var(--tempo)) var(--kurve) both; z-index: 5; }
+.faden-shell .solitaer__murmel--wackel-a { animation: fl-wackel calc(.45s * var(--tempo)) var(--kurve); }
+.faden-shell .solitaer__murmel--wackel-b { animation: fl-wackel2 calc(.45s * var(--tempo)) var(--kurve); }
+
+/* ── Der Stempel ──────────────────────────────────────────────────────────────────── */
+.faden-shell .solitaer__stempelplatz { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 8; }
+.faden-shell .solitaer__stempel {
+  padding: var(--luft-s) var(--luft-m);
+  border: var(--strich-einhaenger) solid var(--ink); color: var(--ink);
+  font: 900 clamp(var(--grad-18), 3.4vw, var(--grad-26)) var(--serif);
+  letter-spacing: .16em; text-transform: uppercase;
+  background: var(--stempel-grund); white-space: nowrap;
+  animation: fl-stempel calc(.7s * var(--tempo)) var(--kurve) calc(.5s * var(--tempo)) both;
+}
+.faden-shell .solitaer__stempel--gruen { border-color: var(--green); color: var(--green); }
+.faden-shell .solitaer__funke { position: absolute; fill: var(--green); opacity: 0; animation: fl-funke calc(.9s * var(--tempo)) var(--kurve) calc(var(--takt) * var(--tempo)) both; }
+
+.faden-shell .solitaer__wink { margin: var(--luft-m) 0 0; text-align: center; font: italic 300 var(--grad-12)/1.5 var(--serif); color: var(--muted); }
+
+/* ── Die Seitenspalte ─────────────────────────────────────────────────────────────── */
+.faden-shell .solitaer__rand { min-width: 0; display: flex; flex-direction: column; gap: var(--luft-l); }
+
+/* Kennzahlen: oben eine volle Linie, unten die Doppellinie.
+   🚨 Die Vorlage hängt die Doppellinie als zwei leere Divs mit negativen Rändern an, die
+   genau die 22 px Flex-Lücke aufheben. Dasselbe Bild, ohne diese Kopplung: die Linie
+   liegt als `::after` an der Unterkante des Blocks. Gemessen ist sie 2 px / 2 px Luft /
+   1 px — also `--doppellinie`. */
+.faden-shell .solitaer__kennzahlen { position: relative; border-top: var(--strich-stark) solid var(--ink); display: grid; grid-template-columns: 1fr 1fr; }
+.faden-shell .solitaer__kennzahlen::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 5px; background: var(--doppellinie); }
+.faden-shell .solitaer__kennzahl { padding: var(--luft-m) var(--luft-m) var(--luft-m) 0; min-width: 0; }
+.faden-shell .solitaer__kennzahl--rechts { padding: var(--luft-m) 0 var(--luft-m) var(--luft-m); border-left: var(--strich-haar) solid var(--ink-20); }
+.faden-shell .solitaer__zahl { display: block; margin-top: var(--luft-s); font: 900 clamp(var(--grad-28), 4.4vw, var(--grad-34))/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; transition: color .5s; }
+/* Grün, sobald es eng wird — drei oder weniger auf dem Brett. */
+.faden-shell .solitaer__zahl--gruen { color: var(--green-ink); }
+.faden-shell .solitaer__zahl--tick-a { animation: fl-tick calc(.4s * var(--tempo)) var(--kurve); }
+.faden-shell .solitaer__zahl--tick-b { animation: fl-tick2 calc(.4s * var(--tempo)) var(--kurve); }
+.faden-shell .solitaer__sub { display: block; margin-top: var(--luft-s); font: italic 300 var(--grad-12)/1.4 var(--serif); color: var(--muted); }
+
+/* „Aus dem Spiel" — die Schale. Ein Platz je Murmel, in der Reihenfolge des Schlagens. */
+.faden-shell .solitaer__ausgangKopf { display: block; border-bottom: var(--strich-haar) solid var(--ink-30); padding-bottom: var(--luft-s); }
+.faden-shell .solitaer__schaleRaster { display: grid; grid-template-columns: repeat(8, 1fr); gap: var(--luft-s) 6px; margin-top: var(--luft-m); justify-items: center; }
+.faden-shell .solitaer__slot { position: relative; width: 13px; height: 13px; border-radius: var(--radius-kreis); box-sizing: border-box; border: var(--strich-haar) solid var(--ink-30); background: var(--ink-05); }
+.faden-shell .solitaer__mini {
+  position: absolute; inset: -1px; border-radius: var(--radius-kreis);
+  background: var(--glas-glanz), var(--glas-koerper);
+  box-shadow: var(--glas-klein);
+  animation: fl-knoten calc(.5s * var(--tempo)) var(--ueber) both;
+}
+.faden-shell .solitaer__miniBand { position: absolute; left: 14%; top: 40%; width: 72%; height: 20%; border-radius: var(--radius-kreis); background: var(--katzenauge-klein); transform: rotate(var(--rot)); }
+
+/* Ergebnis, Handlungen, Pille */
+.faden-shell .solitaer__ergebnis { display: flex; flex-direction: column; gap: var(--luft-s); animation: fl-herz calc(.6s * var(--tempo)) var(--kurve) calc(.4s * var(--tempo)) both; }
+.faden-shell .solitaer__rangtext { margin: 0; font: italic 400 var(--grad-15)/1.5 var(--serif); color: var(--ink); }
+.faden-shell .solitaer__punkte { font: 600 var(--grad-12) var(--sans); color: var(--green-ink); }
+
+/* ── Die Brettwahl ────────────────────────────────────────────────────────────────
+   Drei gleichrangige Möglichkeiten — das ist der Fall des Chips (knoepfe.css). Kompakter
+   als der Normalchip, weil die Seitenspalte 210 px breit ist und drei Chips in voller
+   Höhe die Spalte erschlagen würden. */
+.faden-shell .solitaer__brettwahl { display: grid; gap: var(--luft-m); }
+.faden-shell .solitaer__chips .chip { min-height: 30px; padding: var(--luft-xs) var(--luft-m); gap: var(--luft-xs); }
+.faden-shell .solitaer__chipzahl { font: var(--schrift-mini); color: var(--muted); font-variant-numeric: tabular-nums; }
+.faden-shell .solitaer__chips .chip[aria-pressed="true"] .solitaer__chipzahl { color: var(--auf-tinte); opacity: .75; }
+
+/* ── Die Handlungen ───────────────────────────────────────────────────────────────
+   `.strich-link` mit allem, was die Hausform mitbringt: 18-px-Strich, Pfeilspitze,
+   Wachsen auf 30 px beim Zeigen.
+   🚨 „Zug zurück" trägt dieselbe Spitze, nur gespiegelt — der Strich steht links vom
+   Wort und zeigt nach links. Ein Rückschritt mit einem Pfeil nach rechts wäre eine Lüge,
+   und ein nackter Strich ohne Spitze (so die Vorlage) sieht aus wie ein Gedankenstrich. */
+.faden-shell .solitaer__taten { display: flex; flex-wrap: wrap; gap: var(--luft-s) var(--luft-l); align-items: center; border-top: var(--strich-haar) dotted var(--ink-35); padding-top: var(--luft-m); }
+.faden-shell .solitaer__tat--zurueck { color: var(--ink); }
+.faden-shell .solitaer__tat--zurueck i { width: 14px; transform: scaleX(-1); }
+.faden-shell .solitaer__tat--zurueck:hover { color: var(--green-ink); }
+.faden-shell .solitaer__tat--zurueck:disabled { color: var(--ink-45); cursor: default; }
+.faden-shell .solitaer__tat--zurueck:disabled:hover i { width: 14px; }
+.faden-shell .solitaer__nochmal { align-self: flex-start; animation: fl-herz calc(.6s * var(--tempo)) var(--kurve) calc(.9s * var(--tempo)) both; }
+
+/* Abschluss: eine Haarlinie über die ganze Breite, darunter die Fußnote. */
+.faden-shell .solitaer__fuss {
+  margin: var(--luft-xl) 0 0; padding-top: var(--luft-s);
+  border-top: var(--strich-haar) solid var(--ink-30);
+  font: italic 300 var(--grad-12)/1.5 var(--serif); color: var(--muted);
+}
+
+/* ── Bewegung ─────────────────────────────────────────────────────────────────────
+   Die Zwillinge (`…2`) sind kein Versehen: ein Zähler wechselt bei jedem Auslösen den
+   Namen, sonst startet eine laufende Animation nicht neu. Übernommen aus dem Haus:
+   fl-herz (statistik-formen.css), fl-punkt · fl-stempel · fl-druck (kursblatt.css). */
+@keyframes fl-fall {
+  0%   { opacity: 0; transform: translateY(-45%) scale(1.15); }
+  65%  { opacity: 1; transform: translateY(5%) scale(.96); }
+  85%  { transform: translateY(-2%) scale(1.01); }
+  100% { opacity: 1; transform: none; }
+}
+/* 🚨 Der Schatten gehört IN den Keyframe. Eine Murmel, die auf halber Höhe ihres Sprungs
+   denselben flachen Schatten wirft wie im Loch, sieht aus, als rutsche sie. */
+@keyframes fl-hop {
+  0%   { transform: none; }
+  50%  { transform: translateY(-14%) scale(1.32); box-shadow: var(--glas-flug); }
+  100% { transform: none; }
+}
+@keyframes fl-hop2 {
+  0%   { transform: none; }
+  50%  { transform: translateY(-14%) scale(1.32); box-shadow: var(--glas-flug); }
+  100% { transform: none; }
+}
+@keyframes fl-wackel {
+  0%, 100% { transform: none; }
+  20%      { transform: translateX(-8%) rotate(-6deg); }
+  45%      { transform: translateX(7%) rotate(5deg); }
+  70%      { transform: translateX(-4%) rotate(-3deg); }
+}
+@keyframes fl-wackel2 {
+  0%, 100% { transform: none; }
+  20%      { transform: translateX(-8%) rotate(-6deg); }
+  45%      { transform: translateX(7%) rotate(5deg); }
+  70%      { transform: translateX(-4%) rotate(-3deg); }
+}
+@keyframes fl-ring { 0% { transform: scale(.6); opacity: .8; } 100% { transform: scale(2.4); opacity: 0; } }
+@keyframes fl-spin { to { transform: rotate(360deg); } }
+@keyframes fl-knoten { 0% { transform: scale(0); } 60% { transform: scale(1.5); } 100% { transform: scale(1); } }
+@keyframes fl-funke {
+  0%   { transform: scale(0) rotate(-30deg); opacity: 0; }
+  45%  { transform: scale(1.4) rotate(10deg); opacity: 1; }
+  100% { transform: scale(.6) rotate(30deg) translateY(-6px); opacity: 0; }
+}
+@keyframes fl-tick  { 0% { transform: scale(1); } 40% { transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes fl-tick2 { 0% { transform: scale(1); } 40% { transform: scale(1.18); } 100% { transform: scale(1); } }
+
+/* ── Ruhe ─────────────────────────────────────────────────────────────────────────
+   Wer weniger Bewegung bestellt hat, bekommt dasselbe Spiel ohne Inszenierung: die
+   Murmeln stehen sofort, springen ohne Bogen, der Stempel liegt da. Der Spielstand hing
+   nie an einer Animation, es fällt also nichts aus. */
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .solitaer,
+  .faden-shell .solitaer__puls,
+  .faden-shell .solitaer__status--a,
+  .faden-shell .solitaer__status--b,
+  .faden-shell .solitaer__loch--ziel .solitaer__zielring,
+  .faden-shell .solitaer__augeDreh--dreht,
+  .faden-shell .solitaer__murmel--rieselt,
+  .faden-shell .solitaer__murmel--hop-a,
+  .faden-shell .solitaer__murmel--hop-b,
+  .faden-shell .solitaer__murmel--wackel-a,
+  .faden-shell .solitaer__murmel--wackel-b,
+  .faden-shell .solitaer__stempel,
+  .faden-shell .solitaer__zahl--tick-a,
+  .faden-shell .solitaer__zahl--tick-b,
+  .faden-shell .solitaer__mini,
+  .faden-shell .solitaer__ergebnis,
+  .faden-shell .solitaer__nochmal { animation: none; }
+  /* Die Funken sind reine Bewegung — angehalten wären sie vier Sterne, die für immer
+     schief an der Ecke kleben. */
+  .faden-shell .solitaer__funke { display: none; }
+  .faden-shell .solitaer__murmel { transition: opacity .2s; }
+  .faden-shell .solitaer__schale { transition: none; }
+}

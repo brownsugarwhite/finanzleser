@@ -1,0 +1,477 @@
+[
+  {
+    "slug": "wohnmobil-versicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Welche Versicherungsarten gibt es für Wohnmobile?",
+        "art": "balken",
+        "titel": "Gesetzliche Mindestdeckung für die Wohnmobil-Haftpflicht",
+        "untertitel": "Mindestversicherungssummen je Schadenfall nach der Anlage zu § 4 Abs. 2 PflVG",
+        "einheit": "Mio. €",
+        "quelle": {
+          "name": "Anlage zu § 4 Abs. 2 Pflichtversicherungsgesetz (PflVG) (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/pflvg/anlage.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "mindestdeckung",
+            "label": "Mindestdeckung je Schadenfall",
+            "werte": [
+              {
+                "label": "Personenschäden",
+                "wert": 7.5
+              },
+              {
+                "label": "Sachschäden",
+                "wert": 1.3
+              },
+              {
+                "label": "Reine Vermögensschäden",
+                "wert": 0.05
+              }
+            ]
+          }
+        ],
+        "hinweis": "Diese Kfz-Pflichtversicherungssummen gelten für jedes zugelassene Wohnmobil wie für jeden anderen Pkw; höhere Deckungen bis 100 Millionen Euro sind freiwillig und werden von vielen Versicherern angeboten.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wie entwickeln sich die Kosten für Wohnmobil-Versicherungen 2026?",
+        "art": "saeulen",
+        "titel": "Wohnmobil-Bestand in Deutschland wächst rasant",
+        "untertitel": "Zugelassene Wohnmobile im Zentralen Fahrzeugregister, jeweils zum 1. Januar",
+        "einheit": "Tsd.",
+        "quelle": {
+          "name": "Kraftfahrt-Bundesamt (KBA), Pressemitteilung Nr. 23/2025 „Eine Million Wohnmobile in Deutschland“",
+          "url": "https://www.kba.de/DE/Presse/Pressemitteilungen/Allgemein/2025/pm23_2025_wohnmobile.html",
+          "stand": "28.05.2025"
+        },
+        "reihen": [
+          {
+            "key": "bestand",
+            "label": "Bestand zum 1.1.",
+            "werte": [
+              {
+                "label": "2017",
+                "wert": 450
+              },
+              {
+                "label": "2018",
+                "wert": 487
+              },
+              {
+                "label": "2019",
+                "wert": 533
+              },
+              {
+                "label": "2020",
+                "wert": 589
+              },
+              {
+                "label": "2021",
+                "wert": 675
+              },
+              {
+                "label": "2022",
+                "wert": 767
+              },
+              {
+                "label": "2023",
+                "wert": 838
+              },
+              {
+                "label": "2024",
+                "wert": 908
+              }
+            ]
+          }
+        ],
+        "hinweis": "Im April 2025 überschritt der Bestand erstmals die Millionengrenze; seit 2017 hat er sich mehr als verdoppelt. Mehr und wertvollere Fahrzeuge bedeuten für die Versicherer ein größeres Schadenpotenzial – ein Treiber für steigende Prämien.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "tierversicherungen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was kosten Tierversicherungen 2026?",
+        "art": "saeulen",
+        "titel": "Beitragseinnahmen der Tierkrankenversicherung vervierfacht",
+        "untertitel": "Gebuchte Bruttobeiträge der deutschen Tierkrankenversicherer",
+        "einheit": "Mio. €",
+        "quelle": {
+          "name": "Gesamtverband der Deutschen Versicherungswirtschaft (GDV), Meldung „Tierkrankenversicherung wächst rasant“ (zitiert nach Pfefferminzia)",
+          "url": "https://www.pfefferminzia.de/zuhause/hohe-nachfrage-mehr-als-2-millionen-haustiere-abgesichert/",
+          "stand": "11.08.2026",
+          "sekundaer": true
+        },
+        "reihen": [
+          {
+            "key": "beitraege",
+            "label": "Beitragseinnahmen",
+            "werte": [
+              {
+                "label": "2019",
+                "wert": 173
+              },
+              {
+                "label": "2024",
+                "wert": 720
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Zahl versicherter Tiere hat sich binnen fünf Jahren von rund 845.000 (2019) auf über 2 Millionen (2024) mehr als verdoppelt; 2023 und 2024 wuchsen die Beiträge laut GDV jeweils um rund 40 Prozent.",
+        "abschnitt": "heading-6",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "reiseversicherung",
+    "statistiken": []
+  },
+  {
+    "slug": "cyberversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Markt und Prämien 2026",
+        "art": "saeulen",
+        "titel": "Beitragseinnahmen der Cyberversicherer 2020 bis 2022",
+        "untertitel": "Gebuchte Bruttobeiträge im inländischen Direktgeschäft der Cyberrisikoversicherung",
+        "einheit": "Mio. €",
+        "quelle": {
+          "name": "Gesamtverband der Deutschen Versicherungswirtschaft (GDV), Pressemitteilung „Cyberversicherer kehren in die Gewinnzone zurück – Markt wächst weiter“",
+          "url": "https://www.gdv.de/gdv/medien/medieninformationen/cyberversicherer-kehren-in-die-gewinnzone-zurueck-markt-waechst-weiter--147652",
+          "stand": "19.09.2023"
+        },
+        "reihen": [
+          {
+            "key": "beitraege",
+            "label": "Beiträge",
+            "werte": [
+              {
+                "label": "2020",
+                "wert": 106
+              },
+              {
+                "label": "2021",
+                "wert": 178
+              },
+              {
+                "label": "2022",
+                "wert": 249
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Schaden-Kosten-Quote sank von rund 124 Prozent (2021) auf rund 78 Prozent (2022); die Zahl der Schäden ging leicht zurück, während der Schadendurchschnitt von 37.000 auf 42.000 Euro stieg.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "betriebshaftpflichtversicherung",
+    "statistiken": []
+  },
+  {
+    "slug": "berufshaftpflichtversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Welche Versicherungssummen und Deckungsgrenzen sind richtig?",
+        "art": "balken",
+        "titel": "Gesetzliche Mindestversicherungssummen je nach Beruf",
+        "untertitel": "Vorgeschriebene Mindestdeckung für Personen- und Sachschäden je Versicherungsfall",
+        "einheit": "Mio. €",
+        "quelle": {
+          "name": "§ 51 Abs. 4 Bundesrechtsanwaltsordnung (BRAO); § 95e Sozialgesetzbuch V (SGB V) (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/sgb_5/__95e.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "mindestsumme",
+            "label": "Mindestsumme",
+            "werte": [
+              {
+                "label": "Rechtsanwalt, Einzelanwalt (§ 51 Abs. 4 BRAO)",
+                "wert": 0.25
+              },
+              {
+                "label": "Vertragsarzt ohne angestellte Ärzte (§ 95e SGB V)",
+                "wert": 3
+              },
+              {
+                "label": "Medizinisches Versorgungszentrum (§ 95e SGB V)",
+                "wert": 5
+              }
+            ]
+          }
+        ],
+        "hinweis": "Bei den ärztlichen Mindestsummen müssen die jährlichen Leistungen des Versicherers zusätzlich mindestens das Zwei- beziehungsweise Dreifache der Mindestsumme je Schadenfall abdecken.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "bauherrenhaftpflichtversicherung",
+    "statistiken": []
+  },
+  {
+    "slug": "drohnenhaftpflichtversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Drohnenhaftpflichtversicherung: Gesetzliche Pflicht & rechtlicher Rahmen",
+        "art": "balken",
+        "titel": "EU-Mindestversicherung für Fluggeräte steigt mit dem Gewicht",
+        "untertitel": "Mindesthaftungssumme je Schadenfall nach Gewichtsklasse (höchstzulässige Startmasse)",
+        "einheit": "Mio. €",
+        "quelle": {
+          "name": "Verordnung (EG) Nr. 785/2004 des Europäischen Parlaments und des Rates vom 21. April 2004, Art. 7 mit Tabelle (ABl. Nr. L 138 vom 30.04.2004)",
+          "url": "https://www.umwelt-online.de/regelwerk/cgi-bin/suchausgabe.cgi?pfad=/eu/00_04/04_785.htm&such=UMWELT",
+          "stand": "30.04.2004"
+        },
+        "reihen": [
+          {
+            "key": "mtom",
+            "label": "Mindestversicherungssumme",
+            "werte": [
+              {
+                "label": "Unter 500 kg",
+                "wert": 0.885
+              },
+              {
+                "label": "Unter 1.000 kg",
+                "wert": 1.77
+              },
+              {
+                "label": "Unter 2.700 kg",
+                "wert": 3.54
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Verordnung nennt die Beträge in Sonderziehungsrechten (SZR); umgerechnet zum SZR-Kurs vom 4. September 2026 (1 SZR ≈ 1,18 €). Handelsübliche Drohnen fallen mit ihrem Abfluggewicht praktisch immer in die niedrigste Kategorie unter 500 Kilogramm.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "e-scooter-versicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Welche Leistungen bietet die E-Scooter Versicherung?",
+        "art": "balken",
+        "titel": "Leih-Scooter verursachen überproportional viele Schäden",
+        "untertitel": "Von Kfz-Haftpflichtversicherern regulierte Schadenfälle nach Nutzungsart, 2022",
+        "einheit": "",
+        "quelle": {
+          "name": "Gesamtverband der Deutschen Versicherungswirtschaft (GDV), Pressemitteilung „E-Scooter: Viele Unfälle durch Leih-Flotten“",
+          "url": "https://www.gdv.de/gdv/medien/medieninformationen/e-scooter-viele-unfaelle-durch-leih-flotten-149344",
+          "stand": "18.09.2023"
+        },
+        "reihen": [
+          {
+            "key": "schaeden",
+            "label": "Schäden 2022",
+            "werte": [
+              {
+                "label": "Private E-Scooter (571.000 versichert)",
+                "wert": 1850
+              },
+              {
+                "label": "Leih-Scooter (193.000 versichert)",
+                "wert": 2350
+              }
+            ]
+          }
+        ],
+        "hinweis": "Obwohl nur etwa jeder vierte E-Scooter zu einer Leihflotte gehört, verantworten Leih-Scooter mehr als die Hälfte aller E-Scooter-Unfälle; bei Personenschäden entstehen im Schnitt Kosten von über 13.000 Euro.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "fondsgebundene-lebensversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Fondsgebundene versus klassische Lebensversicherung: Was sind die Unterschiede?",
+        "art": "saeulen",
+        "titel": "Höchstrechnungszins fällt jahrzehntelang, steigt seit 2025",
+        "untertitel": "Vom Bundesfinanzministerium festgelegte Obergrenze für den Rechnungszins der Lebensversicherer",
+        "einheit": "%",
+        "quelle": {
+          "name": "Deutsche Aktuarvereinigung (DAV), Fachinformation „Höchstrechnungszins in der Lebensversicherung“",
+          "url": "https://aktuar.de/content/PDF/Fachwissen/H%C3%B6chstrechnungszins_in_der_Lebensversicherung.pdf",
+          "stand": "2025",
+          "sekundaer": true
+        },
+        "reihen": [
+          {
+            "key": "zins",
+            "label": "Höchstrechnungszins",
+            "werte": [
+              {
+                "label": "2000–03",
+                "wert": 3.25
+              },
+              {
+                "label": "2004–06",
+                "wert": 2.75
+              },
+              {
+                "label": "2007–11",
+                "wert": 2.25
+              },
+              {
+                "label": "2012–14",
+                "wert": 1.75
+              },
+              {
+                "label": "2015–16",
+                "wert": 1.25
+              },
+              {
+                "label": "2017–21",
+                "wert": 0.9
+              },
+              {
+                "label": "2022–24",
+                "wert": 0.25
+              },
+              {
+                "label": "2025",
+                "wert": 1
+              }
+            ]
+          }
+        ],
+        "hinweis": "Über die endgültige Höhe entscheidet das Bundesministerium der Finanzen durch die Deckungsrückstellungsverordnung. Für fondsgebundene Verträge ohne Garantie gilt kein Höchstrechnungszins – das Anlagerisiko trägt vollständig der Versicherte.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "wahltarife-gesetzliche-krankenkasse",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Selbstbehalttarife: Funktionsweise und Risiken",
+        "art": "balken",
+        "titel": "Gesetzlicher Deckel für Wahltarif-Prämien",
+        "untertitel": "Höchstgrenze der jährlichen Prämienzahlung, gemessen an den selbst getragenen Beiträgen",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 53 Abs. 8 Satz 4 Sozialgesetzbuch V (SGB V) (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/sgb_5/__53.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "deckel",
+            "label": "Höchstgrenze",
+            "werte": [
+              {
+                "label": "Ein Wahltarif",
+                "wert": 20
+              },
+              {
+                "label": "Mehrere kombinierte Wahltarife",
+                "wert": 30
+              }
+            ]
+          }
+        ],
+        "hinweis": "Zusätzlich gilt eine absolute Obergrenze von 600 Euro jährlich bei einem Tarif beziehungsweise 900 Euro bei mehreren kombinierten Tarifen.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "vorsorgeaufwendungen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch sind die Höchstbeträge für Altersvorsorge 2026?",
+        "art": "balken",
+        "titel": "Höchstbetrag für Altersvorsorgeaufwendungen 2026",
+        "untertitel": "Abzugsfähiger Höchstbetrag nach § 10 Abs. 3 EStG, gekoppelt an den Höchstbeitrag zur knappschaftlichen Rentenversicherung",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 10 Abs. 3 EStG; § 4 Abs. 1 Nr. 2 Sozialversicherungsrechengrößen-Verordnung 2026 (SVBezGrV 2026); Bekanntmachung der Beitragssätze in der allgemeinen und knappschaftlichen Rentenversicherung 2026 (RVBeitrSBek 2026) (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__10.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Ledige",
+                "wert": 30826
+              },
+              {
+                "label": "Verheiratete (gemeinsam veranlagt)",
+                "wert": 61652
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Betrag ergibt sich aus dem Höchstbeitrag zur knappschaftlichen Rentenversicherung: 124.800 Euro Beitragsbemessungsgrenze (jährlich) × 24,7 Prozent Beitragssatz = 30.825,60 Euro, aufgerundet auf 30.826 Euro; für Verheiratete verdoppelt.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Welche Versicherungen gehören zu „sonstigen Vorsorgeaufwendungen“?",
+        "art": "balken",
+        "titel": "Höchstbeträge für sonstige Vorsorgeaufwendungen",
+        "untertitel": "Abzugsfähiger Jahreshöchstbetrag nach § 10 Abs. 4 EStG",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 10 Abs. 4 EStG (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__10.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "hoechstbetrag",
+            "label": "Höchstbetrag",
+            "werte": [
+              {
+                "label": "Selbstständige (Krankenversicherung vollständig selbst finanziert)",
+                "wert": 2800
+              },
+              {
+                "label": "Arbeitnehmer (Zuschuss/Beihilfe zur Krankenversicherung)",
+                "wert": 1900
+              }
+            ]
+          }
+        ],
+        "hinweis": "Bei zusammen veranlagten Ehegatten verdoppelt sich der jeweilige Höchstbetrag; angerechnet werden vorrangig die Beiträge zur Kranken- und Pflegeversicherung.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  }
+]

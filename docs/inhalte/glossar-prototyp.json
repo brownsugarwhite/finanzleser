@@ -1,0 +1,965 @@
+[
+  {
+    "slug": "haftpflicht",
+    "titel": "Privathaftpflicht",
+    "varianten": [
+      "Privathaftpflicht",
+      "Haftpflicht"
+    ],
+    "erklaerung": "<p>Die Versicherung, die zahlt, wenn Sie anderen versehentlich einen Schaden zufügen: an Sachen, an Personen, am Vermögen. Sie prüft auch, ob eine Forderung berechtigt ist, und wehrt unberechtigte ab.</p>",
+    "quelle": "AVB Ammerländer Privathaftpflicht, § 2",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "vergleich/private-haftpflichtversicherung-vergleich",
+    "frage": "Reicht meine Haftpflicht für eine Familie?",
+    "antwort": "Für Familien zählt der Tarif als Familientarif: Partner und Kinder sind mitversichert, deliktunfähige Kinder idealerweise ausdrücklich. Deckungssumme mindestens 10 Millionen Euro pauschal, Schlüsselverlust und Gefälligkeitsschäden enthalten. Das erfüllen 9 von 10 Partnertarifen.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "schliessanlage",
+    "titel": "Schließanlage",
+    "varianten": [
+      "Schließanlage"
+    ],
+    "erklaerung": "<p>Ein Schließsystem, bei dem ein Schlüssel mehrere Türen öffnet, etwa in Mehrfamilienhäusern oder Firmen. Geht ein Schlüssel verloren, muss oft die ganze Anlage getauscht werden. Das kostet schnell fünfstellig.</p>",
+    "quelle": "BGH, Urteil vom 5. März 2014, VIII ZR 205/13",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "checkliste/private-haftpflichtversicherung",
+    "frage": "Muss der Vermieter die Anlage wirklich komplett tauschen?",
+    "antwort": "Nur, wenn ein Missbrauch des Schlüssels möglich ist, etwa weil er mit Adresse verloren ging. Der BGH verlangt eine konkrete Missbrauchsgefahr (VIII ZR 205/13). Ein Schlüssel ohne Zuordnung rechtfertigt oft keinen Komplettaustausch.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "selbstbeteiligung",
+    "titel": "Selbstbeteiligung",
+    "varianten": [
+      "Selbstbeteiligung"
+    ],
+    "erklaerung": "<p>Der Teil eines Schadens, den Sie selbst tragen. Eine Selbstbeteiligung von 150 Euro senkt den Beitrag, lohnt sich aber nur, wenn Sie selten kleine Schäden melden.</p>",
+    "quelle": "Verbraucherzentrale, Privathaftpflicht: Worauf Sie achten sollten; Tarifübersichten 2026",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "vergleich/private-haftpflichtversicherung-vergleich",
+    "frage": "Lohnt sich eine Selbstbeteiligung bei der Haftpflicht?",
+    "antwort": "Bei der Privathaftpflicht selten. Der Beitrag liegt ohnehin bei 3 bis 8 Euro im Monat, eine Selbstbeteiligung von 150 Euro spart davon nur 10 bis 20 Prozent, und im Schadenfall zahlen Sie den Betrag jedes Mal selbst. Bei Hausrat und Kfz-Kasko ist die Ersparnis größer, weil dort die Beiträge höher sind.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "deckungssumme",
+    "titel": "Deckungssumme",
+    "varianten": [
+      "Deckungssumme",
+      "Höchstsumme",
+      "Höchstentschädigung"
+    ],
+    "erklaerung": "<p>Der Höchstbetrag, den der Versicherer je Schadenfall zahlt. Bei der Haftpflicht heute üblich: 10 bis 50 Millionen Euro pauschal, für Sonderbausteine wie Schlüsselverlust meist eine eigene, kleinere Summe.</p>",
+    "quelle": "Verbraucherzentrale Bundesverband, Mindestkriterien Privathaftpflicht; Stiftung Warentest Finanztest, Haftpflichttest",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "vergleich/private-haftpflichtversicherung-vergleich",
+    "frage": "Welche Deckungssumme ist genug?",
+    "antwort": "Mindestens 10 Millionen Euro pauschal für Personen-, Sach- und Vermögensschäden, besser 20 bis 50 Millionen; der Aufpreis liegt bei wenigen Euro im Jahr. Für Sonderbausteine wie Schlüsselverlust oder Gefälligkeitsschäden gilt eine eigene, kleinere Summe, meist 30.000 bis 100.000 Euro. Die steht getrennt in den Bedingungen.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "fahrlaessigkeit",
+    "titel": "Grobe Fahrlässigkeit",
+    "varianten": [
+      "Grobe Fahrlässigkeit",
+      "grober Fahrlässigkeit",
+      "Fahrlässigkeit",
+      "fahrlässig"
+    ],
+    "erklaerung": "<p>Wer die nötige Sorgfalt in besonders schwerem Maß verletzt, handelt grob fahrlässig: der Schlüssel im offenen Auto, die Kerze neben dem Vorhang. Viele Versicherer dürfen dann kürzen. Gute Tarife verzichten auf diesen Einwand.</p>",
+    "quelle": "§ 81 Abs. 2 VVG; AVB Privathaftpflicht und VHB 2022, Verzicht auf den Einwand der groben Fahrlässigkeit",
+    "ratgeber": "hausratversicherung",
+    "tool": "checkliste/hausratversicherung",
+    "frage": "Und bei grober Fahrlässigkeit?",
+    "antwort": "In der Privathaftpflicht sind auch grob fahrlässig verursachte Schäden an anderen versichert, nur Vorsatz nicht. Anders bei Hausrat, Wohngebäude und Kasko: Dort darf der Versicherer nach § 81 VVG im Verhältnis zur Schwere kürzen, wenn der Tarif nicht ausdrücklich auf diesen Einwand verzichtet. Diesen Verzicht sollte jeder neue Vertrag enthalten.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "vorsatz",
+    "titel": "Vorsatz",
+    "varianten": [
+      "Vorsatz",
+      "vorsätzlich"
+    ],
+    "erklaerung": "<p>Ein Schaden, den jemand mit Wissen und Wollen herbeiführt. Vorsatz ist in keiner Versicherung gedeckt, das steht in § 81 des Versicherungsvertragsgesetzes.</p>",
+    "quelle": "§ 81 Abs. 1 VVG; § 103 VVG",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "",
+    "frage": "Wo endet Fahrlässigkeit und wo beginnt Vorsatz?",
+    "antwort": "Fahrlässig handelt, wer den Schaden nicht will, aber die nötige Sorgfalt vernachlässigt. Vorsätzlich handelt, wer ihn wissentlich und willentlich herbeiführt oder billigend in Kauf nimmt. Vorsatz ist in der Haftpflicht nach § 103 VVG ausgeschlossen, in Sachversicherungen nach § 81 Abs. 1 VVG. Beweisen muss ihn der Versicherer.",
+    "rubrik": "Recht",
+    "wappen": "recht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "versicherungsnehmer",
+    "titel": "Versicherungsnehmer",
+    "varianten": [
+      "Versicherungsnehmer"
+    ],
+    "erklaerung": "<p>Die Person, die den Vertrag abschließt und den Beitrag zahlt. Sie muss nicht die versicherte Person sein: In der Familienhaftpflicht sind Partner und Kinder mitversichert, ohne Versicherungsnehmer zu sein.</p>",
+    "quelle": "AVB Privathaftpflicht, Abschnitt Mitversicherte Personen; Ratgeber Private Haftpflichtversicherung",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "vergleich/private-haftpflichtversicherung-vergleich",
+    "frage": "Sind meine Kinder automatisch mitversichert?",
+    "antwort": "In einer Familien- oder Partnerpolice ja: Ehe- und Lebenspartner und unverheiratete Kinder sind mitversichert, Kinder bis zum Ende der ersten Ausbildung oder des Erststudiums. Wer als Single versichert ist, muss auf den Familientarif umstellen; das kostet meist 10 bis 20 Euro im Jahr mehr.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "avb",
+    "titel": "Versicherungsbedingungen (AVB)",
+    "varianten": [
+      "Versicherungsbedingungen (AVB)",
+      "Versicherungsbedingungen",
+      "Bedingungswerk",
+      "AVB"
+    ],
+    "erklaerung": "<p>Das Kleingedruckte: die allgemeinen Versicherungsbedingungen regeln, was versichert ist, was nicht, und was Sie im Schadenfall tun müssen. Leo hat die Bedingungswerke der Partner gelesen und zitiert daraus mit Seite.</p>",
+    "quelle": "AVB Privathaftpflicht, Abschnitt Schlüsselverlust (je nach Tarif)",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "checkliste/private-haftpflichtversicherung",
+    "frage": "Was steht in meinen Bedingungen zum Schlüsselverlust?",
+    "antwort": "Suchen Sie im Bedingungswerk den Abschnitt „Schlüsselverlust“ oder „Verlust fremder Schlüssel“. Dort stehen die Summe, meist 30.000 bis 100.000 Euro, ob private und berufliche Schlüssel gemeint sind, ob die Schließanlage samt Austausch gedeckt ist und ob eine Selbstbeteiligung gilt. Steht nichts dazu, ist der Baustein nicht enthalten.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "police",
+    "titel": "Police",
+    "varianten": [
+      "Police",
+      "Versicherungsschein"
+    ],
+    "erklaerung": "<p>Die Urkunde über den Versicherungsvertrag, auch Versicherungsschein genannt. Sie nennt Tarif, Summen, Bausteine und Beitrag. Im Aktenkoffer lässt sie sich mit Leo durchsuchen.</p>",
+    "quelle": "§ 3 VVG (Versicherungsschein); Ratgeber Private Haftpflichtversicherung",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "checkliste/private-haftpflichtversicherung",
+    "frage": "Was sollte ich in meiner Police prüfen?",
+    "antwort": "Vier Dinge: die Deckungssumme, die eingeschlossenen Bausteine, den versicherten Personenkreis und das Datum des Bedingungswerks. Bedingungen, die älter als zehn Jahre sind, bleiben fast immer hinter heutigen Tarifen zurück. Steht auf der Police ein anderer Tarifname als im Angebot, fragen Sie nach.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "beitrag",
+    "titel": "Beitrag (Prämie)",
+    "varianten": [
+      "Beitrag (Prämie)",
+      "Beitrag",
+      "Prämie",
+      "Beiträge"
+    ],
+    "erklaerung": "<p>Der Preis der Versicherung, monatlich oder jährlich. Jahreszahlung ist meist 3 bis 5 Prozent günstiger. Beitragsanpassungen begründen ein Sonderkündigungsrecht.</p>",
+    "quelle": "§ 40 VVG (Kündigung bei Prämienerhöhung); Ratgeber Private Haftpflichtversicherung",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "vergleich/private-haftpflichtversicherung-vergleich",
+    "frage": "Ist mein Beitrag zu hoch?",
+    "antwort": "Gute Privathaftpflicht-Tarife mit 50 Millionen Euro Deckung kosten 2026 ab 25 Euro im Jahr für Singles und ab 37 Euro für Familien. Wer deutlich über 80 Euro zahlt, sollte vergleichen. Erhöht der Versicherer den Beitrag, dürfen Sie innerhalb eines Monats außerordentlich kündigen.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "tarif",
+    "titel": "Tarif",
+    "varianten": [
+      "Tarif",
+      "Tarife"
+    ],
+    "erklaerung": "<p>Ein konkretes Produkt eines Versicherers mit festgelegtem Leistungsumfang und Preis. Derselbe Versicherer bietet oft Basis-, Komfort- und Premium-Tarif; die Unterschiede stecken in Bausteinen und Summen.</p>",
+    "quelle": "Tarifvergleich Privathaftpflicht auf Finanzleser (Stand 2026)",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "vergleich/private-haftpflichtversicherung-vergleich",
+    "frage": "Was kostet so ein Tarif?",
+    "antwort": "Ein Familientarif mit 50 Millionen Euro Deckung, Schlüsselverlust, Gefälligkeitsschäden und Forderungsausfall kostet 2026 zwischen 40 und 90 Euro im Jahr. Premium-Tarife mit Best-Leistungs-Garantie liegen bei 90 bis 130 Euro. Der Preis sagt wenig über die Qualität, die Bausteine entscheiden.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "baustein",
+    "titel": "Baustein",
+    "varianten": [
+      "Baustein",
+      "Zusatzbaustein"
+    ],
+    "erklaerung": "<p>Ein einzelner Leistungsteil eines Tarifs, der enthalten sein kann oder zusätzlich versichert wird: Schlüsselverlust, Gefälligkeitsschäden, Forderungsausfall. Die Summe der Bausteine macht den Tarif.</p>",
+    "quelle": "Verbraucherzentrale Bundesverband, Mindestkriterien Privathaftpflicht",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "vergleich/private-haftpflichtversicherung-vergleich",
+    "frage": "Welche Bausteine sind wirklich wichtig?",
+    "antwort": "Fünf gehören in jeden Haftpflichttarif: Forderungsausfall, Schlüsselverlust, Mietsachschäden, Gefälligkeitsschäden und deliktunfähige Kinder. Je nach Leben nützlich: geliehene Sachen, Drohnen, Ehrenamt, Auslandsaufenthalte über ein Jahr. Was Sie nie brauchen, zahlen Sie im Premium-Tarif trotzdem mit.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "betriebshaftpflicht",
+    "titel": "Betriebshaftpflicht",
+    "varianten": [
+      "Betriebshaftpflicht"
+    ],
+    "erklaerung": "<p>Die Haftpflichtversicherung eines Unternehmens. Sie deckt Schäden, die Beschäftigte im Dienst verursachen, etwa den Verlust eines Dienstschlüssels. Bei grober Fahrlässigkeit kann der Arbeitgeber Rückgriff nehmen.</p>",
+    "quelle": "Grundsätze der Arbeitnehmerhaftung, BAG GS 1/89; AVB Privathaftpflicht, berufliche Schlüssel",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "",
+    "frage": "Was gilt bei Dienstschlüsseln?",
+    "antwort": "Geht ein Dienstschlüssel verloren, haftet zunächst der Arbeitgeber gegenüber dem Eigentümer, seine Betriebshaftpflicht zahlt. Bei grober Fahrlässigkeit oder Vorsatz kann er sich das Geld bei Ihnen zurückholen, bei leichter Fahrlässigkeit nicht. Der Baustein „berufliche Schlüssel“ in der Privathaftpflicht deckt genau diesen Rückgriff, meist bis 30.000 Euro.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "hausrat",
+    "titel": "Hausratversicherung",
+    "varianten": [
+      "Hausratversicherung",
+      "Hausrat"
+    ],
+    "erklaerung": "<p>Versichert alles, was Sie beim Umzug mitnehmen würden: Möbel, Kleidung, Elektronik, Fahrräder. Gegen Feuer, Leitungswasser, Sturm, Einbruch. Wichtig ist eine passende Versicherungssumme, sonst droht Unterversicherung.</p>",
+    "quelle": "VHB 2022, Fahrraddiebstahl-Klausel; Ratgeber Hausratversicherung",
+    "ratgeber": "hausratversicherung",
+    "tool": "vergleich/hausratversicherung-vergleich",
+    "frage": "Ist mein Fahrrad in der Hausrat versichert?",
+    "antwort": "In der Wohnung, im abgeschlossenen Keller oder in der Garage ja, gegen Einbruch, Feuer und Wasser. Auf der Straße oder am Bahnhof nur mit der Fahrradklausel, meist bis 1 bis 5 Prozent der Versicherungssumme und nur abgeschlossen an einem festen Gegenstand. Für ein E-Bike ab 3.000 Euro ist eine eigene Fahrradversicherung meist die bessere Wahl.",
+    "rubrik": "Versicherungen",
+    "wappen": "hausrat",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "unterversicherung",
+    "titel": "Unterversicherung",
+    "varianten": [
+      "Unterversicherung"
+    ],
+    "erklaerung": "<p>Wenn die Versicherungssumme unter dem tatsächlichen Wert liegt. Der Versicherer kürzt dann jede Zahlung im Verhältnis. Faustregel für Hausrat: 650 Euro je Quadratmeter Wohnfläche, dann verzichten Versicherer auf den Einwand.</p>",
+    "quelle": "§ 75 VVG; Verbraucherzentrale, Versicherungssumme je Quadratmeter (Juli 2025)",
+    "ratgeber": "hausratversicherung",
+    "tool": "checkliste/hausratversicherung",
+    "frage": "Wie berechne ich die richtige Summe?",
+    "antwort": "Faustregel 650 bis 800 Euro je Quadratmeter Wohnfläche: 80 Quadratmeter ergeben 52.000 bis 64.000 Euro. Wer die Pauschale des Versicherers nimmt, bekommt den Unterversicherungsverzicht. Wer hochwertig eingerichtet ist, rechnet Zimmer für Zimmer den Neuwert zusammen und hebt die Summe an.",
+    "rubrik": "Versicherungen",
+    "wappen": "hausrat",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "elementarschaden",
+    "titel": "Elementarschäden",
+    "varianten": [
+      "Elementarschäden",
+      "Elementarschaden",
+      "Elementar"
+    ],
+    "erklaerung": "<p>Schäden durch Naturgefahren wie Überschwemmung, Starkregen, Erdrutsch, Schneedruck. Sie sind in Hausrat und Wohngebäude nur mit dem Zusatzbaustein „Elementar“ versichert. Sturm und Hagel dagegen sind Standard.</p>",
+    "quelle": "GDV, ZÜRS Geo und Naturgefahrenreport 2022; Ratgeber Hausratversicherung",
+    "ratgeber": "hausratversicherung",
+    "tool": "vergleich/hausratversicherung-vergleich",
+    "frage": "Brauche ich Elementarschutz in meiner Region?",
+    "antwort": "Fast überall. Starkregen kennt keine Risikozonen, und im Ahrtal 2021 lag der Großteil der zerstörten Häuser außerhalb ausgewiesener Hochwassergebiete. Ihre Zone zeigt das ZÜRS-System der Versicherer; in Zone 1 und 2 kostet der Baustein für den Hausrat 20 bis 50 Euro im Jahr, in Zone 4 wird es teuer oder unmöglich.",
+    "rubrik": "Versicherungen",
+    "wappen": "wohnen",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "wechselfrist",
+    "titel": "Kfz-Wechselfrist",
+    "varianten": [
+      "Kfz-Wechselfrist",
+      "Wechselfrist"
+    ],
+    "erklaerung": "<p>Kfz-Verträge laufen meist bis 31. Dezember und verlängern sich, wenn nicht bis 30. November gekündigt wird. Der Wächter erinnert rechtzeitig und bringt geprüfte Angebote.</p>",
+    "quelle": "§ 40 VVG; Ratgeber Kfz-Versicherung",
+    "ratgeber": "kfz-versicherung",
+    "tool": "vergleich/kfz-versicherung-vergleich",
+    "frage": "Wächter für die Kfz-Frist einrichten",
+    "antwort": "Der Wächter merkt sich den 30. November und meldet sich Anfang November mit einem Vergleich zu Ihren Tarifdaten. Kündigen müssen Sie schriftlich beim alten Versicherer; entscheidend ist der Eingang dort, nicht der Poststempel. Erhöht der Versicherer den Beitrag, gilt zusätzlich ein Sonderkündigungsrecht von einem Monat.",
+    "rubrik": "Versicherungen",
+    "wappen": "kfz",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "kasko",
+    "titel": "Teil- und Vollkasko",
+    "varianten": [
+      "Teil- und Vollkasko",
+      "Teilkasko",
+      "Vollkasko",
+      "Kasko"
+    ],
+    "erklaerung": "<p>Die Kasko versichert Schäden am eigenen Auto. Teilkasko: Diebstahl, Glas, Wild, Sturm, Hagel. Vollkasko zusätzlich: selbst verschuldete Unfälle und Vandalismus. Für Neuwagen und Finanzierungen ist Vollkasko üblich.</p>",
+    "quelle": "Ratgeber Kfz-Versicherung; GDV, Typklassenverzeichnis",
+    "ratgeber": "kfz-versicherung",
+    "tool": "vergleich/kfz-versicherung-vergleich",
+    "frage": "Ab welchem Fahrzeugalter reicht Teilkasko?",
+    "antwort": "Als Faustregel ab dem fünften Jahr, wenn der Wiederbeschaffungswert unter 10.000 Euro liegt oder die Vollkasko das Doppelte der Teilkasko kostet. Bei Finanzierung oder Leasing bleibt Vollkasko Pflicht. Rechnen Sie den Aufpreis gegen den Verlust, den ein selbst verschuldeter Totalschaden bedeuten würde.",
+    "rubrik": "Versicherungen",
+    "wappen": "kfz",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "rechtsschutz",
+    "titel": "Rechtsschutzversicherung",
+    "varianten": [
+      "Rechtsschutzversicherung",
+      "Rechtsschutz"
+    ],
+    "erklaerung": "<p>Übernimmt Anwalts- und Gerichtskosten in den versicherten Bereichen: Privat, Beruf, Verkehr, Wohnen. Nicht versichert sind meist Bau, Familienrecht und Streit um den Vertrag selbst.</p>",
+    "quelle": "ARB 2012, Wohnungs- und Grundstücksrechtsschutz; Ratgeber Rechtsschutzversicherung",
+    "ratgeber": "rechtsschutzversicherung",
+    "tool": "vergleich/rechtsschutzversicherung-vergleich",
+    "frage": "Deckt Rechtsschutz einen Streit mit dem Vermieter?",
+    "antwort": "Nur mit dem Baustein Wohnungs- und Grundstücksrechtsschutz, den Privat- und Berufsrechtsschutz nicht enthalten. Er deckt Streit um Mieterhöhung, Nebenkosten, Kündigung und Kaution nach einer Wartezeit von drei Monaten. Ein Streit, der vor Vertragsbeginn begonnen hat, ist nie versichert.",
+    "rubrik": "Versicherungen",
+    "wappen": "recht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "wartezeit",
+    "titel": "Wartezeit",
+    "varianten": [
+      "Wartezeit"
+    ],
+    "erklaerung": "<p>Die Zeit nach Vertragsbeginn, in der noch kein Schutz besteht, bei Rechtsschutz meist drei Monate. Sie verhindert, dass jemand erst im Streit eine Versicherung abschließt. Verkehrsrechtsschutz hat keine Wartezeit.</p>",
+    "quelle": "ARB, Abschnitt Wartezeit (je nach Tarif); § 4 ARB 2012",
+    "ratgeber": "rechtsschutzversicherung",
+    "tool": "vergleich/rechtsschutzversicherung-vergleich",
+    "frage": "Gilt die Wartezeit auch beim Anbieterwechsel?",
+    "antwort": "Beim nahtlosen Wechsel verzichten die meisten Versicherer auf die Wartezeit, wenn der alte Vertrag denselben Baustein enthielt und keine Lücke entsteht. Das steht nicht im Gesetz, sondern in den Bedingungen. Lassen Sie es sich vor der Kündigung schriftlich bestätigen.",
+    "rubrik": "Versicherungen",
+    "wappen": "recht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "unfallversicherung",
+    "titel": "Private Unfallversicherung",
+    "varianten": [
+      "Private Unfallversicherung",
+      "Unfallversicherung"
+    ],
+    "erklaerung": "<p>Zahlt eine vereinbarte Summe, wenn ein Unfall dauerhafte Schäden hinterlässt (Invalidität). Sie gilt weltweit, rund um die Uhr, anders als die gesetzliche Unfallversicherung, die nur Arbeit und Arbeitsweg deckt.</p>",
+    "quelle": "GDV, Ursachen der Berufsunfähigkeit; Ratgeber Unfallversicherung",
+    "ratgeber": "unfallversicherung",
+    "tool": "vergleich/unfallversicherung-vergleich",
+    "frage": "Brauche ich eine Unfallversicherung, wenn ich eine BU habe?",
+    "antwort": "Eine BU ersetzt Ihr Einkommen, gleich ob Krankheit oder Unfall die Ursache ist; das ist der wichtigere Schutz. Die Unfallversicherung zahlt eine Einmalsumme nur bei Unfallfolgen, und Unfälle lösen weniger als jede zehnte Berufsunfähigkeit aus. Sinnvoll bleibt sie für Kinder, Rentner und Menschen, die keine BU bekommen.",
+    "rubrik": "Versicherungen",
+    "wappen": "vorsorge",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "invaliditaet",
+    "titel": "Invalidität",
+    "varianten": [
+      "Invalidität",
+      "Invaliditätssumme",
+      "Invaliditätsgrad"
+    ],
+    "erklaerung": "<p>Die dauerhafte Beeinträchtigung nach einem Unfall, gemessen in Prozent nach der Gliedertaxe. Die Invaliditätssumme wird anteilig gezahlt, mit Progression bei schweren Fällen deutlich mehr.</p>",
+    "quelle": "AUB 2014, Progressionsstaffel; Ratgeber Unfallversicherung",
+    "ratgeber": "unfallversicherung",
+    "tool": "vergleich/unfallversicherung-vergleich",
+    "frage": "Was bedeutet Progression 350 Prozent?",
+    "antwort": "Die Progression erhöht die Leistung bei schweren Verletzungen überproportional: Bei 100 Prozent Invalidität zahlt der Versicherer das 3,5-Fache der Grundsumme, bei 50 Prozent etwa das Doppelte, bei 25 Prozent nur den Anteil der Grundsumme. 100.000 Euro Grundsumme mit Progression 350 bringen im schlimmsten Fall 350.000 Euro.",
+    "rubrik": "Versicherungen",
+    "wappen": "vorsorge",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "duesseldorfer",
+    "titel": "Düsseldorfer Tabelle",
+    "varianten": [
+      "Düsseldorfer Tabelle"
+    ],
+    "erklaerung": "<p>Die Leitlinie der Oberlandesgerichte für den Kindesunterhalt. Sie ordnet dem Nettoeinkommen des Zahlenden eine Einkommensstufe zu und nennt je Altersgruppe des Kindes den Tabellenbetrag. Sie wird meist zum Jahreswechsel angepasst.</p>",
+    "quelle": "Düsseldorfer Tabelle 2026, OLG Düsseldorf",
+    "ratgeber": "duesseldorfer-tabelle",
+    "tool": "rechner/unterhalt",
+    "frage": "Wie viel Unterhalt für zwei Kinder?",
+    "antwort": "In der ersten Einkommensgruppe bis 2.100 Euro Netto sind es 2026 zum Beispiel 558 Euro für ein Kind von 6 bis 11 und 653 Euro für ein Kind von 12 bis 17, abzüglich je 129,50 Euro halbes Kindergeld: zusammen 952 Euro im Monat. Je höher die Einkommensgruppe, desto höher der Betrag, in Schritten von 5 bis 8 Prozent. Der Unterhaltsrechner nimmt Ihre Zahlen.",
+    "rubrik": "Recht",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "unterhalt",
+    "titel": "Kindesunterhalt",
+    "varianten": [
+      "Kindesunterhalt",
+      "Unterhalt",
+      "Mindestunterhalt",
+      "Unterhaltsrechner"
+    ],
+    "erklaerung": "<p>Der Betrag, den der Elternteil zahlt, bei dem das Kind nicht lebt. Höhe nach Düsseldorfer Tabelle, abzüglich des halben Kindergelds. Der Mindestunterhalt ist die unterste Stufe und gesetzlich festgelegt.</p>",
+    "quelle": "§ 1603 Abs. 2 BGB; § 238 FamFG (Abänderung)",
+    "ratgeber": "kindesunterhalt",
+    "tool": "rechner/unterhalt",
+    "frage": "Was passiert bei Jobverlust?",
+    "antwort": "Der Titel gilt weiter, und gegenüber minderjährigen Kindern gilt die gesteigerte Erwerbsobliegenheit: Sie müssen sich nachweisbar um jede zumutbare Arbeit bemühen, sonst rechnet das Gericht ein fiktives Einkommen an. Reicht das Arbeitslosengeld nicht, beantragen Sie beim Familiengericht die Abänderung; das Jugendamt zahlt dem Kind derweil Unterhaltsvorschuss.",
+    "rubrik": "Recht",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "selbstbehalt",
+    "titel": "Selbstbehalt (Unterhalt)",
+    "varianten": [
+      "Selbstbehalt (Unterhalt)",
+      "Selbstbehalt"
+    ],
+    "erklaerung": "<p>Der Betrag, der dem Unterhaltspflichtigen für den eigenen Bedarf bleiben muss. 2026: 1.450 Euro für Erwerbstätige, 1.200 Euro für Nichterwerbstätige gegenüber minderjährigen Kindern.</p>",
+    "quelle": "Düsseldorfer Tabelle 2026, Anmerkung A 5; § 1603 BGB",
+    "ratgeber": "kindesunterhalt",
+    "tool": "rechner/unterhalt",
+    "frage": "Was, wenn mein Einkommen unter dem Selbstbehalt liegt?",
+    "antwort": "Dann sind Sie nicht leistungsfähig und schulden rechtlich keinen Unterhalt, gegenüber minderjährigen Kindern aber nur, wenn Sie alles Zumutbare tun, um mehr zu verdienen. Das Kind erhält Unterhaltsvorschuss vom Jugendamt. Bei einem bestehenden Titel müssen Sie die Abänderung beantragen, sonst laufen Rückstände auf.",
+    "rubrik": "Recht",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "leistungsfaehig",
+    "titel": "Leistungsfähigkeit",
+    "varianten": [
+      "Leistungsfähigkeit",
+      "leistungsfähig"
+    ],
+    "erklaerung": "<p>Unterhalt schuldet nur, wer ihn ohne Gefährdung des eigenen Selbstbehalts zahlen kann. Gegenüber minderjährigen Kindern gilt eine gesteigerte Pflicht: Wer kann, muss auch mehr arbeiten.</p>",
+    "quelle": "§ 1603 Abs. 2 BGB; BGH XII ZB 32/12",
+    "ratgeber": "kindesunterhalt",
+    "tool": "rechner/unterhalt",
+    "frage": "Was bedeutet gesteigerte Erwerbsobliegenheit?",
+    "antwort": "Gegenüber minderjährigen und privilegiert volljährigen Kindern müssen Eltern alle zumutbaren Möglichkeiten ausschöpfen, um den Mindestunterhalt zu zahlen: Vollzeit statt Teilzeit, Nebenjob, notfalls Ortswechsel. Wer das nicht tut, wird behandelt, als hätte er das erzielbare Einkommen. Grenze ist, was nach Ausbildung, Alter und Gesundheit realistisch ist.",
+    "rubrik": "Recht",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "abaenderung",
+    "titel": "Abänderung",
+    "varianten": [
+      "Abänderung"
+    ],
+    "erklaerung": "<p>Ein bestehender Unterhaltstitel gilt weiter, bis ein Gericht ihn ändert. Sinkt das Einkommen dauerhaft, muss die Abänderung beantragt werden, sie wirkt nicht automatisch und nicht rückwirkend.</p>",
+    "quelle": "§ 238 FamFG; § 239 FamFG (Jugendamtsurkunden)",
+    "ratgeber": "kindesunterhalt",
+    "tool": "checkliste/kindesunterhalt",
+    "frage": "Wie beantrage ich eine Abänderung?",
+    "antwort": "Mit einem Abänderungsantrag beim Familiengericht, das den Titel erlassen hat; bei einer Jugendamtsurkunde beim Familiengericht am Wohnort des Kindes. Voraussetzung ist eine wesentliche Änderung, in der Praxis ab etwa 10 Prozent beim Einkommen. Die Änderung wirkt frühestens ab dem Monat, in dem Sie den anderen zur Auskunft aufgefordert haben.",
+    "rubrik": "Recht",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "kindergeld",
+    "titel": "Kindergeld",
+    "varianten": [
+      "Kindergeld"
+    ],
+    "erklaerung": "<p>Eine staatliche Leistung je Kind, 2026: 259 Euro monatlich, gezahlt von der Familienkasse bis zum 18. Geburtstag, in Ausbildung bis 25. Beim Unterhalt wird die Hälfte angerechnet.</p>",
+    "quelle": "Familienkasse der Bundesagentur für Arbeit, Auszahlungstermine 2026",
+    "ratgeber": "kindergeld",
+    "tool": "rechner/kindergeld",
+    "frage": "Wann wird das Kindergeld ausgezahlt?",
+    "antwort": "Die Familienkasse zahlt monatlich nach der Endziffer der Kindergeldnummer: 0 und 1 in den ersten Tagen, 2 bis 5 zur Monatsmitte, 6 und 7 in der zweiten Hälfte, 8 und 9 am Monatsende. Die genauen Termine 2026 stehen im Ratgeber; einen Anspruch auf ein bestimmtes Datum gibt es nicht.",
+    "rubrik": "Recht",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "unterhaltsvorschuss",
+    "titel": "Unterhaltsvorschuss",
+    "varianten": [
+      "Unterhaltsvorschuss"
+    ],
+    "erklaerung": "<p>Zahlt das Jugendamt, wenn der andere Elternteil keinen oder zu wenig Unterhalt leistet. Höhe: Mindestunterhalt minus volles Kindergeld. Der Staat holt sich das Geld beim Pflichtigen zurück.</p>",
+    "quelle": "§ 1 Abs. 1 Nr. 2 UVG; § 6 UVG (Mitwirkungspflicht)",
+    "ratgeber": "unterhaltsvorschuss",
+    "tool": "checkliste/unterhaltsvorschuss",
+    "frage": "Bekomme ich Unterhaltsvorschuss, wenn ich wieder heirate?",
+    "antwort": "Nein. Mit der Heirat endet der Anspruch, weil das Gesetz nur an ledige, verwitwete oder geschiedene Elternteile zahlt, die dauerhaft getrennt leben, und zwar auch, wenn Sie nicht den anderen Elternteil heiraten. Zusammenleben ohne Trauschein ist unschädlich. Die Heirat müssen Sie dem Jugendamt sofort melden.",
+    "rubrik": "Recht",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "grundfreibetrag",
+    "titel": "Grundfreibetrag",
+    "varianten": [
+      "Grundfreibetrag"
+    ],
+    "erklaerung": "<p>Bis zu diesem Betrag bleibt das zu versteuernde Einkommen steuerfrei: 2026 sind es 12.348 Euro für Alleinstehende, das Doppelte für Verheiratete. Er sichert das Existenzminimum.</p>",
+    "quelle": "§ 32a Abs. 1 EStG (Steuerfortentwicklungsgesetz)",
+    "ratgeber": "steuerformulare-2024",
+    "tool": "rechner/einkommensteuer",
+    "frage": "Was bedeutet der Grundfreibetrag für mich?",
+    "antwort": "Auf die ersten 12.348 Euro Ihres zu versteuernden Einkommens zahlen Sie 2026 keine Steuer, bei Zusammenveranlagung auf 24.696 Euro. Er ist in die Steuertabelle eingebaut, Sie müssen ihn nicht beantragen. Für Rentner ist er die Grenze, ab der die Rente steuerpflichtig wird.",
+    "rubrik": "Steuern",
+    "wappen": "steuer",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "einkommensteuer",
+    "titel": "Einkommensteuer",
+    "varianten": [
+      "Einkommensteuer"
+    ],
+    "erklaerung": "<p>Die Steuer auf das Einkommen natürlicher Personen. Der Satz steigt mit dem Einkommen von 14 bis 45 Prozent; Arbeitnehmer zahlen sie als Lohnsteuer im Voraus und holen sich mit der Erklärung oft Geld zurück.</p>",
+    "quelle": "Statistisches Bundesamt, Lohn- und Einkommensteuerstatistik; § 46 EStG",
+    "ratgeber": "steuerformulare-2024",
+    "tool": "rechner/einkommensteuer",
+    "frage": "Lohnt sich eine Steuererklärung für mich?",
+    "antwort": "Für Arbeitnehmer fast immer: Im Schnitt gibt es rund 1.100 Euro zurück, weil Fahrtkosten, Homeoffice, Versicherungen oder Handwerkerrechnungen über der Pauschale liegen. Pflicht ist die Erklärung bei Steuerklasse 3 und 5, bei 4 mit Faktor, bei Lohnersatzleistungen über 410 Euro und bei Nebeneinkünften. Freiwillig dürfen Sie vier Jahre rückwirkend abgeben.",
+    "rubrik": "Steuern",
+    "wappen": "steuer",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "splitting",
+    "titel": "Ehegattensplitting",
+    "varianten": [
+      "Ehegattensplitting",
+      "Splitting",
+      "Splittingtabelle"
+    ],
+    "erklaerung": "<p>Verheiratete versteuern ihr gemeinsames Einkommen so, als hätte jeder die Hälfte verdient. Das senkt die Steuer, je ungleicher die Einkommen sind. Die Splittingtabelle zeigt die Beträge.</p>",
+    "quelle": "§ 32a Abs. 5 EStG; § 26b EStG",
+    "ratgeber": "steuerformulare-2024",
+    "tool": "checkliste/ehegattensplitting",
+    "frage": "Wie viel spart uns das Splitting?",
+    "antwort": "Umso mehr, je ungleicher die Einkommen sind. Bei einem Alleinverdiener mit 60.000 Euro liegt der Vorteil 2026 im mittleren vierstelligen Bereich, bei gleich hohen Einkommen bringt das Splitting nichts. Es gilt auch für eingetragene Lebenspartnerschaften und noch im Jahr der Trennung.",
+    "rubrik": "Steuern",
+    "wappen": "steuer",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "nettoeinkommen",
+    "titel": "Nettoeinkommen",
+    "varianten": [
+      "Nettoeinkommen",
+      "Netto",
+      "Nettogehalt"
+    ],
+    "erklaerung": "<p>Das Einkommen nach Steuern und Sozialabgaben. Für den Unterhalt zählt das bereinigte Netto: abzüglich berufsbedingter Aufwendungen und angemessener Altersvorsorge.</p>",
+    "quelle": "Düsseldorfer Tabelle 2026, Anmerkung A 3 und A 5",
+    "ratgeber": "kindesunterhalt",
+    "tool": "rechner/unterhalt",
+    "frage": "Was wird beim Unterhalt vom Netto abgezogen?",
+    "antwort": "Berufsbedingte Aufwendungen pauschal 5 Prozent, mindestens 50 und höchstens 150 Euro, oder nachgewiesene Fahrtkosten; angemessene zusätzliche Altersvorsorge bis 4 Prozent des Bruttos; Schulden, die vor der Trennung aufgenommen wurden; Krankenversicherungsbeiträge, wenn sie nicht schon im Netto stecken. Miete und Lebenshaltung werden nicht abgezogen, dafür gibt es den Selbstbehalt.",
+    "rubrik": "Recht",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "festgeld",
+    "titel": "Festgeld",
+    "varianten": [
+      "Festgeld"
+    ],
+    "erklaerung": "<p>Eine Anlage mit festem Zins für eine feste Laufzeit, meist 6 Monate bis 5 Jahre. Sicher bis 100.000 Euro je Bank durch die Einlagensicherung, aber ohne vorzeitigen Zugriff.</p>",
+    "quelle": "Festgeld- und Tagesgeldvergleich auf Finanzleser (Stand 2026); § 8 Einlagensicherungsgesetz",
+    "ratgeber": "festgeld",
+    "tool": "vergleich/festgeldvergleich",
+    "frage": "Festgeld oder Tagesgeld: Was passt zu mir?",
+    "antwort": "Tagesgeld für alles, was Sie in den nächsten Monaten brauchen könnten, mindestens den Notgroschen. Festgeld für Beträge, die Sie sicher ein bis drei Jahre nicht anfassen; die Zinsen liegen 2026 meist einen halben bis einen Punkt über Tagesgeld. Länger als drei Jahre lohnt nur, wenn Sie mit fallenden Zinsen rechnen.",
+    "rubrik": "Finanzen",
+    "wappen": "sparen",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "tagesgeld",
+    "titel": "Tagesgeld",
+    "varianten": [
+      "Tagesgeld"
+    ],
+    "erklaerung": "<p>Ein verzinstes Konto mit täglicher Verfügbarkeit. Der Zins ist variabel, Neukunden-Aktionen laufen oft nur wenige Monate. Ideal für den Notgroschen von drei Monatsgehältern.</p>",
+    "quelle": "Verbraucherzentrale, Empfehlung zum Notgroschen; Ratgeber Tagesgeld",
+    "ratgeber": "tagesgeld",
+    "tool": "vergleich/tagesgeldvergleich",
+    "frage": "Wie viel Notgroschen sollte ich halten?",
+    "antwort": "Drei Nettomonatsgehälter für Angestellte, sechs für Selbstständige und Familien mit nur einem Einkommen. Bei 2.500 Euro netto sind das 7.500 Euro auf einem Tagesgeldkonto, nicht im Depot. Erst darüber lohnt Anlegen; ein Notgroschen in ETF ist im Ernstfall gerade dann weniger wert, wenn Sie ihn brauchen.",
+    "rubrik": "Finanzen",
+    "wappen": "sparen",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "etf",
+    "titel": "ETF",
+    "varianten": [
+      "ETF",
+      "ETF-Sparplan",
+      "Indexfonds"
+    ],
+    "erklaerung": "<p>Ein börsengehandelter Fonds, der einen Index wie den MSCI World nachbildet. Breit gestreut, günstig, für lange Anlagezeiträume. Mit einem Sparplan ab 25 Euro monatlich.</p>",
+    "quelle": "Zinseszinsrechner Finanzleser; § 20 InvStG (Teilfreistellung 30 Prozent bei Aktienfonds)",
+    "ratgeber": "etf-exchange-traded-funds",
+    "tool": "rechner/zinseszins",
+    "frage": "Wie viel wird aus 100 Euro im Monat in 20 Jahren?",
+    "antwort": "Bei 6 Prozent Rendite im Jahr werden aus 100 Euro monatlich nach 20 Jahren rund 46.000 Euro, davon 24.000 eingezahlt. Bei 4 Prozent sind es etwa 36.700 Euro, bei 8 Prozent rund 59.000. Gewinne über dem Sparerpauschbetrag von 1.000 Euro sind beim Verkauf steuerpflichtig, bei Aktien-ETF zu 70 Prozent.",
+    "rubrik": "Finanzen",
+    "wappen": "sparen",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "kredit",
+    "titel": "Kredit",
+    "varianten": [
+      "Kredit",
+      "Darlehen",
+      "Ratenkredit"
+    ],
+    "erklaerung": "<p>Geld, das Sie leihen und in Raten mit Zinsen zurückzahlen. Entscheidend ist der effektive Jahreszins, der alle Kosten enthält. Vergleichen Sie mit einer Konditionsanfrage, nicht mit einer Kreditanfrage, sonst leidet die Schufa.</p>",
+    "quelle": "Kreditrechner Finanzleser; Schufa, Unterschied Konditionsanfrage und Kreditanfrage",
+    "ratgeber": "kredite",
+    "tool": "rechner/kredit",
+    "frage": "Wie viel Kredit kann ich mir leisten?",
+    "antwort": "Faustregel: Die Rate sollte höchstens 30 bis 35 Prozent Ihres Nettos ausmachen, und nach allen festen Kosten muss ein Puffer bleiben. Bei 400 Euro Rate über 60 Monate und 6 Prozent Effektivzins sind etwa 20.700 Euro Kredit möglich. Stellen Sie Konditionsanfragen, keine Kreditanfragen; nur letztere wertet die Schufa als Risiko.",
+    "rubrik": "Finanzen",
+    "wappen": "sparen",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "zinsen",
+    "titel": "Zinsen",
+    "varianten": [
+      "Zinsen",
+      "Zins",
+      "Effektivzins",
+      "effektiver Jahreszins",
+      "Jahreszins"
+    ],
+    "erklaerung": "<p>Der Preis für geliehenes Geld, als Prozent pro Jahr. Der Sollzins ist der reine Zins, der Effektivzins enthält zusätzlich Gebühren und die Ratenverteilung und ist der richtige Vergleichswert.</p>",
+    "quelle": "§ 6 Preisangabenverordnung; § 491a BGB",
+    "ratgeber": "kredite",
+    "tool": "rechner/kredit",
+    "frage": "Sollzins oder Effektivzins: Was zählt?",
+    "antwort": "Immer der Effektivzins: Er enthält den Sollzins, Bearbeitungskosten und die Wirkung der Ratenverteilung, ist gesetzlich vorgeschrieben und bei jedem Anbieter gleich berechnet. Ein Angebot mit 4,9 Prozent Sollzins kann teurer sein als eines mit 5,3 Prozent Effektivzins. Nicht enthalten sind freiwillige Restschuldversicherungen, die einen Kredit stark verteuern.",
+    "rubrik": "Finanzen",
+    "wappen": "sparen",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "baufinanzierung",
+    "titel": "Baufinanzierung",
+    "varianten": [
+      "Baufinanzierung"
+    ],
+    "erklaerung": "<p>Ein Darlehen für Kauf oder Bau einer Immobilie, meist mit 10 bis 15 Jahren Zinsbindung. Faustregel: mindestens 20 Prozent Eigenkapital plus Nebenkosten, Tilgung nicht unter 2 Prozent.</p>",
+    "quelle": "§ 489 Abs. 1 Nr. 2 BGB; Zinsentwicklung Baufinanzierung 2026",
+    "ratgeber": "baufinanzierung",
+    "tool": "rechner/annuitaet",
+    "frage": "Welche Zinsbindung ist jetzt sinnvoll?",
+    "antwort": "2026 liegen die Bauzinsen um 3,5 bis 4 Prozent, also im langjährigen Mittel. Wer die Rate langfristig sicher braucht, nimmt 15 Jahre; der Aufschlag gegenüber 10 Jahren beträgt meist 0,2 bis 0,3 Punkte. Nach 10 Jahren dürfen Sie jeden Vertrag mit sechs Monaten Frist kündigen, § 489 BGB; die lange Bindung ist eine Versicherung ohne Nachteil.",
+    "rubrik": "Finanzen",
+    "wappen": "wohnen",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "tilgung",
+    "titel": "Tilgung",
+    "varianten": [
+      "Tilgung"
+    ],
+    "erklaerung": "<p>Der Teil der Rate, der die Schuld verringert; der Rest sind Zinsen. Bei Annuitätendarlehen bleibt die Rate gleich, der Tilgungsanteil wächst. Sondertilgungen verkürzen die Laufzeit spürbar.</p>",
+    "quelle": "Tilgungsrechner Finanzleser",
+    "ratgeber": "baufinanzierung",
+    "tool": "rechner/tilgung",
+    "frage": "Wie wirkt ein Prozent mehr Tilgung?",
+    "antwort": "Bei 300.000 Euro zu 3,8 Prozent dauert die Rückzahlung mit 2 Prozent Anfangstilgung rund 29 Jahre, mit 3 Prozent rund 22 Jahre. Das eine Prozent mehr kostet 250 Euro Rate im Monat und spart etwa 50.000 Euro Zinsen. Sondertilgungen von 5 Prozent im Jahr sind bei den meisten Banken kostenlos vereinbar.",
+    "rubrik": "Finanzen",
+    "wappen": "wohnen",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "schufa",
+    "titel": "Schufa",
+    "varianten": [
+      "Schufa"
+    ],
+    "erklaerung": "<p>Die größte deutsche Auskunftei. Sie sammelt Daten zu Verträgen und Zahlungsverhalten und bildet daraus einen Score, den Banken und Vermieter abfragen. Einmal im Jahr gibt es die Selbstauskunft kostenlos.</p>",
+    "quelle": "Art. 15 DSGVO; Schufa-Verhaltensregeln zur Löschfrist (2023)",
+    "ratgeber": "kredite",
+    "tool": "",
+    "frage": "Wie verbessere ich meinen Schufa-Score?",
+    "antwort": "Ungenutzte Kreditkarten und Konten kündigen, Rechnungen pünktlich zahlen, bei Kreditvergleichen nur Konditionsanfragen stellen und einmal im Jahr die kostenlose Selbstauskunft nach Art. 15 DSGVO prüfen; falsche Einträge muss die Schufa löschen. Erledigte Negativeinträge verschwinden nach drei Jahren, bei schnell beglichenen Forderungen seit 2023 nach 18 Monaten.",
+    "rubrik": "Finanzen",
+    "wappen": "sparen",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "bonitaet",
+    "titel": "Bonität",
+    "varianten": [
+      "Bonität"
+    ],
+    "erklaerung": "<p>Die Kreditwürdigkeit: Wie wahrscheinlich Sie Verpflichtungen erfüllen. Banken bewerten Einkommen, Ausgaben, Schufa und Beschäftigung. Gute Bonität heißt niedrigere Zinsen.</p>",
+    "quelle": "§ 18a KWG (Kreditwürdigkeitsprüfung); Kreditvergaberichtlinien der Banken",
+    "ratgeber": "kredite",
+    "tool": "rechner/kredit",
+    "frage": "Was zählt für die Bank bei der Bonität?",
+    "antwort": "Ein sicheres, regelmäßiges Einkommen, ein unbefristeter Vertrag nach der Probezeit, ein sauberer Schufa-Score, wenig laufende Kredite und ein Girokonto ohne Dauer-Dispo. Selbstständige brauchen zwei bis drei Jahresabschlüsse. Eigenkapital und ein zweiter Kreditnehmer verbessern die Einstufung und damit den Zins.",
+    "rubrik": "Finanzen",
+    "wappen": "sparen",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "notarkosten",
+    "titel": "Notar- und Grundbuchkosten",
+    "varianten": [
+      "Notar- und Grundbuchkosten",
+      "Notarkosten",
+      "Grundbuchkosten",
+      "Grundbuch"
+    ],
+    "erklaerung": "<p>Beim Immobilienkauf fallen etwa 1,5 bis 2 Prozent des Kaufpreises für Notar und Grundbucheintrag an, gesetzlich festgelegt im Gerichts- und Notarkostengesetz. Dazu Grunderwerbsteuer je Bundesland.</p>",
+    "quelle": "GNotKG, Kostenverzeichnis; Grunderwerbsteuersätze der Länder 2026",
+    "ratgeber": "baufinanzierung",
+    "tool": "checkliste/grunderwerbsteuer",
+    "frage": "Was kostet der Notar bei 400.000 Euro?",
+    "antwort": "Etwa 6.000 bis 8.000 Euro: Der Notar berechnet nach dem Gerichts- und Notarkostengesetz rund 1 bis 1,5 Prozent für Kaufvertrag, Beurkundung und Grundschuld, das Grundbuchamt weitere 0,5 Prozent. Dazu kommt die Grunderwerbsteuer: in Nordrhein-Westfalen 6,5 Prozent, also 26.000 Euro, in Bayern 3,5 Prozent, also 14.000 Euro.",
+    "rubrik": "Finanzen",
+    "wappen": "wohnen",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "elterngeld",
+    "titel": "Elterngeld",
+    "varianten": [
+      "Elterngeld"
+    ],
+    "erklaerung": "<p>Ersetzt nach der Geburt 65 bis 100 Prozent des wegfallenden Nettoeinkommens, 300 bis 1.800 Euro monatlich. Basiselterngeld 12 bis 14 Monate, ElterngeldPlus doppelt so lang bei halbem Betrag.</p>",
+    "quelle": "§ 4 BEEG; Elterngeldrechner des Bundesfamilienministeriums",
+    "ratgeber": "elterngeld",
+    "tool": "rechner/elterngeld",
+    "frage": "Basiselterngeld oder ElterngeldPlus?",
+    "antwort": "Basiselterngeld, wenn Sie ganz aussetzen: bis zu 14 Monate in voller Höhe. ElterngeldPlus, wenn Sie in Teilzeit arbeiten: Ein Basismonat wird zu zwei Plus-Monaten mit halbem Höchstbetrag, aber Ihr Teilzeitverdienst kürzt weniger. Wer 20 bis 30 Stunden arbeitet, hat mit Plus über die Laufzeit meist mehr Geld. Mischen ist erlaubt.",
+    "rubrik": "Recht",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "rente",
+    "titel": "Gesetzliche Rente",
+    "varianten": [
+      "Gesetzliche Rente",
+      "Rente",
+      "Rentenbesteuerung"
+    ],
+    "erklaerung": "<p>Die Altersrente aus der Deutschen Rentenversicherung, berechnet aus Entgeltpunkten. Sie wird zunehmend besteuert: Wer 2026 in Rente geht, versteuert 84 Prozent der Rente.</p>",
+    "quelle": "§ 22 Nr. 1 EStG; § 32a EStG 2026; Rentenbesteuerungsrechner Finanzleser",
+    "ratgeber": "rentenbesteuerung",
+    "tool": "rechner/rentenbesteuerung",
+    "frage": "Wie viel Steuer zahle ich auf 1.800 Euro Rente?",
+    "antwort": "Bei Rentenbeginn 2026 sind 84 Prozent von 21.600 Euro Jahresrente steuerpflichtig, also 18.144 Euro. Nach Abzug von 102 Euro Werbungskostenpauschale, 36 Euro Sonderausgabenpauschale und rund 2.600 Euro Kranken- und Pflegebeiträgen bleiben etwa 15.400 Euro. Auf 12.348 Euro Grundfreibetrag zahlen Sie nichts, auf den Rest rund 450 Euro Steuer im Jahr. Der Rechner nimmt Ihre Werte.",
+    "rubrik": "Steuern",
+    "wappen": "rente",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "bu",
+    "titel": "Berufsunfähigkeitsversicherung",
+    "varianten": [
+      "Berufsunfähigkeitsversicherung",
+      "Berufsunfähigkeit",
+      "BU"
+    ],
+    "erklaerung": "<p>Zahlt eine monatliche Rente, wenn Sie Ihren Beruf zu mindestens 50 Prozent nicht mehr ausüben können. Die wichtigste Absicherung der Arbeitskraft, am besten jung und gesund abgeschlossen.</p>",
+    "quelle": "§ 172 Abs. 2 VVG; Bedingungen der BU-Versicherer, Abschnitt Verweisung",
+    "ratgeber": "berufsunfaehigkeitsversicherung",
+    "tool": "vergleich/berufsunfaehigkeitsversicherung-vergleich",
+    "frage": "Was bedeutet Verzicht auf abstrakte Verweisung?",
+    "antwort": "Ohne diesen Verzicht darf der Versicherer Sie auf einen anderen Beruf verweisen, den Sie theoretisch noch ausüben könnten, auch wenn Sie keine solche Stelle haben, und die Rente verweigern. Mit Verzicht zählt nur, ob Sie Ihren zuletzt ausgeübten Beruf zu 50 Prozent nicht mehr können. Der Verzicht ist heute Standard; ältere Verträge ohne ihn lohnt es zu prüfen.",
+    "rubrik": "Versicherungen",
+    "wappen": "vorsorge",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "tierkranken",
+    "titel": "Tierkrankenversicherung",
+    "varianten": [
+      "Tierkrankenversicherung",
+      "Hundekrankenversicherung",
+      "Katzenkrankenversicherung",
+      "Hundekranken"
+    ],
+    "erklaerung": "<p>Übernimmt Tierarztkosten für Hund, Katze oder Pferd: als reiner OP-Schutz oder als Vollschutz mit ambulanten Behandlungen. Abgerechnet wird nach der Gebührenordnung für Tierärzte.</p>",
+    "quelle": "GOT 2022; Vergleich Hundekrankenversicherung auf Finanzleser",
+    "ratgeber": "hundeversicherungen",
+    "tool": "vergleich/hundekrankenversicherung-vergleich",
+    "frage": "Lohnt sich eine Hundekrankenversicherung?",
+    "antwort": "Für einen Hund meist ja, wenn Sie früh einsteigen: Eine Kreuzband-OP kostet 2026 nach GOT 2.500 bis 4.000 Euro, ein Vollschutz für einen jungen Mischling 30 bis 60 Euro im Monat, ein reiner OP-Schutz 10 bis 25 Euro. Wer 4.000 Euro notfalls aus dem Ersparten zahlen könnte, kommt mit OP-Schutz aus. Ab etwa 7 Jahren nehmen viele Versicherer nicht mehr an.",
+    "rubrik": "Versicherungen",
+    "wappen": "hund",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "opschutz",
+    "titel": "OP-Schutz",
+    "varianten": [
+      "OP-Schutz",
+      "Hunde-OP",
+      "Operationen"
+    ],
+    "erklaerung": "<p>Die Einstiegsvariante der Tierkrankenversicherung: Sie zahlt Operationen unter Narkose inklusive Nachsorge, aber keine normalen Tierarztbesuche. Ab etwa 10 Euro im Monat.</p>",
+    "quelle": "GOT 2022; Preislisten von Tierkliniken 2025/2026",
+    "ratgeber": "hunde-op-versicherung",
+    "tool": "vergleich/hundekrankenversicherung-vergleich",
+    "frage": "Was kostet eine Kreuzband-OP beim Hund?",
+    "antwort": "Je nach Verfahren und Klinik 2.500 bis 4.500 Euro inklusive Narkose, Nachsorge und Physiotherapie; die TPLO-Methode liegt am oberen Ende. Ein OP-Schutz übernimmt das bis zur vereinbarten Jahreshöchstsumme, bei guten Tarifen unbegrenzt, nach einer Wartezeit von meist drei Monaten. Bei jedem zweiten Hund reißt später auch das zweite Kreuzband.",
+    "rubrik": "Versicherungen",
+    "wappen": "hund",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "got",
+    "titel": "Gebührenordnung für Tierärzte (GOT)",
+    "varianten": [
+      "Gebührenordnung für Tierärzte (GOT)",
+      "GOT",
+      "Gebührenordnung"
+    ],
+    "erklaerung": "<p>Die verbindliche Preisliste für Tierärzte. Sie dürfen den einfachen bis dreifachen Satz abrechnen, im Notdienst bis zum vierfachen. Seit der Reform 2022 sind die Sätze deutlich gestiegen.</p>",
+    "quelle": "Tierärztegebührenordnung 2022, BGBl. I Nr. 40; Bundestierärztekammer",
+    "ratgeber": "hundeversicherungen",
+    "tool": "vergleich/hundekrankenversicherung-vergleich",
+    "frage": "Warum ist der Tierarzt so viel teurer geworden?",
+    "antwort": "Weil die Gebührenordnung im November 2022 nach 23 Jahren erstmals grundlegend erneuert wurde: Die Sätze stiegen im Schnitt um 20 Prozent, viele Positionen deutlich stärker, die allgemeine Untersuchung etwa von 13,47 auf 23,62 Euro. Tierärzte dürfen zudem den zwei- oder dreifachen Satz nehmen, im Notdienst mindestens den zweifachen plus 50 Euro Pauschale.",
+    "rubrik": "Versicherungen",
+    "wappen": "hund",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "makler",
+    "titel": "Versicherungsmakler",
+    "varianten": [
+      "Versicherungsmakler",
+      "Makler"
+    ],
+    "erklaerung": "<p>Ein unabhängiger Vermittler nach § 34d Gewerbeordnung, der im Auftrag des Kunden vergleicht und berät, anders als der Vertreter, der für einen Versicherer arbeitet. Finconext ist ein solcher Makler.</p>",
+    "quelle": "§ 34d GewO; §§ 59 bis 61 VVG",
+    "ratgeber": "",
+    "tool": "",
+    "frage": "Was unterscheidet Makler und Vertreter?",
+    "antwort": "Der Makler steht vertraglich auf Ihrer Seite und muss aus einer ausreichenden Zahl von Versicherern das passende Angebot heraussuchen; für Fehler haftet er. Der Vertreter arbeitet im Auftrag eines Versicherers und verkauft dessen Produkte. Beide bekommen Provision; wer gegen Honorar berät, heißt Versicherungsberater. Finconext ist Makler nach § 34d GewO.",
+    "rubrik": "Versicherungen",
+    "wappen": "kassensturz",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "provision",
+    "titel": "Provision",
+    "varianten": [
+      "Provision",
+      "Partnerlink",
+      "Partnerlinks",
+      "Affiliate"
+    ],
+    "erklaerung": "<p>Die Vergütung eines Vermittlers, vom Versicherer oder Anbieter gezahlt. Bei Vergleichen mit Partnerlinks erhält Finanzleser eine Provision, wenn Sie über den Link abschließen. Das steht bei jedem Vergleich dabei.</p>",
+    "quelle": "Transparenzhinweis auf Finanzleser; § 5a UWG (Kennzeichnung kommerzieller Inhalte)",
+    "ratgeber": "",
+    "tool": "",
+    "frage": "Beeinflusst die Provision die Reihenfolge im Vergleich?",
+    "antwort": "Nein. Vergleiche auf Finanzleser sind nach Preis oder Leistung sortiert, nicht nach Vergütung; die Provision ist bei allen Partnern ähnlich und ändert die Reihenfolge nicht. Für Sie kostet der Abschluss über einen Partnerlink nicht mehr als direkt beim Anbieter. Wo ein Partnerlink steckt, steht es am Vergleich.",
+    "rubrik": "Finanzen",
+    "wappen": "kassensturz",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "deliktunfaehig",
+    "titel": "Deliktunfähigkeit",
+    "varianten": [
+      "Deliktunfähigkeit",
+      "deliktunfähig",
+      "Deliktunfähige"
+    ],
+    "erklaerung": "<p>Kinder unter sieben Jahren (im Straßenverkehr unter zehn) haften nicht für Schäden. Dann haftet niemand, es sei denn, die Eltern haben die Aufsicht verletzt. Gute Haftpflichttarife zahlen trotzdem.</p>",
+    "quelle": "§ 828 Abs. 1 BGB; § 832 BGB; AVB Privathaftpflicht, deliktunfähige Personen",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "vergleich/private-haftpflichtversicherung-vergleich",
+    "frage": "Mein Kind hat das Auto des Nachbarn zerkratzt. Wer zahlt?",
+    "antwort": "Ein Kind unter sieben haftet nicht, und Sie haften nur bei einer Verletzung der Aufsichtspflicht; ein Sechsjähriger darf auch einmal unbeaufsichtigt auf dem Gehweg spielen. Dann haftet niemand, und der Nachbar bleibt auf dem Schaden sitzen, es sei denn, Ihr Haftpflichttarif enthält den Baustein für deliktunfähige Kinder, meist bis 30.000 Euro.",
+    "rubrik": "Recht",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "mietsachschaden",
+    "titel": "Mietsachschäden",
+    "varianten": [
+      "Mietsachschäden",
+      "Mietsachschaden"
+    ],
+    "erklaerung": "<p>Schäden, die Sie als Mieter an der Wohnung verursachen: der Brandfleck im Parkett, das Loch in der Tür. Normaler Verschleiß gehört nicht dazu. Die Haftpflicht deckt sie meist bis zur Deckungssumme.</p>",
+    "quelle": "AVB Privathaftpflicht, Mietsachschäden; § 538 BGB (vertragsgemäße Abnutzung)",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "vergleich/private-haftpflichtversicherung-vergleich",
+    "frage": "Zahlt die Haftpflicht Kratzer im Parkett?",
+    "antwort": "Ja, wenn der Kratzer über normale Abnutzung hinausgeht, etwa durch den umgekippten Blumenkübel, und der Tarif Mietsachschäden an Gebäuden einschließt; das ist heute Standard, oft mit 500.000 bis 1 Million Euro. Nicht versichert sind allmähliche Abnutzung, Schäden an mitgemieteten beweglichen Sachen und Glasschäden, für die es eigene Bausteine gibt.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "gefaelligkeit",
+    "titel": "Gefälligkeitsschäden",
+    "varianten": [
+      "Gefälligkeitsschäden",
+      "Gefälligkeitsschaden",
+      "Gefälligkeit"
+    ],
+    "erklaerung": "<p>Schäden bei unbezahlter Hilfe, etwa beim Umzug eines Freundes. Rechtlich haften Sie oft gar nicht, weil ein stillschweigender Haftungsverzicht angenommen wird. Gute Tarife zahlen trotzdem, damit die Freundschaft hält.</p>",
+    "quelle": "BGH VI ZR 467/15 (Haftungsverzicht bei Gefälligkeit); AVB Privathaftpflicht, Gefälligkeitsschäden",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "vergleich/private-haftpflichtversicherung-vergleich",
+    "frage": "Ich habe beim Umzug den Fernseher fallen lassen. Zahlt die Haftpflicht?",
+    "antwort": "Nur mit dem Baustein Gefälligkeitsschäden. Bei unentgeltlicher Hilfe unter Freunden nehmen Gerichte oft einen stillschweigenden Haftungsverzicht an; dann müssen Sie rechtlich nicht zahlen und die Haftpflicht auch nicht. Der Baustein lässt den Versicherer trotzdem leisten, meist bis 10.000 oder 30.000 Euro, manchmal mit Selbstbeteiligung.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "versicherungsfall",
+    "titel": "Versicherungsfall",
+    "varianten": [
+      "Versicherungsfall"
+    ],
+    "erklaerung": "<p>Das Ereignis, für das die Versicherung leistet: bei der Haftpflicht der Schaden, den ein Dritter Ihnen gegenüber geltend macht. Er muss unverzüglich gemeldet werden, meist innerhalb einer Woche.</p>",
+    "quelle": "§ 30 VVG (Anzeigepflicht); § 28 VVG (Obliegenheitsverletzung)",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "checkliste/private-haftpflichtversicherung",
+    "frage": "Wie schnell muss ich einen Schaden melden?",
+    "antwort": "Unverzüglich, also ohne schuldhaftes Zögern; viele Bedingungen nennen eine Woche. Melden Sie zuerst und klären Sie Details später, und erkennen Sie gegenüber dem Geschädigten keine Schuld an, das darf nur der Versicherer. Wer die Frist grob fahrlässig versäumt, riskiert eine Kürzung; den Schutz ganz verliert nur, wer vorsätzlich schweigt.",
+    "rubrik": "Versicherungen",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "inflation",
+    "titel": "Inflation",
+    "varianten": [
+      "Inflation"
+    ],
+    "erklaerung": "<p>Der allgemeine Preisanstieg, gemessen am Verbraucherpreisindex. Sie entwertet Erspartes: Bei 2 Prozent verliert Geld auf dem Girokonto in 10 Jahren rund ein Fünftel Kaufkraft.</p>",
+    "quelle": "Statistisches Bundesamt, Verbraucherpreisindex; Inflationsrechner Finanzleser",
+    "ratgeber": "inflation",
+    "tool": "rechner/inflation",
+    "frage": "Wie schütze ich Erspartes vor Inflation?",
+    "antwort": "Mit Anlagen, deren Rendite über der Teuerung liegt: breit gestreute Aktien-ETF für Geld, das Sie zehn Jahre nicht brauchen, Tagesgeld nur für den Notgroschen. Bei 2 Prozent Inflation und 0 Prozent Zins verliert Erspartes in 10 Jahren 18 Prozent Kaufkraft; bei 3 Prozent Zins gewinnt es 10 Prozent. Inflationsindexierte Bundesanleihen sind die konservative Variante.",
+    "rubrik": "Finanzen",
+    "wappen": "sparen",
+    "status": "freigegeben"
+  }
+]

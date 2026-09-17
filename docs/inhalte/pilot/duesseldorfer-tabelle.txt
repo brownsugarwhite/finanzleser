@@ -1,0 +1,126 @@
+SLUG: duesseldorfer-tabelle
+TITEL: Düsseldorfer Tabelle
+UNTERTITEL: Unterhaltsregelung aktualisiert: Neue Sätze 2026
+KATEGORIEN: Ehe & Familie, Recht
+GEÄNDERT: 2026-06-13
+
+## Unterhaltsberechnung nach Düsseldorf Tabelle – Leitfaden
+
+Die Düsseldorfer Tabelle ist die Grundlage für die Berechnung von Kindesunterhalt. Welche Bedarfssätze 2026 gelten und wie Sie den Unterhalt ermitteln.
+
+## Die Düsseldorfer Tabelle 2026: Unterhaltsberechnung einfach erklärt
+
+Die Düsseldorfer Tabelle ist das Standardwerk für Unterhaltsberechnung in Deutschland. Mit der Aktualisierung 2026 steigen die Bedarfssätze moderat an. Gleichzeitig regelt die Düsseldorfer Tabelle erstmals seit 2020 konkrete Selbstbehalte beim Elternunterhalt. Diese Anpassungen berücksichtigen steigende Lebenshaltungskosten und schaffen Planungssicherheit für Millionen Familien.
+
+## Was ist die Düsseldorfer Tabelle?
+
+Die Düsseldorfer Tabelle ist ein anerkanntes Hilfsmittel zur Ermittlung angemessenen Unterhalts nach § 1610 BGB. Das Oberlandesgericht Düsseldorf veröffentlicht sie seit 1979 in Abstimmung mit allen Oberlandesgerichten und dem Deutschen Familiengerichtstag.
+
+Obwohl die Düsseldorfer Tabelle keine Gesetzeskraft besitzt, nutzen Gerichte bundesweit diese Richtlinie als maßgeblichen Standard. Sie typisiert den Lebensbedarf von Kindern nach Alter und elterlichen Lebensverhältnissen, um vergleichbare Fälle einheitlich zu behandeln.
+
+Die Düsseldorfer Tabelle kommt zum Einsatz, wenn Eltern getrennt leben und ein Elternteil barunterhaltspflichtig ist. Sie unterscheidet zwischen minderjährigen Kindern (0-5, 6-11, 12-17 Jahre) und volljährigen Kindern. Für studierende oder auswärts wohnende volljährige Kinder beträgt der pauschale Bedarf 990 € monatlich, einschließlich 440 € Warmmiete (Stand 2026).
+
+## Bedarfssätze 2026: Wer bekommt wie viel?
+
+Die Düsseldorfer Tabelle 2026 zeigt moderate Erhöhungen. Der Mindestunterhalt nach § 1612a BGB steigt in allen Altersstufen um 4 Euro:
+
+ | Altersgruppe | Bedarfssatz 2026 | Erhöhung zu 2025
+
+ | 0-5 Jahre | 486 € | +4 €
+
+ | 6-11 Jahre | 558 € | +4 €
+
+ | 12-17 Jahre | 653 € | +4 €
+
+ | Volljährige | 698 € | +5 €
+
+Diese Beträge gelten für die erste Einkommensgruppe bis 2.100 € Einkommen. Bei höheren Einkommen steigen die Tabellenbeträge gestaffelt: bis zur fünften Gruppe um jeweils 5 %, danach um 8 %. Die Düsseldorfer Tabelle behält ihre bewährte Struktur mit 15 Einkommensgruppen.
+
+[SPIEL quiz] 
+🧠 Quiz
+
+Der Zahlbetrag unterscheidet sich vom Tabellenbetrag durch die Kindergeldanrechnung. Ab Januar 2026 steigt das Kindergeld für jedes Kind um 4 Euro auf 259 € monatlich. Bei minderjährigen Kindern wird die Hälfte und bei volljährigen Kindern der volle Betrag auf den Bedarf angerechnet.
+
+Rechenbeispiel für ein 8-jähriges Kind:
+
+- Tabellenbedarf: 558 €
+
+- Abzüglich hälftiges Kindergeld: 129,50 €
+
+- Tatsächlicher Zahlbetrag: 428,50 €
+
+Trotz gestiegener Tabellenbeträge bleibt die tatsächliche Mehrbelastung für Unterhaltspflichtige begrenzt. Die Zahlbeträge verändern sich meist um nur 2 € pro Jahr. Mehr Details zum direkten Kindesunterhalt finden Sie in unserem Ratgeber.
+
+[SPIEL gewusst] 
+💡 Schon gewusst?
+
+Die Selbstbehalte – Beträge für den Eigenbedarf von Unterhaltspflichtigen – bleiben 2026 unverändert. Das Oberlandesgericht sah angesichts des stabilen Sozialhilfe-Regelbedarfs keine Erhöhung vor.
+
+Die Düsseldorfer Tabelle unterscheidet zwei Kategorien:
+
+Notwendiger Selbstbehalt (gegenüber minderjährigen Kindern):
+
+- Berufstätige: 1.450 € (inkl. 520 € Warmmiete)
+
+- Nicht-Berufstätige: 1.200 € (inkl. 520 € Warmmiete)
+
+Angemessener Selbstbehalt (gegenüber volljährigen Kindern):
+
+- Volljährige Kinder: 1.750 € (inkl. 650 € Warmmiete)
+
+- Ehegatten: 1.600 € berufstätig, 1.475 € nicht-berufstätig
+
+[SPIEL schaetzen] 
+📊 Schätzfrage
+
+Eine Anhebung ist möglich, wenn der Unterhaltspflichtige unvermeidbar höhere Wohnkosten hat. Das Bundesverfassungsgericht bestätigt: Angemessene höhere Mieten müssen berücksichtigt werden. Besonders beim Ehegattenunterhalt spielen individuelle Lebensumstände eine wichtige Rolle.
+
+## Elternunterhalt: Erstmals wieder konkrete Regelungen
+
+Eine wichtige Neuerung 2026 ist die Regelung des Elternunterhalts. Erstmals seit 2020 beziffert die Düsseldorfer Tabelle wieder konkrete Selbstbehalte, die Kindern gegenüber Unterhaltsansprüchen ihrer Eltern zu belassen sind.
+
+Der Bundesgerichtshof entschied im Oktober 2024: Der angemessene Selbstbehalt beim Elternunterhalt muss einen konstanten Zuschlag zum Selbstbehalt für volljährige Kinder aufweisen.
+
+Selbstbehalte beim Elternunterhalt 2026:
+
+ | Personenkreis | Selbstbehalt 2026 | Warmmiete
+
+ | Unterhaltspflichtiges Kind | 2.650 € | 1.000 €
+
+ | Ehegatte des Pflichtigen | 2.120 € | 800 €
+
+Das Einkommen darüber bleibt zu 70 % anrechnungsfrei – erhöht von früher 50 %. Der BGH begründet dies mit gestiegenen Pflegekosten und erhöhter Belastung von Angehörigen.
+
+[SPIEL mythos] 
+🔍 Mythos oder Fakt?
+
+Die Düsseldorfer Tabelle kennt Sonderkonstellationen, die von Standardwerten abweichen:
+
+Mangelfälle: Reicht das Einkommen nicht für alle Unterhaltsansprüche, wird die Verteilungsmasse nach Abzug des Selbstbehalts auf die Berechtigten im Verhältnis ihrer Einsatzbeträge verteilt.
+
+Bedarfskontrolle: Verhindert, dass eine höhere Einkommenseinstufung zum Selbstbehalt-Unterschreiten führt. Dann gilt der Satz der nächstniedriger Gruppe.
+
+Erhöhte Bedarfssätze sind angebracht bei besonderen Bedürfnissen (Behinderung, Krankheit) oder außergewöhnlichen Einkommensverhältnissen.
+
+Titulierte Unterhaltstitel passen sich automatisch an die neue Düsseldorfer Tabelle an, wenn sie dynamische Klauseln enthalten. Dadurch können Rückstände vollstreckt werden.
+
+## Fazit
+
+Die Düsseldorfer Tabelle 2026 balanciert steigende Lebenshaltungskosten mit der Leistungsfähigkeit von Unterhaltspflichtigen. Mit nur 4 € Erhöhung bei minderjährigen Kindern bleibt die zusätzliche Belastung überschaubar. Die Konkretisierung des Elternunterhalt-Selbstbehalts auf 2.650 € schafft Klarheit und spiegelt aktuelle Lebensrealitäten. Die gestiegene anrechnungsfreie Quote auf 70 % zeigt realistische Einschätzung von Pflegelasten. Die unveränderte Struktur mit 15 Einkommensgruppen garantiert Kontinuität und Planbarkeit für alle Beteiligten – eine verlässliche Grundlage für Familien und faire Berücksichtigung beider Seiten.
+
+## Häufig gestellte Fragen
+
+Was ist die Düsseldorfer Tabelle? Die Düsseldorfer Tabelle ist eine vom Oberlandesgericht Düsseldorf herausgegebene Richtlinie zur Berechnung des Kindesunterhalts nach § 1610 BGB. Obwohl sie keine Gesetzeskraft hat, wenden Gerichte sie als maßgebliche Richtlinie an, wenn Eltern getrennt leben und ein Elternteil barunterhaltspflichtig ist.
+ 
+ Wie hoch sind die Unterhaltssätze 2026 laut Düsseldorfer Tabelle? Die Mindestunterhaltssätze 2026 betragen: 486 Euro für Kinder 0–5 Jahre, 558 Euro für Kinder 6–11 Jahre, 653 Euro für Kinder 12–17 Jahre und 698 Euro für Volljährige. Gegenüber 2025 sind die Sätze für Minderjährige um 4 Euro und für Volljährige um 5 Euro gestiegen.
+ 
+ Wie viel Unterhalt bekommen Studierende nach der Düsseldorfer Tabelle? Der Bedarfssatz für studierende volljährige Kinder, die nicht bei den Eltern wohnen, liegt bei 990 Euro monatlich. Darin enthalten sind 440 Euro für Unterkunft inklusive Nebenkosten und Heizung. Dieser Betrag gilt unabhängig vom Einkommen der unterhaltspflichtigen Eltern.
+ 
+ Wie hoch ist der Selbstbehalt 2026 für Unterhaltspflichtige? Die Selbstbehalte werden 2026 nicht erhöht, da der sozialhilferechtliche Regelbedarf unverändert geblieben ist. Die Tabelle unterscheidet zwischen notwendigem und angemessenem Selbstbehalt sowie zwischen erwerbstätigen und nicht erwerbstätigen Pflichtigen. Der notwendige Selbstbehalt gilt gegenüber minderjährigen Kindern.
+ 
+
+[BLOCK checkliste duesseldorfer-tabelle]
+
+[BLOCK rechner unterhalt]
+
+[BLOCK dokumente duesseldorfer-tabelle-2026,der-unterhaltsvorschuss-data,anlage-unterhalt-2024]

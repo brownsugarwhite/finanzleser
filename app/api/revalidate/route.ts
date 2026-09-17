@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
-import { RECHNER_CONFIG_TAG } from "@/lib/cacheTags";
+import { RECHNER_CONFIG_TAG, FADEN_INDEX_TAG, VERGLEICH_DATEN_TAG } from "@/lib/cacheTags";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  let body: { secret?: string; path?: string; type?: string; slug?: string; status?: string; layout?: boolean };
+  let body: { secret?: string; path?: string; type?: string; slug?: string; status?: string; layout?: boolean; tag?: string };
   try {
     body = await request.json();
   } catch {
@@ -51,6 +51,22 @@ export async function POST(request: NextRequest) {
 
   const base = process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin;
   const revalidated: string[] = [];
+
+  // financeads-Snapshot (tools/financeads-refresh.mjs, 2×/Tag): Tag busten, die
+  // Vergleichsseiten und ihre Datenroute neu holen lassen. Kein Layout-Bust — die Daten
+  // hängen nur an den Vergleichsseiten, der Übersicht und der Sitemap.
+  if (body.tag === VERGLEICH_DATEN_TAG) {
+    revalidateTag(VERGLEICH_DATEN_TAG);
+    revalidatePath("/finanztools/vergleiche/[slug]", "page");
+    revalidatePath("/api/vergleich-daten/[slug]", "page");
+    revalidatePath("/finanztools/vergleiche");
+    revalidatePath("/sitemap.xml");
+    revalidated.push(`tag:${VERGLEICH_DATEN_TAG}`, "/finanztools/vergleiche/[slug]", "/finanztools/vergleiche", "/sitemap.xml");
+    // Nur die Übersicht warm halten; die ~50 Einzelseiten wärmen sich beim ersten Besuch
+    // über stale-while-revalidate — alle auf einmal wären 50 Renders in einer Function.
+    await rewarm(base, ["/finanztools/vergleiche"]);
+    return NextResponse.json({ ok: true, revalidated, timestamp: Date.now() });
+  }
 
   if (body.layout) {
     // Das mu-plugin (wordpress/mu-plugins/finanzleser-headless.php) feuert `layout: true` für
@@ -136,6 +152,14 @@ export async function POST(request: NextRequest) {
   // Sitemap immer mit revalidieren
   revalidatePath("/sitemap.xml");
   revalidated.push("/sitemap.xml");
+
+  // Die abgeleiteten Faden-Indizes (Beiträge, Werkzeuge, Glossar) hängen an KEINEM Pfad —
+  // sie liegen als eigene Data-Cache-Einträge und würden sonst bis zu 24 h alt bleiben,
+  // während die Seiten drumherum schon neu gebaut sind. Ein neuer Beitrag fehlte dann in
+  // „Dazu passt", ein neuer Begriff bliebe unverlinkt. Deshalb bei jedem Inhalts-Speichern
+  // den Tag busten; die Neuberechnung passiert beim nächsten Render, nicht hier.
+  revalidateTag(FADEN_INDEX_TAG);
+  revalidated.push(`tag:${FADEN_INDEX_TAG}`);
 
   // Betroffene Seiten sofort wieder warmlaufen lassen (kein Kaltstart für den ersten Besucher).
   await rewarm(base, revalidated);

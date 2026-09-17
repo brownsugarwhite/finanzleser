@@ -1,83 +1,332 @@
-/* ─────────────────────────────────────────────
-   Design Tokens
-   Farben, Fonts, Spacing, Glassmorphism
-   ───────────────────────────────────────────── */
+/* =====================================================================================
+   tokens.css — DAS Verzeichnis. Eine Farbe, ein Grad, ein Abstand hat hier einen Namen,
+   oder sie hat keinen.
+
+   Bis zum 16.09.2026 liefen drei Systeme nebeneinander: `--color-*` hier, `--ink/--luft/
+   --schrift` in faden.css, `--kb-*` in kursblatt.css. 164 Namen für rund 25 Farben; die
+   Tinte kam in 21 Deckungsgraden vor, Weiß in vier Schreibweisen, die Schrift auf rund
+   50 Graden. Gemessen mit `npm run wache:bericht`.
+
+   ── Die fünf Regeln, die das Verzeichnis tragen ──────────────────────────────────────
+
+   1. **Papierfarbe, nicht Weiß.** `--paper` ist der Grund von ALLEM. `--auflage` gibt es
+      nur für Dinge, die ÜBER dem Papier schweben (Menü, Dialog, Eingabefeld, Tooltip).
+   2. **Linien statt Rahmen.** Ein Block grenzt sich durch eine Linie ab. Die Doppellinie
+      ist dem Kopf des Fadens, dem Kiosk und dem Tabellenkopf vorbehalten.
+   3. **Schrift trennt Rang, nicht Größe allein.** Serif trägt Titel und Zitat, Sans den
+      Fließtext und alles Technische. Kursiv ist der Hinweis, Versalien der Kicker.
+   4. **Die Leitern gelten für den SATZ.** Abstände zwischen und in Textblöcken kommen aus
+      `--luft-*`, Schriftgrade aus `--grad-*`. Layoutmaße (Spaltenbreite, Randbreite,
+      Kopfhöhe, Hero) sind etwas anderes und tragen eigene Namen in faden.css.
+   5. **Der Wert steht im Namen, wo er zählt.** `--ink-16` ist 16 % Tinte, `--grad-14` ist
+      14 px. Wer die Tabelle des Handoffs liest, findet die Zeile ohne Übersetzung wieder.
+
+   🚨 Wer eine Zahl direkt in eine Regel schreibt, muss sie begründen können; sonst gehört
+   sie hierher. `npm run wache` schlägt an, sobald eine dazukommt. Der Schaukasten
+   (/schaukasten, Abschnitt „Tokens") zeigt jeden Namen mit seinem echten Wert — gelesen
+   per getComputedStyle, nie abgeschrieben.
+   ===================================================================================== */
 
 :root {
-  /* Fonts */
-  --font-heading: var(--font-heading, "Merriweather", serif);
-  --font-body: var(--font-body, "Open Sans", sans-serif);
+  /* ── Schriftfamilien ──────────────────────────────────────────────────────────────
+     Die Quelle liefert next/font auf <html> (app/layout.tsx). Getrennte Namen (`-src`),
+     damit hier kein Selbstbezug entsteht: stünde links und rechts derselbe Name, wäre die
+     Eigenschaft je nach Stylesheet-Reihenfolge ungültig und würde NICHT auf den
+     Ersatzwert zurückfallen. */
+  --font-heading: var(--font-heading-src, "Merriweather", Georgia, serif);
+  --font-body: var(--font-body-src, "Open Sans", sans-serif);
+  --serif: var(--font-heading);
+  --sans: var(--font-body);
 
-  /* Brand */
-  --color-brand: #45A117;
-  --color-brand-secondary: #D3005E;
+  /* ── Flächen ──────────────────────────────────────────────────────────────────────
+     Drei, mehr gibt es nicht. `--auf-tinte` ist keine Fläche, sondern die Schrift- und
+     Glyphfarbe AUF einer Tintefläche — der einzige Ort, an dem reines Weiß vorkommt. */
+  --paper: #faf9f6;               /* die Seite. Standardgrund für alles */
+  --auflage: #fdfdfb;             /* nur was über dem Papier schwebt: Menü, Dialog, Feld */
+  --auf-tinte: #fff;              /* Schrift und Glyph auf Tinte, Türkis, Magenta */
+  --placeholder: #ebeae7;         /* Bildplatz, eine Spur dunkler als das Papier */
+  --raster: #e3ecd8;              /* der grüne Hauch hinter Bildplätzen (früher visual-fill-1) */
 
-  /* Button States (BookmarkNav) */
-  --color-btn-hover: rgba(109, 202, 28, 0.3);
-  --color-btn-active: #6dca1c;
+  /* ── Tinte ────────────────────────────────────────────────────────────────────────
+     Eine Farbe, neun Deckungen. Sie ersetzen 21 gewachsene Alpha-Stufen; die Prozentzahl
+     steht im Namen, damit die Handoff-Tabelle ohne Übersetzung lesbar bleibt. */
+  --ink: #334A27;                 /* Titel, Fließtext, volle Linie */
+  --ink-45: rgba(51, 74, 39, .45);/* kleine Teilstriche, Punktführung */
+  --ink-35: rgba(51, 74, 39, .35);/* Grundlinie einer Eingabe */
+  --ink-30: rgba(51, 74, 39, .3); /* Rahmen eines Segments */
+  --ink-25: rgba(51, 74, 39, .25);/* Kontur eines Chips */
+  --ink-20: rgba(51, 74, 39, .2); /* Kapitelkopf, Gleis */
+  --ink-16: rgba(51, 74, 39, .16);/* Blocktrenner — die häufigste Linie */
+  --ink-12: rgba(51, 74, 39, .12);/* Zeilen in Listen */
+  --ink-08: rgba(51, 74, 39, .08);/* feinster Trenner, Gitterlinie */
+  --ink-05: rgba(51, 74, 39, .05);/* Hover-Grund einer Zeile */
 
-  /* Text */
-  --color-text-primary: #334A27;
-  --color-text-medium: #686C6A;
-  --color-text-secondary: #475569;
+  --muted: #686C6A;               /* Kicker, Meta, Hinweis, Bildunterschrift, Rang */
 
-  /* Backgrounds */
-  --color-bg-page: #faf9f6;
-  --color-bg-surface: #f8fafc;
-  --color-bg-subtle: #f1f5f9;
+  /* ── Marke ────────────────────────────────────────────────────────────────────────
+     Die Liste des Handoffs („Farben (nur diese)“) und nichts darüber hinaus. */
+  --green: #45A117;               /* Marke als FLÄCHE: Punkte, Haken, Knopfscheibe */
+  --green-ink: #2E7A0B;           /* Marke als SCHRIFT — kontraststark genug auf Papier */
+  --pink: #D3005E;                /* Zweitmarke: Rechner, Spiel, Finanzwort, Fehlerhinweis */
+  --tuerkis: #0B7F66;             /* Vergleich: Bestwert, Nadel, Kurve, CTA */
+  --tuerkis-hell: #06D496;        /* Siegel „Bestwert“, Grund der Bestwertzeile */
+  --lila: #9953c9;                /* Checklisten */
+  --blau: #27548F;                /* Dokumente — Druckerblau, kalt gegen das warme Papier */
+  --rot: #C0392B;                 /* Fehler und Warnung — vorher nur in gamification.css */
+  /* 🚨 Die einzige Farbe, die der Handoff nicht kennt — und die einzige Lücke im Kreis:
+     zwischen Rot und Grün stand nichts. Die Spiele hatten bis zum 16.09.2026 keine eigene
+     Farbe, sie liehen sich Pink vom Rechner und Grün von der Marke; dadurch sah die
+     Rätselseite aus wie ein Werkzeugkasten. Ocker ist warm wie Papier, hält den Kontrast
+     als Linie und liest sich als Auszeichnung, nicht als Werkzeug. */
+  /* 🚨 Vom User gesetzt (16.09.2026): #dbf000. Gemessen hat dieser Ton gegen das Papier
+     nur 1,2 : 1 Kontrast — als 3-px-Linie ein heller Streifen, als SCHRIFT auf Papier
+     unlesbar. Er gehört deshalb an Flächen und Linien, nie an Text; wo ein Spiel Schrift
+     in seiner Farbe braucht, steht `--spiel-ink`. */
+  --spiel: #dbf000;               /* Spiele: Finanzwort, Quiz, Mythos, Schätzfrage, Los, Schlange */
+  --spiel-ink: #6b7500;           /* dieselbe Farbe als SCHRIFT — abgedunkelt, bis sie auf Papier trägt */
 
-  /* Visual / Image Placeholder (a hair darker than page bg, no alpha so it
-     stays the same regardless of what's behind) */
-  --color-placeholder-bg: #ebeae7;
+  /* Vier Hauchtöne als Grund für Zustände — mehr Zustände gibt es nicht. */
+  --tint: #eef3e8;                /* grün: richtig, Erfolg, Marke, Fokusring */
+  --pink-tint: #FBEAF1;           /* magenta: Rechner, Zweitmarke */
+  --tuerkis-hauch: #EAF4F1;       /* türkis: Vergleich, Hinweis */
+  --rot-hauch: #FBEAE8;           /* rot: falsch, Fehler */
+  --tuerkis-grund: rgba(6, 212, 150, .07);  /* Grund der Bestwertzeile in einer Liste */
+  --schleier: rgba(0, 0, 0, .35);  /* hinter einer Schublade — der einzige Ort für Schwarz */
+  --stempel-grund: rgba(255, 255, 255, .7); /* unter einem Stempel bleibt das Papier durchscheinend */
 
-  /* Borders */
-  --color-border-default: rgba(0, 0, 0, 0.08);
+  /* Werkzeugfarben — der Punkt vor dem Kicker, die Linie über dem Einhänger. */
+  --tool-rechner: var(--pink);
+  --tool-vergleich: var(--tuerkis-hell);
+  --tool-checkliste: var(--lila);
+  --tool-dokumente: var(--blau);
+  --tool-spiel: var(--spiel);
 
-  /* Shadow für weiße Boxen (Checklisten-Hover-Pill) — seitenweit identisch */
-  --shadow-card: 0 3px 23px rgba(0, 0, 0, 0.02);
+  /* ── Linien ──────────────────────────────────────────────────────────────────────
+     Fünf Stufen derselben Tinte, benannt nach ihrer AUFGABE. Wer die Deckung meint,
+     nimmt --ink-*; wer den Trenner meint, nimmt --rule-*. */
+  --rule-soft: var(--ink-08);     /* feinster Trenner (Verzeichnis) */
+  --rule-fein: var(--ink-12);     /* Zeilen in Listen */
+  --rule: var(--ink-16);          /* Blocktrenner */
+  --rule-mid: var(--ink-20);      /* Kapitelkopf, Fortschrittsgleis, Chipkontur */
+  --rule-strong: var(--ink);      /* volle Tinte: Blockkopf, Knopfrand */
 
-  /* Glass / Brand (active in components.css) */
-  --glass-brand-5: rgba(69, 161, 23, 0.05);
-  --glass-brand-10: rgba(69, 161, 23, 0.10);
-  --glass-brand-20: rgba(69, 161, 23, 0.20);
+  /* Strichstärken. Drei, und jede sagt etwas anderes. */
+  --strich-haar: 1px;             /* trennt */
+  --strich-fein: 1.5px;          /* die Kontur eines Punktes auf einer Achse — feiner als --strich-stark, aber sichtbar */
+  --strich-stark: 2px;            /* schließt ab, trägt die Doppellinie */
+  /* 🚨 Hin und her am 16./17.09.2026: 3 → 1 → 3. Bei 1 px verschwand die farbige Linie
+     gegen die Haarlinien des Satzes und der Block hatte keinen Anfang mehr. Sie bleibt
+     bei 3 px — sie ist das einzige Farbsignal, das einen Block eröffnet. */
+  --strich-einhaenger: 3px;       /* eröffnet einen Block, trägt die Werkzeugfarbe */
+  --strich-stempel: 2.5px;        /* die Kontur eines aufgesetzten Stempels */
+  /* Die Doppellinie: 2 px Linie, 2 px Luft, 1 px Linie. Als VERLAUF auf einem 5-px-hohen
+     Element — so hängt sie an einem einzigen Knoten und lässt sich drehen.
+     Der Schatten-Zwilling ist für Blöcke, die die Linie als Kante tragen (Tabellenkopf,
+     Kennzahlen): dort gibt es kein eigenes Element dafür. */
+  --doppellinie: linear-gradient(var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px);
+  --doppellinie-grau: linear-gradient(var(--muted) 0 2px, transparent 2px 4px, var(--muted) 4px 5px);
+  --doppellinie-schatten: 0 3px 0 -2px var(--ink);
 
-  /* Glass / Blur (active in components.css) */
+  /* ── Abstandsleiter ──────────────────────────────────────────────────────────────
+     Sieben Sprossen, mehr braucht der Satz nicht:
+       xxs Haaransatz zwischen zwei Zeilen desselben Gedankens
+       xs  Zeilenabstand in einer Liste
+       s   zwischen Kicker und Titel
+       m   innerhalb eines Blocks
+       l   zwischen zwei Teilen eines Blocks
+       xl  zwischen zwei Blöcken
+       xxl zwischen zwei Kapitelteilen
+     🚨 Kein `margin: 37px`. Wer zwischen zwei Sprossen greifen will, greift zur höheren:
+     die Zeitung atmet lieber mehr. */
+  --luft-xxs: 2px;
+  --luft-xs: 4px;
+  --luft-s: 8px;
+  --luft-m: 14px;
+  --luft-l: 22px;
+  --luft-xl: 34px;
+  --luft-xxl: 52px;
+
+  /* ── Schriftgrade ────────────────────────────────────────────────────────────────
+     Die Sprossen tragen ihre Größe im Namen. EINE Halbstufe ist erlaubt: der Kicker auf
+     10,5 px, so steht er im Handoff, und auf 11 gerundet wird er klobig. Die zweite
+     (12,5 px für Fußnote und Hinweis) ist am 16.09.2026 gefallen — sie stand 41-mal neben
+     47 Vorkommen von 12 px, und ein halber Pixel ist kein Rang. */
+  --grad-kicker: 10.5px;          /* Versalien — die eine erlaubte Halbstufe (Handoff) */
+  --grad-11: 11px;
+  --grad-12: 12px;
+  --grad-13: 13px;
+  --grad-14: 14px;
+  --grad-15: 15px;
+  --grad-16: 16px;
+  --grad-18: 18px;
+  --grad-20: 20px;
+  --grad-22: 22px;
+  --grad-26: 26px;
+  --grad-28: 28px;
+  --grad-34: 34px;
+  --grad-44: 44px;
+  --laufweite-kicker: .14em;
+  --laufweite-band: .12em;        /* Versalien im Tabellenkopfband, etwas enger */
+
+  /* ── Schriftrollen ───────────────────────────────────────────────────────────────
+     Jede Rolle ist ein vollständiges `font:` — Schnitt, Grad, Zeile, Familie in einem.
+     Wer eine Rolle setzt, setzt nie zusätzlich font-size oder font-weight daneben. */
+  --schrift-kicker:    700 var(--grad-kicker)/1.3 var(--sans);
+  --schrift-mini:      700 var(--grad-11)/1.25 var(--sans);          /* Legende, Achse, Rang */
+  --schrift-klein:     400 var(--grad-12)/1.45 var(--sans);       /* Fußnote, Quelle */
+  --schrift-hinweis:   italic 300 var(--grad-12)/1.45 var(--serif);/* der kursive Halbsatz */
+  --schrift-tabelle:   600 var(--grad-13)/1.35 var(--sans);          /* Tabellenzelle */
+  --schrift-text:      400 var(--grad-15)/1.65 var(--sans);          /* Fließtext im Kasten */
+  --schrift-fliess:    400 var(--grad-16)/1.75 var(--sans);          /* Fließtext im Ratgeber */
+  --schrift-zeile:     700 var(--grad-16)/1.3 var(--serif);          /* Titelzeile in einer Liste */
+  --schrift-vorspann:  italic 300 var(--grad-15)/1.5 var(--serif);   /* Vorspann unter der Schlagzeile */
+  --schrift-wert:      700 var(--grad-26)/1.1 var(--serif);          /* die Wertzeile einer Eingabe */
+  --schrift-kennzahl:  900 var(--grad-28)/1.05 var(--serif);         /* die Zahl im Kennzahlenblock */
+  --schrift-zwischen:  700 var(--grad-18)/1.3 var(--serif);          /* Zwischentitel im Fließtext */
+  --schrift-zitat:     italic 400 var(--grad-18)/1.6 var(--serif);   /* Zitat im Fließtext */
+  --schrift-rubrik:    italic 500 clamp(var(--grad-16), 1.4vw, var(--grad-20))/1.3 var(--serif);
+  --schrift-anriss:    italic 300 clamp(var(--grad-16), 1.35vw, var(--grad-20))/1.5 var(--serif);
+  --schrift-abschnitt: 700 clamp(var(--grad-20), 1.9vw, var(--grad-26))/1.25 var(--serif);
+  --schrift-schlag:    900 clamp(var(--grad-20), 2.2vw, var(--grad-26))/1.15 var(--serif);
+  --schrift-gross:     900 clamp(var(--grad-22), 2.4vw, var(--grad-34))/1.2 var(--serif);
+  --schrift-titel:     900 clamp(var(--grad-26), 3.4vw, var(--grad-44))/1.1 var(--serif);
+
+  /* ── Formen ──────────────────────────────────────────────────────────────────────
+     Die Zeitung hat eckige Ecken. Vier Werte, und `0` ist der Normalfall. */
+  /* ── Die Holo-Folie ──────────────────────────────────────────────────────────────
+     Der Werkstoff des Bestwert-Siegels: vier Lagen, die übereinanderliegen. Sie stehen
+     hier und nicht im Bauteil, weil eine Perlmuttfolie eine Farbe des Hauses ist wie
+     Tinte und Papier — nur eben eine, die sich beim Scrollen bewegt (Siegel.tsx).
+     🚨 Sehr helle Pastelltöne. Ein gesättigtes Spektrum liest sich im Satz als buntes
+     Abzeichen; der Eindruck von Folie entsteht aus dem WECHSEL, nicht aus Sättigung. */
+  --holo-bogen: linear-gradient(115deg,
+      #F3E4FF 0%, #DCEBFF 17%, #DCF7EC 33%, #FFF6FA 49%,
+      #E7DBFF 65%, #D6F1FF 82%, #FFE6F3 100%);
+  --holo-licht: radial-gradient(130% 100% at 14% 14%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 58%);
+  --holo-hauch: radial-gradient(110% 85% at 88% 86%, rgba(176,240,255,.7) 0%, rgba(176,240,255,0) 62%);
+  --holo-glanz: linear-gradient(26deg, rgba(255,255,255,0) 14%, rgba(255,255,255,.9) 40%, rgba(255,255,255,0) 66%);
+
+  /* ── Das Murmelglas ─────────────────────────────────────────────────────────────
+     Der Werkstoff des Solitärbretts — wie die Holo-Folie eine Farbe des Hauses, nur
+     räumlich: ein Glaskörper mit einem Katzenauge darin. Er steht hier und nicht im
+     Bauteil, weil Werkstoff und Zustand zusammengehören — derselbe Körper liegt ruhig,
+     hebt sich beim Zeigen, liegt in der Hand und fliegt.
+     🚨 Die Innentiefe ist SCHWARZ, nicht Tinte. Das ist neben der gedrückten Taste der
+     zweite Ort im Haus, an dem Schwarz stimmt: Glas verschluckt Licht in seiner Tiefe,
+     es tönt es nicht. */
+  --glas-hoch: #4f6c3b;           /* die Lichtseite des Glaskörpers */
+  --glas-tief: #1d2b15;           /* sein Grund */
+  --glas-koerper: radial-gradient(circle at 50% 58%, var(--glas-hoch) 0, var(--ink) 52%, var(--glas-tief) 100%);
+  --glas-glanz: radial-gradient(circle at 33% 28%, rgba(255,255,255,.95) 0, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 32%),
+                radial-gradient(circle at 70% 82%, rgba(255,255,255,.18) 0, rgba(255,255,255,0) 28%);
+  /* Das Katzenauge — das Band im Glas. Klein gibt es nur den hellen Kern davon. */
+  --katzenauge: linear-gradient(90deg, rgba(69,161,23,.25), #7fcc4a 35%, #c4f09e 50%, #7fcc4a 65%, rgba(69,161,23,.25));
+  --katzenauge-klein: linear-gradient(90deg, transparent, #a9e07c, transparent);
+  --glas-innen: inset 0 -2px 4px rgba(0, 0, 0, .3);
+  --glas-liegt: 0 3px 5px -2px rgba(51, 74, 39, .55), var(--glas-innen);
+  --glas-zeigt: 0 8px 10px -4px rgba(51, 74, 39, .5), var(--glas-innen);
+  --glas-hand:  0 16px 16px -7px rgba(51, 74, 39, .55), var(--glas-innen), 0 0 0 2px var(--paper), 0 0 0 3.5px var(--green);
+  --glas-flug:  0 22px 18px -8px rgba(51, 74, 39, .45), var(--glas-innen);
+  --glas-klein: 0 2px 3px -1px rgba(51, 74, 39, .5);
+  /* Das leere Loch im Brett — eine Mulde, kein Ring. Belegt verschwindet sie wieder. */
+  --loch-tiefe: inset 0 1px 2px var(--ink-25);
+
+  --radius-kante: 2px;            /* die einzige erlaubte Abrundung einer FLÄCHE */
+  --radius-pille: 999px;          /* Pille, Knopf, Chip, Feld — und jedes GERÄT */
+  /* 🚨 Flächen und Geräte sind zweierlei. Eine Fläche trägt Text (Kasten, Dialog, Karte,
+     Kachel) und bekommt die Kante. Ein Gerät wird BEDIENT (Kippschalter, Schiene,
+     Regler) und behält seine Kapselform — es soll aussehen, als ließe es sich schieben.
+     Der Durchgang am 16.09.2026 hat vier Kippschalter und eine Schätzschiene auf 2 px
+     gesetzt; aus runden Schaltern wurden Kästchen. */
+  --radius-kreis: 50%;            /* Punkt, Scheibe, Siegelzahn */
+  /* 🚨 Die Sprechblase braucht ein eigenes Maß. Mit --radius-pille (999 px) übersteigt
+     der Radius die halbe Blasenhöhe, und an der unteren Ecke entsteht ein Zipfel, der
+     wie ein missratener Sprechblasen-Schwanz aussieht. */
+  --radius-blase: 27px;
+  --radius-blase-eng: 20px;       /* dieselbe Blase auf schmalem Schirm, mit weniger Polster */
+
+  /* Die Pfeilspitze des Megamenüs, als Maske — so kommt ihre Farbe aus `background`.
+     🚨 Maße 1:1 aus MegaArrowTrail: Spitze 8 px hoch (× 7,62/14,37 = 4,24 px breit),
+     Schaft 1 px stark. Nicht größer skalieren, sie fällt sonst sofort auf. */
+  --pfeilspitze: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%207.62%2014.37'%3E%3Cpath%20d='M.03,13.84c-.16.44.45.74.72.36,1.35-1.87,4.75-5.02,6.62-6.49.35-.27.34-.8-.02-1.06C5.15,5.05,2.12,2.08.74.17.47-.2-.12.09.03.53c.78,2.28,2.56,4.41,3.22,5.82.26.56.28,1.15,0,1.71C2.58,9.45.71,11.93.03,13.84Z'/%3E%3C/svg%3E");
+
+  /* ── Schatten ────────────────────────────────────────────────────────────────────
+     Drei Höhen. Alles in Tinte getönt, nie in Schwarz — schwarzer Schatten auf warmem
+     Papier wirkt grau und fremd. */
+  --schatten-auflage:   0 2px 6px rgba(51, 74, 39, .07);    /* liegt auf dem Papier */
+  --schatten-schwebend: 0 10px 26px rgba(51, 74, 39, .14);  /* Menü, Rail */
+  --schatten-dialog:    0 16px 40px rgba(51, 74, 39, .18);  /* Dialog, Overlay */
+  /* Zwei Sonderfälle, die sich nicht auf eine Höhe zurückführen lassen. */
+  --schatten-oben:      0 -10px 26px -10px rgba(51, 74, 39, .2), 0 2px 7px rgba(51, 74, 39, .07);
+  --schatten-blatt:     2px 4px 0 var(--ink-08), 0 24px 40px -22px var(--ink-45);
+  /* Der Kassenbon wirft seinen Schatten als `filter: drop-shadow` — gleiche Schreibweise
+     wie ein Schatten, aber an der Zickzack-Kante entlang statt am Rechteck. */
+  --schatten-zettel:    0 14px 16px rgba(51, 74, 39, .18);
+  /* Die eine Vertiefung im Haus: eine gedrückte Taste. Sie ist der einzige Ort, an dem
+     ein Schatten nach INNEN fällt — und der einzige, an dem Schwarz richtig ist: eine
+     eingesunkene Fläche verschluckt Licht, sie tönt es nicht. */
+  --schatten-taste:     inset 0 3px 0 rgba(0, 0, 0, .25);
+
+  /* Die Doppellinie als Schatten, in Tinte und in Grau (Jahresübersicht). */
+  --doppellinie-muted:  0 3px 0 -2px var(--muted);
+
+  /* Der Doppelschlag am Bestwert- und am Live-Punkt (`fl-puls`, `fl-punkt`). Er läuft
+     von der Farbe nach `transparent` — ein durchsichtiges Farbwort braucht keinen Namen. */
+  --puls-marke: rgba(69, 161, 23, .5);
+  --puls-vergleich: rgba(11, 127, 102, .45);
+
+  /* ── Bewegung — Herzschlag-Prinzip (Handoff) ────────────────────────────────────
+     Zwei Kurven tragen alles: die ruhige und die mit Überschwung. */
+  --kurve: cubic-bezier(.2, .8, .2, 1);
+  --ueber: cubic-bezier(.34, 1.56, .64, 1);
+  --ueber-sanft: cubic-bezier(.34, 1.4, .64, 1);
+  --klappe: cubic-bezier(.22, 1.1, .36, 1);
+  --tempo: 1;                     /* ruhig 1.35 · lebhaft .65 */
+
+  /* ═══════════════════════════════════════════════════════════════════════════════
+     ALT-BRÜCKE — app/components.css (die Live-Seite) und der `@theme inline`-Block in
+     globals.css leben von diesen Namen. Sie tragen keine eigenen Werte mehr, sondern
+     zeigen auf das Verzeichnis oben. So bleibt die Alt-Seite unberührt, und wer dort
+     eine Farbe ändert, ändert sie an einer Stelle.
+
+     🚨 NICHT umbenennen: `@theme inline` in globals.css:554-565 deklariert sie
+     selbstbezüglich (`--x: var(--x)`). Verschwindet ein Name, bricht das STILL —
+     die Tailwind-Klasse verliert ihren Wert, ohne dass etwas meldet.
+     ═══════════════════════════════════════════════════════════════════════════════ */
+  --color-brand: var(--green);
+  --color-brand-secondary: var(--pink);
+  --color-text-primary: var(--ink);
+  --color-text-medium: var(--muted);
+  --color-text-secondary: var(--muted);      /* war #475569 — blaustichiges Tailwind-Slate */
+  --color-bg-page: var(--paper);
+  --color-bg-surface: var(--auflage);        /* war #f8fafc */
+  --color-bg-subtle: var(--placeholder);     /* war #f1f5f9 */
+  --color-placeholder-bg: var(--placeholder);
+  --color-border-default: var(--ink-08);     /* war rgba(0,0,0,.08) — jetzt Tinte statt Ruß */
+  --color-nav-text: var(--ink);
+  --color-dot: var(--muted);
+  --color-pill-bg: rgba(255, 255, 255, .5);
+  --color-btn-hover: rgba(69, 161, 23, .3);
+  --color-btn-active: var(--green);          /* war #6dca1c */
+  --color-tool-rechner: var(--tool-rechner);
+  --color-tool-vergleiche: var(--tool-vergleich);
+  --color-tool-checklisten: var(--tool-checkliste);
+  --color-tool-dokumente: var(--tool-dokumente);
+  --fill-0: var(--ink);                      /* SVG-Grundfüllung (Spark u. a.) */
+  --visual-fill-1: var(--raster);            /* --visual-fill-2..10 waren tot und sind weg */
+  --shadow-card: var(--schatten-auflage);
+  --glass-brand-5: rgba(69, 161, 23, .05);
+  --glass-brand-10: rgba(69, 161, 23, .1);
+  --glass-brand-20: rgba(69, 161, 23, .2);
   --glass-blur-sm: 4px;
   --glass-blur-md: 12px;
 
-  /* Nav */
-  --color-nav-text: #334A27;
-  --fill-0: #334A27; /* SVG default fill (Spark, etc.) */
-
-  /* Tool Cards */
-  --color-tool-rechner: var(--color-brand-secondary);
-  --color-tool-vergleiche: #06D496;
-  --color-tool-checklisten: #9953c9;
-  --color-tool-dokumente: #E07A5F;
-
-  /* Pill / Input Background */
-  --color-pill-bg: rgba(255, 255, 255, 0.5);
-
-  /* Decorative Dots */
-  --color-dot: rgba(104, 108, 106, 0.7);
-
-  /* Visual Fills (Bg-Palette, ggf. später wieder dynamisch verwendet) */
-  --visual-fill-1:  #e3ecd8;
-  --visual-fill-2:  #d9e7cb;
-  --visual-fill-3:  #eae4d4;
-  --visual-fill-4:  #e0d9c8;
-  --visual-fill-5:  #dbe4d1;
-  --visual-fill-6:  #e8dcc9;
-  --visual-fill-7:  #d4dec8;
-  --visual-fill-8:  #efe7d5;
-  --visual-fill-9:  #dde3d0;
-  --visual-fill-10: #e5ddd0;
-
-  /* Author Avatar Gradients (dynamisch via Author colorVariant 1-6) */
-  --gradient-author-1: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); /* Instagram */
-  --gradient-author-2: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%); /* Warm Sunset */
-  --gradient-author-3: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple */
-  --gradient-author-4: linear-gradient(135deg, #00D4FF 0%, #0099FF 100%); /* Ocean */
-  --gradient-author-5: linear-gradient(135deg, #1DB954 0%, #1ed760 100%); /* Spotify Green */
-  --gradient-author-6: linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFB6C1 100%); /* Hot Pink */
+  /* Autoren-Avatare — sechs Verläufe, dynamisch über Author colorVariant 1-6.
+     Bewusst außerhalb des Systems: sie sind Personenbilder, keine Gestaltung. */
+  --gradient-author-1: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  --gradient-author-2: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%);
+  --gradient-author-3: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-author-4: linear-gradient(135deg, #00D4FF 0%, #0099FF 100%);
+  --gradient-author-5: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
+  --gradient-author-6: linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFB6C1 100%);
 }

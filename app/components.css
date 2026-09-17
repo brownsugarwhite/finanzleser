@@ -258,9 +258,16 @@ body.leo-chat-open .topbar-grid {
   opacity: 0;                     /* gsap.fromTo in LeoChatMessages fadet ein */
 }
 
-/* Outline-Spike (Antwort) nutzt SVG-Datei /assets/bubble_spike_outline.svg —
-   Fill #faf9f6 (Page-BG) + Stroke #686C6A (text-medium) sind dort hartkodiert.
+/* Outline-Spike (Antwort) ist ein inline-SVG (components/ui/BubbleSpike.tsx, Prop
+   `kontur`) — Fill und Stroke kommen deshalb von hier, nicht mehr aus einer Datei.
    Erbt position/size von .chat-bubble-spike. */
+.chat-bubble-spike--under {
+  fill: var(--color-bg-page);
+  stroke: var(--color-text-medium);
+}
+.chat-bubble-spike--under-error {
+  stroke: var(--color-brand-secondary);
+}
 
 /* Gradient-Overlay am unteren Viewport-Rand — nur in conversation-mode sichtbar.
    Faded die Bubbles aus, die unter die Eingabepille scrollen. 120px hoch,

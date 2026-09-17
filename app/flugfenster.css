@@ -1,0 +1,205 @@
+/* =====================================================================================
+   flugfenster.css — das Flugfenster unter „Aus unserem Newsletter".
+
+   Zwei Linien im Textfluss, dazwischen ein Fenster in voller Satzbreite. Was man darin
+   sieht, steht NICHT im Fluss: es ist eine `position: fixed` Bühne, die am Viewport hängt
+   und nur durch das Fenster hindurch sichtbar ist. Beim Scrollen wandert das Fenster über
+   das stehende Bild — als wäre zwischen den Linien ein Fenster in die Wand geschnitten.
+
+   🚨 Das Beschneiden macht `clip-path` am Fenster, NICHT `overflow: hidden`.
+   `overflow` lässt `position: fixed` Nachfahren durch (sie hängen am Viewport, nicht am
+   Kasten) — die Bühne läge dann über der ganzen Seite. `clip-path` beschneidet den
+   gesamten Teilbaum, Positionierung hin oder her. Am 16.09.2026 in Chromium, WebKit und
+   Firefox gemessen: alle drei klippen, pixelgleich.
+
+   🚨 Und deshalb darf an keinem Vorfahren des Fensters `transform`, `filter`,
+   `perspective`, `backdrop-filter`, `contain: paint` oder `will-change` davon stehen.
+   Jedes davon macht den Vorfahren zum Bezugsrahmen für `fixed` — die Bühne klebte dann
+   am Kasten statt am Viewport, und der ganze Effekt wäre weg.
+
+   Aufbau der Bühne, von hinten nach vorn:
+     himmel   steht still, deckt die ganze Bühnenhöhe
+     wolken-1 hinterste Wolkenlage  ┐ dieselbe Schleife, um je ein Drittel versetzt:
+     wolken-2 mittlere Wolkenlage   ├ klein einblenden, größer werden, ausblenden.
+     wolken-3 vorderste Wolkenlage  ┘ Das ergibt den Flug Richtung Horizont.
+     flieger  in der Mitte, folgt Maus und Scrollstand mit echter 3D-Drehung.
+
+   Alle Lagen hängen mit ihrem FLUCHTPUNKT (im Bildmaterial die Sonne bei 63 % der Höhe)
+   an derselben Stelle der Bühne. Nur so liegen Himmel und Wolken auf einem Horizont.
+   ===================================================================================== */
+
+.faden-shell .flugfenster {
+  /* ── Maße ── */
+  --fenster-h: 560px;        /* Abstand der beiden Linien — seit Baustein 4 höher:
+                                Schlagzeile oben, Glasplatte unten, Flieger dazwischen */
+  --luft: 5px;               /* Abstand des Fensters zur Linie */
+  /* ── Flug ── */
+  --dauer: 18s;              /* eine volle Wolkenschleife */
+  --s0: 0.7;                 /* Skalierung am Horizont (fern) */
+  --s1: 2.9;                 /* Skalierung beim Vorbeiziehen (nah) */
+  /* ── Komposition ── */
+  --fluchtpunkt-y: 63%;      /* wo die Sonne IM BILD sitzt */
+  --horizont: 56%;           /* wo der Fluchtpunkt IN DER BÜHNE sitzt */
+  --himmel-y: 62%;           /* Bildausschnitt des Himmels */
+  --wolken-gr: min(760px, 105vw);  /* Kantenlänge der Wolkenkomposition */
+  --flieger-b: 30%;          /* Spannweite, gemessen an der Fensterbreite */
+
+  display: block; clear: both; margin: 0;
+}
+
+.faden-shell .flugfenster__linie { display: block; height: var(--strich-haar, 1px); background: var(--rule-strong); }
+/* Der Blockkopf über der ersten Linie — derselbe Satz wie jeder Kicker der Startseite. */
+.faden-shell .flugfenster__kicker { display: block; margin-bottom: var(--luft-s); }
+
+/* Das Fenster: der einzige Ort, an dem die Bühne zu sehen ist.
+   Der Verlauf darunter ist der Himmel in zwei Tönen — er hält die Fläche, bis die
+   Bilder da sind, und ist auch das, was ohne Bilder bleibt. */
+.faden-shell .flugfenster__ausschnitt {
+  position: relative;
+  height: calc(var(--fenster-h) - 2 * var(--luft));
+  margin: var(--luft) 0;
+  clip-path: inset(0);
+  background: linear-gradient(to bottom, #8fa0d1 0%, #c3bed3 26%, #eed7ca 46%, #f5e4d0 63%, #c4bed2 100%);
+}
+
+.faden-shell .flugfenster__buehne { position: fixed; inset: 0; pointer-events: none; }
+
+.faden-shell .flugfenster__lage {
+  position: absolute; left: 50%; top: var(--horizont);
+  width: var(--gr); height: var(--gr);
+  margin-left: calc(var(--gr) / -2);
+  margin-top: calc(var(--gr) * -0.63);   /* der Fluchtpunkt auf --horizont */
+}
+.faden-shell .flugfenster__lage img { display: block; width: 100%; height: 100%; }
+
+/* Der Himmel hängt nicht am Fluchtpunkt: er muss die ganze BÜHNENHÖHE decken, sonst
+   blitzt beim Scrollen seine Bildkante durch das Fenster. `cover` statt Strecken. */
+.faden-shell .flugfenster__lage--himmel {
+  --gr: max(var(--wolken-gr), 100vh);
+  top: 0; margin-top: 0; height: 100%;
+}
+.faden-shell .flugfenster__lage--himmel img { object-fit: cover; object-position: 50% var(--himmel-y); }
+
+/* Die drei Wolkenlagen: dieselbe Schleife, um je ein Drittel versetzt.
+   🚨 Die Deckung darf erst voll sein, wenn die Lage das Fenster überragt — sonst sieht
+   man ihre Bildkante. Bei --s0 0.7 und --s1 2.9 ist das ab 16 % der Schleife der Fall. */
+.faden-shell .flugfenster__lage--wolke {
+  --gr: var(--wolken-gr);
+  transform-origin: 50% var(--fluchtpunkt-y);
+  will-change: transform, opacity;
+  animation: flug-zug var(--dauer) linear infinite;
+}
+.faden-shell .flugfenster__lage--w1 { animation-delay: calc(var(--dauer) / -3 * 0); }
+.faden-shell .flugfenster__lage--w2 { animation-delay: calc(var(--dauer) / -3 * 1); }
+.faden-shell .flugfenster__lage--w3 { animation-delay: calc(var(--dauer) / -3 * 2); }
+
+@keyframes flug-zug {
+  0%   { transform: scale(var(--s0)); opacity: 0; }
+  16%  { opacity: 1; }
+  58%  { opacity: 1; }
+  100% { transform: scale(var(--s1)); opacity: 0; }
+}
+
+/* Der Flieger sitzt IM FENSTER, nicht auf der Bühne — er wandert also mit dem Fenster
+   durch den Viewport und bleibt immer zu sehen. `--sp`, `--mx`, `--my` kommen aus
+   Flugfenster.tsx und laufen zwischen -1 und 1. */
+.faden-shell .flugfenster__flieger {
+  position: absolute; left: 50%; top: 50%;
+  width: var(--flieger-b); margin-left: calc(var(--flieger-b) / -2);
+  perspective: 900px;
+}
+.faden-shell .flugfenster__flieger img {
+  display: block; width: 100%; height: auto;
+  transform:
+    translate3d(calc(var(--mx, 0) * 16px), calc(-50% + var(--my, 0) * 11px + var(--sp, 0) * -20px), 0)
+    rotateX(calc(var(--sp, 0) * 7deg + var(--my, 0) * -7deg))
+    rotateY(calc(var(--mx, 0) * 14deg))
+    rotateZ(calc(var(--mx, 0) * -7deg));
+  transform-origin: 50% 40%;
+  filter: drop-shadow(0 18px 26px rgba(90, 80, 110, .28));
+  will-change: transform;
+}
+
+/* Außer Sicht wird nicht gerechnet: drei große Lagen, die niemand sieht, kosten sonst
+   dauerhaft Compositing. `data-ruht` setzt Flugfenster.tsx über einen IntersectionObserver. */
+.faden-shell .flugfenster[data-ruht] .flugfenster__lage--wolke { animation-play-state: paused; will-change: auto; }
+.faden-shell .flugfenster[data-ruht] .flugfenster__flieger img { will-change: auto; }
+
+@media (max-width: 720px) {
+  .faden-shell .flugfenster { --fenster-h: 320px; --flieger-b: 42%; }
+}
+
+/* Ohne Bewegung: ein stehendes Bild. Die Regel in faden.css schaltet `animation` global
+   ab — dann stünden die Wolken auf dem 0-%-Bild, also auf `opacity: 0`. Hier bekommen
+   sie stattdessen eine feste, aufgeräumte Staffelung. */
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .flugfenster__lage--wolke { opacity: 1; }
+  .faden-shell .flugfenster__lage--w1 { transform: scale(0.95); }
+  .faden-shell .flugfenster__lage--w2 { transform: scale(1.4); opacity: .85; }
+  .faden-shell .flugfenster__lage--w3 { transform: scale(2.1); opacity: .5; }
+}
+
+/* ═══ Baustein 4 · Leos Wochenbrief liegt IM Fenster ════════════════════════════════
+   Übergabe „Finanzleser Heute", 17.09.2026: Die Schlagzeile steht mittig oben, die
+   Glasplatte mit der FL Adresszeile mittig unten, und der Flieger fliegt dazwischen
+   durch die Mitte. Kein Verlauf, keine Papierfläche, keine Inhaltsliste — die steht im
+   eigenen Block darüber.
+
+   🚨 Die Fläche darf wachsen (Wunsch 17.09.), aber die beiden Linien und ihr Abstand
+   bleiben, wie sie sind: sie sind der Rahmen des Fensters im Textfluss. Wer die Höhe
+   ändert, ändert `--fenster-h` — `--luft` ist der Abstand zur Linie und bleibt. */
+
+/* Die Bühne und der Flieger liegen unter dem Satz. */
+.faden-shell .flugfenster__flug { position: absolute; inset: 0; }
+
+.faden-shell .flugfenster__titel {
+  /* 🚨 Breiter und tiefer (Wunsch 17.09.2026): Bei 24ch brach die Zeile auf drei Zeilen
+     und stand dabei zu dicht unter der Oberkante. 32ch ergibt zwei Zeilen, und der Satz
+     sitzt jetzt im oberen Drittel statt am Rand. */
+  position: absolute; left: 50%; top: clamp(30px, 6vw, 58px); transform: translateX(-50%);
+  width: min(88%, 32ch); margin: 0; text-align: center;
+  font: 900 clamp(var(--grad-20), 4.2vw, var(--grad-28))/1.15 var(--serif);
+  color: var(--ink); text-wrap: balance;
+  /* 🚨 KEIN Schein hinter der Schrift (Wunsch 17.09.2026). Die Übergabe legt einen weißen
+     `text-shadow` darunter, damit die Zeile über jedem Himmelston trägt — gerendert sah
+     das nach Prägung aus, nicht nach Zeitungssatz. Der Himmel ist an der Stelle, an der
+     die Zeile steht, hell genug; wer die Animation dort dunkler macht, holt den Schein
+     zurück oder rückt die Zeile. */
+}
+
+.faden-shell .flugfenster__platte {
+  /* Weiter herauf, damit unter der Platte noch Himmel bleibt (Wunsch 17.09.2026). */
+  position: absolute; left: 50%; bottom: clamp(30px, 6vw, 58px); transform: translateX(-50%);
+  width: min(100% - 2 * var(--luft-l), 430px);
+  padding: var(--luft-m) var(--luft-l) var(--luft-s);
+  background: rgba(250, 249, 246, .86);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: var(--strich-haar) solid rgba(255, 255, 255, .75);
+  border-radius: var(--radius-kante);
+  box-shadow: 0 18px 40px -22px rgba(51, 74, 39, .55);
+  text-align: center;
+}
+/* Die Adresszeile steht auf der Platte links ausgerichtet, nur der Hinweis mittig. */
+.faden-shell .flugfenster__platte .az { text-align: left; }
+.faden-shell .flugfenster__platte .az__hinweis { text-align: center; }
+.faden-shell .flugfenster__platte .az__hinweis a { text-decoration: underline; }
+
+/* Der Stempel nach dem Eintragen — dieselbe Figur wie „GEPRÜFT" auf dem Beleg. */
+.faden-shell .wb-platte__stempel {
+  position: absolute; right: var(--luft-m); top: calc(-1 * var(--luft-l));
+  padding: var(--luft-xs) var(--luft-s);
+  border: var(--strich-stempel) solid var(--green-ink); border-radius: var(--radius-kante);
+  background: var(--stempel-grund);
+  font: 900 var(--grad-13)/1 var(--serif); letter-spacing: .14em; text-transform: uppercase;
+  color: var(--green-ink); transform: rotate(-11deg);
+  animation: fl-stempel .7s var(--ueber) both;
+}
+.faden-shell .wb-platte__fertig { display: grid; gap: var(--luft-xs); text-align: left; }
+.faden-shell .wb-platte__fertig p { margin: 0; font: 400 var(--grad-13)/1.5 var(--sans); color: var(--ink); }
+
+@media (max-width: 620px) {
+  .faden-shell .flugfenster { --fenster-h: 620px; }
+  .faden-shell .flugfenster__titel { width: min(92%, 20ch); top: clamp(22px, 5vw, 34px); }
+  .faden-shell .flugfenster__platte { width: calc(100% - 2 * var(--luft-m)); padding: var(--luft-m) var(--luft-m) var(--luft-s); }
+}
+@media (prefers-reduced-motion: reduce) { .faden-shell .wb-platte__stempel { animation: none; } }

@@ -2,10 +2,9 @@
  * Server-seitiger Aufbau der Inhaltsverzeichnis-Einträge eines Artikels.
  *
  * 🚨 Muss die Heading-ID-Nummerierung von components/sections/ArticleContent.tsx
- * EXAKT nachbilden (gleiche parseContent-Block-Erkennung, gleiches addHeadingIds-
- * Schema `heading-${n}`, gleiche Tool-Dedupe-Reihenfolge). Sonst zeigen die TOC-
- * Links auf falsche/nicht existierende Anker. Bei Änderungen an ArticleContent
- * dort UND hier anpassen.
+ * EXAKT nachbilden (gleiches addHeadingIds-Schema `heading-${n}`, gleiche Tool-Dedupe-
+ * Reihenfolge). Die Block-Erkennung kommt seit dem Faden-Umbau aus lib/articleHtml.ts
+ * (eine Quelle für ArticleContent, TOC-Builder und lib/faden/kette.ts).
  *
  * Zweck: Das inline-TOC (ArticleTableOfContents) kann seine Einträge so schon beim
  * SSR/Client-Render mit voller Höhe ausgeben → kein Layout-Shift / Nachrutschen des
@@ -18,30 +17,14 @@ export interface ArticleTocItem {
   toolType?: "rechner" | "checkliste" | "vergleich" | "dokumente";
 }
 
-// Identisch zu ArticleContent.parseContent (Block-Divs / Gutenberg-Vergleich-Kommentar
-// / Gamification). Frisch instanziiert wegen lastIndex-State des g-Flags.
-const BLOCK_PATTERN_SRC =
-  '<div\\s+[^>]*?data-finanzleser-(rechner|checkliste|vergleich|dokumente)="([^"]+)"[^>]*>\\s*</div>|<!-- wp:finanzleser\\/(vergleich) \\{"slug":"([^"]+)"\\} \\/-->|<div\\s+[^>]*?data-finanzleser-gamification="(mythos|quiz|schaetzen|karte|test|gewusst)"[^>]*>([\\s\\S]*?)</div>';
-
-// Identisch zu ArticleContent.normalizeFaq.
-function normalizeFaq(html: string): string {
-  if (!html.includes("schema-faq")) return html;
-  return html.replace(
-    /<(strong|h3)([^>]*)class="schema-faq-question"([^>]*)>\s*<\/\1>\s*<strong>([\s\S]*?)<\/strong>/g,
-    '<$1$2class="schema-faq-question"$3>$4</$1>'
-  );
-}
-
-function stripTags(s: string): string {
-  return s.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
-}
+import { neuesBlockPattern, normalizeFaq, stripTags } from "./articleHtml";
 
 export function buildArticleTocItems(content?: string): ArticleTocItem[] {
   if (!content) return [];
 
   // 1. Content in Parts splitten — wie ArticleContent.parseContent.
   const parts: Array<{ type: "html" | "rechner" | "checkliste" | "vergleich" | "dokumente" | "gamification"; value: string }> = [];
-  const blockPattern = new RegExp(BLOCK_PATTERN_SRC, "g");
+  const blockPattern = neuesBlockPattern();
   let lastIndex = 0;
   let match: RegExpExecArray | null;
   while ((match = blockPattern.exec(content)) !== null) {

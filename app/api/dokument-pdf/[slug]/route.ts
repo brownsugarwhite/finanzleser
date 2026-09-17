@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDokumentBySlug } from "@/lib/wordpress";
 import { cacheHeaders } from "@/lib/httpCache";
+import { medienUrl } from "@/lib/faden/medien";
 
 export const revalidate = 86400;
 
@@ -17,7 +18,7 @@ export async function GET(
 ) {
   const { slug } = await params;
   const dokument = await getDokumentBySlug(slug);
-  const pdfUrl = dokument?.pdfFile?.mediaItemUrl;
+  const pdfUrl = medienUrl(dokument?.pdfFile?.mediaItemUrl);
 
   // Fehler NICHT cachen — sonst friert ein WP-Aussetzer die Vorschau fuer 24h ein.
   if (!pdfUrl) {

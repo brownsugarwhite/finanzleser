@@ -1,0 +1,111 @@
+/* =====================================================================================
+   koepfe.css — WANN steht die Versalienschrift über, wann unter, wann in einer Linie.
+
+   Der Kicker ist das lauteste kleine Element der Seite: Versalien, weite Laufweite, an
+   fast jedem Block. Bis zum 16.09.2026 hatte er keine Regel — mal stand er über einer
+   Linie, mal darunter, mal frei, und die Linie darüber war je nach Block 1, 2 oder 3 px
+   stark, ohne dass der Unterschied etwas bedeutete.
+
+   ── Die Regel ───────────────────────────────────────────────────────────────────────
+
+     Versalien UNTER der Linie   → die Linie ERÖFFNET einen Block.      .satzkopf--einhaenger
+     Versalien ÜBER der Linie    → die Linie SCHLIESST ab.              .satzkopf--abschluss
+     Versalien IN einer Fläche   → nur der Tabellenkopf.                .satzkopf--band
+     Versalien OHNE Linie        → Kicker direkt über der Schlagzeile.  .satzkopf--frei
+
+   Und dazu die Strichstärken aus dem Verzeichnis, die den Rang tragen:
+
+     --strich-einhaenger  3 px, farbig   eröffnet einen Block (Werkzeugfarbe oder Grün)
+     --strich-stark       2 px, Tinte    schließt ab; trägt die Doppellinie
+     --strich-haar        1 px           trennt
+
+   🚨 Die DOPPELLINIE ist abschließend aufgezählt und gehört: dem Kopf des Fadens, dem
+   Kiosk, dem Tabellenkopf und dem Kennzahlenblock des Kursblatts. Sonst nirgends.
+
+   Die Datei ist nicht auf `.faden-shell` begrenzt — das Kursblatt läuft auch allein.
+   🚨 Und genau deshalb heißt das Muster `.satzkopf` und NICHT `.kopf`: `.kopf` gehört
+   seit dem Zeitungsumbau dem Seitenkopf (`components/faden/Kopf.tsx`, `<header
+   class="kopf" id="kopf">`). Eine ungebundene Regel `.kopf { display: flex }` traf ihn
+   mit — der Seitenkopf wurde zum Flex-Container, das Megamenü `.blatt` wurde darin zum
+   zweiten Flex-Kind und klappte RECHTS NEBEN der Navigation auf, statt unter ihr; die
+   Navigation schrumpfte auf 429 px und die ganze Seite rutschte um 420 px nach unten.
+   Eine ungebundene Klasse in dieser Datei muss einen Namen tragen, den der Faden noch
+   nicht kennt. Gegenprobe: `grep -rn '"<name>' components app`.
+   ===================================================================================== */
+
+/* ── Der Kicker ─────────────────────────────────────────────────────────────────────── */
+.kicker, .faden-shell .kicker {
+  font: var(--schrift-kicker);
+  letter-spacing: var(--laufweite-kicker);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.kicker--gruen, .faden-shell .kicker--gruen { color: var(--green-ink); }
+.kicker--pink, .faden-shell .kicker--pink { color: var(--pink); }
+.kicker--spiel, .faden-shell .kicker--spiel { color: var(--tool-spiel); }
+/* Der Kicker eines Werkzeugs trägt links seinen Punkt in der Werkzeugfarbe. */
+.kicker--tool, .faden-shell .kicker--tool { display: inline-flex; align-items: center; gap: var(--luft-s); }
+
+/* ── Der Kopf als Zeile: Kicker links, Hinweis rechts ──────────────────────────────── */
+/* Fast jeder Block im Faden trägt rechts noch eine Angabe — eine Lesedauer, einen
+   Bereich, ein Datum. Sie steht kursiv und grau, nie in Versalien: zwei Versalienzeilen
+   nebeneinander lesen sich als Konkurrenz. */
+.satzkopf {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--luft-s) var(--luft-m); flex-wrap: wrap;
+}
+.satzkopf__hinweis { font: var(--schrift-hinweis); color: var(--muted); }
+
+/* ── 1 · Einhänger: die Linie ERÖFFNET ─────────────────────────────────────────────── */
+/* Für alles, was im Fließtext beginnt: Kästen, Werkzeuge, Spiele, Statistiken.
+   `--ton` trägt die Werkzeugfarbe; ohne Angabe eröffnet Grün. */
+.satzkopf--einhaenger {
+  border-top: var(--strich-einhaenger) solid var(--ton, var(--green));
+  padding-top: var(--luft-s);
+}
+.satzkopf--einhaenger--rechner { --ton: var(--tool-rechner); }
+.satzkopf--einhaenger--vergleich { --ton: var(--tool-vergleich); }
+.satzkopf--einhaenger--checkliste { --ton: var(--tool-checkliste); }
+.satzkopf--einhaenger--dokumente { --ton: var(--tool-dokumente); }
+.satzkopf--einhaenger--tinte { --ton: var(--ink); }
+
+/* ── 2 · Abschluss: die Linie SCHLIESST AB ─────────────────────────────────────────── */
+/* Für Verzeichnisse, Listenköpfe, Kennzahlen: erst die Überschrift, dann der Strich,
+   dann der Inhalt. Die Linie sagt „ab hier kommen die Einträge". */
+.satzkopf--abschluss {
+  border-bottom: var(--strich-haar) solid var(--rule);
+  padding-bottom: var(--luft-xs);
+  margin-bottom: var(--luft-s);
+}
+.satzkopf--abschluss--stark { border-bottom-width: var(--strich-stark); border-bottom-color: var(--ink); }
+
+/* ── 3 · Band: Versalien IN einer Fläche ───────────────────────────────────────────── */
+/* Nur der Tabellenkopf. Grauer Grund, weiße Versalien, etwas engere Laufweite —
+   auf einer Fläche braucht die Versalienschrift weniger Luft als auf Papier.
+   Handoff Runde 2, Punkt 5. */
+/* 🚨 Tinte, nicht Grau. Ein grauer Kopf über einer Tabelle in Tinte-Schrift liest sich
+   wie eine zweite, schwächere Stimme; der Kopf ist aber die stärkste Zeile der Tabelle. */
+.satzkopf--band {
+  background: var(--ink); color: var(--auf-tinte);
+  padding: var(--luft-xs) var(--luft-s);
+  font: var(--schrift-kicker); letter-spacing: var(--laufweite-band);
+  text-transform: uppercase;
+}
+.satzkopf--band .kicker,
+.satzkopf--band span,
+.satzkopf--band b { color: var(--auf-tinte); }
+
+/* ── 4 · Frei: Versalien OHNE Linie ────────────────────────────────────────────────── */
+/* Der Regelfall im Satz: Kicker, darunter die Schlagzeile, sonst nichts. */
+.satzkopf--frei { display: grid; gap: var(--luft-xs); }
+
+/* ── Die Doppellinie ───────────────────────────────────────────────────────────────── */
+/* 2 px Linie, 2 px Luft, 1 px Linie — als EIN Verlauf auf einem 5-px-Element.
+   🚨 Nicht als `border-top` plus Schatten: der Faden hatte die Klasse `.doppellinie`
+   schon (faden.css, als Verlauf), und eine zweite Definition unter demselben Namen
+   legte sich am 16.09.2026 darüber statt sie zu ersetzen — Rahmen UND Verlauf UND
+   Schatten, also eine deutlich schwerere Linie als vorher.
+   Vier Verwendungen, mehr nicht: Kopf des Fadens, Kiosk, Tabellenkopf, Kennzahlen. */
+.doppellinie { display: block; height: 5px; background: var(--doppellinie); border: 0; }
+.doppellinie--grau { background: var(--doppellinie-grau); }
+.doppellinie--gedreht { transform: scaleY(-1); }

@@ -1,0 +1,899 @@
+[
+  {
+    "slug": "gesetzliche-krankenversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Krankenversicherung schützt rund 74 Millionen Menschen nach dem Solidarprinzip: Beiträge nach Einkommen, Leistungen nach Bedarf, Familienangehörige beitragsfrei; Angestellte bis 77.400 Euro Jahresbrutto sind pflichtversichert.",
+          "2026 kostet sie 14,6 Prozent plus Zusatzbeitrag, im Schnitt 2,9 Prozent, je nach Kasse 2,18 bis 4,39 Prozent, hälftig mit dem Arbeitgeber geteilt, bis zur Beitragsbemessungsgrenze von 5.812,50 Euro im Monat; dazu 3,6 Prozent Pflegeversicherung, Kinderlose 4,2.",
+          "Neue Leistungen: ausgebaute elektronische Patientenakte, ab Oktober 2026 ein digitaler Medikationsplan, Liposuktion bei Lipödem in allen Stadien nach sechs Monaten konservativer Therapie, Mindestmengen bei Herztransplantationen.",
+          "Bei jeder Zusatzbeitragserhöhung gilt ein Sonderkündigungsrecht; der Wechsel dauert 15 Minuten, keine Kasse darf ablehnen, die neue Kasse kündigt die alte. Zwischen teuerster und günstigster Kasse liegen bei 3.000 Euro brutto rund 330 Euro im Jahr.",
+          "Rund 95 Prozent der Leistungen sind gesetzlich gleich; Unterschiede gibt es bei Zusatzbeitrag, Zahnreinigung, Bonusprogrammen, Service und Versorgungsprogrammen für chronisch Kranke."
+        ],
+        "quellen": [
+          "§§ 5, 6, 10, 175, 241, 242 SGB V",
+          "Sozialversicherungs-Rechengrößenverordnung 2026",
+          "Beitrag Gesetzliche Krankenversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Beitragssätze 2026: Das kostet die Gesetzliche Krankenversicherung",
+          "status": "freigegeben",
+          "frage": "Was zahle ich bei 3.500 Euro brutto für die Krankenversicherung?",
+          "antwort": "Bei 2,9 Prozent Zusatzbeitrag rund 306 Euro im Monat als Ihr Anteil: 7,3 Prozent allgemeiner Beitrag plus 1,45 Prozent halber Zusatzbeitrag, dazu 63 Euro Pflegeversicherung mit Kind oder 84 Euro ohne. Ihr Arbeitgeber zahlt noch einmal 306 Euro. Bei einer Kasse mit 2,18 Prozent sparen Sie 12,60 Euro im Monat.",
+          "quellen": [
+            "§§ 241, 242, 249 SGB V",
+            "§ 55 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Neue Leistungen in der gesetzlichen Krankenversicherung ab 2026",
+          "status": "freigegeben",
+          "frage": "Muss ich die elektronische Patientenakte nutzen?",
+          "antwort": "Nein, sie wird seit 2025 für alle gesetzlich Versicherten automatisch angelegt, aber Sie können ihr insgesamt widersprechen oder einzelne Dokumente und Zugriffe sperren, etwa für bestimmte Praxen. Widerspruch geht über die Kassen-App oder schriftlich, jederzeit widerrufbar. Ohne Widerspruch sehen behandelnde Ärzte Befunde, Medikationsplan und Arztbriefe, was Doppeluntersuchungen spart.",
+          "quellen": [
+            "§ 342 Abs. 2a, § 353 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Kassenwechsel: So sparen Sie bares Geld",
+          "status": "freigegeben",
+          "frage": "Verliere ich beim Kassenwechsel meine laufende Behandlung oder Reha-Genehmigung?",
+          "antwort": "Nein, der Leistungsanspruch ist gesetzlich gleich, und genehmigte Leistungen wie Reha, Hilfsmittel oder Psychotherapie laufen bei der neuen Kasse weiter; Sie reichen die Bewilligung dort ein. Nur freiwillige Extras wie Bonusprogramme oder Zuschüsse zur Zahnreinigung unterscheiden sich. Wahltarife mit Bindungsfrist, etwa fürs Krankengeld, können den Wechsel bis zu drei Jahre blockieren.",
+          "quellen": [
+            "§ 175 SGB V",
+            "§ 53 Abs. 8 SGB V (Wahltarife)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Die richtige Krankenkasse finden: Worauf Sie achten sollten",
+          "status": "freigegeben",
+          "frage": "Lohnt sich eine teurere Kasse mit Bonusprogramm?",
+          "antwort": "Selten: Ein Prozentpunkt Zusatzbeitrag kostet bei 3.500 Euro brutto 210 Euro im Jahr, Bonusprogramme bringen meist 50 bis 150 Euro und verlangen Nachweise für Sport und Vorsorge. Rechnen lohnt sich nur bei teuren Zusatzleistungen wie 200 Euro für Zahnreinigung, Osteopathie oder Reiseimpfungen, die Sie tatsächlich nutzen. Prüfen Sie außerdem Erreichbarkeit und Geschäftsstellen in Ihrer Region.",
+          "quellen": [
+            "§ 65a SGB V (Bonus)",
+            "Beitrag, Abschnitt Kriterien"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "gesetzliche-krankenversicherung",
+        "zusatzbeitrag",
+        "allgemeiner-beitragssatz",
+        "sonderkuendigungsrecht",
+        "solidaritaetsprinzip"
+      ]
+    }
+  },
+  {
+    "slug": "private-krankenversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Über acht Millionen Menschen sind privat krankenversichert: Angestellte ab 77.400 Euro Jahresbrutto, Altversicherte seit 2002 ab 69.750 Euro, Selbstständige, Freiberufler, Beamte mit Beihilfe, Studierende und Minijobber ohne Einkommensgrenze.",
+          "Der Beitrag hängt von Alter, Gesundheit und Tarif ab, nicht vom Einkommen; 2026 liegt er im Schnitt bei rund 617 Euro, für 60 Prozent der Versicherten um 13 Prozent gestiegen, die Pflegepflichtversicherung um 16 Prozent. Der Arbeitgeber zahlt bis 508,59 Euro Kranken- und 104,63 Euro Pflegezuschuss.",
+          "Dafür gibt es schnellere Termine, Chefarzt, Ein- oder Zweibettzimmer, hochwertigen Zahnersatz und Heilpraktiker je nach Tarif; jedes Kind kostet extra, rund 150 Euro, Neugeborene werden ohne Gesundheitsprüfung aufgenommen.",
+          "Beamte zahlen nur den Rest über der Beihilfe von 50 bis 80 Prozent; Rentner bekommen 8,75 Prozent der gesetzlichen Rente als Zuschuss, höchstens die Hälfte des Beitrags, auf Antrag binnen drei Monaten nach Rentenbeginn.",
+          "Ab 2026 melden die Versicherer Beiträge digital ans Bundeszentralamt für Steuern; die elektronische Patientenakte bleibt in der privaten Versicherung freiwillig."
+        ],
+        "quellen": [
+          "§ 6 Abs. 1 Nr. 1, § 257 SGB V",
+          "§ 106 SGB VI (Zuschuss)",
+          "§ 193 VVG",
+          "Beitrag Private Krankenversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer kann sich 2026 privat versichern?",
+          "status": "freigegeben",
+          "frage": "Ich bin Selbstständige mit 40.000 Euro Gewinn. Ist die private Versicherung für mich günstiger?",
+          "antwort": "Kurzfristig oft ja: Freiwillig gesetzlich zahlen Sie auf 3.333 Euro Monatsgewinn rund 700 Euro inklusive Pflege, ein privater Tarif kostet mit 35 Jahren 400 bis 600 Euro. Langfristig steigt der private Beitrag mit dem Alter und ohne Rücksicht auf sinkende Einkünfte, Kinder kosten extra, und die Rückkehr in die gesetzliche Kasse ist ab 55 versperrt. Mit Familienplanung oder schwankendem Einkommen bleibt die gesetzliche Kasse meist die sicherere Wahl.",
+          "quellen": [
+            "§ 240 SGB V",
+            "§ 6 Abs. 3a SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Was leistet die private Krankenversicherung?",
+          "status": "freigegeben",
+          "frage": "Muss ich Arztrechnungen in der privaten Versicherung erst selbst bezahlen?",
+          "antwort": "Ja, Sie sind Vertragspartner des Arztes und bekommen die Rechnung nach der Gebührenordnung, reichen sie beim Versicherer ein und erhalten die Erstattung, meist innerhalb von zwei Wochen per App. Krankenhäuser rechnen oft direkt ab, wenn Sie eine Kostenübernahme vorlegen. Wer im Jahr keine Rechnung einreicht, bekommt bei vielen Tarifen bis zu mehrere Monatsbeiträge zurück.",
+          "quellen": [
+            "§ 192 VVG",
+            "Gebührenordnung für Ärzte"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie entwickeln sich die PKV-Kosten 2026?",
+          "status": "freigegeben",
+          "frage": "Mein Beitrag ist um 20 Prozent gestiegen. Was kann ich tun?",
+          "antwort": "Nutzen Sie das Recht auf Tarifwechsel innerhalb Ihres Versicherers ohne Gesundheitsprüfung, mit voller Anrechnung der Alterungsrückstellungen; ein Wechsel in einen jüngeren Tarif mit ähnlichen Leistungen spart oft 100 bis 300 Euro. Eine höhere Selbstbeteiligung senkt den Beitrag ebenfalls, der Arbeitgeberzuschuss deckt sie nicht. Ein Versichererwechsel lohnt wegen Gesundheitsprüfung und verlorener Rückstellungen nur in jungen Jahren.",
+          "quellen": [
+            "§ 204 VVG",
+            "Beitrag, Abschnitt Kostenentwicklung"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Private Krankenversicherung für verschiedene Lebenssituationen",
+          "status": "freigegeben",
+          "frage": "Wir bekommen ein Kind. Ich bin privat, meine Frau gesetzlich versichert. Wo wird das Kind versichert?",
+          "antwort": "Beitragsfrei bei Ihrer Frau in der gesetzlichen Familienversicherung, es sei denn, Sie verdienen mehr als sie und liegen über 77.400 Euro im Jahr; dann ist die Familienversicherung ausgeschlossen und das Kind muss eigenständig versichert werden, privat für etwa 150 Euro oder freiwillig gesetzlich. Bei Ihrem Versicherer gilt für Neugeborene binnen zwei Monaten Aufnahmezwang ohne Gesundheitsprüfung.",
+          "quellen": [
+            "§ 10 Abs. 3 SGB V",
+            "§ 198 VVG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "private-krankenversicherung",
+        "versicherungspflichtgrenze",
+        "arbeitgeberzuschuss-krankenversicherung",
+        "beihilfe",
+        "alterungsrueckstellung"
+      ]
+    }
+  },
+  {
+    "slug": "krankenversicherungsbeitraege",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Krankenversicherung kostet 2026 14,6 Prozent, ohne Krankengeldanspruch 14,0, plus Zusatzbeitrag, im Schnitt 2,9 statt 2,5 Prozent, je nach Kasse zwischen 2,18 und 4,39 Prozent; Beiträge werden bis 5.812,50 Euro im Monat berechnet, die Versicherungspflichtgrenze liegt bei 77.400 Euro im Jahr.",
+          "Angestellte und Rentner zahlen die Hälfte, Arbeitgeber und Rentenversicherung die andere; Minijobber zahlen nichts, ihr Arbeitgeber 13 Prozent pauschal.",
+          "Selbstständige tragen den vollen Beitrag auf mindestens 1.318,33 Euro fiktives Einkommen: rund 270 Euro im Monat inklusive Pflege ohne Krankengeld, 287 Euro mit; ohne Steuerbescheid setzt die Kasse den Höchstbeitrag von über 1.200 Euro an.",
+          "Rentner in der Krankenversicherung der Rentner zahlen auf Betriebsrenten erst über dem Freibetrag von 197,75 Euro, in der Pflegeversicherung ab dem ersten Euro; Zusatzbeitragsänderungen wirken bei ihnen zwei Monate später.",
+          "Bei jeder Zusatzbeitragserhöhung gibt es ein Sonderkündigungsrecht: Ein Wechsel spart bei 3.000 Euro brutto rund 340 Euro, bei Gutverdienern 660 Euro und bei Selbstständigen bis 680 Euro im Jahr."
+        ],
+        "quellen": [
+          "§§ 240, 241, 242, 243, 249, 249b SGB V",
+          "§ 226 Abs. 2 SGB V",
+          "Beitrag Krankenversicherungsbeiträge"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Beitragssätze im Überblick: Spreizung zwischen den Kassen",
+          "status": "freigegeben",
+          "frage": "Wie finde ich heraus, welchen Zusatzbeitrag meine Kasse nimmt?",
+          "antwort": "Auf der Gehaltsabrechnung steht nur der Gesamtbeitrag; den Zusatzbeitrag finden Sie in der Mitgliederinformation Ihrer Kasse, auf deren Website oder in der amtlichen Liste des GKV-Spitzenverbands, die alle 94 Kassen mit Satz ausweist. Erhöht Ihre Kasse, muss sie Sie einen Monat vorher schriftlich informieren und auf das Sonderkündigungsrecht hinweisen.",
+          "quellen": [
+            "§ 175 Abs. 4 SGB V",
+            "§ 242 Abs. 1 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wer zahlt was? Selbstständige und ihre Mindestbeiträge",
+          "status": "freigegeben",
+          "frage": "Ich bin nebenberuflich selbstständig und angestellt. Zahle ich doppelt Krankenversicherung?",
+          "antwort": "Nein, solange die Selbstständigkeit nebenberuflich bleibt, also weniger Zeit und Einkommen als die Anstellung, sind Sie über den Job pflichtversichert und der Gewinn bleibt beitragsfrei. Wird sie zum Hauptberuf, etwa mit mehr als 20 Wochenstunden und höherem Einkommen, endet die Pflichtversicherung und Sie zahlen freiwillig auf alle Einkünfte. Die Kasse prüft das mit einem Fragebogen.",
+          "quellen": [
+            "§ 5 Abs. 5 SGB V",
+            "Grundsätzliche Hinweise des GKV-Spitzenverbands zur hauptberuflichen Selbstständigkeit"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Besonderheiten für Rentner: Freibeträge und verzögerte Anpassungen",
+          "status": "freigegeben",
+          "frage": "Warum ändert sich der Krankenkassenbeitrag auf meiner Rente erst im März?",
+          "antwort": "Weil die Rentenversicherung als Zahlstelle Zusatzbeitragsänderungen erst mit zwei Monaten Verzögerung umsetzt; eine Erhöhung zum 1. Januar greift bei der Rente ab 1. März. Nachgefordert wird nichts, die zwei Monate sind für Sie ein kleiner Vorteil; bei Senkungen ist es umgekehrt. Ihr Sonderkündigungsrecht gilt trotzdem ab Januar.",
+          "quellen": [
+            "§ 247 Satz 3 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Sparmöglichkeiten: Krankenkassenwechsel richtig nutzen",
+          "status": "freigegeben",
+          "frage": "Ich bin erst seit vier Monaten bei meiner Kasse. Kann ich trotzdem wechseln?",
+          "antwort": "Nur bei einer Zusatzbeitragserhöhung: Dann entfällt die zwölfmonatige Bindungsfrist, und Sie stellen bis zum Ende des Erhöhungsmonats den Antrag bei der neuen Kasse. Ohne Erhöhung müssen Sie die zwölf Monate abwarten; die Kündigungsfrist beträgt dann zwei Monate zum Monatsende. Wer im Januar wechselt, ist ab April Mitglied der neuen Kasse.",
+          "quellen": [
+            "§ 175 Abs. 4 SGB V"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "zusatzbeitrag",
+        "mindestbemessungsgrundlage",
+        "betriebsrentenfreibetrag",
+        "sonderkuendigungsrecht",
+        "allgemeiner-beitragssatz"
+      ]
+    }
+  },
+  {
+    "slug": "krankenversicherungspflicht",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Seit 2009 muss sich jeder mit Wohnsitz in Deutschland krankenversichern, gesetzlich oder privat; ein Verstoß ist nicht strafbar, kostet aber Nachzahlungen für alle Monate ohne Versicherung plus 1 Prozent Säumniszuschlag im Monat.",
+          "Angestellte bis 77.400 Euro Jahresbrutto inklusive Weihnachts- und Urlaubsgeld sind gesetzlich pflichtversichert, ebenso Auszubildende, Arbeitslose, Rentner mit Vorversicherungszeit und Studierende bis 30; Selbstständige, Freiberufler und Beamte wählen frei.",
+          "Die Versicherungspflichtgrenze stieg 2026 um 4,9 Prozent, für Altversicherte seit 2002 gilt die Beitragsbemessungsgrenze von 69.750 Euro; wer nur durch die jährliche Anhebung wieder pflichtversichert wird, kann sich binnen drei Monaten unwiderruflich befreien lassen.",
+          "Familienversichert bleibt, wer höchstens 565 Euro im Monat hat, im Minijob 603 Euro, aber nur ohne weitere Einkünfte; Studierende bis 25.",
+          "Bei zwei Monatsbeiträgen Rückstand ruht der Leistungsanspruch: Die Kasse zahlt nur noch akute Schmerzbehandlung, Schwangerschaft und Früherkennung, chronische Behandlungen und Medikamente nicht."
+        ],
+        "quellen": [
+          "§ 193 Abs. 3 VVG",
+          "§§ 5, 6, 8, 10, 16 Abs. 3a SGB V",
+          "§ 24 SGB IV",
+          "Beitrag Krankenversicherungspflicht"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer muss sich krankenversichern?",
+          "status": "freigegeben",
+          "frage": "Ich war zwei Jahre im Ausland und komme zurück. Wie komme ich wieder in eine Krankenkasse?",
+          "antwort": "Als Angestellte über den neuen Arbeitgeber sofort; ohne Job nimmt Sie die Kasse auf, bei der Sie zuletzt versichert waren, und stellt Sie als freiwilliges Mitglied ein. Beiträge werden ab Rückkehr fällig, nicht für die Auslandszeit, wenn Sie den Auslandsaufenthalt und dortigen Schutz nachweisen. Melden Sie sich in den ersten Wochen, sonst laufen Beiträge und Säumniszuschläge ab dem Tag der Rückkehr.",
+          "quellen": [
+            "§ 5 Abs. 1 Nr. 13 SGB V",
+            "§ 9 Abs. 1 Nr. 1 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Versicherungspflichtgrenze 2026: Was ändert sich?",
+          "status": "freigegeben",
+          "frage": "Ich bin privat versichert und verdiene 76.000 Euro. Muss ich 2026 zurück in die gesetzliche Kasse?",
+          "antwort": "Ja, wenn Sie unter 55 sind, weil Ihr Gehalt unter der neuen Grenze von 77.400 Euro liegt: Die Versicherungspflicht beginnt am 1. Januar 2026. Sie können sich innerhalb von drei Monaten befreien lassen, wenn nur die Anhebung der Grenze Sie pflichtversichert gemacht hat; die Befreiung gilt dann dauerhaft und unwiderruflich, auch bei späteren Gehaltssenkungen. Ohne Befreiung übernimmt Sie die gesetzliche Kasse ohne Gesundheitsprüfung.",
+          "quellen": [
+            "§ 6 Abs. 4 SGB V",
+            "§ 8 Abs. 1 Nr. 1, Abs. 2 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Einkommensgrenzen für Familienversicherung 2026",
+          "status": "freigegeben",
+          "frage": "Mein Sohn verdient 580 Euro im Minijob und hat 50 Euro Zinsen im Monat. Bleibt er familienversichert?",
+          "antwort": "Nein: Sobald neben dem Minijob weitere Einkünfte kommen, gilt statt 603 Euro die allgemeine Grenze von 565 Euro, und 630 Euro liegen darüber. Er muss sich selbst versichern, als Student über die studentische Krankenversicherung für rund 145 Euro. Blieben die Zinsen unter dem Sparerpauschbetrag von 1.000 Euro im Jahr, zählten sie nicht mit; hier sind es 600 Euro, also unschädlich, und er bleibt versichert.",
+          "quellen": [
+            "§ 10 Abs. 1 Nr. 5 SGB V",
+            "§ 16 SGB IV"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Finanzielle Folgen ohne Versicherung",
+          "status": "freigegeben",
+          "frage": "Ich habe Beitragsschulden bei meiner Kasse. Wie komme ich da raus?",
+          "antwort": "Vereinbaren Sie eine Ratenzahlung; sobald Sie sie einhalten, endet das Ruhen der Leistungen und Sie werden wieder voll behandelt. Bei Hilfebedürftigkeit übernimmt das Jobcenter oder Sozialamt die laufenden Beiträge und die Kasse muss die Säumniszuschläge auf 1 Prozent begrenzen. Wer die Selbstständigkeit aufgibt oder angestellt wird, kommt in die Pflichtversicherung, die Altschulden bleiben aber bestehen.",
+          "quellen": [
+            "§ 16 Abs. 3a SGB V",
+            "§ 24 Abs. 1a SGB IV"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "versicherungspflichtgrenze",
+        "familienversicherung",
+        "ruhen-des-leistungsanspruchs",
+        "saeumniszuschlag",
+        "gesetzliche-krankenversicherung"
+      ]
+    }
+  },
+  {
+    "slug": "zusatzbeitrag-krankenkasse",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Den Zusatzbeitrag legt jede Krankenkasse selbst fest, beschlossen vom Verwaltungsrat, genehmigt vom Bundesamt für Soziale Sicherung; er kommt auf den einheitlichen Satz von 14,6 Prozent obendrauf und wird bis 5.812,50 Euro im Monat berechnet.",
+          "2026 liegt der Durchschnitt bei 2,9 Prozent, 0,4 Punkte mehr als 2025: Bei 3.000 Euro brutto sind das 12 Euro mehr im Monat, an der Beitragsbemessungsgrenze 23,25 Euro; die Spanne reicht laut Beitrag von 2,18 Prozent bei der BKK firmus bis 4,39 Prozent bei der BKK24.",
+          "Angestellte und Rentner zahlen die Hälfte, Arbeitgeber und Rentenversicherung den Rest, bei Rentnern mit zwei Monaten Verzögerung; Selbstständige und freiwillig Versicherte tragen ihn allein.",
+          "Jede Erhöhung löst ein Sonderkündigungsrecht aus: Antrag bei der neuen Kasse bis zum Ende des Erhöhungsmonats, Wechsel mit Ablauf des übernächsten Monats; die alte Kasse muss einen Monat vorher informieren und über dem Durchschnitt auf Wechselmöglichkeiten hinweisen.",
+          "Ein Wechsel von der teuersten zur günstigsten Kasse spart bei 4.000 Euro brutto rund 530 Euro im Jahr, Selbstständige das Doppelte; Wahltarife mit Bindung bis drei Jahre sind die Ausnahme vom Sonderkündigungsrecht."
+        ],
+        "quellen": [
+          "§§ 242, 242a, 175 Abs. 4, 247 SGB V",
+          "Beitrag Zusatzbeitrag Krankenkasse"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist der durchschnittliche Zusatzbeitrag Krankenkasse 2026?",
+          "status": "freigegeben",
+          "frage": "Warum steigt der Zusatzbeitrag jedes Jahr?",
+          "antwort": "Weil die Ausgaben für Klinik, Arznei, Pflege und Digitalisierung schneller wachsen als die Löhne, aus denen die Beiträge kommen, und der Bundeszuschuss nicht mitwächst. Der allgemeine Satz von 14,6 Prozent ist gesetzlich eingefroren, jede Lücke landet im Zusatzbeitrag der einzelnen Kasse. Der Schätzerkreis erwartet für die nächsten Jahre weitere Anstiege; Reformvorschläge reichen von Leistungskürzungen bis zu höheren Steuerzuschüssen.",
+          "quellen": [
+            "§ 220, § 221 SGB V",
+            "Schätzerkreis beim Bundesamt für Soziale Sicherung"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wer trägt die Kosten des Zusatzbeitrags?",
+          "status": "freigegeben",
+          "frage": "Ich bin selbstständig. Wie viel kostet mich ein Prozentpunkt Zusatzbeitrag?",
+          "antwort": "Den vollen Punkt auf Ihre beitragspflichtigen Einnahmen: Bei 4.000 Euro Gewinn im Monat 40 Euro, an der Beitragsbemessungsgrenze 58,13 Euro monatlich. Zwischen der günstigsten und der teuersten Kasse liegen 2,21 Punkte, also bis zu 1.540 Euro im Jahr. Für Sie lohnt der Vergleich mehr als für jeden Angestellten; Krankengeldwahltarife prüfen Sie dabei getrennt.",
+          "quellen": [
+            "§ 250 Abs. 2 SGB V",
+            "Beitrag, Abschnitt Selbstständige"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Sonderkündigungsrecht bei Zusatzbeitragserhöhung",
+          "status": "freigegeben",
+          "frage": "Meine Kasse erhöht zum 1. Juli. Bis wann muss ich wechseln?",
+          "antwort": "Der Antrag bei der neuen Kasse muss bis 31. Juli dort eingehen; die Mitgliedschaft beginnt am 1. Oktober. Bis dahin zahlen Sie den erhöhten Beitrag. Die neue Kasse kündigt für Sie und bestätigt die Aufnahme; Ihre alte Kasse darf Sie nicht halten und muss die Mitgliedsbescheinigung ausstellen.",
+          "quellen": [
+            "§ 175 Abs. 4 Satz 5 und 6 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Wechsel der Krankenkasse: Sparpotenzial und Prozess",
+          "status": "freigegeben",
+          "frage": "Kann eine günstige Kasse mich wegen meiner Vorerkrankung ablehnen?",
+          "antwort": "Nein, jede gesetzliche Kasse muss jeden aufnehmen, der wahlberechtigt ist, unabhängig von Alter, Krankheit oder Einkommen; Gesundheitsfragen gibt es nicht. Das Geld folgt dem Risiko über den Gesundheitsfonds, der Kassen mit vielen Kranken höhere Zuweisungen zahlt. Nur regionale Kassen können Sie ablehnen, wenn Sie außerhalb ihres Gebiets wohnen und arbeiten.",
+          "quellen": [
+            "§ 175 Abs. 1 SGB V",
+            "§ 266 SGB V (Risikostrukturausgleich)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "zusatzbeitrag",
+        "sonderkuendigungsrecht",
+        "krankenkassenwechsel",
+        "beitragsbemessungsgrenze"
+      ]
+    }
+  },
+  {
+    "slug": "wechsel-private-krankenversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "In die private Krankenversicherung wechseln dürfen Angestellte, deren regelmäßiges Jahresbrutto 77.400 Euro übersteigt und auch im Folgejahr übersteigen wird; Selbstständige, Freiberufler, Beamte und Studierende ohne Grenze, Altversicherte seit 2002 ab 69.750 Euro.",
+          "Der Arbeitgeber zahlt die Hälfte des Beitrags, höchstens 508,59 Euro für Kranken- und 104,63 Euro für Pflegeversicherung, auch für mitversicherte Kinder; die Summe ist 2026 um 37,28 Euro gestiegen.",
+          "Die Gesundheitsprüfung fragt Behandlungen der letzten drei bis fünf Jahre, Klinikaufenthalte, Medikamente und chronische Leiden ab; verschwiegene Diagnosen erlauben dem Versicherer fünf Jahre lang den Rücktritt, bei Arglist zehn. Ab Mitte 40 ist ein Wechsel meist nicht mehr sinnvoll.",
+          "Statt den Versicherer zu wechseln, lohnt der Tarifwechsel im eigenen Haus nach § 204 VVG: ohne neue Gesundheitsprüfung, mit voller Alterungsrückstellung, Antwort binnen 15 Arbeitstagen; nur Mehrleistungen dürfen mit Zuschlag oder Ausschluss belegt werden. Notausgang ist der Basistarif.",
+          "Zurück in die gesetzliche Kasse geht es unter 55 nur mit Einkommen unter der Grenze, Anstellung nach Selbstständigkeit oder Arbeitslosigkeit; ab 55 praktisch nie. Vor dem Abschluss: anonyme Risikovoranfrage über einen Berater, nie spontan über ein Portal."
+        ],
+        "quellen": [
+          "§ 6 Abs. 1 Nr. 1, Abs. 3a, Abs. 4, § 257 SGB V",
+          "§§ 19 bis 21, 204 VVG",
+          "Beitrag Wechsel private Krankenversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer darf die private Krankenversicherung wechseln?",
+          "status": "freigegeben",
+          "frage": "Ich bekomme ab Oktober 80.000 Euro. Wann kann ich frühestens wechseln?",
+          "antwort": "Zum 1. Januar 2027, wenn Ihr Gehalt schon ab Oktober 2026 hochgerechnet über 77.400 Euro liegt und 2027 die dann gültige Grenze übersteigt; die Versicherungspflicht endet immer zum Jahresende. Beim Neueinstieg mit einem Gehalt über der Grenze endet sie dagegen sofort. Kündigen Sie die gesetzliche Kasse erst, wenn die private Police vorliegt, die Mitgliedschaft endet mit zwei Monaten Frist.",
+          "quellen": [
+            "§ 6 Abs. 4 SGB V",
+            "§ 175 Abs. 4 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie läuft die Gesundheitsprüfung beim Wechsel ab?",
+          "status": "freigegeben",
+          "frage": "Ich hatte vor zwei Jahren eine Psychotherapie. Bekomme ich einen Vertrag?",
+          "antwort": "Möglich, aber nicht sicher: Psychotherapie in den letzten fünf Jahren führt bei vielen Versicherern zu Rückstellung, Zuschlag oder Ablehnung, abgeschlossene kurze Behandlungen ohne Medikamente werden eher akzeptiert. Stellen Sie über einen Makler eine anonyme Risikovoranfrage bei mehreren Gesellschaften, bevor Sie einen echten Antrag stellen; eine Ablehnung wird sonst in der Wagnisdatei gespeichert. Verschweigen ist keine Option, der Versicherer fragt Ärzte und Kassen ab.",
+          "quellen": [
+            "§ 19 VVG",
+            "Beitrag, Abschnitt Gesundheitsprüfung"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Tarifwechsel statt Versicherer-Wechsel: Die bessere Option",
+          "status": "freigegeben",
+          "frage": "Mein Versicherer bietet mir nur teure Tarife zum Wechsel an. Was tun?",
+          "antwort": "Sie haben Anspruch auf eine Übersicht aller Tarife mit gleichartigem Schutz, auch der geschlossenen und der neuen; verlangen Sie sie schriftlich unter Verweis auf § 204 VVG und die Tarifwechsel-Leitlinien des PKV-Verbands. Der Versicherer muss binnen 15 Arbeitstagen antworten. Unabhängige Tarifwechselberater, die auf Honorar arbeiten, finden oft Tarife, die die eigene Hotline nicht nennt; der Ombudsmann hilft bei Verweigerung kostenlos.",
+          "quellen": [
+            "§ 204 Abs. 1 VVG",
+            "§ 6 Abs. 2 VVG-InfoV",
+            "Tarifwechselleitlinien des PKV-Verbands"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Gibt es einen Weg zurück in die gesetzliche Krankenversicherung?",
+          "status": "freigegeben",
+          "frage": "Ich bin 52, privat versichert und werde vielleicht arbeitslos. Komme ich zurück in die gesetzliche Kasse?",
+          "antwort": "Ja, mit Arbeitslosengeld I werden Sie unter 55 automatisch pflichtversichert, es sei denn, Sie waren in den letzten fünf Jahren privat versichert und lassen sich befreien; auch ein Job unter der Versicherungspflichtgrenze bringt Sie zurück. Nach dem 55. Geburtstag ist die Tür zu, wenn Sie in den fünf Jahren davor nicht gesetzlich versichert waren. Wer die Rückkehr will, sollte sie vor 55 gestalten, etwa über eine Anstellung mit Gehalt unter 77.400 Euro.",
+          "quellen": [
+            "§ 5 Abs. 1 Nr. 2, § 6 Abs. 3a, § 8 Abs. 1 Nr. 1a SGB V"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "gesundheitspruefung",
+        "tarifwechsel-pkv",
+        "alterungsrueckstellung",
+        "basistarif",
+        "versicherungspflichtgrenze",
+        "arbeitgeberzuschuss-krankenversicherung"
+      ]
+    }
+  },
+  {
+    "slug": "familienversicherung-gesetzliche-krankenkasse",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Ehe- und Lebenspartner, Kinder, Stief-, Enkel- und Pflegekinder eines gesetzlich Versicherten sind beitragsfrei mitversichert, wenn sie in Deutschland leben, nicht hauptberuflich selbstständig sind und höchstens 565 Euro im Monat haben, im Minijob 603 Euro; Angestellte dürfen mit Werbungskostenpauschale 667,50 Euro brutto verdienen.",
+          "Kinder bleiben bis 18 versichert, ohne Erwerbstätigkeit bis 23, in Ausbildung oder Studium bis 25, plus bis zu zwölf Monate für Wehr- oder Freiwilligendienst; Kinder mit Behinderung ohne Altersgrenze, verheiratete Studierende über den gesetzlich versicherten Ehepartner.",
+          "Ausgeschlossen sind Kinder, wenn der privat versicherte Elternteil mehr verdient als der gesetzlich versicherte und über 77.400 Euro im Jahr liegt; Rentnern ist laut Beitrag seit 2026 der Weg über eine Teilrente in die Familienversicherung versperrt.",
+          "Der Antrag geht mit Geburts- oder Heiratsurkunde und Ausbildungsnachweis an die Kasse, Bearbeitung in wenigen Tagen; jährlich prüft ein Fragebogen die Einkommen, Änderungen sind sofort zu melden.",
+          "Laut Beitrag soll ab 2028 für mitversicherte Partner ohne Betreuungsaufgaben ein Beitrag von 2,5 Prozent des Einkommens des Mitglieds gelten, bei 3.500 Euro 87,50 Euro; ausgenommen bleiben Kinder, Partner mit Kindern unter sieben, mit behinderten Kindern, Pflegende ab Pflegegrad 2 und Partner über der Regelaltersgrenze."
+        ],
+        "quellen": [
+          "§ 10 SGB V",
+          "§ 16 SGB IV",
+          "Beitrag Familienversicherung (Reformangaben laut Beitrag)"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer kann mitversichert werden und welche Bedingungen gelten?",
+          "status": "freigegeben",
+          "frage": "Mein Mann ist selbstständig und verdient kaum etwas. Kann ich ihn mitversichern?",
+          "antwort": "Nur wenn die Selbstständigkeit nicht hauptberuflich ist, also weniger als etwa 20 Wochenstunden umfasst und nicht die Haupteinkommensquelle ist, und der Gewinn unter 565 Euro im Monat liegt. Arbeitet er hauptberuflich selbstständig, muss er sich selbst versichern, freiwillig gesetzlich auf mindestens 1.318,33 Euro fiktives Einkommen, rund 270 Euro im Monat, auch bei Verlust.",
+          "quellen": [
+            "§ 10 Abs. 1 Satz 1 Nr. 4 SGB V",
+            "§ 240 Abs. 4 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Altersgrenzen gelten für Kinder?",
+          "status": "freigegeben",
+          "frage": "Meine Tochter wird 25 und studiert noch. Was passiert mit ihrer Versicherung?",
+          "antwort": "Mit dem 25. Geburtstag endet die Familienversicherung, außer sie hat Wehr- oder Freiwilligendienst geleistet, dann verlängert sich die Frist um dessen Dauer, höchstens zwölf Monate. Danach wechselt sie in die studentische Krankenversicherung für rund 145 Euro im Monat inklusive Pflege, bis zum 30. Geburtstag; die Kasse übernimmt sie automatisch. BAföG-Empfänger bekommen dafür 137 Euro Zuschuss.",
+          "quellen": [
+            "§ 10 Abs. 2 Nr. 3 SGB V",
+            "§ 5 Abs. 1 Nr. 9 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wann ist eine Familienversicherung ausgeschlossen?",
+          "status": "freigegeben",
+          "frage": "Ich bin gesetzlich, mein Mann privat versichert mit 90.000 Euro. Wo kommen die Kinder hin?",
+          "antwort": "Nicht in Ihre Familienversicherung: Weil Ihr Mann mehr verdient als Sie und über 77.400 Euro liegt, sind die Kinder ausgeschlossen. Sie können jedes Kind privat für etwa 150 Euro versichern, mit Arbeitgeberzuschuss, oder freiwillig in Ihrer gesetzlichen Kasse für rund 200 Euro. Verdienen Sie mehr als er, etwa nach einer Gehaltserhöhung, sind die Kinder ab dem nächsten Monat beitragsfrei bei Ihnen.",
+          "quellen": [
+            "§ 10 Abs. 3 SGB V",
+            "§ 257 Abs. 2 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Was ändert sich ab 2028 durch das GKV-Beitragsstabilisierungsgesetz?",
+          "status": "freigegeben",
+          "frage": "Meine Frau ist Hausfrau, unsere Kinder sind 10 und 14. Müssen wir ab 2028 zahlen?",
+          "antwort": "Nach den im Beitrag beschriebenen Plänen ja: Die Ausnahme gilt nur für Partner mit Kindern unter sieben Jahren, behinderten Kindern, Pflege ab Pflegegrad 2 oder über der Regelaltersgrenze. Bei 4.000 Euro Brutto wären das 100 Euro im Monat zusätzlich. Ein Minijob Ihrer Frau ändert daran nichts, eine sozialversicherungspflichtige Teilzeitstelle macht sie dagegen selbst zum Mitglied, oft günstiger. Ob und wie das Gesetz kommt, war bei Redaktionsschluss offen.",
+          "quellen": [
+            "Beitrag, Abschnitt Änderungen ab 2028"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "familienversicherung",
+        "gesamteinkommen",
+        "bezugsgroesse",
+        "studentische-krankenversicherung",
+        "versicherungspflichtgrenze"
+      ]
+    }
+  },
+  {
+    "slug": "verdienstgrenzen-familienversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Familienversichert bleibt 2026, wer höchstens 565 Euro Gesamteinkommen im Monat hat, ein Siebtel der Bezugsgröße von 3.955 Euro; im Minijob gelten 603 Euro, gekoppelt an den Mindestlohn von 13,90 Euro, was etwa 43 Stunden im Monat erlaubt.",
+          "Angestellte ziehen die Werbungskostenpauschale von 102,50 Euro im Monat ab und dürfen 667,50 Euro brutto verdienen; bei pauschal versteuerten Minijobs geht das nicht.",
+          "Zum Gesamteinkommen zählen Lohn samt Sonderzahlungen, Gewinne, Mieten, Kapitalerträge über dem Sparerpauschbetrag von 1.000 Euro und Renten; nicht BAföG, Kindergeld, Elterngeld, Waisenrente sowie Ehrenamts- und Übungsleiterpauschale.",
+          "Mehrere Einkünfte werden addiert, und sobald neben dem Minijob etwas dazukommt, gilt die 565-Euro-Grenze: 580 Euro Minijob plus 50 Euro Mieteinnahmen sprengen sie. Zwei unvorhergesehene Überschreitungen im Jahr sind unschädlich.",
+          "Werkstudenten dürfen bis 667,50 Euro verdienen bei höchstens 20 Wochenstunden; Überschreitungen sind der Kasse sofort zu melden, sonst drohen Nachforderungen, bei Vorsatz 30 Jahre rückwirkend."
+        ],
+        "quellen": [
+          "§ 10 Abs. 1 Satz 1 Nr. 5 SGB V",
+          "§ 16 SGB IV",
+          "§ 206 SGB V (Meldepflicht)",
+          "Beitrag Verdienstgrenzen Familienversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Gesamteinkommen nach § 16 SGB IV: Was zählt dazu?",
+          "status": "freigegeben",
+          "frage": "Meine Frau hat 900 Euro Mieteinnahmen, aber 600 Euro Kosten dafür. Bleibt sie familienversichert?",
+          "antwort": "Ja, weil beim Gesamteinkommen der steuerliche Überschuss zählt: 900 Euro Miete minus 600 Euro Werbungskosten wie Zinsen, Abschreibung und Reparaturen ergeben 300 Euro, unter der Grenze von 565 Euro. Die Kasse verlangt dafür den Steuerbescheid mit der Anlage V. Steigt der Überschuss dauerhaft über 565 Euro, muss sie sich freiwillig versichern.",
+          "quellen": [
+            "§ 16 SGB IV",
+            "§ 2 Abs. 2 Nr. 2 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Mehrere Einkommensquellen: Wie wird es berechnet?",
+          "status": "freigegeben",
+          "frage": "Mein Sohn arbeitet in den Semesterferien drei Monate für 1.500 Euro. Fliegt er aus der Familienversicherung?",
+          "antwort": "Nein, ein befristeter Job bis drei Monate oder 70 Arbeitstage ist eine kurzfristige Beschäftigung, und die Kasse rechnet das Einkommen auf das Jahr um: 4.500 Euro minus 1.230 Euro Werbungskosten geteilt durch zwölf sind 273 Euro im Monat, unter der Grenze. Wichtig ist, dass der Job vorher befristet vereinbart wurde und er nicht mehr als 26 Wochen im Jahr über 20 Stunden arbeitet.",
+          "quellen": [
+            "§ 8 Abs. 1 Nr. 2 SGB IV",
+            "Gemeinsames Rundschreiben zur Familienversicherung"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Studierende und junge Erwachsene: Besondere Regeln",
+          "status": "freigegeben",
+          "frage": "Was ist besser für meine Tochter im Studium: Minijob oder Werkstudentenjob?",
+          "antwort": "Für die Familienversicherung der Werkstudentenjob mit bis zu 667,50 Euro brutto und 20 Wochenstunden, weil die Werbungskostenpauschale abgezogen wird; als Minijobberin sind es nur 603 Euro. Beim Werkstudentenjob zahlt sie 9,3 Prozent Rentenbeitrag und sammelt Entgeltpunkte, aber keine Kranken- und Arbeitslosenbeiträge. Verdient sie mehr als 667,50 Euro, muss sie sich für rund 145 Euro selbst versichern.",
+          "quellen": [
+            "§ 6 Abs. 1 Nr. 3 SGB V (Werkstudentenprivileg)",
+            "§ 10 Abs. 1 Nr. 5 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Meldepflicht und Kontrolle: Das müssen Sie wissen",
+          "status": "freigegeben",
+          "frage": "Ich habe die Einkommensgrenze zwei Jahre unbemerkt überschritten. Was droht?",
+          "antwort": "Die Kasse hebt die Familienversicherung rückwirkend auf und fordert für die Zeit Beiträge einer freiwilligen Versicherung nach, mindestens rund 270 Euro je Monat, also über 6.000 Euro für zwei Jahre, plus Säumniszuschläge. Melden Sie sich selbst, bevor der jährliche Fragebogen es aufdeckt; bei fahrlässigem Versäumnis verjähren Forderungen nach vier Jahren, bei Vorsatz erst nach 30.",
+          "quellen": [
+            "§ 206 Abs. 1 SGB V",
+            "§ 25 SGB IV"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "familienversicherung",
+        "gesamteinkommen",
+        "werkstudentenprivileg",
+        "kurzfristige-beschaeftigung",
+        "minijob"
+      ]
+    }
+  },
+  {
+    "slug": "freiwillige-gesetzliche-krankenversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Freiwillig gesetzlich versichern können sich Angestellte über 77.400 Euro Jahresbrutto, hauptberuflich Selbstständige, Studierende ab 30, Beamte, Rentner ohne Vorversicherungszeit, Nichterwerbstätige und Kinder, die wegen eines gut verdienenden privat versicherten Elternteils nicht familienversichert sind.",
+          "Voraussetzung sind 24 Monate gesetzliche Versicherung in den letzten fünf Jahren oder zwölf Monate unmittelbar davor; endet eine Pflicht- oder Familienversicherung, läuft sie automatisch als Anschlussversicherung weiter, ohne Antrag und Vorversicherungszeit.",
+          "Beitrag: 14,6 Prozent mit oder 14,0 Prozent ohne Krankengeld plus Zusatzbeitrag zwischen 2,18 und 4,39 Prozent, dazu Pflege 3,6 oder 4,2 Prozent, auf mindestens 1.318,33 und höchstens 5.812,50 Euro im Monat; Mindestbeiträge 261 bis 278 Euro.",
+          "Beitragspflichtig sind alle Einnahmen: Gewinn, Gehalt, Mieten, Kapitalerträge, Renten, Betriebsrenten, Unterhalt; Angestellte bekommen die Hälfte vom Arbeitgeber, Selbstständige zahlen alles allein, ohne Steuerbescheid vorläufig den Höchstbeitrag.",
+          "Gegenüber der privaten Versicherung: keine Gesundheitsprüfung, keine Zuschläge, beitragsfreie Familienversicherung; der Wechsel in die private Versicherung geht binnen zwei Wochen, zurück nur unter 55 bei Einkommen unter der Grenze, Anstellung oder Arbeitslosigkeit."
+        ],
+        "quellen": [
+          "§ 9, § 188 Abs. 4, § 240 SGB V",
+          "Beitrag Freiwillige gesetzliche Krankenversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche Vorversicherungszeit ist erforderlich?",
+          "status": "freigegeben",
+          "frage": "Ich war zehn Jahre privat versichert und mache mich jetzt selbstständig. Kann ich in die gesetzliche Kasse?",
+          "antwort": "Nein, als Selbstständige besteht keine Versicherungspflicht, und für den freiwilligen Beitritt fehlt Ihnen die Vorversicherungszeit von 24 Monaten in den letzten fünf Jahren. Der Weg führt nur über eine sozialversicherungspflichtige Anstellung unter 77.400 Euro, die Sie pflichtversichert macht; nach deren Ende laufen Sie als freiwilliges Mitglied weiter. Ab 55 ist auch das ausgeschlossen.",
+          "quellen": [
+            "§ 9 Abs. 1 Nr. 1 SGB V",
+            "§ 6 Abs. 3a SGB V",
+            "§ 188 Abs. 4 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch sind die Beitragssätze und Kosten 2026?",
+          "status": "freigegeben",
+          "frage": "Ich bin Selbstständige mit 2.500 Euro Gewinn im Monat. Was zahle ich?",
+          "antwort": "Ohne Krankengeld bei 2,9 Prozent Zusatzbeitrag rund 423 Euro Krankenversicherung, mit Krankengeldwahl 438 Euro, plus 90 Euro Pflegeversicherung mit Kind oder 105 Euro ohne; zusammen etwa 513 bis 543 Euro im Monat. Grundlage ist der Gewinn laut letztem Steuerbescheid, vorläufig festgesetzt und nach dem nächsten Bescheid korrigiert; Mieten und Kapitalerträge kommen dazu.",
+          "quellen": [
+            "§ 240 Abs. 1, Abs. 4a SGB V",
+            "§ 243 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Einnahmen sind beitragspflichtig?",
+          "status": "freigegeben",
+          "frage": "Ich habe meinen Steuerbescheid nicht eingereicht und zahle jetzt 1.200 Euro. Bekomme ich das zurück?",
+          "antwort": "Ja, wenn Sie den Bescheid innerhalb von drei Jahren nach Ablauf des Jahres nachreichen, für das er gilt; die Kasse setzt die Beiträge dann rückwirkend nach dem tatsächlichen Einkommen fest und erstattet die Differenz. Versäumen Sie die Frist, bleibt der Höchstbeitrag endgültig. Reichen Sie künftig jeden Bescheid sofort ein, die Kasse fordert ihn jährlich an.",
+          "quellen": [
+            "§ 240 Abs. 4a SGB V",
+            "Beitragsverfahrensgrundsätze Selbstzahler § 6a"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Was sind die Unterschiede zur privaten Krankenversicherung?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 85.000 Euro, bin 40 und habe zwei Kinder. Freiwillig gesetzlich oder privat?",
+          "antwort": "Mit Kindern meist gesetzlich: Sie zahlen den Höchstbeitrag von rund 610 Euro inklusive Pflege, die Hälfte trägt der Arbeitgeber, Kinder und ein nicht erwerbstätiger Partner sind gratis dabei. Privat kosten Sie mit 40 etwa 500 bis 700 Euro plus rund 150 Euro je Kind, ebenfalls hälftig bezuschusst, mit besseren Leistungen, aber steigenden Beiträgen im Alter und ohne Rückweg ab 55. Bei Familienplanung oder unsicherem Einkommen bleibt die gesetzliche Kasse die robustere Wahl.",
+          "quellen": [
+            "§ 257 SGB V",
+            "§ 10 SGB V",
+            "Beitrag, Abschnitt Unterschiede zur PKV"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "vorversicherungszeit",
+        "anschlussversicherung",
+        "mindestbemessungsgrundlage",
+        "allgemeiner-beitragssatz",
+        "familienversicherung"
+      ]
+    }
+  },
+  {
+    "slug": "krankenversicherung-rentner",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die meisten Rentner sind in der Krankenversicherung der Rentner pflichtversichert, wenn sie in der zweiten Hälfte ihres Erwerbslebens zu 90 Prozent gesetzlich oder familienversichert waren; je Kind werden drei Jahre angerechnet.",
+          "Auf die gesetzliche Rente zahlen sie 7,3 Prozent plus den halben Zusatzbeitrag, im Schnitt 1,45 Prozent, die Rentenversicherung die andere Hälfte; die Pflegeversicherung mit 3,6 Prozent, Kinderlose 4,2, tragen sie allein, Jahrgänge vor 1940 ohne Zuschlag.",
+          "Mieten und Kapitalerträge bleiben in der Pflichtversicherung beitragsfrei; Betriebsrenten kosten über dem Freibetrag von 197,75 Euro den vollen Satz von 14,6 plus 2,9 Prozent, in der Pflegeversicherung ab dem ersten Euro. Freiwillig Versicherte zahlen auf alles.",
+          "Privat versicherte Rentner erhalten auf Antrag 8,75 Prozent ihrer Rente als Zuschuss, höchstens die Hälfte des Beitrags, nicht für die Pflegeversicherung; der Durchschnittsbeitrag liegt bei 617 Euro, der Basistarif ist bei 1.017,19 Euro gedeckelt.",
+          "Zusatzbeitragsänderungen wirken bei Rentnern zwei Monate später; das Sonderkündigungsrecht gilt trotzdem, ein Wechsel zurück in die gesetzliche Kasse ist im Rentenalter praktisch unmöglich."
+        ],
+        "quellen": [
+          "§ 5 Abs. 1 Nr. 11, § 226, § 237, § 247, § 249a SGB V",
+          "§ 106 SGB VI",
+          "Beitrag Krankenversicherung Rentner"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist die Krankenversicherung der Rentner?",
+          "status": "freigegeben",
+          "frage": "Ich war 15 Jahre privat versichert und bin jetzt 63. Komme ich als Rentnerin in die günstige Pflichtversicherung?",
+          "antwort": "Nur wenn Sie die 90-Prozent-Regel schaffen: Bei 45 Jahren Erwerbsleben zählt die zweite Hälfte, 22,5 Jahre, davon müssen 20,25 Jahre gesetzlich oder familienversichert sein. Mit 15 privaten Jahren in dieser Hälfte reicht es nicht, es sei denn, Kinder helfen: Je Kind werden drei Jahre gutgeschrieben. Sonst bleiben Sie privat oder freiwillig gesetzlich, mit Beiträgen auf alle Einkünfte.",
+          "quellen": [
+            "§ 5 Abs. 1 Nr. 11 und Abs. 2 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche Beiträge zahlen Rentner 2026 konkret?",
+          "status": "freigegeben",
+          "frage": "Ich bekomme 1.600 Euro Rente. Was bleibt nach Kranken- und Pflegeversicherung?",
+          "antwort": "Rund 1.402 Euro: 116,80 Euro Krankenversicherung mit 7,3 Prozent, 23,20 Euro halber Zusatzbeitrag bei 2,9 Prozent und 57,60 Euro Pflegeversicherung mit 3,6 Prozent; kinderlos 67,20 Euro, dann bleiben 1.392 Euro. Die Rentenversicherung zahlt weitere 140 Euro Krankenversicherung für Sie. Steuern kommen je nach Rentenbeginn und Freibetrag dazu.",
+          "quellen": [
+            "§§ 247, 249a SGB V",
+            "§ 55 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie werden verschiedene Einkommensarten behandelt?",
+          "status": "freigegeben",
+          "frage": "Ich bekomme meine Direktversicherung als 60.000 Euro auf einmal. Wie viel Krankenversicherung kostet das?",
+          "antwort": "Die Kasse verteilt die Summe auf 120 Monate, also 500 Euro monatlich, und verbeitragt davon zehn Jahre lang 302,25 Euro über dem Freibetrag mit 17,5 Prozent, rund 53 Euro im Monat, plus Pflegeversicherung auf die vollen 500 Euro, 18 bis 21 Euro. Zusammen etwa 8.500 bis 8.900 Euro über zehn Jahre. Für Beiträge aus versteuertem Netto ab 2004 fallen keine Beiträge an, sofern Sie sie selbst als Versicherungsnehmer gezahlt haben.",
+          "quellen": [
+            "§ 229 Abs. 1 Satz 3 SGB V",
+            "§ 226 Abs. 2 SGB V",
+            "BVerfG 1 BvR 1660/08"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Private Krankenversicherung: Zuschüsse und Grenzen",
+          "status": "freigegeben",
+          "frage": "Ich bin privat versichert mit 700 Euro Beitrag und bekomme 1.800 Euro Rente. Wie hoch ist mein Zuschuss?",
+          "antwort": "157,50 Euro im Monat, 8,75 Prozent Ihrer Rente; die Obergrenze von der Hälfte des Beitrags, 350 Euro, greift nicht. Für die Pflegepflichtversicherung gibt es nichts. Der Zuschuss muss bei der Rentenversicherung beantragt werden, am besten mit dem Rentenantrag; er wird mit der Rente ausgezahlt und ist steuerpflichtig, den Beitrag setzen Sie dafür als Sonderausgabe ab.",
+          "quellen": [
+            "§ 106 SGB VI",
+            "§ 10 Abs. 1 Nr. 3 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "krankenversicherung-der-rentner",
+        "betriebsrentenfreibetrag",
+        "zusatzbeitrag",
+        "basistarif",
+        "kinderlosenzuschlag"
+      ]
+    }
+  },
+  {
+    "slug": "studenten-krankenversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Studierende sind mit der Immatrikulation versicherungspflichtig und haben drei Wege: beitragsfrei familienversichert bis 25 bei höchstens 565 Euro Einkommen, 603 Euro im Minijob, danach die studentische Krankenversicherung bis 30, oder eine private Police, die für das ganze Studium bindet.",
+          "Die studentische Krankenversicherung kostet 2026 87,38 Euro plus Zusatzbeitrag der Kasse, 15 bis 38 Euro, plus 30,78 Euro Pflegeversicherung unter 23 und 35,91 Euro ab 23; zusammen 143 bis 165 Euro im Monat, ein Kassenwechsel spart bis 130 Euro im Jahr.",
+          "Wer mehr als 20 Stunden pro Woche arbeitet, verliert den Studentenstatus und zahlt normale Beiträge; duale Studierende gelten als Arbeitnehmer.",
+          "Private Tarife beginnen bei rund 110 Euro, mit Selbstbehalt bei 92 Euro; sie lohnen sich vor allem für Beamtenkinder mit 80 Prozent Beihilfe. Die Rückkehr in die gesetzliche Kasse ist erst nach dem Studium bei Einkommen unter 77.400 Euro möglich.",
+          "BAföG-Empfänger, die nicht familienversichert sind, bekommen 102 Euro Kranken- und 35 Euro Pflegezuschuss, zusammen 137 Euro, auf gesonderten Antrag beim BAföG-Amt."
+        ],
+        "quellen": [
+          "§ 5 Abs. 1 Nr. 9, § 8 Abs. 1 Nr. 5, § 10, § 245 SGB V",
+          "§ 13a BAföG",
+          "Beitrag Krankenversicherung Studenten"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer braucht eine Studentenkrankenversicherung?",
+          "status": "freigegeben",
+          "frage": "Ich bin 27 und beginne ein Masterstudium nach drei Jahren Berufstätigkeit. Welche Versicherung gilt?",
+          "antwort": "Die studentische Krankenversicherung für rund 145 Euro, weil Sie unter 30 sind und die Familienversicherung mit 25 endet; Ihre bisherige Kasse stellt Sie um, sobald Sie die Immatrikulation einreichen. Arbeiten Sie nebenbei mehr als 20 Wochenstunden, gelten Sie als Arbeitnehmerin mit vollen Beiträgen; in den Semesterferien dürfen es mehr Stunden sein.",
+          "quellen": [
+            "§ 5 Abs. 1 Nr. 9 SGB V",
+            "§ 6 Abs. 1 Nr. 3 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Kosten der studentischen Krankenversicherung 2026",
+          "status": "freigegeben",
+          "frage": "Warum kostet die Studentenversicherung bei jeder Kasse gleich viel, außer beim Zusatzbeitrag?",
+          "antwort": "Weil der Grundbeitrag gesetzlich festgelegt ist: 70 Prozent des BAföG-Bedarfssatzes mal ermäßigter Beitragssatz von 14,6 Prozent, 2026 87,38 Euro, unabhängig von Ihrem Einkommen. Nur der Zusatzbeitrag unterscheidet sich, bei 1,8 statt 2,9 Prozent sparen Sie rund 11 Euro im Monat. Ein Wechsel lohnt sich also, die Leistungen sind gleich.",
+          "quellen": [
+            "§ 245 Abs. 1 SGB V",
+            "§ 242 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Private Krankenversicherung für Studenten",
+          "status": "freigegeben",
+          "frage": "Meine Eltern sind Beamte. Soll ich mich privat versichern?",
+          "antwort": "Meist ja, solange die Beihilfe 80 Prozent Ihrer Kosten übernimmt, also während Kindergeldbezug bis 25: Die private Restkostenversicherung kostet dann oft nur 40 bis 60 Euro. Danach entfällt die Beihilfe und Sie zahlen den vollen Studententarif von 110 bis 200 Euro. Die Befreiung von der studentischen Pflichtversicherung müssen Sie in den ersten drei Monaten beantragen; sie gilt unwiderruflich bis zum Studienende.",
+          "quellen": [
+            "§ 8 Abs. 1 Nr. 5, Abs. 2 SGB V",
+            "Bundesbeihilfeverordnung § 46"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "BAföG und Krankenversicherung",
+          "status": "freigegeben",
+          "frage": "Ich bekomme BAföG und bin noch familienversichert. Steht mir der Zuschuss zu?",
+          "antwort": "Nein, der Zuschlag von 137 Euro gibt es nur, wenn Sie selbst Beiträge zahlen, also ab dem 25. Geburtstag oder bei Verlust der Familienversicherung. Melden Sie dem BAföG-Amt den Wechsel mit der Beitragsbescheinigung der Kasse, dann wird der Zuschlag ab dem Folgemonat gezahlt, nicht rückwirkend.",
+          "quellen": [
+            "§ 13a BAföG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "studentische-krankenversicherung",
+        "familienversicherung",
+        "werkstudentenprivileg",
+        "beihilfe",
+        "zusatzbeitrag"
+      ]
+    }
+  },
+  {
+    "slug": "krankengeld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Krankengeld zahlt die gesetzliche Kasse, wenn nach sechs Wochen die Entgeltfortzahlung des Arbeitgebers endet, ab der siebten Woche; in den ersten vier Wochen eines neuen Jobs schon ab dem ersten Tag.",
+          "Es beträgt 70 Prozent des Bruttos, höchstens 90 Prozent des Nettos, mit Einmalzahlungen bis 100 Prozent, gedeckelt an der Beitragsbemessungsgrenze: 2026 höchstens 135,63 Euro brutto je Kalendertag, nach Abzug von Renten-, Arbeitslosen- und Pflegebeiträgen rund 118,81 Euro, also etwa 3.564 Euro im Monat.",
+          "Pro Krankheit gibt es innerhalb von drei Jahren 78 Wochen inklusive der sechs Wochen Lohnfortzahlung, also 72 Wochen von der Kasse; eine andere Krankheit oder dieselbe nach sechs Monaten Arbeitsfähigkeit startet die Frist neu.",
+          "Selbstständige haben nur mit Wahlerklärung Anspruch, zahlen dann 14,6 statt 14,0 Prozent, höchstens rund 35 Euro mehr im Monat, sind drei Jahre gebunden und bekommen Krankengeld ab dem 43. Tag; Familienversicherte bekommen nichts.",
+          "Krankengeld ist steuerfrei, unterliegt aber dem Progressionsvorbehalt, ab 410 Euro im Jahr ist eine Steuererklärung Pflicht; nach der Aussteuerung greift die Nahtlosigkeitsregel mit Arbeitslosengeld, Reha oder Erwerbsminderungsrente, Kündigungsschutz gibt es nicht."
+        ],
+        "quellen": [
+          "§§ 44 bis 51 SGB V",
+          "§ 3 Nr. 1a, § 32b EStG",
+          "§ 145 SGB III (Nahtlosigkeit)",
+          "Beitrag Krankengeld"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie wird Krankengeld berechnet?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 3.500 Euro brutto, 2.350 Euro netto. Wie viel Krankengeld bekomme ich?",
+          "antwort": "70 Prozent von 3.500 Euro wären 2.450 Euro, aber die Grenze von 90 Prozent des Nettos, 2.115 Euro, greift; davon gehen rund 12,4 Prozent Sozialbeiträge ab, es bleiben etwa 1.853 Euro im Monat, rund 500 Euro weniger als Ihr Netto. Weihnachtsgeld erhöht die Grundlage anteilig. Bezahlt wird nach Kalendertagen, 30 je Monat, im Nachhinein gegen die ärztliche Bescheinigung.",
+          "quellen": [
+            "§ 47 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wer hat Anspruch auf Krankengeld?",
+          "status": "freigegeben",
+          "frage": "Ich bin selbstständig. Krankengeld über die Kasse oder ein privates Krankentagegeld?",
+          "antwort": "Das gesetzliche Krankengeld über die Wahlerklärung kostet höchstens 35 Euro im Monat, zahlt aber erst ab dem 43. Tag und nur 70 Prozent Ihres Gewinns laut Steuerbescheid. Ein privates Krankentagegeld lässt sich ab dem 15. oder 22. Tag und in frei gewählter Höhe abschließen, kostet bei 100 Euro Tagessatz ab dem 22. Tag rund 40 bis 80 Euro. Viele kombinieren beides: Wahltarif der Kasse ab Tag 22 für die Lücke, Krankengeld ab Tag 43.",
+          "quellen": [
+            "§ 44 Abs. 2, § 53 Abs. 6 SGB V",
+            "Beitrag, Abschnitt Anspruch"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie lange wird Krankengeld gezahlt?",
+          "status": "freigegeben",
+          "frage": "Ich war wegen Depression 60 Wochen krank und arbeite seit drei Monaten wieder. Habe ich bei einem Rückfall noch Anspruch?",
+          "antwort": "Nur noch für 18 Wochen innerhalb der laufenden Dreijahresfrist, weil dieselbe Krankheit weiterzählt; eine neue Frist beginnt erst, wenn Sie nach der alten Blockfrist sechs Monate ohne Arbeitsunfähigkeit wegen dieser Krankheit waren und sechs Monate versicherungspflichtig gearbeitet haben. Eine andere Erkrankung, etwa ein Unfall, löst dagegen einen eigenen Anspruch aus. Beantragen Sie rechtzeitig eine Reha.",
+          "quellen": [
+            "§ 48 Abs. 1 und 2 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Was passiert nach der Aussteuerung?",
+          "status": "freigegeben",
+          "frage": "Mein Krankengeld endet in zwei Monaten und ich bin weiter krank. Was muss ich jetzt tun?",
+          "antwort": "Melden Sie sich sofort bei der Agentur für Arbeit arbeitsuchend und beantragen Sie Arbeitslosengeld nach der Nahtlosigkeitsregel: Es wird gezahlt, obwohl Sie krank sind, bis die Rentenversicherung über Reha oder Erwerbsminderung entschieden hat. Stellen Sie parallel den Reha- oder Rentenantrag, der Rentenversicherer prüft zuerst Reha. Ihr Arbeitsverhältnis bleibt bestehen, die Krankenversicherung läuft über das Arbeitslosengeld weiter.",
+          "quellen": [
+            "§ 145 SGB III",
+            "§ 51 SGB V"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "krankengeld",
+        "entgeltfortzahlung",
+        "wahlerklaerung",
+        "aussteuerung",
+        "krankentagegeld",
+        "progressionsvorbehalt"
+      ]
+    }
+  }
+]

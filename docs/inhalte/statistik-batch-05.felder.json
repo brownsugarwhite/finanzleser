@@ -1,0 +1,945 @@
+[
+  {
+    "slug": "steuern-fuer-selbststaendige",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie berechnet sich die Einkommensteuer für Selbständige?",
+          "art": "balken",
+          "titel": "Diese vier Einkommenszonen kennt der Steuertarif 2026",
+          "untertitel": "Einkommensgrenzen, ab denen 2026 die nächste Tarifzone beginnt (Singles)",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 32a Einkommensteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/estg/__32a.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "grenzen",
+              "label": "Tarifzonen 2026",
+              "werte": [
+                {
+                  "label": "Grundfreibetrag (steuerfrei bis)",
+                  "wert": 12348
+                },
+                {
+                  "label": "Ende der ersten Progressionszone",
+                  "wert": 17799
+                },
+                {
+                  "label": "Ende der zweiten Progressionszone",
+                  "wert": 69878
+                },
+                {
+                  "label": "Ende der Proportionalzone (42 %)",
+                  "wert": 277825
+                }
+              ]
+            }
+          ],
+          "hinweis": "Bis 12.348 Euro fällt keine Einkommensteuer an. Ab 69.879 Euro gilt der Spitzensteuersatz von 42 Prozent, ab 277.826 Euro der Höchstsatz von 45 Prozent.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Kleinunternehmerregelung: Grenzen und Vorteile 2026",
+          "art": "saeulen",
+          "titel": "Die Kleinunternehmergrenzen wurden 2025 kräftig angehoben",
+          "untertitel": "Umsatzgrenzen nach § 19 UStG, vor und seit der Reform",
+          "einheit": "€",
+          "umschalter": {
+            "label": "Zeitraum"
+          },
+          "quelle": {
+            "name": "§ 19 Umsatzsteuergesetz (Gesetze im Internet), Fassung ab 1.1.2025",
+            "url": "https://www.gesetze-im-internet.de/ustg_1980/__19.html",
+            "stand": "01.01.2025"
+          },
+          "reihen": [
+            {
+              "key": "alt",
+              "label": "Bis 2024",
+              "werte": [
+                {
+                  "label": "Vorjahresumsatz",
+                  "wert": 22000
+                },
+                {
+                  "label": "Umsatz im laufenden Jahr",
+                  "wert": 50000
+                }
+              ]
+            },
+            {
+              "key": "neu",
+              "label": "Ab 2025",
+              "werte": [
+                {
+                  "label": "Vorjahresumsatz",
+                  "wert": 25000
+                },
+                {
+                  "label": "Umsatz im laufenden Jahr",
+                  "wert": 100000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Das Jahressteuergesetz 2024 hob die Grenzen zum 1. Januar 2025 an; seither sind Kleinunternehmer echt steuerbefreit statt nur von der Steuererhebung ausgenommen.",
+          "abschnitt": "heading-5",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "steuerfreie-einnahmen",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Der Grundfreibetrag 2026: Schutz des Existenzminimums",
+          "art": "saeulen",
+          "titel": "So stark ist der Grundfreibetrag seit 2021 gestiegen",
+          "untertitel": "Steuerfreies Einkommen für Alleinstehende, in Euro pro Jahr",
+          "einheit": "€",
+          "quelle": {
+            "name": "Bundesministerium der Finanzen, Datensammlung zur Steuerpolitik 2026 (Tabelle 2.5.1)",
+            "url": "https://www.bundesfinanzministerium.de/Content/DE/Downloads/Broschueren_Bestellservice/datensammlung-zur-steuerpolitik-2026.pdf?__blob=publicationFile&v=9",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Grundfreibetrag",
+              "werte": [
+                {
+                  "label": "2021",
+                  "wert": 9744
+                },
+                {
+                  "label": "2022",
+                  "wert": 10347
+                },
+                {
+                  "label": "2023",
+                  "wert": 10908
+                },
+                {
+                  "label": "2024",
+                  "wert": 11784
+                },
+                {
+                  "label": "2025",
+                  "wert": 12096
+                },
+                {
+                  "label": "2026",
+                  "wert": 12348
+                }
+              ]
+            }
+          ],
+          "hinweis": "Verheiratete erhalten den doppelten Betrag. Die Werte für 2022 und 2024 wurden nachträglich per Gesetz nochmals angehoben, nachdem zunächst niedrigere Beträge geplant waren.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Sachbezüge: Steuerfreie Zusatzleistungen vom Arbeitgeber",
+          "art": "balken",
+          "titel": "Amtliche Sachbezugswerte 2026 für Verpflegung und Wohnen",
+          "untertitel": "Monatliche Werte nach der Sozialversicherungsentgeltverordnung",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 2 Sozialversicherungsentgeltverordnung (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/svev/__2.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "2026",
+              "werte": [
+                {
+                  "label": "Frühstück (Monat)",
+                  "wert": 71
+                },
+                {
+                  "label": "Mittag- oder Abendessen, je Mahlzeit (Monat)",
+                  "wert": 137
+                },
+                {
+                  "label": "Verpflegung insgesamt (Monat)",
+                  "wert": 345
+                },
+                {
+                  "label": "Unterkunft (Monat)",
+                  "wert": 285
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der Wert für ein Mittag- oder Abendessen (137 Euro im Monat) entspricht rund 4,57 Euro pro Kalendertag; Arbeitgeber dürfen zusätzlich einen steuerfreien Zuschuss zahlen.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "splittingtabelle",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Splittingtabelle 2026: Die aktuellen Steuersätze",
+          "art": "balken",
+          "titel": "Beim Splitting verdoppeln sich alle Tarifgrenzen",
+          "untertitel": "Einkommensgrenzen 2026 nach Familienstand, in Euro",
+          "einheit": "€",
+          "umschalter": {
+            "label": "Veranlagung"
+          },
+          "quelle": {
+            "name": "§ 32a Einkommensteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/estg/__32a.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "single",
+              "label": "Einzelveranlagung",
+              "werte": [
+                {
+                  "label": "Grundfreibetrag",
+                  "wert": 12348
+                },
+                {
+                  "label": "Ende der ersten Progressionszone",
+                  "wert": 17799
+                },
+                {
+                  "label": "Ende der zweiten Progressionszone",
+                  "wert": 69878
+                },
+                {
+                  "label": "Ende der Proportionalzone (42 %)",
+                  "wert": 277825
+                }
+              ]
+            },
+            {
+              "key": "verheiratet",
+              "label": "Zusammenveranlagung (Splitting)",
+              "werte": [
+                {
+                  "label": "Grundfreibetrag",
+                  "wert": 24696
+                },
+                {
+                  "label": "Ende der ersten Progressionszone",
+                  "wert": 35598
+                },
+                {
+                  "label": "Ende der zweiten Progressionszone",
+                  "wert": 139756
+                },
+                {
+                  "label": "Ende der Proportionalzone (42 %)",
+                  "wert": 555650
+                }
+              ]
+            }
+          ],
+          "hinweis": "Beim Splittingverfahren wird die Steuer auf die Hälfte des gemeinsamen Einkommens berechnet und verdoppelt; deshalb liegen alle Zonengrenzen für Verheiratete exakt beim Doppelten der Einzelgrenzen.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "koerperschaftsteuer",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie hoch ist die Gesamtsteuerbelastung für Kapitalgesellschaften?",
+          "art": "saeulen",
+          "titel": "Der Gewerbesteuer-Hebesatz steigt seit Jahren",
+          "untertitel": "Bundesweiter Durchschnitt, gewogen nach Gewerbeertrag",
+          "einheit": "%",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Realsteuervergleich (Pressemitteilungen zu 2022 und 2024)",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2025/08/PD25_309_713.html",
+            "stand": "2025"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Hebesatz Gewerbesteuer",
+              "werte": [
+                {
+                  "label": "2021",
+                  "wert": 403
+                },
+                {
+                  "label": "2022",
+                  "wert": 403
+                },
+                {
+                  "label": "2023",
+                  "wert": 407
+                },
+                {
+                  "label": "2024",
+                  "wert": 409
+                }
+              ]
+            }
+          ],
+          "hinweis": "Kapitalgesellschaften zahlen die Gewerbesteuer zusätzlich zur Körperschaftsteuer; der Hebesatz ist der einzige Faktor, den die Gemeinde selbst festlegt.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Welche Reformen kommen ab 2028?",
+          "art": "saeulen",
+          "titel": "So sinkt der Körperschaftsteuersatz bis 2032",
+          "untertitel": "Gesetzlich beschlossene Stufen ab dem Veranlagungszeitraum 2028",
+          "einheit": "%",
+          "quelle": {
+            "name": "§ 23 Abs. 1 Körperschaftsteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/kstg_1977/__23.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Körperschaftsteuersatz",
+              "werte": [
+                {
+                  "label": "bis 2027",
+                  "wert": 15
+                },
+                {
+                  "label": "2028",
+                  "wert": 14
+                },
+                {
+                  "label": "2029",
+                  "wert": 13
+                },
+                {
+                  "label": "2030",
+                  "wert": 12
+                },
+                {
+                  "label": "2031",
+                  "wert": 11
+                },
+                {
+                  "label": "ab 2032",
+                  "wert": 10
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Stufen stehen bereits im Gesetz für ein steuerliches Investitionssofortprogramm; hinzu kommt weiterhin der Solidaritätszuschlag von 5,5 Prozent auf die Körperschaftsteuer.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "umsatzsteuervoranmeldung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie oft müssen Sie 2026 eine Voranmeldung abgeben?",
+          "art": "balken",
+          "titel": "Ab diesen Beträgen ändert sich Ihre Meldepflicht",
+          "untertitel": "Schwellenwerte der Vorjahres-Zahllast seit 2025",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 18 Abs. 2 Umsatzsteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/ustg_1980/__18.html",
+            "stand": "01.01.2025"
+          },
+          "reihen": [
+            {
+              "key": "schwellen",
+              "label": "Schwellenwerte 2026",
+              "werte": [
+                {
+                  "label": "Befreiung von der Voranmeldung bis",
+                  "wert": 2000
+                },
+                {
+                  "label": "Monatliche Abgabepflicht ab",
+                  "wert": 9000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Bis Ende 2024 lagen die Grenzen bei 1.000 beziehungsweise 7.500 Euro; das Jahressteuergesetz 2024 hob beide zum 1. Januar 2025 an.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "umsatzsteuererklaerung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Kleinunternehmerregelung: Welche Grenzen gelten 2026?",
+          "art": "saeulen",
+          "titel": "Kleinunternehmer dürfen seit 2025 deutlich mehr umsetzen",
+          "untertitel": "Umsatzgrenzen nach § 19 UStG, vor und seit der Reform 2025",
+          "einheit": "€",
+          "umschalter": {
+            "label": "Zeitraum"
+          },
+          "quelle": {
+            "name": "§ 19 Umsatzsteuergesetz (Gesetze im Internet), Fassung ab 1.1.2025",
+            "url": "https://www.gesetze-im-internet.de/ustg_1980/__19.html",
+            "stand": "01.01.2025"
+          },
+          "reihen": [
+            {
+              "key": "alt",
+              "label": "Bis 2024",
+              "werte": [
+                {
+                  "label": "Vorjahresumsatz",
+                  "wert": 22000
+                },
+                {
+                  "label": "Umsatz im laufenden Jahr",
+                  "wert": 50000
+                }
+              ]
+            },
+            {
+              "key": "neu",
+              "label": "Ab 2025",
+              "werte": [
+                {
+                  "label": "Vorjahresumsatz",
+                  "wert": 25000
+                },
+                {
+                  "label": "Umsatz im laufenden Jahr",
+                  "wert": 100000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Wer die Grenze im laufenden Jahr überschreitet, wird ab diesem Umsatz sofort regelbesteuert – ohne Rückwirkung auf den Jahresanfang.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "schenkungssteuer",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Steuersätze bei Schenkung",
+          "art": "saeulen",
+          "titel": "So steigt der Schenkungssteuersatz mit der Schenkung",
+          "untertitel": "Steuersatz je nach Höhe des Erwerbs und Steuerklasse",
+          "einheit": "%",
+          "umschalter": {
+            "label": "Steuerklasse"
+          },
+          "quelle": {
+            "name": "§ 19 Erbschaftsteuer- und Schenkungsteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/erbstg_1974/__19.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "klasse1",
+              "label": "Steuerklasse I (Ehepartner, Kinder, Enkel)",
+              "werte": [
+                {
+                  "label": "bis 75.000 €",
+                  "wert": 7
+                },
+                {
+                  "label": "bis 300.000 €",
+                  "wert": 11
+                },
+                {
+                  "label": "bis 600.000 €",
+                  "wert": 15
+                },
+                {
+                  "label": "bis 6 Mio. €",
+                  "wert": 19
+                },
+                {
+                  "label": "bis 13 Mio. €",
+                  "wert": 23
+                },
+                {
+                  "label": "bis 26 Mio. €",
+                  "wert": 27
+                },
+                {
+                  "label": "über 26 Mio. €",
+                  "wert": 30
+                }
+              ]
+            },
+            {
+              "key": "klasse2",
+              "label": "Steuerklasse II (Geschwister, Nichten, Neffen)",
+              "werte": [
+                {
+                  "label": "bis 75.000 €",
+                  "wert": 15
+                },
+                {
+                  "label": "bis 300.000 €",
+                  "wert": 20
+                },
+                {
+                  "label": "bis 600.000 €",
+                  "wert": 25
+                },
+                {
+                  "label": "bis 6 Mio. €",
+                  "wert": 30
+                },
+                {
+                  "label": "bis 13 Mio. €",
+                  "wert": 35
+                },
+                {
+                  "label": "bis 26 Mio. €",
+                  "wert": 40
+                },
+                {
+                  "label": "über 26 Mio. €",
+                  "wert": 43
+                }
+              ]
+            },
+            {
+              "key": "klasse3",
+              "label": "Steuerklasse III (alle Übrigen)",
+              "werte": [
+                {
+                  "label": "bis 75.000 €",
+                  "wert": 30
+                },
+                {
+                  "label": "bis 300.000 €",
+                  "wert": 30
+                },
+                {
+                  "label": "bis 600.000 €",
+                  "wert": 30
+                },
+                {
+                  "label": "bis 6 Mio. €",
+                  "wert": 30
+                },
+                {
+                  "label": "bis 13 Mio. €",
+                  "wert": 50
+                },
+                {
+                  "label": "bis 26 Mio. €",
+                  "wert": 50
+                },
+                {
+                  "label": "über 26 Mio. €",
+                  "wert": 50
+                }
+              ]
+            }
+          ],
+          "hinweis": "Nur der jeweils übersteigende Teil wird mit dem höheren Satz besteuert; ein Härteausgleich federt den Sprung an jeder Wertgrenze ab (§ 19 Abs. 3 ErbStG).",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Schenkungssteuer vs. Erbschaftssteuer",
+          "art": "balken",
+          "titel": "2025 flossen 8,1 Milliarden Euro Schenkungsteuer",
+          "untertitel": "Festgesetzte Erbschaft- und Schenkungsteuer 2025 im Vergleich",
+          "einheit": "Mrd. €",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Pressemitteilung 306/2026",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/08/PD26_306_736.html",
+            "stand": "26.08.2026"
+          },
+          "reihen": [
+            {
+              "key": "2025",
+              "label": "2025",
+              "werte": [
+                {
+                  "label": "Erbschaftsteuer",
+                  "wert": 13.3
+                },
+                {
+                  "label": "Schenkungsteuer",
+                  "wert": 8.1
+                }
+              ]
+            }
+          ],
+          "hinweis": "Beide Steuerarten erreichten 2025 einen Höchstwert: Die Erbschaftsteuer stieg um 57,1 Prozent, die Schenkungsteuer um 67,3 Prozent gegenüber dem Vorjahr.",
+          "abschnitt": "heading-8",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "lohnsteuertabelle",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Welche Steuerklassen gibt es und wie wirken sie sich aus?",
+          "art": "torte",
+          "titel": "So wählen Ehepaare ihre Steuerklassen",
+          "untertitel": "Zusammenveranlagte Paare mit Arbeitnehmereinkünften, 2020",
+          "einheit": "%",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Pressemitteilung 287/2024 (Lohn- und Einkommensteuerstatistik 2020)",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/07/PD24_287_73.html",
+            "stand": "26.07.2024"
+          },
+          "reihen": [
+            {
+              "key": "2020",
+              "label": "2020",
+              "werte": [
+                {
+                  "label": "Kombination III und V",
+                  "wert": 39
+                },
+                {
+                  "label": "Beide in Steuerklasse IV",
+                  "wert": 36
+                },
+                {
+                  "label": "Nur ein Partner verdient (Steuerklasse III)",
+                  "wert": 25
+                }
+              ]
+            }
+          ],
+          "hinweis": "Von rund 5,3 Millionen zusammenveranlagten Paaren wählten 2,1 Millionen die Kombination III/V, 1,9 Millionen IV/IV; bei 1,3 Millionen verdiente nur eine Person.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Welche Besonderheiten gelten bei Minijobs und Midijobs?",
+          "art": "saeulen",
+          "titel": "So stark stieg die Minijob-Grenze seit 2022",
+          "untertitel": "Monatliche Verdienstgrenze, gekoppelt an den Mindestlohn",
+          "einheit": "€",
+          "quelle": {
+            "name": "Minijob-Zentrale (Deutsche Rentenversicherung Knappschaft-Bahn-See)",
+            "url": "https://www.minijob-zentrale.de/DE/die-minijobs/minijob-mit-verdienstgrenze",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Minijob-Grenze",
+              "werte": [
+                {
+                  "label": "2022 (bis Sept.)",
+                  "wert": 450
+                },
+                {
+                  "label": "2022 (ab Okt.)",
+                  "wert": 520
+                },
+                {
+                  "label": "2024",
+                  "wert": 538
+                },
+                {
+                  "label": "2025",
+                  "wert": 556
+                },
+                {
+                  "label": "2026",
+                  "wert": 603
+                }
+              ]
+            }
+          ],
+          "hinweis": "Seit Oktober 2022 ist die Minijob-Grenze über eine Formel an den gesetzlichen Mindestlohn gekoppelt und steigt automatisch mit ihm.",
+          "abschnitt": "heading-7",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "lohnsteuerermaessigung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wer hat Anspruch auf Lohnsteuerermäßigung?",
+          "art": "balken",
+          "titel": "Ab diesen Kosten lohnt sich ein Freibetrags-Antrag",
+          "untertitel": "Werbungskosten-Pauschbetrag plus Mindestgrenze für den Antrag",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 9a und § 39a Einkommensteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/estg/__39a.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "grenzen",
+              "label": "Schwellenwerte",
+              "werte": [
+                {
+                  "label": "Arbeitnehmer-Pauschbetrag",
+                  "wert": 1230
+                },
+                {
+                  "label": "Mindestgrenze für den Antrag",
+                  "wert": 600
+                },
+                {
+                  "label": "Nötige Aufwendungen insgesamt",
+                  "wert": 1830
+                }
+              ]
+            }
+          ],
+          "hinweis": "1.230 Euro Pauschbetrag plus 600 Euro Mindestgrenze ergeben die 1.830 Euro Werbungskosten, ab denen sich ein Antrag lohnt.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Welche Aufwendungen werden berücksichtigt?",
+          "art": "balken",
+          "titel": "Die Pendlerpauschale wird 2026 einfacher",
+          "untertitel": "Abzugsfähiger Betrag für einen 30-Kilometer-Arbeitsweg, pro Tag",
+          "einheit": "€",
+          "quelle": {
+            "name": "Haufe.de, „Neue Entfernungspauschale ab 2026“ (zu § 9 Abs. 1 EStG)",
+            "url": "https://www.haufe.de/personal/entgelt/erhoehung-der-entfernungspauschale_78_532080.html",
+            "stand": "2026",
+            "sekundaer": true
+          },
+          "reihen": [
+            {
+              "key": "vergleich",
+              "label": "Entfernungspauschale",
+              "werte": [
+                {
+                  "label": "Bis 2025 (gestaffelt)",
+                  "wert": 9.8
+                },
+                {
+                  "label": "Ab 2026 (einheitlich)",
+                  "wert": 11.4
+                }
+              ]
+            }
+          ],
+          "hinweis": "Bis 2025 galten 0,30 €/km für die ersten 20 Kilometer und 0,38 €/km danach; seit 2026 gelten einheitlich 0,38 €/km ab dem ersten Kilometer.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "grundsteuer",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "So unterschiedlich sind die Hebesätze",
+          "art": "saeulen",
+          "titel": "Der Grundsteuer-B-Hebesatz steigt seit Jahren",
+          "untertitel": "Bundesweiter Durchschnitt, gewogen nach Grundsteuermessbeträgen",
+          "einheit": "%",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Realsteuervergleich (Pressemitteilungen zu 2022 und 2024)",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2025/08/PD25_309_713.html",
+            "stand": "2025"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Hebesatz Grundsteuer B",
+              "werte": [
+                {
+                  "label": "2021",
+                  "wert": 481
+                },
+                {
+                  "label": "2022",
+                  "wert": 486
+                },
+                {
+                  "label": "2023",
+                  "wert": 493
+                },
+                {
+                  "label": "2024",
+                  "wert": 506
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der bundesweite Durchschnitt ist nach der Höhe der Grundsteuermessbeträge gewichtet; jede Gemeinde legt ihren eigenen Hebesatz unabhängig davon fest.",
+          "abschnitt": "heading-5",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "grunderwerbsteuer",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Gibt es staatliche Förderungen für Erstkäufer?",
+          "art": "saeulen",
+          "titel": "Das Hessengeld wuchs 2026 auf über 300 Millionen Euro",
+          "untertitel": "Bewilligtes Hessengeld seit dem Start im November 2024",
+          "einheit": "Mio.",
+          "quelle": {
+            "name": "Hessisches Ministerium der Finanzen, Pressemitteilungen",
+            "url": "https://finanzen.hessen.de/presse/ueber-300-millionen-euro-hessengeld-zugesagt",
+            "stand": "17.08.2026"
+          },
+          "reihen": [
+            {
+              "key": "stand",
+              "label": "Bewilligt",
+              "werte": [
+                {
+                  "label": "Feb. 2026",
+                  "wert": 229.5
+                },
+                {
+                  "label": "Aug. 2026",
+                  "wert": 311
+                }
+              ]
+            }
+          ],
+          "hinweis": "Das Hessengeld erstattet Ersterwerbern bis zu 10.000 Euro (20.000 bei zwei Käufern) plus 5.000 Euro je Kind, begrenzt auf die tatsächlich gezahlte Grunderwerbsteuer und ausgezahlt in zehn Jahresraten.",
+          "abschnitt": "heading-6",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "gewerbesteuer",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Die Berechnung: Schritt für Schritt",
+          "art": "balken",
+          "titel": "Der Mindesthebesatz steigt 2027 auf 280 Prozent",
+          "untertitel": "Gesetzliche Untergrenze für den Gewerbesteuer-Hebesatz jeder Gemeinde",
+          "einheit": "%",
+          "quelle": {
+            "name": "Deutscher Bundestag, Drucksache 21/6002 (Gesetzentwurf zur Anhebung des Gewerbesteuer-Mindesthebesatzes)",
+            "url": "https://dserver.bundestag.de/btd/21/060/2106002.pdf",
+            "stand": "19.05.2026"
+          },
+          "reihen": [
+            {
+              "key": "mindesthebesatz",
+              "label": "Gesetzlicher Mindesthebesatz",
+              "werte": [
+                {
+                  "label": "Bis Erhebungszeitraum 2026",
+                  "wert": 200
+                },
+                {
+                  "label": "Ab Erhebungszeitraum 2027",
+                  "wert": 280
+                }
+              ]
+            }
+          ],
+          "hinweis": "Ohne eigenen Beschluss der Gemeinde gilt automatisch dieser Satz; die meisten Gemeinden liegen mit ihrem tatsächlichen Hebesatz deutlich darüber, im bundesweiten Schnitt bei 409 Prozent (2024).",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Hebesätze: Der Standort ist entscheidend",
+          "art": "saeulen",
+          "titel": "Gemeinden schrauben am Gewerbesteuer-Hebesatz",
+          "untertitel": "Bundesweiter Durchschnitt, gewogen nach Gewerbeertrag",
+          "einheit": "%",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Realsteuervergleich (Pressemitteilungen zu 2022 und 2024)",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2025/08/PD25_309_713.html",
+            "stand": "2025"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Hebesatz Gewerbesteuer",
+              "werte": [
+                {
+                  "label": "2021",
+                  "wert": 403
+                },
+                {
+                  "label": "2022",
+                  "wert": 403
+                },
+                {
+                  "label": "2023",
+                  "wert": 407
+                },
+                {
+                  "label": "2024",
+                  "wert": 409
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der Hebesatz ist neben der bundeseinheitlichen Steuermesszahl der einzige Faktor der Gewerbesteuer, den jede Gemeinde selbst festlegt.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  }
+]

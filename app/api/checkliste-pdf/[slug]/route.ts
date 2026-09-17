@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getChecklisteBySlug } from "@/lib/wordpress";
 import { cacheHeaders } from "@/lib/httpCache";
+import { medienUrl } from "@/lib/faden/medien";
 
 export async function GET(
   _request: NextRequest,
@@ -8,7 +9,7 @@ export async function GET(
 ) {
   const { slug } = await params;
   const checkliste = await getChecklisteBySlug(slug);
-  const pdfUrl = checkliste?.pdfUrl;
+  const pdfUrl = medienUrl(checkliste?.pdfUrl);
 
   if (!pdfUrl) {
     return NextResponse.json({ error: "PDF not found" }, { status: 404, headers: { "Cache-Control": "no-store" } });

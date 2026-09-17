@@ -8,6 +8,14 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
+  /**
+   * Ausgabeordner. Standard bleibt `.next`; über NEXT_DIST_DIR lässt sich ein zweiter
+   * bauen, ohne den Ordner eines laufenden `next dev` zu überschreiben.
+   * 🚨 Genau daran ist am 16.09.2026 eine Prüfung gescheitert: ein `next build` neben
+   * dem Dev-Server des Users zerlegt dessen `.next`, und danach liefert er 500.
+   */
+  distDir: process.env.NEXT_DIST_DIR || ".next",
+
   serverExternalPackages: ["pdfjs-dist"],
   experimental: {
     // IONOS-Shared-Hosting ist unter Build-Last fragil. Da Artikel/Hauptkategorien jetzt
@@ -146,9 +154,13 @@ const nextConfig: NextConfig = {
         { key: "Netlify-Vary", value: "query=q" },
       ],
     };
-    // Staging: noindex für die ganze Site (env-basiert, nicht branch-basiert)
-    const isStaging = process.env.NEXT_PUBLIC_SITE_URL?.includes("staging.");
-    if (!isStaging) return [sucheCache];
+    // Alles außer Production bekommt noindex (env-basiert, nicht branch-basiert).
+    // 🚨 Bewusst eine Positivliste auf die Produktions-URL statt einer Prüfung auf
+    // "staging.": jede neue Testumgebung ist damit automatisch geschützt. Die alte
+    // Prüfung hätte dev.finanzleser.de indexierbar gemacht — eine Volltext-Dublette
+    // der Live-Seite, direkt nach der mühsam reparierten Google-Deindexierung.
+    const isProduction = process.env.NEXT_PUBLIC_SITE_URL === "https://www.finanzleser.de";
+    if (isProduction) return [sucheCache];
     return [
       sucheCache,
       {

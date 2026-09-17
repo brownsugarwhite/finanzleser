@@ -15,6 +15,9 @@ const eslintConfig = [
     ignores: [
       "node_modules/**",
       ".next/**",
+      // NEXT_DIST_DIR baut in ein eigenes Verzeichnis (next.config.ts). Ohne diese Zeile
+      // liest eslint den erzeugten Code mit: aus 44 Fehlern wurden 1394.
+      ".next-*/**",
       "out/**",
       "build/**",
       "next-env.d.ts",
@@ -23,6 +26,10 @@ const eslintConfig = [
       // erwartet dort Grossschreibung und meldet sonst 47 Fehler, die keine sind.
       // Geprueft wird diese Datei stattdessen mit `node --check` (siehe wordpress/README.md).
       "wordpress/**",
+      // Fremdcode, minifiziert ausgeliefert (html2canvas für den PDF-Export der
+      // Checklisten). Er wird nicht von uns gepflegt, und `no-this-alias` auf einer
+      // Minifikat-Zeile ist keine Aussage über unseren Code.
+      "public/scripts/**",
     ],
   },
 ];

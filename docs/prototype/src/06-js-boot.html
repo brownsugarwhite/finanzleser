@@ -1,0 +1,13 @@
+
+  // ======================================================================
+  // 06 · Boot: Parameter lesen, Intro oder Deep-Link starten. Muss als Letztes laufen.
+  // ======================================================================
+  var params = new URLSearchParams(location.search); var karteParam = params.get('karte'); var abschnittParam = params.get('abschnitt');
+  var hashRoute = location.hash.indexOf('#/') === 0 ? location.hash.slice(1) : ''; if (hashRoute) history.replaceState(null, '', location.pathname + location.search);
+  if (params.get('plus') === '1') { state.plus = true; speichern(); aktualisiereZahlen(); }
+  if (karteParam === 'heute') { document.getElementById('intro').hidden = true; begruessung(); var kl = params.get('klick'); if (kl === 'thema') setTimeout(function () { var b = document.querySelector('.spalte__themen button'); if (b) b.click(); }, 1200); if (kl === 'hover') setTimeout(function () { var r = document.querySelector('.spalten'); if (r && r.hoverZeichne) r.hoverZeichne(r.querySelectorAll('.spalte')[1]); }, 1200); }
+  else if (karteParam || hashRoute) { document.getElementById('intro').hidden = true; begruesst = true; var z0 = karteParam || (hashRoute.indexOf('unterhalt') > -1 ? 'unterhalt' : hashRoute.indexOf('hund') > -1 ? 'hund' : 'schluesselverlust'); if (z0 === 'ratgeber') z0 = 'schluesselverlust'; eingabeChips(STANDARD_CHIPS); starte(z0, null, true, false, abschnittParam); var fr = params.get('frage'); if (fr) setTimeout(function () { leoFrageZeigen(fr); }, 900); var klick = params.get('klick'); if (klick) setTimeout(function () { var b = document.querySelector('#strom .begriff[data-b="' + klick + '"]'); if (b) { b.click(); var z = document.querySelector('#bmenu .zeile'); if (z) z.click(); } }, 1500); }
+  else { eingabeChips(STANDARD_CHIPS); var iv = params.get('intro'); if (!iv) { try { iv = localStorage.getItem('leo-intro'); } catch (e) {} } introBauen(INTROS.concat(HEROS, HEROS_WEITERE).some(function (v) { return v[0] === iv; }) ? iv : 'landing'); introFortschritt(); }
+  window.addEventListener('scroll', function onScroll() { var intro = document.getElementById('intro'); if (intro.hidden) return; var f = document.getElementById('faden').getBoundingClientRect(); if (f.top < window.innerHeight * .6) { begruessung(); window.removeEventListener('scroll', onScroll); } }, { passive: true });
+})();
+</script>

@@ -1,0 +1,893 @@
+[
+  {
+    "slug": "werbungskosten",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Werbungskosten sind alle beruflichen Ausgaben; 1.230 Euro zieht das Finanzamt ohnehin ab, erst darüber lohnt der Einzelnachweis.",
+          "Die Entfernungspauschale bringt 2026 38 Cent je Kilometer ab dem ersten: Bei 15 Kilometern und 220 Arbeitstagen ist die Pauschale schon überschritten.",
+          "Homeoffice-Tage zählen mit 6 Euro bis 1.260 Euro im Jahr, aber nie am selben Tag wie die Fahrt ins Büro.",
+          "Arbeitsmittel bis 952 Euro brutto werden sofort abgesetzt, Computer immer; Fortbildungen nach der Erstausbildung unbegrenzt, Telefon und Internet pauschal 20 Prozent bis 20 Euro im Monat.",
+          "Neu 2026: Gewerkschaftsbeiträge wirken zusätzlich zum Pauschbetrag, also immer."
+        ],
+        "quellen": [
+          "§ 9 EStG",
+          "§ 9a EStG (Pauschbetrag, Gewerkschaftsbeiträge ab 2026)",
+          "§ 6 Abs. 2 EStG (geringwertige Wirtschaftsgüter)",
+          "Beitrag Werbungskosten"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was sind Werbungskosten und wer kann sie nutzen?",
+          "status": "freigegeben",
+          "frage": "Ich habe nur 900 Euro berufliche Ausgaben. Bringt mir die Steuererklärung etwas?",
+          "antwort": "Bei den Werbungskosten nichts, weil die 1.230 Euro Pauschbetrag ohnehin abgezogen werden. Ab 2026 zählen Gewerkschaftsbeiträge aber zusätzlich, und Sonderausgaben, Handwerkerrechnungen oder Krankheitskosten laufen getrennt; deshalb lohnt sich der Blick trotzdem.",
+          "quellen": [
+            "§ 9a Satz 1 Nr. 1a EStG",
+            "Beitrag, Abschnitt Was sind Werbungskosten"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Entfernungspauschale: Wie wirkt sich die neue Regelung 2026 aus?",
+          "status": "freigegeben",
+          "frage": "Ich fahre mit der Bahn und das Ticket kostet mehr als die Pauschale. Was setze ich an?",
+          "antwort": "Die tatsächlichen Ticketkosten, wenn sie über der Entfernungspauschale liegen. Die Pauschale ist bei öffentlichen Verkehrsmitteln auf 4.500 Euro im Jahr gedeckelt, nachgewiesene höhere Kosten dürfen Sie voll ansetzen. Bewahren Sie die Fahrkarten auf.",
+          "quellen": [
+            "§ 9 Abs. 1 Nr. 4 Satz 2 EStG",
+            "§ 9 Abs. 2 Satz 2 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Homeoffice-Pauschale und häuslicher Arbeitsplatz",
+          "status": "freigegeben",
+          "frage": "Ich arbeite vormittags zu Hause und fahre nachmittags ins Büro. Was zählt an dem Tag?",
+          "antwort": "Nur die Fahrt: Die Homeoffice-Pauschale gibt es für Tage, an denen Sie überwiegend zu Hause gearbeitet haben und keine erste Tätigkeitsstätte aufgesucht haben. Für solche gemischten Tage nehmen Sie die Entfernungspauschale.",
+          "quellen": [
+            "§ 4 Abs. 5 Satz 1 Nr. 6c EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Arbeitsmittel und Fortbildungen: Welche Ausgaben sind absetzbar?",
+          "status": "freigegeben",
+          "frage": "Mein Laptop hat 1.400 Euro gekostet. Muss ich ihn abschreiben?",
+          "antwort": "Nein. Computer, Software und Zubehör dürfen seit 2021 unabhängig vom Preis im Jahr des Kaufs komplett abgesetzt werden, weil ihre Nutzungsdauer auf ein Jahr festgelegt ist. Nur den privat genutzten Anteil müssen Sie herausrechnen, bei gemischter Nutzung meist 50 Prozent.",
+          "quellen": [
+            "BMF-Schreiben vom 22. Februar 2022 (Nutzungsdauer Computerhardware)",
+            "§ 9 Abs. 1 Nr. 6 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Weitere wichtige Werbungskosten im Überblick",
+          "status": "freigegeben",
+          "frage": "Kann ich meine Steuerberaterkosten absetzen?",
+          "antwort": "Den Teil, der auf Ihre Einkünfte entfällt, etwa die Anlage N, als Werbungskosten; den privaten Teil wie Hauptvordruck und Anlage Kind nicht. Bei einer Rechnung ohne Aufteilung akzeptiert das Finanzamt bis 100 Euro die volle Zuordnung zu den Werbungskosten.",
+          "quellen": [
+            "BMF-Schreiben vom 21. Dezember 2007 (Steuerberatungskosten)",
+            "Beitrag, Abschnitt Weitere Werbungskosten"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "werbungskosten",
+        "pauschbetrag",
+        "entfernungspauschale",
+        "homeoffice-pauschale",
+        "arbeitsmittel"
+      ]
+    }
+  },
+  {
+    "slug": "sonderausgaben",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Sonderausgaben sind private Ausgaben, die das Gesetz trotzdem abziehen lässt; der Pauschbetrag von 36 Euro ist so klein, dass fast jeder mit Nachweisen darüber liegt.",
+          "Das große Geld steckt in den Vorsorgeaufwendungen: Rentenbeiträge bis 30.826 Euro, für Ehepaare 61.652 Euro, seit 2023 zu 100 Prozent, dazu Kranken- und Pflegebeiträge in voller Höhe.",
+          "Weitere Versicherungen wie Haftpflicht oder BU zählen nur bis 1.900 Euro bei Arbeitnehmern, 2.800 Euro bei Selbstständigen, und gehen meist in den Krankenkassenbeiträgen unter.",
+          "Kirchensteuer ist unbegrenzt abziehbar, Spenden bis 20 Prozent der Einkünfte, Parteispenden bringen 50 Prozent direkt von der Steuer, Unterhalt an den Ex-Partner bis 13.805 Euro, Schulgeld 30 Prozent bis 5.000 Euro.",
+          "Riester bleibt 2026 mit 2.100 Euro Sonderausgabenabzug, ab 2027 kommt das neue Altersvorsorgedepot mit Zulagen bis 480 Euro."
+        ],
+        "quellen": [
+          "§ 10 EStG",
+          "§ 10a EStG (Riester)",
+          "§ 34g EStG (Parteispenden)",
+          "Beitrag Sonderausgaben"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Welche Sonderausgaben können Sie 2026 absetzen?",
+          "status": "freigegeben",
+          "frage": "Zählen Kita-Gebühren als Sonderausgaben?",
+          "antwort": "Ja, seit 2026 zu 80 Prozent bis 4.800 Euro je Kind unter 14, vorher zwei Drittel bis 4.000 Euro. Nur Betreuung zählt, nicht Essen oder Ausflüge, und die Zahlung muss per Überweisung laufen. Eingetragen wird in der Anlage Kind.",
+          "quellen": [
+            "§ 10 Abs. 1 Nr. 5 EStG in der Fassung ab 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch sind die Vorsorgeaufwendungen 2026?",
+          "status": "freigegeben",
+          "frage": "Meine Rentenbeiträge stehen schon auf der Lohnsteuerbescheinigung. Muss ich sie trotzdem eintragen?",
+          "antwort": "Sie kommen über die eDaten automatisch in die Anlage Vorsorgeaufwand, kontrollieren sollten Sie sie trotzdem. Zusätzlich eingetragen werden müssen Beiträge zu Rürup-Verträgen und Versorgungswerken sowie Haftpflicht-, Unfall- und BU-Beiträge, die der Arbeitgeber nicht kennt.",
+          "quellen": [
+            "§ 10 Abs. 1 Nr. 2 und 3a EStG",
+            "Beitrag, Abschnitt Vorsorgeaufwendungen"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Riester-Rente und staatlich geförderte Altersvorsorge",
+          "status": "freigegeben",
+          "frage": "Lohnt sich Riester 2026 noch, wenn 2027 die Reform kommt?",
+          "antwort": "Bestehende Verträge laufen mit Zulagen und Sonderausgabenabzug weiter, und wer 4 Prozent des Vorjahresbruttos einzahlt, bekommt 2026 die volle Förderung. Für einen Neuabschluss lohnt das Warten auf das Altersvorsorgedepot ab 2027 mit höherer Zulage und ohne Garantiezwang.",
+          "quellen": [
+            "§ 10a EStG",
+            "Gesetz zur Reform der steuerlich geförderten privaten Altersvorsorge, Bundesrat 8. Mai 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Spenden und politische Unterstützung",
+          "status": "freigegeben",
+          "frage": "Ich habe 500 Euro an einen Verein gespendet. Brauche ich eine Spendenquittung?",
+          "antwort": "Ja, ab 300 Euro braucht das Finanzamt auf Nachfrage die Zuwendungsbestätigung des Vereins; bis 300 Euro reicht der Kontoauszug. Viele Vereine melden Spenden inzwischen elektronisch, dann entfällt der Beleg. Einreichen müssen Sie nichts, nur aufbewahren.",
+          "quellen": [
+            "§ 50 EStDV",
+            "§ 10b EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "sonderausgaben",
+        "vorsorgeaufwendungen",
+        "kirchensteuer",
+        "realsplitting"
+      ]
+    }
+  },
+  {
+    "slug": "pendlerpauschale",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Pendlerpauschale bringt 2026 einheitlich 38 Cent je Entfernungskilometer ab dem ersten, für die einfache Strecke, egal ob Auto, Rad, Bahn oder zu Fuß.",
+          "Formel: Arbeitstage mal Kilometer mal 0,38 Euro; bei 20 Kilometern und 220 Tagen sind das 1.672 Euro, mehr als der Pauschbetrag von 1.230 Euro.",
+          "Bei Bus und Bahn ist die Pauschale auf 4.500 Euro gedeckelt, höhere Ticketkosten setzen Sie nachgewiesen voll an; beim Firmenwagen gilt sie trotzdem.",
+          "Geringverdiener unter dem Grundfreibetrag bekommen für Wege über 20 Kilometer die Mobilitätsprämie von 14 Prozent der Pauschale ausgezahlt.",
+          "An Homeoffice-Tagen gibt es statt der Fahrt die Tagespauschale von 6 Euro; über 230 Fahrten im Jahr verlangt das Finanzamt Nachweise."
+        ],
+        "quellen": [
+          "§ 9 Abs. 1 Nr. 4 EStG",
+          "§§ 101 bis 109 EStG (Mobilitätsprämie)",
+          "Beitrag Pendlerpauschale"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist die Pendlerpauschale und wie funktioniert sie?",
+          "status": "freigegeben",
+          "frage": "Zählt die kürzeste Strecke, auch wenn ich über die Autobahn schneller bin?",
+          "antwort": "Grundsätzlich die kürzeste Straßenverbindung. Eine längere Strecke dürfen Sie ansetzen, wenn sie offensichtlich verkehrsgünstiger ist und Sie sie regelmäßig nutzen, etwa weil Sie damit deutlich Zeit sparen. Angefangene Kilometer werden abgerundet.",
+          "quellen": [
+            "§ 9 Abs. 1 Nr. 4 Satz 4 EStG",
+            "BFH VI R 46/10"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Die neue Pendlerpauschale 2026: Das ändert sich",
+          "status": "freigegeben",
+          "frage": "Wie viel Steuer spare ich mit 25 Kilometern Arbeitsweg?",
+          "antwort": "25 Kilometer mal 220 Tage mal 38 Cent sind 2.090 Euro Werbungskosten, 860 Euro über dem Pauschbetrag. Bei 30 Prozent Grenzsteuersatz sind das rund 260 Euro Erstattung im Jahr, bei 42 Prozent etwa 360 Euro.",
+          "quellen": [
+            "Beitrag, Rechenbeispiele",
+            "§ 32a EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Pendlerpauschale bei verschiedenen Verkehrsmitteln",
+          "status": "freigegeben",
+          "frage": "Wir fahren zu dritt in einer Fahrgemeinschaft. Bekommt jeder die Pauschale?",
+          "antwort": "Ja, jeder Mitfahrer setzt die Pauschale für seine eigene Entfernung an, auch an Tagen, an denen er nur mitfährt. Für Mitfahrer gilt die Obergrenze von 4.500 Euro, der Fahrer darf an seinen Fahrtagen darüber hinausgehen.",
+          "quellen": [
+            "§ 9 Abs. 1 Nr. 4 Satz 2 EStG",
+            "BMF-Schreiben zur Entfernungspauschale, Rn. 22 ff."
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Mobilitätsprämie: Dauerhafte Unterstützung für Geringverdiener",
+          "status": "freigegeben",
+          "frage": "Ich verdiene unter dem Grundfreibetrag und pendle 40 Kilometer. Was bringt die Mobilitätsprämie?",
+          "antwort": "14 Prozent der Pauschale ab dem 21. Kilometer, also 20 Kilometer mal 220 Tage mal 38 Cent mal 14 Prozent, rund 234 Euro, ausgezahlt vom Finanzamt, weil Sie ohne Steuerlast sonst nichts von der Pauschale hätten. Beantragt wird sie mit der Anlage Mobilitätsprämie.",
+          "quellen": [
+            "§ 101 EStG",
+            "§ 104 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "entfernungspauschale",
+        "erste-taetigkeitsstaette",
+        "mobilitaetspraemie",
+        "homeoffice-pauschale"
+      ]
+    }
+  },
+  {
+    "slug": "aussergewoehnliche-belastungen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Außergewöhnliche Belastungen sind Kosten, denen Sie nicht ausweichen können: nicht erstattete Krankheitskosten, Pflege, Beerdigung, Schäden nach Hochwasser oder Brand.",
+          "Sie wirken erst über der zumutbaren Belastung von 1 bis 7 Prozent der Einkünfte, gestaffelt nach Einkommen und Kinderzahl; für einen Ledigen mit 40.000 Euro sind das rund 2.400 Euro.",
+          "Besondere Belastungen gibt es ohne diesen Abzug: Behindertenpauschbeträge von 384 bis 7.400 Euro, Pflegepauschbetrag bis 1.800 Euro, Unterhalt an Bedürftige bis 12.348 Euro.",
+          "Nur der selbst getragene Anteil zählt; Erstattungen von Kasse oder Beihilfe werden abgezogen, bei Heimunterbringung die Haushaltsersparnis von 10.347 Euro.",
+          "Planbare Kosten in ein Jahr bündeln, Unterhalt nur per Überweisung, Behindertenpauschbetrag kommt ab 2026 digital vom Versorgungsamt."
+        ],
+        "quellen": [
+          "§§ 33, 33a, 33b EStG",
+          "BFH VI R 75/14, Urteil vom 19. Januar 2017 (Staffelung)",
+          "Beitrag Außergewöhnliche Belastungen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was sind außergewöhnliche Belastungen?",
+          "status": "freigegeben",
+          "frage": "Zählt meine neue Brille für 600 Euro?",
+          "antwort": "Ja, als Krankheitskosten, soweit die Kasse nichts erstattet hat; eine ärztliche Verordnung oder der Sehtest des Optikers reicht als Nachweis. Steuerlich wirkt sie aber nur zusammen mit anderen Kosten über der zumutbaren Belastung.",
+          "quellen": [
+            "§ 33 EStG",
+            "§ 64 EStDV (Nachweis)"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist die zumutbare Belastung für 2026?",
+          "status": "freigegeben",
+          "frage": "Wir haben zwei Kinder und 60.000 Euro Einkünfte. Wo liegt unsere Grenze?",
+          "antwort": "Bei etwa 2.770 Euro: 4 Prozent auf die ersten 15.340 Euro, 5 Prozent auf die nächsten 35.790 Euro und 6 Prozent auf die 8.870 Euro darüber, gestaffelt seit dem Urteil des Bundesfinanzhofs von 2017. Erst was diese Summe übersteigt, mindert die Steuer.",
+          "quellen": [
+            "§ 33 Abs. 3 EStG",
+            "BFH VI R 75/14"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Kosten gelten als außergewöhnliche Belastungen?",
+          "status": "freigegeben",
+          "frage": "Ich pflege meine Mutter zu Hause. Gibt es dafür etwas?",
+          "antwort": "Den Pflegepauschbetrag: 600 Euro bei Pflegegrad 2, 1.100 Euro bei Pflegegrad 3, 1.800 Euro ab Pflegegrad 4 oder Hilflosigkeit, ohne zumutbare Belastung und ohne Einzelnachweis, solange Sie kein Geld dafür bekommen. Alternativ setzen Sie höhere tatsächliche Kosten mit Abzug der zumutbaren Belastung an.",
+          "quellen": [
+            "§ 33b Abs. 6 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie beantrage ich außergewöhnliche Belastungen in der Steuererklärung?",
+          "status": "freigegeben",
+          "frage": "Die Zahnarztrechnung kommt im Dezember, bezahlen will ich im Januar. Wann zählt sie?",
+          "antwort": "Im Jahr der Zahlung. Wenn Sie in diesem Jahr ohnehin hohe Krankheitskosten hatten, zahlen Sie noch im Dezember, damit alles in ein Jahr fällt und die zumutbare Belastung nur einmal abgezogen wird. Bei geringen Kosten in beiden Jahren geht der Abzug ganz verloren.",
+          "quellen": [
+            "§ 11 Abs. 2 EStG (Abflussprinzip)",
+            "Beitrag, Optimierungstipps"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "aussergewoehnliche-belastungen",
+        "zumutbare-belastung",
+        "behindertenpauschbetrag",
+        "pauschbetrag"
+      ]
+    }
+  },
+  {
+    "slug": "haushaltsnahe-dienstleistungen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Für Putzhilfe, Gartenpflege, Winterdienst, Pflege oder Hundesitter im eigenen Haushalt zieht das Finanzamt 20 Prozent der Arbeitskosten direkt von der Steuer ab, bis 4.000 Euro im Jahr.",
+          "Daneben gibt es 20 Prozent bis 510 Euro für einen Minijob im Haushalt und 20 Prozent bis 1.200 Euro für Handwerker; zusammen bis zu 5.710 Euro.",
+          "Bedingungen: Rechnung mit getrennten Arbeits- und Materialkosten, Zahlung per Überweisung, Leistung im selbst genutzten Haushalt in der EU; bar gezahlt gibt es nichts.",
+          "Mieter setzen Hausmeister, Treppenhausreinigung, Gartenpflege und Schornsteinfeger aus der Nebenkostenabrechnung ab.",
+          "Große Handwerkerprojekte über zwei Jahre verteilen; für energetische Sanierung gibt es die eigene Förderung mit 20 Prozent von 200.000 Euro inklusive Material."
+        ],
+        "quellen": [
+          "§ 35a EStG",
+          "§ 35c EStG (energetische Sanierung)",
+          "BMF-Schreiben vom 9. November 2016 zu § 35a EStG",
+          "Beitrag Haushaltsnahe Dienstleistungen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche Arbeiten können Sie absetzen?",
+          "status": "freigegeben",
+          "frage": "Zählt der Hundesitter, der unseren Hund tagsüber ausführt?",
+          "antwort": "Ja, wenn die Betreuung in Ihrem Haushalt stattfindet oder der Sitter den Hund von zu Hause abholt und ausführt; das hat der Bundesfinanzhof 2016 anerkannt. Eine Hundepension außerhalb zählt nicht. Rechnung und Überweisung sind Pflicht.",
+          "quellen": [
+            "BFH VI R 13/15, Urteil vom 3. September 2015",
+            "FG Hessen 12 K 902/16 (Gassi-Service)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch ist die Steuerersparnis für 2026?",
+          "status": "freigegeben",
+          "frage": "Der Handwerker hat 8.000 Euro Arbeitslohn berechnet. Bekomme ich 20 Prozent davon?",
+          "antwort": "Nur bis zur Grenze: 20 Prozent von höchstens 6.000 Euro Arbeitskosten, also 1.200 Euro. Materialkosten zählen nie. Wenn ein Teil der Arbeit erst im Januar bezahlt wird, nutzen Sie die Grenze in beiden Jahren.",
+          "quellen": [
+            "§ 35a Abs. 3 EStG",
+            "Beitrag, Abschnitt Häufige Fehler"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Voraussetzungen gelten für den Steuerabzug?",
+          "status": "freigegeben",
+          "frage": "Ich habe die Putzfrau bar bezahlt. Kann ich das noch retten?",
+          "antwort": "Nein, Barzahlungen sind ausdrücklich ausgeschlossen, auch mit Quittung. Stellen Sie ab sofort auf Überweisung um und lassen Sie sich eine Rechnung mit Name, Adresse und Steuernummer geben; besser noch melden Sie die Hilfe als Minijob bei der Minijob-Zentrale an, dann sind 20 Prozent bis 510 Euro sicher.",
+          "quellen": [
+            "§ 35a Abs. 5 Satz 3 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Was können Mieter und Vermieter absetzen?",
+          "status": "freigegeben",
+          "frage": "Welche Posten aus meiner Nebenkostenabrechnung darf ich ansetzen?",
+          "antwort": "Hausmeister, Treppenhaus- und Fensterreinigung, Gartenpflege, Winterdienst, Schornsteinfeger und Wartung von Heizung oder Aufzug, jeweils den Arbeitskostenanteil. Ihr Vermieter muss diese Anteile auf Verlangen ausweisen; viele Abrechnungen enthalten dafür eine eigene Bescheinigung nach § 35a.",
+          "quellen": [
+            "BMF-Schreiben vom 9. November 2016, Rn. 26 f.",
+            "Beitrag, Abschnitt Mieter und Vermieter"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "haushaltsnahe-dienstleistungen",
+        "handwerkerleistungen",
+        "minijob"
+      ]
+    }
+  },
+  {
+    "slug": "arbeitszimmer-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Seit 2023 gibt es zwei Wege: das anerkannte Arbeitszimmer als Mittelpunkt der Arbeit mit allen anteiligen Kosten oder wahlweise 1.260 Euro Jahrespauschale, und die Tagespauschale von 6 Euro bis 1.260 Euro für alle anderen, auch am Küchentisch.",
+          "Anerkannt wird nur ein abgeschlossener, fast ausschließlich beruflich genutzter Raum, in dem mehr als die Hälfte der Arbeitszeit stattfindet; die frühere 1.250-Euro-Regel ohne anderen Arbeitsplatz ist weg.",
+          "Beim echten Arbeitszimmer zählen Miete, Nebenkosten, Strom und Heizung nach Flächenanteil; 14 von 80 Quadratmetern bei 1.280 Euro Warmmiete und Strom sind rund 2.700 Euro im Jahr.",
+          "Möbel, Computer und Internet kommen in beiden Varianten obendrauf; bis 952 Euro brutto sofort, Möbel darüber über 13 Jahre.",
+          "Für denselben Tag nie Tagespauschale und Entfernungspauschale; ein Homeoffice-Kalender belegt die Tage."
+        ],
+        "quellen": [
+          "§ 4 Abs. 5 Satz 1 Nr. 6b und 6c EStG",
+          "§ 9 Abs. 5 EStG",
+          "Beitrag Arbeitszimmer"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Voraussetzungen: Wann erkennt das Finanzamt ein Arbeitszimmer an?",
+          "status": "freigegeben",
+          "frage": "Ich bin Lehrerin und bereite zu Hause vor. Ist mein Arbeitszimmer der Mittelpunkt?",
+          "antwort": "Nein, der Mittelpunkt einer Lehrerin ist die Schule, weil der prägende Teil der Arbeit dort stattfindet. Das häusliche Arbeitszimmer wird seit 2023 nicht mehr anerkannt; Ihnen bleibt die Tagespauschale von 6 Euro für Tage, an denen Sie überwiegend zu Hause gearbeitet haben, auch ohne die Schule zu meiden.",
+          "quellen": [
+            "§ 4 Abs. 5 Satz 1 Nr. 6c Satz 2 EStG (Sonderregel ohne anderen Arbeitsplatz)",
+            "BFH VI R 13/09"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Homeoffice-Pauschale vs. Arbeitszimmer: Was lohnt sich mehr?",
+          "status": "freigegeben",
+          "frage": "Ich arbeite vier Tage die Woche zu Hause in einem eigenen Zimmer. Pauschale oder echte Kosten?",
+          "antwort": "Rechnen Sie beides: Vier Tage mal 46 Wochen sind 184 Tage, also 1.104 Euro Tagespauschale. Ein anerkanntes Arbeitszimmer bringt entweder die Jahrespauschale von 1.260 Euro oder die anteiligen Wohnkosten, bei 15 Prozent Flächenanteil und 1.500 Euro Warmmiete rund 2.700 Euro. Bei hoher Miete gewinnt das Zimmer klar.",
+          "quellen": [
+            "Beitrag, Beispielrechnung Arbeitszimmer",
+            "§ 4 Abs. 5 Satz 1 Nr. 6b EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Kosten lassen sich anteilig absetzen?",
+          "status": "freigegeben",
+          "frage": "Wir haben das Haus gekauft. Was zählt beim Arbeitszimmer im Eigentum?",
+          "antwort": "Anteilig die Gebäudeabschreibung von 2 Prozent des Gebäudewerts im Jahr, Schuldzinsen, Grundsteuer, Gebäudeversicherung, Heizung, Strom und Wasser, jeweils nach Fläche; Renovierungen des Zimmers selbst zu 100 Prozent. Beim Verkauf innerhalb von zehn Jahren kann der Zimmeranteil steuerpflichtig werden.",
+          "quellen": [
+            "§ 7 Abs. 4 EStG",
+            "BFH IX R 27/19 (Verkauf mit Arbeitszimmer)"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Häufige Fehler und Fallstricke vermeiden",
+          "status": "freigegeben",
+          "frage": "Wie weise ich meine Homeoffice-Tage nach?",
+          "antwort": "Mit einem einfachen Kalender, in dem Sie je Tag notieren, ob Sie zu Hause oder im Büro waren, ergänzt um die Homeoffice-Vereinbarung mit dem Arbeitgeber. Das Finanzamt fragt seit 2026 häufiger nach; die Summe aus Homeoffice- und Bürotagen darf die Arbeitstage nicht übersteigen.",
+          "quellen": [
+            "Beitrag, Abschnitt Dokumentation",
+            "§ 90 AO (Mitwirkungspflicht)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "arbeitszimmer",
+        "homeoffice-pauschale",
+        "arbeitsmittel",
+        "werbungskosten"
+      ]
+    }
+  },
+  {
+    "slug": "doppelte-haushaltsfuehrung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Wer aus beruflichen Gründen eine Zweitwohnung am Arbeitsort hat und zu Hause einen eigenen Hausstand als Lebensmittelpunkt behält, setzt die Mehrkosten als Werbungskosten ab.",
+          "Die tägliche Fahrt muss unzumutbar sein, als Richtwert über 50 Kilometer oder mehr als eine Stunde je Strecke.",
+          "Unterkunft bis 1.000 Euro im Monat, im Ausland ab 2026 bis 2.000 Euro; Einrichtung zählt extra und gilt bis 5.000 Euro als angemessen.",
+          "Eine Familienheimfahrt je Woche mit 38 Cent je Kilometer ohne Obergrenze, Verpflegung 14 oder 28 Euro am Tag für die ersten drei Monate.",
+          "Die Miete müssen Sie selbst schulden und zahlen; alles kommt in die Anlage N-Doppelte Haushaltsführung, Belege zehn Jahre aufheben."
+        ],
+        "quellen": [
+          "§ 9 Abs. 1 Satz 3 Nr. 5 EStG",
+          "§ 9 Abs. 4a EStG (Verpflegung)",
+          "BFH VI R 18/17 (Einrichtung außerhalb der 1.000-Euro-Grenze)",
+          "Beitrag Doppelte Haushaltsführung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Welche Voraussetzungen müssen Sie erfüllen?",
+          "status": "freigegeben",
+          "frage": "Ich bin ledig und wohne am Wochenende bei meinen Eltern. Habe ich einen eigenen Hausstand?",
+          "antwort": "Nur wenn Sie dort nicht bloß ein Zimmer bewohnen, sondern sich an der Haushaltsführung beteiligen, finanziell und tatsächlich. Nach der neueren Rechtsprechung genügt bei einer eigenen abgeschlossenen Wohnung das Innehaben; im Mehrgenerationenhaushalt müssen Sie die Beteiligung an Miete und Lebenshaltung nachweisen, etwa mit Überweisungen.",
+          "quellen": [
+            "§ 9 Abs. 1 Satz 3 Nr. 5 Satz 3 EStG",
+            "BFH VI R 39/19"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie weit darf Ihr Arbeitsplatz entfernt sein?",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitsplatz ist 45 Kilometer entfernt, aber mit Stau brauche ich 75 Minuten. Reicht das?",
+          "antwort": "Möglich. Gerichte stellen auf die Zumutbarkeit ab; bei mehr als einer Stunde je Strecke im üblichen Verkehr wird die Zweitwohnung meist anerkannt, auch unter 50 Kilometern. Belegen Sie die Fahrzeit mit Routenplaner-Ausdrucken zur üblichen Pendelzeit.",
+          "quellen": [
+            "BFH VI R 2/16",
+            "FG Münster 7 K 3215/18 E",
+            "Beitrag, Abschnitt Entfernung"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Kosten können Sie absetzen?",
+          "status": "freigegeben",
+          "frage": "Meine Wohnung in München kostet 1.400 Euro warm. Bleibt der Rest an mir hängen?",
+          "antwort": "Ja, im Inland sind 1.000 Euro im Monat die Grenze für Miete samt Nebenkosten, Strom und Zweitwohnungsteuer; die übrigen 400 Euro tragen Sie selbst. Einrichtung, Familienheimfahrten und Verpflegung kommen unabhängig davon dazu.",
+          "quellen": [
+            "§ 9 Abs. 1 Satz 3 Nr. 5 Satz 4 EStG",
+            "BFH VI R 18/17"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie hoch sind die Familienheimfahrten 2026?",
+          "status": "freigegeben",
+          "frage": "Ich fahre jedes Wochenende 300 Kilometer nach Hause. Wie viel ist das im Jahr?",
+          "antwort": "Eine Heimfahrt je Woche zählt: 46 Wochen mal 300 Kilometer mal 38 Cent sind 5.244 Euro, ohne Obergrenze. Fahren Sie öfter, können Sie stattdessen alle Fahrten mit der Entfernungspauschale ansetzen, dann aber ohne Unterkunftskosten; rechnen Sie beides durch.",
+          "quellen": [
+            "§ 9 Abs. 1 Satz 3 Nr. 5 Satz 5 und 6 EStG",
+            "Beitrag, Abschnitt Familienheimfahrten"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "doppelte-haushaltsfuehrung",
+        "familienheimfahrt",
+        "verpflegungsmehraufwand",
+        "erste-taetigkeitsstaette"
+      ]
+    }
+  },
+  {
+    "slug": "lohnsteuer",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Lohnsteuer ist die monatliche Vorauszahlung auf die Einkommensteuer, die der Arbeitgeber nach Steuerklasse und Programmablaufplan einbehält; abgerechnet wird erst mit der Steuererklärung.",
+          "Bis 12.348 Euro im Jahr, etwa 1.029 Euro brutto im Monat, fällt keine Lohnsteuer an; darüber steigt der Satz von 14 auf 42 Prozent ab 69.879 Euro, 45 Prozent ab 277.826 Euro.",
+          "Sechs Steuerklassen verteilen die Vorauszahlung; vor Elterngeld lohnt der Wechsel des künftigen Beziehers in Klasse 3 mindestens sieben Monate vor der Geburt.",
+          "2026 neu: 38 Cent Entfernungspauschale ab dem ersten Kilometer, Minijob-Grenze 603 Euro, Aktivrente 2.000 Euro steuerfrei, Mindestvorsorgepauschale abgeschafft.",
+          "Den Solidaritätszuschlag zahlen Singles erst ab 20.350 Euro Einkommensteuer, rund 73.000 Euro brutto."
+        ],
+        "quellen": [
+          "§§ 38 ff. EStG",
+          "§ 32a EStG (Tarif 2026)",
+          "§ 8 Abs. 1a SGB IV (Minijob-Grenze)",
+          "Beitrag Lohnsteuer"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie wird die Lohnsteuer 2026 berechnet?",
+          "status": "freigegeben",
+          "frage": "Ich bekomme eine Gehaltserhöhung und rutsche über 69.879 Euro. Zahle ich jetzt auf alles 42 Prozent?",
+          "antwort": "Nein, nur auf jeden Euro über der Grenze. Der Tarif ist progressiv in Stufen: Die ersten 12.348 Euro bleiben frei, danach steigt der Satz allmählich von 14 auf 42 Prozent. Ihr Durchschnittssatz bei 70.000 Euro liegt bei rund 28 Prozent.",
+          "quellen": [
+            "§ 32a Abs. 1 EStG",
+            "Beitrag, Tariftabelle 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Bei welchem Gehalt zahlt man 2026 keine Lohnsteuer?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 1.100 Euro brutto in Teilzeit. Warum zieht mein Arbeitgeber Lohnsteuer ab?",
+          "antwort": "Wahrscheinlich wegen der Steuerklasse: In Klasse 1 bleiben monatlich rund 1.029 Euro plus Pauschbeträge frei, darüber greift der Eingangssatz. Bei 1.100 Euro sind es wenige Euro, die Sie mit der Steuererklärung zurückbekommen. In Klasse 5 oder 6 gibt es keinen Freibetrag, dann ist der Abzug deutlich höher.",
+          "quellen": [
+            "§ 39b EStG",
+            "Beitrag, Abschnitt Keine Lohnsteuer"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Was sind die wichtigsten Neuerungen 2026?",
+          "status": "freigegeben",
+          "frage": "Was bedeutet der Wegfall der Mindestvorsorgepauschale für mich?",
+          "antwort": "Bisher wurden beim Lohnsteuerabzug mindestens 12 Prozent des Lohns als Vorsorgeaufwand unterstellt. Ab 2026 zählen nur die tatsächlichen Kranken- und Pflegebeiträge. Gesetzlich Versicherte merken kaum etwas, Privatversicherte mit niedrigen Beiträgen zahlen monatlich etwas mehr Lohnsteuer und holen es mit der Erklärung zurück.",
+          "quellen": [
+            "§ 39b Abs. 2 Satz 5 Nr. 3 EStG in der Fassung ab 2026",
+            "Beitrag, FAQ Vorsorgepauschale"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Besonderheiten bei Minijobs und Midijobs",
+          "status": "freigegeben",
+          "frage": "Darf ich im Minijob in einem Monat mehr als 603 Euro verdienen?",
+          "antwort": "Ja, unvorhersehbar und gelegentlich, höchstens zweimal im Jahr und bis zum Doppelten der Grenze, also 1.206 Euro. Planbare Mehrarbeit oder ein dritter Monat machen aus dem Minijob eine sozialversicherungspflichtige Beschäftigung im Übergangsbereich bis 2.000 Euro.",
+          "quellen": [
+            "§ 8 Abs. 1b SGB IV",
+            "Geringfügigkeits-Richtlinien der Spitzenorganisationen der Sozialversicherung"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "lohnsteuer",
+        "elstam",
+        "steuerklasse",
+        "minijob",
+        "midijob"
+      ]
+    }
+  },
+  {
+    "slug": "kirchensteuer",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Kirchensteuer zahlen Mitglieder der evangelischen, katholischen und jüdischen Gemeinden als Zuschlag auf die Einkommensteuer: 8 Prozent in Bayern und Baden-Württemberg, sonst 9 Prozent.",
+          "Wer unter dem Grundfreibetrag von 12.348 Euro bleibt, zahlt nichts; bei 45.000 Euro zu versteuerndem Einkommen sind es 826 Euro, nach Sonderausgabenabzug netto rund 545 Euro.",
+          "Die gezahlte Kirchensteuer ist unbegrenzt als Sonderausgabe abziehbar, Erstattungen mindern den Abzug.",
+          "Bei hohen Einkommen greift außer in Bayern eine Kappung auf 2,75 bis 4 Prozent des zu versteuernden Einkommens, teils nur auf Antrag.",
+          "Der Austritt kostet 0 bis 60 Euro beim Amtsgericht oder Standesamt und beendet die Pflicht ab dem Folgemonat; bei Ehen mit nur einem Mitglied kann ab 50.000 Euro gemeinsamem Einkommen Kirchgeld anfallen."
+        ],
+        "quellen": [
+          "Kirchensteuergesetze der Länder",
+          "§ 10 Abs. 1 Nr. 4 EStG (Sonderausgabenabzug)",
+          "Beitrag Kirchensteuer"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Berechnung Schritt für Schritt",
+          "status": "freigegeben",
+          "frage": "Wird die Kirchensteuer vom Brutto berechnet?",
+          "antwort": "Nein, von der Lohn- oder Einkommensteuer. Bei 4.000 Euro brutto in Nordrhein-Westfalen und Steuerklasse 1 fallen rund 630 Euro Lohnsteuer an, davon 9 Prozent sind etwa 57 Euro Kirchensteuer im Monat. Mit Kindern sinkt sie, weil der Kinderfreibetrag die Bemessung mindert.",
+          "quellen": [
+            "Beitrag, Abschnitt Berechnung",
+            "§ 51a EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Kappungsregelung bei hohem Einkommen",
+          "status": "freigegeben",
+          "frage": "Ich wohne in Nordrhein-Westfalen und verdiene 150.000 Euro. Muss ich die Kappung beantragen?",
+          "antwort": "Ja, in Nordrhein-Westfalen, Hessen, Baden-Württemberg, Rheinland-Pfalz und dem Saarland nur auf Antrag beim Landeskirchenamt oder Bistum; in Berlin, Hamburg, Niedersachsen und den meisten anderen Ländern automatisch. Bei 150.000 Euro liegt die Kappung auf 3,5 Prozent in Nordrhein-Westfalen bei 5.250 Euro statt rund 5.000 Euro nach 9 Prozent, also nicht immer günstiger. Rechnen Sie es durch.",
+          "quellen": [
+            "Beitrag, Abschnitt Kappung",
+            "Kirchensteuerordnungen der Landeskirchen und Bistümer in NRW"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Austritt: Kosten und Ablauf",
+          "status": "freigegeben",
+          "frage": "Ab wann zahle ich nach dem Austritt keine Kirchensteuer mehr?",
+          "antwort": "Ab dem Monat nach der Erklärung; für das laufende Jahr wird anteilig nach Monaten gerechnet. Der Arbeitgeber erfährt es über die elektronischen Lohnsteuerabzugsmerkmale, meist mit ein bis zwei Monaten Verzug; zu viel Einbehaltenes kommt mit der Steuererklärung zurück.",
+          "quellen": [
+            "§ 39e EStG",
+            "Kirchensteuergesetze der Länder, Ende der Steuerpflicht"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Kirchensteuer bei Paaren",
+          "status": "freigegeben",
+          "frage": "Ich bin ausgetreten, meine Frau nicht. Zahlen wir trotzdem?",
+          "antwort": "Ihre Frau zahlt auf ihren Anteil an der gemeinsamen Steuer; wenn sie wenig oder nichts verdient, kann das besondere Kirchgeld greifen: ab 50.000 Euro gemeinsamem zu versteuerndem Einkommen gestaffelt von 96 bis 3.600 Euro im Jahr. Mit Einzelveranlagung entfällt es, das kostet aber meist den Splittingvorteil.",
+          "quellen": [
+            "Kirchensteuergesetze der Länder, besonderes Kirchgeld",
+            "BVerfG 2 BvR 591/06"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kirchensteuer",
+        "kappungsgrenze",
+        "kirchgeld",
+        "sonderausgaben"
+      ]
+    }
+  },
+  {
+    "slug": "solidaritaetszuschlag",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Der Solidaritätszuschlag ist ein Aufschlag von 5,5 Prozent auf die Einkommen- und Körperschaftsteuer, seit 1995 dauerhaft; seit 2021 zahlen ihn nur noch etwa 10 Prozent der Steuerzahler.",
+          "Singles bleiben 2026 bis 20.350 Euro Einkommensteuer frei, das sind rund 74.500 Euro zu versteuerndes Einkommen; Paare bis 40.700 Euro.",
+          "Darüber gilt eine Milderungszone: höchstens 11,9 Prozent der Differenz zur Freigrenze, die vollen 5,5 Prozent erst ab etwa 131.000 Euro Brutto.",
+          "Auf Kapitalerträge über dem Sparerpauschbetrag und für GmbHs gibt es keine Freigrenze; die Bank zieht 5,5 Prozent auf die Abgeltungsteuer sofort ab.",
+          "Das Bundesverfassungsgericht hat den Zuschlag im März 2025 bestätigt, mindestens bis 2030."
+        ],
+        "quellen": [
+          "Solidaritätszuschlaggesetz §§ 3, 4",
+          "BVerfG 2 BvR 1505/20, Urteil vom 26. März 2025",
+          "Beitrag Solidaritätszuschlag"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer zahlt 2026 Solidaritätszuschlag?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 80.000 Euro brutto. Zahle ich Soli?",
+          "antwort": "Wahrscheinlich nur wenig oder gar nicht. Nach Werbungskosten und Vorsorgeaufwendungen liegt Ihr zu versteuerndes Einkommen meist um 65.000 Euro, die Einkommensteuer unter der Freigrenze von 20.350 Euro. Erst ab rund 74.500 Euro zu versteuerndem Einkommen beginnt die Milderungszone.",
+          "quellen": [
+            "§ 3 Abs. 3 SolzG",
+            "Beitrag, Abschnitt Spitzenverdiener"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Die Milderungszone erklärt",
+          "status": "freigegeben",
+          "frage": "Meine Einkommensteuer liegt bei 22.000 Euro. Wie viel Soli ist das?",
+          "antwort": "Nicht 5,5 Prozent von 22.000 Euro, sondern höchstens 11,9 Prozent der 1.650 Euro über der Freigrenze: rund 196 Euro. Der volle Satz von 1.210 Euro würde erst ab etwa 36.000 Euro Einkommensteuer greifen.",
+          "quellen": [
+            "§ 4 Satz 2 SolzG",
+            "Beitrag, Beispiel Milderungszone"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Solidaritätszuschlag auf Kapitalerträge",
+          "status": "freigegeben",
+          "frage": "Warum zieht meine Bank Soli ab, obwohl ich auf mein Gehalt keinen zahle?",
+          "antwort": "Weil die Freigrenze nur für die Einkommensteuer auf Ihr übriges Einkommen gilt, nicht für die Abgeltungsteuer. Auf Kapitalerträge über dem Sparerpauschbetrag von 1.000 Euro behält die Bank 25 Prozent plus 5,5 Prozent darauf ein, also 26,375 Prozent. Mit der Günstigerprüfung in der Anlage KAP holen Sie das zurück, wenn Ihr Steuersatz unter 25 Prozent liegt.",
+          "quellen": [
+            "§ 3 Abs. 1 Nr. 5 SolzG",
+            "§ 32d Abs. 6 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "solidaritaetszuschlag",
+        "milderungszone",
+        "sparerpauschbetrag",
+        "einkommensteuer"
+      ]
+    }
+  },
+  {
+    "slug": "einkommensteuer",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Einkommensteuer trifft alle sieben Einkunftsarten, von Lohn über Miete bis Kapital; steuerpflichtig ist, wer in Deutschland wohnt.",
+          "Bis 12.348 Euro zu versteuerndem Einkommen fällt 2026 nichts an, dann steigt der Satz von 14 auf 42 Prozent ab 69.879 Euro und 45 Prozent ab 277.826 Euro, immer nur auf den Teil über der jeweiligen Grenze.",
+          "Lohnsteuer ist nur die Vorauszahlung der Angestellten; Selbstständige zahlen vierteljährlich voraus, abgerechnet wird mit der Erklärung bis 31. Juli 2026, mit Berater bis 1. März 2027.",
+          "Pflicht ist die Erklärung bei Nebeneinkünften über 410 Euro, Lohnersatzleistungen, Steuerklasse 3 und 5, Freibeträgen oder mehreren Arbeitgebern.",
+          "2026 bringen 38 Cent Entfernungspauschale ab dem ersten Kilometer, 259 Euro Kindergeld, 9.756 Euro Kinderfreibetrag und die Aktivrente Entlastung; freiwillige Erklärer bekommen im Schnitt 1.172 Euro zurück."
+        ],
+        "quellen": [
+          "§§ 1, 2, 32a EStG",
+          "§ 46 EStG (Pflichtveranlagung)",
+          "§ 149 AO (Fristen)",
+          "Beitrag Einkommensteuer"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist die Einkommensteuer und wer muss sie zahlen?",
+          "status": "freigegeben",
+          "frage": "Was ist der Unterschied zwischen Brutto und zu versteuerndem Einkommen?",
+          "antwort": "Vom Brutto gehen Werbungskosten, Sozialbeiträge als Vorsorgeaufwendungen, Sonderausgaben, außergewöhnliche Belastungen und Freibeträge ab; was bleibt, ist das zu versteuernde Einkommen, auf das der Tarif angewendet wird. Bei 50.000 Euro brutto liegt es für Angestellte meist um 40.000 Euro.",
+          "quellen": [
+            "§ 2 Abs. 1 bis 5 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch sind die Steuersätze 2026?",
+          "status": "freigegeben",
+          "frage": "Was ist der Unterschied zwischen Grenzsteuersatz und Durchschnittssteuersatz?",
+          "antwort": "Der Grenzsteuersatz ist der Satz auf den nächsten verdienten Euro, bei 40.000 Euro zu versteuerndem Einkommen rund 34 Prozent; der Durchschnittssatz ist die gesamte Steuer geteilt durch das Einkommen, dann etwa 19 Prozent. Für die Frage, was eine Gehaltserhöhung oder ein Abzugsposten bringt, zählt der Grenzsteuersatz.",
+          "quellen": [
+            "§ 32a EStG",
+            "Beitrag, Tariftabelle"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie berechnet sich die Einkommensteuer genau?",
+          "status": "freigegeben",
+          "frage": "Wie viel Steuer zahle ich bei 30.000 Euro zu versteuerndem Einkommen?",
+          "antwort": "2026 rund 4.230 Euro, das sind 14,1 Prozent im Durchschnitt, 86 Euro weniger als 2025 durch die Tarifverschiebung. Der Grenzsteuersatz in dieser Höhe liegt bei etwa 30 Prozent; Kirchensteuer und Soli kommen bei diesem Einkommen nicht dazu.",
+          "quellen": [
+            "§ 32a Abs. 1 EStG 2026",
+            "Beitrag, Abschnitt Berechnung"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wann müssen Sie eine Steuererklärung abgeben?",
+          "status": "freigegeben",
+          "frage": "Ich vermiete eine Wohnung mit 300 Euro Überschuss im Jahr. Muss ich abgeben?",
+          "antwort": "Als Arbeitnehmer nur, wenn die Nebeneinkünfte über 410 Euro liegen; bei 300 Euro Überschuss nach Abzug von Zinsen, Abschreibung und Nebenkosten sind Sie nicht verpflichtet. Die Einkünfte sind trotzdem steuerpflichtig, und ab dem 411. Euro wird die Erklärung Pflicht.",
+          "quellen": [
+            "§ 46 Abs. 2 Nr. 1 EStG",
+            "§ 46 Abs. 3 EStG (Härteausgleich)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "einkommensteuer",
+        "grundfreibetrag",
+        "spitzensteuersatz",
+        "kalte-progression",
+        "lohnsteuer"
+      ]
+    }
+  },
+  {
+    "slug": "kfz-steuer",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Kfz-Steuer berechnet sich für Pkw ab Erstzulassung Juli 2009 aus Hubraum und CO₂: 2 Euro je angefangene 100 Kubikzentimeter bei Benzin, 9,50 Euro bei Diesel, plus 2 bis 4 Euro je Gramm CO₂ über 95 Gramm je Kilometer, progressiv gestaffelt.",
+          "Ein Benziner mit 1.500 Kubikzentimetern und 130 Gramm zahlt 30 Euro Hubraum plus 73 Euro CO₂, rund 103 Euro im Jahr.",
+          "Elektroautos mit Erstzulassung bis Ende 2030 bleiben bis Ende 2035 steuerfrei, auch beim Gebrauchtkauf; danach gilt die halbe Gewichtssteuer.",
+          "Schwerbehinderte mit Merkzeichen H, Bl oder aG sind befreit, mit G oder Gl gibt es 50 Prozent gegen Verzicht auf die Freifahrt; Oldtimer mit H-Kennzeichen zahlen pauschal 191,73 Euro.",
+          "Ab 2026 zieht das Hauptzollamt die Steuer nur noch einmal im Jahr per Lastschrift ein; Raten mit Aufschlag sind abgeschafft."
+        ],
+        "quellen": [
+          "§§ 3d, 9 KraftStG",
+          "Beitrag Kfz-Steuer",
+          "Bundestagsbeschluss vom 4. Dezember 2025 (Verlängerung E-Auto-Befreiung)"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie wird die Kfz-Steuer 2026 berechnet?",
+          "status": "freigegeben",
+          "frage": "Mein Diesel hat 1.968 Kubikzentimeter und 140 Gramm CO₂. Was zahle ich?",
+          "antwort": "Hubraum: 20 angefangene 100er mal 9,50 Euro sind 190 Euro. CO₂: 84 Euro für die ersten 40 Gramm über 95 plus 5 Gramm mal 2,50 Euro sind 96,50 Euro. Zusammen rund 286 Euro im Jahr, sofern das Auto ab 2021 zugelassen ist; ältere Fahrzeuge zahlen die flache CO₂-Komponente von 2 Euro je Gramm.",
+          "quellen": [
+            "§ 9 Abs. 1 Nr. 2b KraftStG",
+            "Beitrag, CO₂-Tabelle"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Kfz-Steuer für Elektrofahrzeuge 2026",
+          "status": "freigegeben",
+          "frage": "Ich kaufe ein gebrauchtes E-Auto von 2022. Wie lange ist es steuerfrei?",
+          "antwort": "Bis Ende 2035, weil die Befreiung an der Erstzulassung hängt und mit dem Halterwechsel übergeht. Sie gilt für alle reinen Elektroautos, die bis zum 31. Dezember 2030 erstmals zugelassen werden; Plug-in-Hybride zahlen regulär nach Hubraum und CO₂.",
+          "quellen": [
+            "§ 3d KraftStG in der Fassung des Beschlusses vom 4. Dezember 2025"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Steuerermäßigungen für Menschen mit Schwerbehinderung",
+          "status": "freigegeben",
+          "frage": "Ich habe Merkzeichen G. Lohnt sich die Ermäßigung oder die Freifahrt?",
+          "antwort": "Das hängt von Ihrer Steuer ab: Die 50-Prozent-Ermäßigung bringt bei 200 Euro Kfz-Steuer 100 Euro im Jahr, die Wertmarke für den Nahverkehr kostet 91 Euro und spart alle Tickets. Wer regelmäßig Bus und Bahn nutzt, fährt mit der Wertmarke besser; wer nur Auto fährt, nimmt die Ermäßigung beim Hauptzollamt mit Formular 3809.",
+          "quellen": [
+            "§ 3a KraftStG",
+            "§ 228 SGB IX (Wertmarke)"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Neue Zahlungsregelung und Fälligkeit",
+          "status": "freigegeben",
+          "frage": "Ich habe bisher vierteljährlich gezahlt. Was ändert sich für mich 2026?",
+          "antwort": "Das Hauptzollamt stellt Ihren Ratenplan automatisch auf eine Jahreszahlung um und schreibt Ihnen Anfang 2026 den neuen Termin; er richtet sich nach dem Zulassungsdatum. Der bisherige Aufschlag von 6 Prozent entfällt, dafür wird der volle Jahresbetrag auf einmal abgebucht.",
+          "quellen": [
+            "§ 11 KraftStG",
+            "Beitrag, Abschnitt Neue Zahlungsregelung"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kfz-steuer",
+        "co2-komponente",
+        "h-kennzeichen",
+        "kasko"
+      ]
+    }
+  }
+]

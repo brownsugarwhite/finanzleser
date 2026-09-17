@@ -1,0 +1,899 @@
+[
+  {
+    "slug": "entlastungsbetrag-alleinerziehende",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Alleinerziehende bekommen 2026 einen Entlastungsbetrag von 4.260 Euro für das erste und 240 Euro für jedes weitere Kind; er senkt das zu versteuernde Einkommen, bei 30 Prozent Steuersatz sind das rund 1.278 Euro Ersparnis im Jahr.",
+          "Voraussetzungen: kein Splitting, ein Kind mit Kindergeldanspruch im Haushalt gemeldet und keine andere volljährige Person in der Wohnung; volljährige Kinder mit Kindergeld sind unschädlich, ein Partner oder eine Mitbewohnerin nicht.",
+          "Genutzt wird er monatlich über die Steuerklasse II oder nachträglich in der Anlage Kind; die 240 Euro je weiterem Kind gibt es nur per Lohnsteuerermäßigung oder mit der Steuererklärung.",
+          "Er wird monatsweise gewährt: Heirat, Einzug eines Partners oder Auszug des Kindes kürzen ihn um ein Zwölftel je Monat, und jede Änderung ist dem Finanzamt zu melden.",
+          "Aufgenommene Geflüchtete aus der Ukraine schaden bis Ende 2026 nicht."
+        ],
+        "quellen": [
+          "§ 24b EStG",
+          "§ 39a Abs. 1 Nr. 4a EStG",
+          "Beitrag Entlastungsbetrag Alleinerziehende"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche Voraussetzungen müssen Sie erfüllen?",
+          "status": "freigegeben",
+          "frage": "Mein 23-jähriger Sohn zieht nach dem Studium wieder bei mir ein. Verliere ich den Entlastungsbetrag?",
+          "antwort": "Solange Sie für ihn Kindergeld bekommen, nicht: Kinder mit Kindergeldanspruch gelten nicht als schädliche Haushaltsgemeinschaft. Endet das Kindergeld, zählt er als andere volljährige Person, und der Entlastungsbetrag entfällt ab dem Folgemonat. Sie können die Vermutung widerlegen, wenn er nachweislich nicht mitwirtschaftet, etwa mit eigener Miete und getrennter Haushaltskasse.",
+          "quellen": [
+            "§ 24b Abs. 1 und 3 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie nutzen Sie den Entlastungsbetrag Alleinerziehende?",
+          "status": "freigegeben",
+          "frage": "Ich habe zwei Kinder. Bekomme ich in Steuerklasse II den vollen Betrag?",
+          "antwort": "Nein, die Steuerklasse II berücksichtigt nur die 4.260 Euro für das erste Kind. Die 240 Euro für das zweite lassen Sie als Freibetrag in die elektronischen Lohnsteuerabzugsmerkmale eintragen, mit dem Antrag auf Lohnsteuerermäßigung, oder holen sie mit der Steuererklärung zurück; bei 30 Prozent Steuersatz sind das rund 72 Euro im Jahr.",
+          "quellen": [
+            "§ 24b Abs. 2 Satz 2 EStG",
+            "§ 39a Abs. 1 Nr. 4a EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wann endet der Anspruch auf den Entlastungsbetrag Alleinerziehende?",
+          "status": "freigegeben",
+          "frage": "Ich heirate im August. Was passiert mit dem Entlastungsbetrag?",
+          "antwort": "Er gilt für Januar bis Juli, sieben Zwölftel von 4.260 Euro, also 2.485 Euro; ab dem Heiratsmonat entfällt er. Der Bundesfinanzhof hat 2021 entschieden, dass Sie ihn für die Monate vor der Heirat auch dann behalten, wenn Sie für das Jahr zusammen veranlagt werden. Das Splitting gilt rückwirkend fürs ganze Jahr und gleicht den Verlust meist mehr als aus.",
+          "quellen": [
+            "§ 24b Abs. 4 EStG",
+            "BFH III R 17/20 (28.10.2021)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie viel Steuern sparen Sie wirklich?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 28.000 Euro zu versteuerndes Einkommen. Was bringt mir der Entlastungsbetrag konkret?",
+          "antwort": "Bei diesem Einkommen liegt Ihr Grenzsteuersatz bei rund 28 Prozent; 4.260 Euro weniger zu versteuern spart etwa 1.170 Euro Einkommensteuer im Jahr, knapp 100 Euro im Monat. Dazu kommen unabhängig davon 259 Euro Kindergeld je Kind; ob der Kinderfreibetrag mehr bringt, prüft das Finanzamt automatisch, bei Ihrem Einkommen bleibt es beim Kindergeld.",
+          "quellen": [
+            "§ 32a EStG (Tarif 2026)",
+            "Beitrag, Abschnitt Steuerersparnis"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "entlastungsbetrag-alleinerziehende",
+        "haushaltsgemeinschaft",
+        "steuerklasse",
+        "kindergeld"
+      ]
+    }
+  },
+  {
+    "slug": "steuerberater-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Steuerberaterkosten sind seit 2006 nur absetzbar, soweit sie der Ermittlung von Einkünften dienen: Anlage N, V, S, G, R, die EÜR, Buchführung, dazu Steuersoftware, Fachliteratur, Lohnsteuerhilfeverein und Fahrten zum Berater.",
+          "Privat und nicht absetzbar ist alles rund um Mantelbogen, Anlage Kind, Sonderausgaben, außergewöhnliche Belastungen, haushaltsnahe Dienstleistungen sowie Erbschaft- und Schenkungsteuer.",
+          "Gemischte Kosten werden aufgeteilt; bis 100 Euro im Jahr folgt das Finanzamt Ihrer Zuordnung, bis 200 Euro dürfen 100 Euro, darüber pauschal die Hälfte als Werbungskosten oder Betriebsausgaben abgezogen werden.",
+          "Angestellte spüren den Abzug erst, wenn alle Werbungskosten zusammen den Pauschbetrag von 1.230 Euro überschreiten, Rentner schon ab 102 Euro; Selbstständige buchen jede berufliche Beraterrechnung als Betriebsausgabe.",
+          "Eine nach Leistungen aufgeteilte Rechnung ist die beste Vorbereitung; Belege bis zur Bestandskraft des Bescheids aufheben."
+        ],
+        "quellen": [
+          "§ 9 Abs. 1, § 4 Abs. 4 EStG",
+          "§ 12 Nr. 1 EStG",
+          "BMF-Schreiben vom 21.12.2007 zu Steuerberatungskosten",
+          "Beitrag Steuerberater absetzen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Welche Steuerberater-Kosten kann ich 2026 absetzen?",
+          "status": "freigegeben",
+          "frage": "Ich nutze ein Steuerprogramm für 35 Euro. Wo trage ich das ein?",
+          "antwort": "Als Werbungskosten in der Anlage N: Unter 100 Euro dürfen Sie den Betrag voll der Einkunftsart Ihrer Wahl zuordnen, ohne Aufteilung. Er wirkt aber nur, wenn Ihre gesamten Werbungskosten über 1.230 Euro liegen; sonst ist er im Pauschbetrag schon enthalten.",
+          "quellen": [
+            "BMF-Schreiben vom 21.12.2007 (Vereinfachungsregel 100 Euro)",
+            "§ 9a Satz 1 Nr. 1a EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "So funktioniert die Aufteilung bei gemischten Kosten",
+          "status": "freigegeben",
+          "frage": "Meine Beraterrechnung über 600 Euro umfasst Anlage N und Anlage Kind. Wie teile ich auf?",
+          "antwort": "Am besten lässt der Berater die Rechnung nach Leistungen aufteilen; dann setzen Sie den Anteil für die Anlage N in voller Höhe an. Ohne Aufteilung dürfen Sie pauschal die Hälfte, 300 Euro, als Werbungskosten abziehen. Beide Wege akzeptiert das Finanzamt, die Aufteilung ist meist günstiger, weil der Mantelbogen-Anteil klein ist.",
+          "quellen": [
+            "BMF-Schreiben vom 21.12.2007 zu Steuerberatungskosten"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Besonderheiten bei verschiedenen Einkunftsarten",
+          "status": "freigegeben",
+          "frage": "Ich bin Rentnerin. Lohnt sich der Steuerberater für die Anlage R steuerlich?",
+          "antwort": "Der Abzug schon, weil der Werbungskosten-Pauschbetrag für Renten nur 102 Euro beträgt: Jeder Euro Beraterhonorar für die Anlage R darüber mindert Ihr Einkommen. Ob der Berater sich insgesamt rechnet, hängt davon ab, ob er mehr herausholt, als er kostet; bei Rente und Kapitalerträgen genügt oft ein Lohnsteuerhilfeverein für rund 150 Euro Jahresbeitrag.",
+          "quellen": [
+            "§ 9a Satz 1 Nr. 3 EStG",
+            "Beitrag, Abschnitt Einkunftsarten"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Praxistipps: So vermeiden Sie häufige Fehler",
+          "status": "freigegeben",
+          "frage": "Wie lange muss ich die Beraterrechnung aufheben?",
+          "antwort": "Mindestens bis der Steuerbescheid bestandskräftig ist, also einen Monat nach Zugang, besser vier Jahre, weil das Finanzamt innerhalb der Festsetzungsfrist nachfragen und ändern kann. Selbstständige heben Rechnungen als Buchungsbelege zehn Jahre auf.",
+          "quellen": [
+            "§ 169 Abs. 2 AO",
+            "§ 147 Abs. 3 AO"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "steuerberatungskosten",
+        "werbungskosten",
+        "betriebsausgaben",
+        "lohnsteuerhilfeverein"
+      ]
+    }
+  },
+  {
+    "slug": "arbeitnehmer-sparzulage",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Arbeitnehmer-Sparzulage ist der staatliche Zuschuss zu vermögenswirksamen Leistungen: 20 Prozent auf bis zu 400 Euro im Jahr in Aktienfonds oder ETF-Sparplänen und 9 Prozent auf bis zu 470 Euro fürs Bausparen oder die Tilgung eines Baukredits, zusammen bis 123 Euro.",
+          "Anspruch haben Angestellte, Beamte, Richter und Soldaten mit höchstens 40.000 Euro zu versteuerndem Einkommen, Verheiratete 80.000 Euro; Kinderfreibeträge von 9.756 Euro je Kind senken diesen Wert, sodass Familien auch mit gut 100.000 Euro brutto förderberechtigt sein können.",
+          "Der Arbeitgeber zahlt zwischen 6,65 und 40 Euro im Monat direkt in den Vertrag; wer keine VL bekommt, lässt Gehalt umwandeln, denn eigene Überweisungen auf den Vertrag zählen nicht.",
+          "Beantragt wird sie jedes Jahr mit der Steuererklärung per Kreuz im Hauptvordruck, rückwirkend bis vier Jahre; der Anbieter meldet die Daten elektronisch ans Finanzamt.",
+          "Die Sperrfrist beträgt sieben Jahre nach der 6+1-Regel, erst danach fließt die Zulage auf den Vertrag; vorzeitige Kündigung kostet sie, außer bei Tod, Heirat, längerer Arbeitslosigkeit oder Selbstständigkeit."
+        ],
+        "quellen": [
+          "§§ 2, 4, 13, 14 Fünftes Vermögensbildungsgesetz",
+          "Beitrag Arbeitnehmer-Sparzulage"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer hat Anspruch auf die Arbeitnehmer-Sparzulage 2026?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 45.000 Euro brutto. Bin ich noch förderberechtigt?",
+          "antwort": "Vermutlich ja: Vom Brutto gehen Vorsorgeaufwendungen, Werbungskosten und Sonderausgaben ab, sodass Ihr zu versteuerndes Einkommen bei etwa 35.000 bis 37.000 Euro liegt, unter der Grenze von 40.000 Euro. Den genauen Wert finden Sie im letzten Steuerbescheid unter „zu versteuerndes Einkommen“.",
+          "quellen": [
+            "§ 13 Abs. 1 5. VermBG"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist die Arbeitnehmer-Sparzulage 2026?",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber zahlt 40 Euro VL. Wie hole ich die volle Förderung?",
+          "antwort": "40 Euro sind 480 Euro im Jahr; die volle Förderung braucht 870 Euro, 400 in einen Fondssparplan und 470 ins Bausparen. Lassen Sie weitere 33 Euro im Monat aus dem Nettolohn über den Arbeitgeber in einen zweiten Vertrag zahlen; die Zulage wächst dann von 80 oder 43 Euro auf 123 Euro im Jahr.",
+          "quellen": [
+            "§ 13 Abs. 2 5. VermBG",
+            "Beitrag, Tabelle Fördersätze"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie beantrage ich die Arbeitnehmer-Sparzulage?",
+          "status": "freigegeben",
+          "frage": "Ich habe die Sparzulage die letzten Jahre nie beantragt. Ist das Geld weg?",
+          "antwort": "Nein, Sie können sie rückwirkend beantragen: für das Sparjahr 2022 bis Ende 2026, für 2023 bis Ende 2027. Reichen Sie für jedes Jahr eine Steuererklärung mit dem Kreuz zur Arbeitnehmer-Sparzulage nach; die elektronischen Bescheinigungen Ihres Anbieters liegen dem Finanzamt meist schon vor.",
+          "quellen": [
+            "§ 14 Abs. 4 5. VermBG",
+            "§ 169 AO"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Sperrfrist und Auszahlung",
+          "status": "freigegeben",
+          "frage": "Ich kündige den VL-Vertrag nach vier Jahren wegen eines Umzugs. Verliere ich alles?",
+          "antwort": "Sie verlieren die Sparzulage für die bisherigen Jahre, weil ein Umzug kein Ausnahmegrund ist; unschädlich sind nur Tod, Erwerbsunfähigkeit, Arbeitslosigkeit über ein Jahr, Heirat nach zwei Jahren Laufzeit, Aufnahme einer Selbstständigkeit und beim Bausparen der Kauf einer eigenen Wohnung. Das angesparte Guthaben samt Zinsen bleibt Ihnen.",
+          "quellen": [
+            "§ 4 Abs. 4 5. VermBG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "arbeitnehmer-sparzulage",
+        "vermoegenswirksame-leistungen",
+        "kinderfreibetrag",
+        "etf"
+      ]
+    }
+  },
+  {
+    "slug": "steuertabelle",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Steuertabelle zeigt, wie viel Einkommensteuer auf ein zu versteuerndes Einkommen entfällt: 2026 nichts bis 12.348 Euro, dann progressiv von 14 auf 42 Prozent bis 69.878 Euro, 42 Prozent bis 277.825 Euro und darüber 45 Prozent.",
+          "Bei 60.000 Euro zahlen Ledige 14.233 Euro, bei 80.000 Euro 22.464 Euro, bei 100.000 Euro 30.864 Euro plus 1.251 Euro Solidaritätszuschlag; der Durchschnittssatz liegt weit unter dem Grenzsteuersatz.",
+          "Verheiratete nutzen die Splittingtabelle: Einkommen halbieren, Steuer berechnen, verdoppeln; bei 80.000 Euro spart das gegenüber einem Single rund 8.000 Euro.",
+          "Solidaritätszuschlag fällt erst über 20.350 Euro Einkommensteuer an, bei Paaren 40.700 Euro, mit Milderungszone; auf Kapitalerträge bleibt er ab dem ersten Euro.",
+          "Das zu versteuernde Einkommen liegt rund 20 Prozent unter dem Brutto, nach Vorsorgeaufwendungen, Werbungskosten ab 1.230 Euro, Sonderausgaben und Kinderfreibeträgen von 9.756 Euro je Kind."
+        ],
+        "quellen": [
+          "§ 32a EStG (Tarif 2026)",
+          "§ 3 SolzG 1995",
+          "Beitrag Steuertabelle"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch sind die Grenzwerte und Steuersätze 2026?",
+          "status": "freigegeben",
+          "frage": "Ich rutsche mit einer Gehaltserhöhung über 69.879 Euro. Zahle ich dann auf alles 42 Prozent?",
+          "antwort": "Nein, nur auf den Teil darüber. Der Spitzensteuersatz ist ein Grenzsteuersatz: Von jedem Euro über 69.878 Euro gehen 42 Cent ans Finanzamt, alles darunter bleibt wie bisher besteuert. Bei genau 69.879 Euro liegt Ihr Durchschnittssatz bei rund 26 Prozent. Eine Gehaltserhöhung lohnt sich immer.",
+          "quellen": [
+            "§ 32a Abs. 1 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Steuerbelastung entsteht bei verschiedenen Einkommen?",
+          "status": "freigegeben",
+          "frage": "Wie viel Einkommensteuer zahle ich 2026 bei 50.000 Euro?",
+          "antwort": "Als Ledige rund 10.548 Euro, ein Durchschnittssatz von 21 Prozent; Solidaritätszuschlag fällt nicht an, weil die Steuer unter 20.350 Euro liegt. Ihr Grenzsteuersatz beträgt etwa 35 Prozent: Von 1.000 Euro Gehaltserhöhung bleiben vor Sozialabgaben rund 650 Euro.",
+          "quellen": [
+            "§ 32a Abs. 1 EStG (Tarif 2026)",
+            "Beitrag, Tabelle Steuerbelastung"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wer muss Solidaritätszuschlag zahlen?",
+          "status": "freigegeben",
+          "frage": "Ab welchem Gehalt zahle ich als Single wieder Soli?",
+          "antwort": "Die Freigrenze von 20.350 Euro Einkommensteuer entspricht 2026 einem zu versteuernden Einkommen von rund 75.000 Euro, also etwa 93.000 Euro brutto für Angestellte. Darüber steigt der Soli in der Milderungszone langsam an und erreicht die vollen 5,5 Prozent erst bei rund 117.000 Euro zu versteuerndem Einkommen.",
+          "quellen": [
+            "§§ 3, 4 SolzG 1995 in der Fassung ab 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Wie berechne ich mein zu versteuerndes Einkommen?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 55.000 Euro brutto. Wie komme ich auf mein zu versteuerndes Einkommen?",
+          "antwort": "Ziehen Sie die abziehbaren Vorsorgeaufwendungen ab, also Renten-, Kranken- und Pflegebeiträge von rund 8.000 Euro, dann Werbungskosten, mindestens 1.230 Euro, und die Sonderausgabenpauschale von 36 Euro. Sie landen bei etwa 45.000 Euro; mit Kindern kommen die Freibeträge dazu, sofern sie günstiger sind als das Kindergeld. Genau steht es im Steuerbescheid oder im Einkommensteuerrechner.",
+          "quellen": [
+            "§ 2 Abs. 5 EStG",
+            "§ 10 Abs. 1 Nr. 2 und 3 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "grenzsteuersatz",
+        "zu-versteuerndes-einkommen",
+        "spitzensteuersatz",
+        "splitting",
+        "solidaritaetszuschlag"
+      ]
+    }
+  },
+  {
+    "slug": "abschreibung-steuererklaerung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Abschreibung, amtlich Absetzung für Abnutzung, verteilt die Anschaffungskosten eines Wirtschaftsguts über seine Nutzungsdauer aus der AfA-Tabelle: Pkw sechs Jahre, Büromöbel 13, Smartphone fünf; Computer und Software dürfen seit 2021 im Kaufjahr voll abgesetzt werden.",
+          "Geringwertige Wirtschaftsgüter bis 800 Euro netto werden sofort abgeschrieben, bis 250 Euro ohne Verzeichnis; alternativ ein Sammelposten für 250 bis 1.000 Euro über fünf Jahre.",
+          "Für Anschaffungen zwischen Juli 2025 und Ende 2027 gilt die degressive Abschreibung mit bis zu 30 Prozent vom Restwert, kombinierbar mit 40 Prozent Sonderabschreibung und dem Investitionsabzugsbetrag von 50 Prozent im Voraus.",
+          "Gebäude: 2 Prozent für Wohnhäuser ab Baujahr 1925, 3 Prozent bei Fertigstellung ab 2023, 5 Prozent degressiv bei Baubeginn zwischen Oktober 2023 und September 2029; das Grundstück wird nie abgeschrieben.",
+          "Bei unterjährigem Kauf zählt jeder Monat anteilig; die Methode wird im Anschaffungsjahr gewählt, Selbstständige führen das Anlageverzeichnis in der Anlage AVEÜR, Angestellte tragen Arbeitsmittel in der Anlage N ein."
+        ],
+        "quellen": [
+          "§ 7 Abs. 1, 2, 4, 5a EStG",
+          "§ 6 Abs. 2 und 2a EStG",
+          "§ 7g EStG",
+          "AfA-Tabelle für allgemein verwendbare Anlagegüter",
+          "Beitrag Abschreibungen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "GWG: Sofortabschreibung bis 800 Euro",
+          "status": "freigegeben",
+          "frage": "Ich kaufe einen Schreibtisch für 700 Euro und einen Stuhl für 300 Euro. Kann ich beides sofort absetzen?",
+          "antwort": "Ja, beides, weil jedes Möbel für sich unter 800 Euro netto liegt und selbstständig nutzbar ist; die Grenze gilt je Wirtschaftsgut, nicht für die Summe. Der Stuhl über 250 Euro kommt ins GWG-Verzeichnis, bei Angestellten genügt die Auflistung in der Anlage N. Voraussetzung ist die berufliche Nutzung, bei gemischter Nutzung nur der berufliche Anteil.",
+          "quellen": [
+            "§ 6 Abs. 2 EStG",
+            "§ 9 Abs. 1 Nr. 6 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Lineare vs. degressive Abschreibung: Welche passt zu dir?",
+          "status": "freigegeben",
+          "frage": "Wann sollte ich auf die degressive Abschreibung verzichten?",
+          "antwort": "Wenn Ihr Gewinn in den ersten Jahren niedrig ist, etwa in der Gründungsphase, und Sie später höhere Steuersätze erwarten: Die degressive Methode verlagert Aufwand nach vorn, wo er wenig Steuer spart. Sie dürfen später von degressiv zu linear wechseln, nie umgekehrt; die Wahl treffen Sie im Anschaffungsjahr.",
+          "quellen": [
+            "§ 7 Abs. 2 und 3 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Immobilien und Gebäude richtig abschreiben",
+          "status": "freigegeben",
+          "frage": "Ich habe 2026 eine vermietete Wohnung von 1990 für 300.000 Euro gekauft. Wie viel AfA bekomme ich?",
+          "antwort": "2 Prozent des Gebäudeanteils im Jahr. Bei einem Bodenanteil von etwa 30 Prozent sind das 210.000 Euro Gebäudewert und 4.200 Euro AfA jährlich, im Kaufjahr anteilig ab dem Monat des Übergangs. Den Bodenanteil ermitteln Sie mit der Arbeitshilfe des Finanzministeriums oder per Gutachten; Notar, Grundbuch und Grunderwerbsteuer erhöhen die Anschaffungskosten und damit die AfA.",
+          "quellen": [
+            "§ 7 Abs. 4 Satz 1 Nr. 2a EStG",
+            "BMF-Arbeitshilfe zur Kaufpreisaufteilung"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Strategische Steuerplanung mit Abschreibungen",
+          "status": "freigegeben",
+          "frage": "Ich plane 2027 eine Maschine für 80.000 Euro. Wie viel kann ich vorab abziehen?",
+          "antwort": "Schon 2026 den Investitionsabzugsbetrag von 50 Prozent, also 40.000 Euro, wenn Ihr Gewinn unter 200.000 Euro liegt. Im Kaufjahr kommen die 40 Prozent Sonderabschreibung und die degressive AfA auf die verbleibenden 40.000 Euro dazu. Bleibt die Investition binnen drei Jahren aus, löst das Finanzamt den Abzug rückwirkend mit Zinsen auf.",
+          "quellen": [
+            "§ 7g Abs. 1, 3 und 5 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "abschreibung",
+        "geringwertige-wirtschaftsgueter",
+        "investitionsabzugsbetrag",
+        "nutzungsdauer",
+        "betriebsausgaben"
+      ]
+    }
+  },
+  {
+    "slug": "abfindungen-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Eine Abfindung ist voll einkommensteuerpflichtig, aber sozialversicherungsfrei; nur freiwillig gesetzlich Versicherte zahlen darauf Kranken- und Pflegebeiträge.",
+          "Die Fünftelregelung mildert die Progression: Ein Fünftel der Abfindung wird zum übrigen Einkommen gerechnet, die Mehrsteuer mit fünf multipliziert; Voraussetzung ist, dass die Abfindung in einem Jahr zusammengeballt fließt.",
+          "Seit 2025 wendet der Arbeitgeber sie nicht mehr im Lohnsteuerabzug an: Bei 75.000 Euro werden zunächst über 20.000 Euro Lohnsteuer einbehalten, die Ersparnis kommt erst mit dem Steuerbescheid.",
+          "Sparen lässt sich mit Einzahlungen in die Basisrente bis 30.826 Euro, in die betriebliche Altersvorsorge bis 8.112 Euro steuerfrei, mit einem Antrag auf Kirchensteuer-Teilerlass bis 50 Prozent und mit der Auszahlung im Januar des Folgejahres, wenn dann weniger Einkommen anfällt.",
+          "Alle Maßnahmen müssen bis 31. Dezember des Auszahlungsjahres umgesetzt sein; die Steuererklärung für 2026 ist bis 31. Juli 2027 fällig."
+        ],
+        "quellen": [
+          "§ 34 Abs. 1 und 2 EStG",
+          "§ 24 Nr. 1 EStG",
+          "§ 39b Abs. 3 EStG in der Fassung des Wachstumschancengesetzes",
+          "§ 14 SGB IV",
+          "Beitrag Abfindungen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was sind Abfindungen und wann entstehen sie?",
+          "status": "freigegeben",
+          "frage": "Ich bin freiwillig gesetzlich krankenversichert. Was zahle ich auf die Abfindung?",
+          "antwort": "Kranken- und Pflegebeiträge, weil die Abfindung bei freiwillig Versicherten als Einnahme zählt: Sie wird auf bis zu zwölf Monate verteilt und bis zur Beitragsbemessungsgrenze von 5.812,50 Euro im Monat verbeitragt. Bei 40.000 Euro und keinem anderen Einkommen sind das rund 700 Euro monatlich für ein Jahr. Pflichtversicherte und privat Versicherte zahlen nichts.",
+          "quellen": [
+            "§ 240 SGB V",
+            "Beitragsverfahrensgrundsätze Selbstzahler des GKV-Spitzenverbands"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Fünftelregelung: So funktioniert die Steueroptimierung bei Abfindungen",
+          "status": "freigegeben",
+          "frage": "Ich bekomme 60.000 Euro Abfindung und habe 50.000 Euro übriges Einkommen. Was spart die Fünftelregelung?",
+          "antwort": "Rund 2.200 Euro Einkommensteuer, weil Ihr Einkommen bereits in der oberen Progressionszone liegt; der Effekt wächst, je niedriger das übrige Einkommen ist. Fließt die Abfindung im Januar eines Jahres ohne weiteres Gehalt, spart die Regelung bei gleicher Summe über 10.000 Euro. Deshalb lohnt sich oft die Verschiebung der Auszahlung ins Folgejahr.",
+          "quellen": [
+            "§ 34 Abs. 1 EStG",
+            "§ 32a EStG (Tarif 2026)"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie können Sie Steuern bei Abfindungen sparen?",
+          "status": "freigegeben",
+          "frage": "Lohnt es sich, einen Teil der Abfindung in die Basisrente zu stecken?",
+          "antwort": "Bei hohem Grenzsteuersatz ja: Bis 30.826 Euro sind 2026 als Sonderausgaben abziehbar, abzüglich Ihrer Rentenbeiträge des Jahres. Bei 42 Prozent spart jeder Euro 42 Cent Steuer. Das Geld ist aber bis zur Rente gebunden, nicht kündbar und wird später nachgelagert besteuert. Die Einzahlung muss bis 31. Dezember auf dem Vertrag sein.",
+          "quellen": [
+            "§ 10 Abs. 1 Nr. 2b und Abs. 3 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Was ändert sich bei Abfindungen 2026?",
+          "status": "freigegeben",
+          "frage": "Kann ich die zu viel einbehaltene Lohnsteuer schneller zurückbekommen?",
+          "antwort": "Nur über die Steuererklärung; ein Freibetrag in den Lohnsteuerabzugsmerkmalen hilft nicht, weil die Fünftelregelung dort nicht abgebildet wird. Geben Sie die Erklärung gleich im Januar des Folgejahres elektronisch ab, dann kommt der Bescheid meist nach zwei bis drei Monaten. Planen Sie die Liquidität so, dass Sie die Wartezeit überbrücken.",
+          "quellen": [
+            "§ 39b Abs. 3 EStG in der Fassung des Wachstumschancengesetzes",
+            "Beitrag, Abschnitt Änderungen 2026"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "fuenftelregelung",
+        "abfindung",
+        "basisrente",
+        "betriebliche-altersvorsorge"
+      ]
+    }
+  },
+  {
+    "slug": "altersvorsorgeaufwendungen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Altersvorsorgeaufwendungen sind Beiträge zur Basisversorgung: gesetzliche Rente, Versorgungswerke, Alterskassen und Basisrente; seit 2023 zu 100 Prozent als Sonderausgaben abziehbar, 2026 bis 30.826 Euro, Verheiratete 61.652 Euro.",
+          "Der Höchstbetrag orientiert sich an der knappschaftlichen Rentenversicherung; Angestellte erreichen ihn mit Pflichtbeiträgen nie, maximal 18.860 Euro mit Arbeitgeberanteil, und der steuerfreie Arbeitgeberanteil wird wieder abgezogen.",
+          "Eingetragen wird alles in der Anlage Vorsorgeaufwand, Basisrentenbeiträge in Zeile 8; die Rentenbeiträge stehen in der Lohnsteuerbescheinigung und sind in ELSTER vorausgefüllt.",
+          "Riester läuft getrennt mit bis zu 2.100 Euro Sonderausgaben, 175 Euro Grundzulage und 300 Euro je Kind; sonstige Vorsorgeaufwendungen wie Haftpflicht oder Berufsunfähigkeit bis 1.900 Euro sind meist durch Krankenkassenbeiträge ausgeschöpft.",
+          "Wer 2026 in Rente geht, versteuert 84 Prozent der Rente; der Vorteil entsteht, wenn der Steuersatz im Alter niedriger ist als heute."
+        ],
+        "quellen": [
+          "§ 10 Abs. 1 Nr. 2, Abs. 3 EStG",
+          "§ 10a EStG, §§ 84 bis 86 EStG (Riester)",
+          "§ 22 Nr. 1 Satz 3 EStG",
+          "Beitrag Altersvorsorgeaufwendungen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Höchstbeträge 2026: Wie viel können Sie steuerlich geltend machen?",
+          "status": "freigegeben",
+          "frage": "Ich bin angestellt mit 70.000 Euro brutto. Wie viel Spielraum habe ich für eine Basisrente?",
+          "antwort": "Ihre Rentenbeiträge betragen mit Arbeitgeberanteil 13.020 Euro. Vom Höchstbetrag von 30.826 Euro bleiben also 17.806 Euro für eine Basisrente. Der Arbeitgeberanteil von 6.510 Euro wird am Ende wieder abgezogen, das ändert am Spielraum nichts. Jeder eingezahlte Euro spart bei Ihrem Grenzsteuersatz von rund 40 Prozent 40 Cent.",
+          "quellen": [
+            "§ 10 Abs. 3 EStG",
+            "Beitragssatz Rentenversicherung 2026: 18,6 Prozent"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie setzen Sie Altersvorsorgeaufwendungen in der Steuererklärung ab?",
+          "status": "freigegeben",
+          "frage": "Muss ich die Rentenbeiträge selbst eintragen?",
+          "antwort": "Nein, die Daten der Lohnsteuerbescheinigung liegen dem Finanzamt elektronisch vor und sind in ELSTER vorausgefüllt; prüfen Sie nur, ob Arbeitnehmer- und Arbeitgeberanteil stimmen. Freiwillige Beiträge zur gesetzlichen Rente und Basisrentenbeiträge tragen Sie selbst ein; die Bescheinigung schickt der Anbieter bis Ende Februar, elektronisch geht sie ebenfalls ans Finanzamt.",
+          "quellen": [
+            "§ 10 Abs. 2a EStG",
+            "§ 41b EStG (Lohnsteuerbescheinigung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Rürup-Rente als flexible Ergänzung zur gesetzlichen Rente",
+          "status": "freigegeben",
+          "frage": "Ich bin selbstständig, 45, ohne Rentenversicherung. Wie viel Basisrente ist sinnvoll?",
+          "antwort": "Steuerlich bis 30.826 Euro, praktisch so viel, dass Ihr Grenzsteuersatz spürbar sinkt und Sie liquide bleiben: Bei 60.000 Euro Gewinn liegt er bei rund 39 Prozent, 10.000 Euro Beitrag sparen etwa 3.700 Euro Steuer. Das Kapital ist nicht kündbar, nur mit Hinterbliebenenschutz vererbbar und wird ab Rentenbeginn zu 84 Prozent und mehr besteuert. Vergleichen Sie mit freiwilligen Beiträgen zur gesetzlichen Rente.",
+          "quellen": [
+            "§ 10 Abs. 1 Nr. 2b EStG",
+            "§ 22 Nr. 1 Satz 3 EStG",
+            "§ 7 SGB VI (freiwillige Versicherung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Riester-Rente: Besondere Regelungen und Grenzen",
+          "status": "freigegeben",
+          "frage": "Lohnt sich Riester noch für mich mit zwei Kindern?",
+          "antwort": "Mit Kindern oft ja: 175 Euro Grundzulage plus 300 Euro je ab 2008 geborenem Kind, zusammen 775 Euro im Jahr, wenn Sie 4 Prozent des Vorjahresbruttos abzüglich Zulagen einzahlen, mindestens 60 Euro. Bei 30.000 Euro brutto zahlen Sie 425 Euro selbst und bekommen 775 Euro dazu. Die Günstigerprüfung entscheidet, ob der Sonderausgabenabzug bis 2.100 Euro mehr bringt; die Kosten des Vertrags bestimmen die Rendite.",
+          "quellen": [
+            "§§ 84, 85, 86 EStG",
+            "§ 10a EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "altersvorsorgeaufwendungen",
+        "basisrente",
+        "riester-rente",
+        "vorsorgeaufwendungen",
+        "besteuerungsanteil"
+      ]
+    }
+  },
+  {
+    "slug": "arbeitsmittel",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Arbeitsmittel sind Gegenstände, die Sie überwiegend beruflich nutzen: Computer, Smartphone, Schreibtisch, Werkzeug, Fachliteratur, Aktentasche, Berufskleidung, anteilig Telefon und Internet; sie zählen zu den Werbungskosten in der Anlage N.",
+          "Computer und Software dürfen seit 2021 unabhängig vom Preis im Kaufjahr voll abgesetzt werden; andere Arbeitsmittel bis 800 Euro netto, 952 Euro brutto, sofort, darüber verteilt über die Nutzungsdauer, ein Schreibtisch etwa über 13 Jahre.",
+          "Bei gemischter Nutzung setzen Sie den beruflichen Anteil an; ab 90 Prozent gilt das Arbeitsmittel als vollständig beruflich.",
+          "Bis 110 Euro im Jahr verlangen viele Finanzämter keine Belege; das ist Kulanz ohne Rechtsanspruch und gilt für alle Arbeitsmittel zusammen.",
+          "Steuer sparen Arbeitsmittel erst, wenn alle Werbungskosten über 1.230 Euro liegen; Pendler mit 15 Kilometern Arbeitsweg sind mit der Entfernungspauschale von 38 Cent schon darüber."
+        ],
+        "quellen": [
+          "§ 9 Abs. 1 Satz 3 Nr. 6 und 7 EStG",
+          "§ 9a EStG",
+          "BMF-Schreiben vom 22.02.2022 (Nutzungsdauer Computerhardware und Software)",
+          "Beitrag Arbeitsmittel"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Computer und technische Geräte: Neue Regelungen seit 2021",
+          "status": "freigegeben",
+          "frage": "Ich nutze meinen 1.500-Euro-Laptop zu 60 Prozent beruflich. Was kann ich absetzen?",
+          "antwort": "900 Euro, und zwar komplett im Kaufjahr, weil für Computer eine Nutzungsdauer von einem Jahr gilt. Den Anteil sollten Sie plausibel begründen, etwa mit Homeoffice-Tagen; ein Nutzungsprotokoll über einige Wochen hilft bei Nachfragen. Der private Anteil von 600 Euro bleibt außen vor.",
+          "quellen": [
+            "BMF-Schreiben vom 22.02.2022",
+            "§ 9 Abs. 1 Satz 3 Nr. 6 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Die 800-Euro-Grenze für Arbeitsmittel",
+          "status": "freigegeben",
+          "frage": "Mein neuer Bürostuhl kostet 1.100 Euro. Wie setze ich ihn ab?",
+          "antwort": "Über die Nutzungsdauer von 13 Jahren, also rund 85 Euro pro Jahr, im Kaufjahr anteilig nach Monaten; gekauft im Juli sind das 42 Euro. Die 800-Euro-Grenze gilt netto, also 952 Euro brutto; nur darunter wäre der Sofortabzug möglich. Ein ergonomischer Stuhl unter 952 Euro wäre steuerlich sofort wirksam.",
+          "quellen": [
+            "§ 9 Abs. 1 Satz 3 Nr. 7 EStG",
+            "AfA-Tabelle AV (Büromöbel 13 Jahre)"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Die 110-Euro-Nichtbeanstandungsgrenze nutzen",
+          "status": "freigegeben",
+          "frage": "Kann ich die 110 Euro einfach jedes Jahr ansetzen, auch ohne Ausgaben?",
+          "antwort": "Sie sollten es nicht: Es ist kein Pauschbetrag, sondern eine Nichtbeanstandungsgrenze. Das Finanzamt fragt meist nicht nach, darf es aber, und dann brauchen Sie Belege. Wer tatsächlich Fachliteratur, Büromaterial oder Reinigung von Berufskleidung hatte, trägt den Betrag mit kurzer Beschreibung ein. Ohne jede Ausgabe wäre es eine falsche Angabe.",
+          "quellen": [
+            "§ 90 AO (Mitwirkungspflicht)",
+            "Beitrag, Abschnitt 110-Euro-Grenze"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Wann lohnt sich der Einzelnachweis gegenüber dem Pauschbetrag?",
+          "status": "freigegeben",
+          "frage": "Ich habe 8 Kilometer Arbeitsweg. Lohnen sich Arbeitsmittel überhaupt?",
+          "antwort": "Die Entfernungspauschale bringt bei 220 Tagen und 38 Cent nur 669 Euro; bis zum Pauschbetrag von 1.230 Euro fehlen gut 560 Euro. Erst Arbeitsmittel, Fortbildungen, Homeoffice-Pauschale von 6 Euro je Tag oder Gewerkschaftsbeitrag über diesen Betrag hinaus senken die Steuer. Ein Laptop für 1.000 Euro allein reicht, um darüber zu kommen.",
+          "quellen": [
+            "§ 9 Abs. 1 Satz 3 Nr. 4 EStG (2026: 38 Cent ab dem ersten Kilometer)",
+            "§ 9a Satz 1 Nr. 1a EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "arbeitsmittel",
+        "werbungskosten",
+        "nichtbeanstandungsgrenze",
+        "digital-afa",
+        "geringwertige-wirtschaftsgueter"
+      ]
+    }
+  },
+  {
+    "slug": "arbeitskleidung-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Absetzbar ist nur typische Berufskleidung, die objektiv nicht privat tragbar ist: Schutzkleidung, Uniformen, Kittel, Amtstracht, Kleidung mit sichtbarem Firmenlogo; Anzug, Kostüm, Bluse und Business-Schuhe nie, auch wenn Sie sie nur im Job tragen.",
+          "Anschaffungen bis 800 Euro netto werden sofort abgesetzt, teurere Ausrüstung über ein bis drei Jahre; bis 110 Euro im Jahr für alle Arbeitsmittel zusammen verlangt das Finanzamt meist keine Belege.",
+          "Reinigung zählt mit: per Wäschereirechnung oder nach Gewicht mit rund 0,50 Euro je Kilo Koch- und Buntwäsche, 0,60 Euro Feinwäsche und 0,34 Euro Trockner im Zweipersonenhaushalt.",
+          "Eingetragen wird alles in der Anlage N bei den Arbeitsmitteln; steuerlich wirkt es erst über dem Pauschbetrag von 1.230 Euro.",
+          "Selbstständige buchen Berufskleidung als Betriebsausgabe ohne Pauschbetragsgrenze; beschädigte Privatkleidung ist abziehbar, wenn der Arbeitgeber keinen Ersatz leistet."
+        ],
+        "quellen": [
+          "§ 9 Abs. 1 Satz 3 Nr. 6 EStG",
+          "§ 12 Nr. 1 EStG",
+          "BFH VIII R 33/18 (16.03.2022)",
+          "Beitrag Arbeitskleidung absetzen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche Kleidung ist steuerlich absetzbar – und welche nicht?",
+          "status": "freigegeben",
+          "frage": "Ich bin Bankberaterin und muss Kostüme tragen. Kann ich sie absetzen?",
+          "antwort": "Nein, auch wenn der Arbeitgeber es vorschreibt: Ein Kostüm könnte privat getragen werden, und allein darauf stellt der Bundesfinanzhof ab. Anders wäre es nur mit dauerhaft eingesticktem Firmenlogo oder bei gestellter Dienstkleidung. Auch die Reinigung solcher bürgerlicher Kleidung ist nicht abziehbar.",
+          "quellen": [
+            "BFH VIII R 33/18 (2022, schwarze Kleidung eines Trauerredners)",
+            "§ 12 Nr. 1 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch ist die 110-Euro-Pauschale für Arbeitsmittel?",
+          "status": "freigegeben",
+          "frage": "Ich bin Krankenpflegerin, die Klinik stellt die Kleidung. Kann ich trotzdem 110 Euro ansetzen?",
+          "antwort": "Nur wenn Sie eigene Ausgaben hatten, etwa weiße Schuhe, Strümpfe oder das Waschen zu Hause; die 110 Euro sind keine Pauschale, sondern die Grenze, bis zu der das Finanzamt keine Belege verlangt. Gestellte Kleidung, die der Arbeitgeber reinigt, verursacht Ihnen keine Kosten und bringt in der Steuererklärung nichts.",
+          "quellen": [
+            "Beitrag, Abschnitt 110-Euro-Grenze",
+            "§ 9 Abs. 1 Satz 3 Nr. 6 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Reinigungskosten berechnen und optimal absetzen",
+          "status": "freigegeben",
+          "frage": "Ich wasche jede Woche 3 Kilo Arbeitskleidung bei 60 Grad zu Hause. Was kann ich ansetzen?",
+          "antwort": "Rund 116 Euro im Jahr: 3 Kilo mal 0,48 Euro sind 1,44 Euro je Woche, bei 47 Arbeitswochen 68 Euro, plus Trockner mit 0,34 Euro je Kilo, weitere 48 Euro. Tragen Sie die Rechnung mit Gewicht und Wochenzahl in die Anlage N ein; Finanzämter erkennen die Sätze der Verbraucherzentrale an, eine Schätzung ist zulässig.",
+          "quellen": [
+            "BFH VI R 77/91 (Schätzung der Waschkosten)",
+            "Kostentabelle der Verbraucherzentrale Bundesverband"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Besonderheiten für Selbstständige und besondere Fälle",
+          "status": "freigegeben",
+          "frage": "Meine Hose ist beim Kundentermin durch Farbe ruiniert worden. Kann ich das absetzen?",
+          "antwort": "Ja, den Zeitwert der Hose, wenn der Schaden beruflich verursacht wurde und niemand Ersatz leistet; das gilt ausnahmsweise auch für bürgerliche Kleidung. Angestellte tragen ihn als Werbungskosten in die Anlage N ein, Selbstständige buchen ihn als Betriebsausgabe. Foto, Kaufbeleg und eine kurze Notiz zum Vorfall reichen als Nachweis.",
+          "quellen": [
+            "§ 9 Abs. 1 Satz 1 EStG",
+            "Beitrag, Abschnitt beschädigte Privatkleidung"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "berufskleidung",
+        "arbeitsmittel",
+        "werbungskosten",
+        "nichtbeanstandungsgrenze"
+      ]
+    }
+  },
+  {
+    "slug": "umsatzsteuer-mehrwertsteuer",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Umsatzsteuer und Mehrwertsteuer sind dieselbe Steuer: Unternehmer erheben sie auf jede Lieferung und Leistung, ziehen die selbst gezahlte Vorsteuer ab und führen die Differenz ab, sodass am Ende nur der Verbraucher sie trägt.",
+          "2026 gelten 19 Prozent regulär und 7 Prozent ermäßigt für Lebensmittel, Bücher, Nahverkehr, Kultur und seit 1. Januar 2026 dauerhaft für Speisen in der Gastronomie, ob im Lokal, zum Mitnehmen oder geliefert; Getränke bleiben bei 19 Prozent, Photovoltaikanlagen bei 0.",
+          "Kleinunternehmer mit höchstens 25.000 Euro Vorjahresumsatz und 100.000 Euro im laufenden Jahr weisen keine Umsatzsteuer aus und haben keinen Vorsteuerabzug; die Regelung endet sofort mit dem Umsatz, der 100.000 Euro überschreitet.",
+          "Vorsteuer gibt es nur mit ordnungsgemäßer Rechnung für betriebliche Zwecke; seit 2026 zählt bei Rechnungen von Ist-Versteuerern der Zahlungszeitpunkt.",
+          "Voranmeldungen laufen monatlich ab 9.000 Euro Vorjahreszahllast, vierteljährlich ab 2.000 Euro, darunter entfallen sie; die Jahreserklärung für 2025 ist bis 31. Juli 2026 fällig."
+        ],
+        "quellen": [
+          "§§ 1, 12, 14, 15, 18, 19 UStG",
+          "§ 12 Abs. 2 Nr. 15 UStG in der Fassung ab 2026 (Gastronomie)",
+          "Beitrag Umsatzsteuer und Mehrwertsteuer"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist die Umsatzsteuer 2026?",
+          "status": "freigegeben",
+          "frage": "Ich verkaufe Kaffee im Café. Welcher Satz gilt?",
+          "antwort": "Getränke immer 19 Prozent, auch Kaffee, ob im Lokal oder zum Mitnehmen; das Stück Kuchen dazu seit 2026 überall 7 Prozent. Nur Milch und Leitungswasser bleiben als Lebensmittel bei 7 Prozent. Der Kassenbon muss beide Sätze getrennt ausweisen.",
+          "quellen": [
+            "§ 12 Abs. 2 Nr. 1 und Nr. 15 UStG",
+            "Anlage 2 zum UStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wann können Sie die Kleinunternehmerregelung nutzen?",
+          "status": "freigegeben",
+          "frage": "Ich habe 2025 als Kleinunternehmer 30.000 Euro umgesetzt. Was gilt 2026?",
+          "antwort": "Sie sind 2026 regelbesteuert, weil der Vorjahresumsatz über 25.000 Euro liegt: ab 1. Januar Umsatzsteuer auf jeder Rechnung, dafür Vorsteuerabzug und Voranmeldungen. Dass Sie 2025 unter 100.000 Euro blieben, hat nur das Jahr 2025 gerettet. Zurück in die Kleinunternehmerregelung geht es erst, wenn ein Jahr wieder unter 25.000 Euro liegt.",
+          "quellen": [
+            "§ 19 Abs. 1 UStG in der Fassung ab 2025"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Vorsteuerabzug: Wie funktioniert die Verrechnung?",
+          "status": "freigegeben",
+          "frage": "Ich habe eine Rechnung ohne meine Adresse bekommen. Bekomme ich die Vorsteuer?",
+          "antwort": "Bei Beträgen bis 250 Euro brutto ja, Kleinbetragsrechnungen brauchen keinen Empfänger. Darüber nicht: Name und Anschrift des Leistungsempfängers sind Pflichtangaben, und das Finanzamt streicht die Vorsteuer bei einer Prüfung. Lassen Sie die Rechnung berichtigen; die Korrektur wirkt auf den ursprünglichen Zeitpunkt zurück.",
+          "quellen": [
+            "§ 14 Abs. 4, § 15 Abs. 1 UStG",
+            "§ 33 UStDV",
+            "EuGH C-518/14 (Senatex)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Umsatzsteuervoranmeldung und praktische Abwicklung",
+          "status": "freigegeben",
+          "frage": "Ich starte 2026 mit meinem Betrieb. Wie oft muss ich Umsatzsteuer melden?",
+          "antwort": "Vierteljährlich, sofern die geschätzte Zahllast im Gründungsjahr unter 9.000 Euro bleibt; die frühere Pflicht zur Monatsmeldung für Neugründer ist bis Ende 2026 ausgesetzt. Erwarten Sie mehr, melden Sie monatlich. Die Voranmeldung für das erste Quartal ist am 10. April fällig, elektronisch über ELSTER, mit Dauerfristverlängerung am 10. Mai.",
+          "quellen": [
+            "§ 18 Abs. 2 Satz 4 und 6 UStG",
+            "§§ 46 bis 48 UStDV"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "umsatzsteuer",
+        "vorsteuer",
+        "kleinunternehmerregelung",
+        "ermaessigter-steuersatz",
+        "ist-versteuerung"
+      ]
+    }
+  },
+  {
+    "slug": "abgeltungssteuer",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Abgeltungsteuer besteuert private Kapitalerträge pauschal mit 25 Prozent plus 5,5 Prozent Soli darauf, zusammen 26,375 Prozent, mit Kirchensteuer 27,82 oder 27,99 Prozent; die Bank behält sie an der Quelle ein, damit ist die Steuerpflicht erledigt.",
+          "Frei bleiben 1.000 Euro Sparerpauschbetrag je Person, 2.000 Euro für Paare, auch je Kind; die Bank nutzt ihn nur mit Freistellungsauftrag, verteilbar auf mehrere Institute und rückwirkend fürs ganze Jahr.",
+          "Betroffen sind Zinsen, Dividenden, Kursgewinne, Fondserträge und Zertifikate; nicht Betriebsvermögen, Riester, Basisrente, Aktien aus der Zeit vor 2009, Lebensversicherungen vor 2005 und Kryptogewinne, die nach eigenen Regeln laufen.",
+          "Liegt Ihr Steuersatz unter 25 Prozent, holt die Günstigerprüfung in der Anlage KAP Geld zurück; unter dem Grundfreibetrag von 12.348 Euro befreit die NV-Bescheinigung ganz.",
+          "Seit dem Jahressteuergesetz 2024 gilt die 20.000-Euro-Grenze für Verluste aus Termingeschäften nicht mehr; Aktienverluste bleiben nur mit Aktiengewinnen verrechenbar, Auslandsdepots müssen in der Anlage KAP erklärt werden."
+        ],
+        "quellen": [
+          "§ 32d EStG",
+          "§ 20 Abs. 6 und 9 EStG",
+          "§§ 43, 44a EStG",
+          "Beitrag Abgeltungssteuer"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist die Abgeltungssteuer wirklich?",
+          "status": "freigegeben",
+          "frage": "Warum zahle ich mit Kirchensteuer nicht einfach 25 plus 8 Prozent?",
+          "antwort": "Weil die Kirchensteuer als Sonderausgabe gleich im Steuersatz berücksichtigt wird: Die Abgeltungsteuer sinkt dadurch auf 24,51 Prozent bei 8 Prozent Kirchensteuer und 24,45 Prozent bei 9 Prozent. Mit Soli und Kirchensteuer landen Sie bei 27,82 beziehungsweise 27,99 Prozent statt bei rund 28,4 Prozent.",
+          "quellen": [
+            "§ 32d Abs. 1 Satz 3 und 4 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Sparerpauschbetrag: Wie nutzen Sie den Freibetrag optimal?",
+          "status": "freigegeben",
+          "frage": "Ich habe Depots bei drei Banken. Wie verteile ich den Freistellungsauftrag?",
+          "antwort": "Nach den erwarteten Erträgen, zusammen höchstens 1.000 Euro: zum Beispiel 600 Euro aufs ETF-Depot, 300 Euro aufs Tagesgeld, 100 Euro aufs Girokonto. Was eine Bank nicht ausschöpft, verfällt dort, lässt sich aber mit der Anlage KAP und den Steuerbescheinigungen beim Finanzamt nachträglich verrechnen. Änderungen wirken rückwirkend zum 1. Januar.",
+          "quellen": [
+            "§ 44a Abs. 2 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wann lohnt sich die Günstigerprüfung?",
+          "status": "freigegeben",
+          "frage": "Ich bin Studentin mit 8.000 Euro Nebenjob und 2.500 Euro Kapitalerträgen. Bekomme ich Steuer zurück?",
+          "antwort": "Ja, alles: 1.000 Euro sind durch den Sparerpauschbetrag frei, die übrigen 1.500 Euro plus 8.000 Euro Lohn liegen unter dem Grundfreibetrag von 12.348 Euro, Ihr Steuersatz ist null. Beantragen Sie die Günstigerprüfung in der Anlage KAP; die einbehaltenen rund 396 Euro werden erstattet. Für die Zukunft spart eine NV-Bescheinigung den Umweg.",
+          "quellen": [
+            "§ 32d Abs. 6 EStG",
+            "§ 44a Abs. 1 Nr. 2 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Was bringt das Jahressteuergesetz 2024 bei der Verlustverrechnung?",
+          "status": "freigegeben",
+          "frage": "Ich habe 2024 15.000 Euro mit Optionen verloren. Kann ich das jetzt nutzen?",
+          "antwort": "Ja, in voller Höhe gegen alle Kapitalerträge, auch Zinsen und Dividenden, seit der eigene Verrechnungskreis für Termingeschäfte rückwirkend gestrichen wurde. Legen Sie Einspruch gegen noch offene Bescheide ein oder nutzen Sie den festgestellten Verlustvortrag in der Anlage KAP. Die Bank verrechnet solche Verluste erst seit 2026 automatisch.",
+          "quellen": [
+            "§ 20 Abs. 6 EStG in der Fassung des Jahressteuergesetzes 2024",
+            "§ 52 Abs. 28 EStG (Anwendung auf offene Fälle)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "abgeltungsteuer",
+        "sparerpauschbetrag",
+        "freistellungsauftrag",
+        "guenstigerpruefung",
+        "nv-bescheinigung",
+        "teilfreistellung",
+        "anlage-kap"
+      ]
+    }
+  },
+  {
+    "slug": "aktien-steuererklaerung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Dividenden und realisierte Kursgewinne aus Aktien unterliegen der Abgeltungsteuer von 25 Prozent plus Soli, zusammen 26,375 Prozent, mit Kirchensteuer bis 27,99 Prozent; Kursgewinne werden erst beim Verkauf besteuert, nicht während der Haltedauer.",
+          "1.000 Euro Sparerpauschbetrag je Person, 2.000 Euro für Paare, jedes Kind eigene 1.000 Euro; nur mit Freistellungsauftrag bei der Bank, der rückwirkend fürs ganze Jahr gilt.",
+          "Aktienverluste dürfen nur mit Aktiengewinnen verrechnet werden; die 20.000-Euro-Grenze für Termingeschäftsverluste ist mit dem Jahressteuergesetz 2024 rückwirkend gefallen, Banken setzen es seit 2026 um.",
+          "Die Steuererklärung mit Anlage KAP ist Pflicht bei Auslandsdepots und ausländischen Erträgen ohne Abzug, freiwillig für die Günstigerprüfung bei Steuersatz unter 25 Prozent und für Verlustbescheinigungen zwischen Banken.",
+          "Für Aktienfonds und ETFs bleiben 30 Prozent der Erträge durch die Teilfreistellung steuerfrei; Aktien liefen im Schnitt der letzten zehn Jahre mit rund 5 Prozent Rendite."
+        ],
+        "quellen": [
+          "§ 20 Abs. 1 Nr. 1, Abs. 2 Nr. 1, Abs. 6 EStG",
+          "§ 32d EStG",
+          "§ 20 InvStG (Teilfreistellung)",
+          "Beitrag Aktien versteuern"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch sind die Steuern auf Aktien 2026?",
+          "status": "freigegeben",
+          "frage": "Ich habe Aktien mit 5.000 Euro Gewinn, verkaufe aber nicht. Muss ich Steuern zahlen?",
+          "antwort": "Nein, Kursgewinne werden erst beim Verkauf besteuert; solange Sie halten, entsteht keine Steuer, egal wie hoch der Buchgewinn ist. Dividenden dagegen versteuert die Bank sofort bei Auszahlung. Der Verkaufszeitpunkt ist damit ein Steuerhebel: Wer über Jahre in Tranchen verkauft, nutzt jedes Jahr den Sparerpauschbetrag neu.",
+          "quellen": [
+            "§ 20 Abs. 2 Satz 1 Nr. 1 EStG",
+            "§ 44 Abs. 1 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie nutze ich den Freistellungsauftrag optimal?",
+          "status": "freigegeben",
+          "frage": "Ich habe erst im Dezember den Freistellungsauftrag erteilt. Ist die Steuer auf die Dividenden vom Frühjahr weg?",
+          "antwort": "Nein, der Auftrag gilt rückwirkend zum 1. Januar, und die Bank erstattet die bereits einbehaltene Abgeltungsteuer bis zur Höhe des Freibetrags im laufenden Jahr automatisch, meist mit der nächsten Abrechnung. Nach dem Jahreswechsel bleibt nur noch der Weg über die Anlage KAP.",
+          "quellen": [
+            "§ 44b Abs. 1 EStG",
+            "§ 44a Abs. 2 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Was ändert sich bei der Verlustverrechnung 2026?",
+          "status": "freigegeben",
+          "frage": "Ich habe 3.000 Euro Verlust mit Aktien und 3.000 Euro Zinsen. Gleicht sich das aus?",
+          "antwort": "Nein, Aktienverluste verrechnet die Bank nur mit Aktiengewinnen; Ihre Zinsen werden voll besteuert, der Verlust wandert in den Aktienverlusttopf und wartet auf künftige Aktiengewinne, unbegrenzt lange. Das Bundesverfassungsgericht prüft diese Ungleichbehandlung seit 2021; halten Sie Bescheide per Einspruch offen. Gewinne aus ETF-Verkäufen zählen nicht als Aktiengewinne.",
+          "quellen": [
+            "§ 20 Abs. 6 Satz 4 EStG",
+            "BFH VIII R 11/18 (Vorlage an das BVerfG, 2 BvL 3/21)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Wann muss ich eine Steuererklärung abgeben?",
+          "status": "freigegeben",
+          "frage": "Ich habe ein Depot bei einem ausländischen Broker. Was muss ich tun?",
+          "antwort": "Alle Erträge selbst in der Anlage KAP erklären, weil ausländische Institute keine deutsche Abgeltungsteuer abführen: Dividenden, Zinsen und Veräußerungsgewinne in Euro zum Tageskurs, dazu die ausländische Quellensteuer zur Anrechnung bis 15 Prozent. Die Jahresübersicht des Brokers reicht als Beleg. Wer das versäumt, riskiert ein Verfahren wegen Steuerhinterziehung.",
+          "quellen": [
+            "§ 32d Abs. 3 und 5 EStG",
+            "§ 370 AO"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "abgeltungsteuer",
+        "sparerpauschbetrag",
+        "freistellungsauftrag",
+        "dividende",
+        "verlustbescheinigung",
+        "teilfreistellung"
+      ]
+    }
+  }
+]

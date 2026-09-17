@@ -1,0 +1,299 @@
+/* =====================================================================================
+   faden-landing.css — die Blöcke, die die Startseite zur fertigen Zeitungsseite machen:
+   die Auslese aus dem Wochenbrief, der Wochenbrief-Teaser, Finanzleser Plus, Leos
+   Empfehlungen und die Chips zum Weiterreden.
+
+   Vorlage: Design A v2 hat KEIN Landing-Artboard (README der Übergabe, Zeile 181). Die
+   Form ist deshalb aus vorhandenen v2-Bausteinen abgeleitet — Kopfzeile aus Kapitel 1
+   „Heute" (Zeile 331–340: Kicker links, kursiver Hinweis rechts), Zeilensatz mit
+   Punktführung aus den Kioskkarten (Zeile 375–379), Anzeigenzeile (Zeile 873–877),
+   Plus-Texte (Zeile 223/270).
+
+   🚨 Kein Kasten, kein weißer Grund, kein Schatten. Diese Blöcke stehen direkt auf dem
+   Papier, wie Kassensturz, Spiel und Finanzwort im Kapitel „Heute".
+   ===================================================================================== */
+
+/* ---------- Gemeinsames Gerüst ---------- */
+.faden-shell .landing-block { display: grid; gap: var(--luft-s); clear: both; min-width: 0; scroll-margin-top: 110px; }
+/* Kopfzeile eines Blocks: Kicker links, kursiver Hinweis rechts, darunter eine Haarlinie
+   in voller Tinte — genau wie die Abschnittsköpfe in v2 (Übergabe Zeile 1158). Die Linie
+   gehört zur Kopfzeile, nicht als eigenes Element daneben. */
+.faden-shell .landing-block__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-m); flex-wrap: wrap; border-bottom: var(--strich-haar) solid var(--rule-strong); padding-bottom: var(--luft-s); }
+.faden-shell .landing-block__hinweis { font: var(--schrift-hinweis); color: var(--muted); }
+.faden-shell .landing-block__schlag { margin: var(--luft-s) 0 0; font: var(--schrift-schlag); color: var(--ink); text-wrap: pretty; }
+.faden-shell .landing-block__vorspann { margin: 0; font: var(--schrift-vorspann); color: var(--muted); }
+
+/* ---------- Aus unserem Newsletter: sechs Zeilen mit Punktführung ---------- */
+.faden-shell .auslese__liste { list-style: none; margin: var(--luft-s) 0 0; padding: 0; display: grid; }
+.faden-shell .auslese__eintrag { display: flex; align-items: baseline; gap: var(--luft-s); border-top: var(--strich-haar) solid var(--rule-fein); padding: var(--luft-s) 0; text-decoration: none; color: var(--ink); transition: padding-left .3s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .auslese__eintrag:hover { padding-left: var(--luft-s); }
+.faden-shell .auslese__eintrag .kicker { flex: none; width: 78px; }
+.faden-shell .auslese__titel { font: 700 var(--grad-16)/1.3 var(--serif); color: var(--ink); min-width: 0; }
+.faden-shell .auslese__eintrag:hover .auslese__titel { color: var(--green-ink); }
+.faden-shell .auslese__eintrag .dot { align-self: center; }
+.faden-shell .auslese > .strich-link--gross { justify-self: start; margin-top: var(--luft-m); }
+@media (max-width: 620px) {
+  .faden-shell .auslese__eintrag { flex-wrap: wrap; gap: var(--luft-xs) var(--luft-s); }
+  .faden-shell .auslese__eintrag .kicker { width: auto; }
+  .faden-shell .auslese__eintrag .inhalt__linie { display: none; }
+}
+
+/* ── Finanzleser Plus als Abo-Coupon (Übergabe „Finanzleser Heute", Baustein 5) ─────
+   🚨 Hier stand der Wochenbrief-Teaser (`.wb-teaser__*`). Er ist entfallen: der
+   Wochenbrief liegt seit dem 17.09.2026 IM Flugfenster (app/flugfenster.css).
+
+   Der Plus-Block steht jetzt in einer gestrichelten Schnittlinie, und auf der oberen
+   Linie sitzt eine Schere. Beim Überfahren wandert sie einmal quer hindurch und
+   schneidet dabei — genau das, was man mit einem Coupon tut. */
+.faden-shell .plus-coupon { position: relative; border: var(--strich-haar) dashed var(--ink-45); padding: var(--luft-l) clamp(var(--luft-l), 4vw, var(--luft-xl)); }
+/* Die Schlagzeile des Plus-Blocks ist die größte der Seite — hier wird geworben. */
+.faden-shell .plus-teaser__schlag { margin: 0; font: 900 clamp(var(--grad-26), 3.2vw, var(--grad-34))/1.12 var(--serif); color: var(--ink); letter-spacing: -.015em; text-wrap: balance; }
+
+/* Die Schere: 20 × 20 Papiergrund auf der Linie, um 90° gegen den Uhrzeigersinn gedreht
+   (Wunsch 17.09.2026), damit die Klingen quer zur Schnittlinie stehen. */
+.faden-shell .plus-coupon__schere {
+  position: absolute; top: -10px; left: var(--luft-l); z-index: 1;
+  width: 20px; height: 20px; display: grid; place-items: center;
+  background: var(--paper); color: var(--ink);
+  transform: rotate(-90deg);
+  transition: left 1.6s var(--kurve);
+}
+.faden-shell .plus-coupon:hover .plus-coupon__schere { left: calc(100% - 44px); }
+.faden-shell .plus-coupon__schere svg { display: block; overflow: visible; }
+/* Die kleine Schneidbewegung: die beiden Klingen klappen im Takt auf und zu, solange die
+   Schere unterwegs ist. Gedreht wird um die Ösen, nicht um die Mitte. */
+.faden-shell .plus-coupon__klinge--a, .faden-shell .plus-coupon__oese--a { transform-origin: 6px 6px; }
+.faden-shell .plus-coupon__klinge--b, .faden-shell .plus-coupon__oese--b { transform-origin: 6px 18px; }
+.faden-shell .plus-coupon:hover .plus-coupon__klinge--a, .faden-shell .plus-coupon:hover .plus-coupon__oese--a { animation: plus-schnipp-a .34s ease-in-out 8; }
+.faden-shell .plus-coupon:hover .plus-coupon__klinge--b, .faden-shell .plus-coupon:hover .plus-coupon__oese--b { animation: plus-schnipp-b .34s ease-in-out 8; }
+@keyframes plus-schnipp-a { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(9deg); } }
+@keyframes plus-schnipp-b { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-9deg); } }
+
+/* Kopf: Schlagzeile links, die runde Plakette rechts. */
+.faden-shell .plus-coupon__satz { display: grid; gap: var(--luft-l) var(--luft-xl); align-items: center; margin-top: var(--luft-m); }
+@media (min-width: 720px) { .faden-shell .plus-coupon__satz { grid-template-columns: minmax(0, 1fr) 168px; } }
+.faden-shell .plus-coupon__text { display: grid; gap: var(--luft-s); }
+/* Die Plakette: dieselbe Holo-Folie wie das Bestwert-Siegel, nur rund
+   (components/kursblatt/teile/Siegel.tsx, form="kreis"). Auf ihr steht nur das Wort;
+   „30 Tage" darunter, der Preis in der Fußzeile — Stufe 1 hat keine Anmeldung, und eine
+   Zahl auf dem Abzeichen verspräche einen Kauf, den es nicht gibt. */
+.faden-shell .plus-coupon__plakette { justify-self: center; display: grid; justify-items: center; gap: var(--luft-xs); }
+.faden-shell .plus-coupon__plakette .kb-siegel { transform: rotate(-7deg); filter: drop-shadow(0 2px 0 var(--ink-12)); }
+.faden-shell .plus-coupon__plakette .kb-siegel__text { font: 900 var(--grad-16)/1 var(--serif); letter-spacing: .05em; text-indent: .05em; }
+.faden-shell .plus-coupon__plakette em { font: var(--schrift-hinweis); color: var(--muted); }
+
+/* Das Leistungsverzeichnis: Glyph, Text, Verweis — drei Zeilen mit Haarlinie. */
+.faden-shell .plus-coupon__punkte { list-style: none; margin: var(--luft-l) 0 0; padding: 0; border-top: var(--strich-haar) solid var(--rule-strong); }
+.faden-shell .plus-coupon__punkte li { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; align-items: center; gap: var(--luft-m); padding: var(--luft-m) 0; border-bottom: var(--strich-haar) solid var(--rule-fein); transition: padding-left .3s var(--kurve); }
+.faden-shell .plus-coupon__punkte li:hover { padding-left: var(--luft-s); }
+.faden-shell .plus-coupon__punkte li.ist-spaeter { color: var(--muted); }
+.faden-shell .plus-coupon__zeile { display: grid; gap: var(--luft-xxs); min-width: 0; }
+.faden-shell .plus-coupon__zeile b { font: var(--schrift-zeile); }
+.faden-shell .plus-coupon__zeile small { font: 400 var(--grad-13)/1.5 var(--sans); color: var(--muted); }
+.faden-shell .plus-coupon__punkte .strich-link { white-space: nowrap; }
+.faden-shell .plus-coupon__punkte li:hover .strich-link i { width: 34px; }
+.faden-shell .plus-coupon__fuss { display: flex; align-items: center; gap: var(--luft-m) var(--luft-l); flex-wrap: wrap; margin-top: var(--luft-l); }
+.faden-shell .plus-coupon__fuss .quelle { margin: 0; }
+@media (max-width: 560px) {
+  .faden-shell .plus-coupon__punkte li { grid-template-columns: 40px minmax(0, 1fr); }
+  .faden-shell .plus-coupon__punkte li > :last-child { grid-column: 2; }
+}
+
+/* ── Die drei Glyphen (40 × 30, reines CSS) ─────────────────────────────────────────
+   Sie reagieren auf das Überfahren ihrer Zeile: der Koffer fächert auf, der Wächter
+   schlägt schneller, die PDF-Seite füllt ihre Zeilen. Ein Icon-Satz wäre schwerer und
+   könnte auf nichts davon reagieren. */
+.faden-shell .plus-glyph { position: relative; display: block; width: 40px; height: 30px; }
+.faden-shell .plus-glyph i { position: absolute; display: block; }
+
+/* Aktenkoffer: drei Kärtchen, im Ruhezustand leicht gefächert. */
+.faden-shell .plus-glyph--koffer i { top: 6px; left: 14px; width: 12px; height: 17px; background: var(--auflage); border: var(--strich-haar) solid var(--ink); border-bottom-width: var(--strich-stark); transition: transform .45s var(--ueber); }
+.faden-shell .plus-glyph--koffer i:nth-child(1) { transform: rotate(-6deg) translateX(-3px); }
+.faden-shell .plus-glyph--koffer i:nth-child(2) { transition-delay: .04s; }
+.faden-shell .plus-glyph--koffer i:nth-child(3) { transform: rotate(6deg) translateX(3px); transition-delay: .08s; }
+.faden-shell .plus-coupon__punkte li:hover .plus-glyph--koffer i:nth-child(1) { transform: rotate(-18deg) translateX(-8px); }
+.faden-shell .plus-coupon__punkte li:hover .plus-glyph--koffer i:nth-child(2) { transform: translateY(-3px); }
+.faden-shell .plus-coupon__punkte li:hover .plus-glyph--koffer i:nth-child(3) { transform: rotate(18deg) translateX(8px); }
+
+/* Wächter: ein Punkt, zwei Ringe, die nach außen laufen. */
+.faden-shell .plus-glyph--waechter i { top: 10px; left: 15px; width: 10px; height: 10px; border-radius: var(--radius-kreis); }
+.faden-shell .plus-glyph--waechter i:nth-child(1) { background: var(--green); }
+.faden-shell .plus-glyph--waechter i:nth-child(2), .faden-shell .plus-glyph--waechter i:nth-child(3) { border: var(--strich-fein) solid var(--green); animation: plus-ring 2.6s var(--kurve) infinite; }
+.faden-shell .plus-glyph--waechter i:nth-child(3) { animation-delay: .9s; }
+.faden-shell .plus-coupon__punkte li:hover .plus-glyph--waechter i:nth-child(2), .faden-shell .plus-coupon__punkte li:hover .plus-glyph--waechter i:nth-child(3) { animation-duration: 1.3s; }
+@keyframes plus-ring { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(2.6); opacity: 0; } }
+
+/* PDF: eine Seite mit vier angerissenen Zeilen, die sich beim Überfahren füllen. */
+.faden-shell .plus-glyph--pdf { background: var(--auflage); width: 16px; height: 22px; margin: var(--luft-xs) 0 0 12px; border: var(--strich-haar) solid var(--muted); }
+.faden-shell .plus-glyph--pdf i { left: 3px; right: 3px; height: var(--strich-haar); background: var(--muted); transform-origin: left; transition: transform .35s var(--kurve); }
+.faden-shell .plus-glyph--pdf i:nth-child(1) { top: 5px; transform: scaleX(.4); }
+.faden-shell .plus-glyph--pdf i:nth-child(2) { top: 9px; transform: scaleX(.6); transition-delay: .05s; }
+.faden-shell .plus-glyph--pdf i:nth-child(3) { top: 13px; transform: scaleX(.3); transition-delay: .1s; }
+.faden-shell .plus-glyph--pdf i:nth-child(4) { top: 17px; transform: scaleX(.5); transition-delay: .15s; }
+.faden-shell .plus-coupon__punkte li:hover .plus-glyph--pdf i { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .plus-coupon__schere { transition: none; }
+  .faden-shell .plus-coupon:hover .plus-coupon__klinge--a, .faden-shell .plus-coupon:hover .plus-coupon__klinge--b,
+  .faden-shell .plus-coupon:hover .plus-coupon__oese--a, .faden-shell .plus-coupon:hover .plus-coupon__oese--b,
+  .faden-shell .plus-glyph--waechter i { animation: none; }
+  .faden-shell .plus-glyph i { transition: none; }
+}
+
+/* ---------- Leo empfiehlt: Vergleiche als Vorschau ---------- */
+/* Die Karten stehen in Leos Spalte, also rechts der 60-px-Gasse von `.wort--leo`. */
+/* ═══ Vergleichs-Teaser (Übergabe „Finanzleser Heute", Baustein 2) ═══════════════════
+   Zwei nebeneinander auf Satzbreite, getrennt durch Haarlinien — kein Kasten, kein
+   Schatten. Die Bildkarte von vorher ist weg: An ihrer Stelle steht der Markt selbst. */
+/* 🚨 Das Raster bricht aus Leos Spalte AUS (Wunsch 17.09.2026: „über die ganze Breite").
+   `.wort--leo` ist ein Raster aus 60-px-Gasse und Textspalte; alles darin landet in
+   Spalte 2. Die Teaser sollen beide Spalten nehmen — Leos Kopf und sein Satz bleiben, wo
+   sie sind, der Markt darunter nimmt den ganzen Satzspiegel.
+   Der Selektor ist ein NACHFAHRE, kein Kind: Die Teaser stecken in einer `Insel`, und die
+   ist `display: contents` — fürs Raster unsichtbar, für den Selektor nicht. */
+.faden-shell .wort--leo .vgl-teaser__raster,
+.faden-shell .wort--leo .vgl-teaser__fussnote { grid-column: 1 / -1; }
+.faden-shell .vgl-teaser__raster { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--luft-l); border-top: var(--strich-haar) solid var(--rule-strong); border-bottom: var(--strich-haar) solid var(--ink-30); }
+@media (max-width: 620px) { .faden-shell .vgl-teaser__raster { grid-template-columns: minmax(0, 1fr); } }
+.faden-shell .vgl-teaser { position: relative; display: grid; align-content: start; padding: var(--luft-l); text-decoration: none; color: var(--ink); min-width: 0; }
+.faden-shell .vgl-teaser:nth-child(2n) { border-left: var(--strich-haar) solid var(--rule); }
+.faden-shell .vgl-teaser:nth-child(n + 3) { border-top: var(--strich-haar) solid var(--rule); }
+@media (max-width: 620px) {
+  .faden-shell .vgl-teaser:nth-child(2n) { border-left: 0; }
+  .faden-shell .vgl-teaser:nth-child(n + 2) { border-top: var(--strich-haar) solid var(--rule); }
+}
+
+.faden-shell .vgl-teaser__kopf { display: flex; align-items: baseline; justify-content: space-between; gap: var(--luft-s); flex-wrap: wrap; }
+.faden-shell .vgl-teaser__bestand { font: italic 300 var(--grad-11)/1.4 var(--serif); color: var(--muted); white-space: nowrap; }
+/* `min-height` hält die Preiszeilen der beiden Spalten auf einer Höhe, auch wenn ein
+   Titel einzeilig bleibt. Lange Wörter trennen statt über die Kante zu laufen. */
+.faden-shell .vgl-teaser__titel { margin-top: var(--luft-s); font: 700 clamp(var(--grad-18), 2.9vw, var(--grad-20))/1.2 var(--serif); min-height: 2.4em; hyphens: auto; text-wrap: balance; }
+.faden-shell .vgl-teaser:hover .vgl-teaser__titel { color: var(--green-ink); }
+
+.faden-shell .vgl-teaser__preis { display: flex; align-items: baseline; justify-content: space-between; gap: var(--luft-xs) var(--luft-s); flex-wrap: wrap; margin-top: var(--luft-m); }
+.faden-shell .vgl-teaser__zahl { display: flex; align-items: baseline; gap: var(--luft-xs); }
+.faden-shell .vgl-teaser__zahl em { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }
+.faden-shell .vgl-teaser__zahl b { font: 900 var(--grad-26)/1 var(--serif); color: var(--tuerkis); font-variant-numeric: tabular-nums; transition: transform .3s var(--ueber); transform-origin: left bottom; }
+.faden-shell .vgl-teaser:hover .vgl-teaser__zahl b { transform: scale(1.06); }
+.faden-shell .vgl-teaser__spanne { font: 600 var(--grad-12) var(--sans); color: var(--green-ink); }
+
+.faden-shell .vgl-teaser__mehr { margin-top: var(--luft-m); padding-top: var(--luft-m); border-top: var(--strich-haar) dotted var(--ink-35); }
+.faden-shell .vgl-teaser:hover .vgl-teaser__mehr .strich-link i { width: 30px; }
+.faden-shell .vgl-teaser__fussnote { margin: var(--luft-m) 0 0; font: var(--schrift-hinweis); color: var(--muted); }
+
+/* ── Das Säulen-Marktband ───────────────────────────────────────────────────────────
+   Die Höhen kommen als Prozent (lib/faden/vergleichTeaser.ts) — dieselbe Rechnung
+   trägt das große Band im Kursblatt, nur mit anderer Feldhöhe. */
+/* 🚨 `--luft-l` statt `--luft-s`: Der pulsende Punkt sitzt ÜBER der Bestwertsäule und
+   ragt damit acht Pixel über das Band hinaus. Mit dem kleinen Abstand klebte sein Schein
+   an der Zeile darüber (Fehlermeldung 17.09.2026). */
+.faden-shell .marktband { display: block; margin-top: var(--luft-l); }
+.faden-shell .marktband__feld { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: var(--luft-xxs); height: var(--band-h, 48px); }
+.faden-shell .marktband--dicht .marktband__feld { gap: var(--strich-haar); }
+.faden-shell .marktband__saeule { position: relative; flex: 1 1 0; min-width: var(--strich-stark); max-width: 9px; background: var(--ink-30); border-radius: var(--radius-kante) var(--radius-kante) 0 0; transform-origin: bottom; transform: scaleY(0); }
+.faden-shell .marktband--dicht .marktband__saeule { max-width: 7px; }
+.faden-shell .vgl-teaser:hover .marktband__saeule { background: var(--ink-45); }
+.faden-shell .marktband__saeule.ist-best, .faden-shell .vgl-teaser:hover .marktband__saeule.ist-best { background: var(--tuerkis); }
+.faden-shell .marktband[data-sicht="an"] .marktband__saeule { animation: marktband-auf .55s var(--ueber-sanft) both; }
+@keyframes marktband-auf { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+/* Der Doppelschlag über der Bestwertsäule — dieselben Keyframes wie der Bestwertpunkt
+   im Kursblatt (`fl-puls`, app/kursblatt.css). Die Zentrierung steckt IN den Keyframes
+   (`translate(-50%, -50%)`); der Punkt trägt sie darum auch im Ruhezustand, sonst spränge
+   er beim Anlaufen der Animation um seine halbe Größe. */
+.faden-shell .marktband__punkt { position: absolute; left: 50%; top: calc(-1 * var(--luft-s)); width: var(--luft-s); height: var(--luft-s); border-radius: var(--radius-kreis); background: var(--tuerkis); transform: translate(-50%, -50%); opacity: 0; }
+.faden-shell .marktband[data-sicht="an"] .marktband__punkt { animation: marktband-sicht .3s 1.2s both, fl-puls 2.4s ease-in-out 1.5s infinite; }
+@keyframes marktband-sicht { to { opacity: 1; } }
+
+/* Die Ø-Linie liegt auf derselben Skala wie die Säulen; ihr Etikett steht rechts darüber
+   und deckt die Linie mit Papierfarbe ab, damit es lesbar bleibt. */
+.faden-shell .marktband__schnitt { position: absolute; left: 0; right: 0; border-top: var(--strich-haar) dashed var(--ink-45); opacity: 0; }
+.faden-shell .marktband[data-sicht="an"] .marktband__schnitt { animation: marktband-sicht .4s 1.1s both; }
+.faden-shell .marktband__schnitt em { position: absolute; right: 0; bottom: var(--luft-xxs); padding-left: var(--luft-xs); background: var(--paper); font: 600 var(--grad-kicker)/1 var(--sans); font-style: normal; color: var(--muted); }
+.faden-shell .marktband__grund { display: block; height: var(--strich-haar); background: var(--ink-45); transform-origin: left; }
+.faden-shell .marktband[data-sicht="an"] .marktband__grund { animation: marktband-grund .9s var(--kurve) both; }
+@keyframes marktband-grund { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+/* Die rechte Angabe bricht nie um; die linke darf sich stauchen, sonst steht „teuerster
+   103 €" auf zwei Zeilen und die Grundlinie darüber wirkt schief. */
+.faden-shell .marktband__fuss { display: flex; align-items: baseline; justify-content: space-between; gap: var(--luft-s); margin-top: var(--luft-xs); font: 500 var(--grad-kicker)/1.3 var(--sans); color: var(--muted); }
+.faden-shell .marktband__fuss > span:last-child { flex: none; white-space: nowrap; }
+.faden-shell .marktband__best { min-width: 0; }
+.faden-shell .marktband__best { font-weight: 700; color: var(--tuerkis); }
+
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .marktband[data-sicht="an"] .marktband__saeule,
+  .faden-shell .marktband[data-sicht="an"] .marktband__grund,
+  .faden-shell .marktband[data-sicht="an"] .marktband__punkt,
+  .faden-shell .marktband[data-sicht="an"] .marktband__schnitt { animation: none; transform: none; opacity: 1; }
+}
+
+.faden-shell .weiterreden .chips { margin-top: var(--luft-xs); }
+
+/* ── Die Mini-Zinskurve im Teaser (components/faden/landing/Zinsband.tsx) ───────────
+   Wo eine Kategorie eine Laufzeit hat, zeigt der Teaser nicht die Streuung der Anbieter,
+   sondern was die Laufzeit ausmacht — die kleine Schwester der Kurve im Kursblatt. */
+.faden-shell .zinsband { display: block; margin-top: var(--luft-l); }
+.faden-shell .zinsband__feld { position: relative; display: block; height: var(--band-h, 48px); }
+/* 🚨 Die Linie wird von links AUFGEDECKT, nicht mit `stroke-dasharray` gezeichnet.
+   Das viewBox wird mit `preserveAspectRatio="none"` ungleichmäßig gestreckt; zusammen mit
+   `vector-effect: non-scaling-stroke` rechnet der Strichmusterraum dann in Schirmpixeln,
+   die Nutzereinheiten des Pfades aber nicht — gemessen am 17.09.2026 riss die Linie
+   dadurch mitten im Band ab. Ein `clip-path` kennt diese Zweideutigkeit nicht. */
+.faden-shell .zinsband__feld svg { display: block; width: 100%; height: 100%; overflow: visible; clip-path: inset(0 100% 0 0); }
+.faden-shell .zinsband__linie { fill: none; stroke: var(--tuerkis); stroke-width: var(--strich-stark); stroke-linecap: round; stroke-linejoin: round; }
+.faden-shell .zinsband[data-sicht="an"] .zinsband__feld svg { animation: zinsband-zeichnen .9s var(--kurve) both; }
+@keyframes zinsband-zeichnen { to { clip-path: inset(0 -6% 0 0); } }
+/* Die Punkte liegen als runde Knoten ÜBER dem gestreckten SVG — im SVG selbst würden sie
+   mit `preserveAspectRatio="none"` zu Ellipsen. */
+.faden-shell .zinsband__punkt { position: absolute; transform: translate(-50%, 50%); opacity: 0; }
+.faden-shell .zinsband[data-sicht="an"] .zinsband__punkt { animation: marktband-sicht .3s both; }
+.faden-shell .zinsband__punkt b { display: block; width: 7px; height: 7px; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-fein) solid var(--tuerkis); box-sizing: border-box; }
+.faden-shell .zinsband__punkt.ist-best b { --puls-marke: var(--puls-vergleich); width: 11px; height: 11px; background: var(--tuerkis); border: 0; }
+.faden-shell .zinsband[data-sicht="an"] .zinsband__punkt.ist-best b { animation: fl-punkt 2.4s ease-in-out 1.4s infinite; }
+.faden-shell .zinsband__grund { display: block; height: var(--strich-haar); background: var(--ink-45); transform-origin: left; }
+.faden-shell .zinsband[data-sicht="an"] .zinsband__grund { animation: marktband-grund .9s var(--kurve) both; }
+.faden-shell .zinsband__achse { display: flex; justify-content: space-between; margin-top: var(--luft-xxs); font: 500 var(--grad-kicker)/1.3 var(--sans); color: var(--muted); }
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .zinsband[data-sicht="an"] .zinsband__feld svg,
+  .faden-shell .zinsband[data-sicht="an"] .zinsband__punkt,
+  .faden-shell .zinsband[data-sicht="an"] .zinsband__grund,
+  .faden-shell .zinsband[data-sicht="an"] .zinsband__punkt.ist-best b { animation: none !important; opacity: 1; }
+  .faden-shell .zinsband__feld svg { clip-path: none; }
+}
+
+/* -- Das Streuband im Teaser (components/faden/landing/Punktband.tsx) ---------------
+   Die dritte Form. Ab 17 Angeboten wird aus jeder Säule ein Punkt — dieselbe Grenze wie
+   im Kursblatt (`bandform`), damit die Vorschau zeigt, was die Seite dahinter zeigt.
+   Der Punkt sieht aus wie der der Zinskurve; nur seine Achse bedeutet etwas anderes. */
+.faden-shell .punktband { display: block; margin-top: var(--luft-l); }
+.faden-shell .punktband__feld { position: relative; display: block; height: var(--band-h, 48px); }
+.faden-shell .punktband__punkt { position: absolute; transform: translate(-50%, 50%); opacity: 0; }
+.faden-shell .punktband[data-sicht="an"] .punktband__punkt { animation: marktband-sicht .3s both; }
+/* 🚨 Maße und Ton vom großen Band geerbt (`.kb-band__punkt`: 10 px, volle Tinte), nur
+   eine Spur kleiner, weil der Teaser halb so breit ist. Der Punkt stand hier erst in
+   7 px auf --ink-45 und verschwand neben den Säulen der Nachbarteaser. */
+.faden-shell .punktband__punkt b { display: block; width: 8px; height: 8px; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-fein) solid var(--ink); box-sizing: border-box; transition: background-color .3s; }
+.faden-shell .vgl-teaser:hover .punktband__punkt b { background: var(--ink-16); }
+/* Der Bestwert ist gefüllt, größer und pulst — wie an der Kurve. */
+.faden-shell .punktband__punkt.ist-best b,
+.faden-shell .vgl-teaser:hover .punktband__punkt.ist-best b { --puls-marke: var(--puls-vergleich); width: 12px; height: 12px; background: var(--tuerkis); border: 0; }
+.faden-shell .punktband[data-sicht="an"] .punktband__punkt.ist-best b { animation: fl-punkt 2.4s ease-in-out 1.4s infinite; }
+/* 🚨 Die Ø-Linie steht SENKRECHT. Beim Säulenband liegt der Durchschnitt auf einer
+   Höhe, hier auf einer Stelle der Achse — dieselbe Aussage, um 90 Grad gedreht. */
+.faden-shell .punktband__schnitt { position: absolute; top: 0; bottom: 0; border-left: var(--strich-haar) dashed var(--ink-45); opacity: 0; }
+.faden-shell .punktband[data-sicht="an"] .punktband__schnitt { animation: marktband-sicht .4s 1.1s both; }
+.faden-shell .punktband__schnitt em { position: absolute; left: var(--luft-xs); top: 0; padding: 0 var(--luft-xxs); background: var(--paper); font: 600 var(--grad-kicker)/1 var(--sans); font-style: normal; color: var(--muted); white-space: nowrap; }
+/* Steht der Durchschnitt weit rechts, kippt sein Etikett auf die andere Seite — sonst
+   läuft es aus dem Teaser heraus.
+   🚨 Über ein `data-`Attribut, nicht über `[style*="left: 7"]`: dieselbe Zeichenfolge
+   steht in „left: 7.2%" wie in „left: 71.5%". */
+.faden-shell .punktband__schnitt[data-seite="rechts"] em { left: auto; right: var(--luft-xs); }
+.faden-shell .punktband__grund { display: block; height: var(--strich-haar); background: var(--ink-45); transform-origin: left; }
+.faden-shell .punktband[data-sicht="an"] .punktband__grund { animation: marktband-grund .9s var(--kurve) both; }
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .punktband[data-sicht="an"] .punktband__punkt,
+  .faden-shell .punktband[data-sicht="an"] .punktband__punkt.ist-best b,
+  .faden-shell .punktband[data-sicht="an"] .punktband__schnitt,
+  .faden-shell .punktband[data-sicht="an"] .punktband__grund { animation: none !important; opacity: 1; transform: translate(-50%, 50%); }
+  .faden-shell .punktband[data-sicht="an"] .punktband__schnitt { transform: none; }
+}

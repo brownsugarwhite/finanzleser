@@ -1,0 +1,319 @@
+/* =====================================================================================
+   kassensturz.css — Finanz-Kassensturz im Faden (Kasten, Fragen als Karten, Ergebnis mit
+   Tacho, Ampel und Lückenkarten) und der Teaser unter den Ratgebern.
+   Port aus docs/prototype/src/01-css.html (.kasten--ks, .ks__*, .tacho*, Zeilen 94–133,
+   165–166, 252–263, 870). Nur im .faden-shell-Scope; Regeln, die der Prototyp-Code nicht
+   mehr nutzt (.ks__optionen, .ks__option, .ks__spalten, WhatsApp-Reihe), sind weggelassen.
+   ===================================================================================== */
+
+/* Kassensturz im Zeitungsstil: Kopfzeile mit Stand, feine Fortschrittslinie, eine Frage groß in Serif,
+   Antworten als Karten. Die gewählte Karte füllt sich dunkel (wie das Register), dann wechselt die Bühne ruhig. */
+.faden-shell .kasten--ks { padding: var(--luft-l) var(--luft-xl) var(--luft-xl); }
+.faden-shell .ks { display: grid; gap: 0; min-width: 0; }
+.faden-shell .kasten--ks { min-width: 0; }
+.faden-shell .ks .ikon { width: 20px; height: 20px; vertical-align: -5px; flex: none; }
+/* 🚨 Der Einhänger sitzt am KOPF des Satzes, nicht an der Bühne — er gilt für beide
+   Spalten (Wunsch 17.09.2026). `.ks` behält ihn nur dort, wo es allein steht (Schaukasten,
+   Ratgeber-Teaser): ohne `.ks-satz` darüber greift die zweite Regel. */
+.faden-shell .ks-satz__kopf { grid-column: 1 / -1; border-top: var(--strich-einhaenger) solid var(--green); padding-top: var(--luft-m); }
+.faden-shell .ks-satz .ks { border-top: 0; padding-top: 0; }
+.faden-shell .ks { border-top: var(--strich-einhaenger) solid var(--green); padding-top: var(--luft-m); }
+.faden-shell .ks__kopf { display: flex; justify-content: space-between; align-items: center; gap: var(--luft-m); flex-wrap: wrap; }
+.faden-shell .ks__marke { display: inline-flex; align-items: center; gap: var(--luft-s); }
+.faden-shell .ks__marke i { width: 8px; height: 8px; border-radius: var(--radius-kreis); background: var(--green); flex: none; }
+.faden-shell .ks__stand { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); text-transform: none; letter-spacing: normal; font-variant-numeric: tabular-nums; }
+/* Fortschritt als Segmentreihe, 1:1 aus Design A v2 (Übergabe Zeile 829–831): erledigt
+   grün, das laufende in Tinte und einmal von links aufgezogen, offene fast durchsichtig.
+   Der Ton der offenen Segmente steht wörtlich — er liegt zwischen --rule und --rule-fein. */
+.faden-shell .ks__fortschritt { display: flex; gap: var(--luft-xs); height: 3px; margin: var(--luft-m) 0 var(--luft-l); }
+.faden-shell .ks__fortschritt i { flex: 1; height: 3px; background: var(--ink-16); transition: background .4s; transform-origin: left; }
+.faden-shell .ks__fortschritt i.ist-erledigt { background: var(--green); }
+.faden-shell .ks__fortschritt i.ist-jetzt { background: var(--ink); animation: ks-linie .6s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes ks-linie { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.faden-shell .ks__buehne { display: grid; gap: var(--luft-l); justify-items: start; text-align: left; transition: opacity .22s ease, transform .22s ease; }
+.faden-shell .ks__buehne.geht { opacity: 0; transform: translateY(-8px); }
+.faden-shell .ks__buehne.kommt { opacity: 0; transform: translateY(10px); transition: none; }
+/* 🚨 Kein `max-width`, und kein `text-wrap: balance`. Beide brachen die Frage früh um
+   („Wie gut sind Sie / eigentlich aufgestellt?" auf halber Spalte). Eine Schlagzeile
+   nimmt die Satzbreite — Regel des Users vom 13.09.2026: Überschriften nutzen die ganze
+   Breite, wo es geht. `balance` verteilt die Zeilen gleichmäßig und kostet dabei genau
+   die Breite, die man haben will; `pretty` verhindert nur den Schusterjungen. */
+.faden-shell .ks__frage { font: var(--schrift-gross); letter-spacing: normal; text-wrap: pretty; }
+.faden-shell .ks__hinweis { font: italic 300 var(--grad-15)/1.45 var(--serif); color: var(--muted); margin: calc(-1 * var(--luft-s)) 0 0; }
+.faden-shell .ks__weiter { border: 0; background: none; color: var(--ink); font: 600 var(--grad-14)/1 var(--sans); cursor: pointer; display: inline-flex; align-items: center; gap: var(--luft-s); padding: var(--luft-s) var(--luft-xxs); border-bottom: var(--strich-haar) solid var(--ink); text-decoration: none; border-radius: 0; }
+.faden-shell .ks__weiter i { font-style: normal; color: var(--green); transition: transform .2s; }
+.faden-shell .ks__weiter:hover i { transform: translateX(3px); }
+.faden-shell .ks__still { border: 0; background: none; color: var(--muted); font: 400 var(--grad-13)/1 var(--sans); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.faden-shell .ks__regler { width: 100%; display: grid; gap: 0; }
+.faden-shell .ks__bahn { position: relative; padding: var(--luft-xl) 0 var(--luft-s); }
+.faden-shell .ks input[type=range] { position: relative; z-index: 2; width: 100%; height: 6px; -webkit-appearance: none; appearance: none; background: linear-gradient(to right, var(--ink) var(--anteil, 0%), var(--rule) var(--anteil, 0%)); border-radius: var(--radius-kante); }
+.faden-shell .ks input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-einhaenger) solid var(--ink); cursor: pointer; }
+.faden-shell .ks input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-einhaenger) solid var(--ink); cursor: pointer; }
+.faden-shell .ks__fahne { position: absolute; top: 0; transform: translateX(-50%); z-index: 3; background: var(--ink); color: var(--auf-tinte); padding: var(--luft-xs) var(--luft-m); font: 600 var(--grad-16)/1 var(--sans); white-space: nowrap; font-variant-numeric: tabular-nums; transition: left .28s cubic-bezier(.22,1,.36,1); }
+.faden-shell .ks__fahne::after { content: ""; position: absolute; left: 50%; bottom: -5px; transform: translateX(-50%); border: 5px solid transparent; border-bottom: 0; border-top-color: var(--ink); }
+.faden-shell .ks__spanne { position: absolute; top: 34px; height: 6px; z-index: 1; background: repeating-linear-gradient(135deg, rgba(51,74,39,.28) 0 4px, transparent 4px 8px); }
+.faden-shell .ks__wahr { position: absolute; top: 46px; transform: translateX(-50%); z-index: 3; background: var(--green); color: var(--auf-tinte); padding: var(--luft-xs) var(--luft-s); font: 700 var(--grad-13)/1 var(--sans); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.faden-shell .ks__wahr i { position: absolute; left: 50%; top: -12px; width: 2px; height: 12px; background: var(--green); transform: translateX(-50%); }
+.faden-shell .ks__spanneWerte { display: flex; justify-content: space-between; font: 700 var(--grad-13)/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; margin-top: var(--luft-s); }
+.faden-shell .ks__spanneWerte span { position: relative; padding-top: var(--luft-s); }
+.faden-shell .ks__spanneWerte span::before { content: ""; position: absolute; top: 0; width: 2px; height: 5px; background: var(--ink); }
+.faden-shell .ks__spanneWerte span:first-child::before { left: 1px; } .faden-shell .ks__spanneWerte span:last-child::before { right: 1px; }
+.faden-shell .ks__aufloesung { font: 400 var(--grad-16)/1.55 var(--sans); max-width: 60ch; }
+.faden-shell .ks__aufloesung b { font-family: var(--serif); font-weight: 700; }
+.faden-shell .ks__genau { display: inline-block; margin-left: var(--luft-s); padding: var(--luft-xs) var(--luft-s); background: var(--tint); color: var(--green-ink); font: 700 var(--grad-13)/1.3 var(--sans); }
+.faden-shell .ks__aufloesung small { display: block; font: 400 var(--grad-12)/1.4 var(--sans); color: var(--muted); margin-top: var(--luft-s); }
+
+/* Antworten als Karten mit Ikon */
+/* Die Antwortkarten sind TASTEN einer Registrierkasse (Übergabe „Finanzleser Heute",
+   Baustein 3): untereinander, Ikon links, Beschriftung daneben. Gedrückt sinken sie ein,
+   füllen sich mit Tinte und schicken ihre Punkte zum Beleg.
+   🚨 Vorher standen sie nebeneinander in einem `auto-fit`-Raster. Neben dem Beleg ist
+   dafür kein Platz mehr, und eine Taste liest sich als Zeile besser als als Kachel. */
+.faden-shell .ks__karten { display: grid; gap: var(--luft-s); width: 100%; min-width: 0; }
+.faden-shell .ks__karte { position: relative; display: grid; grid-template-columns: 36px minmax(0, 1fr); align-items: center; gap: var(--luft-m); min-height: 56px; border: var(--strich-haar) solid var(--ink-25); border-radius: 0; background: var(--color-pill-bg); padding: var(--luft-s) var(--luft-l) var(--luft-s) var(--luft-m); text-align: left; color: var(--ink); cursor: pointer; transition: transform .2s var(--kurve), border-color .25s, background .25s, box-shadow .2s; animation: ks-rein .4s both; }
+.faden-shell .ks__karte b { font: 700 var(--grad-15)/1.3 var(--serif); }
+.faden-shell .ks__karte .ikon { width: 34px; height: 34px; vertical-align: 0; color: var(--ink); transition: filter .2s, transform .2s; }
+.faden-shell .ks__karte:hover { border-color: var(--ink); transform: translateY(-1px); }
+.faden-shell .ks__karte:hover .ikon { transform: scale(1.08); }
+/* Gedrückt: die Taste sinkt ein, das Ikon wird weiß ausgestanzt. */
+.faden-shell .ks__karte.gewaehlt { background: var(--ink); border-color: var(--ink); color: var(--paper); transform: translateY(2px); box-shadow: var(--schatten-taste); }
+.faden-shell .ks__karte.gewaehlt .ikon { filter: brightness(0) invert(1); }
+
+/* Ergebnis: Zierlinie, Profil als Vorspann, Ampel als Zeile, Tacho rechts, Lücken als Karten */
+.faden-shell .ks__zier { display: flex; align-items: center; gap: var(--luft-m); color: var(--muted); }
+.faden-shell .ks__zier i { width: 48px; height: 1px; background: var(--muted); opacity: .55; }
+.faden-shell .ks__zier .spark { color: var(--muted); }
+.faden-shell .ks__profil { font: 400 var(--grad-20)/1.5 var(--serif); font-style: italic; max-width: 46ch; margin: 0; }
+.faden-shell .ks__ampel { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--luft-s) var(--luft-l); }
+.faden-shell .ks__ampel span { font: 600 var(--grad-11)/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--green-ink); display: inline-flex; align-items: center; gap: var(--luft-s); }
+.faden-shell .ks__ampel span::before { content: ""; width: 7px; height: 7px; border-radius: var(--radius-kreis); background: var(--green); }
+.faden-shell .ks__ampel span.rot { color: var(--pink); }
+.faden-shell .ks__ampel span.rot::before { background: var(--pink); }
+.faden-shell .ks__nr { font: 400 var(--grad-28)/1 var(--serif); color: var(--pink); }
+.faden-shell .ks__kopfzeile { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--luft-l) var(--luft-xl); align-items: center; width: 100%; text-align: left; }
+.faden-shell .ks__profilblock { display: grid; gap: var(--luft-m); }
+.faden-shell .ks__profilblock .ks__ampel { justify-content: flex-start; }
+.faden-shell .ks__tacho { justify-self: end; }
+.faden-shell .ks__erg-karten { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--luft-m); width: 100%; text-align: left; }
+.faden-shell .ks__erg { position: relative; border: var(--strich-haar) solid var(--rule); border-radius: 0; background: none; padding: var(--luft-l) var(--luft-m) var(--luft-m); display: grid; gap: var(--luft-s); align-content: start; }
+.faden-shell .ks__erg h4 { margin: 0; font: 700 var(--grad-16)/1.3 var(--serif); }
+.faden-shell .ks__erg p { margin: 0; font-size: var(--grad-14); line-height: 1.5; }
+.faden-shell .ks__erg .links { display: flex; flex-wrap: wrap; gap: var(--luft-xs) var(--luft-m); margin-top: var(--luft-xxs); }
+.faden-shell .ks__erg-ikon { width: 34px; height: 34px; border-radius: 0; background: none; color: var(--ink); display: grid; place-items: start; }
+.faden-shell .ks__erg-ikon .ikon { width: 28px; height: 28px; vertical-align: 0; }
+.faden-shell .ks__erg--gut .ks__erg-ikon { color: var(--green-ink); }
+.faden-shell .ks__erg .ks__nr { position: absolute; top: 12px; right: 14px; font-size: var(--grad-22); }
+.faden-shell .ks__aktionen { display: flex; gap: var(--luft-l); flex-wrap: wrap; justify-content: center; }
+.faden-shell .ks__nachher { width: 100%; text-align: left; background: none; border: 0; border-top: var(--strich-haar) solid var(--rule); border-radius: 0; padding: var(--luft-l) 0 0; margin-top: var(--luft-s); }
+.faden-shell .ks__zustellung { grid-column: 2; display: flex; align-items: baseline; gap: var(--luft-l); flex-wrap: wrap; margin-top: var(--luft-m); width: 100%; }
+.faden-shell .ks__feld { display: flex; align-items: baseline; gap: 0; flex: 1 1 260px; min-width: 0; max-width: 380px; border-bottom: var(--strich-haar) solid var(--ink); }
+.faden-shell .ks__feld input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; padding: var(--luft-s) 0; font: 400 var(--grad-14) var(--sans); color: var(--ink); }
+.faden-shell .ks__feld input::placeholder { color: var(--muted); }
+.faden-shell .ks__senden { border: 0; background: none; padding: var(--luft-s) 0 var(--luft-s) var(--luft-s); font: 600 var(--grad-13) var(--sans); color: var(--green-ink); white-space: nowrap; cursor: pointer; }
+.faden-shell .ks__wa { display: inline-flex; align-items: center; gap: var(--luft-s); border: 0; background: none; padding: var(--luft-s) 0; font: 600 var(--grad-13) var(--sans); color: var(--muted); cursor: pointer; }
+.faden-shell .ks__wa:hover { color: var(--green-ink); }
+.faden-shell .ks__wa .ikon { width: 17px; height: 17px; vertical-align: 0; }
+.faden-shell .ks__feld .knopf .ikon { width: 16px; height: 16px; vertical-align: -3px; margin-right: var(--luft-xs); }
+.faden-shell .ks__rein { animation: ks-rein .5s cubic-bezier(.25,.46,.45,.94) both; }
+@keyframes ks-rein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* Tacho: Halbkreis, Bogen füllt sich, Zahl zählt hoch */
+.faden-shell .tacho { position: relative; width: 230px; height: 126px; }
+.faden-shell .tacho svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.faden-shell .tacho__bogen { transition: stroke .6s; }
+.faden-shell .tacho__wert { position: absolute; left: 0; right: 0; bottom: 10px; text-align: center; }
+.faden-shell .tacho__wert b { display: block; font: 900 var(--grad-34)/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
+.faden-shell .tacho__wert small { display: block; margin-top: var(--luft-xs); font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .faden-shell .ks__frage { font-size: var(--grad-20); }
+  .faden-shell .kasten--ks { padding: var(--luft-l) var(--luft-m) var(--luft-l); }
+  .faden-shell .ks__kopfzeile { grid-template-columns: 1fr; }
+  .faden-shell .ks__tacho { justify-self: center; }
+}
+
+/* =====================================================================================
+   Baustein 3 der Übergabe „Finanzleser Heute“ (17.09.2026): Bühne links, Beleg rechts.
+
+   Der Kassensturz ist damit kein Kasten mehr, sondern ein SATZ aus zwei Spalten. Die
+   alten `.kasten--ks`-Regeln bleiben stehen, solange die Alt-Seite sie noch braucht.
+   ===================================================================================== */
+.faden-shell .ks-satz { display: grid; grid-template-columns: minmax(0, 1fr) 252px; gap: 0 var(--luft-xl); align-items: start; position: relative; min-width: 0; scroll-margin-top: 110px; }
+/* Die Fortschrittsreihe trägt ihren eigenen Abstand nach unten (`.ks__fortschritt`);
+   zwischen Kopf und Spalten braucht das Raster deshalb keinen weiteren. */
+.faden-shell .ks-satz > .ks { padding-top: 0; }
+@media (max-width: 760px) {
+  /* Eng: eine Spalte, der Beleg rutscht unter die Bühne und steht mittig. */
+  .faden-shell .ks-satz { grid-template-columns: minmax(0, 1fr); gap: var(--luft-xl); }
+  .faden-shell .ks-beleg { justify-self: center; width: min(100%, 300px); }
+}
+
+/* ── Der Fahrplan auf dem Deckblatt ─────────────────────────────────────────────────
+   Drei Stationen auf einer Linie. Die Linie läuft nur ZWISCHEN den Kreisen (je eine
+   halbe Spalte Einzug) — über die volle Breite sähe sie aus wie ein Trennstrich. */
+.faden-shell .ks-fahrplan { position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--luft-m); width: 100%; text-align: center; }
+.faden-shell .ks-fahrplan__linie { position: absolute; left: 16.6%; right: 16.6%; top: 11px; height: var(--strich-haar); background: var(--ink-30); }
+.faden-shell .ks-fahrplan li { display: grid; justify-items: center; gap: var(--luft-xs); animation: ks-rein .5s cubic-bezier(.25,.46,.45,.94) both; }
+.faden-shell .ks-fahrplan__kreis { width: 22px; height: 22px; border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-fein) solid var(--ink); display: grid; place-items: center; font: 900 var(--grad-kicker)/1 var(--serif); color: var(--ink); }
+.faden-shell .ks-fahrplan b { font: 700 var(--grad-13)/1.3 var(--serif); }
+.faden-shell .ks-fahrplan small { font: var(--schrift-hinweis); color: var(--muted); }
+@media (max-width: 560px) { .faden-shell .ks-fahrplan { grid-template-columns: minmax(0, 1fr); gap: var(--luft-m); } .faden-shell .ks-fahrplan__linie { display: none; } }
+
+/* ── Der Beleg ──────────────────────────────────────────────────────────────────────
+   Ein weißer Zettel mit Zickzack-Unterkante. Die Zacken sind ein `clip-path`-Polygon
+   mit 8-px-Zähnen alle 3 % — deshalb steht der Inhalt in `__innen`: `clip-path` würde
+   sonst auch den Stempel abschneiden, der über die Kante ragen darf. */
+.faden-shell .ks-beleg { position: sticky; top: 20px; align-self: start; }
+.faden-shell .ks-beleg__zettel { position: relative; filter: drop-shadow(var(--schatten-zettel)); font-variant-numeric: tabular-nums; animation: ks-herz .6s var(--kurve) .25s both; }
+.faden-shell .ks-beleg__innen {
+  background: var(--auf-tinte); padding: var(--luft-m) var(--luft-m) 26px;
+  clip-path: polygon(
+    0 0, 100% 0, 100% calc(100% - 8px),
+    97% 100%, 94% calc(100% - 8px), 91% 100%, 88% calc(100% - 8px), 85% 100%, 82% calc(100% - 8px),
+    79% 100%, 76% calc(100% - 8px), 73% 100%, 70% calc(100% - 8px), 67% 100%, 64% calc(100% - 8px),
+    61% 100%, 58% calc(100% - 8px), 55% 100%, 52% calc(100% - 8px), 49% 100%, 46% calc(100% - 8px),
+    43% 100%, 40% calc(100% - 8px), 37% 100%, 34% calc(100% - 8px), 31% 100%, 28% calc(100% - 8px),
+    25% 100%, 22% calc(100% - 8px), 19% 100%, 16% calc(100% - 8px), 13% 100%, 10% calc(100% - 8px),
+    7% 100%, 4% calc(100% - 8px), 1% 100%, 0 calc(100% - 8px)
+  );
+}
+.faden-shell .ks-beleg__kopf { display: grid; justify-items: center; gap: var(--luft-xxs); text-align: center; margin-bottom: var(--luft-s); }
+.faden-shell .ks-beleg__kopf b { font: 700 var(--grad-11)/1 var(--serif); letter-spacing: .22em; text-transform: uppercase; color: var(--ink); }
+.faden-shell .ks-beleg__kopf span { font: 400 var(--grad-kicker)/1.3 var(--sans); color: var(--muted); }
+.faden-shell .ks-beleg__riss { display: block; height: var(--strich-haar); border-top: var(--strich-haar) dashed var(--ink-35); }
+
+.faden-shell .ks-beleg__zeilen { list-style: none; margin: 0; padding: 0; }
+.faden-shell .ks-beleg__zeilen li { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto 34px; align-items: baseline; gap: var(--luft-xs); padding: var(--luft-xs) 0; font: 400 var(--grad-11)/1.3 var(--sans); color: var(--muted); }
+.faden-shell .ks-beleg__zeilen li.ist-gebucht { color: var(--ink); animation: ks-druck .5s var(--kurve) both; }
+.faden-shell .ks-beleg__nr { font: 700 var(--grad-kicker)/1.3 var(--sans); color: var(--muted); }
+.faden-shell .ks-beleg__thema { display: flex; align-items: baseline; gap: var(--luft-xs); min-width: 0; }
+.faden-shell .ks-beleg__wert { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 96px; }
+.faden-shell .ks-beleg__punkte { display: flex; align-items: center; justify-content: flex-end; gap: var(--luft-xxs); font: 700 var(--grad-11)/1.3 var(--sans); color: var(--muted); }
+.faden-shell .ks-beleg__punkte.ist-plus { color: var(--green-ink); }
+.faden-shell .ks-beleg__punkte.ist-minus { color: var(--pink); }
+.faden-shell .ks-beleg__haken { flex: none; width: 10px; height: 9px; fill: none; stroke: var(--green); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 14; stroke-dashoffset: 14; animation: ks-haken .45s var(--kurve) forwards; }
+
+.faden-shell .ks-beleg__summe { display: flex; align-items: baseline; justify-content: space-between; gap: var(--luft-s); padding: var(--luft-s) 0 var(--luft-xs); }
+.faden-shell .ks-beleg__summe b { font: 700 var(--grad-11)/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; }
+.faden-shell .ks-beleg__zahl { font: 900 var(--grad-18)/1 var(--serif); color: var(--ink); white-space: nowrap; }
+.faden-shell .ks-beleg__zahl.ist-frisch { animation: ks-tick .4s var(--ueber); }
+.faden-shell .ks-beleg__zahl small { font: 400 var(--grad-kicker)/1 var(--sans); color: var(--muted); margin-left: var(--luft-xs); }
+.faden-shell .ks-beleg .doppellinie { margin-top: var(--luft-xxs); }
+.faden-shell .ks-beleg__fuss { margin: var(--luft-s) 0 0; font: var(--schrift-hinweis); font-size: var(--grad-kicker); color: var(--muted); }
+
+/* Der Stempel sitzt oben rechts im Belegkopf und darf über die Kante ragen. */
+.faden-shell .ks-beleg__stempel {
+  /* 🚨 Auf die Ecke, nicht in den Kopf: Bei 252 px Belegbreite reicht „KASSENSTURZ" bis
+     unter den Stempel, und beides überdruckte sich. Er darf über die Kante ragen —
+     dafür steht der Inhalt in `__innen` und nur der wird beschnitten. */
+  position: absolute; right: -14px; top: -16px;
+  padding: var(--luft-xs) var(--luft-s);
+  border: var(--strich-stempel) solid var(--green); background: var(--stempel-grund);
+  font: 900 var(--grad-13)/1 var(--serif); letter-spacing: .14em; text-transform: uppercase; color: var(--green);
+  transform: rotate(-11deg); animation: fl-stempel .7s var(--ueber) .6s both;
+}
+.faden-shell .ks-beleg__funke { position: absolute; color: var(--green); opacity: 0; animation: ks-funke .9s var(--kurve) both; }
+
+@keyframes ks-herz { 0% { opacity: 0; transform: translateY(14px) scale(.985); } 55% { opacity: 1; transform: translateY(-2px) scale(1.008); } 100% { opacity: 1; transform: none; } }
+@keyframes ks-druck { 0% { opacity: 0; transform: translateY(6px); letter-spacing: .05em; } 60% { opacity: 1; letter-spacing: .005em; } 100% { opacity: 1; transform: none; letter-spacing: normal; } }
+@keyframes ks-haken { to { stroke-dashoffset: 0; } }
+@keyframes ks-tick { 0% { transform: scale(1); } 40% { transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes ks-bon { 0% { transform: translateY(0); } 35% { transform: translateY(3px); } 100% { transform: translateY(0); } }
+@keyframes ks-bon2 { 0% { transform: translateY(0); } 35% { transform: translateY(3px); } 100% { transform: translateY(0); } }
+@keyframes ks-funke { 0% { transform: scale(0) rotate(-30deg); opacity: 0; } 45% { transform: scale(1.4) rotate(10deg); opacity: 1; } 100% { transform: scale(.6) rotate(30deg) translateY(-6px); opacity: 0; } }
+
+/* ── Der Punkte-Flug ────────────────────────────────────────────────────────────────
+   Ein Chip, der von der gedrückten Taste zur Zwischensumme fliegt. Er liegt absolut im
+   Wurzelknoten des Kassensturzes und rechnet in SEITENKOORDINATEN — so hängt er an
+   keinem `overflow` und an keiner Transformation. */
+.faden-shell .ks-flug {
+  position: absolute; left: 0; top: 0; z-index: 4; pointer-events: none;
+  padding: var(--luft-xxs) var(--luft-s); border-radius: var(--radius-pille);
+  background: var(--green-ink); color: var(--auf-tinte);
+  font: 700 var(--grad-13)/1.3 var(--sans); white-space: nowrap;
+  animation: ks-flug .65s cubic-bezier(.3, .7, .3, 1) both;
+}
+.faden-shell .ks-flug[data-ton="minus"] { background: var(--pink); }
+.faden-shell .ks-flug[data-ton="null"] { background: var(--muted); }
+@keyframes ks-flug {
+  0%   { transform: translate(calc(var(--x0) - 50%), calc(var(--y0) - 50%)) scale(1); opacity: 1; }
+  50%  { opacity: 1; }
+  100% { transform: translate(calc(var(--x1) - 50%), calc(var(--y1) - 50%)) scale(.7); opacity: 0; }
+}
+
+/* ── Die Schätzfrage mit Lineal ─────────────────────────────────────────────────────
+   Nach dem Tipp liegt eine durchsichtige Sperre darauf: Das Lineal soll stehen bleiben,
+   wo der Leser es gelassen hat. */
+.faden-shell .ks-schaetz { position: relative; width: 100%; }
+.faden-shell .ks-schaetz__sperre { position: absolute; inset: 0; cursor: default; }
+
+/* Die Auflösung: Grundlinie, Spanne in der Urteilsfarbe, Tipp-Marke und Wahrheits-Knoten. */
+.faden-shell .ks-aufl { position: relative; height: 44px; width: 100%; }
+.faden-shell .ks-aufl__grund { position: absolute; left: 0; right: 0; top: 22px; height: var(--strich-haar); background: var(--ink-30); }
+.faden-shell .ks-aufl__spanne { position: absolute; top: 21px; height: var(--strich-einhaenger); background: var(--green); transform-origin: left; animation: ks-linie .6s var(--kurve) .2s both; }
+.faden-shell .ks-aufl[data-urteil="nah"] .ks-aufl__spanne { background: var(--spiel-ink); }
+.faden-shell .ks-aufl[data-urteil="weit"] .ks-aufl__spanne { background: var(--pink); }
+.faden-shell .ks-aufl__tipp, .faden-shell .ks-aufl__wahr { position: absolute; top: 17px; transform: translateX(-50%); }
+.faden-shell .ks-aufl__tipp::before { content: ""; display: block; width: 11px; height: 11px; border-radius: var(--radius-kreis); background: var(--auf-tinte); border: var(--strich-stark) solid var(--ink); box-sizing: border-box; }
+.faden-shell .ks-aufl__wahr::before { content: ""; display: block; width: 11px; height: 11px; border-radius: var(--radius-kreis); background: var(--green); border: var(--strich-stark) solid var(--paper); box-sizing: border-box; animation: ks-knoten .5s var(--ueber) both; }
+.faden-shell .ks-aufl__tipp em { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); font: 600 var(--grad-kicker)/1 var(--sans); color: var(--muted); white-space: nowrap; font-style: normal; }
+.faden-shell .ks-aufl__wahr em { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); font: 700 var(--grad-kicker)/1 var(--sans); color: var(--green-ink); white-space: nowrap; font-style: normal; animation: ks-druck .5s var(--kurve) .3s both; }
+.faden-shell .ks-aufl__urteil { margin: 0; font: italic 400 var(--grad-16)/1.5 var(--serif); color: var(--green-ink); }
+.faden-shell .ks-aufl__urteil[data-urteil="nah"] { color: var(--spiel-ink); }
+.faden-shell .ks-aufl__urteil[data-urteil="weit"] { color: var(--pink); }
+.faden-shell .ks-aufl__urteil small { display: block; margin-top: var(--luft-xs); font: 400 var(--grad-12)/1.4 var(--sans); color: var(--muted); }
+@keyframes ks-knoten { 0% { transform: scale(0); } 60% { transform: scale(1.6); } 100% { transform: scale(1); } }
+
+/* ── Das Ergebnis ───────────────────────────────────────────────────────────────────
+   Tacho links, Urteil rechts; darunter die Lücken als Verzeichnis. */
+.faden-shell .ks-erg { display: grid; grid-template-columns: minmax(0, 190px) minmax(0, 1fr); gap: var(--luft-l); align-items: center; width: 100%; text-align: left; }
+@media (max-width: 620px) { .faden-shell .ks-erg { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; } }
+/* 🚨 `.tacho` trägt eine FESTE Breite von 230 px (weiter oben) und lief damit über seine
+   170-px-Spalte hinaus — der Vorspann daneben verschwand halb darunter. Hier bekommt er
+   die Spaltenbreite und behält sein Seitenverhältnis. */
+.faden-shell .ks-erg__tacho .tacho { width: 100%; height: auto; aspect-ratio: 230 / 126; }
+.faden-shell .ks-erg__urteil { display: grid; gap: var(--luft-s); min-width: 0; }
+.faden-shell .ks-erg__schlag { margin: 0; font: var(--schrift-abschnitt); color: var(--ink); }
+.faden-shell .ks-erg__vorspann { margin: 0; font: 400 var(--grad-14)/1.6 var(--sans); color: var(--ink); max-width: 52ch; }
+.faden-shell .ks-erg__gut { margin: 0; font: var(--schrift-hinweis); color: var(--muted); }
+/* Die Ampel: drei Punkte, einer leuchtet — der Rest bleibt blass stehen. */
+.faden-shell .ks-ampel { display: flex; align-items: center; gap: var(--luft-s); flex-wrap: wrap; }
+.faden-shell .ks-ampel i { width: 13px; height: 13px; border-radius: var(--radius-kreis); opacity: .18; }
+.faden-shell .ks-ampel__rot { background: var(--pink); }
+.faden-shell .ks-ampel__gelb { background: var(--spiel-ink); }
+.faden-shell .ks-ampel__gruen { background: var(--green); }
+.faden-shell .ks-ampel[data-stufe="rot"] .ks-ampel__rot,
+.faden-shell .ks-ampel[data-stufe="gelb"] .ks-ampel__gelb,
+.faden-shell .ks-ampel[data-stufe="gruen"] .ks-ampel__gruen { opacity: 1; outline: var(--strich-haar) solid currentColor; outline-offset: var(--luft-xxs); }
+.faden-shell .ks-ampel[data-stufe="rot"] .ks-ampel__rot { color: var(--pink); }
+.faden-shell .ks-ampel[data-stufe="gelb"] .ks-ampel__gelb { color: var(--spiel-ink); }
+.faden-shell .ks-ampel[data-stufe="gruen"] .ks-ampel__gruen { color: var(--green); }
+.faden-shell .ks-ampel span { margin-left: var(--luft-xs); font: 600 var(--grad-12)/1.3 var(--sans); color: var(--muted); }
+
+.faden-shell .ks-luecken { width: 100%; }
+.faden-shell .ks-luecken__kopf { display: block; padding-bottom: var(--luft-s); border-bottom: var(--strich-haar) solid var(--ink); }
+.faden-shell .ks-luecken ol { list-style: none; margin: 0; padding: 0; }
+.faden-shell .ks-luecken li { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; align-items: baseline; gap: var(--luft-m); padding: var(--luft-m) 0; border-bottom: var(--strich-haar) solid var(--rule-fein); transition: padding-left .3s var(--kurve); animation: ks-rein .5s cubic-bezier(.25,.46,.45,.94) both; }
+.faden-shell .ks-luecken li:hover { padding-left: var(--luft-s); }
+.faden-shell .ks-luecken__nr { font: 900 var(--grad-13)/1.3 var(--serif); color: var(--pink); }
+.faden-shell .ks-luecken li:nth-child(2) .ks-luecken__nr { color: var(--spiel-ink); }
+.faden-shell .ks-luecken li:nth-child(3) .ks-luecken__nr { color: var(--green-ink); }
+.faden-shell .ks-luecken__satz { display: grid; gap: var(--luft-xxs); min-width: 0; }
+.faden-shell .ks-luecken__satz b { font: 700 var(--grad-15)/1.35 var(--serif); }
+.faden-shell .ks-luecken__satz small { font: 400 var(--grad-12)/1.5 var(--sans); color: var(--muted); }
+.faden-shell .ks-luecken__wege { display: grid; gap: var(--luft-xs); justify-items: end; }
+.faden-shell .ks-luecken__wege .strich-link { font-size: var(--grad-12); white-space: nowrap; }
+@media (max-width: 560px) {
+  .faden-shell .ks-luecken li { grid-template-columns: 26px minmax(0, 1fr); }
+  .faden-shell .ks-luecken__wege { grid-column: 2; justify-items: start; }
+}
+
+.faden-shell .ks-zustellung { width: min(100%, 430px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .ks-beleg__zettel, .faden-shell .ks-beleg__zeilen li.ist-gebucht, .faden-shell .ks-beleg__stempel,
+  .faden-shell .ks-beleg__funke, .faden-shell .ks-beleg__haken, .faden-shell .ks-beleg__zahl.ist-frisch,
+  .faden-shell .ks-flug, .faden-shell .ks-aufl__spanne, .faden-shell .ks-aufl__wahr::before,
+  .faden-shell .ks-aufl__wahr em, .faden-shell .ks-fahrplan li, .faden-shell .ks-luecken li { animation: none !important; opacity: 1; }
+  .faden-shell .ks-beleg__haken { stroke-dashoffset: 0; }
+}

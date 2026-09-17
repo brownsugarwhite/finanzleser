@@ -1,0 +1,532 @@
+{
+  "slug": "berufsunfaehigkeitsversicherung",
+  "kopie": "vorlage-bu",
+  "bloecke": [
+    {
+      "nach": "heading-2",
+      "statistik": {
+        "art": "kennzahlen-vierer",
+        "titel": "Berufsunfähigkeit in Zahlen",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung, Rentenstatistik 2025",
+          "url": "https://jahresbericht.deutsche-rentenversicherung.de/artikel/in-zahlen-2025/",
+          "stand": "2025"
+        },
+        "kacheln": [
+          {
+            "label": "Verbreitung",
+            "zahl": 26.7,
+            "einheit": "%",
+            "text": "der Haushalte haben eine BU-Police",
+            "farbe": "var(--pink)"
+          },
+          {
+            "label": "Neue EM-Renten",
+            "zahl": 175978,
+            "einheit": "",
+            "text": "Zugänge im Jahr 2025",
+            "farbe": "var(--ink)"
+          },
+          {
+            "label": "Ø EM-Rente",
+            "zahl": 1067,
+            "einheit": "€",
+            "text": "im Monat, Zugang 2025",
+            "farbe": "var(--ink)"
+          },
+          {
+            "label": "Häufigste Ursache",
+            "zahl": 32.3,
+            "einheit": "%",
+            "text": "psychische Erkrankungen",
+            "farbe": "var(--green-ink)"
+          }
+        ],
+        "hinweis": "Die Verbreitung stammt aus der Einkommens- und Verbrauchsstichprobe 2023, die Ursachen aus dem M&M Rating 2026."
+      }
+    },
+    {
+      "nach": "heading-2",
+      "statistik": {
+        "art": "kreis",
+        "titel": "Warum Menschen berufsunfähig werden",
+        "untertitel": "Anteil an den Leistungsfällen, M&M Rating 2026",
+        "einheit": "%",
+        "mitteText": "Leistungsfälle",
+        "quelle": {
+          "name": "MORGEN & MORGEN, M&M Rating Berufsunfähigkeit 2026",
+          "url": "https://morgenundmorgen.com/magazin/mm-marktblick/m-m-marktblick-berufsunfaehigkeit-2026/",
+          "stand": "05.05.2026",
+          "sekundaer": true
+        },
+        "stuecke": [
+          {
+            "label": "Psychische Erkrankungen",
+            "wert": 32.3
+          },
+          {
+            "label": "Nerven, Herz, Unfall und weitere",
+            "wert": 20.0
+          },
+          {
+            "label": "Skelett und Bewegungsapparat",
+            "wert": 17.6
+          },
+          {
+            "label": "Krebs und Geschwülste",
+            "wert": 16.3
+          },
+          {
+            "label": "Sonstige Krankheiten",
+            "wert": 13.8
+          }
+        ],
+        "hinweis": "Nerven-, Herz- und Unfallursachen weist die Studie nur gerundet mit je rund sechs Prozent aus; sie stehen hier zusammengefasst."
+      }
+    },
+    {
+      "nach": "heading-3",
+      "statistik": {
+        "art": "saeulen",
+        "titel": "Wie gut die Haushalte abgesichert sind",
+        "untertitel": "Anteil der Haushalte mit der jeweiligen Police, 2023",
+        "einheit": "%",
+        "quelle": {
+          "name": "GDV, Auswertung der Einkommens- und Verbrauchsstichprobe 2023",
+          "url": "https://www.gdv.de/gdv/medien/medieninformationen/versicherungsschutz-in-der-fuenfjahreserhebung-mehr-alltagsschutz-weniger-vorsorge-fuers-alter--198196",
+          "stand": "07.04.2026"
+        },
+        "reihen": [
+          {
+            "label": "Anteil der Haushalte"
+          }
+        ],
+        "kategorien": [
+          {
+            "label": "Privathaftpflicht",
+            "werte": [
+              90
+            ]
+          },
+          {
+            "label": "Hausrat",
+            "werte": [
+              78
+            ]
+          },
+          {
+            "label": "Rechtsschutz",
+            "werte": [
+              50
+            ]
+          },
+          {
+            "label": "Berufsunfähigkeit",
+            "werte": [
+              26.7
+            ]
+          },
+          {
+            "label": "Risikoleben",
+            "werte": [
+              18.7
+            ]
+          }
+        ],
+        "hinweis": "Die Berufsunfähigkeit sichert das Einkommen ab — und ist trotzdem seltener als der Schutz für Möbel."
+      }
+    },
+    {
+      "nach": "heading-3",
+      "statistik": {
+        "art": "abwaegung",
+        "titel": "BU oder Grundfähigkeitsversicherung?",
+        "quelle": {
+          "name": "§ 172 VVG, Berufsunfähigkeit",
+          "url": "https://www.gesetze-im-internet.de/vvg_2008/__172.html",
+          "stand": "2026"
+        },
+        "pro": [
+          "Die BU zahlt, sobald der zuletzt ausgeübte Beruf zu 50 Prozent nicht mehr geht.",
+          "Sie deckt auch psychische Ursachen ab – die häufigste Gruppe.",
+          "Die Leistung ist an das Einkommen gekoppelt, nicht an eine Fähigkeitenliste."
+        ],
+        "contra": [
+          "Die Gesundheitsprüfung ist streng.",
+          "Der Beitrag hängt stark vom Beruf ab.",
+          "Körperlich Tätige zahlen deutlich mehr als Bürotätige."
+        ]
+      }
+    },
+    {
+      "nach": "heading-4",
+      "statistik": {
+        "art": "kennzahlen-liste",
+        "titel": "Die gesetzliche Erwerbsminderungsrente",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung, Rentenstatistik 2025",
+          "url": "https://jahresbericht.deutsche-rentenversicherung.de/artikel/in-zahlen-2025/",
+          "stand": "2025"
+        },
+        "zeilen": [
+          {
+            "name": "Ø Zahlbetrag im Zugang 2025",
+            "wert": "1.067 €"
+          },
+          {
+            "name": "Ø Zahlbetrag im Zugang 2024",
+            "wert": "1.041 €"
+          },
+          {
+            "name": "Ø Zahlbetrag im Bestand 2025",
+            "wert": "1.091 €"
+          },
+          {
+            "name": "Neuzugänge 2025",
+            "wert": "175.978"
+          },
+          {
+            "name": "Neuzugänge 2024",
+            "wert": "171.732"
+          },
+          {
+            "name": "Anstieg seit 2013",
+            "wert": "+74 %"
+          }
+        ],
+        "hinweis": "Beträge nach Abzug der Beiträge zur Kranken- und Pflegeversicherung."
+      }
+    },
+    {
+      "nach": "heading-6",
+      "statistik": {
+        "art": "schrittfolge",
+        "titel": "So stellen Sie den Antrag richtig",
+        "quelle": {
+          "name": "§ 19 VVG, Anzeigepflicht",
+          "url": "https://www.gesetze-im-internet.de/vvg_2008/__19.html",
+          "stand": "2026"
+        },
+        "schritte": [
+          {
+            "titel": "Krankenakte einsehen",
+            "text": "Bei Krankenkasse und Ärzten anfordern, was in den letzten fünf bis zehn Jahren dokumentiert ist."
+          },
+          {
+            "titel": "Anonyme Risikovoranfrage stellen",
+            "text": "Ohne Namen anfragen – eine Ablehnung landet dann in keiner Datei."
+          },
+          {
+            "titel": "Gesundheitsfragen vollständig beantworten",
+            "text": "Wer etwas verschweigt, riskiert nach § 19 VVG den Rücktritt des Versicherers."
+          },
+          {
+            "titel": "Nachversicherungsgarantie prüfen",
+            "text": "Sie erlaubt es später, die Rente ohne neue Gesundheitsprüfung zu erhöhen."
+          }
+        ]
+      }
+    },
+    {
+      "nach": "heading-7",
+      "statistik": {
+        "art": "tabelle",
+        "titel": "Drei Wege, das Einkommen abzusichern",
+        "untertitel": "Was wann leistet",
+        "zeilenkopf": "Merkmal",
+        "quelle": {
+          "name": "§ 43 SGB VI und § 172 VVG",
+          "url": "https://www.gesetze-im-internet.de/sgb_6/__43.html",
+          "stand": "2026"
+        },
+        "spalten": [
+          {
+            "name": "Erwerbsminderungsrente"
+          },
+          {
+            "name": "Berufsunfähigkeit",
+            "tag": "Empfehlung",
+            "hervor": true
+          },
+          {
+            "name": "Grundfähigkeiten"
+          }
+        ],
+        "zeilen": [
+          {
+            "name": "Maßstab",
+            "werte": [
+              "Arbeit allgemein",
+              "zuletzt ausgeübter Beruf",
+              "einzelne Fähigkeiten"
+            ]
+          },
+          {
+            "name": "Leistet ab",
+            "werte": [
+              "unter 6 Std. täglich",
+              "50 % Berufsunfähigkeit",
+              "Verlust einer Fähigkeit"
+            ]
+          },
+          {
+            "name": "Psychische Ursachen",
+            "werte": [
+              "✓",
+              "✓",
+              "–"
+            ]
+          },
+          {
+            "name": "Gesundheitsprüfung",
+            "werte": [
+              "–",
+              "streng",
+              "einfacher"
+            ]
+          },
+          {
+            "name": "Ø Höhe 2025",
+            "werte": [
+              "1.067 €",
+              "frei vereinbart",
+              "frei vereinbart"
+            ]
+          }
+        ],
+        "fussnote": "✓ abgedeckt · – nicht abgedeckt · Die Erwerbsminderungsrente setzt fünf Jahre Wartezeit voraus."
+      }
+    },
+    {
+      "nach": "heading-8",
+      "statistik": {
+        "art": "saeulen",
+        "titel": "Wie die Erwerbsminderungsrente gestiegen ist",
+        "untertitel": "Ø Zahlbetrag im Rentenzugang, in Euro",
+        "einheit": "€",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung, Rentenstatistik 2025",
+          "url": "https://jahresbericht.deutsche-rentenversicherung.de/artikel/in-zahlen-2025/",
+          "stand": "2025"
+        },
+        "reihen": [
+          {
+            "label": "Ø Zahlbetrag"
+          }
+        ],
+        "kategorien": [
+          {
+            "label": "2013",
+            "werte": [
+              613
+            ]
+          },
+          {
+            "label": "2024",
+            "werte": [
+              1041
+            ]
+          },
+          {
+            "label": "2025",
+            "werte": [
+              1067
+            ]
+          }
+        ],
+        "hinweis": "Der Anstieg geht vor allem auf die Leistungsverbesserungen 2014, 2017 und 2018 zurück — nicht auf höhere Löhne."
+      }
+    },
+    {
+      "nach": "heading-8",
+      "statistik": {
+        "art": "begriffe",
+        "titel": "Aus dem Glossar",
+        "quelle": {
+          "name": "§ 172 VVG und § 43 SGB VI",
+          "url": "https://www.gesetze-im-internet.de/vvg_2008/__172.html",
+          "stand": "2026"
+        },
+        "begriffe": [
+          {
+            "begriff": "Abstrakte Verweisung",
+            "text": "Der Versicherer darf auf einen anderen zumutbaren Beruf verweisen. Gute Tarife verzichten darauf."
+          },
+          {
+            "begriff": "Nachversicherungsgarantie",
+            "text": "Das Recht, die Rente bei Heirat, Geburt oder Gehaltssprung ohne neue Gesundheitsprüfung zu erhöhen."
+          },
+          {
+            "begriff": "Erwerbsminderungsrente",
+            "text": "Die staatliche Leistung. Sie fragt nicht nach dem Beruf, sondern danach, ob überhaupt noch gearbeitet werden kann."
+          }
+        ]
+      }
+    },
+    {
+      "nach": "heading-8",
+      "statistik": {
+        "art": "vergleichsrechner",
+        "titel": "Berufsunfähigkeitsversicherung vergleichen",
+        "slug": "berufsunfaehigkeitsversicherung-vergleich",
+        "quelle": {
+          "name": "Vergleichsrechner unseres Partners",
+          "url": "https://www.finanzleser.de/finanztools/vergleiche/berufsunfaehigkeitsversicherung-vergleich/",
+          "stand": "2026"
+        }
+      }
+    },
+    {
+      "statt": {
+        "typ": "tabelle",
+        "enthaelt": "Berufsgruppe"
+      },
+      "statistik": {
+        "art": "balken",
+        "titel": "Was der Beruf am Beitrag ausmacht",
+        "untertitel": "Monatsbeitrag für 1.500 € BU-Rente, Eintritt mit 30 Jahren",
+        "einheit": "€",
+        "quelle": {
+          "name": "Redaktionelle Marktbeobachtung finanzleser",
+          "url": "https://www.finanzleser.de/versicherungen/berufsunfaehigkeit/berufsunfaehigkeitsversicherung/",
+          "stand": "2026"
+        },
+        "hervor": "Handwerker",
+        "werte": [
+          {
+            "label": "Akademiker",
+            "wert": 34.93
+          },
+          {
+            "label": "Kaufmännischer Angestellter",
+            "wert": 52.29
+          },
+          {
+            "label": "Handwerker",
+            "wert": 113.02
+          }
+        ],
+        "hinweis": "Ein Handwerker zahlt gut das Dreifache eines Akademikers — für dieselbe Rente."
+      }
+    },
+    {
+      "statt": {
+        "typ": "liste",
+        "enthaelt": "Normale Annahme"
+      },
+      "statistik": {
+        "art": "anteilsleiste",
+        "titel": "Wie Anträge ausgehen",
+        "untertitel": "Anteil aller Anträge",
+        "einheit": "%",
+        "quelle": {
+          "name": "Redaktionelle Marktbeobachtung finanzleser",
+          "url": "https://www.finanzleser.de/versicherungen/berufsunfaehigkeit/berufsunfaehigkeitsversicherung/",
+          "stand": "2026"
+        },
+        "stuecke": [
+          {
+            "label": "Normal angenommen",
+            "wert": 78
+          },
+          {
+            "label": "Mit Ausschluss oder Zuschlag",
+            "wert": 18
+          },
+          {
+            "label": "Abgelehnt",
+            "wert": 4
+          }
+        ],
+        "hinweis": "Die Erhebung nennt Spannen — 75 bis 80, 15 bis 20 und 3 bis 5 Prozent. Hier stehen die auf 100 Prozent gerundeten Mittelwerte."
+      }
+    }
+  ],
+  "leoFragen": [
+    {
+      "abschnitt": "heading-2",
+      "abschnitt_titel": "Warum ist eine Berufsunfähigkeitsversicherung wichtig?",
+      "status": "freigegeben",
+      "frage": "Ich bin 45. Lohnt sich eine BU jetzt überhaupt noch?",
+      "antwort": "Der Beitrag ist deutlich höher als mit 30, und die Gesundheitsprüfung fällt strenger aus — aber die verbleibenden zwanzig Berufsjahre sind genau die, in denen das Risiko am höchsten ist. Rechnen Sie gegen, was die gesetzliche Alternative bringt: Die Erwerbsminderungsrente lag im Zugang 2025 im Schnitt bei 1.067 Euro. Wenn eine volle BU zu teuer wird, sichern Sie lieber eine kleinere Rente ab als gar keine.",
+      "quellen": [
+        "Deutsche Rentenversicherung, Rentenstatistik 2025"
+      ]
+    },
+    {
+      "abschnitt": "heading-3",
+      "abschnitt_titel": "Für wen ist eine BU besonders wichtig?",
+      "status": "freigegeben",
+      "frage": "Ich bin Beamtin auf Probe. Brauche ich trotzdem eine BU?",
+      "antwort": "Gerade dann. In der Probezeit gibt es bei Dienstunfähigkeit noch kein Ruhegehalt — Sie werden entlassen und in der gesetzlichen Rentenversicherung nachversichert. Bis zur Lebenszeitverbeamtung besteht also eine echte Lücke. Achten Sie auf eine Dienstunfähigkeitsklausel, die die Entscheidung des Dienstherrn übernimmt, statt sie noch einmal medizinisch zu prüfen.",
+      "quellen": [
+        "§ 28 BeamtStG",
+        "§ 8 SGB VI"
+      ]
+    },
+    {
+      "abschnitt": "heading-4",
+      "abschnitt_titel": "Wie hoch sollte die BU-Rente sein?",
+      "status": "freigegeben",
+      "frage": "Ich habe 3.200 Euro netto. Wie hoch sollte die BU-Rente sein?",
+      "antwort": "Als Faustregel gelten 70 bis 80 Prozent des Nettoeinkommens, hier also rund 2.300 bis 2.600 Euro. Die BU-Rente ist steuerlich günstig, aber Sie zahlen davon Kranken- und Pflegeversicherung selbst. Rechnen Sie außerdem mit Inflation: Ohne Dynamik verliert eine heute vereinbarte Rente bis zum Leistungsfall spürbar an Wert.",
+      "quellen": [
+        "§ 22 Nr. 1 Satz 3 EStG"
+      ]
+    },
+    {
+      "abschnitt": "heading-5",
+      "abschnitt_titel": "Was kostet eine Berufsunfähigkeitsversicherung?",
+      "status": "freigegeben",
+      "frage": "Warum zahlt mein Bruder als Dachdecker dreimal so viel wie ich?",
+      "antwort": "Weil der Beruf das Risiko bestimmt, nicht das Einkommen. In unserer Marktbeobachtung zahlt ein Akademiker mit 30 Jahren ab 34,93 Euro im Monat für 1.500 Euro Rente, ein Handwerker mindestens 113,02 Euro. Körperliche Arbeit führt häufiger zu Schäden am Bewegungsapparat — der zweithäufigsten Ursache nach psychischen Erkrankungen. Prüfen Sie, ob der Versicherer nach konkreter Tätigkeit statt nach Berufsbild einstuft; das kann eine Gruppe ausmachen.",
+      "quellen": [
+        "Redaktionelle Marktbeobachtung finanzleser 2026",
+        "MORGEN & MORGEN, M&M Rating Berufsunfähigkeit 2026"
+      ]
+    },
+    {
+      "abschnitt": "heading-6",
+      "abschnitt_titel": "Wie sind die Chancen bei Vorerkrankungen?",
+      "status": "freigegeben",
+      "frage": "Ich war zweimal in Psychotherapie. Bekomme ich noch eine BU?",
+      "antwort": "Möglich, aber nicht selbstverständlich — psychische Vorerkrankungen sind der häufigste Ablehnungsgrund, weil sie zugleich die häufigste Leistungsursache sind. Entscheidend ist der Abstand: Liegt die Therapie mehr als fünf Jahre zurück, war sie abgeschlossen und ohne Medikamente, stehen die Chancen ordentlich. Stellen Sie unbedingt eine anonyme Risikovoranfrage, bevor Ihr Name in einer Datei landet.",
+      "quellen": [
+        "MORGEN & MORGEN, M&M Rating Berufsunfähigkeit 2026"
+      ]
+    },
+    {
+      "abschnitt": "heading-6",
+      "abschnitt_titel": "Wie sind die Chancen bei Vorerkrankungen?",
+      "status": "freigegeben",
+      "frage": "Was passiert, wenn ich eine Vorerkrankung vergessen habe anzugeben?",
+      "antwort": "Der Versicherer darf vom Vertrag zurücktreten, wenn Sie eine gefahrerhebliche Frage falsch beantwortet haben — bei Vorsatz oder grober Fahrlässigkeit innerhalb von fünf Jahren, bei arglistiger Täuschung zehn Jahre lang. Dann zahlt er nicht, auch wenn die verschwiegene Sache mit Ihrer Berufsunfähigkeit nichts zu tun hat. Fordern Sie vor dem Antrag Ihre Patientenakte an; Sie haben darauf einen gesetzlichen Anspruch.",
+      "quellen": [
+        "§ 19 VVG",
+        "§ 21 Abs. 3 VVG",
+        "§ 630g BGB"
+      ]
+    },
+    {
+      "abschnitt": "heading-7",
+      "abschnitt_titel": "Verschiedene Vertragsformen",
+      "status": "freigegeben",
+      "frage": "Was ist die abstrakte Verweisung und warum ist sie gefährlich?",
+      "antwort": "Mit ihr darf der Versicherer sagen: Sie können zwar Ihren Beruf nicht mehr ausüben, aber einen anderen, der Ihrer Ausbildung und Lebensstellung entspricht — also zahlen wir nicht. Ob Sie diese Stelle tatsächlich bekommen, spielt keine Rolle. Gute Tarife verzichten darauf vollständig. Die konkrete Verweisung — auf eine Tätigkeit, die Sie wirklich ausüben — bleibt davon unberührt und ist üblich.",
+      "quellen": [
+        "§ 172 Abs. 2 VVG"
+      ]
+    },
+    {
+      "abschnitt": "heading-8",
+      "abschnitt_titel": "Staatliche Absicherung 2026: Die Grenzen der Erwerbsminderungsrente",
+      "status": "freigegeben",
+      "frage": "Ich beziehe volle Erwerbsminderungsrente. Zahlt die BU zusätzlich?",
+      "antwort": "Ja, beide Leistungen stehen nebeneinander — die BU rechnet die gesetzliche Rente nicht an. Das ist auch nötig: Der durchschnittliche Zahlbetrag im Zugang 2025 lag bei 1.067 Euro, und die volle Erwerbsminderungsrente setzt voraus, dass Sie in gar keinem Beruf mehr drei Stunden täglich arbeiten können. Die BU fragt dagegen nur nach Ihrem zuletzt ausgeübten Beruf.",
+      "quellen": [
+        "§ 43 SGB VI",
+        "Deutsche Rentenversicherung, Rentenstatistik 2025"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "selbstbezug": {
+    "verschieden": 0,
+    "vorkommen": 0
+  },
+  "farben": {
+    "verschieden": 15,
+    "vorkommen": 20
+  },
+  "schriftgrade": {
+    "verschieden": 2,
+    "vorkommen": 2
+  },
+  "schriftfamilien": {
+    "verschieden": 0,
+    "vorkommen": 0
+  },
+  "abstaende": {
+    "verschieden": 31,
+    "vorkommen": 185
+  },
+  "linien": {
+    "verschieden": 0,
+    "vorkommen": 0
+  },
+  "radien": {
+    "verschieden": 1,
+    "vorkommen": 1
+  },
+  "schatten": {
+    "verschieden": 8,
+    "vorkommen": 8
+  }
+}

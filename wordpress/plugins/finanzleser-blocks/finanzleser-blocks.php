@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Finanzleser Blocks
- * Description: Gutenberg-Blöcke für Finanzrechner, Checklisten und Vergleiche
- * Version: 1.1.0
+ * Description: Gutenberg-Blöcke für Finanzrechner, Checklisten, Vergleiche und Statistiken
+ * Version: 1.3.0
  * Author: Finanzleser
  */
 
@@ -75,11 +75,18 @@ add_action('rest_api_init', function() {
             ));
             $result = array();
             foreach ($posts as $p) {
-                $typ = get_field('vergleich_typ', $p->ID);
+                // 🚨 Bis 15.09.2026 stand hier get_field('vergleich_typ') — ein ACF-Relikt, das ohne
+                // ACF einen Fatal Error wirft. Die Gruppierung kommt jetzt aus dem Block
+                // vergleich-quelle: financeads-Kategorie oder „extern".
+                $typ = '';
+                if (preg_match('/<!-- wp:finanzleser\/vergleich-quelle \{"config":"([A-Za-z0-9+\/=]+)"\}/', $p->post_content, $m)) {
+                    $cfg = json_decode(base64_decode($m[1]), true);
+                    $typ = is_array($cfg) && !empty($cfg['embedType']) && $cfg['embedType'] === 'financeads' ? 'financeads' : 'extern';
+                }
                 $result[] = array(
                     'slug' => $p->post_name,
                     'title' => $p->post_title,
-                    'typ' => is_array($typ) ? $typ[0] : $typ,
+                    'typ' => $typ,
                 );
             }
             return rest_ensure_response($result);
@@ -197,11 +204,49 @@ add_action('init', function() {
         ),
     ));
 
+    // Statistik: EINE Blockart, dreizehn Variationen (Kreisdiagramm, Saeulen, Spannen,
+    // Anteilsleiste, Liniendiagramm, Zeitstrahl, Vergleichstabelle, Kennzahlen-Vierer,
+    // Kennzahlen-Liste, Schrittfolge, Abwaegung, Begriffe, Vergleichsrechner). Im Inserter
+    // sind es dreizehn eigene Eintraege, gespeichert wird ein einziger Blocktyp.
+    //
+    // DYNAMIC. Die Nutzlast steht als base64-JSON im Attribut `daten` — base64, weil die
+    // Werte Euro-Zeichen, Umlaute, Haken und Anfuehrungszeichen enthalten und ein
+    // Klartext-Attribut daran zerbrechen wuerde. Gleiches Muster wie vergleich-quelle.
+    // Gegenstueck im Frontend: lib/statistik/schema.ts (parseStatistik) und der Parser in
+    // lib/articleHtml.ts.
+    register_block_type('finanzleser/statistik', array(
+        'api_version' => 3,
+        'title' => 'Statistik',
+        'description' => 'Zahlen, Listen und Tabellen im Zeitungssatz',
+        'category' => 'embed',
+        'icon' => 'chart-pie',
+        'attributes' => array(
+            // Gespiegelt aus `daten`, damit die Block-Variationen ueber isActive greifen.
+            'art' => array('type' => 'string', 'default' => ''),
+            'daten' => array('type' => 'string', 'default' => ''),
+        ),
+        'render_callback' => function($attributes) {
+            $daten = isset($attributes['daten']) ? $attributes['daten'] : '';
+            if (!$daten) return '';
+            return '<div data-finanzleser-statistik="' . esc_attr($daten) . '"></div>';
+        },
+    ));
+
+    // Registry-Zwilling (generiert aus lib/financeads/registry.ts, tools/financeads-registry-export.mjs):
+    // Kategorien und Parameter der financeads-Vergleiche für den Block vergleich-quelle.
+    wp_register_script(
+        'finanzleser-financeads-registry',
+        plugins_url('financeads-registry.js', __FILE__),
+        array(),
+        filemtime(plugin_dir_path(__FILE__) . 'financeads-registry.js'),
+        true
+    );
+
     // Editor Script registrieren
     wp_register_script(
         'finanzleser-blocks-editor',
         plugins_url('blocks.js', __FILE__),
-        array('wp-blocks', 'wp-element', 'wp-components', 'wp-block-editor', 'wp-api-fetch'),
+        array('wp-blocks', 'wp-element', 'wp-components', 'wp-block-editor', 'wp-api-fetch', 'wp-plugins', 'wp-edit-post', 'wp-editor', 'wp-core-data', 'wp-data', 'finanzleser-financeads-registry'),
         filemtime(plugin_dir_path(__FILE__) . 'blocks.js'),
         true
     );

@@ -1,0 +1,790 @@
+[
+  {
+    "slug": "pflegeversicherung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was ist Pflegeversicherung und wer braucht sie?",
+          "art": "torte",
+          "titel": "So wurden die rund 6 Millionen Pflegebedürftigen 2025 versorgt",
+          "untertitel": "Leistungsbeziehende der sozialen Pflegeversicherung nach Versorgungsart",
+          "einheit": "Mio.",
+          "quelle": {
+            "name": "Bundesministerium für Gesundheit (BMG), Zahlen, Daten und Fakten zur Pflegeversicherung",
+            "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
+            "stand": "Juli 2026"
+          },
+          "reihen": [
+            {
+              "key": "2025",
+              "label": "2025",
+              "werte": [
+                {
+                  "label": "Ambulante Versorgung",
+                  "wert": 5.16
+                },
+                {
+                  "label": "Vollstationäre Pflege",
+                  "wert": 0.71
+                },
+                {
+                  "label": "Einrichtungen der Eingliederungshilfe",
+                  "wert": 0.14
+                }
+              ]
+            }
+          ],
+          "hinweis": "86 Prozent der Pflegebedürftigen wurden 2025 ambulant versorgt, 12 Prozent vollstationär und 2 Prozent in Einrichtungen der Eingliederungshilfe (jeweils gerundet).",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Pflegeversicherungsbeitrag 2026: Sätze und Staffelungen",
+          "art": "balken",
+          "titel": "Je mehr Kinder, desto niedriger der Pflegeversicherungsbeitrag",
+          "untertitel": "Beitragssatz zur sozialen Pflegeversicherung nach Kinderzahl, 2026",
+          "einheit": "%",
+          "quelle": {
+            "name": "Bundesministerium für Gesundheit (BMG), Zahlen, Daten und Fakten zur Pflegeversicherung",
+            "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
+            "stand": "Juli 2026"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "2026",
+              "werte": [
+                {
+                  "label": "Kinderlos",
+                  "wert": 4.2
+                },
+                {
+                  "label": "1 Kind",
+                  "wert": 3.6
+                },
+                {
+                  "label": "2 Kinder",
+                  "wert": 3.35
+                },
+                {
+                  "label": "3 Kinder",
+                  "wert": 3.1
+                },
+                {
+                  "label": "4 Kinder",
+                  "wert": 2.85
+                },
+                {
+                  "label": "5 und mehr Kinder",
+                  "wert": 2.6
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der Abschlag von 0,25 Prozentpunkten je Kind gilt nur für das zweite bis fünfte Kind unter 25 Jahren.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "pflegegrade",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was sind Pflegegrade – Definition und Überblick",
+          "art": "saeulen",
+          "titel": "Das Risiko der Pflegebedürftigkeit steigt im Alter deutlich",
+          "untertitel": "Wahrscheinlichkeit, pflegebedürftig zu werden, nach Altersgruppe",
+          "einheit": "%",
+          "quelle": {
+            "name": "Bundesministerium für Gesundheit (BMG), Zahlen, Daten und Fakten zur Pflegeversicherung",
+            "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
+            "stand": "Juli 2026"
+          },
+          "reihen": [
+            {
+              "key": "alter",
+              "label": "Pflegewahrscheinlichkeit",
+              "werte": [
+                {
+                  "label": "bis unter 20",
+                  "wert": 3.3
+                },
+                {
+                  "label": "20 bis 65",
+                  "wert": 2.6
+                },
+                {
+                  "label": "65 bis 70",
+                  "wert": 8.6
+                },
+                {
+                  "label": "70 bis 75",
+                  "wert": 13.3
+                },
+                {
+                  "label": "75 bis 80",
+                  "wert": 21.9
+                },
+                {
+                  "label": "80 bis 85",
+                  "wert": 37.8
+                },
+                {
+                  "label": "85 bis 90",
+                  "wert": 56.8
+                },
+                {
+                  "label": "90 und älter",
+                  "wert": 74.7
+                }
+              ]
+            }
+          ],
+          "hinweis": "Ab 85 Jahren ist mehr als jeder Zweite pflegebedürftig, ab 90 Jahren fast drei von vier Menschen.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "pflegegrad-beantragen",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wer kann einen Pflegegrad beantragen?",
+          "art": "saeulen",
+          "titel": "Die Zahl der Pflegebedürftigen hat sich seit 2005 verdreifacht",
+          "untertitel": "Leistungsbeziehende der sozialen Pflegeversicherung am Jahresende",
+          "einheit": "Mio.",
+          "quelle": {
+            "name": "Bundesministerium für Gesundheit (BMG), Zahlen, Daten und Fakten zur Pflegeversicherung",
+            "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
+            "stand": "Juli 2026"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Leistungsbeziehende",
+              "werte": [
+                {
+                  "label": "2005",
+                  "wert": 1.95
+                },
+                {
+                  "label": "2010",
+                  "wert": 2.29
+                },
+                {
+                  "label": "2015",
+                  "wert": 2.67
+                },
+                {
+                  "label": "2019",
+                  "wert": 4
+                },
+                {
+                  "label": "2021",
+                  "wert": 4.61
+                },
+                {
+                  "label": "2023",
+                  "wert": 5.24
+                },
+                {
+                  "label": "2025",
+                  "wert": 6.01
+                }
+              ]
+            }
+          ],
+          "hinweis": "Zwischen 2016 und 2017 stieg die Zahl sprunghaft, weil die Pflegereform die drei Pflegestufen durch die fünf heutigen Pflegegrade ablöste.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "pflegebeduerftigkeit",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Welche Pflegegrade gibt es und welche Leistungen stehen zu?",
+          "art": "torte",
+          "titel": "Vier von zehn Pflegebedürftigen haben Pflegegrad 2",
+          "untertitel": "Anteil der Pflegebedürftigen nach Pflegegrad, 2025",
+          "einheit": "%",
+          "quelle": {
+            "name": "Bundesministerium für Gesundheit (BMG), Zahlen, Daten und Fakten zur Pflegeversicherung",
+            "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
+            "stand": "Juli 2026"
+          },
+          "reihen": [
+            {
+              "key": "2025",
+              "label": "2025",
+              "werte": [
+                {
+                  "label": "Pflegegrad 1",
+                  "wert": 15.8
+                },
+                {
+                  "label": "Pflegegrad 2",
+                  "wert": 40.1
+                },
+                {
+                  "label": "Pflegegrad 3",
+                  "wert": 29.2
+                },
+                {
+                  "label": "Pflegegrad 4",
+                  "wert": 11
+                },
+                {
+                  "label": "Pflegegrad 5",
+                  "wert": 3.9
+                }
+              ]
+            }
+          ],
+          "hinweis": "Nur 3,9 Prozent der Pflegebedürftigen haben den höchsten Pflegegrad 5.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "pflegedienste",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Welche neuen Befugnisse haben Pflegefachkräfte ab 2026?",
+          "art": "saeulen",
+          "titel": "Ambulante Pflegedienste beschäftigen immer mehr Personal",
+          "untertitel": "Beschäftigte in ambulanten Pflegeeinrichtungen, 2005 bis 2023",
+          "einheit": "Tsd.",
+          "quelle": {
+            "name": "Bundesministerium für Gesundheit (BMG), Zahlen, Daten und Fakten zur Pflegeversicherung (Quelle darin: Statistisches Bundesamt, Pflegestatistik vom 18.12.2024)",
+            "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
+            "stand": "18.12.2024"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Beschäftigte ambulant",
+              "werte": [
+                {
+                  "label": "2005",
+                  "wert": 214.3
+                },
+                {
+                  "label": "2009",
+                  "wert": 268.9
+                },
+                {
+                  "label": "2013",
+                  "wert": 320.1
+                },
+                {
+                  "label": "2017",
+                  "wert": 390.3
+                },
+                {
+                  "label": "2019",
+                  "wert": 421.6
+                },
+                {
+                  "label": "2021",
+                  "wert": 442.9
+                },
+                {
+                  "label": "2023",
+                  "wert": 446.4
+                }
+              ]
+            }
+          ],
+          "hinweis": "Zwischen 2005 und 2023 hat sich die Zahl der Beschäftigten in ambulanten Pflegediensten mehr als verdoppelt.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "kurzzeitpflege",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wer hat Anspruch auf Kurzzeitpflege?",
+          "art": "saeulen",
+          "titel": "Die Zahl der Kurzzeitpflegeplätze sinkt seit 2011",
+          "untertitel": "Eigenständige Kurzzeitpflege-Einrichtungen bundesweit",
+          "einheit": "",
+          "quelle": {
+            "name": "Bundesministerium für Gesundheit (BMG), Zahlen, Daten und Fakten zur Pflegeversicherung (Quelle darin: Statistisches Bundesamt, Pflegestatistik und Sonderauswertung über stationäre Einrichtungen vom 18.12.2024)",
+            "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
+            "stand": "18.12.2024"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Kurzzeitpflege-Einrichtungen",
+              "werte": [
+                {
+                  "label": "2005",
+                  "wert": 1529
+                },
+                {
+                  "label": "2009",
+                  "wert": 1588
+                },
+                {
+                  "label": "2011",
+                  "wert": 1673
+                },
+                {
+                  "label": "2015",
+                  "wert": 1674
+                },
+                {
+                  "label": "2017",
+                  "wert": 1205
+                },
+                {
+                  "label": "2019",
+                  "wert": 1336
+                },
+                {
+                  "label": "2021",
+                  "wert": 1263
+                },
+                {
+                  "label": "2023",
+                  "wert": 1124
+                }
+              ]
+            }
+          ],
+          "hinweis": "2023 gab es 1.124 eigenständige Kurzzeitpflege-Einrichtungen – rund ein Drittel weniger als im Höchststand 2011 mit 1.673.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "pflegezusatzversicherung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Warum reicht die gesetzliche Pflegeversicherung nicht aus?",
+          "art": "saeulen",
+          "titel": "Der Eigenanteil im Pflegeheim steigt jedes halbe Jahr",
+          "untertitel": "Bundesweiter Eigenanteil im ersten Aufenthaltsjahr, monatlich",
+          "einheit": "€",
+          "quelle": {
+            "name": "vdek (Verband der Ersatzkassen), Pressemitteilungen vom 22.01.2026 und 14.07.2026",
+            "url": "https://www.vdek.com/presse/pressemitteilungen/2026/stationaere-pflege-eigenanteile-juli-2026.html",
+            "stand": "14.07.2026"
+          },
+          "reihen": [
+            {
+              "key": "stichtage",
+              "label": "Eigenanteil im 1. Jahr",
+              "werte": [
+                {
+                  "label": "01/2025",
+                  "wert": 2984
+                },
+                {
+                  "label": "07/2025",
+                  "wert": 3108
+                },
+                {
+                  "label": "01/2026",
+                  "wert": 3245
+                },
+                {
+                  "label": "07/2026",
+                  "wert": 3364
+                }
+              ]
+            }
+          ],
+          "hinweis": "Von Januar 2025 bis Juli 2026 stieg der bundesweite Eigenanteil im ersten Aufenthaltsjahr um 380 Euro monatlich.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "private-pflege-pflichtversicherung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Leistungen der privaten Pflegepflichtversicherung",
+          "art": "torte",
+          "titel": "Privatversicherte haben häufiger einen hohen Pflegegrad",
+          "untertitel": "Anteil der PPV-Leistungsempfänger nach Pflegegrad, 2025",
+          "einheit": "%",
+          "quelle": {
+            "name": "Bundesministerium für Gesundheit (BMG), Zahlen, Daten und Fakten zur Pflegeversicherung",
+            "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
+            "stand": "Juli 2026"
+          },
+          "reihen": [
+            {
+              "key": "2025",
+              "label": "2025",
+              "werte": [
+                {
+                  "label": "Pflegegrad 1",
+                  "wert": 8.3
+                },
+                {
+                  "label": "Pflegegrad 2",
+                  "wert": 37.4
+                },
+                {
+                  "label": "Pflegegrad 3",
+                  "wert": 33.8
+                },
+                {
+                  "label": "Pflegegrad 4",
+                  "wert": 15.3
+                },
+                {
+                  "label": "Pflegegrad 5",
+                  "wert": 5.2
+                }
+              ]
+            }
+          ],
+          "hinweis": "Pflegegrad 4 und 5 machen bei Privatversicherten zusammen 20,5 Prozent aus, in der sozialen Pflegeversicherung nur 14,9 Prozent.",
+          "abschnitt": "heading-5",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Die Pflegelücke: Warum eine Zusatzversicherung nötig ist",
+          "art": "saeulen",
+          "titel": "Pflegebedürftige Privatversicherte haben sich mehr als verdoppelt",
+          "untertitel": "Leistungsempfänger der privaten Pflegepflichtversicherung",
+          "einheit": "Tsd.",
+          "quelle": {
+            "name": "PKV – Verband der Privaten Krankenversicherung, Pressemeldung „Leistungsausgaben der Privaten Pflegepflichtversicherung steigen deutlich“",
+            "url": "https://www.pkv.de/verband/presse/meldungen/leistungsausgaben-der-privaten-pflegepflichtversicherung-steigen-deutlich/",
+            "stand": "11.09.2025"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Leistungsempfänger PPV",
+              "werte": [
+                {
+                  "label": "2014",
+                  "wert": 169
+                },
+                {
+                  "label": "2024",
+                  "wert": 379
+                }
+              ]
+            }
+          ],
+          "hinweis": "Im gleichen Zeitraum stiegen die Leistungsausgaben der privaten Pflegepflichtversicherung von rund 880 Millionen auf fast 2,8 Milliarden Euro.",
+          "abschnitt": "heading-9",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "unfallversicherung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was ist eine Unfallversicherung?",
+          "art": "saeulen",
+          "titel": "Immer weniger Menschen haben eine private Unfallversicherung",
+          "untertitel": "Bestand an privaten Unfallversicherungsverträgen in Deutschland",
+          "einheit": "Mio.",
+          "quelle": {
+            "name": "Gesamtverband der Deutschen Versicherungswirtschaft (GDV), Statistiken zur deutschen Versicherungswirtschaft",
+            "url": "https://www.gdv.de/resource/blob/152652/dd6bd3e5c32eb6fbd132dc654673d16c/statistiken-zur-deutschen-versicherungswirtschaft-taschenbuch-data.pdf",
+            "stand": "2024"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Verträge private Unfallversicherung",
+              "werte": [
+                {
+                  "label": "2000",
+                  "wert": 29.1
+                },
+                {
+                  "label": "2005",
+                  "wert": 29.2
+                },
+                {
+                  "label": "2010",
+                  "wert": 27.3
+                },
+                {
+                  "label": "2015",
+                  "wert": 25.7
+                },
+                {
+                  "label": "2020",
+                  "wert": 25.5
+                },
+                {
+                  "label": "2023",
+                  "wert": 25.1
+                },
+                {
+                  "label": "2024",
+                  "wert": 24.8
+                }
+              ]
+            }
+          ],
+          "hinweis": "Seit dem Höchststand 2005 ist der Bestand an privaten Unfallversicherungen um rund 15 Prozent gesunken.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "gesetzliche-unfallversicherung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was sind die verschiedenen Arten von Versicherungsfällen?",
+          "art": "torte",
+          "titel": "Die meisten Versicherungsfälle sind Arbeitsunfälle",
+          "untertitel": "Meldungen bei den Berufsgenossenschaften und Unfallkassen, 2024",
+          "einheit": "Tsd.",
+          "quelle": {
+            "name": "Deutsche Gesetzliche Unfallversicherung (DGUV), Pressemitteilung „Unfallrisiko bei der Arbeit 2024 erneut zurückgegangen“",
+            "url": "https://www.dguv.de/de/mediencenter/pm/bilanz-2024.jsp",
+            "stand": "2024"
+          },
+          "reihen": [
+            {
+              "key": "2024",
+              "label": "2024",
+              "werte": [
+                {
+                  "label": "Arbeitsunfälle",
+                  "wert": 712.3
+                },
+                {
+                  "label": "Wegeunfälle",
+                  "wert": 168.6
+                },
+                {
+                  "label": "Berufskrankheiten (Verdachtsanzeigen)",
+                  "wert": 90.7
+                }
+              ]
+            }
+          ],
+          "hinweis": "2024 gingen 90.749 Verdachtsanzeigen auf eine Berufskrankheit ein, aber nur in 26.821 Fällen wurde sie auch anerkannt.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "risikolebensversicherung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was ist eine Risikolebensversicherung?",
+          "art": "saeulen",
+          "titel": "Neuabschlüsse von Risikolebensversicherungen sind eingebrochen",
+          "untertitel": "Eingelöster Neuzugang an Risikoversicherungen, Anzahl",
+          "einheit": "Tsd.",
+          "quelle": {
+            "name": "Gesamtverband der Deutschen Versicherungswirtschaft (GDV), Die deutsche Lebensversicherung in Zahlen 2025",
+            "url": "https://www.gdv.de/resource/blob/188374/dde4d81192e583ac43e7e80a84aa6ac6/die-deutsche-lebensversicherung-in-zahlen-2025-publikation-pdf-data.pdf",
+            "stand": "31.12.2024"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Neuzugang Risikoversicherungen",
+              "werte": [
+                {
+                  "label": "2000",
+                  "wert": 1193.7
+                },
+                {
+                  "label": "2005",
+                  "wert": 1028.9
+                },
+                {
+                  "label": "2010",
+                  "wert": 945.8
+                },
+                {
+                  "label": "2015",
+                  "wert": 415.2
+                },
+                {
+                  "label": "2020",
+                  "wert": 451
+                },
+                {
+                  "label": "2022",
+                  "wert": 416.1
+                },
+                {
+                  "label": "2023",
+                  "wert": 466.6
+                },
+                {
+                  "label": "2024",
+                  "wert": 448.6
+                }
+              ]
+            }
+          ],
+          "hinweis": "Zwischen 2010 und 2015 sank die Zahl der neu abgeschlossenen Risikolebensversicherungen auf weniger als die Hälfte.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "lebensversicherung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Welche Arten von Lebensversicherungen gibt es und was sind die Unterschiede?",
+          "art": "torte",
+          "titel": "Rentenversicherungen dominieren den Lebensversicherungsmarkt",
+          "untertitel": "Bestand an Hauptversicherungen nach Versicherungsart, 31.12.2024",
+          "einheit": "%",
+          "quelle": {
+            "name": "Gesamtverband der Deutschen Versicherungswirtschaft (GDV), Die deutsche Lebensversicherung in Zahlen 2025",
+            "url": "https://www.gdv.de/resource/blob/188374/dde4d81192e583ac43e7e80a84aa6ac6/die-deutsche-lebensversicherung-in-zahlen-2025-publikation-pdf-data.pdf",
+            "stand": "31.12.2024"
+          },
+          "reihen": [
+            {
+              "key": "2024",
+              "label": "2024",
+              "werte": [
+                {
+                  "label": "Renten- und Pensionsversicherungen",
+                  "wert": 52.5
+                },
+                {
+                  "label": "Kapitalversicherungen (klassisch)",
+                  "wert": 19.5
+                },
+                {
+                  "label": "Risikoversicherungen",
+                  "wert": 9.1
+                },
+                {
+                  "label": "Invaliditätsversicherungen",
+                  "wert": 7.5
+                },
+                {
+                  "label": "Sonstige",
+                  "wert": 11.3
+                }
+              ]
+            }
+          ],
+          "hinweis": "„Sonstige“ fasst fondsgebundene Kapitalversicherungen, Restschuldversicherungen, Pflegerentenversicherungen und übrige Lebensversicherungen zusammen.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Welche Rolle spielt die betriebliche Altersvorsorge?",
+          "art": "saeulen",
+          "titel": "Die betriebliche Altersvorsorge wächst kaum noch",
+          "untertitel": "Bestand an Verträgen der betrieblichen Altersversorgung (bAV)",
+          "einheit": "Mio.",
+          "quelle": {
+            "name": "Gesamtverband der Deutschen Versicherungswirtschaft (GDV), Die deutsche Lebensversicherung in Zahlen 2025",
+            "url": "https://www.gdv.de/resource/blob/188374/dde4d81192e583ac43e7e80a84aa6ac6/die-deutsche-lebensversicherung-in-zahlen-2025-publikation-pdf-data.pdf",
+            "stand": "31.12.2024"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "bAV-Verträge",
+              "werte": [
+                {
+                  "label": "2002",
+                  "wert": 8.1
+                },
+                {
+                  "label": "2005",
+                  "wert": 10.87
+                },
+                {
+                  "label": "2010",
+                  "wert": 13.21
+                },
+                {
+                  "label": "2015",
+                  "wert": 15.3
+                },
+                {
+                  "label": "2020",
+                  "wert": 16.38
+                },
+                {
+                  "label": "2022",
+                  "wert": 16.54
+                },
+                {
+                  "label": "2023",
+                  "wert": 16.55
+                },
+                {
+                  "label": "2024",
+                  "wert": 16.55
+                }
+              ]
+            }
+          ],
+          "hinweis": "Trotz des wachsenden Vertragsbestands sank laut Alterssicherungsbericht 2024 der Bundesregierung die Verbreitung unter sozialversicherungspflichtig Beschäftigten von 54,1 Prozent (2019) auf 51,9 Prozent (2024).",
+          "abschnitt": "heading-8",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  }
+]

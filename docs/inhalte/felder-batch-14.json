@@ -1,0 +1,969 @@
+[
+  {
+    "slug": "buergergeld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Bürgergeld ist seit 2023 die Grundsicherung für Erwerbsfähige zwischen 15 Jahren und der Regelaltersgrenze, die mindestens drei Stunden täglich arbeiten könnten, deren Einkommen aber nicht reicht; im März 2026 bezogen es 5,18 Millionen Menschen, darunter 1,8 Millionen Kinder und 800.000 Aufstocker mit Job. Laut Beitrag wird es zum 1. Juli 2026 vom Grundsicherungsgeld abgelöst, Bestandsbescheide bleiben gültig.",
+          "Der Regelsatz bleibt 2026 zum zweiten Mal bei 563 Euro für Alleinstehende, 506 Euro je Partner, 471, 390 und 357 Euro für Kinder nach Alter; rechnerisch wären es 557 Euro, eine Senkung ist gesetzlich ausgeschlossen. Dazu kommen angemessene Miete und Heizung, Kranken- und Pflegebeiträge sowie Mehrbedarfe für Schwangere, Alleinerziehende und Menschen mit Behinderung.",
+          "Bis Juni 2026 gilt die Karenz mit 40.000 Euro geschütztem Vermögen im ersten Jahr und 15.000 Euro je weiterer Person; vom Erwerbseinkommen bleiben 100 Euro plus 20 bis 30 Prozent bis 1.200 Euro, mit Kindern 1.500 Euro, anrechnungsfrei. Geschützt sind selbst genutztes Wohneigentum, Riester und angemessenes Auto.",
+          "Laut Beitrag gelten ab Juli 2026 altersabhängige Vermögensfreibeträge ab dem ersten Tag von 5.000 Euro bis 30 Jahre bis 20.000 Euro über 50, die Mietkarenz entfällt zugunsten eines Deckels bei der anderthalbfachen Angemessenheitsgrenze, Pflichtverstöße kosten einheitlich 30 Prozent für drei Monate, drei versäumte Termine den ganzen Anspruch, und Vermittlung geht vor Weiterbildung.",
+          "Der Antrag läuft online über das Jobcenter-Portal mit Ausweis, Meldebescheinigung, Einkommens- und Mietunterlagen und drei Monaten Kontoauszügen, Bearbeitung in bis zu 14 Arbeitstagen; Familien mit kleinem Einkommen fahren mit Wohngeld plus Kinderzuschlag oft 200 bis 300 Euro besser, ohne Vermögensprüfung und Sanktionen."
+        ],
+        "quellen": [
+          "§§ 7, 11b, 12, 20, 22, 31 SGB II",
+          "Regelbedarfsstufen-Fortschreibungsverordnung 2026",
+          "Bundesagentur für Arbeit, Statistik März 2026",
+          "Beitrag Bürgergeld"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wer hat Anspruch auf Bürgergeld?",
+          "status": "freigegeben",
+          "frage": "Ich arbeite 30 Stunden für 1.600 Euro netto und habe zwei Kinder. Bekomme ich aufstockend Bürgergeld?",
+          "antwort": "Wahrscheinlich ja: Ihr Bedarf liegt bei 563 Euro für Sie, 390 und 471 Euro für die Kinder, plus 36 Prozent Mehrbedarf als Alleinerziehende und einer angemessenen Warmmiete von etwa 900 Euro, zusammen rund 2.500 Euro; angerechnet werden 1.600 Euro minus 100 Euro Grundfreibetrag minus 20 Prozent von 900 Euro und 10 Prozent des Rests, also etwa 1.250 Euro, plus 510 Euro Kindergeld. Es bleiben rund 700 Euro Anspruch. Prüfen Sie parallel Wohngeld plus Kinderzuschlag von bis zu 297 Euro je Kind, das ist bei Ihrem Einkommen oft die bessere Kombination ohne Vermögensprüfung.",
+          "quellen": [
+            "§ 11b Abs. 2 und 3 SGB II",
+            "§ 21 Abs. 3 SGB II",
+            "§ 6a BKGG (Kinderzuschlag)"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Einkommen und Vermögen bis 30. Juni 2026",
+          "status": "freigegeben",
+          "frage": "Ich habe 25.000 Euro auf dem Tagesgeldkonto. Muss ich das erst aufbrauchen?",
+          "antwort": "Bis Juni 2026 nicht, im ersten Bezugsjahr sind 40.000 Euro geschützt; danach gelten laut Beitrag ab Juli 2026 altersabhängige Freibeträge, mit 45 Jahren 12.500 Euro, und alles darüber müssen Sie zuerst verbrauchen, bevor Sie Leistungen erhalten. Nicht angerechnet werden Riester-Verträge, eine angemessene Eigentumswohnung bis 140 Quadratmeter und ein Auto bis rund 15.000 Euro. Ein Teil des Geldes lässt sich vor dem Antrag noch in geschützte Altersvorsorge umschichten, wenn der Vertrag unwiderruflich bis zur Rente gebunden ist; Ausgaben kurz vor dem Antrag prüft das Jobcenter auf sozialwidriges Verhalten.",
+          "quellen": [
+            "§ 12 SGB II",
+            "Beitrag, Abschnitt Reform ab Juli 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Die große Reform ab 1. Juli 2026",
+          "status": "freigegeben",
+          "frage": "Was passiert, wenn ich eine Stelle ablehne, die 60 Kilometer entfernt ist?",
+          "antwort": "Zumutbar ist ein Pendelweg bis zweieinhalb Stunden täglich bei Vollzeit, 60 Kilometer mit dem Auto liegen darunter; ohne wichtigen Grund wie Kinderbetreuung ohne Alternative, Gesundheit oder fehlendes Fahrzeug bei schlechter Anbindung kürzt das Jobcenter laut Beitrag ab Juli 2026 den Regelbedarf um 30 Prozent für drei Monate, bei wiederholter Verweigerung kann er ganz entfallen, wobei Miete und Krankenversicherung weiterlaufen. Legen Sie Gründe schriftlich dar und gehen Sie zum Vorstellungsgespräch, denn schon das Fernbleiben gilt als Verweigerung. Gegen jede Minderung ist binnen eines Monats Widerspruch möglich.",
+          "quellen": [
+            "§ 10 SGB II (Zumutbarkeit)",
+            "§ 31, § 31a SGB II",
+            "§ 140 Abs. 4 SGB III (Pendelzeiten)"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Bürgergeld oder Wohngeld mit Kinderzuschlag?",
+          "status": "freigegeben",
+          "frage": "Wie finde ich heraus, welche Kombination für uns mehr bringt?",
+          "antwort": "Rechnen Sie beides mit den Online-Rechnern des Bundes durch: den Kinderzuschlag über die Familienkasse, das Wohngeld über den Rechner des Bauministeriums, das Bürgergeld über den Rechner hier. Faustregel: Ab etwa 1.400 Euro Brutto für Alleinerziehende und 2.000 Euro für Paare mit Kindern liegt die Kombination aus Wohngeld und Kinderzuschlag gleichauf oder vorn, weil Erwerbseinkommen milder angerechnet wird, kein Vermögen geprüft wird und der Bildungspaket-Anspruch gleich bleibt. Nachteil ist, dass Sie Krankenkasse und Mehrbedarfe selbst regeln müssen; die Beratungsstellen der Caritas oder Diakonie prüfen das kostenlos.",
+          "quellen": [
+            "§ 6a BKGG",
+            "Wohngeldgesetz",
+            "Beitrag, Abschnitt Bürgergeld oder Wohngeld"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "buergergeld",
+        "grundsicherungsgeld",
+        "regelsatz",
+        "erwerbsfaehigkeit",
+        "aufstocker",
+        "schonvermoegen",
+        "kosten-der-unterkunft",
+        "sanktionen",
+        "mehrbedarf",
+        "kinderzuschlag",
+        "wohngeld"
+      ]
+    }
+  },
+  {
+    "slug": "sozialhilfe",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Sozialhilfe nach dem SGB XII ist das letzte Netz für Menschen, die nicht erwerbsfähig sind, also weniger als drei Stunden täglich arbeiten können oder die Altersgrenze erreicht haben, und deren Einkommen und Vermögen nicht reichen; Erwerbsfähige fallen unter das Bürgergeld. Sie umfasst die Hilfe zum Lebensunterhalt und die Grundsicherung im Alter und bei Erwerbsminderung.",
+          "Die Regelsätze bleiben 2026 bei 563 Euro für Alleinstehende, 506 Euro je Partner, 451 Euro in Einrichtungen und 471, 390 und 357 Euro für Kinder; hinzu kommen angemessene Unterkunft und Heizung nach den örtlichen Grenzen sowie Kranken- und Pflegebeiträge.",
+          "Mehrbedarfe erhöhen den Regelsatz: 36 Prozent für Alleinerziehende mit einem Kind unter sieben oder zwei bis drei Kindern unter 16, sonst 12 Prozent je Kind bis 60 Prozent, 17 Prozent ab der 13. Schwangerschaftswoche, 17 Prozent bei Merkzeichen G und Zuschläge für teure Krankenkost mit Attest.",
+          "Kinder bekommen aus dem Bildungspaket 195 Euro Schulbedarf im Jahr, Klassenfahrten, Mittagessen, Schülerbeförderung, Nachhilfe und 15 Euro monatlich für Verein oder Musikschule, automatisch mit dem Hauptantrag. Bei drei Schulkindern sind das allein 585 Euro Schulbedarf.",
+          "Hilfe zum Lebensunterhalt beginnt, sobald das Sozialamt von der Not erfährt, auch per Anruf; Grundsicherung im Alter braucht einen Antrag und wird nicht rückwirkend gezahlt. Eltern erwachsener Kinder mit Behinderung zahlen nur bei über 100.000 Euro Jahreseinkommen einen Pauschalbeitrag von 34,31 Euro im Monat. Gegen Bescheide ist binnen eines Monats Widerspruch möglich."
+        ],
+        "quellen": [
+          "§§ 18, 19, 27 ff., 30, 34, 41 ff., 94 SGB XII",
+          "Regelbedarfsstufen-Fortschreibungsverordnung 2026",
+          "Beitrag Sozialhilfe"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer hat Anspruch auf Sozialhilfe?",
+          "status": "freigegeben",
+          "frage": "Meine Rente beträgt 900 Euro, die Miete 650 Euro. Habe ich Anspruch auf Grundsicherung?",
+          "antwort": "Sehr wahrscheinlich ja: Ihr Bedarf ist 563 Euro Regelsatz plus 650 Euro Warmmiete, sofern sie am Wohnort angemessen ist, also 1.213 Euro; von der Rente werden 900 Euro angerechnet, es bleiben rund 313 Euro Grundsicherung. Haben Sie mindestens 33 Jahre Grundrentenzeiten, bleiben zusätzlich 100 Euro plus 30 Prozent des Rests Ihrer Rente anrechnungsfrei, was den Anspruch auf etwa 550 Euro erhöht. Vermögen bis 10.000 Euro ist geschützt, Kinder werden erst ab 100.000 Euro Jahreseinkommen herangezogen. Stellen Sie den Antrag beim Sozialamt, er gilt ab dem Antragsmonat.",
+          "quellen": [
+            "§ 41, § 42, § 82a SGB XII",
+            "§ 43 Abs. 5 SGB XII (Unterhaltsrückgriff)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Mehrbedarfe und Sonderleistungen",
+          "status": "freigegeben",
+          "frage": "Ich bin alleinerziehend mit drei Kindern von 5, 9 und 14 Jahren. Wie hoch ist mein Mehrbedarf?",
+          "antwort": "36 Prozent des Regelsatzes, also 202,68 Euro im Monat, weil Sie ein Kind unter sieben Jahren betreuen; alternativ 12 Prozent je Kind, was bei drei Kindern ebenfalls 36 Prozent ergäbe, das Sozialamt nimmt den höheren Wert, mehr als 60 Prozent gibt es nie. Dazu kommen die Regelsätze der Kinder von 357, 390 und 471 Euro, das Bildungspaket für alle drei und gegebenenfalls Unterhaltsvorschuss, der als Einkommen der Kinder angerechnet wird. Als Erwerbsfähige würden Sie allerdings Bürgergeld statt Sozialhilfe beziehen, dort gelten dieselben Mehrbedarfssätze.",
+          "quellen": [
+            "§ 30 Abs. 3 SGB XII",
+            "§ 21 Abs. 3 SGB II"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie beantragt man Sozialhilfe?",
+          "status": "freigegeben",
+          "frage": "Das Sozialamt lässt mich seit acht Wochen warten und ich habe kein Geld mehr. Was kann ich tun?",
+          "antwort": "Beantragen Sie sofort einen Vorschuss oder eine vorläufige Leistung nach § 42 SGB I, das Amt muss bei nachgewiesener Not innerhalb weniger Tage zahlen; hilft das nicht, stellen Sie beim Sozialgericht einen Antrag auf einstweilige Anordnung, der kostenlos ist und binnen ein bis zwei Wochen entschieden wird, Formulare gibt es bei der Rechtsantragstelle des Gerichts. Nach sechs Monaten ohne Bescheid wäre zudem eine Untätigkeitsklage möglich. Wenden Sie sich parallel an die Sozialberatung von Caritas, Diakonie oder AWO, die auch Lebensmittelgutscheine und Tafelzugang vermitteln.",
+          "quellen": [
+            "§ 42, § 43 SGB I",
+            "§ 86b SGG (einstweiliger Rechtsschutz)",
+            "§ 88 SGG"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Unterschiede zwischen Sozialhilfe-Leistungen",
+          "status": "freigegeben",
+          "frage": "Mein Sohn mit Behinderung wird 18 und zieht in eine Wohngruppe. Müssen wir als Eltern zahlen?",
+          "antwort": "Nur, wenn ein Elternteil mehr als 100.000 Euro brutto im Jahr verdient, und dann nur den Pauschalbetrag von 34,31 Euro monatlich, nicht die tatsächlichen Kosten; darunter bleibt Ihr Einkommen und Vermögen ganz außen vor. Ihr Sohn erhält Grundsicherung bei dauerhafter voller Erwerbsminderung ab 18 in eigenem Namen, dazu Eingliederungshilfe für die Wohngruppe über das Bundesteilhabegesetz, und das Kindergeld fließt weiter an Sie oder auf Antrag an ihn. Stellen Sie den Antrag auf Grundsicherung rechtzeitig vor dem 18. Geburtstag, damit keine Lücke entsteht.",
+          "quellen": [
+            "§ 94 Abs. 2 SGB XII",
+            "§ 41 Abs. 3 SGB XII",
+            "§ 99 SGB IX (Eingliederungshilfe)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "hilfe-zum-lebensunterhalt",
+        "grundsicherung-im-alter",
+        "regelsatz",
+        "mehrbedarf",
+        "bildungspaket",
+        "erwerbsfaehigkeit",
+        "elternunterhalt",
+        "kosten-der-unterkunft"
+      ]
+    }
+  },
+  {
+    "slug": "uebergangsgeld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Übergangsgeld ersetzt das Einkommen während einer medizinischen oder beruflichen Reha, wenn der Arbeitgeber kein Gehalt mehr zahlt; Träger sind je nach Fall Rentenversicherung, Unfallversicherung oder Arbeitsagentur, bei Krankenkassen-Reha fließt stattdessen Krankengeld.",
+          "Berechnungsgrundlage sind 80 Prozent des letzten Bruttos, höchstens das Netto und höchstens die Beitragsbemessungsgrenze; davon gibt es 68 Prozent ohne und 75 Prozent mit Kind oder Pflegepflicht, bei 3.000 Euro Grundlage also 2.040 oder 2.250 Euro. Die Grenzen 2026: 5.812,50 Euro in der Krankenversicherung, 8.450 Euro in der Rentenversicherung.",
+          "Voraussetzung sind Rentenbeiträge vor der Maßnahme und unmittelbar zuvor Arbeitsentgelt, Krankengeld oder Arbeitslosengeld; bei beruflicher Reha mindestens 15 Wochenstunden, nicht berufsbegleitend. Ohne Beiträge im Bemessungszeitraum gilt ein Mindestübergangsgeld aus einem fiktiven Einkommen nach vier Qualifikationsgruppen und der Bezugsgröße von 3.955 Euro.",
+          "Gezahlt wird vom ersten bis zum letzten Tag der Maßnahme, bei Krankheit in beruflicher Reha bis 42 Tage weiter; zwischen zwei Maßnahmen gibt es Zwischenübergangsgeld, danach bis drei Monate Anschluss-Übergangsgeld mit 60 oder 67 Prozent. Nach Arbeitslosengeld zahlt die Rentenversicherung in dessen Höhe.",
+          "Übergangsgeld ist steuerfrei mit Progressionsvorbehalt, ab 410 Euro im Jahr ist die Steuererklärung Pflicht; Sozialbeiträge trägt der Träger bis auf den Kinderlosenzuschlag der Pflegeversicherung. Der Antrag mit Formular G0512 gehört vor den Maßnahmenbeginn, rückwirkend gibt es nichts, die erste Zahlung kommt meist zum 25. des Folgemonats."
+        ],
+        "quellen": [
+          "§§ 20, 21, 65 bis 71 SGB IX",
+          "§ 20, § 21 SGB VI",
+          "§ 32b EStG",
+          "Beitrag Übergangsgeld"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer hat Anspruch auf Übergangsgeld?",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber zahlt während der dreiwöchigen Reha weiter Gehalt. Bekomme ich trotzdem Übergangsgeld?",
+          "antwort": "Nein, solange Entgeltfortzahlung fließt, ruht das Übergangsgeld, denn es ist Lohnersatz; eine Reha gilt wie Arbeitsunfähigkeit, sodass Ihr Arbeitgeber die ersten sechs Wochen zahlen muss, sofern Sie den Anspruch nicht schon durch vorherige Krankheit mit derselben Ursache verbraucht haben. Erst danach zahlt die Rentenversicherung Übergangsgeld, in Höhe von meist 68 bis 75 Prozent des Nettos. Der Arbeitgeber erhält vom Rehaträger keine Erstattung, wohl aber aus der Umlage U1, wenn er höchstens 30 Beschäftigte hat. Reichen Sie die Bewilligung dem Arbeitgeber ein, die Reha-Zeit zählt nicht als Urlaub.",
+          "quellen": [
+            "§ 9 EFZG",
+            "§ 65 Abs. 1 SGB IX",
+            "Beitrag, Abschnitt Anspruch"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie wird das Übergangsgeld berechnet?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 6.500 Euro brutto. Warum ist mein Übergangsgeld so viel niedriger als 68 Prozent davon?",
+          "antwort": "Wegen zweier Deckel: Die Berechnungsgrundlage ist auf die Beitragsbemessungsgrenze der Krankenversicherung von 5.812,50 Euro begrenzt, wenn die Krankenkasse oder die Rentenversicherung bei medizinischer Reha zahlt, und auf 80 Prozent des Bruttos, höchstens das Netto. Aus 5.812,50 Euro werden 80 Prozent, 4.650 Euro, gedeckelt auf Ihr Netto von etwa 3.900 Euro; davon 68 Prozent sind rund 2.650 Euro. Bei beruflicher Reha gilt die höhere Rentengrenze von 8.450 Euro, dann bleiben rund 2.700 Euro. Prüfen Sie den Bescheid auf die richtige Grenze und ob Einmalzahlungen wie Weihnachtsgeld anteilig eingerechnet wurden.",
+          "quellen": [
+            "§ 66, § 67 SGB IX",
+            "Beitrag, Abschnitt Berechnung"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Dauer und besondere Arten des Übergangsgeldes",
+          "status": "freigegeben",
+          "frage": "Meine Umschulung ist beendet, aber ich habe noch keine Stelle. Bekomme ich weiter Geld?",
+          "antwort": "Ja, bis zu drei Monate Anschluss-Übergangsgeld in Höhe von 60 Prozent, mit Kind 67 Prozent der Berechnungsgrundlage, wenn Sie arbeitslos gemeldet sind und noch kein Arbeitslosengeld erhalten; melden Sie sich dafür am ersten Tag nach der Umschulung bei der Agentur für Arbeit arbeitsuchend und arbeitslos. Danach greift das Arbeitslosengeld, für das die Umschulungszeit als Versicherungszeit zählt, weil der Rehaträger Beiträge gezahlt hat. Die Höhe richtet sich dann nach dem Übergangsgeld beziehungsweise dem fiktiven Entgelt Ihrer neuen Qualifikationsgruppe, nicht nach dem alten Gehalt.",
+          "quellen": [
+            "§ 71 Abs. 4 SGB IX",
+            "§ 26 Abs. 2 Nr. 1 SGB III",
+            "Beitrag, Abschnitt Anschluss-Übergangsgeld"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Steuerliche Behandlung und Progressionsvorbehalt",
+          "status": "freigegeben",
+          "frage": "Ich hatte 2025 vier Monate Übergangsgeld von 8.000 Euro. Was bedeutet der Progressionsvorbehalt konkret?",
+          "antwort": "Die 8.000 Euro bleiben steuerfrei, erhöhen aber den Steuersatz auf Ihr übriges Einkommen: Bei 28.000 Euro zu versteuerndem Einkommen liegt der Durchschnittssteuersatz bei etwa 14 Prozent, mit den 8.000 Euro obendrauf bei rund 17 Prozent, und diese 17 Prozent werden auf die 28.000 Euro angewendet, also gut 800 Euro Mehrsteuer. Weil Ihr Arbeitgeber die Lohnsteuer nur auf das Gehalt berechnet hat, kommt das als Nachzahlung mit dem Steuerbescheid. Die Rentenversicherung meldet die Beträge elektronisch, Sie tragen sie in der Anlage N ein und müssen wegen der Pflichtveranlagung bis Ende Juli 2026 abgeben.",
+          "quellen": [
+            "§ 32b Abs. 1 Nr. 1 Buchstabe c EStG",
+            "§ 46 Abs. 2 Nr. 1 EStG",
+            "Beitrag, Abschnitt Progressionsvorbehalt"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "uebergangsgeld",
+        "reha-vor-rente",
+        "bemessungszeitraum",
+        "qualifikationsgruppe",
+        "bezugsgroesse",
+        "beitragsbemessungsgrenze",
+        "progressionsvorbehalt",
+        "entgeltfortzahlung"
+      ]
+    }
+  },
+  {
+    "slug": "kurzarbeitergeld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Kurzarbeitergeld gleicht Lohnausfälle aus, wenn ein Betrieb aus wirtschaftlichen Gründen oder durch ein unabwendbares Ereignis vorübergehend weniger arbeiten lässt; Voraussetzung ist, dass mindestens ein Drittel der Beschäftigten über 10 Prozent Entgeltausfall hat, alle zumutbaren Alternativen wie Überstundenabbau und Urlaub ausgeschöpft sind und der Betriebsrat oder die einzelnen Beschäftigten zustimmen.",
+          "Es beträgt 60 Prozent, mit Kind 67 Prozent der Differenz zwischen dem pauschalierten Netto vor und während der Kurzarbeit: Bei 4.000 Euro brutto und halber Arbeitszeit bleiben etwa 1.200 Euro Netto aus Arbeit plus 660 Euro Kurzarbeitergeld, rund 78 Prozent des bisherigen Nettos. Entgelt über der Beitragsbemessungsgrenze von 8.450 Euro bleibt unberücksichtigt.",
+          "Die Bezugsdauer beträgt regulär zwölf Monate; laut Beitrag gilt für Betriebe, die schon 2025 kurzgearbeitet haben, bis Ende 2026 eine Verlängerung auf 24 Monate, danach fällt die Frist zurück. Ein Monat ohne Zahlung verlängert die Frist, drei Monate Pause starten sie neu.",
+          "Der Arbeitgeber zeigt den Ausfall im Monat des Beginns bei der Agentur für Arbeit an, sonst gibt es nichts rückwirkend, und beantragt monatlich binnen drei Monaten die Erstattung; für die Ausfallstunden trägt er die Sozialbeiträge auf ein fiktives Entgelt von 80 Prozent der Differenz allein, ohne Arbeitslosenversicherung.",
+          "Alte Nebenjobs bleiben anrechnungsfrei, neue mindern das Kurzarbeitergeld; Aufstockungen des Arbeitgebers sind steuerpflichtig, das Kurzarbeitergeld selbst steuerfrei mit Progressionsvorbehalt, ab 410 Euro im Jahr mit Pflicht zur Steuererklärung bis 31. Juli 2027 und meist dreistelligen Nachzahlungen. Fehlende Zeitaufzeichnungen führen zur vollständigen Rückforderung."
+        ],
+        "quellen": [
+          "§§ 95 bis 109 SGB III",
+          "Kurzarbeitergeldverlängerungsverordnung",
+          "§ 32b EStG",
+          "Beitrag Kurzarbeitergeld"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wann haben Sie Anspruch auf Kurzarbeitergeld?",
+          "status": "freigegeben",
+          "frage": "Mein Chef hat per Aushang Kurzarbeit ab Montag angeordnet. Muss ich das hinnehmen?",
+          "antwort": "Nein, Kurzarbeit braucht eine Rechtsgrundlage: einen Tarifvertrag, eine Betriebsvereinbarung mit dem Betriebsrat oder Ihre individuelle Zustimmung, etwa durch eine Klausel im Arbeitsvertrag oder eine Änderungsvereinbarung; einseitig angeordnete Kurzarbeit ist unwirksam und der Arbeitgeber schuldet Ihnen den vollen Lohn, weil er im Annahmeverzug ist. Verweigern Sie die Zustimmung, riskieren Sie allerdings eine Änderungskündigung oder eine betriebsbedingte Kündigung, wenn der Auftragsmangel dauerhaft ist. Sinnvoll ist, der Kurzarbeit mit klarer Befristung, Ankündigungsfrist und möglichst einer Aufstockung zuzustimmen; der Betriebsrat, falls vorhanden, muss ohnehin beteiligt werden.",
+          "quellen": [
+            "§ 87 Abs. 1 Nr. 3 BetrVG",
+            "§ 615 BGB",
+            "BAG 18.11.2015, 5 AZR 491/14"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Höhe des Kurzarbeitergeldes – So wird’s berechnet",
+          "status": "freigegeben",
+          "frage": "Warum bekomme ich bei Kurzarbeit null nur 60 Prozent meines Nettos, aber der Kollege mit Kind 67 Prozent, obwohl sein Kind nicht bei ihm wohnt?",
+          "antwort": "Weil der erhöhte Satz an den Kinderfreibetrag auf der Lohnsteuerkarte hängt: Wer mindestens einen halben Kinderfreibetrag in den ELStAM eingetragen hat, bekommt 67 Prozent, unabhängig davon, wo das Kind lebt oder ob Unterhalt gezahlt wird. Haben Sie selbst Kinder, aber keinen Eintrag, lassen Sie den Freibetrag beim Finanzamt nachtragen, die Agentur rechnet dann ab dem Folgemonat mit 67 Prozent. Bei Kurzarbeit null entfällt Ihr Nettogehalt komplett, das Kurzarbeitergeld ersetzt 60 Prozent des pauschalierten Nettos, das etwas unter Ihrem tatsächlichen Netto liegt, weil es nach Steuerklasse ohne Kirchensteuer und Freibeträge tabelliert ist.",
+          "quellen": [
+            "§ 105 SGB III",
+            "§ 106 SGB III",
+            "Beitrag, Abschnitt Höhe"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Sozialversicherung während Kurzarbeit",
+          "status": "freigegeben",
+          "frage": "Verliere ich durch Kurzarbeit Rentenpunkte?",
+          "antwort": "Nur wenig: Für die Ausfallstunden zahlt der Arbeitgeber Rentenbeiträge auf 80 Prozent des ausgefallenen Bruttos, bei Kurzarbeit null auf 80 Prozent des vollen Gehalts, sodass Sie für diese Zeit etwa 80 Prozent Ihrer üblichen Entgeltpunkte gutgeschrieben bekommen; bei 4.000 Euro brutto und sechs Monaten Kurzarbeit null fehlen am Ende rund 0,1 Entgeltpunkte, etwa 4 Euro Monatsrente. Kranken- und Pflegeversicherung laufen vollständig weiter, die Arbeitslosenversicherung ebenfalls, ohne dass Sie Beiträge zahlen. Auch Urlaubsanspruch und Betriebszugehörigkeit werden nicht gekürzt, nur bei Kurzarbeit null darf der Arbeitgeber den Urlaub anteilig kürzen.",
+          "quellen": [
+            "§ 163 Abs. 6 SGB VI",
+            "§ 232a SGB V",
+            "BAG 30.11.2021, 9 AZR 225/21 (Urlaubskürzung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Steuern und Progressionsvorbehalt",
+          "status": "freigegeben",
+          "frage": "Ich habe 2025 sechs Monate Kurzarbeitergeld bekommen. Mit welcher Nachzahlung muss ich rechnen?",
+          "antwort": "Grob mit 3 bis 5 Prozent des erhaltenen Kurzarbeitergelds: Bei 30.000 Euro Jahresgehalt und 6.000 Euro Kurzarbeitergeld steigt der Durchschnittssteuersatz auf das Gehalt von etwa 11 auf 13,5 Prozent, das sind rund 700 Euro Mehrsteuer, weil der Arbeitgeber die Lohnsteuer nur auf das gekürzte Gehalt berechnet hat. In Steuerklasse V oder bei Ehepartnern mit hohem Einkommen kann es auch mehr sein, in Steuerklasse III mit Alleinverdienst weniger. Die Agentur meldet die Beträge elektronisch, Sie tragen sie in Anlage N Zeile 28 ein; geben Sie die Erklärung bis 31. Juli 2026 ab und legen Sie das Geld zurück.",
+          "quellen": [
+            "§ 32b Abs. 1 Nr. 1 Buchstabe a EStG",
+            "§ 46 Abs. 2 Nr. 1 EStG",
+            "Beitrag, Abschnitt Steuern"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kurzarbeitergeld",
+        "erheblichkeitsschwelle",
+        "fiktives-entgelt",
+        "progressionsvorbehalt",
+        "arbeitslosenversicherung",
+        "beitragsbemessungsgrenze",
+        "arbeitslosengeld"
+      ]
+    }
+  },
+  {
+    "slug": "arbeitslosengeld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Arbeitslosengeld I ist eine Versicherungsleistung nach dem SGB III, unabhängig vom Vermögen: Anspruch hat, wer in den 30 Monaten vor der Meldung mindestens zwölf Monate versichert war, in Ausnahmen bei kurzen Befristungen sechs Monate, arbeitslos oder unter 15 Wochenstunden beschäftigt ist, sich gemeldet hat und dem Arbeitsmarkt zur Verfügung steht; Kindererziehung bis drei Jahre, Krankengeld und Freiwilligendienste zählen mit.",
+          "Es beträgt 60 Prozent des pauschalierten Nettos aus dem Brutto der letzten zwölf Monate, mit Kind 67 Prozent, bis zur Beitragsbemessungsgrenze von 8.450 Euro; bei 3.000 Euro brutto sind das rund 1.800 beziehungsweise 2.010 Euro, der Höchstsatz liegt bei knapp 3.000 Euro. Gezahlt wird nachträglich zum Monatsanfang, nur noch per Überweisung.",
+          "Die Dauer richtet sich nach Alter und Versicherungszeit der letzten fünf Jahre: unter 50 höchstens zwölf Monate nach 24 Beitragsmonaten, ab 50 15 Monate, ab 55 18 Monate, ab 58 nach 48 Monaten 24 Monate; mindestens sechs Monate.",
+          "Melden Sie sich spätestens drei Monate vor Vertragsende oder drei Tage nach Kenntnis der Kündigung arbeitsuchend und am ersten Tag der Arbeitslosigkeit arbeitslos, online oder persönlich, mit Ausweis, Arbeitsbescheinigung, Lebenslauf und IBAN; eine verspätete Meldung kostet eine Woche Sperrzeit.",
+          "Sperrzeiten bis zwölf Wochen drohen bei Eigenkündigung, Aufhebungsvertrag oder Ablehnung zumutbarer Angebote ohne wichtigen Grund; anerkannt sind Gesundheit mit Attest, ausbleibender Lohn, Mobbing, Umzug zum Partner oder eine zugesagte Stelle, die platzt. Die Sperrzeit verkürzt zugleich die Gesamtdauer."
+        ],
+        "quellen": [
+          "§§ 136 bis 159 SGB III",
+          "§ 38 SGB III (Meldepflichten)",
+          "Beitrag Arbeitslosengeld"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer hat Anspruch auf Arbeitslosengeld?",
+          "status": "freigegeben",
+          "frage": "Ich war zwei Jahre selbstständig und davor acht Jahre angestellt. Bekomme ich Arbeitslosengeld?",
+          "antwort": "Nur, wenn Sie sich als Selbstständige freiwillig in der Arbeitslosenversicherung weiterversichert haben, was binnen drei Monaten nach dem Start möglich war und 2026 rund 100 Euro im Monat kostet; dann zählen die zwei Jahre voll und das Arbeitslosengeld richtet sich nach einem fiktiven Entgelt Ihrer Qualifikationsstufe, bei Hochschulabschluss etwa 1.700 Euro netto. Ohne diese Versicherung liegt Ihre letzte Beitragszeit über 30 Monate zurück, die Anwartschaft ist verfallen und es bleibt nur Bürgergeld mit Vermögensprüfung. Prüfen Sie, ob Sie noch innerhalb der Frist sind, falls die Selbstständigkeit noch keine drei Monate läuft.",
+          "quellen": [
+            "§ 28a SGB III",
+            "§ 142, § 152 SGB III"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch ist das Arbeitslosengeld 2026?",
+          "status": "freigegeben",
+          "frage": "Ich bin in Steuerklasse V, mein Mann in III. Warum ist mein Arbeitslosengeld so niedrig?",
+          "antwort": "Weil die Agentur das Netto nach der Steuerklasse berechnet, die am 1. Januar des Jahres eingetragen war, und Klasse V ein sehr niedriges Netto ergibt; bei 2.500 Euro brutto sind das etwa 1.250 Euro Netto und 750 Euro Arbeitslosengeld statt rund 1.000 Euro in Klasse IV. Ein Wechsel zu IV/IV oder III/V zu Ihren Gunsten wird von der Agentur nur anerkannt, wenn er dem Verhältnis der Gehälter entspricht oder Sie ihn vor Jahresbeginn vollzogen haben; ein Wechsel nach der Kündigung nur zur Erhöhung des Arbeitslosengelds wird ignoriert. Für die Zukunft lohnt es sich, den Wechsel jeweils im Dezember zu prüfen.",
+          "quellen": [
+            "§ 153 Abs. 2 SGB III",
+            "Beitrag, Abschnitt Höhe"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie lange erhalten Sie Arbeitslosengeld?",
+          "status": "freigegeben",
+          "frage": "Ich bin 59 und werde nach 20 Jahren im Betrieb gekündigt. Kann ich das Arbeitslosengeld bis zur Rente strecken?",
+          "antwort": "Sie haben 24 Monate Anspruch, danach greift ab 63 mit 35 Versicherungsjahren die Rente für langjährig Versicherte mit Abschlag von 0,3 Prozent je vorgezogenem Monat, oder ab 64 Jahren und zehn Monaten für den Jahrgang 1967 die abschlagsfreie Rente für besonders langjährig Versicherte nach 45 Jahren, wobei Zeiten des Arbeitslosengelds in den letzten zwei Jahren vor Rentenbeginn nicht mitzählen, außer bei Insolvenz oder Geschäftsaufgabe des Arbeitgebers. Eine Lücke zwischen Arbeitslosengeld und Rente überbrücken Ersparnisse, eine Abfindung oder Bürgergeld mit Vermögensprüfung; die Agentur darf Sie ab 58 nicht in die vorzeitige Rente zwingen, wohl aber müssen Sie weiter vermittelbar bleiben.",
+          "quellen": [
+            "§ 147 Abs. 2 SGB III",
+            "§ 51 Abs. 3a SGB VI",
+            "§ 236b SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Wann droht eine Sperrzeit?",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber bietet einen Aufhebungsvertrag mit Abfindung an. Bekomme ich dann eine Sperrzeit?",
+          "antwort": "In der Regel ja, zwölf Wochen, außer der Aufhebungsvertrag ersetzt eine ohnehin drohende betriebsbedingte Kündigung, hält die ordentliche Kündigungsfrist ein und die Abfindung liegt zwischen 0,25 und 0,5 Monatsgehältern je Beschäftigungsjahr; dann erkennt die Agentur einen wichtigen Grund an, ohne die Kündigung zu prüfen. Fehlt die Kündigungsfrist, ruht das Arbeitslosengeld zusätzlich bis zu dem Tag, an dem sie geendet hätte, und die Abfindung wird anteilig angerechnet. Lassen Sie den Vertrag vor der Unterschrift vom Anwalt oder der Gewerkschaft prüfen und schreiben Sie den Kündigungsgrund hinein; die Abfindung selbst bleibt sozialversicherungsfrei und wird mit der Fünftelregelung ermäßigt besteuert.",
+          "quellen": [
+            "§ 159 Abs. 1 Nr. 1 SGB III",
+            "§ 158 SGB III",
+            "Fachliche Weisungen der BA zu § 159, Rz. 159.1.2.1"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "arbeitslosengeld",
+        "anwartschaftszeit",
+        "sperrzeit",
+        "arbeitsuchendmeldung",
+        "leistungsentgelt",
+        "arbeitslosenversicherung",
+        "abfindung",
+        "buergergeld"
+      ]
+    }
+  },
+  {
+    "slug": "kuenstlersozialkasse",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Künstlersozialkasse in Wilhelmshaven bringt selbstständige Künstler und Publizisten in die gesetzliche Kranken-, Pflege- und Rentenversicherung wie Angestellte: Sie zahlen nur die Arbeitnehmerhälfte, die andere Hälfte finanzieren der Bund mit 20 Prozent und die Unternehmen mit 30 Prozent über die Künstlersozialabgabe; über 190.000 Kreative sind versichert.",
+          "Aufgenommen wird, wer erwerbsmäßig Musik, darstellende oder bildende Kunst schafft, ausübt oder lehrt oder als Schriftsteller, Journalist oder Übersetzer arbeitet, höchstens einen sozialversicherungspflichtigen Mitarbeiter hat und mindestens 3.900 Euro im Jahr verdient; Berufsanfänger sind in den ersten drei Jahren auch darunter versichert.",
+          "2026 zahlen Versicherte 9,3 Prozent Rente, 7,3 Prozent Krankenversicherung plus halben Zusatzbeitrag und 1,8 bis 2,1 Prozent Pflege auf das geschätzte Jahreseinkommen; bei 10.000 Euro sind das rund 77,50 Euro Rente im Monat, insgesamt etwa 160 Euro. Die Ersparnis gegenüber der freiwilligen Versicherung liegt bei rund 50 Prozent.",
+          "Die Abgabe der Auftraggeber sinkt 2026 auf 4,9 Prozent der Honorare; abgabepflichtig ist jedes Unternehmen, das regelmäßig Grafik, Fotos, Texte, Websites oder Musik von Selbstständigen bezieht, laut Beitrag ab 2026 erst ab 1.000 Euro im Jahr, außer typische Verwerter wie Verlage, Theater und Sender. Die Meldung des Vorjahres ist bis 31. März fällig.",
+          "Die Anmeldung läuft per Fragebogen und Nachweisen wie Rechnungen, Verträgen und Veröffentlichungen, die Prüfung dauert drei bis sechs Monate, die Versicherung beginnt mit dem Tag der Anmeldung; Leistungen sind Krankengeld ab der siebten Woche, Familienversicherung, Erwerbsminderungs- und Altersrente."
+        ],
+        "quellen": [
+          "Künstlersozialversicherungsgesetz, §§ 1 bis 3, 14, 23 ff.",
+          "Künstlersozialabgabe-Verordnung 2026",
+          "Beitrag Künstlersozialkasse"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer kann Mitglied werden – Voraussetzungen für Künstler und Publizisten?",
+          "status": "freigegeben",
+          "frage": "Ich bin Webdesignerin und schreibe nebenbei Texte für Kunden. Nimmt mich die KSK?",
+          "antwort": "Wahrscheinlich ja, wenn der gestalterische Anteil überwiegt: Webdesign gilt als bildende Kunst im Sinne des Gesetzes, wenn Sie Layout, Grafik und Bildsprache entwerfen, nicht wenn Sie überwiegend programmieren oder fertige Vorlagen einsetzen; das Texten zählt als publizistische Tätigkeit. Die KSK prüft anhand von Rechnungen, Verträgen, Website und Referenzen, ob Sie selbstständig, erwerbsmäßig und mit mindestens 3.900 Euro im Jahr tätig sind. Beschreiben Sie Ihre Arbeit im Fragebogen als gestaltend und legen Sie Arbeitsproben bei; reine Technikleistungen wie Hosting oder SEO-Betreuung sollten Sie getrennt ausweisen, weil sie den Anteil drücken.",
+          "quellen": [
+            "§ 2 KSVG",
+            "BSG 21.06.2001, B 3 KR 11/00 R (Webdesign)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch sind die Beiträge zur KSK 2026?",
+          "status": "freigegeben",
+          "frage": "Ich habe mein Einkommen mit 12.000 Euro geschätzt, es werden aber 25.000. Was passiert?",
+          "antwort": "Melden Sie die Änderung sofort, die KSK passt die Beiträge ab dem Folgemonat an; sie prüft die Schätzungen stichprobenartig anhand der Steuerbescheide, und wer vorsätzlich oder grob fahrlässig zu niedrig schätzt, riskiert Nachforderung und ein Bußgeld bis 5.000 Euro. Eine Nachzahlung für die Vergangenheit gibt es bei ehrlicher Fehlschätzung nicht, aber die zu niedrigen Rentenbeiträge fehlen später in der Rente. Bei 25.000 Euro zahlen Sie etwa 194 Euro Rente und rund 200 Euro Kranken- und Pflegeversicherung im Monat. Umgekehrt dürfen Sie bei Auftragseinbruch jederzeit nach unten korrigieren, das senkt den Beitrag sofort.",
+          "quellen": [
+            "§ 12, § 13 KSVG",
+            "§ 36 KSVG (Bußgeld)"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Künstlersozialabgabe für Unternehmen: Wer muss zahlen?",
+          "status": "freigegeben",
+          "frage": "Ich betreibe einen kleinen Onlineshop und zahle einer Fotografin 1.500 Euro im Jahr. Muss ich Abgabe zahlen?",
+          "antwort": "Ja, weil Sie über der Bagatellgrenze liegen, die laut Beitrag ab 2026 bei 1.000 Euro liegt: 4,9 Prozent von 1.500 Euro sind 73,50 Euro im Jahr, gemeldet bis 31. März des Folgejahres über das Meldeportal der KSK, bei erstmaliger Abgabepflicht mit Anmeldung. Abgabepflichtig ist das Honorar aller selbstständigen Kreativen, auch wenn diese nicht in der KSK versichert sind, nicht aber Zahlungen an GmbHs oder Agenturen mit eigener Abgabepflicht; Reisekosten und Umsatzsteuer zählen nicht mit. Die Rentenversicherung prüft die Abgabe bei Betriebsprüfungen mit, Nachzahlungen reichen fünf Jahre zurück.",
+          "quellen": [
+            "§ 24, § 25, § 27 KSVG",
+            "§ 28p SGB IV (Prüfung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Anmeldung und Meldepflichten – So werden Sie Mitglied",
+          "status": "freigegeben",
+          "frage": "Die KSK hat mich abgelehnt, weil meine Tätigkeit nicht künstlerisch sei. Was kann ich tun?",
+          "antwort": "Legen Sie binnen eines Monats Widerspruch ein und begründen Sie ihn mit Arbeitsproben, Kundenbewertungen, Ausstellungen, Veröffentlichungen, Mitgliedschaften in Berufsverbänden und Ihrer Ausbildung; entscheidend ist, ob Ihre Tätigkeit in Fachkreisen als künstlerisch anerkannt wird und eigenschöpferisch ist. Häufig scheitern Anträge an unklaren Beschreibungen wie „Mediengestaltung“ oder an einem hohen Anteil handwerklicher oder technischer Leistungen. Bleibt es bei der Ablehnung, hilft die Klage vor dem Sozialgericht ohne Gerichtskosten; Berufsverbände wie der BBK oder der DJV beraten dazu. Bis zur Entscheidung müssen Sie sich freiwillig in der Krankenkasse versichern.",
+          "quellen": [
+            "§ 84 SGG (Widerspruchsfrist)",
+            "BSG-Rechtsprechung zum Kunstbegriff, B 3 KR 37/03 R"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kuenstlersozialkasse",
+        "bagatellgrenze",
+        "gesetzliche-krankenversicherung",
+        "krankengeld",
+        "familienversicherung",
+        "freiwillige-rentenversicherung"
+      ]
+    }
+  },
+  {
+    "slug": "kuendigung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Kündigungsfrist beträgt für Arbeitnehmer immer vier Wochen zum 15. oder Monatsende, für Arbeitgeber steigt sie mit der Betriebszugehörigkeit von einem Monat ab zwei Jahren bis sieben Monate ab 20 Jahren, jeweils zum Monatsende; in der Probezeit bis sechs Monate gelten zwei Wochen zu jedem Tag.",
+          "Kündigungen brauchen Papier und eigenhändige Unterschrift, E-Mail oder Messenger sind unwirksam; die Frist läuft ab Zugang, den der Kündigende beweisen muss. Seit dem Urteil des Bundesarbeitsgerichts vom Januar 2025 reicht der Einlieferungsbeleg eines Einwurf-Einschreibens nicht, sicher sind Übergabe gegen Quittung, Bote mit Zeugen oder Einschreiben mit Rückschein.",
+          "In Betrieben mit mehr als zehn Vollzeitstellen und nach sechs Monaten Wartezeit braucht der Arbeitgeber einen personen-, verhaltens- oder betriebsbedingten Grund; Schwangere, Eltern in Elternzeit, Schwerbehinderte und Betriebsräte genießen Sonderkündigungsschutz.",
+          "Fristlos geht nur mit wichtigem Grund wie Diebstahl, Arbeitsverweigerung, Belästigung oder ausbleibendem Lohn, binnen zwei Wochen ab Kenntnis und meist nach Abmahnung; der Betriebsrat ist vor jeder Kündigung anzuhören, eine Woche bei ordentlicher, drei Tage bei fristloser, sonst ist sie unwirksam.",
+          "Gegen jede Kündigung muss binnen drei Wochen nach Zugang Kündigungsschutzklage beim Arbeitsgericht erhoben werden, sonst gilt sie als wirksam; die meisten Kündigungen scheitern an Form, Betriebsratsanhörung oder Sozialauswahl. Danach folgen Arbeitslosengeld und gegebenenfalls eine Abfindung, oft 0,5 Gehälter je Jahr im Vergleich."
+        ],
+        "quellen": [
+          "§§ 622, 623, 626 BGB",
+          "§§ 1, 4, 23 KSchG",
+          "§ 102 BetrVG",
+          "BAG 30.01.2025, 2 AZR 68/24",
+          "Beitrag Kündigung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Kündigungsfristen 2026: Tabelle und Berechnung",
+          "status": "freigegeben",
+          "frage": "Meine Kündigung nach elf Jahren ging mir am 20. März zu. Wann endet mein Arbeitsverhältnis?",
+          "antwort": "Am 31. Juli: Nach zehn Jahren Betriebszugehörigkeit beträgt die Frist vier Monate zum Monatsende, gerechnet ab Zugang am 20. März, also 20. Juli, aufgerundet auf das Monatsende. Steht in Ihrem Arbeits- oder Tarifvertrag eine längere Frist, gilt die; Zeiten vor dem 25. Geburtstag zählen seit dem EuGH-Urteil von 2010 voll mit. Kündigt der Arbeitgeber zu einem früheren Termin, wird die Kündigung meist in die richtige Frist umgedeutet, Sie bekommen aber bis Ende Juli Gehalt. Prüfen Sie trotzdem binnen drei Wochen per Klage, ob die Kündigung überhaupt wirksam ist, das ist die einzige Frist, die Sie nicht versäumen dürfen.",
+          "quellen": [
+            "§ 622 Abs. 2 BGB",
+            "EuGH C-555/07 (Kücükdeveci)",
+            "§ 4 KSchG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Kündigungsschutzgesetz: Wer ist geschützt?",
+          "status": "freigegeben",
+          "frage": "Wir sind neun Vollzeitkräfte und vier Teilzeitler mit 20 Stunden. Gilt bei uns das Kündigungsschutzgesetz?",
+          "antwort": "Ja: Teilzeitkräfte bis 20 Wochenstunden zählen mit 0,5, bis 30 Stunden mit 0,75, Vollzeit mit 1,0, Auszubildende gar nicht; neun plus vier mal 0,5 ergibt elf, und das Gesetz greift bei mehr als zehn Arbeitnehmern. Der Arbeitgeber braucht dann einen Kündigungsgrund und muss bei betriebsbedingten Kündigungen die Sozialauswahl nach Betriebszugehörigkeit, Alter, Unterhaltspflichten und Schwerbehinderung vornehmen. Wer nach sechs Monaten Wartezeit gekündigt wird, kann binnen drei Wochen klagen; im Kleinbetrieb darunter gilt nur der Schutz vor Willkür und Sittenwidrigkeit, aber ebenfalls die Klagefrist.",
+          "quellen": [
+            "§ 23 Abs. 1 KSchG",
+            "§ 1 Abs. 3 KSchG (Sozialauswahl)"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wann ist eine außerordentliche Kündigung möglich?",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber zahlt seit zwei Monaten kein Gehalt. Kann ich fristlos kündigen und bekomme ich Arbeitslosengeld?",
+          "antwort": "Ja, ausbleibender Lohn über mindestens zwei Monate oder einen erheblichen Betrag ist ein wichtiger Grund, wenn Sie vorher schriftlich abgemahnt und eine Frist von etwa zwei Wochen gesetzt haben; kündigen Sie schriftlich mit Verweis auf § 626 BGB und der Abmahnung. Die Agentur für Arbeit erkennt das als wichtigen Grund an, es gibt keine Sperrzeit, legen Sie Abmahnung und Kontoauszüge vor. Zusätzlich können Sie Schadenersatz für den Verdienstausfall bis zum Ende der ordentlichen Frist verlangen und bei Insolvenz des Arbeitgebers für drei Monate Insolvenzgeld beantragen; Lohnansprüche verfallen nach den Ausschlussfristen des Vertrags oft schon nach drei Monaten, machen Sie sie sofort schriftlich geltend.",
+          "quellen": [
+            "§ 626 BGB",
+            "§ 628 Abs. 2 BGB",
+            "§ 159 Abs. 1 SGB III",
+            "§ 165 SGB III (Insolvenzgeld)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Häufige Kündigungsfehler und rechtliche Risiken",
+          "status": "freigegeben",
+          "frage": "Ich habe die Kündigung vor vier Wochen bekommen und die Klagefrist verpasst. Ist alles verloren?",
+          "antwort": "Fast: Nach drei Wochen gilt die Kündigung als wirksam, selbst wenn sie fehlerhaft war; eine nachträgliche Zulassung der Klage gibt es nur, wenn Sie trotz aller Sorgfalt verhindert waren, etwa im Krankenhaus oder weil der Brief nachweislich nicht ankam, und Sie binnen zwei Wochen nach Wegfall des Hindernisses klagen. Prüfen lassen sollten Sie die Kündigung trotzdem: Fehlt die Schriftform oder wurde sie nur per E-Mail geschickt, ist sie nichtig und die Frist lief nie; auch der Zugang ist manchmal nicht beweisbar. Unabhängig davon bleiben Ansprüche auf Zeugnis, Resturlaub, Überstunden und Arbeitslosengeld, und ein Aufhebungsvergleich mit Abfindung ist weiter verhandelbar.",
+          "quellen": [
+            "§ 4, § 5, § 7 KSchG",
+            "§ 623 BGB"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kuendigungsfrist",
+        "zugang-der-kuendigung",
+        "kuendigungsschutz",
+        "ausserordentliche-kuendigung",
+        "abmahnung",
+        "betriebsratsanhoerung",
+        "kuendigungsschutzklage",
+        "abfindung"
+      ]
+    }
+  },
+  {
+    "slug": "wohnungskuendigung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Mieter kündigen immer mit drei Monaten Frist, egal wie lange sie wohnen: Die Kündigung muss bis zum dritten Werktag eines Monats beim Vermieter sein, dann endet der Vertrag mit dem übernächsten Monat, Samstag zählt als Werktag; ein Tag zu spät kostet einen ganzen Monat Miete. Längere Fristen im Vertrag sind für Mieter unwirksam.",
+          "Nötig sind Papier und Unterschrift aller Hauptmieter, E-Mail und Fax sind unwirksam; entscheidend ist der Zugang beim Vermieter, am sichersten per Übergabe gegen Quittung oder Einschreiben mit Rückschein.",
+          "Vermieter haben je nach Mietdauer drei, sechs oder neun Monate Frist und brauchen einen Grund, meist Eigenbedarf für sich oder nahe Angehörige; nach Kauf einer vermieteten Wohnung gilt eine Sperrfrist von drei Jahren, bei Umwandlung in Eigentum und in angespannten Märkten zehn Jahre. Rund 60 Prozent der Eigenbedarfskündigungen werden angefochten, viele scheitern an Formfehlern.",
+          "Fristlos darf der Vermieter bei zwei Monatsmieten Rückstand, schweren Störungen des Hausfriedens oder illegaler Nutzung kündigen, der Mieter bei gesundheitsgefährdenden Mängeln wie Schimmel; meist ist vorher eine Abmahnung nötig. Sonderkündigungsrechte gelten nach Mieterhöhung, Modernisierungsankündigung und beim Tod des Mieters.",
+          "Mieter können der Kündigung bis zwei Monate vor Fristende wegen Härte widersprechen, etwa bei hohem Alter, Krankheit, Schwangerschaft, Prüfungen oder fehlendem Ersatzwohnraum. Die Kaution kommt üblich nach drei bis sechs Monaten zurück, der Vermieter darf für Nebenkostennachzahlungen bis zu einem Jahr einen Teil behalten; Ansprüche verjähren nach drei Jahren."
+        ],
+        "quellen": [
+          "§§ 543, 568, 573, 573a, 573c, 574, 577a BGB",
+          "BGH VIII ZR 206/04 (Samstag als Werktag)",
+          "Beitrag Wohnungskündigung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Ordentliche Kündigung durch Mieter: Die 3-Monate-Regel verstehen",
+          "status": "freigegeben",
+          "frage": "Ich ziehe wegen eines neuen Jobs in vier Wochen um. Komme ich früher aus dem Vertrag?",
+          "antwort": "Nur mit Zustimmung des Vermieters: Ein Sonderkündigungsrecht wegen Jobwechsels gibt es nicht, die drei Monate laufen, und Sie zahlen bis zum Ende Miete, auch wenn Sie schon ausgezogen sind. Bieten Sie dem Vermieter einen solventen Nachmieter an; er muss ihn nicht akzeptieren, außer der Vertrag enthält eine Nachmieterklausel, aber viele lassen sich darauf ein, weil sie keinen Leerstand wollen. Vermietet er die Wohnung früher weiter, endet Ihre Zahlungspflicht mit dem neuen Mietbeginn. Ein Aufhebungsvertrag mit Auszugsdatum, Kautionsregelung und Übergabetermin sichert das schriftlich ab; die doppelte Miete ist bei beruflichem Umzug als Werbungskosten absetzbar.",
+          "quellen": [
+            "§ 573c BGB",
+            "BGH VIII ZR 253/03 (Nachmieter)",
+            "§ 9 EStG (Umzugskosten)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie funktioniert die korrekte Fristberechnung?",
+          "status": "freigegeben",
+          "frage": "Der 1. Oktober 2026 ist ein Donnerstag. Bis wann muss meine Kündigung ankommen, damit ich Ende Dezember raus bin?",
+          "antwort": "Bis Samstag, den 3. Oktober, denn Samstag ist ein Werktag; aber der 3. Oktober ist der Tag der Deutschen Einheit, ein gesetzlicher Feiertag, der nicht zählt. Die drei Werktage sind also Donnerstag der 1., Freitag der 2. und Montag der 5. Oktober. Geht die Kündigung bis zum 5. Oktober zu, endet das Mietverhältnis am 31. Dezember 2026, einen Tag später erst am 31. Januar 2027. Verlassen Sie sich nicht auf die Post, sondern übergeben Sie das Schreiben persönlich gegen Empfangsbestätigung oder werfen Sie es mit Zeugen ein und fotografieren Sie den Einwurf mit Uhrzeit.",
+          "quellen": [
+            "§ 573c Abs. 1 BGB",
+            "§ 193 BGB",
+            "BGH VIII ZR 206/04"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Eigenbedarfskündigung: Verschärfte Anforderungen 2026",
+          "status": "freigegeben",
+          "frage": "Mein Vermieter kündigt wegen Eigenbedarfs für seine Nichte. Ist das zulässig?",
+          "antwort": "Grundsätzlich ja, Nichten und Neffen gehören nach dem Bundesgerichtshof zum Kreis der Familienangehörigen, für die Eigenbedarf geltend gemacht werden darf, ohne dass ein besonderes Näheverhältnis nachgewiesen werden muss. Die Kündigung muss aber den Bedarf konkret begründen, Person, Grund und die bisherige Wohnsituation nennen, die Frist von drei bis neun Monaten einhalten und den Hinweis auf Ihr Widerspruchsrecht enthalten; bei einem Wohnungskauf innerhalb der letzten drei Jahre ist sie unzulässig. Prüfen Sie, ob der Vermieter eine vergleichbare freie Wohnung im Haus hat, die er anbieten muss, und ob Härtegründe wie Alter, Krankheit oder Schulkinder vorliegen; ziehen Sie nach vorgetäuschtem Eigenbedarf aus, steht Ihnen Schadenersatz für Umzug und Mietdifferenz zu.",
+          "quellen": [
+            "§ 573 Abs. 2 Nr. 2 BGB",
+            "BGH VIII ZR 159/09 (Nichte)",
+            "§ 573 Abs. 3 BGB (Begründung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Kaution, Übergabe und was nach der Kündigung passiert",
+          "status": "freigegeben",
+          "frage": "Der Vermieter will von der Kaution 800 Euro für das Streichen der Wände abziehen. Muss ich das hinnehmen?",
+          "antwort": "Nur, wenn eine wirksame Schönheitsreparaturklausel im Vertrag steht, Sie die Wohnung renoviert übernommen haben und die Wände tatsächlich renovierungsbedürftig sind; Klauseln mit starren Fristen, Farbvorgaben während der Mietzeit oder bei unrenoviert übergebener Wohnung sind nach dem Bundesgerichtshof unwirksam, dann trägt der Vermieter das Streichen. Normale Abnutzung wie Dübellöcher in üblicher Zahl oder helle Nagellöcher darf er nie abziehen. Verlangen Sie eine schriftliche Abrechnung mit Kostenvoranschlag; der Vermieter hat sechs Monate ab Rückgabe, Ansprüche geltend zu machen, danach sind sie verjährt und die Kaution mit Zinsen sofort fällig.",
+          "quellen": [
+            "BGH VIII ZR 185/14 (unrenovierte Wohnung)",
+            "§ 548 BGB",
+            "§ 551 BGB"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kuendigungsfrist",
+        "dritter-werktag",
+        "zugang-der-kuendigung",
+        "eigenbedarfskuendigung",
+        "haerteeinwand",
+        "sperrfrist-eigenbedarf",
+        "mietkaution",
+        "ausserordentliche-kuendigung",
+        "abmahnung"
+      ]
+    }
+  },
+  {
+    "slug": "pfaendung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Pfänden darf ein Gläubiger erst mit vollstreckbarem Titel wie Urteil, Vollstreckungsbescheid oder notarieller Urkunde; dann greift er per Gerichtsvollzieher auf Sachen, per Pfändungsbeschluss beim Arbeitgeber auf den Lohn oder bei der Bank auf das Konto zu. Kleidung, notwendiger Hausrat und Arbeitsmittel bleiben unpfändbar.",
+          "Vom Nettoeinkommen ist bis Juni 2026 ein Grundbetrag von 1.559,99 Euro geschützt, laut Beitrag ab 1. Juli 2026 1.587,40 Euro; für die erste unterhaltsberechtigte Person kommen dann 597,42 Euro hinzu, für jede weitere 332,83 Euro, bei einem Kind also 2.184,82 Euro, bei fünf Personen 3.516,14 Euro. Oberhalb wird nur ein Teil gepfändet, ab rund 4.767 Euro alles.",
+          "Selbstständige und Freiberufler nutzen dieselbe Tabelle, Grundlage ist ihr bereinigtes Einkommen nach Abzug notwendiger Betriebsausgaben wie Miete, Versicherungen, Fahrten und Steuerberatung; Sozialleistungen, Kindergeld für Kinder und Pflegegeld sind gesondert geschützt.",
+          "Bei Kontopfändung schützt nur das Pfändungsschutzkonto, in das jede Bank binnen vier Geschäftstagen kostenlos umwandeln muss, auch im Minus: automatisch 1.560 Euro im Monat, ab Juli 2026 1.590 Euro, mit Bescheinigung von Schuldnerberatung, Arbeitgeber, Familienkasse oder Anwalt mehr für Unterhaltspflichten und Kindergeld; nicht verbrauchtes Guthaben überträgt sich drei Monate, nur ein Einzelkonto je Person.",
+          "Gegen fehlerhafte Pfändungen helfen Erinnerung beim Amtsgericht, Vollstreckungsabwehrklage bei erloschener Forderung, Antrag auf Erhöhung des Freibetrags bei Mehrbedarf und Aussetzung bei Existenzgefährdung; häufige Fehler sind ein zu spät beantragtes P-Konto, fehlende Unterhaltsnachweise und veraltete Freibeträge."
+        ],
+        "quellen": [
+          "§§ 704, 750, 811, 850 ff., 899 ff. ZPO",
+          "Pfändungsfreigrenzenbekanntmachung 2025 und 2026",
+          "Beitrag Pfändung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie funktioniert eine Pfändung rechtlich?",
+          "status": "freigegeben",
+          "frage": "Ein Inkassobüro droht mit Pfändung, ich habe aber nie ein Urteil bekommen. Dürfen die das?",
+          "antwort": "Nein, ohne Titel gibt es keine Pfändung, und Drohungen mit Gerichtsvollzieher oder Kontosperre ohne Titel sind unzulässige Druckmittel; verlangen Sie schriftlich die Forderungsaufstellung mit Vertrag und Rechnung. Achten Sie aber auf gerichtliche Post: Ein Mahnbescheid vom Mahngericht wird ohne Widerspruch binnen zwei Wochen zum Vollstreckungsbescheid und damit zum Titel, ohne dass ein Richter die Forderung prüft. Legen Sie gegen unberechtigte Mahnbescheide fristgerecht Widerspruch ein, prüfen Sie Verjährung nach drei Jahren und lassen Sie sich von der Verbraucherzentrale oder Schuldnerberatung kostenlos beraten; überhöhte Inkassogebühren müssen Sie nicht zahlen.",
+          "quellen": [
+            "§ 704, § 794 ZPO",
+            "§ 692, § 699 ZPO (Mahnverfahren)",
+            "§ 13e RDG (Inkassokosten)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "So berechnet sich Ihr persönlicher Freibetrag",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 2.600 Euro netto und zahle Unterhalt für ein Kind. Wie viel wird gepfändet?",
+          "antwort": "Bis Juni 2026 etwa 130 Euro im Monat, ab Juli laut Beitrag rund 115 Euro: Ihr Freibetrag liegt mit einer Unterhaltspflicht bei 2.184,82 Euro, vom Mehrbetrag von rund 415 Euro bleiben Ihnen weitere fünf Zehntel, gepfändet werden also etwa drei Zehntel, den genauen Wert zeigt die amtliche Tabelle. Voraussetzung ist, dass Ihr Arbeitgeber die Unterhaltspflicht kennt; legen Sie ihm den Unterhaltstitel oder Zahlungsnachweise vor, sonst rechnet er ohne Freibetrag für das Kind und pfändet über 300 Euro. Wird für den Unterhalt selbst gepfändet, gelten niedrigere Freibeträge, die das Gericht festsetzt.",
+          "quellen": [
+            "§ 850c ZPO mit Tabelle",
+            "§ 850d ZPO (Unterhaltspfändung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Das Pfändungsschutzkonto: Ihr wichtigster Schutz",
+          "status": "freigegeben",
+          "frage": "Mein Konto ist seit gestern gesperrt und ich habe kein P-Konto. Ist mein Gehalt verloren?",
+          "antwort": "Nein, Sie haben vier Wochen Zeit: Wandeln Sie das Konto sofort in ein P-Konto um, die Bank muss das binnen vier Geschäftstagen tun, und der Schutz gilt rückwirkend auf den Beginn des Monats, in dem die Pfändung zugestellt wurde; das Guthaben bis 1.560 Euro, mit Bescheinigung für Kinder und Partner mehr, wird dann freigegeben. Die Bank darf in der Zwischenzeit vier Wochen lang nichts an den Gläubiger auszahlen. Beantragen Sie parallel bei der Schuldnerberatung oder Ihrem Arbeitgeber die Bescheinigung über Unterhaltspflichten und Kindergeld und lassen Sie die laufenden Abbuchungen für Miete und Strom prüfen, damit sie nicht platzen.",
+          "quellen": [
+            "§ 850k ZPO",
+            "§ 899, § 900, § 903 ZPO",
+            "Beitrag, Abschnitt Pfändungsschutzkonto"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Wie Sie sich gegen unrechtmäßige Pfändungen wehren",
+          "status": "freigegeben",
+          "frage": "Ich habe drei Gläubiger und über 40.000 Euro Schulden, die ich nie abzahlen kann. Was ist der Ausweg?",
+          "antwort": "Die Verbraucherinsolvenz: Nach einem gescheiterten außergerichtlichen Einigungsversuch über eine Schuldnerberatung oder einen Anwalt beantragen Sie beim Amtsgericht das Verfahren, während dessen drei Jahre lang der pfändbare Teil Ihres Einkommens an den Treuhänder geht und Sie sich um Arbeit bemühen müssen; danach werden die Restschulden erlassen, auch die 40.000 Euro, ausgenommen Geldstrafen, Unterhaltsrückstände und Schulden aus vorsätzlicher Straftat. Pfändungen der einzelnen Gläubiger enden mit Eröffnung des Verfahrens. Die Schuldnerberatungsstellen der Wohlfahrtsverbände sind kostenlos, haben aber Wartezeiten von Wochen; die Verfahrenskosten können gestundet werden.",
+          "quellen": [
+            "§§ 286 ff., 304 ff. InsO",
+            "§ 302 InsO (ausgenommene Forderungen)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "pfaendungsfreigrenze",
+        "p-konto",
+        "lohnpfaendung",
+        "vollstreckungstitel",
+        "schuldnerberatung",
+        "privatinsolvenz",
+        "schonvermoegen"
+      ]
+    }
+  },
+  {
+    "slug": "geringfuegige-beschaeftigung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Geringfügig ist ein Job, wenn der Verdienst 2026 höchstens 603 Euro im Monat beträgt, Minijob, oder die Arbeit auf 70 Tage beziehungsweise drei Monate im Jahr begrenzt ist, kurzfristige Beschäftigung ohne Verdienstgrenze; die Minijob-Grenze ist an den Mindestlohn von 13,90 Euro gekoppelt, entspricht zehn Wochenstunden und steigt 2027 auf 633 Euro.",
+          "Minijobber haben volle Arbeitnehmerrechte: Mindestlohn, Urlaub, Lohnfortzahlung, Kündigungsschutz und Unfallversicherung; zweimal im Jahr darf die Grenze unvorhersehbar überschritten werden, bis höchstens 8.442 Euro im Jahr. In der Landwirtschaft gelten laut Beitrag seit 2026 90 Tage.",
+          "Der Arbeitgeber zahlt rund 31 Prozent Pauschalabgaben: 13 Prozent Kranken-, 15 Prozent Rentenversicherung, 2 Prozent Pauschalsteuer, 0,8 Prozent Umlage U1, 0,24 Prozent U2 und 0,12 Prozent Insolvenzgeldumlage, bei 603 Euro etwa 187 Euro; alternativ wird nach Lohnsteuermerkmalen besteuert, was für Schüler und Studierende unter dem Grundfreibetrag von 12.348 Euro steuerfrei bleibt.",
+          "Minijobber zahlen 3,6 Prozent Eigenanteil zur Rentenversicherung, in Privathaushalten 13,6 Prozent, bei 603 Euro rund 22 Euro, und können sich davon befreien lassen; laut Beitrag lässt sich die Befreiung ab Juli 2026 einmalig rückgängig machen. Ohne Befreiung entstehen volle Rentenmonate und Ansprüche auf Reha und Erwerbsminderungsrente.",
+          "Mehrere Minijobs werden zusammengerechnet, über 603 Euro werden alle versicherungspflichtig; neben einer Hauptbeschäftigung bleibt ein Minijob abgabenfrei, ein zweiter wird zusammengerechnet. Zwischen 603,01 und 2.000 Euro liegt der Midijob mit reduzierten Beiträgen. Pflicht sind schriftlicher Vertrag, tägliche Zeiterfassung und Anmeldung bei der Minijob-Zentrale."
+        ],
+        "quellen": [
+          "§ 8, § 8a SGB IV",
+          "§ 40a EStG",
+          "§ 249b SGB V, § 172 SGB VI",
+          "Mindestlohnanpassungsverordnung 2026",
+          "Beitrag Geringfügige Beschäftigung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Die Verdienstgrenze 2026",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 600 Euro im Minijob und bekomme im November 300 Euro Weihnachtsgeld. Fliege ich aus dem Minijob?",
+          "antwort": "Ja, wenn das Weihnachtsgeld vertraglich zugesagt ist, denn vorhersehbare Einmalzahlungen werden auf das Jahr umgelegt: 12 mal 600 plus 300 sind 7.500 Euro, mehr als die Jahresgrenze von 7.236 Euro, damit ist der Job von Anfang an versicherungspflichtig und der Arbeitgeber muss nachzahlen. Die Ausnahme für unvorhersehbares Überschreiten gilt nur für Krankheitsvertretungen oder Sonderfälle, nicht für zugesagtes Weihnachtsgeld. Lösung: Den Monatslohn auf 578 Euro senken, das Weihnachtsgeld streichen oder als Sachgeschenk bis 60 Euro gestalten, oder bewusst in den Midijob wechseln, der bei 650 Euro nur rund 20 Euro Beitrag kostet und vollen Schutz bringt.",
+          "quellen": [
+            "§ 8 Abs. 1b SGB IV",
+            "Geringfügigkeits-Richtlinien der Spitzenverbände, Abschnitt B 2.2"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Besteuerung von Minijobs",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber besteuert meinen Minijob nach Steuerklasse VI, weil ich noch einen Hauptjob habe. Verliere ich viel?",
+          "antwort": "In Klasse VI zieht er bei 603 Euro rund 60 Euro Lohnsteuer ab, die Sie über die Steuererklärung teils zurückholen, sofern Ihr Gesamteinkommen den Hauptjob-Abzug nicht ohnehin ausschöpft; mit der 2-Prozent-Pauschalsteuer, die der Arbeitgeber trägt oder auf Sie abwälzt, wären es nur 12 Euro und der Minijob tauchte in Ihrer Erklärung gar nicht auf. Die Wahl trifft der Arbeitgeber, aber viele stimmen der Pauschale zu, wenn Sie anbieten, die 12 Euro selbst zu tragen, weil das für ihn kostenneutral ist. Bei der Rentenversicherung ändert sich nichts, der Minijob neben der Hauptbeschäftigung bleibt versicherungsfrei, nur den Eigenanteil von 3,6 Prozent zahlen Sie weiter.",
+          "quellen": [
+            "§ 40a Abs. 2 EStG",
+            "§ 39e EStG (Steuerklasse VI)",
+            "Beitrag, Abschnitt Besteuerung"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Sozialversicherungsbeiträge",
+          "status": "freigegeben",
+          "frage": "Lohnt es sich, im Minijob die 22 Euro Rentenbeitrag zu zahlen, statt mich befreien zu lassen?",
+          "antwort": "Meist ja: Für 22 Euro im Monat erwerben Sie einen vollen Beitragsmonat mit etwa 0,15 Entgeltpunkten im Jahr, was die Rente um rund 6 Euro monatlich für jedes Jahr Minijob erhöht, dazu Wartezeiten für Reha, Erwerbsminderungsrente und die Rente mit 63 nach 45 Jahren, und den Zugang zur Riester-Förderung. Bei 263 Euro im Jahr Eigenbeitrag holen Sie die 6 Euro Monatsrente nach vier Rentenjahren wieder herein. Sinnvoll ist die Befreiung nur, wenn Sie ohnehin Rentnerin sind oder als Beamtin eine Pension erwarten. Wer sich befreit hat, kann die Befreiung laut Beitrag ab Juli 2026 einmalig zurücknehmen, aber nicht erneut beantragen.",
+          "quellen": [
+            "§ 6 Abs. 1b SGB VI",
+            "§ 168 Abs. 1 Nr. 1b SGB VI",
+            "Beitrag, Abschnitt Sozialversicherung"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Mehrere Minijobs kombinieren",
+          "status": "freigegeben",
+          "frage": "Ich bin Rentnerin und habe zwei Minijobs mit 400 und 350 Euro. Was passiert?",
+          "antwort": "Beide werden zusammengerechnet auf 750 Euro und damit von Beginn an sozialversicherungspflichtig als Midijobs: Sie zahlen darauf reduzierte Beiträge zur Kranken- und Pflegeversicherung, als Altersrentnerin nach der Regelaltersgrenze aber keine Renten- und Arbeitslosenbeiträge, insgesamt etwa 60 Euro im Monat, und die Arbeitgeber müssen die Jobs bei der Krankenkasse statt der Minijob-Zentrale melden. Der Hinzuverdienst ist bei der Altersrente seit 2023 unbegrenzt erlaubt. Alternativ reduzieren Sie einen Job so, dass die Summe unter 603 Euro bleibt, oder verhandeln einen Job als kurzfristige Beschäftigung für höchstens 70 Tage im Jahr, die nicht zusammengerechnet wird. Melden Sie beiden Arbeitgebern den jeweils anderen Job, sonst drohen Nachforderungen.",
+          "quellen": [
+            "§ 8 Abs. 2 SGB IV",
+            "§ 20 Abs. 2 SGB IV (Übergangsbereich)",
+            "§ 5 Abs. 4 SGB VI (Rentner)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "minijob",
+        "geringfuegigkeitsgrenze",
+        "kurzfristige-beschaeftigung",
+        "pauschalabgaben",
+        "midijob",
+        "mindestlohn",
+        "rentenversicherungsbefreiung",
+        "grundfreibetrag"
+      ]
+    }
+  },
+  {
+    "slug": "bafoeg",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "BAföG fördert Studium und Schule ab Klasse 10 an bestimmten Schulen, wenn Eltern und eigene Mittel nicht reichen: Der Höchstsatz beträgt 2026 992 Euro im Monat aus 475 Euro Grundbedarf, 380 Euro Wohnpauschale und 137 Euro Kranken- und Pflegezuschlag, bei Wohnen bei den Eltern und Familienversicherung 855 Euro, ab 31 Jahren bis 1.040 Euro.",
+          "Maßgeblich ist das Elterneinkommen des vorletzten Jahres mit Freibeträgen von 2.415 Euro netto für Ehepaare, 1.605 Euro für Alleinerziehende und 730 Euro je Geschwisterkind; ist das Einkommen aktuell deutlich niedriger, hilft ein Aktualisierungsantrag. Elternvermögen zählt nicht, eigenes Vermögen ist bis 15.000 Euro frei, ab 30 Jahren 45.000 Euro, eigener Verdienst bis 603 Euro im Monat.",
+          "Der Antrag läuft nur digital über bafoeg-digital, sechs bis acht Wochen vor Semesterbeginn, weil ab dem Antragsmonat gezahlt wird, nie rückwirkend; nötig sind Formblatt 1, Studienbescheinigung, Einkommenserklärung und Steuerbescheid der Eltern, Immatrikulation und Mietvertrag.",
+          "Studienanfänger unter 25 aus Haushalten mit Bürgergeld, Kinderzuschlag oder Wohngeld erhalten die Studienstarthilfe von 1.000 Euro als Zuschuss, beantragt bis Ende des zweiten Studienmonats, ohne Anrechnung auf andere Leistungen.",
+          "An Hochschulen ist die Hälfte Zuschuss, die Hälfte zinsloses Darlehen: Rückzahlung fünf Jahre nach Ende der Förderungshöchstdauer mit 130 Euro monatlich, höchstens 77 Raten oder 10.010 Euro, über längstens 20 Jahre, bei Einkommen unter 1.690 Euro netto Freistellung. Laut Beitrag ist eine Reform mit 440 Euro Wohnpauschale und Grundbedarf auf Bürgergeldniveau geplant, aber noch nicht beschlossen."
+        ],
+        "quellen": [
+          "§§ 11, 12, 13, 13a, 21 bis 29, 56a BAföG",
+          "§ 17, § 18 BAföG (Rückzahlung)",
+          "Beitrag BAföG"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer hat Anspruch auf BAföG?",
+          "status": "freigegeben",
+          "frage": "Ich bin 36 und will nach zehn Jahren Beruf ein Studium beginnen. Bekomme ich noch BAföG?",
+          "antwort": "Nur ausnahmsweise: Die Altersgrenze liegt bei 45 Jahren zu Beginn des Studiums, aber für Antragsteller über 45 gilt sie nicht, wenn sie den Hochschulzugang erst über den zweiten Bildungsweg oder berufliche Qualifikation erworben haben, und darunter, also bei Ihnen mit 36, ist die Grenze ohnehin eingehalten. Elternunabhängig gefördert werden Sie, weil Sie nach dem 18. Geburtstag mindestens fünf Jahre erwerbstätig waren; dann zählt nur Ihr eigenes Einkommen und Vermögen bis 45.000 Euro. Voraussetzung bleibt ein Erststudium oder ein Master nach Bachelor; eine abgeschlossene Ausbildung schadet nicht. Der Höchstsatz beträgt mit eigener Krankenversicherung bis 1.040 Euro.",
+          "quellen": [
+            "§ 10 Abs. 3 BAföG",
+            "§ 11 Abs. 3 BAföG (elternunabhängige Förderung)",
+            "§ 29 Abs. 1 BAföG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "BAföG berechnen: Einkommens- und Vermögensgrenzen",
+          "status": "freigegeben",
+          "frage": "Meine Eltern verdienen zusammen 4.500 Euro netto und ich habe einen Bruder in der Ausbildung. Wie viel bekomme ich?",
+          "antwort": "Grob geschätzt 550 bis 650 Euro: Vom Nettoeinkommen der Eltern bleiben 2.415 Euro Grundfreibetrag und 730 Euro für Ihren Bruder frei, sofern er kein BAföG bezieht, vom Rest von rund 1.355 Euro werden 50 Prozent für die Eltern und 5 Prozent für jedes Kind freigestellt, sodass etwa 600 Euro auf Ihren Bedarf von 992 Euro angerechnet werden. Bekommt der Bruder eine Ausbildungsvergütung über 730 Euro, entfällt sein Freibetrag teilweise. Nutzen Sie den amtlichen Rechner des Bildungsministeriums und beantragen Sie trotzdem, denn Werbungskosten und Sonderausgaben der Eltern senken das anrechenbare Einkommen weiter; auch ein Teilbetrag von 100 Euro sichert Ihnen die Kranken- und Pflegezuschüsse.",
+          "quellen": [
+            "§ 25 BAföG",
+            "§ 21 BAföG (Einkommensbegriff)"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie funktioniert die BAföG-Antragstellung?",
+          "status": "freigegeben",
+          "frage": "Mein Vater weigert sich, seine Einkommensunterlagen herauszugeben. Bleibe ich ohne BAföG?",
+          "antwort": "Nein, beantragen Sie Vorausleistung: Das BAföG-Amt zahlt dann Ihre Förderung so, als würde der Vater nichts leisten, fordert ihn selbst zur Auskunft auf und holt sich den Unterhalt bei ihm zurück, notfalls per Klage; Sie müssen nur glaubhaft machen, dass er nicht zahlt und die Unterlagen verweigert, etwa mit Ihrem Schriftwechsel. Reichen Sie den normalen Antrag ohne sein Formblatt 3 ein und kreuzen Sie die Vorausleistung an, das Amt hört den Vater an. Falls er anschließend Unterhalt direkt an Sie zahlt, wird das angerechnet. Unabhängig davon können Sie ihn auf Unterhalt verklagen, mit Beratungshilfe kostenlos.",
+          "quellen": [
+            "§ 36, § 37 BAföG",
+            "§ 47 Abs. 4 BAföG (Auskunftspflicht)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Wie funktioniert die BAföG-Rückzahlung?",
+          "status": "freigegeben",
+          "frage": "Mein Rückzahlungsbescheid kommt in zwei Jahren, ich habe 9.000 Euro Darlehen. Lohnt es sich, auf einmal zu zahlen?",
+          "antwort": "Ja, deutlich: Bei vorzeitiger Rückzahlung des gesamten Darlehens gewährt das Bundesverwaltungsamt einen Nachlass, der von der Höhe abhängt, bei 9.000 Euro etwa 21 Prozent, sodass Sie rund 7.100 Euro zahlen und knapp 1.900 Euro sparen; das Angebot steht im Bescheid, den Sie vier bis fünf Jahre nach Studienende erhalten, und muss innerhalb eines Monats angenommen werden. Da das Darlehen zinslos ist, lohnt sich das nur, wenn das Geld sonst weniger als den Nachlass einbringt, bei 4 Prozent Tagesgeld über 20 Jahre wäre Ratenzahlung knapp besser, bei Konsumkrediten die Einmalzahlung. Wer unter 1.690 Euro netto verdient, kann sich stattdessen freistellen lassen, die Raten verschieben sich dann nach hinten.",
+          "quellen": [
+            "§ 18b BAföG",
+            "Verordnung über die Rückzahlung von BAföG-Darlehen (DarlehensV)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "bafoeg",
+        "bedarfssatz",
+        "studienstarthilfe",
+        "bafoeg-rueckzahlung",
+        "geringfuegigkeitsgrenze",
+        "kinderzuschlag",
+        "wohngeld"
+      ]
+    }
+  },
+  {
+    "slug": "vermoegenswirksame-leistungen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Vermögenswirksame Leistungen sind Geld vom Arbeitgeber, das nach dem Vermögensbildungsgesetz direkt in einen Sparvertrag fließt: bis 40 Euro im Monat je nach Tarifvertrag, im öffentlichen Dienst 6,65 Euro, für Anwärter 13,29 Euro; einen gesetzlichen Anspruch gibt es nicht, Selbstständige sind ausgeschlossen, Teilzeitkräfte erhalten anteilig.",
+          "Der Staat legt die Arbeitnehmer-Sparzulage drauf: 20 Prozent auf bis zu 400 Euro im Jahr bei Fonds- und ETF-Sparplänen, also 80 Euro, und 9 Prozent auf bis zu 470 Euro beim Bausparen, 43 Euro, zusammen bis 123 Euro, für Ehepaare das Doppelte; seit 2024 gilt die Einkommensgrenze von 40.000 Euro zu versteuerndem Einkommen für Ledige und 80.000 Euro für Verheiratete, was 14 Millionen mehr Berechtigte brachte.",
+          "Anlageformen sind ETF- und Fondssparpläne mit historisch rund 6 Prozent Rendite und höchster Förderung, Bausparverträge für den geplanten Immobilienkauf, ungeförderte Banksparpläne mit etwa 1 Prozent und die Tilgung eines eigenen Baukredits; für die meisten ist der ETF-Sparplan die beste Wahl.",
+          "Bausparer bekommen zusätzlich die Wohnungsbauprämie von 10 Prozent auf eigene Einzahlungen bis 700 Euro, also 70 Euro, für Paare 140 Euro, bis 35.000 beziehungsweise 70.000 Euro Einkommen; die Arbeitgeberleistung selbst ist seit 2024 nicht mehr prämienberechtigt.",
+          "Verträge laufen sieben Jahre, sechs Jahre Einzahlung plus ein Jahr Ruhe; vorzeitige Kündigung kostet die Zulage, außer bei Arbeitslosigkeit oder Härte. Die Zulage muss über die Steuererklärung mit Anlage VL beantragt werden. Rechenbeispiel: 40 Euro monatlich im ETF ergeben nach sieben Jahren rund 3.660 Euro plus 480 Euro Zulage, ohne eigenen Cent."
+        ],
+        "quellen": [
+          "Fünftes Vermögensbildungsgesetz, §§ 2, 13, 14",
+          "Wohnungsbau-Prämiengesetz",
+          "Beitrag Vermögenswirksame Leistungen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was sind vermögenswirksame Leistungen?",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber zahlt keine VL. Kann ich trotzdem die Sparzulage bekommen?",
+          "antwort": "Ja, Sie dürfen bis zu 40 Euro Ihres eigenen Bruttogehalts als vermögenswirksame Leistung anlegen lassen; der Arbeitgeber muss das auf Verlangen tun, den Betrag vom Gehalt einbehalten und an den Vertrag überweisen, die Zulage von bis zu 123 Euro gibt es dann auf Ihre eigene Einzahlung, sofern Ihr zu versteuerndes Einkommen unter 40.000 Euro liegt. Weil der Betrag steuer- und sozialabgabenpflichtiges Gehalt bleibt, kostet Sie das netto rund 25 Euro für 40 Euro Sparleistung plus 80 Euro Zulage im Jahr. Legen Sie dem Arbeitgeber einfach den Vertrag der Fondsgesellschaft oder Bausparkasse vor und fragen Sie zugleich nach, ob ein Tarifvertrag doch einen Zuschuss vorsieht.",
+          "quellen": [
+            "§ 11 Abs. 1 VermBG",
+            "§ 13 VermBG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Die staatliche Förderung 2026",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 48.000 Euro brutto. Liege ich über der Grenze von 40.000 Euro?",
+          "antwort": "Wahrscheinlich nicht, denn die Grenze gilt für das zu versteuernde Einkommen, nicht das Brutto: Nach Abzug von rund 8.000 Euro Vorsorgeaufwendungen, 1.230 Euro Werbungskostenpauschale oder höheren Fahrtkosten und 36 Euro Sonderausgabenpauschale liegen Sie bei etwa 38.700 Euro, mit Kinderfreibeträgen, Kirchensteuer oder Handwerkerkosten noch niedriger. Den Wert finden Sie im letzten Steuerbescheid unter „zu versteuerndes Einkommen“. Verheiratete mit gemeinsamer Veranlagung dürfen 80.000 Euro erreichen, auch wenn ein Partner allein mehr als 40.000 verdient. Die Zulage wird in der Steuererklärung geprüft, ein Antrag lohnt also auch im Grenzbereich.",
+          "quellen": [
+            "§ 13 Abs. 1 VermBG",
+            "§ 2 Abs. 5 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Anlageformen gibt es?",
+          "status": "freigegeben",
+          "frage": "Welchen ETF-Sparplan soll ich für die VL nehmen und was kostet das?",
+          "antwort": "Einen weltweit gestreuten Aktien-ETF auf MSCI World oder FTSE All-World über einen VL-fähigen Anbieter wie Finvesto, Oskar oder die VL-Depots einiger Direktbanken; die Depotgebühr liegt bei 10 bis 25 Euro im Jahr, manche Anbieter verlangen einen Ausgabeaufschlag, den Sie meiden sollten. Prüfen Sie, dass der Anbieter die Sparzulage beantragt und die Bescheinigung für die Anlage VL liefert. Nach sieben Jahren können Sie das Depot behalten und selbst weiterbesparen; die Kursgewinne sind mit Abgeltungsteuer belastet, aber 30 Prozent über die Teilfreistellung frei. Ihr Arbeitgeber braucht nur die Depotnummer und den Anbieter, den Rest regelt die Anlage VL.",
+          "quellen": [
+            "§ 2 Abs. 1 Nr. 1 VermBG",
+            "Beitrag, Abschnitt Anlageformen"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Laufzeit und Sperrfristen",
+          "status": "freigegeben",
+          "frage": "Ich wechsle nach drei Jahren den Arbeitgeber. Was passiert mit meinem VL-Vertrag?",
+          "antwort": "Er läuft weiter, Sie geben dem neuen Arbeitgeber einfach die Vertragsdaten, und er zahlt seine VL in denselben Vertrag; zahlt er keine, können Sie vom eigenen Gehalt weiter einzahlen oder den Vertrag ruhen lassen, die Sperrfrist von sieben Jahren läuft ab dem ersten Beitrag weiter, und die bis dahin erhaltene Zulage bleibt erhalten. Kündigen Sie vorzeitig, verlieren Sie die Zulage der letzten sechs Jahre, außer bei Arbeitslosigkeit über ein Jahr, Erwerbsunfähigkeit, Tod des Partners oder Heirat mit anschließender Verwendung. Nach Ablauf der Sperrfrist dürfen Sie das Guthaben frei verwenden und mit einem neuen Vertrag wieder von vorn beginnen.",
+          "quellen": [
+            "§ 4 Abs. 4 VermBG",
+            "§ 13 Abs. 5 VermBG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "vermoegenswirksame-leistungen",
+        "arbeitnehmer-sparzulage",
+        "wohnungsbaupraemie",
+        "sperrfrist-vl",
+        "bausparvertrag",
+        "etf"
+      ]
+    }
+  }
+]

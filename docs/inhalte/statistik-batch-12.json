@@ -1,0 +1,486 @@
+[
+  {
+    "slug": "zahnzusatzversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Auswirkungen der GKV-Reform 2026 auf die Zahnzusatzversicherung",
+        "art": "balken",
+        "titel": "Festzuschüsse zu Zahnersatz sinken 2027 um zehn Punkte",
+        "untertitel": "Anteil der GKV-Erstattung an der Regelversorgung nach Vorsorgeverhalten",
+        "einheit": "%",
+        "quelle": {
+          "name": "Bundesministerium für Gesundheit (BMG), FAQ zum GKV-Beitragssatzstabilisierungsgesetz",
+          "url": "https://www.bundesgesundheitsministerium.de/service/gesetze-und-verordnungen/guv-21-lp/gkv-beitragssatzstabilisierungsgesetz-faq",
+          "stand": "Gesetz vom Bundestag am 10.07.2026 beschlossen, Änderung in Kraft ab 01.01.2027"
+        },
+        "reihen": [
+          {
+            "key": "bis2026",
+            "label": "Bis 2026",
+            "werte": [
+              {
+                "label": "Regelversorgung",
+                "wert": 60
+              },
+              {
+                "label": "Nach 5 Jahren Vorsorge",
+                "wert": 70
+              },
+              {
+                "label": "Nach 10 Jahren Vorsorge",
+                "wert": 75
+              }
+            ]
+          },
+          {
+            "key": "ab2027",
+            "label": "Ab 2027",
+            "werte": [
+              {
+                "label": "Regelversorgung",
+                "wert": 50
+              },
+              {
+                "label": "Nach 5 Jahren Vorsorge",
+                "wert": 60
+              },
+              {
+                "label": "Nach 10 Jahren Vorsorge",
+                "wert": 65
+              }
+            ]
+          }
+        ],
+        "umschalter": {
+          "label": "Zeitraum"
+        },
+        "hinweis": "Die Härtefallregelung bleibt bestehen: Wer die Regelversorgung finanziell nicht tragen kann, erhält weiterhin einen zusätzlichen Zuschuss bis zu 100 Prozent der Kosten. Vor dem 1. Januar 2027 genehmigte Heil- und Kostenpläne behalten dauerhaft den alten, höheren Festzuschuss.",
+        "abschnitt": "heading-8",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "sterbegeldversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch sind die Bestattungskosten in Deutschland?",
+        "art": "saeulen",
+        "titel": "Bestattungspreise steigen seit Jahren spürbar",
+        "untertitel": "Jährliche Preissteigerung bei Bestattungen gegenüber dem Vorjahr",
+        "einheit": "%",
+        "quelle": {
+          "name": "Aeternitas – Verbraucherinitiative Bestattungskultur e. V., Pressemitteilung „Weiterhin deutlicher Preisanstieg bei Bestattungen“",
+          "url": "https://www.aeternitas.de/verein/presse/pressemitteilungen/detail/weiterhin-deutlicher-preisanstieg-bei-bestattungen",
+          "stand": "16.01.2025",
+          "sekundaer": true
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Preissteigerung ggü. Vorjahr",
+            "werte": [
+              {
+                "label": "2020",
+                "wert": 1.4
+              },
+              {
+                "label": "2021",
+                "wert": 2.9
+              },
+              {
+                "label": "2022",
+                "wert": 4.3
+              },
+              {
+                "label": "2023",
+                "wert": 5.4
+              },
+              {
+                "label": "2024",
+                "wert": 4.5
+              }
+            ]
+          }
+        ],
+        "hinweis": "Aeternitas beziffert den Preisanstieg der Jahre 2020 bis 2024 zusammengenommen auf rund ein Fünftel. 2024 stiegen Bestattungsleistungen und Friedhofsgebühren um 4,6 Prozent, Särge, Urnen und Grabsteine um 3,8 Prozent.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "rechtsschutzversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Welche Kosten übernimmt die Versicherung?",
+        "art": "saeulen",
+        "titel": "Die Anwaltsgebühr steigt mit dem Streitwert",
+        "untertitel": "Eine 1,0-Gebühr nach dem Rechtsanwaltsvergütungsgesetz je Gegenstandswert-Stufe",
+        "einheit": "€",
+        "quelle": {
+          "name": "Rechtsanwaltsvergütungsgesetz (RVG), Anlage 2 (zu § 13 Absatz 1 Satz 3), Gebührentabelle",
+          "url": "https://www.gesetze-im-internet.de/rvg/anlage_2.html",
+          "stand": "Fassung nach Bundesgesetzblatt 2025 I Nr. 109"
+        },
+        "reihen": [
+          {
+            "key": "gebuehr",
+            "label": "1,0-Gebühr",
+            "werte": [
+              {
+                "label": "bis 500 €",
+                "wert": 51.5
+              },
+              {
+                "label": "bis 5.000 €",
+                "wert": 354.5
+              },
+              {
+                "label": "bis 10.000 €",
+                "wert": 652
+              },
+              {
+                "label": "bis 50.000 €",
+                "wert": 1357
+              },
+              {
+                "label": "bis 110.000 €",
+                "wert": 1755
+              },
+              {
+                "label": "bis 410.000 €",
+                "wert": 3332
+              }
+            ]
+          }
+        ],
+        "hinweis": "Ein Rechtsstreit verursacht in der Regel mehrere solcher Gebühren (etwa Verfahrens- und Terminsgebühr) sowie zusätzlich Gerichtskosten nach dem Gerichtskostengesetz; die Tabelle zeigt nur die einfache RVG-Gebühr je Streitwertstufe.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "kfz-versicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Gesetzliche Mindestdeckungssummen für Kfz-Versicherung",
+        "art": "balken",
+        "titel": "Kfz-Haftpflicht muss mindestens 7,5 Millionen Euro abdecken",
+        "untertitel": "Mindestversicherungssummen der Kfz-Haftpflicht je Schadensfall",
+        "einheit": "€",
+        "quelle": {
+          "name": "Anlage (zu § 4 Abs. 2) zum Pflichtversicherungsgesetz (PflVG)",
+          "url": "https://www.gesetze-im-internet.de/pflvg/anlage.html",
+          "stand": "geändert durch Gesetz vom 11.04.2024, geltend seit 17.04.2024"
+        },
+        "reihen": [
+          {
+            "key": "mindest",
+            "label": "Mindestversicherungssumme",
+            "werte": [
+              {
+                "label": "Personenschäden",
+                "wert": 7500000
+              },
+              {
+                "label": "Sachschäden",
+                "wert": 1300000
+              },
+              {
+                "label": "Vermögensschäden",
+                "wert": 50000
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Beträge gelten je Schadensfall für Pkw und andere Standardfahrzeuge einschließlich Anhänger; bei Fahrzeugen zur Personenbeförderung mit mehr als neun Plätzen erhöhen sich die Summen je weiterem Sitzplatz. Viele Versicherer bieten heute deutlich höhere Deckungssummen an.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "wohngebaeudeversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Indexanpassung 2026: Was Hausbesitzer wissen müssen",
+        "art": "saeulen",
+        "titel": "Die Baupreise für Wohngebäude ziehen 2026 weiter an",
+        "untertitel": "Baupreisveränderung für Wohngebäude gegenüber dem Vorjahresmonat",
+        "einheit": "%",
+        "quelle": {
+          "name": "Statistisches Bundesamt (Destatis), Pressemitteilungen zum Baupreisindex für Wohngebäude",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_126_61261.html",
+          "stand": "Berichtsmonat Februar 2026, Pressemitteilung vom 10.04.2026"
+        },
+        "reihen": [
+          {
+            "key": "veraenderung",
+            "label": "Baupreise Wohngebäude ggü. Vorjahresmonat",
+            "werte": [
+              {
+                "label": "Nov. 2025",
+                "wert": 3.2
+              },
+              {
+                "label": "Feb. 2026",
+                "wert": 3.3
+              },
+              {
+                "label": "Mai 2026",
+                "wert": 5
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der amtliche Baupreisindex bildet die Grundlage für den Anpassungsfaktor, mit dem Wohngebäudeversicherer Versicherungssumme und Beitrag jährlich an die Baukosten anpassen, um eine Unterversicherung im Schadenfall zu vermeiden.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Warum wird der Elementarschutz immer wichtiger?",
+        "art": "saeulen",
+        "titel": "Immer mehr Wohngebäude sind gegen Naturgefahren versichert",
+        "untertitel": "Anteil der Wohngebäude mit Elementarschadenversicherung",
+        "einheit": "%",
+        "quelle": {
+          "name": "GDV (Gesamtverband der Deutschen Versicherungswirtschaft), Datenservice zum Naturgefahrenreport – Versicherungsquote Elementarschadenversicherung",
+          "url": "https://www.gdv.de/gdv/statistik/datenservice-zum-naturgefahrenreport/sachversicherung-elementar/versicherungsquote-bei-elementarschadenversicherung-steigt-kontinuierlich--147644",
+          "stand": "Jahresende 2024"
+        },
+        "reihen": [
+          {
+            "key": "quote",
+            "label": "Versicherungsquote",
+            "werte": [
+              {
+                "label": "2017",
+                "wert": 41
+              },
+              {
+                "label": "2024",
+                "wert": 57
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Quote bezieht sich auf Verträge mit Wohngebäude-Feuerversicherung (ohne reine Starkregenverträge, mit sogenannten Altprodukten der ehemaligen Deutschen Versicherungs-AG) und deckt rund 10,2 Millionen versicherte Wohngebäude zum Jahresende 2024 ab. Regional schwankt die Quote stark, etwa zwischen 47 und 65 Prozent in Nordrhein-Westfalen.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "hausbesitzerhaftpflichtversicherung",
+    "statistiken": []
+  },
+  {
+    "slug": "hundehaftpflichtversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Für wen ist die Hundehaftpflichtversicherung Pflicht?",
+        "art": "balken",
+        "titel": "Bremen schreibt ab 2026 klare Mindestsummen vor",
+        "untertitel": "Pflicht-Mindestdeckungssummen der Hundehaftpflicht nach dem neuen Bremischen Hundegesetz",
+        "einheit": "€",
+        "quelle": {
+          "name": "Bremisches Gesetz über das Halten von Hunden (BremHundeG) vom 24.06.2025, § 6",
+          "url": "https://www.transparenz.bremen.de/metainformationen/bremisches-gesetz-ueber-das-halten-von-hunden-bremhundeg-vom-24-juni-2025-286470?template=20_gp_ifg_meta_detail_d",
+          "stand": "verkündet 24.06.2025, Versicherungspflicht in Kraft seit 01.07.2026"
+        },
+        "reihen": [
+          {
+            "key": "deckung",
+            "label": "Mindestversicherungssumme",
+            "werte": [
+              {
+                "label": "Personenschäden",
+                "wert": 500000
+              },
+              {
+                "label": "Sachschäden",
+                "wert": 250000
+              }
+            ]
+          }
+        ],
+        "hinweis": "Seit dem 1. Juli 2026 gilt die Versicherungspflicht in Bremen erstmals für alle Hunde und nicht mehr nur für sogenannte gefährliche Hunde; sie muss ab Beginn der Haltung bestehen. Ausnahmen gelten nur für Diensthunde öffentlicher Stellen und fremder Streitkräfte.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "hunde-op-versicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "GOT-Reform 2022: Wie Gebührenordnung die Versicherung beeinflusst",
+        "art": "balken",
+        "titel": "Der GOT-Satz vervielfacht die Tierarztrechnung",
+        "untertitel": "Kosten einer allgemeinen klinischen Untersuchung je nach Gebührensatz",
+        "einheit": "€",
+        "quelle": {
+          "name": "Tierärztegebührenordnung (GOT), Gebührenverzeichnis lfd. Nr. 16 sowie §§ 2 und 4",
+          "url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
+          "stand": "vom 15.08.2022, zuletzt geändert durch Verordnung vom 15.03.2023 (BGBl. 2023 I Nr. 70), in Kraft seit 22.11.2022"
+        },
+        "reihen": [
+          {
+            "key": "gebuehr",
+            "label": "Allgemeine klinische Untersuchung",
+            "werte": [
+              {
+                "label": "Regelsatz (1-fach)",
+                "wert": 23.62
+              },
+              {
+                "label": "Höchstsatz (3-fach)",
+                "wert": 70.86
+              },
+              {
+                "label": "Notdienst (4-fach + Pauschale)",
+                "wert": 144.48
+              }
+            ]
+          }
+        ],
+        "hinweis": "Nach § 2 Abs. 1 GOT reicht der reguläre Gebührenrahmen vom einfachen bis zum dreifachen Satz; im tierärztlichen Notdienst erlaubt § 4 Abs. 1 GOT bis zum vierfachen Satz zuzüglich einer Notdienstgebühr von 50 Euro. Die Werte für 3-fachen und 4-fachen Satz sind rechnerisch aus dem Einzelsatz des Gebührenverzeichnisses ermittelt (23,62 € × 3 bzw. × 4 zzgl. 50 €).",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "hundeversicherungen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie haben sich die Tierarztkosten 2026 entwickelt?",
+        "art": "balken",
+        "titel": "Auch Routineeingriffe kosten im Notdienst ein Vielfaches",
+        "untertitel": "Gebühr für eine Kastration beim Rüden je nach Gebührensatz",
+        "einheit": "€",
+        "quelle": {
+          "name": "Tierärztegebührenordnung (GOT), Gebührenverzeichnis lfd. Nr. 377 sowie §§ 2 und 4",
+          "url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
+          "stand": "vom 15.08.2022, zuletzt geändert durch Verordnung vom 15.03.2023 (BGBl. 2023 I Nr. 70), in Kraft seit 22.11.2022"
+        },
+        "reihen": [
+          {
+            "key": "gebuehr",
+            "label": "Kastration Rüde",
+            "werte": [
+              {
+                "label": "Regelsatz (1-fach)",
+                "wert": 70.6
+              },
+              {
+                "label": "Höchstsatz (3-fach)",
+                "wert": 211.8
+              },
+              {
+                "label": "Notdienst (4-fach + Pauschale)",
+                "wert": 332.4
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Gebührensätze wurden mit der GOT-Novelle 2022 grundlegend angehoben. Im Notdienst kommt zum bis zu vierfachen Satz nach § 4 Abs. 1 GOT zusätzlich eine Notdienstgebühr von 50 Euro hinzu. Die Werte für 3-fachen und 4-fachen Satz sind rechnerisch aus dem Einzelsatz ermittelt (70,60 € × 3 bzw. × 4 zzgl. 50 €).",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "pferdeversicherung",
+    "statistiken": []
+  },
+  {
+    "slug": "fahrradversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wann lohnt sich eine Fahrradversicherung?",
+        "art": "saeulen",
+        "titel": "Fahrraddiebstähle bei Versicherern gehen zurück",
+        "untertitel": "Bei Versicherern gemeldete Fahrraddiebstähle in Deutschland",
+        "einheit": "Tsd.",
+        "quelle": {
+          "name": "GDV (Gesamtverband der Deutschen Versicherungswirtschaft), Medieninformation „Weniger Fahrraddiebstähle – Schäden bleiben auf Rekordniveau“",
+          "url": "https://www.gdv.de/gdv/medien/medieninformationen/weniger-fahrraddiebstaehle-schaeden-bleiben-auf-rekordniveau-199150",
+          "stand": "12.05.2026"
+        },
+        "reihen": [
+          {
+            "key": "anzahl",
+            "label": "Gestohlene Fahrräder (versichert)",
+            "werte": [
+              {
+                "label": "2024",
+                "wert": 135
+              },
+              {
+                "label": "2025",
+                "wert": 115
+              }
+            ]
+          }
+        ],
+        "hinweis": "Trotz sinkender Fallzahlen erreichte der durchschnittliche Schaden je Diebstahl 2025 mit 1.270 Euro einen neuen Höchststand, weil zunehmend hochwertige Räder und E-Bikes gestohlen werden. Die Versicherer zahlten 2025 wie im Vorjahr rund 150 Millionen Euro für gestohlene Fahrräder.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "e-bike-versicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Ist eine E-Bike Versicherung wirklich notwendig?",
+        "art": "saeulen",
+        "titel": "Schaden je Fahrraddiebstahl hat sich seit 2012 verdreifacht",
+        "untertitel": "Durchschnittlicher Versicherungsschaden je Fahrraddiebstahl in Deutschland",
+        "einheit": "€",
+        "quelle": {
+          "name": "GDV (Gesamtverband der Deutschen Versicherungswirtschaft), Medieninformationen zum Fahrraddiebstahl (19.04.2022 und 12.05.2026)",
+          "url": "https://www.gdv.de/gdv/medien/medieninformationen/weniger-fahrraddiebstaehle-schaeden-bleiben-auf-rekordniveau-199150",
+          "stand": "Zeitreihe 2012–2025, jüngste Pressemitteilung vom 12.05.2026"
+        },
+        "reihen": [
+          {
+            "key": "schaden",
+            "label": "Durchschnittlicher Schaden",
+            "werte": [
+              {
+                "label": "2012",
+                "wert": 440
+              },
+              {
+                "label": "2021",
+                "wert": 860
+              },
+              {
+                "label": "2025",
+                "wert": 1270
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der GDV erklärt den Anstieg mit dem gestiegenen Wert der Räder: Hochwertige E-Bikes und Pedelecs treiben die Schadenhöhe je Diebstahl in die Höhe, auch wenn die Zahl der Diebstähle insgesamt zurückgeht.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  }
+]

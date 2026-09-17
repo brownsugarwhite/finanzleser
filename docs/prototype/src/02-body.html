@@ -1,0 +1,110 @@
+
+<div class="blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+<header class="kopf" id="kopf">
+  <div class="kopf__innen">
+    <div class="kopf__zeile">
+      <a class="logo" href="#" onclick="return false" aria-label="finanzleser"><img src="__LOGO__" alt="finanzleser"></a>
+      <nav class="register" id="register" aria-label="Register"></nav>
+      <div class="lesezeichen" aria-label="Lesezeichen">
+        <button class="btn--menue" onclick="menueAuf()" aria-label="Menü"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <button class="lz-wort" onclick="starte('wochenbrief', 'Leos Wochenbrief')" title="Leos Wochenbrief: donnerstags, ein Feld, kein Formular">Newsletter</button>
+        <button class="lz-icon" id="kofferBtn" onclick="plusBlatt()" aria-label="Aktenkoffer" title="Aktenkoffer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M9 7.5V5.5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5.5v2M3 12h18M12 11v3"/></svg><i class="lz-zahl" id="kofferZahl" hidden>0</i></button>
+        <button class="lz-icon" id="plusBtn" onclick="plusBlatt()" aria-label="Anmelden · Finanzleser Plus" title="Anmelden · Finanzleser Plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="blatt" id="blatt" aria-label="Registerblatt"></div>
+</header>
+
+<div class="menue" id="menue" aria-label="Menü">
+  <div class="menue__kopf"><img src="__LOGO__" alt="finanzleser"><button class="btn btn--klein btn--still" onclick="menueZu()">Schließen ✕</button></div>
+  <div id="menueListe"></div>
+  <div class="klein">
+    <button onclick="menueZu(); randAuf('links')"><span>☰</span> Verlauf und Inhalt</button>
+    <button onclick="menueZu(); randAuf('rechts')"><span>✦</span> Glossar der Sitzung</button>
+    <button onclick="menueZu(); plusBlatt()"><span>●</span> <span id="menuePlus">Anmelden · Finanzleser Plus</span></button>
+  </div>
+</div>
+
+<section class="intro" id="intro" aria-label="Einführung">
+  <div class="szene" id="szene"><div class="buehne" id="buehne"></div></div>
+  <div class="intro__wahl" id="introWahl"><span class="kicker" onclick="document.getElementById('introWahl').classList.toggle('offen')">Intro: <b id="introName">Zeitung</b> ▾</span><span class="intro__chips" id="introChips"></span><span class="intro__stand" id="introStand"></span><button class="btn btn--klein btn--still" onclick="introUeberspringen()">Überspringen ↓</button></div>
+</section>
+
+<main class="faden" id="faden">
+  <aside class="rand rand--links" id="randLinks" aria-label="Verlauf und Inhalt">
+    <div class="rand__lauf">
+      <div class="rand__innen">
+       <div class="rand__oben">
+        <div class="verlauf">
+          <h2>Verlauf</h2>
+          <ul id="kapitelListe"><li class="rand__leer">Noch kein Kapitel. Fragen Sie Leo oder blättern Sie oben im Register.</li></ul>
+        </div>
+        <div class="block" id="wbBox">
+          <span class="kicker kicker--gruen">Leos Wochenbrief</span>
+          <form onsubmit="return wbEintragen(event, this)"><input type="email" placeholder="ihre@adresse.de" aria-label="E-Mail für den Wochenbrief"><button class="btn btn--klein btn--primary" type="submit">Eintragen</button></form>
+        </div>
+       </div>
+       <div class="rand__fuss">
+        <div class="einschub" data-format="skyscraper" id="railLinks"></div>
+       </div>
+      </div>
+    </div>
+  </aside>
+  <div class="schublade" id="schublade" onclick="randZu()" hidden></div>
+
+  <div id="mitte">
+    <div class="mobil-leiste"><button onclick="randAuf('links')"><i>☰</i> Verlauf</button><button onclick="randAuf('rechts')">Glossar <i>✦</i></button></div>
+    <div class="strom" id="strom" aria-live="polite" aria-relevant="additions"></div>
+    <div class="eingabe">
+      <div class="eingabe__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+      <div class="suchpille-wrap" id="fadenPille">
+        <form onsubmit="return senden(event)" autocomplete="off" class="suchpille">
+          <div class="sprung" id="sprung" role="listbox"></div>
+          <label class="sr" for="frage">Fragen Sie Leo oder suchen Sie im Bestand</label>
+          <input id="frage" type="text" placeholder="Was kann ich für Sie tun?" autocomplete="off" oninput="sprungSuche(this.value)" onfocus="sprungSuche(this.value)" onkeydown="sprungTaste(event)">
+          <button type="submit" class="senden">Fragen</button>
+        </form>
+      </div>
+      <div class="chips" id="eingabeChips"></div>
+    </div>
+  </div>
+
+  <aside class="rand rand--rechts" id="randRechts" aria-label="Glossar, Leo und Anzeigen">
+    <div class="rand__lauf">
+      <div class="rand__innen">
+       <div class="rand__oben">
+        <div>
+          <h2>Glossar · Aktuelle Sitzung</h2>
+          <div class="glossar-rail" id="glossarRail"><span class="rand__leer">Tippen Sie im Text auf einen <span class="begriff" style="cursor:default">grünen Begriff</span>. Die Erklärung landet hier und bleibt für diese Sitzung.</span></div>
+        </div>
+       </div>
+       <div class="rand__fuss">
+        <div id="leoFrage"></div>
+        <div class="einschub" data-format="halfpage" id="railRechts"></div>
+       </div>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<button class="lesestelle" id="lesestelle" onclick="lesestelleZurueck()"><i>↑</i><span id="lesestelleText">Zurück zur Lesestelle</span></button>
+<p class="fussnote">Klick-Prototyp, Stand 6. September 2026 · Inhalte, Zahlen und Anzeigen sind Beispiele, keine Beratung, keine echten Angebote · <button onclick="kulissen()">Was Suchmaschinen sehen</button></p>
+<div class="toast" id="toast" role="status"></div>
+<div class="bmenu" id="bmenu" role="dialog" aria-label="Begriff"></div>
+
+<div class="seite" id="seite" aria-modal="true" role="dialog" aria-label="Was der Server schickt">
+  <div class="seite__leiste">
+    <button class="btn btn--klein" onclick="seiteZu()">‹ Zurück in den Faden</button>
+    <div class="url" id="seiteUrl"></div>
+    <span style="font-size:12px;color:var(--muted)">Blick hinter die Kulissen</span>
+  </div>
+  <div class="seite__innen">
+    <article id="seiteInhalt" class="artikel"></article>
+    <aside class="seo">
+      <span class="kicker">Was der Server schickt</span>
+      <ul><li>✓ Titel und Beschreibung</li><li>✓ Canonical-Adresse</li><li>✓ Strukturierte Daten (JSON-LD)</li><li>✓ Eintrag in der Sitemap</li><li>✓ Die ganze Kette im HTML</li><li>✓ Glossar-Begriffe als Links</li></ul>
+      <p class="hinweis">Genau das bekommen Google, Bing und KI-Suchmaschinen unter dieser Adresse: den Faden mit der vollständigen Kette, nur ohne Leo. Ein Mensch sieht diese Ansicht nie; sein Browser zeigt sofort den Faden mit Leo.</p>
+    </aside>
+  </div>
+</div>

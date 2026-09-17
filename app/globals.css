@@ -1,8 +1,23 @@
 @import "tailwindcss";
 @import "./tokens.css";
+@import "./knoepfe.css";
+@import "./koepfe.css";
 @import "./components.css";
 @import "./rechner.css";
 @import "./gamification.css";
+@import "./faden.css";
+@import "./kursblatt.css";
+@import "./statistik-formen.css";
+@import "./vergleich.css";
+@import "./spiele.css";
+@import "./finanzwort.css";
+@import "./faden-hover.css";
+@import "./faden-landing.css";
+@import "./flugfenster.css";
+@import "./schlange.css";
+@import "./solitaer.css";
+@import "./kassensturz.css";
+@import "./leo-fragt.css";
 
 /* Space for fixed logo + absolute nav bar */
 body {

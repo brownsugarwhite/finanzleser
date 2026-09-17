@@ -1,0 +1,890 @@
+[
+  {
+    "slug": "erwerbsminderungsrente",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie wird die Erwerbsminderungsrente 2026 berechnet?",
+        "art": "saeulen",
+        "titel": "Die Zurechnungszeit steigt bis 2030 schrittweise weiter",
+        "untertitel": "Endalter der Zurechnungszeit nach Jahr des Rentenbeginns",
+        "einheit": "Jahre",
+        "quelle": {
+          "name": "§ 253a SGB VI (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/sgb_6/__253a.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "rentenbeginn",
+            "label": "Rentenbeginn",
+            "werte": [
+              {
+                "label": "2019",
+                "wert": 65.67
+              },
+              {
+                "label": "2021",
+                "wert": 65.83
+              },
+              {
+                "label": "2023",
+                "wert": 66
+              },
+              {
+                "label": "2025",
+                "wert": 66.17
+              },
+              {
+                "label": "2026",
+                "wert": 66.25
+              },
+              {
+                "label": "2028",
+                "wert": 66.5
+              },
+              {
+                "label": "2030",
+                "wert": 66.83
+              }
+            ]
+          }
+        ],
+        "hinweis": "2026 endet die Zurechnungszeit bei 66 Jahren und 3 Monaten. Sie wird bis zum Rentenbeginn 2031 weiter auf das Alter der Regelaltersgrenze angehoben und wirkt sich vor allem bei jungen Erwerbsgeminderten aus, deren Rente sonst sehr niedrig ausfiele.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wie hoch sind die Hinzuverdienstgrenzen 2026?",
+        "art": "balken",
+        "titel": "Teilweise Erwerbsminderung erlaubt doppelt so hohen Hinzuverdienst",
+        "untertitel": "Jährliche Hinzuverdienstgrenze 2026 nach Erwerbsminderungsgrad",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 96a Abs. 1c SGB VI (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/sgb_6/__96a.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "grad",
+            "label": "Erwerbsminderungsgrad",
+            "werte": [
+              {
+                "label": "Volle Erwerbsminderung",
+                "wert": 20763.75
+              },
+              {
+                "label": "Teilweise Erwerbsminderung (Mindestgrenze)",
+                "wert": 41527.5
+              }
+            ]
+          }
+        ],
+        "hinweis": "Beide Werte sind gesetzlich festgelegte Vielfache der monatlichen Bezugsgröße 2026 (3.955 €): 3/8 der 14-fachen Bezugsgröße bei voller, 6/8 bei teilweiser Erwerbsminderung. Bei besseren früheren Einkommen kann die individuelle Grenze für teilweise Erwerbsminderung höher liegen.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "witwenrente",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch ist die Witwenrente 2026?",
+        "art": "balken",
+        "titel": "Nach dem Sterbevierteljahr sinkt die Witwenrente auf 55 Prozent",
+        "untertitel": "Rentenartfaktor nach Phase des Rentenbezugs (neues Recht)",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 67 SGB VI (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/sgb_6/__67.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "phase",
+            "label": "Phase",
+            "werte": [
+              {
+                "label": "Sterbevierteljahr",
+                "wert": 100
+              },
+              {
+                "label": "Große Witwenrente",
+                "wert": 55
+              },
+              {
+                "label": "Kleine Witwenrente",
+                "wert": 25
+              }
+            ]
+          }
+        ],
+        "hinweis": "In den ersten drei Monaten nach dem Sterbemonat zahlt die Rentenversicherung die volle Rente des Verstorbenen (Rentenartfaktor 1,0), danach gilt der reduzierte Faktor für die jeweilige Witwenrentenart.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wer hat Anspruch auf die große Witwenrente?",
+        "art": "saeulen",
+        "titel": "Die Altersgrenze für die große Witwenrente steigt schrittweise",
+        "untertitel": "Erforderliches Alter nach Todesjahr des Versicherten",
+        "einheit": "Jahre",
+        "quelle": {
+          "name": "§ 242a Abs. 5 SGB VI (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/sgb_6/__242a.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "todesjahr",
+            "label": "Todesjahr",
+            "werte": [
+              {
+                "label": "2024",
+                "wert": 46.17
+              },
+              {
+                "label": "2025",
+                "wert": 46.33
+              },
+              {
+                "label": "2026",
+                "wert": 46.5
+              },
+              {
+                "label": "2027",
+                "wert": 46.67
+              },
+              {
+                "label": "2028",
+                "wert": 46.83
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Grundgrenze von 45 Jahren wird seit 2012 stufenweise angehoben. Wer ein Kind erzieht, ein behindertes Kind betreut oder erwerbsgemindert ist, erhält die große Witwenrente unabhängig vom Alter.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "hinzuverdienst-rente",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Erwerbsminderungsrenten: Höhere Grenzen",
+        "art": "balken",
+        "titel": "Bei teilweiser Erwerbsminderung ist doppelt so viel Hinzuverdienst erlaubt",
+        "untertitel": "Jährliche Hinzuverdienstgrenze 2026 nach Erwerbsminderungsgrad",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 96a Abs. 1c SGB VI (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/sgb_6/__96a.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "grad",
+            "label": "Erwerbsminderungsgrad",
+            "werte": [
+              {
+                "label": "Volle Erwerbsminderung",
+                "wert": 20763.75
+              },
+              {
+                "label": "Teilweise Erwerbsminderung (Mindestgrenze)",
+                "wert": 41527.5
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: 3/8 (volle EM) bzw. 6/8 (teilweise EM, Mindestgrenze) der 14-fachen monatlichen Bezugsgröße 2026 (3.955 €) = 20.763,75 € bzw. 41.527,50 € jährlich.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Minijob-Grenze steigt auf 603 Euro",
+        "art": "saeulen",
+        "titel": "Die Minijob-Grenze steigt 2026 auf 603 Euro",
+        "untertitel": "Monatliche Verdienstgrenze für Minijobs",
+        "einheit": "€",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung Baden-Württemberg, Pressemitteilung zur Minijob-Verdienstgrenze 2026/2027",
+          "url": "https://www.deutsche-rentenversicherung.de/BadenWuerttemberg/DE/Presse/Pressemitteilungen/2025/251222_Minijob",
+          "stand": "22.12.2025"
+        },
+        "reihen": [
+          {
+            "key": "jahr",
+            "label": "Jahr",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 556
+              },
+              {
+                "label": "2026",
+                "wert": 603
+              },
+              {
+                "label": "2027",
+                "wert": 633
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Grenze ist seit Oktober 2022 dynamisch an den Mindestlohn gekoppelt (Formel: Mindestlohn × 130 ÷ 3). Mit dem Mindestlohn von 13,90 € (2026) bzw. 14,60 € (2027) steigt sie automatisch mit.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "altersteilzeit",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was ist Altersteilzeit genau?",
+        "art": "balken",
+        "titel": "Rund 274.000 Beschäftigte nutzen die Altersteilzeit",
+        "untertitel": "Altersteilzeitbeschäftigte am 31.12.2024 nach Geschlecht",
+        "einheit": "",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung Bund, Rentenversicherung in Zahlen 2026 (Statistik der Deutschen Rentenversicherung – Versicherte 2024)",
+          "url": "https://www.deutsche-rentenversicherung.de/SharedDocs/Downloads/DE/Statistiken-und-Berichte/statistikpublikationen/rv_in_zahlen.pdf",
+          "stand": "25.06.2026 (Datenstand 31.12.2024)"
+        },
+        "reihen": [
+          {
+            "key": "geschlecht",
+            "label": "Geschlecht",
+            "werte": [
+              {
+                "label": "Männer",
+                "wert": 185946
+              },
+              {
+                "label": "Frauen",
+                "wert": 87954
+              }
+            ]
+          }
+        ],
+        "hinweis": "Altersteilzeitbeschäftigte zählen als versicherungspflichtig Beschäftigte in der gesetzlichen Rentenversicherung. Insgesamt waren das 273.900 Personen, gut doppelt so viele Männer wie Frauen.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "freiwillige-gesetzliche-rente",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Beitragsgrenzen 2026 für die freiwillige Rentenversicherung",
+        "art": "saeulen",
+        "titel": "Der Höchstbeitrag zur freiwilligen Rente steigt 2026 weiter",
+        "untertitel": "Mindest- und Höchstbeitrag der freiwilligen Rentenversicherung",
+        "einheit": "€",
+        "umschalter": {
+          "label": "Beitragshöhe"
+        },
+        "quelle": {
+          "name": "Deutsche Rentenversicherung Bund, Rentenversicherung in Zahlen 2026 (Bemessungswerte der Rentenversicherung)",
+          "url": "https://www.deutsche-rentenversicherung.de/SharedDocs/Downloads/DE/Statistiken-und-Berichte/statistikpublikationen/rv_in_zahlen.pdf",
+          "stand": "25.06.2026"
+        },
+        "reihen": [
+          {
+            "key": "mindest",
+            "label": "Mindestbeitrag",
+            "werte": [
+              {
+                "label": "2024",
+                "wert": 100.07
+              },
+              {
+                "label": "2025",
+                "wert": 103.42
+              },
+              {
+                "label": "2026",
+                "wert": 112.16
+              }
+            ]
+          },
+          {
+            "key": "hoechst",
+            "label": "Höchstbeitrag",
+            "werte": [
+              {
+                "label": "2024",
+                "wert": 1404.3
+              },
+              {
+                "label": "2025",
+                "wert": 1497.3
+              },
+              {
+                "label": "2026",
+                "wert": 1571.7
+              }
+            ]
+          }
+        ],
+        "hinweis": "Bei der freiwilligen Versicherung gibt es keinen Unterschied zwischen alten und neuen Bundesländern. Der Mindestbeitrag orientiert sich an der Geringfügigkeitsgrenze, der Höchstbeitrag an der Beitragsbemessungsgrenze der allgemeinen Rentenversicherung, jeweils mal 18,6 Prozent.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "pflichtversicherung-rente",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wer ist automatisch rentenversichert – und wer nicht?",
+        "art": "torte",
+        "titel": "83,6 Prozent der Erwerbspersonen sind pflichtversichert",
+        "untertitel": "Rentenversicherungsstatus der Erwerbspersonen ohne Rentenbezug 2025",
+        "einheit": "%",
+        "quelle": {
+          "name": "Statistisches Bundesamt (Destatis), Gesetzlich rentenversicherte Erwerbspersonen (Mikrozensus)",
+          "url": "https://www.destatis.de/DE/Themen/Arbeit/Arbeitsmarkt/Qualitaet-Arbeit/Dimension-4/gesetzlich-rentenversichertel.html",
+          "stand": "2025"
+        },
+        "reihen": [
+          {
+            "key": "status",
+            "label": "Status",
+            "werte": [
+              {
+                "label": "Pflichtversichert",
+                "wert": 83.6
+              },
+              {
+                "label": "Freiwillig versichert",
+                "wert": 3.4
+              },
+              {
+                "label": "Nicht gesetzlich rentenversichert",
+                "wert": 13
+              }
+            ]
+          }
+        ],
+        "hinweis": "Zur nicht gesetzlich rentenversicherten Gruppe zählen unter anderem Beamte, viele Selbstständige mit eigener Versorgung und Privatversicherte.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Welche Selbstständigen zahlen in die Rentenversicherung?",
+        "art": "saeulen",
+        "titel": "Der Regelbeitrag für pflichtversicherte Selbstständige steigt weiter",
+        "untertitel": "Regelbeitrag versicherungspflichtiger Selbstständiger (z. B. Handwerker)",
+        "einheit": "€",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung Bund, Rentenversicherung in Zahlen 2026 (Bemessungswerte der Rentenversicherung)",
+          "url": "https://www.deutsche-rentenversicherung.de/SharedDocs/Downloads/DE/Statistiken-und-Berichte/statistikpublikationen/rv_in_zahlen.pdf",
+          "stand": "25.06.2026"
+        },
+        "reihen": [
+          {
+            "key": "jahr",
+            "label": "Jahr",
+            "werte": [
+              {
+                "label": "2024 West",
+                "wert": 657.51
+              },
+              {
+                "label": "2024 Ost",
+                "wert": 644.49
+              },
+              {
+                "label": "2025",
+                "wert": 696.57
+              },
+              {
+                "label": "2026",
+                "wert": 735.63
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Regelbeitrag gilt unter anderem für Handwerker mit Eintragung in die Handwerksrolle. Seit 2025 gibt es keinen regionalen Unterschied mehr zwischen alten und neuen Bundesländern.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "rentenarten",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Die wichtigsten Rentenarten im Überblick",
+        "art": "saeulen",
+        "titel": "Das Rentenniveau ist seit 1970 spürbar gesunken",
+        "untertitel": "Sicherungsniveau der Standardrente (netto vor Steuern) im Zeitverlauf",
+        "einheit": "%",
+        "quelle": {
+          "name": "Statistisches Bundesamt, BMAS, Deutsche Rentenversicherung Bund – Rentenversicherung in Zahlen 2026 (Entwicklung des Standardrentenniveaus)",
+          "url": "https://www.deutsche-rentenversicherung.de/SharedDocs/Downloads/DE/Statistiken-und-Berichte/statistikpublikationen/rv_in_zahlen.pdf",
+          "stand": "25.06.2026"
+        },
+        "reihen": [
+          {
+            "key": "jahr",
+            "label": "Jahr",
+            "werte": [
+              {
+                "label": "1970",
+                "wert": 55.2
+              },
+              {
+                "label": "1980",
+                "wert": 57.6
+              },
+              {
+                "label": "1990",
+                "wert": 55
+              },
+              {
+                "label": "2000",
+                "wert": 52.9
+              },
+              {
+                "label": "2010",
+                "wert": 51.6
+              },
+              {
+                "label": "2020",
+                "wert": 48.2
+              },
+              {
+                "label": "2026",
+                "wert": 48
+              }
+            ]
+          }
+        ],
+        "regler": {
+          "label": "Ihre Beitragsjahre",
+          "min": 5,
+          "max": 50,
+          "schritt": 5,
+          "start": 45,
+          "einheit": "Jahre",
+          "formel": {
+            "typ": "rechner",
+            "rechner": "rente",
+            "eingabe": "beitragsjahre",
+            "ausgabe": "renteMonatlich",
+            "basis": {
+              "jahresBrutto": 51944
+            }
+          },
+          "ergebnis": "Ihre geschätzte Rente im Monat (2026, bei Durchschnittsverdienst)",
+          "ergebnisEinheit": "€"
+        },
+        "hinweis": "Das Rentenniveau setzt die Standardrente (45 Beitragsjahre zum Durchschnittsverdienst) ins Verhältnis zum durchschnittlichen Nettoentgelt. Seit 2024 gilt gesetzlich eine Haltelinie von 48 Prozent.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "grundsicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Regelsätze und Leistungshöhe 2026",
+        "art": "balken",
+        "titel": "Der Regelsatz für Alleinstehende bleibt bei 563 Euro",
+        "untertitel": "Monatlicher Regelbedarf 2026 nach Personengruppe",
+        "einheit": "€",
+        "quelle": {
+          "name": "Bundesministerium für Arbeit und Soziales (BMAS), Pressemitteilung zur Fortschreibung der Regelbedarfe in der Sozialhilfe und beim Bürgergeld/Grundsicherungsgeld",
+          "url": "https://www.bmas.de/DE/Service/Presse/Pressemitteilungen/2025/fortschreibung-regelbedarfe-sozialhilfe-und-buergergeld.html",
+          "stand": "10.09.2025"
+        },
+        "reihen": [
+          {
+            "key": "gruppe",
+            "label": "Personengruppe",
+            "werte": [
+              {
+                "label": "Alleinstehende/Alleinerziehende",
+                "wert": 563
+              },
+              {
+                "label": "Partner in Bedarfsgemeinschaft",
+                "wert": 506
+              },
+              {
+                "label": "Jugendliche 15 bis 18 Jahre",
+                "wert": 471
+              },
+              {
+                "label": "Kinder 7 bis 14 Jahre",
+                "wert": 390
+              },
+              {
+                "label": "Kinder bis 6 Jahre",
+                "wert": 357
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Regelsätze bleiben 2026 gegenüber 2025 unverändert, da die gesetzliche Besitzschutzregelung ein Sinken der Beträge ausschließt.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Vermögensfreigrenzen und altersabhängiges Schonvermögen",
+        "art": "saeulen",
+        "titel": "Ab Juli 2026 gilt ein altersgestaffeltes Schonvermögen",
+        "untertitel": "Vermögensfreibetrag je Person in der Bedarfsgemeinschaft nach Lebensalter",
+        "einheit": "€",
+        "quelle": {
+          "name": "Bundesagentur für Arbeit, Fachliche Weisungen zu § 12 SGB II (Berücksichtigung von Vermögen)",
+          "url": "https://www.arbeitsagentur.de/datei/fw-zu-par-12-sgb2-beruecksichtigung-von-vermoegen_ba058027.pdf",
+          "stand": "01.07.2026"
+        },
+        "reihen": [
+          {
+            "key": "alter",
+            "label": "Lebensalter",
+            "werte": [
+              {
+                "label": "bis 30 Jahre",
+                "wert": 5000
+              },
+              {
+                "label": "ab 31 Jahre",
+                "wert": 10000
+              },
+              {
+                "label": "ab 41 Jahre",
+                "wert": 12500
+              },
+              {
+                "label": "ab 51 Jahre",
+                "wert": 20000
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der erhöhte Freibetrag gilt ab dem Monat, in dem die jeweilige Altersgrenze erreicht wird. Nicht ausgeschöpfte Freibeträge einzelner Mitglieder der Bedarfsgemeinschaft werden auf andere übertragen. Die frühere einjährige Karenzzeit mit bis zu 40.000 € Schonvermögen entfällt.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "sozialversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Beitragssätze 2026: Wer zahlt wie viel?",
+        "art": "balken",
+        "titel": "Die Rentenversicherung hat den höchsten Beitragssatz",
+        "untertitel": "Beitragssätze der Sozialversicherungszweige 2026",
+        "einheit": "%",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Faktenblatt Rechengrößen und Grenzwerte im Versicherungs- und Beitragsrecht 2026",
+          "url": "https://www.gkv-spitzenverband.de/media/dokumente/presse/zahlen_und_grafiken/20260101_Faktenblatt_Rechengroessen_Beitragsrecht.pdf",
+          "stand": "01.01.2026"
+        },
+        "reihen": [
+          {
+            "key": "zweig",
+            "label": "Versicherungszweig",
+            "werte": [
+              {
+                "label": "Krankenversicherung",
+                "wert": 14.6
+              },
+              {
+                "label": "Pflegeversicherung",
+                "wert": 3.6
+              },
+              {
+                "label": "Rentenversicherung",
+                "wert": 18.6
+              },
+              {
+                "label": "Arbeitslosenversicherung",
+                "wert": 2.6
+              }
+            ]
+          }
+        ],
+        "hinweis": "Hinzu kommt in der Krankenversicherung ein durchschnittlicher Zusatzbeitrag von 2,9 Prozent. Kinderlose ab 23 Jahren zahlen in der Pflegeversicherung einen Zuschlag von 0,6 Prozentpunkten.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Demografischer Wandel: Kann das System bestehen?",
+        "art": "saeulen",
+        "titel": "Auf einen Rentenbezieher kommen heute gut zwei Versicherte",
+        "untertitel": "Aktiv Versicherte je passiv Versicherter (Rentenbezieher) in der Rentenversicherung",
+        "einheit": "",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung Bund, Rentenversicherung in Zahlen 2026 (aktiv und passiv Versicherte am 31.12., Zeitreihe)",
+          "url": "https://www.deutsche-rentenversicherung.de/SharedDocs/Downloads/DE/Statistiken-und-Berichte/statistikpublikationen/rv_in_zahlen.pdf",
+          "stand": "25.06.2026 (Datenstand 31.12.2024)"
+        },
+        "reihen": [
+          {
+            "key": "jahr",
+            "label": "Jahr",
+            "werte": [
+              {
+                "label": "1995",
+                "wert": 1.75
+              },
+              {
+                "label": "2000",
+                "wert": 1.96
+              },
+              {
+                "label": "2010",
+                "wert": 2.1
+              },
+              {
+                "label": "2015",
+                "wert": 2.21
+              },
+              {
+                "label": "2020",
+                "wert": 2.2
+              },
+              {
+                "label": "2024",
+                "wert": 2.15
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: aktiv Versicherte ÷ passiv Versicherte je Jahr aus der amtlichen Zeitreihe (z. B. 2024: 40.138.000 ÷ 18.709.000 = 2,15), gerundet auf zwei Nachkommastellen. Passiv Versicherte umfasst alle Rentenbeziehenden, nicht nur Altersrentner.",
+        "abschnitt": "heading-8",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "sozialversicherungsbeitraege",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Rentenversicherung: Das Ende der Ost-West-Spaltung",
+        "art": "saeulen",
+        "titel": "Die Beitragsbemessungsgrenze ist seit 2025 bundeseinheitlich",
+        "untertitel": "Monatliche Beitragsbemessungsgrenze der allgemeinen Rentenversicherung",
+        "einheit": "€",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung Bund, Rentenversicherung in Zahlen 2026 (Bemessungswerte der Rentenversicherung)",
+          "url": "https://www.deutsche-rentenversicherung.de/SharedDocs/Downloads/DE/Statistiken-und-Berichte/statistikpublikationen/rv_in_zahlen.pdf",
+          "stand": "25.06.2026"
+        },
+        "reihen": [
+          {
+            "key": "jahr",
+            "label": "Jahr",
+            "werte": [
+              {
+                "label": "2024 West",
+                "wert": 7550
+              },
+              {
+                "label": "2024 Ost",
+                "wert": 7450
+              },
+              {
+                "label": "2025",
+                "wert": 8050
+              },
+              {
+                "label": "2026",
+                "wert": 8450
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Angleichung der Beitragsbemessungsgrenze in der allgemeinen Rentenversicherung an den Westwert war bereits 2025 abgeschlossen; 2026 steigt die bundeseinheitliche Grenze weiter auf 8.450 €.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Sachbezugswerte und Entlastungsmaßnahmen 2026",
+        "art": "torte",
+        "titel": "Drei Mahlzeiten ergeben den Sachbezugswert für Verpflegung",
+        "untertitel": "Zusammensetzung des monatlichen Sachbezugswerts Verpflegung 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "Sozialversicherungsentgeltverordnung (SvEV), § 2",
+          "url": "https://www.gesetze-im-internet.de/svev/__2.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "mahlzeit",
+            "label": "Mahlzeit",
+            "werte": [
+              {
+                "label": "Frühstück",
+                "wert": 71
+              },
+              {
+                "label": "Mittagessen",
+                "wert": 137
+              },
+              {
+                "label": "Abendessen",
+                "wert": 137
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die drei Werte ergeben zusammen den monatlichen Gesamtsachbezugswert für freie Verpflegung von 345 Euro (2026, bundesweit einheitlich, vom Bundesrat am 19.12.2025 gebilligt).",
+        "abschnitt": "heading-7",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "beitragsbemessungsgrenzen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Die aktuellen Grenzen 2026",
+        "art": "balken",
+        "titel": "Jeder Versicherungszweig hat 2026 eine eigene Beitragsgrenze",
+        "untertitel": "Monatliche Beitragsbemessungsgrenze 2026 nach Versicherungszweig",
+        "einheit": "€",
+        "quelle": {
+          "name": "Sozialversicherungsrechengrößen-Verordnung 2026 (SVBezGrV 2026), §§ 2 und 4",
+          "url": "https://www.gesetze-im-internet.de/svbezgrv_2026/BJNR1160A0025.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "zweig",
+            "label": "Versicherungszweig",
+            "werte": [
+              {
+                "label": "Kranken-/Pflegeversicherung",
+                "wert": 5812.5
+              },
+              {
+                "label": "Renten-/Arbeitslosenversicherung",
+                "wert": 8450
+              },
+              {
+                "label": "Knappschaftliche Rentenversicherung",
+                "wert": 10400
+              }
+            ]
+          }
+        ],
+        "hinweis": "Zusätzlich liegt die Versicherungspflichtgrenze der Krankenversicherung 2026 bei 6.450 € monatlich (77.400 € jährlich) – ab diesem Einkommen ist ein Wechsel in die private Krankenversicherung möglich.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "minijob",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Verdienstgrenzen 2026 und 2027",
+        "art": "saeulen",
+        "titel": "Die Minijob-Grenze steigt 2026 auf 603 Euro",
+        "untertitel": "Monatliche Verdienstgrenze für Minijobs",
+        "einheit": "€",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung Baden-Württemberg, Pressemitteilung zur Minijob-Verdienstgrenze 2026/2027",
+          "url": "https://www.deutsche-rentenversicherung.de/BadenWuerttemberg/DE/Presse/Pressemitteilungen/2025/251222_Minijob",
+          "stand": "22.12.2025"
+        },
+        "reihen": [
+          {
+            "key": "jahr",
+            "label": "Jahr",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 556
+              },
+              {
+                "label": "2026",
+                "wert": 603
+              },
+              {
+                "label": "2027",
+                "wert": 633
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Grenze ist seit Oktober 2022 dynamisch an den Mindestlohn gekoppelt (Formel: Mindestlohn × 130 ÷ 3, aufgerundet). 2026 gilt ein Mindestlohn von 13,90 €, 2027 von 14,60 €.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Rentenversicherung im Minijob",
+        "art": "balken",
+        "titel": "Die meisten Minijobber verzichten auf die Rentenversicherung",
+        "untertitel": "Anteil rentenversicherungspflichtiger und befreiter Minijobber 2026",
+        "einheit": "%",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung, Meldung „Minijob: Befreiung von Abgaben zur Rentenversicherung einmalig widerrufbar“",
+          "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Ueber-uns-und-Presse/Presse/Meldungen/2026/260605-minijob-befreiung-rv-pflicht",
+          "stand": "05.06.2026"
+        },
+        "reihen": [
+          {
+            "key": "gruppe",
+            "label": "Gruppe",
+            "werte": [
+              {
+                "label": "Gewerblich, pflichtversichert",
+                "wert": 20.9
+              },
+              {
+                "label": "Gewerblich, befreit",
+                "wert": 79.1
+              },
+              {
+                "label": "Privathaushalt, pflichtversichert",
+                "wert": 11.3
+              },
+              {
+                "label": "Privathaushalt, befreit",
+                "wert": 88.7
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: befreiter Anteil = 100 % minus pflichtversicherter Anteil (Sonderauswertung der Minijob-Zentrale). Rund 7 Millionen Menschen sind bei der Minijob-Zentrale gemeldet, davon etwa 6,5 Millionen im gewerblichen Bereich.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  }
+]

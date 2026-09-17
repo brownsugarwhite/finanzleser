@@ -1,0 +1,635 @@
+[
+  {
+    "slug": "elternunterhalt",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Kinder müssen für pflegebedürftige Eltern erst zahlen, wenn ihr eigenes Jahresbrutto über 100.000 Euro liegt; das Einkommen des Ehepartners und das Vermögen zählen für diese Grenze nicht.",
+          "Vorher zahlen die Eltern selbst, dann das Sozialamt mit der Hilfe zur Pflege; erst danach prüft es, ob es sich das Geld bei einem Kind zurückholen kann.",
+          "Über der Grenze bleibt 2026 ein Selbstbehalt von 2.650 Euro im Monat, dazu 2.120 Euro für den Ehepartner; vom Einkommen darüber sind nur 30 Prozent einzusetzen, seit dem BGH-Beschluss vom Oktober 2024.",
+          "Das selbst bewohnte Haus, eine angemessene Altersvorsorge von 5 Prozent des Bruttos je Berufsjahr, ein Notgroschen und das Auto sind Schonvermögen.",
+          "Jedes Geschwisterkind wird einzeln geprüft; wer unter der Grenze liegt, zahlt nichts, und niemand haftet für die Geschwister mit."
+        ],
+        "quellen": [
+          "§ 94 Abs. 1a SGB XII (Angehörigen-Entlastungsgesetz)",
+          "Düsseldorfer Tabelle 2026, Abschnitt D",
+          "BGH XII ZB 6/24, Beschluss vom Oktober 2024",
+          "§§ 1601 ff. BGB"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wann müssen Kinder für ihre Eltern Unterhalt zahlen?",
+          "status": "freigegeben",
+          "frage": "Was kostet ein Heimplatz 2026 und wer zahlt zuerst?",
+          "antwort": "Zwischen 3.800 und 5.200 Euro im Monat je nach Bundesland; der Eigenanteil im ersten Jahr liegt im Schnitt bei rund 3.245 Euro. Zuerst zahlen die Eltern aus Rente und Ersparnissen, dann springt das Sozialamt ein, und erst dann kommt die Frage nach den Kindern.",
+          "quellen": [
+            "Verband der Ersatzkassen, Eigenanteile Januar 2026",
+            "§ 61 ff. SGB XII (Hilfe zur Pflege)"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie funktioniert die 100.000-Euro-Grenze beim Elternunterhalt?",
+          "status": "freigegeben",
+          "frage": "Wir verdienen zusammen 130.000 Euro, ich allein 70.000. Bin ich betroffen?",
+          "antwort": "Nein. Die Grenze gilt für Ihr eigenes Jahresbrutto nach dem Steuerbescheid, nicht für das Haushaltseinkommen. Bei 70.000 Euro endet die Prüfung des Sozialamts, das Einkommen Ihres Partners bleibt außen vor.",
+          "quellen": [
+            "§ 94 Abs. 1a SGB XII",
+            "Beitrag, Abschnitt 100.000-Euro-Grenze"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Berechnung des Elternunterhalts: Selbstbehalt und 70-Prozent-Regel",
+          "status": "freigegeben",
+          "frage": "Wie viel müsste ich bei 4.000 Euro Netto zahlen?",
+          "antwort": "Höchstens 405 Euro im Monat: 4.000 Euro minus 2.650 Euro Selbstbehalt ergibt 1.350 Euro, davon 30 Prozent. Die übrigen 70 Prozent des Mehrbetrags bleiben bei Ihnen, so hat es der Bundesgerichtshof im Oktober 2024 entschieden.",
+          "quellen": [
+            "BGH XII ZB 6/24",
+            "Düsseldorfer Tabelle 2026, Abschnitt D"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welches Vermögen ist vor dem Elternunterhalt geschützt?",
+          "status": "freigegeben",
+          "frage": "Muss ich mein Haus verkaufen, um für meine Mutter zu zahlen?",
+          "antwort": "Nein. Ein angemessenes, selbst bewohntes Eigenheim ist geschützt, ebenso eine Altersvorsorge von 5 Prozent des Bruttos je Berufsjahr mit 4 Prozent Verzinsung, ein Notgroschen von 10.000 bis 25.000 Euro und das Auto für den Alltag.",
+          "quellen": [
+            "BGH XII ZR 98/04 (Altersvorsorge)",
+            "Beitrag, Abschnitt Schonvermögen"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Praktisches Vorgehen bei Anfragen vom Sozialamt",
+          "status": "freigegeben",
+          "frage": "Das Sozialamt hat mir einen Fragebogen geschickt. Muss ich alles offenlegen?",
+          "antwort": "Auskunft müssen Sie geben, aber das Amt darf nur bei Anhaltspunkten für ein Einkommen über 100.000 Euro nachfragen. Liegt Ihr Brutto darunter, reicht oft eine Bescheinigung; die Details zu Vermögen und Ausgaben kommen erst, wenn die Grenze überschritten ist.",
+          "quellen": [
+            "§ 117 SGB XII (Auskunftspflicht)",
+            "Beitrag, Abschnitt Praktisches Vorgehen"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "elternunterhalt",
+        "schonvermoegen",
+        "selbstbehalt",
+        "leistungsfaehig"
+      ]
+    }
+  },
+  {
+    "slug": "ehegattenunterhalt",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Ehegattenunterhalt gibt es in drei Formen: Familienunterhalt in der Ehe, Trennungsunterhalt bis zur Scheidung und nachehelicher Unterhalt danach; jede muss eigens geltend gemacht werden.",
+          "Trennungsunterhalt setzt nur Trennung und Einkommensunterschied voraus; im ersten Trennungsjahr muss niemand arbeiten gehen.",
+          "Berechnet wird nach der Differenzmethode: Der schwächere Partner bekommt drei Siebtel, in Süddeutschland 45 Prozent, der Differenz der bereinigten Nettoeinkommen; Kindesunterhalt geht vor.",
+          "Nach der Scheidung gilt Eigenverantwortung; Unterhalt gibt es nur bei Betreuung, Alter, Krankheit, Erwerbslosigkeit, Aufstockung oder Ausbildung, meist befristet.",
+          "Dem Zahlenden bleiben 2026 mindestens 1.600 Euro, ohne Erwerbstätigkeit 1.475 Euro im Monat."
+        ],
+        "quellen": [
+          "§§ 1361, 1569 bis 1578b BGB",
+          "Düsseldorfer Tabelle 2026, Abschnitt B",
+          "Süddeutsche Leitlinien 2026"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Trennungsunterhalt vs. nachehelicher Unterhalt",
+          "status": "freigegeben",
+          "frage": "Wir leben seit drei Monaten getrennt. Muss ich schon arbeiten gehen?",
+          "antwort": "Nein. Im ersten Trennungsjahr besteht keine Pflicht, eine Arbeit aufzunehmen oder auszuweiten; der Trennungsunterhalt sichert den bisherigen Lebensstandard. Danach nimmt die Erwerbsobliegenheit zu, spätestens nach drei Jahren wird eigenes Einkommen erwartet.",
+          "quellen": [
+            "§ 1361 Abs. 2 BGB",
+            "Beitrag, FAQ Trennungsunterhalt"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Berechnung des Ehegattenunterhalts 2026",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 4.000 Euro netto, meine Frau 1.500. Wie viel Unterhalt wäre das?",
+          "antwort": "Drei Siebtel der Differenz von 2.500 Euro sind 1.071 Euro. Weil Ihnen 1.600 Euro Selbstbehalt bleiben müssen und die Berechnung mit bereinigten Einkommen läuft, liegt der Betrag in der Praxis oft darunter; im Beispiel des Beitrags bei 875 Euro. Kindesunterhalt wird vorher abgezogen.",
+          "quellen": [
+            "Düsseldorfer Tabelle 2026, Abschnitt B",
+            "Beitrag, Berechnungstabelle"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wann besteht Anspruch auf nachehelichen Unterhalt?",
+          "status": "freigegeben",
+          "frage": "Unser Kind ist zwei. Bekomme ich nach der Scheidung Betreuungsunterhalt?",
+          "antwort": "Ja, mindestens bis zum dritten Geburtstag des Kindes. Danach verlängert sich der Anspruch nur, wenn es der Billigkeit entspricht, etwa weil keine Betreuung verfügbar ist oder das Kind besondere Bedürfnisse hat.",
+          "quellen": [
+            "§ 1570 BGB"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Dauer des nachehelichen Unterhalts",
+          "status": "freigegeben",
+          "frage": "Nach 25 Jahren Ehe: Bekomme ich unbefristet Unterhalt?",
+          "antwort": "Häufig ja. Bei über 20 Jahren Ehe und ehebedingten Nachteilen, etwa weil Sie für die Kinder den Beruf aufgegeben haben, sehen Gerichte oft von einer Befristung ab. Ohne solche Nachteile ist auch nach langer Ehe eine Herabsetzung möglich.",
+          "quellen": [
+            "§ 1578b BGB",
+            "Beitrag, Orientierungshilfen nach Ehedauer"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "trennungsunterhalt",
+        "nachehelicher-unterhalt",
+        "selbstbehalt",
+        "nettoeinkommen"
+      ]
+    }
+  },
+  {
+    "slug": "elternzeit",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Jeder Elternteil hat je Kind Anspruch auf bis zu 36 Monate unbezahlte Elternzeit, bis zu 24 Monate davon zwischen dem dritten und achten Geburtstag, in bis zu drei Abschnitten.",
+          "Angemeldet wird beim Arbeitgeber sieben Wochen vor Beginn, ab dem dritten Geburtstag 13 Wochen; für Kinder ab Mai 2025 reicht eine E-Mail, davor braucht es die Unterschrift.",
+          "Der Kündigungsschutz beginnt acht Wochen vor der Elternzeit, beim späteren Abschnitt 14 Wochen, und gilt bis zum Ende.",
+          "Teilzeit bis 32 Wochenstunden ist in Betrieben ab 16 Beschäftigten nach sechs Monaten Betriebszugehörigkeit ein Anspruch, den nur dringende betriebliche Gründe kippen.",
+          "Elternzeit und Elterngeld sind getrennte Dinge: Die Auszeit gibt es auch ohne Geld, das Geld muss eigens beantragt werden."
+        ],
+        "quellen": [
+          "§§ 15, 16, 18 BEEG",
+          "§ 126b BGB (Textform)",
+          "Beitrag Elternzeit"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Anspruch und maximale Dauer",
+          "status": "freigegeben",
+          "frage": "Können wir beide gleichzeitig Elternzeit nehmen?",
+          "antwort": "Ja. Jeder Elternteil hat seinen eigenen Anspruch von 36 Monaten, den er allein oder zeitgleich mit dem anderen nehmen kann. Zusammen sind also 72 Monate möglich, auch parallel in den ersten Lebensmonaten.",
+          "quellen": [
+            "§ 15 Abs. 3 BEEG"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Anmeldung: Fristen und aktuelle Regelungen",
+          "status": "freigegeben",
+          "frage": "Unser Kind ist im März 2025 geboren. Reicht eine E-Mail für die Anmeldung?",
+          "antwort": "Nein. Die Textform gilt erst für Kinder, die ab dem 1. Mai 2025 geboren sind. Für Ihr Kind bleibt es bei der Schriftform: Der Antrag muss eigenhändig unterschrieben beim Arbeitgeber eingehen, sonst ist die Anmeldung unwirksam.",
+          "quellen": [
+            "§ 16 Abs. 1 BEEG in der Fassung ab 1. Mai 2025",
+            "§ 126 BGB"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Kündigungsschutz während der Elternzeit",
+          "status": "freigegeben",
+          "frage": "Darf mein Arbeitgeber mir nach der Anmeldung noch kündigen?",
+          "antwort": "Grundsätzlich nicht. Der Schutz beginnt acht Wochen vor der Elternzeit, bei einem Abschnitt nach dem dritten Geburtstag 14 Wochen vorher, und gilt bis zum Ende. Nur in Ausnahmefällen wie einer Betriebsstilllegung kann die Landesbehörde eine Kündigung für zulässig erklären.",
+          "quellen": [
+            "§ 18 BEEG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Teilzeitarbeit in der Elternzeit",
+          "status": "freigegeben",
+          "frage": "Mein Betrieb hat zwölf Beschäftigte. Habe ich Anspruch auf Teilzeit?",
+          "antwort": "Keinen einklagbaren Anspruch: Der gilt erst ab mehr als 15 Beschäftigten. Sie können Teilzeit trotzdem vereinbaren, der Arbeitgeber muss aber nicht zustimmen. Bis 32 Wochenstunden bleibt der Elterngeldanspruch erhalten.",
+          "quellen": [
+            "§ 15 Abs. 7 BEEG"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Praktische Vorbereitung: Checkliste für 2026",
+          "status": "freigegeben",
+          "frage": "Verliere ich in der Elternzeit meinen Urlaub?",
+          "antwort": "Der Arbeitgeber darf den Jahresurlaub für jeden vollen Monat Elternzeit um ein Zwölftel kürzen, muss es aber ausdrücklich erklären. Resturlaub aus der Zeit davor nehmen Sie nach der Elternzeit im laufenden oder nächsten Jahr.",
+          "quellen": [
+            "§ 17 BEEG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "elternzeit",
+        "elterngeld",
+        "textform",
+        "kuendigungsschutz"
+      ]
+    }
+  },
+  {
+    "slug": "mutterschaftsgeld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Mutterschaftsgeld ersetzt den Lohn in den Schutzfristen sechs Wochen vor und acht Wochen nach der Geburt, bei Früh- und Mehrlingsgeburten zwölf Wochen danach.",
+          "Gesetzlich Versicherte bekommen von der Krankenkasse bis 13 Euro je Kalendertag, der Arbeitgeber zahlt die Differenz zum Netto; Privatversicherte erhalten einmalig bis 210 Euro vom Bundesamt für Soziale Sicherung plus Arbeitgeberzuschuss.",
+          "Selbstständige haben nur mit freiwilliger gesetzlicher Versicherung und Krankengeldanspruch etwas, dann 70 Prozent des Einkommens; Privatversicherte Selbstständige gehen leer aus.",
+          "Seit Juni 2025 gibt es auch bei Fehlgeburten ab der 13. Woche gestaffelte Schutzfristen mit Mutterschaftsgeld.",
+          "Es ist steuerfrei mit Progressionsvorbehalt und wird in den ersten acht Wochen voll auf das Elterngeld angerechnet; die 210 Euro nicht."
+        ],
+        "quellen": [
+          "§§ 19, 20 MuSchG",
+          "§ 24i SGB V",
+          "§ 1 AAG (U2-Umlage)",
+          "§ 3 Abs. 1 BEEG (Anrechnung)"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer hat Anspruch auf Mutterschaftsgeld?",
+          "status": "freigegeben",
+          "frage": "Ich bin privat versichert und angestellt. Was bekomme ich?",
+          "antwort": "Einmalig bis zu 210 Euro vom Bundesamt für Soziale Sicherung und vom Arbeitgeber den Zuschuss: Ihr durchschnittliches Netto je Tag minus 13 Euro, für die ganze Schutzfrist. Unterm Strich fehlt Ihnen gegenüber gesetzlich Versicherten also nur der Krankenkassenanteil.",
+          "quellen": [
+            "§ 19 Abs. 2 MuSchG",
+            "§ 20 MuSchG"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist das Mutterschaftsgeld 2026?",
+          "status": "freigegeben",
+          "frage": "Bekomme ich wirklich mein volles Netto?",
+          "antwort": "In der Regel ja. Die Kasse zahlt bis 13 Euro pro Tag, der Arbeitgeber füllt bis zum durchschnittlichen Netto der letzten drei abgerechneten Monate auf. Nur wenn Ihr Netto unter 390 Euro im Monat lag, gibt es keinen Zuschuss.",
+          "quellen": [
+            "§ 20 MuSchG",
+            "Beitrag, Tabelle Versicherungsart"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Mutterschutzfristen gelten 2026?",
+          "status": "freigegeben",
+          "frage": "Das Kind kam zwei Wochen zu früh. Verkürzt sich die Schutzfrist danach?",
+          "antwort": "Nein, sie verlängert sich. Bei Frühgeburten gilt nach der Geburt eine Schutzfrist von zwölf Wochen, und die Tage, die vor der Geburt nicht genommen werden konnten, kommen zusätzlich hinten dran.",
+          "quellen": [
+            "§ 3 Abs. 2 MuSchG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Antragstellung und erforderliche Unterlagen",
+          "status": "freigegeben",
+          "frage": "Wann sollte ich das Mutterschaftsgeld beantragen?",
+          "antwort": "Etwa sieben Wochen vor dem errechneten Termin, sobald Sie die ärztliche Bescheinigung mit dem Geburtstermin haben; eine Ausfertigung geht an die Krankenkasse, eine an den Arbeitgeber. Nach der Geburt reichen Sie die Geburtsurkunde nach, damit die Zahlung weiterläuft.",
+          "quellen": [
+            "§ 24i SGB V",
+            "Beitrag, Abschnitt Antragstellung"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Steuerliche Behandlung und Anrechnung auf Elterngeld",
+          "status": "freigegeben",
+          "frage": "Zählen die acht Wochen Mutterschutz als Elterngeldmonate?",
+          "antwort": "Ja. Das Mutterschaftsgeld wird voll auf das Elterngeld angerechnet, deshalb gelten der erste und zweite Lebensmonat als von der Mutter verbrauchte Basiselterngeldmonate. Die einmaligen 210 Euro der Privatversicherten werden nicht angerechnet.",
+          "quellen": [
+            "§ 3 Abs. 1 BEEG",
+            "§ 4 Abs. 3 BEEG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "mutterschutzfrist",
+        "u2-umlage",
+        "progressionsvorbehalt",
+        "elterngeld"
+      ]
+    }
+  },
+  {
+    "slug": "kinderzuschlag",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Der Kinderzuschlag bringt Familien mit kleinem Einkommen bis zu 297 Euro je Kind im Monat zusätzlich zum Kindergeld von 259 Euro, zusammen also 556 Euro.",
+          "Voraussetzung: Kindergeld für ein unverheiratetes Kind unter 25 im Haushalt, mindestens 900 Euro brutto bei Paaren oder 600 Euro bei Alleinerziehenden, und mit Kinderzuschlag und Wohngeld reicht es ohne Bürgergeld.",
+          "Einkommen über dem Bedarf der Eltern und Einkommen des Kindes werden zu 45 Prozent angerechnet; die Leistung sinkt allmählich, es gibt keine harte Obergrenze mehr.",
+          "Der Antrag geht online oder per Post an die Familienkasse, der KiZ-Lotse prüft vorab; bewilligt wird für sechs Monate.",
+          "Dazu kommen Bildungspaket, Kita-Gebührenbefreiung und oft Wohngeld; der Zuschlag ist steuerfrei."
+        ],
+        "quellen": [
+          "§ 6a BKGG",
+          "Familienkasse der Bundesagentur für Arbeit, KiZ-Lotse",
+          "Beitrag Kinderzuschlag"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist der Kinderzuschlag?",
+          "status": "freigegeben",
+          "frage": "Ich bin alleinerziehend und verdiene 1.400 Euro brutto. Lohnt sich ein Antrag?",
+          "antwort": "Sehr wahrscheinlich. Sie liegen über der Mindestgrenze von 600 Euro, und bei einem Einkommen in dieser Höhe deckt der Zuschlag mit Wohngeld meist den Bedarf. Der KiZ-Lotse der Familienkasse sagt Ihnen in wenigen Minuten, ob ein Antrag Aussicht hat.",
+          "quellen": [
+            "§ 6a Abs. 1 BKGG",
+            "KiZ-Lotse der Familienkasse"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Höhe des Kinderzuschlags 2026",
+          "status": "freigegeben",
+          "frage": "Gibt es den Sofortzuschlag von 25 Euro noch extra?",
+          "antwort": "Nein, er steckt seit 2025 im Höchstbetrag von 297 Euro und wird nicht zusätzlich ausgezahlt. Mit dem Kindergeld von 259 Euro kommen Sie je Kind auf bis zu 556 Euro im Monat.",
+          "quellen": [
+            "§ 6a Abs. 2 BKGG",
+            "Beitrag, Abschnitt Höhe"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Berechnung des Kinderzuschlags",
+          "status": "freigegeben",
+          "frage": "Mein Kind bekommt 400 Euro Unterhalt. Wird das abgezogen?",
+          "antwort": "Zu 45 Prozent: Von 400 Euro Unterhalt mindern 180 Euro den Kinderzuschlag für dieses Kind. Dasselbe gilt für Ausbildungsvergütung. Kindergeld selbst wird nicht als Kindeseinkommen angerechnet.",
+          "quellen": [
+            "§ 6a Abs. 3 BKGG",
+            "Beitrag, Abschnitt Berechnung"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Beantragung des Kinderzuschlags",
+          "status": "freigegeben",
+          "frage": "Muss ich den Kinderzuschlag jedes halbe Jahr neu beantragen?",
+          "antwort": "Ja. Die Familienkasse bewilligt in der Regel für sechs Monate, weil sich Einkommen und Miete oft ändern. Stellen Sie den Folgeantrag rechtzeitig vor Ablauf, sonst entsteht eine Lücke; rückwirkend zahlt die Kasse nicht.",
+          "quellen": [
+            "§ 6a Abs. 7 BKGG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Zusätzliche Leistungen neben dem Kinderzuschlag",
+          "status": "freigegeben",
+          "frage": "Kann ich Kinderzuschlag und Wohngeld zusammen bekommen?",
+          "antwort": "Ja, das ist sogar der Regelfall, denn beide Leistungen zusammen sollen den Bedarf ohne Bürgergeld decken. Dazu kommen das Bildungspaket mit 195 Euro Schulbedarf im Jahr und die Befreiung von Kita-Gebühren.",
+          "quellen": [
+            "§ 6b BKGG",
+            "§ 90 Abs. 4 SGB VIII (Kita-Gebühren)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kinderzuschlag",
+        "kindergeld",
+        "bildungspaket",
+        "guenstigerpruefung"
+      ]
+    }
+  },
+  {
+    "slug": "ehegattensplitting",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Beim Ehegattensplitting wird das gemeinsame zu versteuernde Einkommen halbiert, darauf die Steuer berechnet und verdoppelt; der doppelte Grundfreibetrag von 24.696 Euro bleibt 2026 steuerfrei.",
+          "Der Vorteil wächst mit dem Einkommensunterschied: Bei einem Alleinverdiener mit 100.000 Euro sind es rund 9.768 Euro im Jahr, bei gleich hohen Einkommen nichts; das Maximum liegt bei 19.471 Euro.",
+          "Steuerklassen ändern nur die monatliche Lohnsteuer, der Splittingvorteil kommt erst mit der Jahresveranlagung.",
+          "Für das Steuerjahr 2026 gilt das Splitting unverändert; diskutiert wird ein Realsplitting für neue Ehen mit einem übertragbaren Betrag in Höhe des Grundfreibetrags.",
+          "Der Solidaritätszuschlag trifft Ehepaare 2026 erst ab 40.700 Euro Einkommensteuer."
+        ],
+        "quellen": [
+          "§ 26b EStG, § 32a Abs. 5 EStG",
+          "§ 3 SolzG (Freigrenze)",
+          "Beitrag Ehegattensplitting"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "So funktioniert das Ehegattensplitting 2026",
+          "status": "freigegeben",
+          "frage": "Wir verdienen beide etwa gleich viel. Bringt uns das Splitting etwas?",
+          "antwort": "Praktisch nichts. Der Vorteil entsteht nur, wenn das Halbieren des gemeinsamen Einkommens einen Partner in einen niedrigeren Steuersatz bringt. Bei 30.000 zu 30.000 Euro ändert sich die Steuer nicht; der doppelte Grundfreibetrag steht Ihnen ohnehin zu.",
+          "quellen": [
+            "§ 32a Abs. 5 EStG",
+            "Beitrag, Tabelle Einkommensverteilung"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer profitiert am meisten vom Ehegattensplitting?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 60.000 Euro, meine Frau ist in Elternzeit. Wie viel sparen wir?",
+          "antwort": "Bis zu 5.800 Euro im Jahr gegenüber der Einzelveranlagung. Elternzeit ist der klassische Fall, in dem das Splitting voll wirkt, weil ein Einkommen für ein Jahr fast ganz wegfällt. Das Elterngeld selbst ist steuerfrei, erhöht aber über den Progressionsvorbehalt den Satz.",
+          "quellen": [
+            "Beitrag, Beispiel 60.000 Euro",
+            "§ 32b EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Was würde ein Realsplitting bedeuten?",
+          "status": "freigegeben",
+          "frage": "Gilt das Splitting für uns weiter, wenn wir 2027 heiraten?",
+          "antwort": "Nach heutiger Rechtslage ja. Für 2026 gibt es weder Gesetzentwurf noch Kabinettsbeschluss. Diskutiert wird, das Realsplitting nur für neu geschlossene Ehen einzuführen; bestehende Ehen sollen das klassische Splitting behalten. Beobachten Sie die Reform, planen Sie mit dem geltenden Recht.",
+          "quellen": [
+            "Beitrag, Abschnitt Reformdebatte 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Steuerklassenwahl und praktische Umsetzung",
+          "status": "freigegeben",
+          "frage": "Sind Steuerklasse 3 und 5 dasselbe wie das Splitting?",
+          "antwort": "Nein. Die Steuerklassen verteilen nur die monatliche Lohnsteuer zwischen Ihnen, die Jahressteuer ist am Ende dieselbe. Das Splitting wirkt erst in der Steuererklärung. Mit 3 und 5 gibt es meist eine Nachzahlung, mit 4 und 4 eine Erstattung; das Faktorverfahren trifft die Jahressteuer am genauesten.",
+          "quellen": [
+            "§ 38b EStG, § 39f EStG (Faktorverfahren)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "splitting",
+        "grundfreibetrag",
+        "realsplitting",
+        "einkommensteuer"
+      ]
+    }
+  },
+  {
+    "slug": "wohngeld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Wohngeld ist ein Zuschuss zu Miete oder Eigenheimlasten für Haushalte mit kleinem Einkommen, die keine anderen Leistungen wie Bürgergeld beziehen; seit der Reform sind es im Schnitt 370 Euro im Monat.",
+          "Die Höhe hängt von Haushaltsgröße, anrechenbarem Einkommen und der Mietstufe des Wohnorts ab; 2026 liegt die Einkommensgrenze für eine Person in Mietstufe I bei 1.443 Euro, in München reicht es für eine vierköpfige Familie bis 5.250 Euro brutto.",
+          "Vom Brutto gehen pauschal bis zu 30 Prozent für Steuern und Sozialabgaben ab, dazu Freibeträge für Schwerbehinderte, Alleinerziehende und Erwerbstätige.",
+          "Vermögen ist bis 60.000 Euro für die erste und 30.000 Euro für jede weitere Person unschädlich, das selbst genutzte Eigenheim zählt nicht mit.",
+          "Der Antrag geht an die Wohngeldstelle, bewilligt wird für zwölf Monate ab dem Antragsmonat, rückwirkend gibt es nichts."
+        ],
+        "quellen": [
+          "Wohngeldgesetz (WoGG) §§ 3, 12, 16, 25",
+          "Beitrag Wohngeld"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer hat Anspruch auf Wohngeld 2026?",
+          "status": "freigegeben",
+          "frage": "Ich arbeite Vollzeit zum Mindestlohn. Kann ich Wohngeld bekommen?",
+          "antwort": "Häufig ja. Bei 13,90 Euro Mindestlohn liegt das Brutto bei rund 2.400 Euro; in teureren Mietstufen liegt die Einkommensgrenze für einen Haushalt mit Kindern darüber. Entscheidend sind Haushaltsgröße, Miete und Mietstufe, nicht der Lohn allein.",
+          "quellen": [
+            "§ 3 WoGG",
+            "Beitrag, Abschnitt Anspruch"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist das Wohngeld 2026?",
+          "status": "freigegeben",
+          "frage": "Meine Miete liegt über dem Höchstbetrag meiner Mietstufe. Bekomme ich trotzdem etwas?",
+          "antwort": "Ja, aber nur bis zum Höchstbetrag. In Mietstufe I werden für eine Person 476,60 Euro Miete berücksichtigt, in Mietstufe VII 780,60 Euro; was darüber liegt, bleibt bei Ihnen. Der Zuschuss selbst wird aus dem berücksichtigten Betrag berechnet.",
+          "quellen": [
+            "§ 12 WoGG (Höchstbeträge)",
+            "Beitrag, Abschnitt Mietstufen"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Freibeträge senken das anrechenbare Einkommen?",
+          "status": "freigegeben",
+          "frage": "Ich bin alleinerziehend. Gibt es einen Freibetrag?",
+          "antwort": "Ja, 1.320 Euro im Jahr, wenn ein Kind unter 18 bei Ihnen lebt, zusätzlich zum Erwerbstätigenfreibetrag von 10 Prozent bis 100 Euro im Monat. Prüfen Sie parallel den Kinderzuschlag, beide Leistungen gehen zusammen.",
+          "quellen": [
+            "§ 17 WoGG",
+            "Beitrag, Abschnitt Freibeträge"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wohngeld beantragen: Schritt für Schritt",
+          "status": "freigegeben",
+          "frage": "Ich ziehe im November um. Muss ich neu beantragen?",
+          "antwort": "Ja. Wohngeld ist an die Wohnung gebunden; am neuen Wohnort stellen Sie einen neuen Antrag bei der dortigen Wohngeldstelle, und zwar im Monat des Einzugs, weil rückwirkend nichts gezahlt wird. Der alte Bescheid endet mit dem Auszug.",
+          "quellen": [
+            "§ 25 WoGG",
+            "§ 28 WoGG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "wohngeld",
+        "mietstufe",
+        "kinderzuschlag",
+        "buergergeld"
+      ]
+    }
+  },
+  {
+    "slug": "erbschaftsteuer",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Erbschaftsteuer fällt nur auf den Teil des Nachlasses an, der über dem persönlichen Freibetrag liegt: 500.000 Euro für Ehepartner, 400.000 Euro je Kind, 200.000 Euro für Enkel, 20.000 Euro für Geschwister und Unverheiratete.",
+          "Die Freibeträge sind seit 2009 unverändert und haben rund ein Drittel Kaufkraft verloren.",
+          "Der Steuersatz richtet sich nach Steuerklasse und Betrag: 7 bis 30 Prozent für die engste Familie, 15 bis 43 Prozent für Geschwister und Nichten, 30 oder 50 Prozent für alle anderen.",
+          "Das selbst bewohnte Familienheim bleibt für Ehepartner ohne Grenze und für Kinder bis 200 Quadratmeter steuerfrei, wenn der Erbe zehn Jahre darin wohnt.",
+          "Schenkungen innerhalb von zehn Jahren werden zusammengerechnet; wer alle zehn Jahre schenkt, nutzt die Freibeträge mehrfach. Jede Erbschaft ist binnen drei Monaten dem Finanzamt anzuzeigen."
+        ],
+        "quellen": [
+          "§§ 13 Abs. 1 Nr. 4b und 4c, 14, 16, 19, 30 ErbStG",
+          "Beitrag Erbschaftsteuer"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Freibeträge 2026 – wer erhält wie viel?",
+          "status": "freigegeben",
+          "frage": "Gilt der Freibetrag von 400.000 Euro je Kind pro Elternteil?",
+          "antwort": "Ja. Jedes Kind hat den Freibetrag gegenüber jedem Elternteil einzeln, also 400.000 Euro von der Mutter und 400.000 Euro vom Vater. Ein Ehepaar mit zwei Kindern kann so 1,6 Millionen Euro steuerfrei an die Kinder übertragen, mit Schenkungen alle zehn Jahre entsprechend mehr.",
+          "quellen": [
+            "§ 16 Abs. 1 Nr. 2 ErbStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Steuerklassen und Steuersätze 2026",
+          "status": "freigegeben",
+          "frage": "Ich erbe von meinem unverheirateten Partner. Was bleibt mir?",
+          "antwort": "Wenig Freibetrag: 20.000 Euro, und darüber Steuerklasse III mit 30 Prozent, ab 6 Millionen 50 Prozent. Bei 300.000 Euro Erbe sind das 84.000 Euro Steuer. Eine Heirat würde den Freibetrag auf 500.000 Euro heben; ein Testament allein ändert die Steuerklasse nicht.",
+          "quellen": [
+            "§ 15 ErbStG, § 19 ErbStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Familienheim-Befreiung: Immobilien steuerfrei erben",
+          "status": "freigegeben",
+          "frage": "Ich erbe das Elternhaus, will aber nach vier Jahren verkaufen. Was passiert?",
+          "antwort": "Die Befreiung fällt rückwirkend weg, weil Sie die Selbstnutzung vor Ablauf von zehn Jahren aufgeben; das Finanzamt setzt die Steuer nach. Ausnahmen gelten nur bei zwingenden Gründen wie Pflegebedürftigkeit. Rechnen Sie vorher, ob der Freibetrag von 400.000 Euro die Immobilie ohnehin abdeckt.",
+          "quellen": [
+            "§ 13 Abs. 1 Nr. 4c ErbStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Die 10-Jahres-Regel für Schenkungen nutzen",
+          "status": "freigegeben",
+          "frage": "Mein Vater hat mir 2020 schon 200.000 Euro geschenkt. Wie viel Freibetrag bleibt?",
+          "antwort": "Noch 200.000 Euro, wenn er vor 2030 stirbt oder erneut schenkt, weil alle Erwerbe innerhalb von zehn Jahren zusammengerechnet werden. Ab 2030 stünde der volle Freibetrag von 400.000 Euro wieder zur Verfügung.",
+          "quellen": [
+            "§ 14 ErbStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Anzeigepflicht und praktische Schritte",
+          "status": "freigegeben",
+          "frage": "Muss ich eine Erbschaft melden, wenn keine Steuer anfällt?",
+          "antwort": "Ja, innerhalb von drei Monaten beim Finanzamt am Wohnsitz des Verstorbenen, unabhängig davon, ob Steuer entsteht. Ausgenommen sind nur Fälle, die ohnehin über Nachlassgericht oder Notar gemeldet werden, etwa bei einem eröffneten Testament.",
+          "quellen": [
+            "§ 30 ErbStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "erbschaftsteuer",
+        "familienheim",
+        "zehnjahresfrist",
+        "versorgungsfreibetrag"
+      ]
+    }
+  }
+]

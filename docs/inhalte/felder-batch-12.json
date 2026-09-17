@@ -1,0 +1,936 @@
+[
+  {
+    "slug": "zahnzusatzversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Kasse zahlt bei Zahnersatz nur den Festzuschuss zur Regelversorgung, derzeit 60 Prozent; laut Beitrag soll er mit der GKV-Reform ab 2027 auf 50 Prozent sinken, wer den Heil- und Kostenplan noch 2026 genehmigen lässt, behält den alten Zuschuss. Ein Implantat kostet 2.000 bis 4.000 Euro, den Rest trägt der Patient.",
+          "Eine Zahnzusatzversicherung schließt die Lücke und lohnt sich für alle, die Keramik statt Metall, Implantate statt Prothesen und regelmäßige professionelle Zahnreinigung wollen; Erwachsene zahlen 20 bis 40 Euro im Monat, Kinder ab 1,50 Euro, ein 31-Jähriger für den Allianz-Tarif MeinZahnschutz 100 rund 30 Euro.",
+          "Gute Tarife erstatten mindestens 75 Prozent für Zahnersatz, sehr gute 90 bis 100 Prozent, dazu hochwertige Füllungen, Wurzel- und Parodontosebehandlung und die professionelle Zahnreinigung für 80 bis 150 Euro ein- bis mehrmals im Jahr.",
+          "Stiftung Warentest hat im Juli 2025 285 Tarife geprüft; Testsieger sind unter anderem DFV ZahnSchutz Exklusiv 100 mit Note 0,5, Allianz MeinZahnschutz 100 und HanseMerkur Zahn Komfort und Luxus, die inzwischen ohne Wartezeit starten.",
+          "Klassische Tarife haben drei bis acht Monate Wartezeit; Tarife ohne Wartezeit begrenzen die Erstattung in den ersten Jahren auf 900 bis 1.500 Euro im ersten und 2.000 bis 3.000 Euro im zweiten Jahr und leisten ab dem vierten oder fünften Jahr unbegrenzt. Bereits angeratene Behandlungen sind ausgeschlossen, dafür gibt es spezielle Sofort-Tarife."
+        ],
+        "quellen": [
+          "§ 55 SGB V (Festzuschuss)",
+          "Stiftung Warentest, Finanztest 7/2025",
+          "Beitrag Zahnzusatzversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch sind die Kosten für eine Zahnzusatzversicherung?",
+          "status": "freigegeben",
+          "frage": "Lohnt sich mit 55 Jahren noch ein Abschluss, wenn die Zähne noch in Ordnung sind?",
+          "antwort": "Ja, gerade dann: Ohne laufende oder angeratene Behandlung nehmen die Versicherer Sie normal an, und mit 55 kostet ein sehr guter Tarif etwa 35 bis 50 Euro im Monat. Rechnen Sie gegen: Zwei Implantate in den nächsten zehn Jahren kosten 5.000 bis 8.000 Euro, die Beiträge in dieser Zeit rund 5.000 Euro. Wählen Sie einen Tarif mit Altersrückstellungen, damit der Beitrag nicht alle zehn Jahre springt, und klären Sie vor dem Abschluss beim Zahnarzt, dass nichts im Bonusheft als angeraten notiert ist.",
+          "quellen": [
+            "Beitrag, Abschnitt Kosten",
+            "Finanztest 7/2025"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Die wichtigsten Leistungen einer Zahnzusatzversicherung",
+          "status": "freigegeben",
+          "frage": "Zahlt die Zusatzversicherung die Krone komplett oder nur den Rest nach dem Kassenzuschuss?",
+          "antwort": "Sie rechnet auf die Gesamtrechnung: Ein 90-Prozent-Tarif erstattet 90 Prozent der Kosten abzüglich dessen, was die Kasse als Festzuschuss zahlt, bei 1.500 Euro für eine Keramikkrone und 400 Euro Festzuschuss also 950 Euro, sodass Sie 150 Euro selbst tragen. Manche Tarife zahlen den Prozentsatz nur auf den Eigenanteil, das ist deutlich weniger; prüfen Sie den Wortlaut, ob „inklusive Vorleistung der GKV“ oder „vom Rechnungsbetrag“ steht. Reichen Sie immer erst den Heil- und Kostenplan bei der Kasse ein, sonst entfällt der Festzuschuss.",
+          "quellen": [
+            "§ 55 SGB V",
+            "Beitrag, Abschnitt Leistungen"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wartezeiten und Leistungsstaffeln verstehen",
+          "status": "freigegeben",
+          "frage": "Ich habe einen Tarif ohne Wartezeit und brauche im ersten Jahr zwei Implantate für 6.000 Euro. Was bekomme ich?",
+          "antwort": "Nur den Betrag der Zahnstaffel für das erste Jahr, meist 1.000 bis 1.500 Euro, egal wie hoch die Rechnung ist; im zweiten Jahr kommen 2.000 bis 3.000 Euro dazu. Wenn die Behandlung medizinisch aufschiebbar ist, lohnt es sich, ein Implantat ins Folgejahr zu legen, weil die Staffel je Versicherungsjahr gilt. Ausnahmen gibt es bei Unfällen, die meist ohne Staffel voll erstattet werden. Hatte der Zahnarzt die Implantate schon vor dem Abschluss empfohlen, zahlt der Versicherer gar nichts.",
+          "quellen": [
+            "Beitrag, Abschnitt Leistungsstaffeln",
+            "Tarifbedingungen der Anbieter"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Besondere Situationen: Kinder, Senioren, angeratene Behandlungen",
+          "status": "freigegeben",
+          "frage": "Wann sollte ich für mein Kind abschließen, damit die Zahnspange versichert ist?",
+          "antwort": "Spätestens mit sechs oder sieben Jahren, vor der ersten kieferorthopädischen Untersuchung; sobald eine Fehlstellung im Bonusheft oder in der Akte steht, ist sie ausgeschlossen. Achten Sie auf Tarife, die Kieferorthopädie auch bei den Schweregraden 1 und 2 zahlen, die die Kasse gar nicht übernimmt, und auf eine Staffel, die vor dem typischen Behandlungsbeginn mit zehn bis zwölf Jahren ausläuft. Kindertarife kosten 1,50 bis 20 Euro, gute Kieferorthopädie-Bausteine etwa 8 bis 15 Euro im Monat.",
+          "quellen": [
+            "§ 29 SGB V (Kieferorthopädie)",
+            "Beitrag, Abschnitt Kinder"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "zahnzusatzversicherung",
+        "festzuschuss",
+        "zahnstaffel",
+        "professionelle-zahnreinigung",
+        "wartezeit",
+        "gkv-beitragssatzstabilisierungsgesetz"
+      ]
+    }
+  },
+  {
+    "slug": "sterbegeldversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Sterbegeldversicherung ist eine kleine Lebensversicherung auf den Todesfall, die eine feste Summe von meist 3.000 bis 15.000 Euro an die bezugsberechtigte Person auszahlt, um die Bestattung zu bezahlen; seit die Kassen 2004 das gesetzliche Sterbegeld gestrichen haben, tragen Familien diese Kosten allein.",
+          "Eine Bestattung kostet je nach Art 2.000 bis 4.000 Euro anonym, rund 3.200 Euro als einfache Urnenbeisetzung, etwa 8.000 Euro für eine Erdbestattung und bis 20.000 Euro mit Grabstein und Trauerfeier, dazu 150 bis 330 Euro Grabpflege im Jahr.",
+          "Die Beiträge liegen bei 30 bis 50 Euro im Monat, mit 50 Jahren ab etwa 20 Euro für 8.000 Euro Summe; sie hängen von Eintrittsalter, Summe und Zahlungsdauer ab, oft endet die Beitragspflicht mit 65 oder 85 Jahren, der Schutz gilt lebenslang.",
+          "Tarife ohne Gesundheitsfragen nehmen jeden an, zahlen bei Tod durch Krankheit in den ersten 6 bis 36 Monaten aber nur gestaffelt oder die Beiträge zurück; bei Unfalltod gilt von Anfang an die volle, oft doppelte Summe.",
+          "Sinnvoll ist sie für Menschen ohne Rücklagen, mit Vorerkrankungen oder ohne Angehörige, die ein Bestattungsinstitut als Begünstigten einsetzen; wer spät abschließt, zahlt oft mehr ein, als ausgezahlt wird. Die abgezahlte Police zählt bei Sozialhilfe zum geschützten Vermögen, die Auszahlung ist einkommensteuerfrei."
+        ],
+        "quellen": [
+          "§ 150 ff. VVG",
+          "§ 90 Abs. 3 SGB XII, BSG B 8 SO 9/14 R (Bestattungsvorsorge)",
+          "Beitrag Sterbegeldversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch sind die Bestattungskosten in Deutschland?",
+          "status": "freigegeben",
+          "frage": "Wer muss die Beerdigung bezahlen, wenn kein Geld da ist?",
+          "antwort": "Zuerst die Erben aus dem Nachlass, und wenn der nicht reicht, die unterhaltspflichtigen Angehörigen nach den Bestattungsgesetzen der Länder, also Ehepartner, Kinder und Eltern, auch wenn sie das Erbe ausgeschlagen haben. Können auch die nicht zahlen, übernimmt das Sozialamt die Kosten einer ortsüblichen einfachen Bestattung nach § 74 SGB XII. Eine Sterbegeldversicherung mit 5.000 bis 8.000 Euro nimmt den Angehörigen diese Last ab und wird direkt an die eingetragene Person ausgezahlt, ohne Erbschein.",
+          "quellen": [
+            "§ 1968 BGB",
+            "§ 74 SGB XII",
+            "Bestattungsgesetze der Länder"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie hoch sind die Kosten einer Sterbegeldversicherung?",
+          "status": "freigegeben",
+          "frage": "Ich bin 68. Ist es noch sinnvoll, 8.000 Euro Sterbegeld zu versichern?",
+          "antwort": "Rechnen Sie nach: Mit 68 kosten 8.000 Euro Summe etwa 45 bis 60 Euro im Monat, bei Beitragszahlung bis 85 also 9.000 bis 12.000 Euro, mehr als die Auszahlung, wenn Sie das Alter erreichen. Günstiger ist ein Tagesgeldkonto mit Dauerauftrag von 60 Euro, das nach elf Jahren die Summe voll enthält und jederzeit verfügbar bleibt, oder ein Bestattungsvorsorgevertrag mit Treuhandkonto. Die Versicherung lohnt sich in Ihrem Alter nur, wenn Sie das Geld sofort abgesichert brauchen und nicht ansparen können oder wollen.",
+          "quellen": [
+            "Beitrag, Abschnitt Kosten",
+            "Beitrag, Abschnitt Für wen sich die Versicherung lohnt"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wichtige Versicherungsbedingungen: Wartezeit und Gesundheitsprüfung",
+          "status": "freigegeben",
+          "frage": "Mein Vater hat Krebs. Bekommt er noch eine Sterbegeldversicherung?",
+          "antwort": "Nur einen Tarif ohne Gesundheitsfragen, und der zahlt bei Tod durch Krankheit in der Wartezeit von meist 12 bis 36 Monaten nur die eingezahlten Beiträge oder eine Staffel, etwa ein Drittel im ersten Jahr; die volle Summe gibt es erst danach. Bei einer Erkrankung mit kurzer Prognose ist das kein Schutz. Sinnvoller ist dann ein Bestattungsvorsorgevertrag beim Bestatter mit Treuhandkonto oder ein Sparkonto, das per Vollmacht über den Tod hinaus für die Bestattung zugänglich bleibt.",
+          "quellen": [
+            "Beitrag, Abschnitt Wartezeit",
+            "Tarifbedingungen der Anbieter"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Für wen sich die Sterbegeldversicherung lohnt",
+          "status": "freigegeben",
+          "frage": "Meine Mutter muss ins Pflegeheim und das Sozialamt prüft ihr Vermögen. Muss die Sterbegeldversicherung aufgelöst werden?",
+          "antwort": "In der Regel nein: Das Bundessozialgericht schützt eine angemessene Bestattungsvorsorge als Vermögen, das nicht verwertet werden muss, solange die Summe den ortsüblichen Kosten entspricht, meist bis etwa 8.000 bis 10.000 Euro, und die Police erkennbar der Bestattung dient, etwa durch unwiderrufliches Bezugsrecht zugunsten eines Bestatters oder eines Angehörigen. Legen Sie dem Amt die Police und eine Kostenschätzung vor; ein Bestattungsvorsorgevertrag mit Treuhandkonto ist noch sicherer.",
+          "quellen": [
+            "§ 90 Abs. 3 SGB XII",
+            "BSG B 8 SO 9/14 R vom 18.03.2008 und B 8 SO 20/15 R"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "sterbegeldversicherung",
+        "bestattungskosten",
+        "bezugsrecht",
+        "wartezeit",
+        "gesundheitspruefung",
+        "schonvermoegen"
+      ]
+    }
+  },
+  {
+    "slug": "rechtsschutzversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Rechtsschutzversicherung zahlt Anwalts- und Gerichtskosten, Gutachter, Zeugen und Mediation bis zur Deckungssumme, wenn Sie Ihr Recht durchsetzen oder sich verteidigen; ein Zivilprozess um 400.000 Euro kostet schnell über 24.000 Euro Gebühren.",
+          "Sie ist modular: Privat, Beruf, Verkehr und Wohnen lassen sich kombinieren, der PBV-Schutz aus Privat, Beruf und Verkehr ist die übliche Kombination; Privat und Verkehr gibt es ab zwölf Euro im Monat, Tarife nach den Kriterien der Stiftung Warentest ab 11,92 Euro.",
+          "Die Deckungssumme sollte mindestens 300.000 Euro betragen, besser eine Million oder unbegrenzt; wichtig sind freie Anwaltswahl, Mediation, Schutz mindestens europaweit, telefonische Rechtsberatung und Erstberatung ohne Selbstbeteiligung.",
+          "Wartezeiten von drei Monaten gelten für Privat- und Wohnrecht, drei bis sechs Monate für Arbeitsrecht, keine für Verkehr und Strafrecht; beim nahtlosen Wechsel entfällt die Wartezeit für gleiche Leistungen.",
+          "Basistarife für PBV kosten 15 bis 30 Euro im Monat, Premium 40 Euro und mehr; eine Selbstbeteiligung bis 250 Euro senkt den Beitrag spürbar. Günstig sind 2026 WGV ab 148,80 Euro und HUK24 ab 167,40 Euro im Jahr."
+        ],
+        "quellen": [
+          "Allgemeine Rechtsschutzbedingungen ARB 2021 des GDV",
+          "§§ 125 ff. VVG",
+          "Stiftung Warentest, Rechtsschutzversicherung",
+          "Beitrag Rechtsschutzversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie funktioniert das Bausteinsystem?",
+          "status": "freigegeben",
+          "frage": "Ich bin Mieter und Angestellter. Welche Bausteine brauche ich wirklich?",
+          "antwort": "Beruf und Wohnen sind für Sie die wertvollsten: Kündigungsschutzklagen kosten bei 3.500 Euro Monatsgehalt schnell 3.000 bis 5.000 Euro, weil im Arbeitsrecht in erster Instanz jeder seinen Anwalt selbst zahlt, auch wenn er gewinnt; Mietstreitigkeiten um Nebenkosten, Kaution oder Eigenbedarf sind die zweithäufigsten Fälle. Verkehr lohnt sich, wenn Sie Auto oder Rad fahren, Privat deckt Online-Käufe, Nachbarn und Behördenstreit. Familienrecht, Bauen und Erbrecht sind fast immer ausgeschlossen, dort gibt es nur eine Erstberatung.",
+          "quellen": [
+            "§ 12a ArbGG",
+            "ARB 2021, § 2 und § 3"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Kosten übernimmt die Versicherung?",
+          "status": "freigegeben",
+          "frage": "Zahlt der Rechtsschutz auch, wenn ich den Prozess verliere?",
+          "antwort": "Ja, das ist der Kern: Bei Niederlage übernimmt er neben Ihren eigenen Anwalts- und Gerichtskosten auch die des Gegners, die das Gericht Ihnen auferlegt, bis zur Deckungssumme. Vorher prüft der Versicherer aber die Erfolgsaussichten und darf die Deckungszusage verweigern, wenn der Fall mutwillig oder aussichtslos ist; dann können Sie über den Stichentscheid Ihres Anwalts oder ein Schiedsgutachten widersprechen. Nicht gezahlt werden Bußgelder, Schadenersatz und Vergleiche, in denen Sie freiwillig mehr Kosten übernehmen als dem Ergebnis entspricht.",
+          "quellen": [
+            "§ 91 ZPO",
+            "§ 128 VVG",
+            "ARB 2021, § 3a und § 5"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wann greifen Wartezeiten?",
+          "status": "freigegeben",
+          "frage": "Mein Chef hat gestern eine Abmahnung angekündigt. Nützt mir ein Abschluss heute noch?",
+          "antwort": "Für diesen Konflikt nicht: Neben der Wartezeit von drei bis sechs Monaten im Arbeitsrecht gilt, dass der Rechtsschutzfall als eingetreten zählt, sobald der erste Verstoß behauptet wird, und die Ankündigung liegt vor dem Vertragsbeginn. Der Versicherer würde den Fall als vorvertraglich ablehnen. Abschließen lohnt sich trotzdem für alles, was danach kommt, etwa eine spätere Kündigung. Für die aktuelle Abmahnung hilft eine Erstberatung beim Fachanwalt für 190 Euro netto oder die kostenlose Beratung der Gewerkschaft, falls Sie Mitglied sind.",
+          "quellen": [
+            "§ 4 Abs. 1 ARB 2021 (Vorvertraglichkeit)",
+            "§ 34 RVG (Erstberatung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Wie wähle ich den richtigen Tarif?",
+          "status": "freigegeben",
+          "frage": "Der Versicherer bietet mir eine Anwaltsempfehlung mit niedrigerer Selbstbeteiligung an. Ist das ein guter Deal?",
+          "antwort": "Für einfache Fälle ja: Nehmen Sie den vom Versicherer empfohlenen Anwalt, sinkt die Selbstbeteiligung oft von 250 auf 100 oder null Euro, und die Kanzleien sind auf das Rechtsgebiet spezialisiert. Bei komplexen oder emotionalen Streitigkeiten, etwa im Arbeitsrecht, bleibt die freie Anwaltswahl wichtig; das Gesetz garantiert sie für jedes Gerichtsverfahren, der Versicherer darf sie nur mit Anreizen, nicht mit Verboten lenken. Eine „Schadenfreiheitsklasse“ im Rechtsschutz, bei der die Selbstbeteiligung mit jedem schadenfreien Jahr sinkt, ist ebenfalls sinnvoll.",
+          "quellen": [
+            "§ 127 VVG (freie Anwaltswahl)",
+            "Beitrag, Abschnitt Tarifwahl"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "rechtsschutz",
+        "pbv-rechtsschutz",
+        "deckungssumme",
+        "wartezeit",
+        "rechtsanwaltsverguetungsgesetz",
+        "mediation",
+        "freie-anwaltswahl",
+        "selbstbeteiligung"
+      ]
+    }
+  },
+  {
+    "slug": "kfz-versicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Kfz-Haftpflicht ist seit 1965 Pflicht, ohne sie gibt es keine Zulassung; Teilkasko gegen Diebstahl, Glas, Unwetter und Wildschäden und Vollkasko gegen selbst verschuldete Schäden und Vandalismus sind freiwillig. Laut Beitrag steigen die Beiträge 2026 um 10 bis 15 Prozent, weil Ersatzteile und Werkstattstunden mit rund 200 Euro immer teurer werden; ein Sachschaden kostete 2024 im Schnitt 4.250 Euro.",
+          "Haftpflicht kostet 200 bis 400 Euro im Jahr, Teilkasko 100 bis 300 Euro zusätzlich, Vollkasko 400 bis 900 Euro; die gesetzlichen Mindestsummen von 7,5 Millionen Euro für Personen- und gut 1,2 Millionen für Sachschäden reichen nicht, üblich sind 100 Millionen Euro pauschal.",
+          "Regional- und Typklassen werden jährlich neu berechnet: 2026 rutschen 5,9 Millionen Fahrer in schlechtere Typklassen, 4,5 Millionen in bessere; Brandenburg und Schleswig-Holstein sind günstig, Offenbach mit 40 Prozent über dem Schnitt am teuersten.",
+          "Sparen lässt sich durch jährliche Zahlung, Garage, Werkstattbindung bis 20 Prozent, Telematik bis 30 Prozent, Selbstbeteiligung von 150 Euro Teilkasko und 300 bis 500 Euro Vollkasko sowie Berufsrabatte; zwischen mittleren und günstigen Tarifen liegen 52 Prozent, 200 bis 500 Euro im Jahr sind realistisch.",
+          "Der Kündigungsstichtag ist der 30. November für den Wechsel zum 1. Januar; bei Beitragserhöhung, nach einem Schaden und nach Umzug in eine teurere Regionalklasse gilt ein Sonderkündigungsrecht von einem Monat. Die Schadenfreiheitsklasse ist der größte Hebel: SF 0 kostet bis 230 Prozent, SF 35 etwa 25 Prozent des Grundbeitrags."
+        ],
+        "quellen": [
+          "Pflichtversicherungsgesetz",
+          "GDV, Regional- und Typklassenstatistik 2026",
+          "Beitrag Kfz-Versicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Gesetzliche Mindestdeckungssummen für Kfz-Versicherung",
+          "status": "freigegeben",
+          "frage": "Warum brauche ich 100 Millionen Euro Deckung, wenn 7,5 Millionen gesetzlich reichen?",
+          "antwort": "Weil ein einziger schwerer Unfall mit mehreren Verletzten, lebenslanger Pflege und Verdienstausfall die 7,5 Millionen für Personenschäden überschreiten kann; was darüber liegt, zahlen Sie persönlich, und ein Pflegefall kostet über 40 Jahre schnell 5 Millionen. Die 100-Millionen-Pauschale, bei der je verletzter Person meist 12 bis 15 Millionen gelten, kostet nur wenige Euro mehr als die Mindestdeckung, weil solche Schäden extrem selten sind. Fast alle Tarife bieten sie standardmäßig; achten Sie darauf beim Vergleich der Billigtarife.",
+          "quellen": [
+            "Anlage zu § 4 Abs. 2 PflVG",
+            "Beitrag, Abschnitt Mindestdeckungssummen"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Günstige Kfz-Versicherung finden: Konkrete Sparpotenziale",
+          "status": "freigegeben",
+          "frage": "Lohnt sich ein Telematik-Tarif für meinen 19-jährigen Sohn?",
+          "antwort": "Oft ja: Fahranfänger zahlen in SF 0 bis 230 Prozent, und Telematik bringt bei defensiver Fahrweise bis 30 Prozent Rabatt, bei 1.800 Euro Beitrag also 500 Euro. Die App oder Box bewertet Bremsen, Beschleunigen, Tempo, Nachtfahrten und Handynutzung; schlechte Werte kosten meist keinen Aufschlag, nur den Rabatt. Prüfen Sie die Datenschutzregeln und ob der Score im Schadenfall ausgewertet wird. Noch günstiger ist es, den Sohn als Zweitwagenfahrer auf Ihren Vertrag zu nehmen, dann startet er in SF ½ statt SF 0.",
+          "quellen": [
+            "Beitrag, Abschnitt Sparpotenziale",
+            "Beitrag, Abschnitt Persönliche Faktoren"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Kündigung und Wechselrecht richtig nutzen",
+          "status": "freigegeben",
+          "frage": "Meine Beitragsrechnung kam am 20. November mit 12 Prozent Erhöhung. Kann ich noch wechseln?",
+          "antwort": "Ja, doppelt: Bis zum 30. November regulär, und unabhängig davon binnen eines Monats nach Zugang der Rechnung per Sonderkündigung, also bis 20. Dezember, jeweils zum Zeitpunkt, an dem die Erhöhung wirksam wird. Das Sonderkündigungsrecht gilt auch, wenn der Beitrag nur wegen einer schlechteren Regionalklasse oder Typklasse steigt, nicht aber, wenn er allein durch Ihre Rückstufung nach einem Schaden höher wird. Kündigen Sie schriftlich mit Zugangsnachweis und schließen Sie den neuen Vertrag vorher ab, damit die eVB-Nummer rechtzeitig vorliegt.",
+          "quellen": [
+            "§ 40 VVG",
+            "Beitrag, Abschnitt Kündigung"
+          ]
+        },
+        {
+          "abschnitt": "heading-9",
+          "abschnitt_titel": "Persönliche Faktoren bei Kfz-Versicherung",
+          "status": "freigegeben",
+          "frage": "Ich hatte einen Schaden mit 1.200 Euro. Soll ich ihn selbst zahlen, um die Rückstufung zu vermeiden?",
+          "antwort": "Meist ja, bei kleinen Schäden: Eine Rückstufung von SF 20 auf etwa SF 10 kostet über die Jahre bis zur Rückkehr oft 1.500 bis 3.000 Euro Mehrbeitrag. Sie haben sechs Monate Zeit, den regulierten Schaden dem Versicherer zurückzuzahlen und die Einstufung zu retten; viele Tarife bieten außerdem einen Rabattschutz, der einen Schaden pro Jahr ohne Rückstufung verzeiht, aber beim Wechsel nicht übertragbar ist. Lassen Sie sich vom Versicherer die konkrete Rückstufung und den Mehrbeitrag ausrechnen, bevor Sie entscheiden.",
+          "quellen": [
+            "Allgemeine Bedingungen für die Kfz-Versicherung AKB, Anhang Rückstufung",
+            "Beitrag, Abschnitt Schadenfreiheitsklasse"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kasko",
+        "schadenfreiheitsklasse",
+        "typklasse",
+        "regionalklasse",
+        "deckungssumme",
+        "telematik-tarif",
+        "werkstattbindung",
+        "mallorca-police",
+        "kuendigungsstichtag-kfz"
+      ]
+    }
+  },
+  {
+    "slug": "wohngebaeudeversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Wohngebäudeversicherung ersetzt Schäden am Haus durch Feuer, Leitungswasser, Sturm ab Windstärke 8 und Hagel samt Aufräumkosten, Übernachtung bei Unbewohnbarkeit und behördlichen Auflagen; Hochwasser, Starkregen, Erdbeben und Erdrutsch brauchen den Elementarbaustein, den nur 54 Prozent der Häuser haben.",
+          "2026 steigt der Anpassungsfaktor auf 27,63 und der gleitende Neuwertfaktor auf 27,8, ein Plus von 4,22 Prozent, weil der Baupreisindex auf 22,636 klettert; bei 300.000 Euro Versicherungswert kostet das etwa 18 Euro mehr im Jahr, seit 2016 hat sich der Faktor von 17 auf 27,6 erhöht.",
+          "Die Versicherungssumme ergibt sich aus dem Wert 1914 mal Anpassungsfaktor: 20.000 Mark entsprechen 2026 rund 552.600 Euro; der Anpassung darf man binnen eines Monats widersprechen, riskiert dann aber Unterversicherung.",
+          "Jahresbeiträge liegen zwischen 300 und 1.000 Euro, sehr gute Tarife für ein Musterhaus ab 568 Euro, Elementarschutz kostet 150 bis 300 Euro extra und ist über ZÜRS Geo für 99 Prozent der Häuser versicherbar; Holzhäuser zahlen 20 bis 40 Prozent mehr als Massivbau.",
+          "Sparen lässt sich durch jährliche Zahlung, 150 bis 500 Euro Selbstbeteiligung und Bündelung mit der Hausrat um 5 bis 20 Prozent; ein Wechsel bringt wenig, weil alle Anbieter dieselben Baukosten tragen. Stiftung Warentest fand 65 von 194 Tarifen mangelhaft, meist wegen fehlendem Schutz bei grober Fahrlässigkeit; gut bewertet sind Domcura, R+V, Allianz, GEV und Rhion."
+        ],
+        "quellen": [
+          "VGB 2022 des GDV",
+          "Statistisches Bundesamt, Baupreisindex",
+          "Stiftung Warentest, Wohngebäudeversicherung",
+          "Beitrag Wohngebäudeversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche Schäden werden durch die Wohngebäudeversicherung abgedeckt?",
+          "status": "freigegeben",
+          "frage": "Der Keller ist nach einem Starkregen vollgelaufen. Zahlt meine Gebäudeversicherung?",
+          "antwort": "Nur, wenn Sie den Elementarbaustein haben: Wasser, das von außen durch Starkregen, Rückstau aus der Kanalisation oder Hochwasser eindringt, ist ein Elementarschaden; die Grunddeckung zahlt nur bei Leitungswasser aus Rohren, Heizung oder Waschmaschine im Haus. Für Rückstau verlangen viele Tarife zusätzlich eine funktionierende Rückstausicherung, sonst kürzen sie. Prüfen Sie Ihre Police auf „erweiterte Naturgefahren“ oder „Elementar“; fehlt der Baustein, hilft nur noch die Nothilfe des Landes, die es aber nur gibt, wenn das Haus nicht versicherbar war.",
+          "quellen": [
+            "VGB 2022, Abschnitt A § 4 (Elementarschäden)",
+            "Beitrag, Abschnitt Elementarschutz"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie berechnet sich die Versicherungssumme richtig?",
+          "status": "freigegeben",
+          "frage": "Woher bekomme ich den Wert 1914 für mein Haus?",
+          "antwort": "Aus der alten Police, dem Kaufvertrag oder der Berechnung des Versicherers: Er ermittelt ihn über Wohnfläche, Bauart, Ausstattung und Baujahr mit Tabellen des GDV, etwa 120 Quadratmeter gehobener Standard ergeben rund 20.000 bis 25.000 Mark. Bei An- und Umbauten, Wärmepumpe oder Photovoltaik müssen Sie den Wert nachmelden, sonst sind Sie unterversichert. Moderne Tarife verzichten auf den Wert 1914 und versichern nach Wohnfläche mit Unterversicherungsverzicht; das ist einfacher und bei richtiger Flächenangabe genauso sicher.",
+          "quellen": [
+            "VGB 2022, Abschnitt A § 11 (Versicherungswert)",
+            "Beitrag, Abschnitt Versicherungssumme"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Sparmöglichkeiten trotz steigender Preise",
+          "status": "freigegeben",
+          "frage": "Mein Beitrag ist in fünf Jahren von 480 auf 720 Euro gestiegen. Lohnt sich ein Wechsel?",
+          "antwort": "Ein Vergleich ja, ein Wechsel nur bei gleichzeitig besseren Leistungen: Etwa die Hälfte Ihrer Steigerung kommt aus der Indexanpassung, die jeder Anbieter weitergibt, der Rest aus Beitragsanpassungen nach Schadenjahren. Holen Sie drei Angebote mit Unterversicherungsverzicht, grober Fahrlässigkeit, Elementar und Ableitungsrohren auf dem Grundstück ein; liegt der beste 100 Euro unter Ihrem Beitrag, wechseln Sie zum Ablauf mit drei Monaten Frist oder nach einer Beitragserhöhung per Sonderkündigung. Vorschäden müssen Sie angeben, nach einem großen Schaden ist ein Wechsel oft schwierig.",
+          "quellen": [
+            "§ 40 VVG (Sonderkündigung)",
+            "Beitrag, Abschnitt Sparmöglichkeiten"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Testsieger und Anbietervergleich 2026",
+          "status": "freigegeben",
+          "frage": "Was bedeutet der Verzicht auf den Einwand der groben Fahrlässigkeit konkret?",
+          "antwort": "Dass der Versicherer voll zahlt, auch wenn Sie den Schaden leichtsinnig verursacht haben, etwa die Kerze brennen ließen, den Wasserhahn bei offenem Fenster vergaßen oder im Winter die Heizung im leeren Haus abgestellt hatten; ohne den Verzicht darf er die Leistung nach der Schwere des Verschuldens kürzen, bei Bränden oft um 50 Prozent oder mehr. Gute Tarife verzichten unbegrenzt bis zur Versicherungssumme, schlechte nur bis 10.000 oder 50.000 Euro. Vorsatz bleibt immer ausgeschlossen, ebenso die Verletzung von Sicherheitsvorschriften wie einer Frostschutzpflicht in manchen Tarifen.",
+          "quellen": [
+            "§ 81 Abs. 2 VVG",
+            "Stiftung Warentest, Wohngebäudeversicherung"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "wohngebaeudeversicherung",
+        "elementarschaden",
+        "wert-1914",
+        "gleitender-neuwertfaktor",
+        "unterversicherung",
+        "grobe-fahrlaessigkeit",
+        "zuers-geo"
+      ]
+    }
+  },
+  {
+    "slug": "hausbesitzerhaftpflichtversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Wer ein Haus oder Grundstück besitzt, trägt die Verkehrssicherungspflicht nach § 823 BGB und haftet unbegrenzt, wenn Passanten auf dem ungestreuten Weg stürzen, Dachziegel Autos treffen oder Äste fallen; die Haus- und Grundbesitzerhaftpflicht zahlt berechtigte Ansprüche und wehrt unberechtigte ab, inklusive Prozesskosten.",
+          "Nötig ist sie für Vermieter, Mehrfamilienhäuser, unbebaute Grundstücke, Eigentümergemeinschaften und vermietete Gewerbeflächen; wer sein Ein- oder Zweifamilienhaus selbst bewohnt, ist über die Privathaftpflicht geschützt, ebenso bei Einliegerwohnung in vielen Tarifen.",
+          "Pflichten sind Winterdienst, Baumkontrolle, Prüfung von Dach und Fassade, Beleuchtung und Beseitigung von Stolperfallen; der BGH verlangt, was ein umsichtiger, in vernünftigen Grenzen vorsichtiger Mensch tun würde. Auf Mieter übertragene Pflichten müssen im Mietvertrag stehen und stichprobenartig kontrolliert werden, sonst haften beide.",
+          "Versichert sind Personen-, Sach- und Vermögensschäden, auch durch Hausmeister und Handwerker, Photovoltaik- und Solaranlagen sowie kleinere Bauvorhaben bis meist 50.000 Euro Bausumme; empfohlen sind mindestens 5, besser 10 Millionen Euro Deckung.",
+          "Sie kostet 30 bis 70 Euro im Jahr: Ein- und Zweifamilienhaus ab 40 Euro, jede weitere Wohnung 25 Euro, unbebaute Grundstücke bis 2.000 Quadratmeter ab 20 Euro, Mehrfamilienhäuser ab 36 Euro; Vermieter legen den Beitrag nach § 2 Nr. 13 BetrKV auf die Mieter um. Jede Immobilie an einem anderen Ort braucht eine eigene Police."
+        ],
+        "quellen": [
+          "§ 823 BGB",
+          "BGH VI ZR 274/05 vom 06.02.2007",
+          "§ 2 Nr. 13 Betriebskostenverordnung",
+          "Beitrag Hausbesitzerhaftpflicht"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wann benötige ich eine separate Hausbesitzerhaftpflicht?",
+          "status": "freigegeben",
+          "frage": "Ich vermiete die Einliegerwohnung in meinem Haus an eine fremde Person. Reicht meine Privathaftpflicht?",
+          "antwort": "In den meisten modernen Tarifen ja: Sie versichern das selbst bewohnte Ein- oder Zweifamilienhaus einschließlich einer vermieteten Einliegerwohnung oder bis zu drei vermieteten Wohnungen mit. Ältere Verträge schließen fremdvermietete Einheiten oft aus; dort hilft ein Anruf beim Versicherer, der die Wohnung meist für 20 bis 30 Euro im Jahr einschließt. Ziehen Sie selbst aus und vermieten das ganze Haus, brauchen Sie in jedem Fall eine eigene Haus- und Grundbesitzerhaftpflicht, denn der Schutz der Privathaftpflicht gilt nur für die selbst genutzte Immobilie.",
+          "quellen": [
+            "Beitrag, Abschnitt Wann separate Versicherung",
+            "Bedingungen der Privathaftpflichtversicherer"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Pflichten haben Hausbesitzer und Grundeigentümer?",
+          "status": "freigegeben",
+          "frage": "Ich wohne 300 Kilometer von meinem vermieteten Haus entfernt. Wie erfülle ich die Streupflicht?",
+          "antwort": "Übertragen Sie den Winterdienst schriftlich im Mietvertrag oder in der Hausordnung auf die Mieter, mit klarer Regelung der Zeiten, meist werktags 7 bis 20 Uhr, sonntags ab 8 oder 9 Uhr nach der Gemeindesatzung, oder beauftragen Sie einen Hausmeisterdienst für 300 bis 600 Euro je Winter; die Kosten sind umlagefähige Betriebskosten. Kontrollieren Sie stichprobenartig, etwa durch Nachfragen oder bei Besuchen, und dokumentieren Sie das, denn ohne Kontrolle bleibt die Haftung bei Ihnen. Die Haus- und Grundbesitzerhaftpflicht zahlt in beiden Fällen, wenn trotzdem jemand stürzt.",
+          "quellen": [
+            "§ 823 BGB",
+            "§ 2 Nr. 8 BetrKV (Straßenreinigung, Winterdienst)",
+            "BGH VI ZR 126/07"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Schäden deckt die Hausbesitzerhaftpflicht ab?",
+          "status": "freigegeben",
+          "frage": "Bei Sturm ist ein Ast von meinem Baum auf das Nachbarauto gefallen. Muss ich zahlen?",
+          "antwort": "Nur, wenn Sie Ihre Kontrollpflicht verletzt haben: Gesunde Bäume, die bei Sturm Äste verlieren, sind höhere Gewalt, der Nachbar trägt den Schaden selbst oder über seine Teilkasko. War der Ast erkennbar morsch oder der Baum seit Jahren nicht kontrolliert, haften Sie, und die Haus- und Grundbesitzerhaftpflicht oder bei selbst bewohntem Haus die Privathaftpflicht zahlt. Lassen Sie große Bäume ein- bis zweimal im Jahr in Augenschein nehmen und notieren Sie das mit Datum; bei Auffälligkeiten beauftragen Sie einen Baumpfleger, dessen Rechnung als Nachweis dient.",
+          "quellen": [
+            "§ 823 BGB",
+            "BGH VI ZR 311/12 (Baumkontrolle)",
+            "Beitrag, Abschnitt Sachschäden"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie hoch sind die Kosten und was ist bei der Versicherungssumme zu beachten?",
+          "status": "freigegeben",
+          "frage": "Darf ich die Haftpflicht wirklich auf die Mieter umlegen, obwohl sie mich als Eigentümer schützt?",
+          "antwort": "Ja, § 2 Nr. 13 der Betriebskostenverordnung nennt die Haftpflichtversicherung für Gebäude, Öltank und Aufzug ausdrücklich, zusammen mit der Gebäudeversicherung gegen Feuer, Sturm, Wasser und Elementarschäden; Voraussetzung ist, dass der Mietvertrag die Umlage der Betriebskosten vereinbart. Nicht umlegbar sind Rechtsschutz-, Mietausfall- oder Hausratversicherungen des Vermieters. Bei 60 Euro Jahresbeitrag und vier Wohnungen sind das 15 Euro je Mieter im Jahr, verteilt nach dem im Vertrag genannten Schlüssel, meist Wohnfläche.",
+          "quellen": [
+            "§ 2 Nr. 13 BetrKV",
+            "§ 556 BGB"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "haus-und-grundbesitzerhaftpflicht",
+        "verkehrssicherungspflicht",
+        "haftpflicht",
+        "passiver-rechtsschutz",
+        "betriebskostenverordnung",
+        "deckungssumme"
+      ]
+    }
+  },
+  {
+    "slug": "hundehaftpflichtversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Hundehalter haften nach § 833 BGB unbegrenzt und ohne eigenes Verschulden für alles, was ihr Hund anrichtet; springt er einen Radfahrer an, der dauerhaft verletzt bleibt, sind 500.000 Euro und mehr fällig. Die Hundehaftpflicht zahlt Personen-, Sach- und Vermögensschäden und wehrt unberechtigte Forderungen ab.",
+          "Pflicht ist sie für alle Hunde in Berlin, Hamburg, Niedersachsen, Sachsen-Anhalt, Schleswig-Holstein und Thüringen, laut Beitrag ab Juli 2026 auch in Bremen mit Hundeführerschein; neun Länder verlangen sie nur für bestimmte Rassen oder Größen, in Nordrhein-Westfalen ab 20 Kilo oder 40 Zentimetern, Mecklenburg-Vorpommern hat keine Vorgabe. Bußgelder reichen bis 10.000 Euro.",
+          "Empfohlen sind mindestens 10 Millionen Euro Deckung, weil der Aufpreis von 5 auf 50 Millionen oft nur 5 bis 12 Euro im Jahr kostet; wichtig sind Mietsachschäden, Forderungsausfall, Fremdhüterrisiko, weltweiter Schutz, Hundeschule und Verzicht auf die Leinenpflicht-Klausel.",
+          "Solide Tarife kosten 46 bis 85 Euro im Jahr, Basis ab 19 Euro, Premium bis 195 Euro; kleine Hunde ab 33 Euro, große ab 45 Euro, Listenhunde 80 bis 200 Euro mit Aufschlägen bis 240 Prozent. 150 Euro Selbstbeteiligung sparen 20 bis 30 Prozent.",
+          "Welpen sind meist 6 bis 12 Monate beitragsfrei mitversichert, wenn die Mutterhündin versichert ist; die Privathaftpflicht deckt Hunde nie, nur Kleintiere wie Katzen. Ergänzend schützt eine Hunde-OP-Versicherung vor Tierarztkosten."
+        ],
+        "quellen": [
+          "§ 833 BGB",
+          "Hundegesetze der Länder",
+          "Beitrag Hundehaftpflichtversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Für wen ist die Hundehaftpflichtversicherung Pflicht?",
+          "status": "freigegeben",
+          "frage": "Ich ziehe mit meinem Labrador von Bayern nach Hamburg. Muss ich etwas ändern?",
+          "antwort": "Ja, in Hamburg ist die Haftpflicht für jeden Hund Pflicht, mit mindestens 1 Million Euro für Personen- und 250.000 Euro für Sachschäden, und Sie müssen den Hund binnen 14 Tagen beim Hunderegister anmelden, mit Chipnummer und Versicherungsnachweis; in Bayern galt die Pflicht nur für Kampfhunde. Ihre bestehende Police reicht, wenn sie diese Summen erfüllt, was jeder Tarif ab 5 Millionen tut; melden Sie dem Versicherer den Umzug, weil manche Tarife regional kalkulieren. Ohne Nachweis droht in Hamburg ein Bußgeld bis 10.000 Euro.",
+          "quellen": [
+            "§ 12 Hamburgisches Hundegesetz",
+            "Beitrag, Abschnitt Versicherungspflicht"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch sollte die Deckungssumme sein?",
+          "status": "freigegeben",
+          "frage": "Mein Tarif hat 3 Millionen Euro Deckung aus dem Jahr 2015. Reicht das?",
+          "antwort": "Für die gesetzlichen Mindestsummen ja, für einen schweren Personenschaden nicht: Wird ein Radfahrer durch Ihren Hund querschnittsgelähmt, summieren sich Behandlung, Pflege, Verdienstausfall und Schmerzensgeld über Jahrzehnte auf 5 bis 10 Millionen Euro, und was über der Deckung liegt, zahlen Sie. Ein neuer Tarif mit 10 bis 50 Millionen Euro, Forderungsausfall und Fremdhüterrisiko kostet 50 bis 70 Euro im Jahr, oft weniger als Ihr alter; kündigen Sie den Altvertrag erst, wenn die neue Police vorliegt, damit keine Lücke entsteht.",
+          "quellen": [
+            "Beitrag, Abschnitt Deckungssumme",
+            "§ 833 BGB"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Welche Leistungen sind wichtig?",
+          "status": "freigegeben",
+          "frage": "Meine Nachbarin führt meinen Hund oft aus. Ist sie versichert, wenn er dabei jemanden beißt?",
+          "antwort": "Nur mit dem Baustein Fremdhüterrisiko: Dann sind Personen, die den Hund unentgeltlich betreuen, wie Nachbarn, Freunde oder Familie, in Ihrem Vertrag mitversichert, auch für Schäden, die der Hund ihnen selbst zufügt, bei guten Tarifen. Ohne den Baustein haften Sie als Halter trotzdem nach § 833 BGB, Ihre Versicherung zahlt dem Geschädigten, könnte aber theoretisch bei der Nachbarin Regress nehmen, wenn sie grob fahrlässig war. Gewerbliche Hundesitter brauchen eine eigene Betriebshaftpflicht. Prüfen Sie außerdem, ob Schäden trotz Verstoß gegen die Leinenpflicht gedeckt sind.",
+          "quellen": [
+            "§ 833, § 834 BGB (Tieraufseher)",
+            "Beitrag, Abschnitt Leistungen"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Besonderheiten bei Listenhunden",
+          "status": "freigegeben",
+          "frage": "Ich möchte einen American Staffordshire aus dem Tierschutz aufnehmen. Bekomme ich eine Versicherung?",
+          "antwort": "Ja, aber nicht überall: Viele Versicherer lehnen Listenhunde ab, spezialisierte Anbieter wie die Uelzener, Haftpflichtkasse oder Gothaer versichern sie für 80 bis 200 Euro im Jahr, teils mit Wesenstest oder Sachkundenachweis als Bedingung. Klären Sie vorher die Landesregeln: In Bayern ist der Amstaff Kategorie 1 und die Haltung nur mit Ausnahmegenehmigung erlaubt, in Niedersachsen gibt es keine Rasseliste, dafür Sachkundeprüfung für alle Halter. Das Tierheim kennt meist Versicherer, die die Rasse annehmen, und bescheinigt bestandene Wesenstests.",
+          "quellen": [
+            "Hundegesetze der Länder",
+            "Beitrag, Abschnitt Listenhunde"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "hundehaftpflicht",
+        "gefaehrdungshaftung",
+        "listenhund",
+        "deckungssumme",
+        "forderungsausfall",
+        "fremdhueterrisiko",
+        "mietsachschaden"
+      ]
+    }
+  },
+  {
+    "slug": "hunde-op-versicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Hunde-OP-Versicherung zahlt Operationen unter Vollnarkose samt Voruntersuchung, Narkose, Klinikaufenthalt, Nachsorge bis etwa 20 Tage und Medikamenten, nicht aber Impfungen, Routinebesuche oder ambulante Behandlungen; dafür ist sie deutlich günstiger als die Vollversicherung.",
+          "Ein Kreuzbandriss kostet 2026 rund 3.000 bis 3.500 Euro, eine Magendrehung 3.000 bis 5.000 Euro, Tumoroperationen 500 bis 2.000 Euro; etwa 42 Prozent aller Hunde werden mindestens einmal operiert.",
+          "Basis-Tarife mit 80 Prozent Erstattung kosten 7 bis 15 Euro im Monat, Standard mit 90 bis 100 Prozent 12 bis 22 Euro, Premium mit Nachsorge und Voruntersuchung 20 bis 35 Euro; Rasse, Alter, Selbstbeteiligung von 250 bis 500 Euro mit bis 40 Prozent Rabatt und der versicherte GOT-Satz bestimmen den Beitrag.",
+          "Seit der GOT-Reform 2022 sind Tierarztkosten um 20 bis 25 Prozent gestiegen, im Notdienst darf der Tierarzt den vierfachen Satz plus 59,50 Euro Notdienstpauschale abrechnen; ein Tarif sollte daher den vierfachen Satz und eine unbegrenzte Jahressumme abdecken.",
+          "Ausgeschlossen sind Kastration und Sterilisation ohne medizinischen Grund, Zahnbehandlungen, Vorerkrankungen und Eingriffe in der Wartezeit von ein bis sechs Monaten, Unfälle sind sofort versichert. Vollschutz lohnt sich bei Rassen mit chronischen Leiden wie Französischer Bulldogge, Schäferhund oder Cavalier King Charles."
+        ],
+        "quellen": [
+          "Gebührenordnung für Tierärzte 2022",
+          "Beitrag Hunde-OP-Versicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Häufige Operationen bei Hunden: Was kostet wie viel?",
+          "status": "freigegeben",
+          "frage": "Warum nennt mir die Klinik für den Kreuzbandriss 3.500 Euro, wenn die GOT 1.400 Euro vorsieht?",
+          "antwort": "Weil die GOT nur den einfachen Satz je Leistung festlegt und Tierärzte je nach Aufwand bis zum dreifachen, im Notdienst bis zum vierfachen Satz abrechnen dürfen; dazu kommen Narkose, Röntgen oder CT, Implantate, Klinikaufenthalt, Medikamente und Mehrwertsteuer, die die reine OP-Position vervielfachen. Eine moderne TPLO-Operation liegt deshalb bei 2.500 bis 4.000 Euro. Lassen Sie sich vor dem Eingriff einen Kostenvoranschlag mit Satzangabe geben und reichen Sie ihn beim Versicherer ein, dann wissen Sie vorher, was erstattet wird.",
+          "quellen": [
+            "GOT 2022, § 2 (Gebührensätze)",
+            "Beitrag, Abschnitt Operationskosten"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Kosten und Tarife: Was kostet eine Hunde-OP-Versicherung 2026?",
+          "status": "freigegeben",
+          "frage": "Mein Hund ist neun. Nimmt mich noch jemand?",
+          "antwort": "Ja, einige Anbieter wie Hepster, Barkibu, Helvetia, Balunos oder die Uelzener haben kein Höchstalter, verlangen aber mit neun Jahren 25 bis 45 Euro im Monat und schließen bestehende Leiden aus; viele andere nehmen nur bis sieben oder acht Jahre auf. Prüfen Sie, ob der Beitrag mit dem Alter weiter steigt oder altersunabhängig bleibt, und ob Tumor-Operationen, die im Alter häufig werden, unbegrenzt gedeckt sind. Alternativ legen Sie monatlich 40 Euro auf ein Tierkonto zurück, das nach drei Jahren die meisten Eingriffe deckt.",
+          "quellen": [
+            "Beitrag, Abschnitt Kosten und Tarife",
+            "Beitrag Hundeversicherungen, Abschnitt Anbieter"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "GOT-Reform 2022: Wie Gebührenordnung die Versicherung beeinflusst",
+          "status": "freigegeben",
+          "frage": "Was bedeutet es, wenn mein Tarif nur bis zum zweifachen GOT-Satz erstattet?",
+          "antwort": "Dass Sie bei den meisten Operationen die Hälfte oder mehr selbst zahlen: Kliniken rechnen komplexe Eingriffe regelmäßig zum dreifachen Satz ab, im Notdienst nachts und am Wochenende zum vierfachen. Bei einer Magendrehung um Mitternacht für 4.000 Euro zum vierfachen Satz erstattet ein Zweifach-Tarif nur 2.000 Euro, ein Vierfach-Tarif alles bis auf die Selbstbeteiligung. Der Unterschied im Beitrag liegt oft nur bei 3 bis 6 Euro im Monat; wechseln Sie zu einem Tarif mit vierfachem Satz, solange der Hund gesund ist.",
+          "quellen": [
+            "GOT 2022, § 2 und § 3a (Notdienst)",
+            "Beitrag, Abschnitt GOT-Reform"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Abschluss einer Hunde-OP-Versicherung: Das sollten Sie prüfen",
+          "status": "freigegeben",
+          "frage": "Der Tierarzt hat eine leichte Hüftdysplasie festgestellt. Ist eine spätere Hüft-OP noch versicherbar?",
+          "antwort": "Nein, eine bereits diagnostizierte oder erkennbare Erkrankung ist als Vorerkrankung ausgeschlossen, auch wenn Sie sie im Antrag nicht angeben, und das Verschweigen lässt den Versicherer vom Vertrag zurücktreten. Versichert bleiben alle anderen Eingriffe, etwa Kreuzband, Magendrehung oder Unfälle. Manche Anbieter schließen die Dysplasie nur befristet aus oder versichern sie gegen Zuschlag, wenn die Diagnose länger als zwei Jahre ohne Behandlung zurückliegt; fragen Sie anonym über einen Makler an.",
+          "quellen": [
+            "§§ 19 bis 21 VVG (Anzeigepflicht)",
+            "Beitrag, Abschnitt Ausschlüsse"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "op-versicherung",
+        "got",
+        "got-satz",
+        "notdienstgebuehr",
+        "wartezeit",
+        "selbstbeteiligung",
+        "tierkranken"
+      ]
+    }
+  },
+  {
+    "slug": "hundeversicherungen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Für Hunde gibt es drei Versicherungen: die Haftpflicht für Schäden an anderen, in sechs Bundesländern Pflicht für alle Hunde und ab 3 Euro im Monat; die OP-Versicherung für Operationen ab 5 bis 10 Euro; und die Krankenversicherung als Vollschutz mit ambulanten Behandlungen, Medikamenten und Vorsorge ab etwa 12 Euro, im Schnitt 30 bis 40 Euro.",
+          "Seit der neuen Gebührenordnung vom November 2022 kosten Tierarztleistungen rund 25 Prozent mehr, einzelne bis 55 Prozent; der Tierarzt rechnet je nach Aufwand den ein- bis dreifachen Satz ab, im Notdienst den vierfachen. Eine Untersuchung kostet 30 bis 120 Euro, eine Zahnreinigung 85 bis 340 Euro.",
+          "Testsieger 2026 bei Stiftung Warentest ist Lassie mit unbegrenzter Deckung, Online-Tierarzt und rund 32 Euro im Monat; HanseMerkur erstattet bis zum vierfachen Satz ohne Limit, Barmenia gewann 2025 bei den OP-Versicherungen, Agila, DFV, Hepster, Balunos, Barkibu und Helvetia sind weitere Anbieter, teils ohne Altersgrenze.",
+          "Entscheidend sind mindestens dreifacher, besser vierfacher GOT-Satz, Höchstentschädigung ab 5.000 Euro oder unbegrenzt, Wartezeiten bis drei Monate, freie Tierarztwahl, keine Altersgrenze und Schutz bei rassetypischen Krankheiten; 20 bis 30 Prozent oder 150 Euro Selbstbeteiligung senken den Beitrag um 20 bis 40 Prozent.",
+          "Der beste Zeitpunkt ist die Übernahme des Welpen, weil dann noch keine Vorerkrankungen ausgeschlossen werden; Stiftung Warentest empfiehlt nur rund ein Viertel aller Tarife."
+        ],
+        "quellen": [
+          "§ 833 BGB",
+          "Gebührenordnung für Tierärzte 2022",
+          "Stiftung Warentest 2/2026",
+          "Beitrag Hundeversicherungen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Welche Arten von Hundeversicherungen gibt es?",
+          "status": "freigegeben",
+          "frage": "Welche der drei Versicherungen ist wirklich nötig, wenn das Geld knapp ist?",
+          "antwort": "Die Haftpflicht, ohne Wenn und Aber: Sie kostet 3 bis 6 Euro im Monat und schützt vor Millionenforderungen, für die Sie nach § 833 BGB unbegrenzt haften; in sechs Ländern ist sie ohnehin Pflicht. Als zweites die OP-Versicherung für 8 bis 15 Euro, weil Operationen die einzigen Tierarztrechnungen sind, die Sie nicht aus dem Monatsbudget zahlen können. Die Vollversicherung für 30 bis 40 Euro ersetzt vor allem planbare Kosten, die Sie bei knappem Budget besser selbst ansparen, außer bei Rassen mit chronischen Leiden.",
+          "quellen": [
+            "Beitrag, Abschnitt Arten",
+            "§ 833 BGB"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie haben sich die Tierarztkosten 2026 entwickelt?",
+          "status": "freigegeben",
+          "frage": "Darf der Tierarzt tagsüber den dreifachen Satz nehmen, ohne mir das vorher zu sagen?",
+          "antwort": "Ja, innerhalb des Rahmens vom ein- bis dreifachen Satz entscheidet er nach Schwierigkeit, Zeitaufwand und Umständen, ohne Ankündigung; überschreiten darf er den dreifachen Satz nur mit schriftlicher Vereinbarung vor der Behandlung, im Notdienst gilt der vierfache Satz plus 59,50 Euro Pauschale automatisch. Sie haben Anspruch auf eine Rechnung, die jede Leistung mit GOT-Nummer und Satz ausweist; fragen Sie bei teuren Behandlungen vorher nach einem Kostenvoranschlag, das ist üblich und die Versicherung verlangt ihn ohnehin.",
+          "quellen": [
+            "GOT 2022, § 2, § 3a und § 6",
+            "Beitrag, Abschnitt Tierarztkosten"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Anbieter führen den Markt 2026 an?",
+          "status": "freigegeben",
+          "frage": "Warum liegt der Beitrag bei Lassie für meinen Hund weit über den 32 Euro aus dem Test?",
+          "antwort": "Weil 32 Euro der Durchschnitt über alle Hunde ist und Ihr Beitrag von Rasse, Alter, Wohnort und Tarifstufe abhängt: Ein sechsjähriger Berner Sennenhund kostet im Maxi-Tarif mit unbegrenzter Deckung schnell 60 bis 80 Euro, ein junger Mischling 20 Euro. Vergleichen Sie die Tarifstufen Mini, Midi und Maxi, die sich in Jahreslimit und Selbstbeteiligung unterscheiden, und prüfen Sie, ob ein Tarif mit 5.000 Euro Jahreslimit für Sie reicht; die FAZ hob 2026 Lassie Midi als besten Vollschutz hervor, nicht den teuersten.",
+          "quellen": [
+            "Beitrag, Abschnitt Anbieter",
+            "Stiftung Warentest 2/2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Auswahlkriterien sind entscheidend?",
+          "status": "freigegeben",
+          "frage": "Zahlt die Krankenversicherung, wenn mein Dackel wegen seines langen Rückens einen Bandscheibenvorfall bekommt?",
+          "antwort": "Nur, wenn der Tarif rassetypische Erkrankungen nicht ausschließt: Der Dackel-Bandscheibenvorfall, die Hüftdysplasie des Schäferhunds oder die Atemwegs-OP der Bulldogge stehen bei manchen Anbietern auf Ausschlusslisten oder werden nur nach längerer Wartezeit gezahlt. Suchen Sie im Bedingungswerk nach „rassespezifisch“, „erblich“ oder „angeboren“; gute Tarife wie die Testsieger schließen nichts aus, wenn der Hund beim Abschluss beschwerdefrei war. Bei einem Dackel kostet die Bandscheiben-OP 3.000 bis 5.000 Euro, das rechtfertigt den teureren Tarif.",
+          "quellen": [
+            "Beitrag, Abschnitt Auswahlkriterien",
+            "Tarifbedingungen der Anbieter"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "hundehaftpflicht",
+        "op-versicherung",
+        "tierkranken",
+        "got",
+        "got-satz",
+        "wartezeit",
+        "selbstbeteiligung"
+      ]
+    }
+  },
+  {
+    "slug": "pferdeversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Pferdehalter haften nach § 833 BGB unbegrenzt und ohne eigenes Verschulden; eine Pferdehaftpflicht ist zwar gesetzlich nicht vorgeschrieben, aber wegen möglicher Personenschäden von 5 bis 10 Millionen Euro unverzichtbar und wird von den meisten Ställen verlangt. Sie kostet 75 bis 120 Euro im Jahr, empfohlen sind 10 Millionen Euro Deckung, der Sprung auf 50 Millionen kostet wenige Euro.",
+          "Versichert sind Personen-, Sach- und Vermögensschäden, Mietsachschäden an Stall und Ausrüstung, Forderungsausfall und, wenn ausdrücklich vereinbart, Fremdreiter und Reitbeteiligungen; eigene Fohlen sind im ersten Lebensjahr mitversichert.",
+          "Die OP-Versicherung ab 72 Euro im Jahr zahlt Operationen in der Klinik und unter Standnarkose vor Ort: Eine Kolik-OP kostet 5.000 bis 6.500 Euro, komplizierte bis 25.000 Euro, eine Fesselbeinfissur 3.000 bis 4.000 Euro, ein Griffelbeinbruch bis 4.000 Euro.",
+          "Die Vollkrankenversicherung ab 100 Euro im Monat übernimmt alle Behandlungen, Diagnostik, Medikamente und Reha und lohnt sich für Sport- und Zuchtpferde sowie ältere Tiere ab sieben Jahren mit Arthrose oder chronischen Leiden.",
+          "Wartezeiten betragen bis zu drei Monate, Kolik-Operationen sind oft nach fünf bis sieben Tagen versichert; Vorerkrankungen sind ausgeschlossen. Spezialpolicen decken Tod durch Unfall, Transport und Fohlen ab."
+        ],
+        "quellen": [
+          "§ 833 BGB",
+          "Tierärztliche Hochschule Hannover, Kolik-OP-Kosten 2025",
+          "Beitrag Pferdeversicherungen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Pferdehaftpflichtversicherung – Das Fundament",
+          "status": "freigegeben",
+          "frage": "Mein Pferd hat auf der Weide das Auto des Nachbarn beschädigt, obwohl der Zaun intakt war. Muss ich zahlen?",
+          "antwort": "Ja, die Gefährdungshaftung nach § 833 BGB greift auch ohne Ihr Verschulden, weil das Pferd aus eigener Tierlaune gehandelt hat; die Pferdehaftpflicht ersetzt den Schaden am Auto und prüft vorher, ob der Nachbar das Fahrzeug erlaubt dort abgestellt hatte, was ein Mitverschulden begründen könnte. Nur wer das Pferd beruflich hält, etwa als Landwirt oder Reitschule, kann sich mit dem Nachweis sorgfältiger Aufsicht entlasten. Melden Sie den Schaden binnen einer Woche und geben Sie keine Schuldanerkenntnis ab, das erledigt der Versicherer.",
+          "quellen": [
+            "§ 833 Satz 1 und 2 BGB",
+            "Beitrag, Abschnitt Rechtliche Grundlagen"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Pferde-OP-Versicherung – Wie viel zahlt die Versicherung für Operationen?",
+          "status": "freigegeben",
+          "frage": "Zahlt die OP-Versicherung auch, wenn das Pferd nach der Kolik-OP noch zwei Wochen in der Klinik bleibt?",
+          "antwort": "Gute Tarife ja, meist bis 10 bis 15 Tage stationären Aufenthalt samt Medikamenten und Nachkontrollen, oft mit einer Obergrenze je Fall von 5.000 bis 10.000 Euro oder einem Jahreslimit; Basistarife zahlen nur die OP selbst mit Narkose und begrenzen den Klinikaufenthalt auf wenige Tage. Bei einer komplizierten Kolik mit Darmresektion und 20.000 Euro Rechnung entscheidet genau dieser Punkt. Wählen Sie einen Tarif mit unbegrenzter oder hoher Fallsumme und verlangen Sie den Kostenvoranschlag der Klinik vor dem Eingriff, soweit die Zeit reicht.",
+          "quellen": [
+            "Beitrag, Abschnitt OP-Versicherung",
+            "Tarifbedingungen der Pferdeversicherer"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wartezeiten und Ausschlüsse",
+          "status": "freigegeben",
+          "frage": "Ich habe das Pferd gerade gekauft. Ab wann ist eine Kolik versichert?",
+          "antwort": "Bei den meisten Anbietern nach fünf bis sieben Tagen, weil Kolik das häufigste Notfallrisiko ist; für andere Operationen gelten meist ein bis drei Monate, Unfälle sind sofort gedeckt. Schließen Sie die OP-Versicherung deshalb am Kauftag ab und lassen Sie eine Ankaufsuntersuchung machen, deren Protokoll als Gesundheitsnachweis dient und spätere Streitigkeiten über Vorerkrankungen vermeidet. Bekannte Befunde wie Arthrose oder Hufrolle werden ausgeschlossen, alles andere ist nach der Wartezeit versichert.",
+          "quellen": [
+            "Beitrag, Abschnitt Wartezeiten",
+            "Tarifbedingungen der Pferdeversicherer"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Reitbeteiligungen und Fremdreiter absichern",
+          "status": "freigegeben",
+          "frage": "Meine Reitbeteiligung ist vom Pferd gefallen und hat sich den Arm gebrochen. Wer zahlt?",
+          "antwort": "Grundsätzlich Sie als Halterin nach § 833 BGB, denn auch die Reiterin ist Dritte; die Pferdehaftpflicht zahlt Behandlung, Verdienstausfall und Schmerzensgeld aber nur, wenn Fremdreiterschäden eingeschlossen sind, was viele Tarife auf Nachfrage und einige nur mit namentlicher Nennung tun. Ein Mitverschulden der Reiterin, etwa Reiten ohne Helm oder gegen Absprachen, mindert den Anspruch. Ohne Einschluss bleibt Ihnen nur die eigene Privathaftpflicht, die Tierhalterrisiken ausschließt, also nichts. Vereinbaren Sie den Fremdreiterschutz schriftlich und halten Sie die Reitbeteiligung in einem kurzen Vertrag fest.",
+          "quellen": [
+            "§ 833 BGB",
+            "BGH VI ZR 465/12 (Reitbeteiligung)",
+            "Beitrag, Abschnitt Reitbeteiligungen"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "pferdehaftpflicht",
+        "gefaehrdungshaftung",
+        "op-versicherung",
+        "reitbeteiligung",
+        "pferdelebensversicherung",
+        "wartezeit",
+        "deckungssumme"
+      ]
+    }
+  },
+  {
+    "slug": "fahrradversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "2025 wurden rund 214.000 Fahrraddiebstähle angezeigt, 13 Prozent weniger als im Vorjahr, die Dunkelziffer liegt über 400.000; der Schaden je Rad erreichte mit 1.270 Euro einen Höchststand, weil Diebe gezielt E-Bikes und teure Räder nehmen.",
+          "Die Hausratversicherung zahlt Diebstahl aus dem verschlossenen Keller, unterwegs nur mit Fahrradklausel und meist begrenzt auf 1 bis 2 Prozent der Versicherungssumme, bei 50.000 Euro also 500 bis 1.000 Euro, ältere Verträge mit Nachtzeitklausel zwischen 22 und 6 Uhr; eine eigene Fahrradversicherung lohnt sich ab etwa 1.000 Euro Radwert.",
+          "Gute Tarife decken Diebstahl und Teilediebstahl fest verbauter Teile, Vandalismus, Unfall- und Sturzschäden, Elementarschäden und nach Wartezeit Verschleiß, dazu Zubehör bis 300 Euro je Teil, oft mit Pannenhilfe; sie erstatten mehrere Jahre den Neuwert ohne Nachtzeitklausel und ohne Schlossvorgaben.",
+          "Die Beiträge liegen zwischen 30 und 221 Euro im Jahr: sehr guter Diebstahlschutz für ein 1.500-Euro-Trekkingrad ab 30 Euro, ein 6.000-Euro-E-Bike ab 60 Euro; der Wohnort wiegt schwer, dasselbe 3.000-Euro-Rad kostet bei HUK24 in Remscheid 46 Euro und in Berlin 199 Euro. 150 bis 250 Euro Selbstbeteiligung sparen 20 bis 30 Prozent.",
+          "Stiftung Warentest bewertete 2026 112 Tarife von 45 Anbietern, 35 davon sehr gut; empfohlen werden Pergande und Pöthe, HUK24 mit Verschleiß, Hepster und Ammerländer für E-Bikes, Signal Iduna als günstigster Diebstahlschutz und HanseMerkur ab 70,80 Euro. Im Schadenfall braucht es Polizeianzeige, Kaufbeleg mit Rahmennummer und Fotos."
+        ],
+        "quellen": [
+          "Polizeiliche Kriminalstatistik 2025",
+          "GDV, Fahrraddiebstahl-Statistik",
+          "Stiftung Warentest, Fahrradversicherung 2026",
+          "Beitrag Fahrradversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wann lohnt sich eine Fahrradversicherung?",
+          "status": "freigegeben",
+          "frage": "Mein Rad hat 1.800 Euro gekostet, meine Hausrat hat eine Fahrradklausel mit 1 Prozent. Reicht das?",
+          "antwort": "Nur, wenn Ihre Hausratsumme 180.000 Euro beträgt, was für eine normale Wohnung unrealistisch ist; bei 60.000 Euro Versicherungssumme bekämen Sie 600 Euro und trügen 1.200 Euro selbst. Fragen Sie den Hausratversicherer nach einer Erhöhung der Fahrradklausel auf 2.000 bis 3.000 Euro für meist 20 bis 40 Euro im Jahr, das ist bei Diebstahl gleichwertig; für Sturzschäden, Vandalismus und Teilediebstahl brauchen Sie dagegen die eigene Fahrradversicherung, die für Ihr Rad je nach Wohnort 40 bis 90 Euro kostet. Achten Sie in der Hausrat auf die Nachtzeitklausel.",
+          "quellen": [
+            "Beitrag, Abschnitt Hausratversicherung",
+            "VHB 2022 des GDV, Abschnitt A § 7"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Was leistet eine gute Fahrradversicherung?",
+          "status": "freigegeben",
+          "frage": "Ich bin mit dem Rennrad gestürzt, der Carbonrahmen ist gebrochen. Zahlt die Versicherung?",
+          "antwort": "Ein Kaskotarif mit Unfall- und Sturzschäden ja, ein reiner Diebstahltarif nein; gute Kaskotarife ersetzen die Reparatur oder bei Totalschaden den Neuwert in den ersten drei bis fünf Jahren, danach den Zeitwert. Melden Sie den Schaden mit Fotos und Kostenvoranschlag des Händlers, eine Polizeianzeige ist nur bei Fremdverschulden nötig. Hat ein anderer den Sturz verursacht, holt sich der Versicherer das Geld von dessen Haftpflicht zurück. Rennen und Wettkämpfe sind in vielen Tarifen ausgeschlossen, Training und Radtouren nicht.",
+          "quellen": [
+            "Beitrag, Abschnitt Leistungen",
+            "Tarifbedingungen der Fahrradversicherer"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Kosten entstehen und wovon hängen sie ab?",
+          "status": "freigegeben",
+          "frage": "Warum zahle ich in Berlin das Vierfache für dieselbe Versicherung wie mein Bruder in Remscheid?",
+          "antwort": "Weil die Versicherer nach Postleitzahl und örtlicher Diebstahlstatistik kalkulieren und Berlin die meisten Diebstähle Deutschlands hat, auch wenn Göttingen, Münster und Magdeburg je Einwohner vorn liegen. Die Spreizung ist je Anbieter unterschiedlich: Pergande und Pöthe verlangen für das Berliner Rad 70 Euro, wo HUK24 199 Euro nimmt. Vergleichen Sie deshalb immer mit Ihrer eigenen Postleitzahl, nutzen Sie eine Selbstbeteiligung von 150 Euro und prüfen Sie, ob ein abschließbarer Fahrradkeller oder ein Rahmenschloss mit Codierung Rabatt bringt.",
+          "quellen": [
+            "Beitrag, Abschnitt Kosten",
+            "Polizeiliche Kriminalstatistik 2025"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Schadensmeldung und Verhalten im Versicherungsfall",
+          "status": "freigegeben",
+          "frage": "Ich habe keinen Kaufbeleg mehr. Zahlt die Versicherung trotzdem bei Diebstahl?",
+          "antwort": "Schwierig, aber möglich: Sie müssen Eigentum und Wert glaubhaft machen, etwa mit Kontoauszug oder Kreditkartenabrechnung des Kaufs, Rahmennummer aus dem Fahrradpass oder der Codierung, Fotos, Werkstattrechnungen oder einer Bestätigung des Händlers, der den Kauf meist im System hat. Ohne jeden Nachweis kürzt der Versicherer auf einen geschätzten Zeitwert oder lehnt ab. Notieren Sie jetzt die Rahmennummer, fotografieren Sie Rad und Beleg und laden Sie beides in den Aktenkoffer oder eine Cloud, dann ist der nächste Fall in Minuten erledigt.",
+          "quellen": [
+            "§ 31 VVG (Auskunftspflicht)",
+            "Beitrag, Abschnitt Schadensmeldung"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "fahrradversicherung",
+        "hausrat",
+        "fahrradklausel",
+        "nachtzeitklausel",
+        "teilediebstahl",
+        "neuwertentschaedigung",
+        "selbstbeteiligung"
+      ]
+    }
+  },
+  {
+    "slug": "e-bike-versicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "E-Bikes der Mittelklasse kosten 3.000 bis 4.000 Euro, vollgefederte E-Mountainbikes über 10.000 Euro, jährlich werden etwa zwei Millionen Pedelecs verkauft und rund 150.000 gestohlen; der durchschnittliche Diebstahlschaden liegt bei 1.270 Euro. Als Faustregel kostet die Versicherung etwa ein Dreißigstel des Kaufpreises im Jahr.",
+          "Pedelecs bis 25 km/h gelten als Fahrräder ohne Versicherungspflicht; S-Pedelecs bis 45 km/h sind Kleinkrafträder und brauchen Kfz-Haftpflicht mit Versicherungskennzeichen ab rund 30 bis 60 Euro im Jahr, Führerschein AM, Helm und dürfen nicht auf Radwege.",
+          "Die Hausratversicherung deckt meist nur Diebstahl aus verschlossenen Räumen und 1 bis 3 Prozent der Hausratsumme, keine Unfälle, Vandalismus oder Elektronikschäden; eine E-Bike-Versicherung zahlt rund um die Uhr bei Diebstahl und Teilediebstahl von Akku oder Display, bei Sturz, Vandalismus, Unwetter, Elektronikdefekten, die bei über 20 Prozent der E-Bikes auftreten, und je nach Tarif Akkuverschleiß und Pannenhilfe.",
+          "Ein guter Tarif kostet 70 bis 150 Euro im Jahr, für ein 2.500-Euro-Rad 60 bis 70 Euro, mit Schutzbrief bis 200 Euro; Kaufpreis, Wohnort, Leistungsumfang und Selbstbeteiligung bestimmen den Beitrag, eine Reparatur kostet im Schnitt 567 Euro.",
+          "Wichtig sind drei bis fünf Jahre Neuwerterstattung statt Zeitwert, Schutz auch im Ausland, kein Höchstalter des Rades über sechs Monate bis drei Jahre hinaus und Verschleißschutz; empfohlen werden Ammerländer, Pergande und Pöthe sowie HUK24. Gebrauchte Räder brauchen Rechnung und Rahmennummer, manche Versicherer lehnen sie ab."
+        ],
+        "quellen": [
+          "§ 1 Abs. 3 StVG, § 63a StVZO (Pedelec)",
+          "Pflichtversicherungsgesetz (S-Pedelec)",
+          "GDV, Fahrraddiebstahl 2025",
+          "Beitrag E-Bike-Versicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Pflicht oder Empfehlung: Wann brauchen Sie E-Bike Versicherung?",
+          "status": "freigegeben",
+          "frage": "Ich habe mein Pedelec auf 35 km/h tunen lassen. Was bedeutet das für die Versicherung?",
+          "antwort": "Sie fahren ein zulassungspflichtiges Kleinkraftrad ohne Zulassung und Haftpflicht, was strafbar ist, und im Unfall zahlt niemand: Die Fahrradversicherung und Ihre Privathaftpflicht schließen getunte Pedelecs aus, weil sie keine Fahrräder mehr sind, und die Kfz-Versicherung fehlt. Bei einem Personenschaden haften Sie unbegrenzt privat, dazu kommen Führerscheinentzug und Bußgeld. Auch die Herstellergarantie erlischt. Bauen Sie das Tuning zurück; wer schneller fahren will, kauft ein S-Pedelec mit Kennzeichen für 30 bis 60 Euro Haftpflicht im Jahr.",
+          "quellen": [
+            "§ 6 PflVG",
+            "§ 1 Abs. 3 StVG",
+            "Beitrag, Abschnitt Pflicht oder Empfehlung"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Hausratversicherung oder spezialisierte E-Bike Versicherung?",
+          "status": "freigegeben",
+          "frage": "Der Akku wurde aus meinem abgeschlossenen E-Bike vor dem Büro gestohlen. Wer zahlt die 800 Euro?",
+          "antwort": "Die E-Bike-Versicherung, wenn sie Teilediebstahl einschließt, was gute Tarife tun, mit voller Erstattung des Akkus abzüglich Selbstbeteiligung; die Hausratversicherung zahlt draußen nur mit Fahrradklausel und dann nur den Anteil an der Fahrradsumme, viele Klauseln schließen Einzelteile ganz aus. Erstatten Sie Anzeige, reichen Sie Kaufbeleg und Foto des Rads ohne Akku ein. Vorbeugen hilft: Akku mitnehmen, Akkuschloss mit eigenem Schlüssel und GPS-Tracker, den einige Versicherer mit Rabatt belohnen.",
+          "quellen": [
+            "Beitrag, Abschnitt Hausrat oder E-Bike-Versicherung",
+            "Tarifbedingungen der Fahrradversicherer"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Kosten für E-Bike Versicherung 2026",
+          "status": "freigegeben",
+          "frage": "Lohnt sich der Schutzbrief mit Pannenhilfe für 40 Euro extra?",
+          "antwort": "Für Pendler und Tourenfahrer ja: Ein Abschleppdienst für ein 25 Kilo schweres E-Bike mit leerem Akku oder Motorschaden kostet ohne Schutzbrief 80 bis 150 Euro, der Baustein zahlt Hilfe vor Ort, Transport zur Werkstatt, Weiterfahrt per Taxi oder Bahn und teils Übernachtung, meist ab 10 Kilometern vom Wohnort. Wer nur in der Stadt fährt und das Rad im Fall der Fälle schieben kann, spart das Geld. ADAC-Mitglieder haben Pannenhilfe für Räder oft schon im Plus-Tarif enthalten, prüfen Sie Doppelungen.",
+          "quellen": [
+            "Beitrag, Abschnitt Zusatzleistungen",
+            "Beitrag, Abschnitt Kosten"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Gebraucht gekaufte E-Bikes versichern",
+          "status": "freigegeben",
+          "frage": "Ich kaufe ein zwei Jahre altes E-Bike privat für 2.200 Euro. Kann ich es versichern?",
+          "antwort": "Ja, bei Anbietern ohne Höchstalter oder mit drei Jahren Grenze, etwa Ammerländer, Hepster oder Pergande und Pöthe; Sie geben den Kaufpreis von 2.200 Euro als Wert an und erhalten diesen bei Diebstahl, nicht den Neupreis. Verlangen Sie vom Verkäufer die Originalrechnung, einen schriftlichen Kaufvertrag mit Rahmennummer und Personalausweisdaten, und prüfen Sie die Rahmennummer bei der Polizei oder in Fahrradregistern auf Diebstahlmeldung, ein gestohlenes Rad bekommen Sie nicht versichert und müssen es herausgeben. Bei Bosch-Systemen lässt sich die Zugehörigkeit im Hersteller-Konto übertragen.",
+          "quellen": [
+            "Beitrag, Abschnitt Gebrauchte E-Bikes",
+            "§ 935 BGB (gestohlene Sachen)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "fahrradversicherung",
+        "pedelec",
+        "hausrat",
+        "teilediebstahl",
+        "neuwertentschaedigung",
+        "nachtzeitklausel"
+      ]
+    }
+  }
+]

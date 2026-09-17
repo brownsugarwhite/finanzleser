@@ -1,0 +1,689 @@
+[
+  {
+    "slug": "entlastungsbetrag-alleinerziehende",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie hoch ist der Entlastungsbetrag Alleinerziehende 2026?",
+          "art": "saeulen",
+          "titel": "Je weiterem Kind steigt der Betrag um 240 Euro",
+          "untertitel": "Entlastungsbetrag für Alleinerziehende 2026 nach Kinderzahl",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 24b Abs. 2 EStG (Einkommensteuergesetz)",
+            "url": "https://www.gesetze-im-internet.de/estg/__24b.html",
+            "stand": "aktuelle Fassung, gültig seit Veranlagungszeitraum 2023"
+          },
+          "reihen": [
+            {
+              "key": "kinder",
+              "label": "Entlastungsbetrag",
+              "werte": [
+                {
+                  "label": "1 Kind",
+                  "wert": 4260
+                },
+                {
+                  "label": "2 Kinder",
+                  "wert": 4500
+                },
+                {
+                  "label": "3 Kinder",
+                  "wert": 4740
+                },
+                {
+                  "label": "4 Kinder",
+                  "wert": 4980
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der Grundbetrag von 4.260 Euro gilt für das erste Kind; für jedes weitere Kind kommen 240 Euro hinzu. Die Werte für 2 bis 4 Kinder sind daraus abgeleitet (4.260 + n × 240 Euro).",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "steuerberater-von-der-steuer-absetzen",
+    "felder": {
+      "statistiken": []
+    }
+  },
+  {
+    "slug": "arbeitnehmer-sparzulage",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wer hat Anspruch auf die Arbeitnehmer-Sparzulage 2026?",
+          "art": "balken",
+          "titel": "Ehepaare dürfen bis 80.000 Euro Einkommen verdienen",
+          "untertitel": "Einkommensgrenze für die Arbeitnehmer-Sparzulage 2026",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 13 Abs. 1 Fünftes Vermögensbildungsgesetz (5. VermBG)",
+            "url": "https://www.gesetze-im-internet.de/vermbg_2/__13.html",
+            "stand": "aktuelle Fassung, seit Zukunftsfinanzierungsgesetz 2024"
+          },
+          "reihen": [
+            {
+              "key": "status",
+              "label": "Einkommensgrenze",
+              "werte": [
+                {
+                  "label": "Alleinstehende",
+                  "wert": 40000
+                },
+                {
+                  "label": "Verheiratete (Zusammenveranlagung)",
+                  "wert": 80000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Maßgeblich ist das zu versteuernde Einkommen des Vorjahres, nicht der Bruttolohn. Vor der Reform 2024 lagen die Grenzen deutlich niedriger.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Wie hoch ist die Arbeitnehmer-Sparzulage 2026?",
+          "art": "balken",
+          "titel": "Aktienfonds bringen fast doppelt so viel Förderung",
+          "untertitel": "Maximale Arbeitnehmer-Sparzulage je Anlageform 2026",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 13 Abs. 2 Fünftes Vermögensbildungsgesetz (5. VermBG)",
+            "url": "https://www.gesetze-im-internet.de/vermbg_2/__13.html",
+            "stand": "aktuelle Fassung 2026"
+          },
+          "reihen": [
+            {
+              "key": "form",
+              "label": "Max. Förderung",
+              "werte": [
+                {
+                  "label": "Aktienfonds/ETF (20 % von 400 €)",
+                  "wert": 80
+                },
+                {
+                  "label": "Bausparen (9 % von 470 €)",
+                  "wert": 42.3
+                }
+              ]
+            }
+          ],
+          "hinweis": "Beide Förderungen lassen sich kombinieren: macht zusammen bis zu 122,30 Euro pro Jahr bei 870 Euro angelegten vermögenswirksamen Leistungen (abgeleitet: 80 + 42,30 Euro).",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "steuertabelle",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie hoch sind die Grenzwerte und Steuersätze 2026?",
+          "art": "saeulen",
+          "titel": "Der Spitzensteuersatz beginnt 2026 bei 69.879 Euro",
+          "untertitel": "Obergrenzen der Tarifzonen bei der Einkommensteuer 2026",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 32a Abs. 1 EStG (Einkommensteuertarif)",
+            "url": "https://www.gesetze-im-internet.de/estg/__32a.html",
+            "stand": "aktuelle Fassung, Veranlagungszeitraum 2026"
+          },
+          "reihen": [
+            {
+              "key": "zonen",
+              "label": "Obergrenze der Zone",
+              "werte": [
+                {
+                  "label": "Grundfreibetrag",
+                  "wert": 12348
+                },
+                {
+                  "label": "1. Progressionszone",
+                  "wert": 17799
+                },
+                {
+                  "label": "2. Progressionszone",
+                  "wert": 69878
+                },
+                {
+                  "label": "Proportionalzone (42 %)",
+                  "wert": 277825
+                }
+              ]
+            }
+          ],
+          "hinweis": "Bis zur jeweiligen Grenze gilt der vorherige Tarif; ab 69.879 Euro greift der Spitzensteuersatz von 42 Prozent, ab 277.826 Euro die Reichensteuer von 45 Prozent.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Wer muss Solidaritätszuschlag zahlen?",
+          "art": "balken",
+          "titel": "Singles zahlen erst ab 20.350 Euro Soli",
+          "untertitel": "Freigrenze beim Solidaritätszuschlag 2026",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 3 Solidaritätszuschlaggesetz 1995 (SolzG 1995)",
+            "url": "https://www.gesetze-im-internet.de/solzg_1995/__3.html",
+            "stand": "Fassung ab Veranlagungszeitraum 2026 (Art. 4 Gesetz v. 23.12.2024, BGBl. 2024 I Nr. 449)"
+          },
+          "reihen": [
+            {
+              "key": "status",
+              "label": "Freigrenze",
+              "werte": [
+                {
+                  "label": "Einzelveranlagung",
+                  "wert": 20350
+                },
+                {
+                  "label": "Zusammenveranlagung",
+                  "wert": 40700
+                }
+              ]
+            }
+          ],
+          "hinweis": "Bis zu dieser Höhe der festgesetzten Einkommensteuer fällt kein Solidaritätszuschlag an; danach folgt eine Milderungszone, bevor die vollen 5,5 Prozent greifen.",
+          "abschnitt": "heading-6",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "abschreibung-steuererklaerung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "GWG: Sofortabschreibung bis 800 Euro",
+          "art": "balken",
+          "titel": "Bis 800 Euro netto sind Anschaffungen sofort absetzbar",
+          "untertitel": "Wertgrenzen für geringwertige Wirtschaftsgüter (GWG) 2026",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 6 Abs. 2 und 2a EStG",
+            "url": "https://www.gesetze-im-internet.de/estg/__6.html",
+            "stand": "aktuelle Fassung 2026"
+          },
+          "reihen": [
+            {
+              "key": "grenzen",
+              "label": "Wertgrenze",
+              "werte": [
+                {
+                  "label": "Sofort ohne Aufzeichnung",
+                  "wert": 250
+                },
+                {
+                  "label": "GWG-Grenze (mit Verzeichnis)",
+                  "wert": 800
+                },
+                {
+                  "label": "Sammelposten-Obergrenze",
+                  "wert": 1000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Bis 250 Euro netto ist keine Aufzeichnung nötig, bis 800 Euro netto reicht ein GWG-Verzeichnis; zwischen 250 und 1.000 Euro ist wahlweise ein über 5 Jahre abzuschreibender Sammelposten möglich.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Immobilien und Gebäude richtig abschreiben",
+          "art": "saeulen",
+          "titel": "Wohngebäude-AfA stieg 2023 von 2 auf 3 Prozent",
+          "untertitel": "Lineare und degressive Abschreibungssätze für Gebäude",
+          "einheit": "%",
+          "quelle": {
+            "name": "§ 7 Abs. 4 und 5a EStG",
+            "url": "https://www.gesetze-im-internet.de/estg/__7.html",
+            "stand": "aktuelle Fassung 2026 (Änderung durch Jahressteuergesetz 2022)"
+          },
+          "reihen": [
+            {
+              "key": "saetze",
+              "label": "AfA-Satz",
+              "werte": [
+                {
+                  "label": "Fertigstellung bis 2022",
+                  "wert": 2
+                },
+                {
+                  "label": "Fertigstellung ab 2023",
+                  "wert": 3
+                },
+                {
+                  "label": "Degressiv ab 2023 (Baubeginn)",
+                  "wert": 5
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die degressive Gebäude-AfA von 5 Prozent gilt nur bei Baubeginn zwischen dem 30.9.2023 und dem 1.10.2029 und schließt die lineare Abschreibung für dasselbe Gebäude aus.",
+          "abschnitt": "heading-5",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "abfindungen-von-der-steuer-absetzen",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie hoch sind die Steuersätze für Abfindungen 2026?",
+          "art": "saeulen",
+          "titel": "Der Spitzensteuersatz beginnt 2026 bei 69.879 Euro",
+          "untertitel": "Obergrenzen der Tarifzonen bei der Einkommensteuer 2026",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 32a Abs. 1 EStG (Einkommensteuertarif)",
+            "url": "https://www.gesetze-im-internet.de/estg/__32a.html",
+            "stand": "aktuelle Fassung, Veranlagungszeitraum 2026"
+          },
+          "reihen": [
+            {
+              "key": "zonen",
+              "label": "Obergrenze der Zone",
+              "werte": [
+                {
+                  "label": "Grundfreibetrag",
+                  "wert": 12348
+                },
+                {
+                  "label": "1. Progressionszone",
+                  "wert": 17799
+                },
+                {
+                  "label": "2. Progressionszone",
+                  "wert": 69878
+                },
+                {
+                  "label": "Proportionalzone (42 %)",
+                  "wert": 277825
+                }
+              ]
+            }
+          ],
+          "hinweis": "Da eine Abfindung das zu versteuernde Einkommen vollständig erhöht, kann sie den Grenzsteuersatz bis in die Reichensteuer-Zone treiben – dagegen hilft die Fünftelregelung.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Wie können Sie Steuern bei Abfindungen sparen?",
+          "art": "balken",
+          "titel": "Bis zu 8.112 Euro betriebliche Vorsorge bleiben steuerfrei",
+          "untertitel": "Steuerfreier und sozialversicherungsfreier Höchstbetrag für bAV 2026",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 3 Nr. 63 EStG; Sozialversicherungsentgeltverordnung (SvEV) § 1 Abs. 1 Nr. 9; Beitragsbemessungsgrenze aus Sozialversicherungsrechengrößen-Verordnung 2026",
+            "url": "https://www.gesetze-im-internet.de/estg/__3.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "grenzen",
+              "label": "Höchstbetrag",
+              "werte": [
+                {
+                  "label": "Steuerfrei (8 % der Beitragsbemessungsgrenze)",
+                  "wert": 8112
+                },
+                {
+                  "label": "Davon sozialversicherungsfrei (4 %)",
+                  "wert": 4056
+                }
+              ]
+            }
+          ],
+          "hinweis": "Abgeleitet aus der Beitragsbemessungsgrenze der allgemeinen Rentenversicherung West 2026 von 101.400 Euro/Jahr (8.450 Euro/Monat): 8 % davon sind 8.112 Euro, 4 % davon sind 4.056 Euro.",
+          "abschnitt": "heading-5",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "altersvorsorgeaufwendungen",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was sind Altersvorsorgeaufwendungen?",
+          "art": "saeulen",
+          "titel": "2026 werden 84 Prozent der Rente besteuert",
+          "untertitel": "Steuerpflichtiger Anteil der Rente nach Renteneintrittsjahr",
+          "einheit": "%",
+          "quelle": {
+            "name": "§ 22 Nr. 1 Satz 3 Buchst. a Doppelbuchst. aa EStG",
+            "url": "https://www.gesetze-im-internet.de/estg/__22.html",
+            "stand": "aktuelle Fassung 2026"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Besteuerungsanteil",
+              "werte": [
+                {
+                  "label": "2023",
+                  "wert": 82.5
+                },
+                {
+                  "label": "2024",
+                  "wert": 83
+                },
+                {
+                  "label": "2025",
+                  "wert": 83.5
+                },
+                {
+                  "label": "2026",
+                  "wert": 84
+                },
+                {
+                  "label": "2027",
+                  "wert": 84.5
+                },
+                {
+                  "label": "2028",
+                  "wert": 85
+                },
+                {
+                  "label": "2029",
+                  "wert": 85.5
+                },
+                {
+                  "label": "2030",
+                  "wert": 86
+                }
+              ]
+            }
+          ],
+          "hinweis": "Maßgeblich ist allein das Jahr des Rentenbeginns; der einmal festgelegte Prozentsatz gilt für die gesamte Rentenlaufzeit. Er steigt gesetzlich bis 2058 auf 100 Prozent.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Höchstbeträge 2026: Wie viel können Sie steuerlich geltend machen?",
+          "art": "balken",
+          "titel": "Ehepaare setzen 2026 bis zu 61.652 Euro Altersvorsorge ab",
+          "untertitel": "Höchstbetrag für Altersvorsorgeaufwendungen 2026",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 10 Abs. 3 EStG i. V. m. Sozialversicherungsrechengrößen-Verordnung 2026 und Bekanntmachung der Beitragssätze 2026",
+            "url": "https://www.deutsche-rentenversicherung.de/KnappschaftBahnSee/DE/Aktuelles/Meldungen/2026/2026_01_02_Sozialversicherungsrechengroessen2026",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "status",
+              "label": "Höchstbetrag",
+              "werte": [
+                {
+                  "label": "Ledige",
+                  "wert": 30826
+                },
+                {
+                  "label": "Verheiratete (zusammenveranlagt)",
+                  "wert": 61652
+                }
+              ]
+            }
+          ],
+          "hinweis": "Abgeleitet aus der Beitragsbemessungsgrenze der knappschaftlichen Rentenversicherung 2026 (124.800 Euro/Jahr) mal dem Beitragssatz von 24,7 Prozent = 30.825,60 Euro, aufgerundet 30.826 Euro; für Verheiratete gilt der doppelte Betrag.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "arbeitsmittel",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wann lohnt sich der Einzelnachweis gegenüber dem Pauschbetrag?",
+          "art": "balken",
+          "titel": "Rentner dürfen nur 102 statt 1.230 Euro pauschal absetzen",
+          "untertitel": "Werbungskosten-Pauschbetrag 2026 nach Personengruppe",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 9a EStG (Pauschbeträge für Werbungskosten)",
+            "url": "https://www.gesetze-im-internet.de/estg/__9a.html",
+            "stand": "aktuelle Fassung 2026"
+          },
+          "reihen": [
+            {
+              "key": "gruppe",
+              "label": "Pauschbetrag",
+              "werte": [
+                {
+                  "label": "Arbeitnehmer",
+                  "wert": 1230
+                },
+                {
+                  "label": "Versorgungsbezüge/Renten",
+                  "wert": 102
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der Pauschbetrag wird automatisch abgezogen, wenn keine höheren Werbungskosten nachgewiesen werden. Wer mehr ausgibt, muss die Einzelposten – etwa Arbeitsmittel – nachweisen.",
+          "abschnitt": "heading-7",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "arbeitskleidung-von-der-steuer-absetzen",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie können Sie Anschaffungskosten richtig absetzen?",
+          "art": "balken",
+          "titel": "Bis 800 Euro netto ist Arbeitskleidung sofort absetzbar",
+          "untertitel": "Wertgrenzen für die Sofortabschreibung von Arbeitsmitteln 2026",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 6 Abs. 2 und 2a EStG",
+            "url": "https://www.gesetze-im-internet.de/estg/__6.html",
+            "stand": "aktuelle Fassung 2026"
+          },
+          "reihen": [
+            {
+              "key": "grenzen",
+              "label": "Wertgrenze",
+              "werte": [
+                {
+                  "label": "Sofort ohne Aufzeichnung",
+                  "wert": 250
+                },
+                {
+                  "label": "GWG-Grenze (mit Verzeichnis)",
+                  "wert": 800
+                },
+                {
+                  "label": "Sammelposten-Obergrenze",
+                  "wert": 1000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Dieselbe Wertgrenze gilt für Arbeitskleidung wie für jedes andere geringwertige Wirtschaftsgut: bis 800 Euro netto (952 Euro brutto bei 19 % USt) volle Absetzung im Kaufjahr.",
+          "abschnitt": "heading-5",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "umsatzsteuer-mehrwertsteuer",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was ändert sich bei Gastronomie-Speisen ab 2026?",
+          "art": "saeulen",
+          "titel": "Seit 2026 gilt für Restaurant-Speisen dauerhaft 7 Prozent",
+          "untertitel": "Umsatzsteuersatz auf den Verzehr von Speisen vor Ort",
+          "einheit": "%",
+          "quelle": {
+            "name": "§ 12 Abs. 2 Nr. 15 UStG; Bundesregierung zum Steueränderungsgesetz 2025",
+            "url": "https://www.bundesregierung.de/breg-de/aktuelles/steueraenderungsgesetz-bundesrat-2383684",
+            "stand": "beschlossen 4./19. Dezember 2025, in Kraft seit 1. Januar 2026"
+          },
+          "reihen": [
+            {
+              "key": "zeitraum",
+              "label": "Steuersatz",
+              "werte": [
+                {
+                  "label": "bis 31.12.2025",
+                  "wert": 19
+                },
+                {
+                  "label": "seit 1.1.2026 (dauerhaft)",
+                  "wert": 7
+                }
+              ]
+            }
+          ],
+          "hinweis": "Getränke bleiben unabhängig vom Verzehrort bei 19 Prozent. Die Speisen-Regelung gilt seit 1. Januar 2026 dauerhaft und einheitlich für Vor-Ort-Verzehr, Mitnahme und Lieferung.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Wann können Sie die Kleinunternehmerregelung nutzen?",
+          "art": "balken",
+          "titel": "Kleinunternehmer dürfen 2026 bis 100.000 Euro Umsatz machen",
+          "untertitel": "Umsatzgrenzen der Kleinunternehmerregelung 2026",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 19 Abs. 1 UStG",
+            "url": "https://www.gesetze-im-internet.de/ustg_1980/__19.html",
+            "stand": "aktuelle Fassung seit 1.1.2025"
+          },
+          "reihen": [
+            {
+              "key": "grenzen",
+              "label": "Umsatzgrenze",
+              "werte": [
+                {
+                  "label": "Vorjahresumsatz",
+                  "wert": 25000
+                },
+                {
+                  "label": "Umsatz im laufenden Jahr",
+                  "wert": 100000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Beide Grenzen müssen gleichzeitig eingehalten werden. Wird die 100.000-Euro-Grenze im laufenden Jahr überschritten, endet die Kleinunternehmerregelung sofort mit dem übersteigenden Umsatz.",
+          "abschnitt": "heading-5",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "abgeltungssteuer",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Sparerpauschbetrag: Wie nutzen Sie den Freibetrag optimal?",
+          "art": "balken",
+          "titel": "Ehepaare behalten 2.000 Euro Kapitalerträge steuerfrei",
+          "untertitel": "Sparerpauschbetrag 2026 nach Familienstand",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 20 Abs. 9 EStG (Sparer-Pauschbetrag)",
+            "url": "https://www.gesetze-im-internet.de/estg/__20.html",
+            "stand": "aktuelle Fassung, seit 2023"
+          },
+          "reihen": [
+            {
+              "key": "status",
+              "label": "Sparerpauschbetrag",
+              "werte": [
+                {
+                  "label": "Einzelperson",
+                  "wert": 1000
+                },
+                {
+                  "label": "Zusammenveranlagte Ehegatten",
+                  "wert": 2000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Ohne eingerichteten Freistellungsauftrag behält die Bank die Abgeltungsteuer trotz Freibetrag in voller Höhe ein.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "aktien-steuererklaerung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Welcher Freibetrag steht mir 2026 zu?",
+          "art": "balken",
+          "titel": "Ledige Anleger behalten 1.000 Euro Kursgewinne steuerfrei",
+          "untertitel": "Sparerpauschbetrag 2026 für Kapitalerträge aus Aktien",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 20 Abs. 9 EStG (Sparer-Pauschbetrag)",
+            "url": "https://www.gesetze-im-internet.de/estg/__20.html",
+            "stand": "aktuelle Fassung, seit 2023"
+          },
+          "reihen": [
+            {
+              "key": "status",
+              "label": "Sparerpauschbetrag",
+              "werte": [
+                {
+                  "label": "Einzelperson",
+                  "wert": 1000
+                },
+                {
+                  "label": "Zusammenveranlagte Ehegatten",
+                  "wert": 2000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der Freibetrag gilt automatisch für alle Kapitalerträge zusammen – Dividenden, Zinsen und Kursgewinne –, wirkt beim Steuerabzug aber nur mit eingerichtetem Freistellungsauftrag.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  }
+]
