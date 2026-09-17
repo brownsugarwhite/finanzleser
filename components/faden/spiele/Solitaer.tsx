@@ -122,11 +122,13 @@ export default function Solitaer() {
     });
   }, [stand, rest, brettName]);
 
-  /* Das Andrucken läuft einmal je Partie. Liefe es weiter, zuckte jede gelandete
-     Murmel mit, und aus der Inszenierung würde ein Flackern. */
+  /* Das Andrucken läuft einmal je Partie, danach der Wink auf die beweglichen Murmeln.
+     Liefe das Fenster weiter, zuckte jede gelandete Murmel mit, und aus der Inszenierung
+     würde ein Flackern. Die Uhr deckt beide Läufe ab (Andruck + Wink, siehe
+     app/solitaer.css) — sie darf nicht früher schließen, sonst bricht der Wink ab. */
   useEffect(() => {
     setFrisch(true);
-    const id = window.setTimeout(() => setFrisch(false), 620 + brett.loecher.length * 14);
+    const id = window.setTimeout(() => setFrisch(false), 620 + 850 + brett.loecher.length * 13);
     return () => clearTimeout(id);
   }, [runde, brett.loecher.length]);
 

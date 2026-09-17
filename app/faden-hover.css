@@ -50,28 +50,45 @@
 
 /* CTA „Finanzleser entdecken ↓“ unten im Hero, blendet nach 2,2 s ein (01-css.html:476–479) */
 .faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; border: 0; background: none; color: var(--ink); font-weight: 600; font-size: var(--grad-14); display: grid; justify-items: center; gap: var(--luft-xs); letter-spacing: .02em; cursor: pointer; font-family: inherit; }
-/* 🚨 Die Scheibe ist GEFÜLLT, nicht umrandet (Wunsch 17.09.2026: „cooler und in Tint").
-   `--tint` ist der grüne Hauch des Hauses — dieselbe Fläche wie hinter einer richtigen
-   Antwort. Darauf zwei Winkel in Markengrün, die nacheinander durchlaufen: Der vordere
-   fällt nach unten heraus, der hintere kommt von oben nach. Das ist die übliche
-   Scroll-Geste, nur als Zeichnung statt als Schriftzeichen — ein ‚↓' sitzt in jeder
-   Schrift anders und lässt sich nicht bewegen. */
-.faden-shell .hero-cta__scheibe { width: 34px; height: 34px; border-radius: var(--radius-kreis); background: var(--tint); display: grid; place-items: center; overflow: hidden; transition: background .25s, transform .25s var(--ueber); }
-.faden-shell .hero-cta:hover .hero-cta__scheibe { background: var(--green); transform: translateY(3px); }
-.faden-shell .hero-cta__scheibe svg { width: 22px; height: 22px; overflow: visible; }
-.faden-shell .hero-cta__winkel { fill: none; stroke: var(--green-ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: stroke .25s; animation: hero-winkel 1.9s var(--kurve) infinite; }
-.faden-shell .hero-cta:hover .hero-cta__winkel { stroke: var(--auf-tinte); }
-/* Der zweite Winkel läuft eine halbe Runde versetzt — so ist immer einer im Bild. */
-.faden-shell .hero-cta__winkel--b { animation-delay: -.95s; }
-@keyframes hero-winkel {
-  0%   { transform: translateY(-7px); opacity: 0; }
-  30%  { opacity: 1; }
-  70%  { opacity: 1; }
-  100% { transform: translateY(7px); opacity: 0; }
+/* ── Der Faden unter dem CTA ────────────────────────────────────────────────────────
+   🚨 Keine Scheibe, kein Winkel aus dem Baukasten, kein Grün (Wunsch 17.09.2026:
+   „minimalistisch, kreativ, in Tinte"). Was dort hängt, ist der Faden: eine Haarlinie, an
+   der ein Tintentropfen herunterrinnt. Wo er ankommt, SCHREIBT er die Pfeilspitze — sie
+   zeichnet sich genau in dem Augenblick, in dem er sie erreicht.
+
+   Drei Haarlinien und ein Punkt, alles in `--ink`. Die Bewegung trägt die Aussage „nach
+   unten"; die Form muss es nicht mehr. */
+.faden-shell .hero-cta__faden { display: block; color: var(--ink); transition: transform .3s var(--kurve); }
+.faden-shell .hero-cta:hover .hero-cta__faden { transform: translateY(3px); }
+.faden-shell .hero-cta__faden svg { display: block; width: 12px; height: 32px; overflow: visible; }
+.faden-shell .hero-cta__schnur { stroke: currentColor; stroke-width: 1; }
+.faden-shell .hero-cta__tropfen { fill: currentColor; animation: hero-tropfen 2.6s var(--kurve) infinite; }
+.faden-shell .hero-cta__spitze {
+  fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;
+  /* 14 ist etwas mehr als die Pfadlänge (2 × 6,8) — mit Reserve, damit nichts stehen bleibt. */
+  stroke-dasharray: 14; stroke-dashoffset: 14;
+  animation: hero-spitze 2.6s var(--kurve) infinite;
+}
+.faden-shell .hero-cta:hover .hero-cta__tropfen,
+.faden-shell .hero-cta:hover .hero-cta__spitze { animation-duration: 1.5s; }
+
+/* Oben schwillt der Tropfen an, rinnt herunter und versickert an der Spitze. */
+@keyframes hero-tropfen {
+  0%   { transform: translateY(2px) scale(.2); opacity: 0; }
+  12%  { transform: translateY(4px) scale(1); opacity: 1; }
+  62%  { transform: translateY(20px) scale(1); opacity: 1; }
+  74%  { transform: translateY(23px) scale(.3); opacity: .5; }
+  100% { transform: translateY(23px) scale(0); opacity: 0; }
+}
+/* Die Spitze zeichnet sich, sobald er ankommt, und bleibt bis zum nächsten Tropfen. */
+@keyframes hero-spitze {
+  0%, 62% { stroke-dashoffset: 14; }
+  78%     { stroke-dashoffset: 0; }
+  100%    { stroke-dashoffset: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .faden-shell .hero-cta__winkel { animation: none; opacity: 1; }
-  .faden-shell .hero-cta__winkel--b { display: none; }
+  .faden-shell .hero-cta__tropfen { animation: none; opacity: 0; }
+  .faden-shell .hero-cta__spitze { animation: none; stroke-dashoffset: 0; }
 }
 
 @media (max-width: 900px) {

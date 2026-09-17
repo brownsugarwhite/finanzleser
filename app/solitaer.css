@@ -153,9 +153,26 @@
 /* ── Das Andrucken der ganzen Seite ───────────────────────────────────────────────
    Eine neue Partie wird gedruckt, nicht eingeblendet: Murmel für Murmel, im Takt ihrer
    Lochnummer — von links oben nach rechts unten, wie eine Seite durch die Presse geht. */
-.faden-shell .solitaer__brett--andruck .solitaer__leib {
-  animation: solitaer-andruck .42s var(--ueber) backwards;
-  animation-delay: calc(var(--i) * 13ms);
+/* 🚨 Auf `.solitaer__platz` eingeengt, und zwar zwingend. Die fliegende Murmel hängt in
+   `.solitaer__oben`, nicht in einem Platz — stünde hier nur `.solitaer__leib`, wäre diese
+   Regel mit vier Klassen spezifischer als die Flugregel mit dreien und würde sie
+   überschreiben. Der erste Sprung innerhalb der ersten Sekunde einer Partie hätte dann
+   keinen Bogen, sondern ein Aufploppen am Ziel.
+   Dieselbe Falle beim Zittern weiter unten. */
+.faden-shell .solitaer__brett--andruck .solitaer__platz .solitaer__leib {
+  animation: solitaer-andruck .42s var(--ueber) calc(var(--i) * 13ms) 1 normal backwards;
+}
+/* Der Wink: einmal, kurz nach dem Andrucken, heben sich genau die Murmeln, die
+   überhaupt springen können. Danach nie wieder — eine Dauermarkierung an vier Murmeln
+   wäre eine Legende, und die Zeitung erklärt ihre Bilder im Text, nicht im Bild. */
+.faden-shell .solitaer__brett--andruck .solitaer__platz--beweglich .solitaer__leib {
+  animation:
+    solitaer-andruck .42s var(--ueber) calc(var(--i) * 13ms) 1 normal backwards,
+    solitaer-wink .85s var(--kurve) calc(var(--i) * 13ms + 620ms) 1 normal both;
+}
+@keyframes solitaer-wink {
+  0%, 100% { transform: translateY(0) scale(1); }
+  40%      { transform: translateY(-2.4px) scale(1.07); }
 }
 @keyframes solitaer-andruck {
   from { opacity: 0; transform: scale(.4); }
@@ -166,9 +183,8 @@
 /* ── Festgefahren ─────────────────────────────────────────────────────────────────
    Kein Ausrufezeichen, nur ein Rütteln: die Murmeln probieren es noch einmal und
    sitzen fest. Weil sich mit ihnen das Raster dreht, sieht man das Rütteln auch dort. */
-.faden-shell .solitaer__brett--fest .solitaer__leib {
-  animation: solitaer-zittern .45s var(--kurve) backwards;
-  animation-delay: calc(var(--i) * 9ms);
+.faden-shell .solitaer__brett--fest .solitaer__platz .solitaer__leib {
+  animation: solitaer-zittern .45s var(--kurve) calc(var(--i) * 9ms) 1 normal backwards;
 }
 @keyframes solitaer-zittern {
   0%, 100% { transform: none; }
@@ -261,8 +277,9 @@
   .faden-shell .solitaer__raumpuls,
   .faden-shell .solitaer__zerfall circle,
   .faden-shell .solitaer__murmel .solitaer__leib,
-  .faden-shell .solitaer__brett--andruck .solitaer__leib,
-  .faden-shell .solitaer__brett--fest .solitaer__leib,
+  .faden-shell .solitaer__brett--andruck .solitaer__platz .solitaer__leib,
+  .faden-shell .solitaer__brett--andruck .solitaer__platz--beweglich .solitaer__leib,
+  .faden-shell .solitaer__brett--fest .solitaer__platz .solitaer__leib,
   .faden-shell .solitaer__brett--sieg .solitaer__loch { animation: none; }
   .faden-shell .solitaer__leib { transition: none; }
   .faden-shell .solitaer__raumzeiger { transition: none; }

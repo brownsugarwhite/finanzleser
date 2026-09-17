@@ -13,8 +13,8 @@
  * stünden zwei Suchpillen gleichzeitig da. Die Einfahrt selbst macht faden.css.
  *
  * Dazu unter der Pille die Werkzeugreihe (Rechner · Vergleiche · Checklisten, Klick
- * öffnet das Finanztools-Registerblatt) und der CTA „Finanzleser entdecken ↓", der zu
- * „Heute" scrollt. Alles steht sofort — seit dem 13.09.2026 hat der Hero keine
+ * öffnet das Finanztools-Registerblatt) und der CTA „Finanzleser entdecken", an dem der
+ * Faden mit einem Tintentropfen hängt und der zu „Heute" scrollt. Alles steht sofort — seit dem 13.09.2026 hat der Hero keine
  * Auftrittsanimation mehr.
  *
  * Übergabe „Finanzleser Heute", Baustein 1 (17.09.2026): Die Reihe ist zentriert, drei
@@ -165,16 +165,21 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
           </div>
         </div>
       </div>
-      {/* Die Scheibe unter dem Text: zwei Winkel, die nacheinander nach unten durchlaufen
-          und am Rand verschwinden — die übliche Geste für „hier geht es weiter", nur
-          gezeichnet statt getippt. Ein ‚↓' als Schriftzeichen sitzt in jeder Schrift
-          anders und lässt sich nicht bewegen. */}
+      {/* Unter dem Text hängt DER FADEN: eine Haarlinie in Tinte. Daran rinnt ein
+          Tintentropfen herunter, und wo er ankommt, SCHREIBT er die Pfeilspitze — sie
+          zeichnet sich in dem Moment, in dem er sie erreicht, und bleibt stehen, bis der
+          nächste Tropfen oben entsteht.
+
+          Die Geste „hier geht es weiter" also nicht als Winkel aus dem Icon-Baukasten,
+          sondern im Bild des Hauses. Und minimal ist sie: drei Haarlinien und ein Punkt,
+          alles in einer Farbe, keine Fläche. */}
       <button type="button" className="hero-cta" onClick={entdecken}>
         Finanzleser entdecken
-        <i className="hero-cta__scheibe" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path className="hero-cta__winkel hero-cta__winkel--a" d="M7 9.5l5 5 5-5" />
-            <path className="hero-cta__winkel hero-cta__winkel--b" d="M7 9.5l5 5 5-5" />
+        <i className="hero-cta__faden" aria-hidden="true">
+          <svg viewBox="0 0 12 32">
+            <line className="hero-cta__schnur" x1="6" y1="0" x2="6" y2="23" />
+            <path className="hero-cta__spitze" d="M2.6 22.5 6 28.5 9.4 22.5" />
+            <circle className="hero-cta__tropfen" cx="6" cy="0" r="1.9" />
           </svg>
         </i>
       </button>
